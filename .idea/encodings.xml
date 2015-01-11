@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/commons/android/WakefulThread.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/commons/android/content/Badge.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/commons/android/content/BasePreferences.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/commons/android/database/Column.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/commons/android/graphics/RectD.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/commons/android/security/PrngFixes.java" charset="UTF-8" />
+  </component>
+</project>
+

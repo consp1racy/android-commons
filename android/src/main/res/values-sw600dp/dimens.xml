@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="material_toolbar_height">64dp</dimen>
+
+  <dimen name="material_padding_horizontal">8dp</dimen>
+
+  <dimen name="material_content_inset">80dp</dimen>
+</resources>
