@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- RED -->
-  <color name="material_red_50">#fde0dc</color>
-  <color name="material_red_100">#f9bdbb</color>
-  <color name="material_red_200">#f69988</color>
-  <color name="material_red_300">#f36c60</color>
-  <color name="material_red_400">#e84e40</color>
-  <color name="material_red_500">#e51c23</color>
+  <color name="material_red_50">#ffebee</color>
+  <color name="material_red_100">#ffcdd2</color>
+  <color name="material_red_200">#ef9a9a</color>
+  <color name="material_red_300">#e57373</color>
+  <color name="material_red_400">#ef5350</color>
+  <color name="material_red_500">#f44336</color>
   <color name="material_red_600">#dd191d</color>
   <color name="material_red_700">#d01716</color>
   <color name="material_red_800">#c41411</color>
   <color name="material_red_900">#b0120a</color>
-  <color name="material_red_a100">#ff7997</color>
-  <color name="material_red_a200">#ff5177</color>
-  <color name="material_red_a400">#ff2d6f</color>
-  <color name="material_red_a700">#e00032</color>
+  <color name="material_red_a100">#ff8a80</color>
+  <color name="material_red_a200">#ff5252</color>
+  <!-- was #ff1744 which looked pink -->
+  <!--<color name="material_red_a400">#ff1744</color>-->
+  <color name="material_red_a400">#ff1717</color>
+  <color name="material_red_a700">#d50000</color>
 
   <!-- PINK -->
   <color name="material_pink_50">#fce4ec</color>
