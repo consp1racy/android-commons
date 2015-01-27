@@ -23,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
@@ -38,6 +39,8 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
 import net.xpece.commons.android.R;
+import net.xpece.commons.android.content.AndroidUtils;
+import net.xpece.commons.android.content.res.Dimension;
 
 public class CollapsingTitleLayout extends FrameLayout {
 
@@ -103,6 +106,14 @@ public class CollapsingTitleLayout extends FrameLayout {
 
     mTextPaint = new TextPaint();
     mTextPaint.setAntiAlias(true);
+
+    if (AndroidUtils.API_21) {
+      Typeface tf = Typeface.create("sans-serif-medium", Typeface.NORMAL);
+      mTextPaint.setTypeface(tf);
+    } else {
+      Typeface tf = Typeface.create("sans-serif", Typeface.NORMAL);
+      mTextPaint.setTypeface(tf);
+    }
 
     TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CollapsingTitleLayout);
 
@@ -200,6 +211,8 @@ public class CollapsingTitleLayout extends FrameLayout {
     final float textSizeOffset = mTextSizeInterpolator != null
         ? mTextSizeInterpolator.getInterpolation(mScrollOffset)
         : offset;
+
+    mTextPaint.setShadowLayer(interpolate(Dimension.fromDp(getContext(), 8).get(), 0, offset), 0, 0, 0x40000000);
 
     mTextLeft = interpolate(mExpandedMarginLeft, mToolbarContentBounds.left, offset);
     mTextTop = interpolate(mExpandedTop, mCollapsedTop, offset);
