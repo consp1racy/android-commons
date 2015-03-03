@@ -55,7 +55,7 @@ class SlidingTabStrip extends LinearLayout {
     mDefaultTabColorizer = new SimpleTabColorizer();
     mDefaultTabColorizer.setIndicatorColors(themeForegroundColor);
 
-    mSelectedIndicatorThickness = (int) (SELECTED_INDICATOR_THICKNESS_DIPS * density);
+    mSelectedIndicatorThickness = (int) (SELECTED_INDICATOR_THICKNESS_DIPS * density + 0.5);
     mSelectedIndicatorPaint = new Paint();
   }
 
