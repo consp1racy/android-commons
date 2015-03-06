@@ -40,7 +40,6 @@ import android.widget.FrameLayout;
 
 import net.xpece.commons.android.R;
 import net.xpece.commons.android.content.AndroidUtils;
-import net.xpece.commons.android.content.res.Dimension;
 
 public class CollapsingTitleLayout extends FrameLayout {
 
@@ -212,7 +211,8 @@ public class CollapsingTitleLayout extends FrameLayout {
         ? mTextSizeInterpolator.getInterpolation(mScrollOffset)
         : offset;
 
-    mTextPaint.setShadowLayer(interpolate(Dimension.fromDp(getContext(), 8).get(), 0, offset), 0, 0, 0x40000000);
+    // genymotion crashes when shadow is greater than 25
+    mTextPaint.setShadowLayer(interpolate(25, 0, offset), 0, 0, 0x40000000);
 
     mTextLeft = interpolate(mExpandedMarginLeft, mToolbarContentBounds.left, offset);
     mTextTop = interpolate(mExpandedTop, mCollapsedTop, offset);

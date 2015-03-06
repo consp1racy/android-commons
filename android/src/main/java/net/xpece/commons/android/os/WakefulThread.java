@@ -12,7 +12,7 @@
   limitations under the License.
  */
 
-package net.xpece.commons.android;
+package net.xpece.commons.android.os;
 
 import android.os.HandlerThread;
 import android.os.PowerManager;

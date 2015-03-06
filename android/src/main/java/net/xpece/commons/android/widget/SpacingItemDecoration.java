@@ -6,7 +6,10 @@ import android.view.View;
 
 /**
  * Created by pechanecjr on 21. 12. 2014.
+ *
+ * <i>Deprecated:</i> Use something from TwoWayView library.
  */
+@Deprecated
 public class SpacingItemDecoration extends RecyclerView.ItemDecoration {
 
   private float mPadding;

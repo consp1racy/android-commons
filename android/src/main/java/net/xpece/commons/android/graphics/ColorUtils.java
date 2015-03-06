@@ -42,7 +42,7 @@ public class ColorUtils {
       return Color.WHITE;
   }
 
-  private static double getLuminance(int color) {
+  public static double getLuminance(int color) {
     int r = (color & 0xff0000) >> 16;
     int g = (color & 0xff00) >> 8;
     int b = color & 0xff;

@@ -32,6 +32,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.xpece.commons.android.R;
 import net.xpece.commons.android.content.AndroidUtils;
 import net.xpece.commons.android.content.res.ResourceUtils;
 import net.xpece.commons.android.graphics.ColorUtils;
@@ -67,13 +68,15 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
   }
 
-  private static final int TITLE_OFFSET_DIPS = 72;
-  private static final int TAB_VIEW_PADDING_DIPS = 12;
-  private static final int TAB_VIEW_TEXT_SIZE_SP = 14;
+//  private static final int TITLE_OFFSET_DIPS = 72;
+//  private static final int TAB_VIEW_PADDING_DIPS = 12;
+//  private static final int TAB_VIEW_TEXT_SIZE_SP = 14;
 
   private int mTitleOffset;
   private int mTabViewPadding;
   private boolean mDistributeEvenly;
+
+  private float mTextSize;
 
   private int mTabViewLayoutId;
   private int mTabViewTextViewId;
@@ -99,8 +102,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
     // Make sure that the Tab Strips fills this View
     setFillViewport(true);
 
-    mTitleOffset = (int) (TITLE_OFFSET_DIPS * getResources().getDisplayMetrics().density);
-    mTabViewPadding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
+//    mTitleOffset = (int) (TITLE_OFFSET_DIPS * getResources().getDisplayMetrics().density);
+//    mTabViewPadding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
+    mTitleOffset = getResources().getDimensionPixelOffset(R.dimen.material_tab_title_offset);
+    mTabViewPadding = getResources().getDimensionPixelOffset(R.dimen.material_tab_padding);
+    mTextSize = getResources().getDimension(R.dimen.material_tab_text_size);
 
     mTabStrip = new SlidingTabStrip(context);
     addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -182,7 +188,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
   protected TextView createDefaultTabView(Context context) {
     TextView textView = new TextView(context);
     textView.setGravity(Gravity.CENTER);
-    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
+//    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
+    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSize);
     textView.setTypeface(Typeface.DEFAULT_BOLD);
     if (AndroidUtils.API_14) textView.setAllCaps(true);
     textView.setTextColor(

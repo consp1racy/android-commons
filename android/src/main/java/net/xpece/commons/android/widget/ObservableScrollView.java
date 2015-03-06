@@ -8,9 +8,10 @@ import java.util.ArrayList;
 
 /**
  * A custom ScrollView that can accept a scroll listener.
- *
+ *<p><b>Deprecated.</b> Use https://github.com/ksoichiro/Android-ObservableScrollView instead.</p>
  * @author com.google.samples.apps.iosched.ui.widget.ObservableScrollView
  */
+@Deprecated
 public class ObservableScrollView extends ScrollView {
   private ArrayList<Callbacks> mCallbacks = new ArrayList<Callbacks>();
 
