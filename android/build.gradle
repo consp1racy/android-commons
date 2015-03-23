@@ -1,40 +1,40 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 21
-  buildToolsVersion "21.1.2"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
 
-  defaultConfig {
-    minSdkVersion 7
-    targetSdkVersion 21
-    versionCode 1
-    versionName "1.0"
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    defaultConfig {
+        minSdkVersion 7
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
     }
-  }
-  publishNonDefault true
-  defaultPublishConfig "release"
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    publishNonDefault true
+    defaultPublishConfig "release"
 
-  lintOptions {
-    abortOnError false
-  }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  provided 'com.android.support:support-v4:21.0.3'
-  provided 'com.android.support:appcompat-v7:21.0.3'
-  provided 'com.android.support:recyclerview-v7:21.0.3'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided 'com.android.support:support-v4:22.0.0'
+    provided 'com.android.support:appcompat-v7:22.0.0'
+    provided 'com.android.support:recyclerview-v7:22.0.0'
 }
 
 ext {
-  PUBLISH_GROUP_ID = 'net.xpece.commons'
-  PUBLISH_ARTIFACT_ID = 'android'
-  PUBLISH_VERSION = '0.1.8'
+    PUBLISH_GROUP_ID = 'net.xpece.android'
+    PUBLISH_ARTIFACT_ID = 'commons'
+    PUBLISH_VERSION = '0.3.0'
 }
 
 apply from: '../android-release-aar.gradle'
