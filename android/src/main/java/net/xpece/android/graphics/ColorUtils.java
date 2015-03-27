@@ -83,6 +83,13 @@ public class ColorUtils {
     }
 
     /**
+     * Set the alpha value of the {@code color} to be the given {@code alpha} value.
+     */
+    public static int setColorAlpha(int color, float alpha) {
+        return Color.argb((int)(alpha * 255), Color.red(color), Color.green(color), Color.blue(color));
+    }
+
+    /**
      * Blend {@code color1} and {@code color2} using the given ratio.
      *
      * @param ratio of which to blend. 1.0 will return {@code color1}, 0.5 will give an even blend,
@@ -122,6 +129,12 @@ public class ColorUtils {
             new int[]{active, passive});
     }
 
+    /**
+     * @param min
+     * @param max
+     * @param value
+     * @return
+     */
     public static float interpolate(float min, float max, float value) {
         if (max < min) {
             throw new IllegalArgumentException("max cannot be less than min.");
