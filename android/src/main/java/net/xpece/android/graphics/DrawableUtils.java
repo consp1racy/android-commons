@@ -23,11 +23,12 @@ public class DrawableUtils {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @Deprecated
     public static Drawable getDividerDrawable(Context context, boolean doInset) {
         ColorDrawable color = new ColorDrawable(XpColorUtils.getDividerColor(context));
         if (doInset) {
             boolean rtl = AndroidUtils.isRtl(context);
-            int inset = context.getResources().getDimensionPixelOffset(R.dimen.material_content_inset);
+            int inset = context.getResources().getDimensionPixelOffset(R.dimen.material_content_keyline);
             return new InsetDrawable(color, (rtl ? 0 : inset), 0, (rtl ? inset : 0), 0);
         } else {
             return color;
