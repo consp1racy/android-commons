@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 import net.xpece.commons.android.R;
 import net.xpece.android.AndroidUtils;
-import net.xpece.android.content.res.XpeceResources;
+import net.xpece.android.content.res.XpResources;
 
 /**
  * Created by pechanecjr on 4. 1. 2015.
@@ -27,7 +27,7 @@ public class TintUtils {
   }
 
   public static Drawable getDrawableWithColorControlNormal(Context context, @DrawableRes int drawableId) {
-    Drawable d = XpeceResources.getDrawable(context, drawableId).mutate();
+    Drawable d = XpResources.getDrawable(context, drawableId).mutate();
     return getDrawableWithColorControlNormal(context, d);
   }
 
@@ -40,7 +40,7 @@ public class TintUtils {
   }
 
   public static Drawable getDrawable(Context context, @DrawableRes int drawableId, @ColorRes int colorId) {
-    Drawable d = XpeceResources.getDrawable(context, drawableId).mutate();
+    Drawable d = XpResources.getDrawable(context, drawableId).mutate();
     int c = context.getResources().getColor(colorId);
     return getDrawable(d, c);
   }
@@ -71,8 +71,17 @@ public class TintUtils {
   }
 
   @TargetApi(21)
+  @Deprecated
   public static void tintMenuWithColorControlNormal(Menu menu, Context context) {
     TypedArray ta = context.obtainStyledAttributes(new int[]{AndroidUtils.API_21 ? android.R.attr.colorControlNormal : R.attr.colorControlNormal});
+    int color = ta.getColor(0, Color.BLACK);
+    ta.recycle();
+    tintMenu(menu, color);
+  }
+
+  @TargetApi(21)
+  public static void tintMenuWithColorControlNormal(Menu menu, Context context, boolean appcompat) {
+    TypedArray ta = context.obtainStyledAttributes(new int[]{!appcompat ? android.R.attr.colorControlNormal : R.attr.colorControlNormal});
     int color = ta.getColor(0, Color.BLACK);
     ta.recycle();
     tintMenu(menu, color);

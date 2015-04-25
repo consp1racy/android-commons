@@ -41,6 +41,7 @@ import android.widget.FrameLayout;
 import net.xpece.commons.android.R;
 import net.xpece.android.AndroidUtils;
 
+@Deprecated
 public class CollapsingTitleLayout extends FrameLayout {
 
   // Pre-JB-MR2 doesn't support HW accelerated canvas scaled text so we will workaround it

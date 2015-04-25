@@ -20,7 +20,10 @@ import java.util.HashMap;
 
 /**
  * Provides static methods for creating mutable {@code Maps} instances easily.
+ *
+ * @deprecated Use Guava.
  */
+@Deprecated
 public class Maps {
     /**
      * Creates a {@code HashMap} instance.

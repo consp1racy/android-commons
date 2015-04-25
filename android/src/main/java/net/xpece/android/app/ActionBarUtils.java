@@ -5,6 +5,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -13,10 +15,10 @@ import android.widget.ImageView;
 import android.widget.Toolbar;
 
 import net.xpece.android.AndroidUtils;
-import net.xpece.commons.android.R;
-import net.xpece.android.content.res.XpeceResources;
+import net.xpece.android.content.res.XpResources;
 import net.xpece.android.graphics.TintUtils;
-import net.xpece.android.view.XpeceViewCompat;
+import net.xpece.android.view.XpView;
+import net.xpece.commons.android.R;
 
 import java.util.ArrayList;
 
@@ -39,7 +41,7 @@ public class ActionBarUtils {
      * @param back Optional back button drawable. Defaults to back arrow. Will be colored.
      */
     @TargetApi(14)
-    public static void fixActionBarBackButton(Activity activity, Drawable back) {
+    public static void fixActionBarBackButton(@NonNull final Activity activity, @Nullable final Drawable back) {
         if (!AndroidUtils.API_14 || AndroidUtils.API_21) return;
 
         ActionBar ab = activity.getActionBar();
@@ -57,13 +59,8 @@ public class ActionBarUtils {
             int width = activity.getResources().getDimensionPixelSize(R.dimen.abc_action_button_min_width_material) + p;
             int height = activity.getResources().getDimensionPixelSize(R.dimen.abc_action_button_min_height_material);
 
-            ImageView image;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                ViewGroup home = (ViewGroup) activity.findViewById(android.R.id.home).getParent();
-                image = ((ImageView) home.getChildAt(0));
-            } else {
-                image = ((ImageView) activity.findViewById(R.id.up));
-            }
+            ViewGroup home = (ViewGroup) activity.findViewById(android.R.id.home).getParent();
+            ImageView image = (ImageView) home.getChildAt(0);
             image.setScaleType(ImageView.ScaleType.CENTER);
             image.setMinimumWidth(width);
             image.setMinimumHeight(height);
@@ -83,7 +80,7 @@ public class ActionBarUtils {
      * @param more Optional custom more overflow icon.
      */
     @TargetApi(21)
-    public static void fixActionBarOverflowButton(final Activity activity, final Drawable more) {
+    public static void fixActionBarOverflowButton(@NonNull final Activity activity, @Nullable final Drawable more) {
         if (Build.VERSION.SDK_INT == 21) {
             try {
                 final int abId = activity.getResources().getIdentifier("android:id/action_bar", null, null);
@@ -94,7 +91,7 @@ public class ActionBarUtils {
                 if (more == null) {
                     final int backId = activity.getResources().getIdentifier("android:drawable/ic_menu_moreoverflow_material", null, null);
 //          d = toolbar.getContext().getResources().getDrawable(backId);
-                    d = XpeceResources.getDrawable(toolbar.getContext(), backId);
+                    d = XpResources.getDrawable(toolbar.getContext(), backId);
                 } else {
                     d = TintUtils.getDrawableWithColorControlNormal(toolbar.getContext(), more);
                 }
@@ -102,7 +99,7 @@ public class ActionBarUtils {
                 toolbar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        XpeceViewCompat.removeOnGlobalLayoutListener(toolbar, this);
+                        XpView.removeOnGlobalLayoutListener(toolbar, this);
 
                         final String moreString = activity.getString(moreId);
                         final ArrayList<View> out = new ArrayList<>();

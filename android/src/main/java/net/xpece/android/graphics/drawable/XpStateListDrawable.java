@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 /**
  * Created by Eugen on 8. 3. 2015.
  */
-public class XpeceStateListDrawable {
+public class XpStateListDrawable {
 
     private static final Method METHOD_GET_STATE_COUNT;
     private static final Method METHOD_GET_STATE_SET;
@@ -37,7 +37,7 @@ public class XpeceStateListDrawable {
         METHOD_GET_STATE_DRAWABLE_INDEX = getStateDrawableIndex;
     }
 
-    private XpeceStateListDrawable() {}
+    private XpStateListDrawable() {}
 
     public static int getStateCount(StateListDrawable drawable) {
         try {

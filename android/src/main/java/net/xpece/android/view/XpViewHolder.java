@@ -1,5 +1,6 @@
 package net.xpece.android.view;
 
+import android.support.annotation.IdRes;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -9,8 +10,8 @@ import android.view.View;
  * <p/>
  * Sauce: Pierre-Yves Ricau http://www.piwai.info/android-adapter-good-practices/
  */
-public class ViewHolder {
-    private static final String TAG = ViewHolder.class.getSimpleName();
+public class XpViewHolder {
+    private static final String TAG = XpViewHolder.class.getSimpleName();
 
     public static <T> void putObject(View view, int id, T obj) {
         if (id <= 0) throw new IllegalArgumentException("ID must be positive.");
@@ -20,15 +21,19 @@ public class ViewHolder {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T getObject(View view, int id) {
+    public static <T> T getObject(View view, int id, T ifNotFound) {
         if (id < 0) throw new IllegalArgumentException("ID must be positive.");
 
         SparseArray<Object> viewHolder = ensureViewHolder(view);
-        return (T) viewHolder.get(-id, null);
+        return (T) viewHolder.get(-id, ifNotFound);
+    }
+
+    public static <T> T getObject(View view, int id) {
+        return getObject(view, id , null);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends View> T get(View view, int id) {
+    public static <T extends View> T get(View view, @IdRes int id) {
         if (id <= 0) throw new IllegalArgumentException("ID must be positive.");
 
         SparseArray<Object> viewHolder = ensureViewHolder(view);
@@ -52,7 +57,7 @@ public class ViewHolder {
                 view.setTag(viewHolder);
             }
         } catch (ClassCastException ex) {
-            Log.e(TAG, view + " already had a tag. Access it by calling getObject(view, 0).");
+            Log.d(TAG, view + " already had a tag. Access it by calling getObject(view, 0).");
 
             viewHolder = new SparseArray<>();
             viewHolder.put(0, view.getTag());

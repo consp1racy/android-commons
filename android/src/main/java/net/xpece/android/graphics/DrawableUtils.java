@@ -13,7 +13,7 @@ import android.util.StateSet;
 
 import net.xpece.android.AndroidUtils;
 import net.xpece.commons.android.R;
-import net.xpece.android.content.res.XpeceResources;
+import net.xpece.android.content.res.XpResources;
 
 /**
  * Created by pechanecjr on 7. 1. 2015.
@@ -24,7 +24,7 @@ public class DrawableUtils {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static Drawable getDividerDrawable(Context context, boolean doInset) {
-        ColorDrawable color = new ColorDrawable(ColorUtils.getDividerColor(context));
+        ColorDrawable color = new ColorDrawable(XpColorUtils.getDividerColor(context));
         if (doInset) {
             boolean rtl = AndroidUtils.isRtl(context);
             int inset = context.getResources().getDimensionPixelOffset(R.dimen.material_content_inset);
@@ -35,19 +35,19 @@ public class DrawableUtils {
     }
 
     public static Drawable getDisabledDrawable(Context context, @DrawableRes int did, @ColorRes int cid) {
-        Drawable d = XpeceResources.getDrawable(context, did);
+        Drawable d = XpResources.getDrawable(context, did);
         int c = context.getResources().getColor(cid);
         return getDisabledDrawable(d, c);
     }
 
     public static Drawable getDisabledDrawable(Drawable d, int color) {
         byte alpha;
-        if (ColorUtils.isLightColor(color)) {
+        if (XpColorUtils.isLightColor(color)) {
             alpha = (int) (0.5f + 255 * 0.3f);
         } else {
             alpha = (int) (0.5f + 255 * 0.26f);
         }
-        int disabledColor = ColorUtils.setColorAlpha(color, alpha);
+        int disabledColor = XpColorUtils.setColorAlpha(color, alpha);
 
         StateListDrawable sld = new StateListDrawable();
         sld.addState(new int[]{-android.R.attr.state_enabled}, TintUtils.getDrawable(d.getConstantState().newDrawable(), disabledColor));

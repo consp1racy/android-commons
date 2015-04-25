@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/android/content/BooleanPreference.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/android/content/FloatPreference.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/android/content/IntegerPreference.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/android/content/LongPreference.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/android/content/StringPreference.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/android/text/Truss.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/android/widget/BindableAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/android/src/main/java/net/xpece/android/widget/EnumAdapter.java" charset="UTF-8" />
+  </component>
 </project>
-

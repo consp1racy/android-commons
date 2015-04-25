@@ -8,8 +8,8 @@ import java.lang.reflect.Field;
 /**
  * Created by Eugen on 8. 3. 2015.
  */
-public class XpeceDrawableWrapper {
-    private static final String TAG = XpeceDrawableWrapper.class.getSimpleName();
+public class XpDrawableWrapper {
+    private static final String TAG = XpDrawableWrapper.class.getSimpleName();
 
     private static final Class<?> CLASS_DRAWABLE_WRAPPER;
     private static final Class<?> CLASS_DRAWABLE_WRAPPER_COMPAT;
@@ -39,7 +39,7 @@ public class XpeceDrawableWrapper {
         FIELD_DRAWABLE_COMPAT = drawableSupport;
     }
 
-    private XpeceDrawableWrapper() {}
+    private XpDrawableWrapper() {}
 
     public static Drawable getDrawable(Drawable wrapper) {
         try {

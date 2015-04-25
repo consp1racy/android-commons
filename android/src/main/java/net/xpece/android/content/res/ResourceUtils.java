@@ -1,70 +1,53 @@
 package net.xpece.android.content.res;
 
 import android.content.Context;
-import android.content.res.TypedArray;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.AttrRes;
 
 /**
  * Created by pechanecjr on 4. 1. 2015.
+ * @deprecated Use {@link XpResources} instead.
  */
+@Deprecated
 public class ResourceUtils {
 
   private ResourceUtils() {}
 
   public static boolean getBoolean(Context context, @AttrRes int attr, boolean fallback) {
-    TypedArray ta = context.obtainStyledAttributes(new int[]{attr});
-    try {
-      return ta.getBoolean(0, fallback);
-    } finally {
-      ta.recycle();
-    }
+    return XpResources.resolveBoolean(context, attr, fallback);
   }
 
   public static int getColor(Context context, @AttrRes int attr, int fallback) {
-    TypedArray ta = context.obtainStyledAttributes(new int[]{attr});
-    try {
-      return ta.getColor(0, fallback);
-    } finally {
-      ta.recycle();
-    }
+    return XpResources.resolveColor(context, attr, fallback);
+  }
+
+  public static ColorStateList getColorStateList(Context context, @AttrRes int attr) {
+    return XpResources.resolveColorStateList(context, attr);
   }
 
   public static float getDimension(Context context, @AttrRes int attr, float fallback) {
-    TypedArray ta = context.obtainStyledAttributes(new int[]{attr});
-    try {
-      return ta.getDimension(0, fallback);
-    } finally {
-      ta.recycle();
-    }
+    return XpResources.resolveDimension(context, attr, fallback);
   }
 
   public static int getDimensionPixelOffset(Context context, @AttrRes int attr, float fallback) {
-    float dimen = getDimension(context, attr, fallback);
-    return (int) (dimen);
+    return XpResources.resolveDimensionPixelOffset(context, attr, fallback);
   }
 
   public static int getDimensionPixelSize(Context context, @AttrRes int attr, float fallback) {
-    float dimen = getDimension(context, attr, fallback);
-    return (int) (dimen + 0.5f);
+    return XpResources.resolveDimensionPixelSize(context, attr, fallback);
   }
 
   public static Drawable getDrawable(Context context, @AttrRes int attr) {
-    TypedArray ta = context.obtainStyledAttributes(new int[]{attr});
-    try {
-      return ta.getDrawable(0);
-    } finally {
-      ta.recycle();
-    }
+    return XpResources.resolveDrawable(context, attr);
   }
 
   public static String getString(Context context, @AttrRes int attr) {
-    TypedArray ta = context.obtainStyledAttributes(new int[]{attr});
-    try {
-      return ta.getString(0);
-    } finally {
-      ta.recycle();
-    }
+    return XpResources.resolveString(context, attr);
+  }
+
+  public static CharSequence getText(Context context, @AttrRes int attr) {
+    return XpResources.resolveText(context, attr);
   }
 
 }

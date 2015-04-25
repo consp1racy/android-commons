@@ -16,10 +16,11 @@ import java.util.ArrayList;
 /**
  * Created by Eugen on 24. 3. 2015.
  */
+@Deprecated
 public class LayoutManagerWrapper<T extends RecyclerView.LayoutManager> extends RecyclerView.LayoutManager {
 
     final T mManager;
-    
+
     protected LayoutManagerWrapper(T manager) {
         mManager = manager;
     }

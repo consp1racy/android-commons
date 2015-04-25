@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Eugen on 26. 2. 2015.
  */
-public class XpeceTextUtils {
+public class XpTextUtils {
 
   private static final Pattern PATTERN_UNACCENT = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 
@@ -18,9 +18,10 @@ public class XpeceTextUtils {
    *
    * @param s
    * @return
+   * @since API 9
    */
   @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-  public static String unAccent(CharSequence s) {
+  public static String unaccent(CharSequence s) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
       throw new UnsupportedOperationException("unAccent is not supported below API 9.");
     } else {

@@ -41,4 +41,9 @@
         <attr name="android:textSize"/>
         <attr name="android:textColor"/>
     </declare-styleable>
+
+    <declare-styleable name="FontFitTextView">
+        <attr name="minTextSize" format="reference|dimension"/>
+        <attr name="maxTextSize" format="reference|dimension"/>
+    </declare-styleable>
 </resources>

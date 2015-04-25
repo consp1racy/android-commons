@@ -35,7 +35,7 @@ import android.widget.TextView;
 import net.xpece.commons.android.R;
 import net.xpece.android.AndroidUtils;
 import net.xpece.android.content.res.ResourceUtils;
-import net.xpece.android.graphics.ColorUtils;
+import net.xpece.android.graphics.XpColorUtils;
 
 /**
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
@@ -193,7 +193,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     textView.setTypeface(Typeface.DEFAULT_BOLD);
     if (AndroidUtils.API_14) textView.setAllCaps(true);
     textView.setTextColor(
-        ColorUtils.createActivatedColor(
+        XpColorUtils.createActivatedColor(
             ResourceUtils.getColor(context, android.R.attr.textColorSecondary, 0),
             ResourceUtils.getColor(context, android.R.attr.textColorPrimary, 0)));
 
