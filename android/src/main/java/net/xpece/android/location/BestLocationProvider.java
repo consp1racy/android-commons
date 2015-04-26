@@ -18,19 +18,17 @@ import java.util.Date;
 public class BestLocationProvider {
 
   private static final String TAG = BestLocationProvider.class.getSimpleName();
-  ;
+
   public enum LocationType {
     GPS,
     CELL,
     UNKNOWN
   }
 
-  //  private static final String TAG = "BestLocationProvider";
   private static final int TOO_OLD_LOCATION_DELTA = 1000 * 60 * 2;
+  public static final float TOO_INACURATE_LOCATION_DELTA = 200;
 
   private WeakReference<Context> mContext;
-  //  private LocationManager mLocationMgrCell;
-//  private LocationManager mLocationMgrGPS;
   private LocationManager mLocationManager;
   private LocationListener mLocationListener;
   private Location mLocation;
@@ -262,7 +260,7 @@ public class BestLocationProvider {
     int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
     boolean isLessAccurate = accuracyDelta > 0;
     boolean isMoreAccurate = accuracyDelta < 0;
-    boolean isSignificantlyLessAccurate = accuracyDelta > 200;
+    boolean isSignificantlyLessAccurate = accuracyDelta > TOO_INACURATE_LOCATION_DELTA;
 
     // Check if the old and new location are from the same provider
     boolean isFromSameProvider = isSameProvider(location.getProvider(),

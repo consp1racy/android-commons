@@ -43,6 +43,14 @@ public class Dimension {
         return new Dimension(this.mDimen - that.mDimen);
     }
 
+    public Dimension plus(float that) {
+        return new Dimension(this.mDimen + that);
+    }
+
+    public Dimension minus(float that) {
+        return new Dimension(this.mDimen - that);
+    }
+
     public Dimension multiply(float q) {
         return new Dimension(this.mDimen * q);
     }

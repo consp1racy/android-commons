@@ -54,6 +54,15 @@ public class AndroidUtils {
         return 1;
     }
 
+    /**
+     * TODO: Larger on tablets - multiplier
+     * TODO: Padding aware?
+     * @param context
+     * @param itemSize
+     * @param large
+     * @param availableSpace
+     * @return
+     */
     public static int getGridColumnCount(Context context, ItemSize itemSize, boolean large, int availableSpace) {
         int itemSizeInt;
         if (large) {

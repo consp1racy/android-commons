@@ -15,8 +15,15 @@ import android.support.annotation.DrawableRes;
 public class XpResources {
     private XpResources() {}
 
+    /**
+     * @deprecated Use {@link android.support.v4.content.ContextCompat#getDrawable(Context, int)} instead.
+     * @param context
+     * @param did
+     * @return
+     */
     @SuppressWarnings("deprecation")
     @TargetApi(21)
+    @Deprecated
     public static Drawable getDrawable(Context context, @DrawableRes int did) {
         if (Build.VERSION.SDK_INT < 21) {
             return context.getResources().getDrawable(did);

@@ -3,6 +3,7 @@
  */
 package net.xpece.android.content;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +17,8 @@ import net.xpece.android.AndroidUtils;
  * @author pechanecjr
  * @version 0.0.0000 - 2.10.2013
  */
-public class BasePreferences {
+@SuppressLint("deprecation")
+public class BasePreferences<T extends BasePreferences> {
     private final SharedPreferences mPrefs;
 
     protected BasePreferences(Context context, String preferenceFile) {
@@ -31,38 +33,69 @@ public class BasePreferences {
 
     // == OTHER NON-PRIVATE INSTANCE METHODS ===================================
 
-    protected synchronized final void remove(String key) {
+    protected synchronized final T remove(String key) {
         if (getSharedPreferences().contains(key)) {
             Editor editor = getSharedPreferences().edit();
             editor.remove(key);
             apply(editor);
         }
+        return self();
     }
 
+    protected synchronized final T put(String key, String value) {
+        edit(key, value);
+        return self();
+    }
+
+    @Deprecated
     protected synchronized final void edit(String key, String value) {
         Editor editor = getSharedPreferences().edit();
         editor.putString(key, value);
         apply(editor);
     }
 
+    protected synchronized final T put(String key, boolean value) {
+        edit(key, value);
+        return self();
+    }
+
+    @Deprecated
     protected synchronized final void edit(String key, boolean value) {
         Editor editor = getSharedPreferences().edit();
         editor.putBoolean(key, value);
         apply(editor);
     }
 
+    protected synchronized final T put(String key, int value) {
+        edit(key, value);
+        return self();
+    }
+
+    @Deprecated
     protected synchronized final void edit(String key, int value) {
         Editor editor = getSharedPreferences().edit();
         editor.putInt(key, value);
         apply(editor);
     }
 
+    protected synchronized final T put(String key, long value) {
+        edit(key, value);
+        return self();
+    }
+
+    @Deprecated
     protected synchronized final void edit(String key, long value) {
         Editor editor = getSharedPreferences().edit();
         editor.putLong(key, value);
         apply(editor);
     }
 
+    protected synchronized final T put(String key, float value) {
+        edit(key, value);
+        return self();
+    }
+
+    @Deprecated
     protected synchronized final void edit(String key, float value) {
         Editor editor = getSharedPreferences().edit();
         editor.putFloat(key, value);
@@ -116,5 +149,10 @@ public class BasePreferences {
         } else {
             editor.commit();
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected final T self() {
+        return (T) this;
     }
 }

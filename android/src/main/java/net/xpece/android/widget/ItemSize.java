@@ -7,8 +7,8 @@ import net.xpece.commons.android.R;
 /**
  * Created by Eugen on 24. 4. 2015.
  */
-public enum ItemSize {
-    SMALL {
+public abstract class ItemSize {
+    public static final ItemSize SMALL = new ItemSize() {
         @Override
         public int getIconSize(Context context) {
             return context.getResources().getDimensionPixelSize(R.dimen.material_icon_size_small);
@@ -28,7 +28,8 @@ public enum ItemSize {
         public int getGridItemWidthLarge(Context context) {
             return context.getResources().getDimensionPixelSize(R.dimen.material_grid_item_size_small2);
         }
-    }, MEDIUM {
+    };
+    public static final ItemSize MEDIUM = new ItemSize() {
         @Override
         public int getIconSize(Context context) {
             return context.getResources().getDimensionPixelSize(R.dimen.material_icon_size_medium);
@@ -48,7 +49,8 @@ public enum ItemSize {
         public int getGridItemWidthLarge(Context context) {
             return context.getResources().getDimensionPixelSize(R.dimen.material_grid_item_size_medium2);
         }
-    }, LARGE {
+    };
+    public static final ItemSize LARGE = new ItemSize() {
         @Override
         public int getIconSize(Context context) {
             return context.getResources().getDimensionPixelSize(R.dimen.material_icon_size_large);

@@ -55,18 +55,15 @@
   <dimen name="material_list_item_text_inset_vertical">12dp</dimen>
 
   <!-- default margin for widgets -->
-  <dimen name="material_content_inset_horizontal">4dp</dimen>
-  <dimen name="material_content_inset_vertical">4dp</dimen>
+  <dimen name="material_content_inset_all">4dp</dimen>
 
   <!-- spaces between widgets -->
   <dimen name="material_content_spacing_small">4dp</dimen>
   <dimen name="material_content_spacing_medium">8dp</dimen>
 
   <!-- container padding for use in activities -->
-  <dimen name="material_container_padding_vertical">12dp</dimen>
-  <dimen name="material_container_padding_horizontal">12dp</dimen>
+  <dimen name="material_container_padding_all">12dp</dimen>
 
   <!-- container padding for use in dialogs -->
-  <dimen name="material_dialog_padding_vertical">20dp</dimen>
-  <dimen name="material_dialog_padding_horizontal">20dp</dimen>
+  <dimen name="material_dialog_padding_all">20dp</dimen>
 </resources>

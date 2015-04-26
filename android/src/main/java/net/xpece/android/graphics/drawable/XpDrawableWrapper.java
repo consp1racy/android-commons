@@ -6,6 +6,8 @@ import android.util.Log;
 import java.lang.reflect.Field;
 
 /**
+ * Used for accessing drawables inside wrappers created by AppCompat library for tinting.
+ *
  * Created by Eugen on 8. 3. 2015.
  */
 public class XpDrawableWrapper {

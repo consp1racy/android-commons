@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.util.StateSet;
 
-import net.xpece.android.content.res.ResourceUtils;
+import net.xpece.android.content.res.XpResources;
 
 /**
  * Created by pechanecjr on 4. 1. 2015.
@@ -119,7 +119,7 @@ public class XpColorUtils {
      * @return
      */
     public static int getDividerColor(Context context) {
-        return ResourceUtils.getColor(context, android.R.attr.colorForeground, 0) & 0x1effffff;
+        return XpResources.resolveColor(context, android.R.attr.colorForeground, 0) & 0x1effffff;
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)

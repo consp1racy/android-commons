@@ -6,7 +6,7 @@ import android.util.SparseArray;
 import android.view.View;
 
 /**
- * Extended to support arbitrary objects alongside views. Use negative ids for arbitrary objects.
+ * Extended to support arbitrary objects alongside views.
  * <p/>
  * Sauce: Pierre-Yves Ricau http://www.piwai.info/android-adapter-good-practices/
  */
