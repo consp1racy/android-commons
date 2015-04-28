@@ -69,7 +69,7 @@ public class XpView {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressWarnings("deprecation")
-    public static void removeOnGlobalLayoutListener(android.view.View v, ViewTreeObserver.OnGlobalLayoutListener l) {
+    public static void removeOnGlobalLayoutListener(View v, ViewTreeObserver.OnGlobalLayoutListener l) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
             v.getViewTreeObserver().removeGlobalOnLayoutListener(l);
         } else {
@@ -77,6 +77,10 @@ public class XpView {
         }
     }
 
+    /**
+     * @deprecated Use {@link android.support.v4.widget.TextViewCompat#setCompoundDrawablesRelative(TextView, Drawable, Drawable, Drawable, Drawable)}.
+     */
+    @Deprecated
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static void setCompoundDrawablesRelative(TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -86,7 +90,11 @@ public class XpView {
         }
     }
 
+    /**
+     * @deprecated Use {@link android.support.v4.widget.TextViewCompat#setCompoundDrawablesRelativeWithIntrinsicBounds(TextView, int, int, int, int)}.
+     */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @Deprecated
     public static void setCompoundDrawablesRelativeWithIntrinsicBounds(TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
             tv.setCompoundDrawablesWithIntrinsicBounds(start, top, end, bottom);

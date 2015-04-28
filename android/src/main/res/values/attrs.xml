@@ -8,6 +8,10 @@
             <enum name="height" value="1"/>
             <enum name="width" value="2"/>
         </attr>
+        <attr name="aspectRatioSource" format="enum">
+            <enum name="specified" value="0"/>
+            <enum name="drawable" value="1"/>
+        </attr>
     </declare-styleable>
 
     <!--

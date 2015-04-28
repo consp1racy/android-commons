@@ -8,7 +8,7 @@ import net.xpece.commons.android.R;
  * Created by Eugen on 24. 4. 2015.
  */
 public abstract class ItemSize {
-    public static final ItemSize SMALL = new ItemSize() {
+    public static final ItemSize MATERIAL_SMALL = new ItemSize() {
         @Override
         public int getIconSize(Context context) {
             return context.getResources().getDimensionPixelSize(R.dimen.material_icon_size_small);
@@ -29,7 +29,7 @@ public abstract class ItemSize {
             return context.getResources().getDimensionPixelSize(R.dimen.material_grid_item_size_small2);
         }
     };
-    public static final ItemSize MEDIUM = new ItemSize() {
+    public static final ItemSize MATERIAL_MEDIUM = new ItemSize() {
         @Override
         public int getIconSize(Context context) {
             return context.getResources().getDimensionPixelSize(R.dimen.material_icon_size_medium);
@@ -50,7 +50,7 @@ public abstract class ItemSize {
             return context.getResources().getDimensionPixelSize(R.dimen.material_grid_item_size_medium2);
         }
     };
-    public static final ItemSize LARGE = new ItemSize() {
+    public static final ItemSize MATERIAL_LARGE = new ItemSize() {
         @Override
         public int getIconSize(Context context) {
             return context.getResources().getDimensionPixelSize(R.dimen.material_icon_size_large);

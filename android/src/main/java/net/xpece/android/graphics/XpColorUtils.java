@@ -103,7 +103,7 @@ public class XpColorUtils {
         return Color.rgb((int) r, (int) g, (int) b);
     }
 
-    public static int blendColorsAlpha(int color1, int color2, float ratio) {
+    public static int blendColorsWithAlpha(int color1, int color2, float ratio) {
         final float inverseRatio = 1f - ratio;
         float a = (Color.alpha(color1) * ratio) + (Color.alpha(color2) * inverseRatio);
         float r = (Color.red(color1) * ratio) + (Color.red(color2) * inverseRatio);
@@ -135,7 +135,7 @@ public class XpColorUtils {
      * @param value
      * @return
      */
-    public static float interpolate(float min, float max, float value) {
+    public static float normalize(float min, float max, float value) {
         if (max < min) {
             throw new IllegalArgumentException("max cannot be less than min.");
 //            float temp = min;

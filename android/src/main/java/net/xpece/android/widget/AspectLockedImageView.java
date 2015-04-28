@@ -1,8 +1,10 @@
 package net.xpece.android.widget;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -20,6 +22,7 @@ public class AspectLockedImageView extends ImageView {
 
     private float mAspectRatio;
     private int mAdjust;
+    private int mSource;
 
     public AspectLockedImageView(Context context) {
         super(context);
@@ -47,6 +50,7 @@ public class AspectLockedImageView extends ImageView {
         float width = ta.getInteger(R.styleable.AspectLockedImageView_aspectRatioWidth, 1);
         float height = ta.getInteger(R.styleable.AspectLockedImageView_aspectRatioHeight, 1);
         mAdjust = ta.getInteger(R.styleable.AspectLockedImageView_aspectRatioAdjust, 0);
+        mSource = ta.getInteger(R.styleable.AspectLockedImageView_aspectRatioSource, 0);
         ta.recycle();
         mAspectRatio = width / height;
     }
@@ -56,56 +60,54 @@ public class AspectLockedImageView extends ImageView {
         int lockedWidth = MeasureSpec.getSize(widthMeasureSpec);
         int lockedHeight = MeasureSpec.getSize(heightMeasureSpec);
 
-        if (mAspectRatio == 0) {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        } else {
-//      if (lockedWidth == 0 && lockedHeight == 0) {
-//        throw new IllegalArgumentException(
-//            "Both width and height cannot be zero -- watch out for scrollable containers");
-//      }
-
-            // Get the padding of the border background.
-            int hPadding = getPaddingLeft() + getPaddingRight();
-            int vPadding = getPaddingTop() + getPaddingBottom();
-
-            // Resize the preview frame with correct aspect ratio.
-            lockedWidth -= hPadding;
-            lockedHeight -= vPadding;
-
-            if (mAdjust == Adjust.WIDTH) {
-                lockedWidth = (int) (lockedHeight * mAspectRatio + .5);
-            } else if (mAdjust == Adjust.HEIGHT) {
-                lockedHeight = (int) (lockedWidth / mAspectRatio + .5);
-            } else if (mAdjust == Adjust.DETERMINE) {
-//                if (lockedHeight > 0 && (lockedWidth > lockedHeight * mAspectRatio)) {
-                if (lockedHeight > 0 && lockedWidth == 0) {
-                    lockedWidth = (int) (lockedHeight * mAspectRatio + .5);
-//                } else {
-                } else if (lockedWidth > 0 && lockedHeight == 0) {
-                    lockedHeight = (int) (lockedWidth / mAspectRatio + .5);
-                } else {
-//                    throw new IllegalStateException("Exactly one of height or width must be set to zero.");
-                }
+        if (mSource == AspectRatioSource.DRAWABLE) {
+            Drawable d = getDrawable();
+            if (d == null) {
+                super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            } else {
+                float aspectRatio = (float) d.getIntrinsicWidth() / d.getIntrinsicHeight();
+                onMeasureWithParams(lockedWidth, lockedHeight, aspectRatio);
             }
-
-//      Log.d(TAG, "BEFORE: lockedWidth=" + lockedWidth + ", lockedHeight=" + lockedHeight);
-//      if (lockedHeight > 0) {
-//        // if i have height, adjust only width
-//        lockedWidth = (int) (lockedHeight * mAspectRatio + .5);
-//      } else if (lockedWidth > 0) {
-//        // if i have width, adjust only height
-//        lockedHeight = (int) (lockedWidth / mAspectRatio + .5);
-//      }
-//      Log.d(TAG, "AFTER: lockedWidth=" + lockedWidth + ", lockedHeight=" + lockedHeight);
-
-            // Add the padding of the border.
-            lockedWidth += hPadding;
-            lockedHeight += vPadding;
-
-            // Ask children to follow the new preview dimension.
-            super.onMeasure(MeasureSpec.makeMeasureSpec(lockedWidth, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(lockedHeight, MeasureSpec.EXACTLY));
+        } else {
+            if (mAspectRatio == 0) {
+                super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            } else {
+                onMeasureWithParams(lockedWidth, lockedHeight, mAspectRatio);
+            }
         }
+    }
+
+    @SuppressLint("WrongCall")
+    private void onMeasureWithParams(int lockedWidth, int lockedHeight, float aspectRatio) {
+        // Get the padding of the border background.
+        int hPadding = getPaddingLeft() + getPaddingRight();
+        int vPadding = getPaddingTop() + getPaddingBottom();
+
+        // Resize the preview frame with correct aspect ratio.
+        lockedWidth -= hPadding;
+        lockedHeight -= vPadding;
+
+        if (mAdjust == Adjust.WIDTH) {
+            lockedWidth = (int) (lockedHeight * aspectRatio + .5);
+        } else if (mAdjust == Adjust.HEIGHT) {
+            lockedHeight = (int) (lockedWidth / aspectRatio + .5);
+        } else if (mAdjust == Adjust.DETERMINE) {
+            if (lockedHeight > 0 && lockedWidth == 0) {
+                lockedWidth = (int) (lockedHeight * aspectRatio + .5);
+            } else if (lockedWidth > 0 && lockedHeight == 0) {
+                lockedHeight = (int) (lockedWidth / aspectRatio + .5);
+            } else {
+                throw new IllegalStateException("Exactly one of height or width must be set to zero when Adjust.DETERMINE is used.");
+            }
+        }
+
+        // Add the padding of the border.
+        lockedWidth += hPadding;
+        lockedHeight += vPadding;
+
+        // Ask children to follow the new preview dimension.
+        super.onMeasure(MeasureSpec.makeMeasureSpec(lockedWidth, MeasureSpec.EXACTLY),
+            MeasureSpec.makeMeasureSpec(lockedHeight, MeasureSpec.EXACTLY));
     }
 
     public void setAspectRatio(float aspectRatio) {
@@ -127,6 +129,13 @@ public class AspectLockedImageView extends ImageView {
         }
     }
 
+    public void setAspectRatioSource(@AspectRatioSource int source) {
+        if (mSource != source) {
+            mSource = source;
+            requestLayout();
+        }
+    }
+
     @Retention(RetentionPolicy.SOURCE)
     public @interface Adjust {
         @Adjust
@@ -135,5 +144,13 @@ public class AspectLockedImageView extends ImageView {
         int HEIGHT = 1;
         @Adjust
         int WIDTH = 2;
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface AspectRatioSource {
+        @Adjust
+        int SPECIFIED = 0;
+        @Adjust
+        int DRAWABLE = 1;
     }
 }

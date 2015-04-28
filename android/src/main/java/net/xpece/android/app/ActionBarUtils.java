@@ -50,7 +50,7 @@ public class ActionBarUtils {
         try {
             Drawable d;
             if (back == null) {
-                d = TintUtils.getDrawableWithColorControlNormal(activity.getActionBar().getThemedContext(), R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+                d = TintUtils.getDrawableWithColorControlNormal(activity.getActionBar().getThemedContext(), activity.getResources().getIdentifier("drawable/abc_ic_ab_back_mtrl_am_alpha", null, null));
             } else {
                 d = TintUtils.getDrawableWithColorControlNormal(activity.getActionBar().getThemedContext(), back);
             }

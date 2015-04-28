@@ -25,11 +25,7 @@ public class XpTextUtils {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
       throw new UnsupportedOperationException("unAccent is not supported below API 9.");
     } else {
-      //
-      // JDK1.5
-      //   use sun.text.Normalizer.normalize(s, Normalizer.DECOMP, 0);
-      //
-      String temp = Normalizer.normalize(s.toString(), Normalizer.Form.NFD);
+      String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
       return PATTERN_UNACCENT.matcher(temp).replaceAll("");
     }
   }
