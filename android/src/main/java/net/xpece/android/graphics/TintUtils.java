@@ -26,12 +26,14 @@ public class TintUtils {
   private TintUtils() {
   }
 
+  @Deprecated
   public static Drawable getDrawableWithColorControlNormal(Context context, @DrawableRes int drawableId) {
     Drawable d = XpResources.getDrawable(context, drawableId).mutate();
     return getDrawableWithColorControlNormal(context, d);
   }
 
   @TargetApi(21)
+  @Deprecated
   public static Drawable getDrawableWithColorControlNormal(Context context, Drawable d) {
     TypedArray ta = context.obtainStyledAttributes(new int[]{AndroidUtils.API_21 ? android.R.attr.colorControlNormal : R.attr.colorControlNormal});
     int c = ta.getColor(0, Color.BLACK);
@@ -39,12 +41,14 @@ public class TintUtils {
     return getDrawable(d, c);
   }
 
+  @Deprecated
   public static Drawable getDrawable(Context context, @DrawableRes int drawableId, @ColorRes int colorId) {
     Drawable d = XpResources.getDrawable(context, drawableId).mutate();
     int c = context.getResources().getColor(colorId);
     return getDrawable(d, c);
   }
 
+  @Deprecated
   public static Drawable getDrawable(Drawable d, int c) {
     PorterDuffColorFilter cf = COLOR_FILTER_CACHE.get(c);
     if (cf == null) {

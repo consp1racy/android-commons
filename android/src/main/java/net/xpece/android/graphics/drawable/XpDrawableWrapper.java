@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
  *
  * Created by Eugen on 8. 3. 2015.
  */
+@Deprecated
 public class XpDrawableWrapper {
     private static final String TAG = XpDrawableWrapper.class.getSimpleName();
 

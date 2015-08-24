@@ -97,7 +97,7 @@ public class AspectLockedImageView extends ImageView {
             } else if (lockedWidth > 0 && lockedHeight == 0) {
                 lockedHeight = (int) (lockedWidth / aspectRatio + .5);
             } else {
-                throw new IllegalStateException("Exactly one of height or width must be set to zero when Adjust.DETERMINE is used.");
+                throw new IllegalStateException("Exactly one of height or width must be set to zero when aspectRatioAdjust=\"determine\" is used.");
             }
         }
 

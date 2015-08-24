@@ -20,21 +20,21 @@ android {
     defaultPublishConfig "release"
 
     lintOptions {
-        abortOnError false
+        abortOnError true
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided 'com.android.support:support-v4:22.1.1'
-    provided 'com.android.support:appcompat-v7:22.1.1'
-    provided 'com.android.support:recyclerview-v7:22.1.0'
+    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.android.support:recyclerview-v7:22.1.0'
 }
 
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.3.4'
+    PUBLISH_VERSION = '0.3.6'
 }
 
 apply from: '../android-release-aar.gradle'

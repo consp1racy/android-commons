@@ -16,6 +16,7 @@ import net.xpece.commons.android.R;
  * @author speedplane
  */
 public class FontFitTextView extends TextView {
+    private static final float THRESHOLD = 0.5f;
 
     //Attributes
     private Paint mTestPaint;
@@ -25,23 +26,28 @@ public class FontFitTextView extends TextView {
 
     public FontFitTextView(Context context) {
         super(context);
-        initialise(context, null);
+        initialize(context, null);
     }
 
     public FontFitTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initialise(context, attrs);
+        initialize(context, attrs);
     }
 
-    private void initialise(Context context, AttributeSet attrs) {
+    private void initialize(Context context, AttributeSet attrs) {
         mTestPaint = new Paint();
         mTestPaint.set(getPaint());
         //max size defaults to the initially specified text size unless it is too small
 
+        float textSize = getTextSize();
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.FontFitTextView);
-        mMinTextSize = ta.getDimension(R.styleable.FontFitTextView_minTextSize, 1);
-        mMaxTextSize = ta.getDimension(R.styleable.FontFitTextView_maxTextSize, Float.MAX_VALUE);
+        mMinTextSize = ta.getDimension(R.styleable.FontFitTextView_minTextSize, textSize);
+        mMaxTextSize = ta.getDimension(R.styleable.FontFitTextView_maxTextSize, textSize);
         ta.recycle();
+
+        if (mMinTextSize > mMaxTextSize) {
+            throw new IllegalArgumentException("Minimum text size cannot be larger than maximum text size.");
+        }
     }
 
     /* Re size the font so the specified text fits in the text box
@@ -51,13 +57,12 @@ public class FontFitTextView extends TextView {
         if (textWidth <= 0)
             return;
         int targetWidth = textWidth - this.getPaddingLeft() - this.getPaddingRight();
-        float hi = 100;
-        float lo = 2;
-        final float threshold = 0.5f; // How close we have to be
+        float hi = mMaxTextSize;
+        float lo = mMinTextSize;
 
         mTestPaint.set(getPaint());
 
-        while ((hi - lo) > threshold) {
+        while ((hi - lo) > THRESHOLD) {
             float size = (hi + lo) / 2;
             mTestPaint.setTextSize(size);
             if (mTestPaint.measureText(text, 0, text.length()) >= targetWidth)
@@ -65,12 +70,9 @@ public class FontFitTextView extends TextView {
             else
                 lo = size; // too small
         }
-        // Use lo so that we undershoot rather than overshoot
-        float size = lo;
 
-        if (size < mMinTextSize) size = mMinTextSize;
-        if (size > mMaxTextSize) size = mMaxTextSize;
-        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+        // Use lo so that we undershoot rather than overshoot
+        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, lo);
     }
 
     @Override

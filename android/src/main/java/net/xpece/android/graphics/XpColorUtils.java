@@ -86,7 +86,7 @@ public class XpColorUtils {
      * Set the alpha value of the {@code color} to be the given {@code alpha} value.
      */
     public static int setColorAlpha(int color, float alpha) {
-        return Color.argb((int)(alpha * 255), Color.red(color), Color.green(color), Color.blue(color));
+        return (color & 0xffffff) | ((int) (alpha * 255) << 24);
     }
 
     /**
@@ -95,7 +95,7 @@ public class XpColorUtils {
      * @param ratio of which to blend. 1.0 will return {@code color1}, 0.5 will give an even blend,
      * 0.0 will return {@code color2}.
      */
-    public static int blendColors(int color1, int color2, float ratio) {
+    public static int blendColorsSolid(int color1, int color2, float ratio) {
         final float inverseRatio = 1f - ratio;
         float r = (Color.red(color1) * ratio) + (Color.red(color2) * inverseRatio);
         float g = (Color.green(color1) * ratio) + (Color.green(color2) * inverseRatio);
@@ -103,7 +103,11 @@ public class XpColorUtils {
         return Color.rgb((int) r, (int) g, (int) b);
     }
 
-    public static int blendColorsWithAlpha(int color1, int color2, float ratio) {
+    public static int blendColors(int color1, int color2, float ratio, float alpha) {
+        return setColorAlpha(blendColorsSolid(color1, color2, ratio), alpha);
+    }
+
+    public static int blendColorsTranslucent(int color1, int color2, float ratio) {
         final float inverseRatio = 1f - ratio;
         float a = (Color.alpha(color1) * ratio) + (Color.alpha(color2) * inverseRatio);
         float r = (Color.red(color1) * ratio) + (Color.red(color2) * inverseRatio);

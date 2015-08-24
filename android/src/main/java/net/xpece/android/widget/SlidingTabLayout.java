@@ -53,6 +53,7 @@ import net.xpece.android.graphics.XpColorUtils;
  * The views used as tabs can be customized by calling {@link #setCustomTabView(int, int)},
  * providing the layout ID of your custom layout.
  */
+@Deprecated
 public class SlidingTabLayout extends HorizontalScrollView {
 
   /**

@@ -105,4 +105,13 @@ public class XpResources {
         }
     }
 
+    public static int resolveResourceId(Context context, @AttrRes int attr, int fallback) {
+        TypedArray ta = context.obtainStyledAttributes(new int[]{attr});
+        try {
+            return ta.getResourceId(0, fallback);
+        } finally {
+            ta.recycle();
+        }
+    }
+
 }

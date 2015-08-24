@@ -23,6 +23,5 @@ dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
   debugCompile project(path: ':android', configuration: 'debug');
   releaseCompile project(path: ':android', configuration: 'release');
-  compile 'com.android.support:support-v4:22.1.1'
   compile 'com.android.support:appcompat-v7:22.1.1'
 }
