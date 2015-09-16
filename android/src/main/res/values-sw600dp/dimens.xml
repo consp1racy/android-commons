@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <dimen name="material_toolbar_height">64dp</dimen>
+    <dimen name="material_activity_padding_horizontal">8dp</dimen>
 
-  <dimen name="material_activity_padding_horizontal">8dp</dimen>
+    <dimen name="material_content_keyline">80dp</dimen>
 
-  <dimen name="material_content_keyline">80dp</dimen>
-
-  <dimen name="material_tab_padding">24dp</dimen>
-  <dimen name="material_tab_title_offset">80dp</dimen>
+    <!-- Four on Nexus 7 (600dp).-->
+    <dimen name="material_grid_item_size_small">150dp</dimen>
 </resources>

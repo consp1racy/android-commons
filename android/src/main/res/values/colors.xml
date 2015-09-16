@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <color name="xpc_disabled_dark">#2000</color>
+  <color name="xpc_disabled_light">#2fff</color>
+  <color name="xpc_selected_dark">#4fff</color>
+  <color name="xpc_selected_light">#4000</color>
+
   <!-- was #ff1744 -->
   <color name="material_red_a400">#ff1717</color>
   <!-- was #c51162 -->
@@ -304,9 +309,9 @@
   <color name="material_white_30p">#4dffffff</color>
   <color name="material_white_12p">#1effffff</color>
 
-  <color name="material_white_primary">@color/material_white_100p</color>
+  <color name="material_white_text_primary">@color/material_white_100p</color>
+  <color name="material_white_text_secondary">@color/material_white_70p</color>
   <color name="material_white_icons">@color/material_white_100p</color>
-  <color name="material_white_secondary">@color/material_white_70p</color>
   <color name="material_white_disabled">@color/material_white_30p</color>
   <color name="material_white_hints">@color/material_white_30p</color>
   <color name="material_white_dividers">@color/material_white_12p</color>
@@ -317,8 +322,8 @@
   <color name="material_black_26p">#42000000</color>
   <color name="material_black_12p">#1e000000</color>
 
-  <color name="material_black_primary">@color/material_black_87p</color>
-  <color name="material_black_secondary">@color/material_black_54p</color>
+  <color name="material_black_text_primary">@color/material_black_87p</color>
+  <color name="material_black_text_secondary">@color/material_black_54p</color>
   <color name="material_black_icons">@color/material_black_54p</color>
   <color name="material_black_disabled">@color/material_black_26p</color>
   <color name="material_black_hints">@color/material_black_26p</color>

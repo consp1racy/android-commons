@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public type="string" name="xpc_try_again"/>
+
+    <public type="integer" name="button_pressed_animation_duration_material"/>
+    <public type="integer" name="button_pressed_animation_delay_material"/>
+
+    <public type="drawable" name="xpc_selectable_item_background_dark"/>
+    <public type="drawable" name="xpc_selectable_item_background_light"/>
+
+    <public type="drawable" name="ic_chevron_left_white_24dp"/>
+    <public type="drawable" name="ic_chevron_right_white_24dp"/>
+    <public type="drawable" name="ic_expand_less_white_24dp"/>
+    <public type="drawable" name="ic_expand_more_white_24dp"/>
+    
+    <public type="id" name="expandable_text"/>
+    <public type="id" name="expand_collapse"/>
+
+    <public type="dimen" name="material_icon_size_small"/>
+    <public type="dimen" name="material_icon_size_medium"/>
+    <public type="dimen" name="material_icon_size_large"/>
+
+    <public type="dimen" name="material_list_item_height_small"/>
+    <public type="dimen" name="material_list_item_height_medium"/>
+    <public type="dimen" name="material_list_item_height_large"/>
+
+    <public type="dimen" name="material_touch_size"/>
+
+    <public type="dimen" name="material_content_keyline_base"/>
+    <public type="dimen" name="material_content_keyline"/>
+
+    <public type="dimen" name="material_grid_spacing_micro"/>
+    <public type="dimen" name="material_grid_spacing_small"/>
+
+    <public type="dimen" name="material_activity_padding_horizontal"/>
+    <public type="dimen" name="material_list_padding_vertical"/>
+
+    <public type="dimen" name="material_list_item_text_inset_vertical"/>
+    <public type="dimen" name="material_full_width_text_inset_vertical"/>
+
+    <public type="dimen" name="material_content_inset_all"/>
+    <public type="dimen" name="material_container_padding_all"/>
+
+    <public type="dimen" name="material_content_spacing_small"/>
+    <public type="dimen" name="material_content_spacing_medium"/>
+    <public type="dimen" name="material_content_spacing_large"/>
+
+    <public type="dimen" name="material_grid_item_size_large"/>
+    <public type="dimen" name="material_grid_item_size_medium"/>
+    <public type="dimen" name="material_grid_item_size_small"/>
+    <public type="dimen" name="material_grid_item_size_micro"/>
+    
+    <!--reds-->
+    <public type="color" name="material_red_50"/>
+    <public type="color" name="material_red_100"/>
+    <public type="color" name="material_red_200"/>
+    <public type="color" name="material_red_300"/>
+    <public type="color" name="material_red_400"/>
+    <public type="color" name="material_red_500"/>
+    <public type="color" name="material_red_600"/>
+    <public type="color" name="material_red_700"/>
+    <public type="color" name="material_red_800"/>
+    <public type="color" name="material_red_900"/>
+    <public type="color" name="material_red_a100"/>
+    <public type="color" name="material_red_a200"/>
+    <public type="color" name="material_red_a400"/>
+    <public type="color" name="material_red_a700"/>
+
+    <!-- pinks -->
+    <public type="color" name="material_pink_50"/>
+    <public type="color" name="material_pink_100"/>
+    <public type="color" name="material_pink_200"/>
+    <public type="color" name="material_pink_300"/>
+    <public type="color" name="material_pink_400"/>
+    <public type="color" name="material_pink_500"/>
+    <public type="color" name="material_pink_600"/>
+    <public type="color" name="material_pink_700"/>
+    <public type="color" name="material_pink_800"/>
+    <public type="color" name="material_pink_900"/>
+    <public type="color" name="material_pink_a100"/>
+    <public type="color" name="material_pink_a200"/>
+    <public type="color" name="material_pink_a400"/>
+    <public type="color" name="material_pink_a700"/>
+
+    <!-- purples -->
+    <public type="color" name="material_purple_50"/>
+    <public type="color" name="material_purple_100"/>
+    <public type="color" name="material_purple_200"/>
+    <public type="color" name="material_purple_300"/>
+    <public type="color" name="material_purple_400"/>
+    <public type="color" name="material_purple_500"/>
+    <public type="color" name="material_purple_600"/>
+    <public type="color" name="material_purple_700"/>
+    <public type="color" name="material_purple_800"/>
+    <public type="color" name="material_purple_900"/>
+    <public type="color" name="material_purple_a100"/>
+    <public type="color" name="material_purple_a200"/>
+    <public type="color" name="material_purple_a400"/>
+    <public type="color" name="material_purple_a700"/>
+
+    <!-- deep purples -->
+    <public type="color" name="material_deep_purple_50"/>
+    <public type="color" name="material_deep_purple_100"/>
+    <public type="color" name="material_deep_purple_200"/>
+    <public type="color" name="material_deep_purple_300"/>
+    <public type="color" name="material_deep_purple_400"/>
+    <public type="color" name="material_deep_purple_500"/>
+    <public type="color" name="material_deep_purple_600"/>
+    <public type="color" name="material_deep_purple_700"/>
+    <public type="color" name="material_deep_purple_800"/>
+    <public type="color" name="material_deep_purple_900"/>
+    <public type="color" name="material_deep_purple_a100"/>
+    <public type="color" name="material_deep_purple_a200"/>
+    <public type="color" name="material_deep_purple_a400"/>
+    <public type="color" name="material_deep_purple_a700"/>
+
+    <!-- indigo -->
+    <public type="color" name="material_indigo_50"/>
+    <public type="color" name="material_indigo_100"/>
+    <public type="color" name="material_indigo_200"/>
+    <public type="color" name="material_indigo_300"/>
+    <public type="color" name="material_indigo_400"/>
+    <public type="color" name="material_indigo_500"/>
+    <public type="color" name="material_indigo_600"/>
+    <public type="color" name="material_indigo_700"/>
+    <public type="color" name="material_indigo_800"/>
+    <public type="color" name="material_indigo_900"/>
+    <public type="color" name="material_indigo_a100"/>
+    <public type="color" name="material_indigo_a200"/>
+    <public type="color" name="material_indigo_a400"/>
+    <public type="color" name="material_indigo_a700"/>
+
+    <!--blue-->
+    <public type="color" name="material_blue_50"/>
+    <public type="color" name="material_blue_100"/>
+    <public type="color" name="material_blue_200"/>
+    <public type="color" name="material_blue_300"/>
+    <public type="color" name="material_blue_400"/>
+    <public type="color" name="material_blue_500"/>
+    <public type="color" name="material_blue_600"/>
+    <public type="color" name="material_blue_700"/>
+    <public type="color" name="material_blue_800"/>
+    <public type="color" name="material_blue_900"/>
+    <public type="color" name="material_blue_a100"/>
+    <public type="color" name="material_blue_a200"/>
+    <public type="color" name="material_blue_a400"/>
+    <public type="color" name="material_blue_a700"/>
+
+    <!-- light blue-->
+    <public type="color" name="material_light_blue_50"/>
+    <public type="color" name="material_light_blue_100"/>
+    <public type="color" name="material_light_blue_200"/>
+    <public type="color" name="material_light_blue_300"/>
+    <public type="color" name="material_light_blue_400"/>
+    <public type="color" name="material_light_blue_500"/>
+    <public type="color" name="material_light_blue_600"/>
+    <public type="color" name="material_light_blue_700"/>
+    <public type="color" name="material_light_blue_800"/>
+    <public type="color" name="material_light_blue_900"/>
+    <public type="color" name="material_light_blue_a100"/>
+    <public type="color" name="material_light_blue_a200"/>
+    <public type="color" name="material_light_blue_a400"/>
+    <public type="color" name="material_light_blue_a700"/>
+
+    <!-- cyan -->
+    <public type="color" name="material_cyan_50"/>
+    <public type="color" name="material_cyan_100"/>
+    <public type="color" name="material_cyan_200"/>
+    <public type="color" name="material_cyan_300"/>
+    <public type="color" name="material_cyan_400"/>
+    <public type="color" name="material_cyan_500"/>
+    <public type="color" name="material_cyan_600"/>
+    <public type="color" name="material_cyan_700"/>
+    <public type="color" name="material_cyan_800"/>
+    <public type="color" name="material_cyan_900"/>
+    <public type="color" name="material_cyan_a100"/>
+    <public type="color" name="material_cyan_a200"/>
+    <public type="color" name="material_cyan_a400"/>
+    <public type="color" name="material_cyan_a700"/>
+
+    <!-- teal -->
+    <public type="color" name="material_teal_50"/>
+    <public type="color" name="material_teal_100"/>
+    <public type="color" name="material_teal_200"/>
+    <public type="color" name="material_teal_300"/>
+    <public type="color" name="material_teal_400"/>
+    <public type="color" name="material_teal_500"/>
+    <public type="color" name="material_teal_600"/>
+    <public type="color" name="material_teal_700"/>
+    <public type="color" name="material_teal_800"/>
+    <public type="color" name="material_teal_900"/>
+    <public type="color" name="material_teal_a100"/>
+    <public type="color" name="material_teal_a200"/>
+    <public type="color" name="material_teal_a400"/>
+    <public type="color" name="material_teal_a700"/>
+
+    <!-- green -->
+    <public type="color" name="material_green_50"/>
+    <public type="color" name="material_green_100"/>
+    <public type="color" name="material_green_200"/>
+    <public type="color" name="material_green_300"/>
+    <public type="color" name="material_green_400"/>
+    <public type="color" name="material_green_500"/>
+    <public type="color" name="material_green_600"/>
+    <public type="color" name="material_green_700"/>
+    <public type="color" name="material_green_800"/>
+    <public type="color" name="material_green_900"/>
+    <public type="color" name="material_green_a100"/>
+    <public type="color" name="material_green_a200"/>
+    <public type="color" name="material_green_a400"/>
+    <public type="color" name="material_green_a700"/>
+
+    <!--light green-->
+    <public type="color" name="material_light_green_50"/>
+    <public type="color" name="material_light_green_100"/>
+    <public type="color" name="material_light_green_200"/>
+    <public type="color" name="material_light_green_300"/>
+    <public type="color" name="material_light_green_400"/>
+    <public type="color" name="material_light_green_500"/>
+    <public type="color" name="material_light_green_600"/>
+    <public type="color" name="material_light_green_700"/>
+    <public type="color" name="material_light_green_800"/>
+    <public type="color" name="material_light_green_900"/>
+    <public type="color" name="material_light_green_a100"/>
+    <public type="color" name="material_light_green_a200"/>
+    <public type="color" name="material_light_green_a400"/>
+    <public type="color" name="material_light_green_a700"/>
+
+    <!-- lime-->
+    <public type="color" name="material_lime_50"/>
+    <public type="color" name="material_lime_100"/>
+    <public type="color" name="material_lime_200"/>
+    <public type="color" name="material_lime_300"/>
+    <public type="color" name="material_lime_400"/>
+    <public type="color" name="material_lime_500"/>
+    <public type="color" name="material_lime_600"/>
+    <public type="color" name="material_lime_700"/>
+    <public type="color" name="material_lime_800"/>
+    <public type="color" name="material_lime_900"/>
+    <public type="color" name="material_lime_a100"/>
+    <public type="color" name="material_lime_a200"/>
+    <public type="color" name="material_lime_a400"/>
+    <public type="color" name="material_lime_a700"/>
+
+    <!--yellow -->
+    <public type="color" name="material_yellow_50"/>
+    <public type="color" name="material_yellow_100"/>
+    <public type="color" name="material_yellow_200"/>
+    <public type="color" name="material_yellow_300"/>
+    <public type="color" name="material_yellow_400"/>
+    <public type="color" name="material_yellow_500"/>
+    <public type="color" name="material_yellow_600"/>
+    <public type="color" name="material_yellow_700"/>
+    <public type="color" name="material_yellow_800"/>
+    <public type="color" name="material_yellow_900"/>
+    <public type="color" name="material_yellow_a100"/>
+    <public type="color" name="material_yellow_a200"/>
+    <public type="color" name="material_yellow_a400"/>
+    <public type="color" name="material_yellow_a700"/>
+
+    <!--amber-->
+    <public type="color" name="material_amber_50"/>
+    <public type="color" name="material_amber_100"/>
+    <public type="color" name="material_amber_200"/>
+    <public type="color" name="material_amber_300"/>
+    <public type="color" name="material_amber_400"/>
+    <public type="color" name="material_amber_500"/>
+    <public type="color" name="material_amber_600"/>
+    <public type="color" name="material_amber_700"/>
+    <public type="color" name="material_amber_800"/>
+    <public type="color" name="material_amber_900"/>
+    <public type="color" name="material_amber_a100"/>
+    <public type="color" name="material_amber_a200"/>
+    <public type="color" name="material_amber_a400"/>
+    <public type="color" name="material_amber_a700"/>
+
+    <!--orange-->
+    <public type="color" name="material_orange_50"/>
+    <public type="color" name="material_orange_100"/>
+    <public type="color" name="material_orange_200"/>
+    <public type="color" name="material_orange_300"/>
+    <public type="color" name="material_orange_400"/>
+    <public type="color" name="material_orange_500"/>
+    <public type="color" name="material_orange_600"/>
+    <public type="color" name="material_orange_700"/>
+    <public type="color" name="material_orange_800"/>
+    <public type="color" name="material_orange_900"/>
+    <public type="color" name="material_orange_a100"/>
+    <public type="color" name="material_orange_a200"/>
+    <public type="color" name="material_orange_a400"/>
+    <public type="color" name="material_orange_a700"/>
+
+    <!--deep orange-->
+    <public type="color" name="material_deep_orange_50"/>
+    <public type="color" name="material_deep_orange_100"/>
+    <public type="color" name="material_deep_orange_200"/>
+    <public type="color" name="material_deep_orange_300"/>
+    <public type="color" name="material_deep_orange_400"/>
+    <public type="color" name="material_deep_orange_500"/>
+    <public type="color" name="material_deep_orange_600"/>
+    <public type="color" name="material_deep_orange_700"/>
+    <public type="color" name="material_deep_orange_800"/>
+    <public type="color" name="material_deep_orange_900"/>
+    <public type="color" name="material_deep_orange_a100"/>
+    <public type="color" name="material_deep_orange_a200"/>
+    <public type="color" name="material_deep_orange_a400"/>
+    <public type="color" name="material_deep_orange_a700"/>
+
+    <!--brown -->
+    <public type="color" name="material_brown_50"/>
+    <public type="color" name="material_brown_100"/>
+    <public type="color" name="material_brown_200"/>
+    <public type="color" name="material_brown_300"/>
+    <public type="color" name="material_brown_400"/>
+    <public type="color" name="material_brown_500"/>
+    <public type="color" name="material_brown_600"/>
+    <public type="color" name="material_brown_700"/>
+    <public type="color" name="material_brown_800"/>
+    <public type="color" name="material_brown_900"/>
+
+    <!--grey-->
+    <public type="color" name="material_grey_50"/>
+    <public type="color" name="material_grey_100"/>
+    <public type="color" name="material_grey_200"/>
+    <public type="color" name="material_grey_300"/>
+    <public type="color" name="material_grey_400"/>
+    <public type="color" name="material_grey_500"/>
+    <public type="color" name="material_grey_600"/>
+    <public type="color" name="material_grey_700"/>
+    <public type="color" name="material_grey_800"/>
+    <public type="color" name="material_grey_850"/>
+    <public type="color" name="material_grey_900"/>
+
+    <!--blue grey-->
+    <public type="color" name="material_blue_grey_50"/>
+    <public type="color" name="material_blue_grey_100"/>
+    <public type="color" name="material_blue_grey_200"/>
+    <public type="color" name="material_blue_grey_300"/>
+    <public type="color" name="material_blue_grey_400"/>
+    <public type="color" name="material_blue_grey_500"/>
+    <public type="color" name="material_blue_grey_600"/>
+    <public type="color" name="material_blue_grey_700"/>
+    <public type="color" name="material_blue_grey_800"/>
+    <public type="color" name="material_blue_grey_900"/>
+
+    <!-- WHITE -->
+    <public type="color" name="material_white_text_primary"/>
+    <public type="color" name="material_white_text_secondary"/>
+    <public type="color" name="material_white_icons"/>
+    <public type="color" name="material_white_disabled"/>
+    <public type="color" name="material_white_hints"/>
+    <public type="color" name="material_white_dividers"/>
+
+    <!-- BLACK -->
+    <public type="color" name="material_black_text_primary"/>
+    <public type="color" name="material_black_text_secondary"/>
+    <public type="color" name="material_black_icons"/>
+    <public type="color" name="material_black_disabled"/>
+    <public type="color" name="material_black_hints"/>
+    <public type="color" name="material_black_dividers"/>
+
+    <!-- light theme -->
+    <public type="color" name="material_light_status_bar"/>
+    <public type="color" name="material_light_app_bar"/>
+    <public type="color" name="material_light_background"/>
+    <public type="color" name="material_light_cards"/>
+    <public type="color" name="material_light_dialogs"/>
+
+    <!-- dark theme -->
+    <public type="color" name="material_dark_status_bar"/>
+    <public type="color" name="material_dark_app_bar"/>
+    <public type="color" name="material_dark_background"/>
+    <public type="color" name="material_dark_cards"/>
+    <public type="color" name="material_dark_dialogs"/>
+</resources>

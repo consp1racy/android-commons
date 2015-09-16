@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:enterFadeDuration="@integer/button_pressed_animation_duration_material"
+    android:exitFadeDuration="@integer/button_pressed_animation_duration_material" tools:ignore="UnusedAttribute">
+
+    <item android:drawable="@color/xpc_disabled_dark" android:state_enabled="false" android:state_focused="true" android:state_pressed="true"/>
+    <item android:drawable="@color/xpc_disabled_dark" android:state_enabled="false" android:state_focused="true"/>
+    <item android:drawable="@color/xpc_selected_dark" android:state_focused="true" android:state_pressed="true"/>
+    <item android:drawable="@color/xpc_selected_dark" android:state_focused="false" android:state_pressed="true"/>
+    <item android:drawable="@color/xpc_selected_dark" android:state_focused="true"/>
+    <item android:drawable="@android:color/transparent"/>
+</selector>

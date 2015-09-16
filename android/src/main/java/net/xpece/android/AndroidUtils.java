@@ -1,5 +1,6 @@
 package net.xpece.android;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.Service;
@@ -13,8 +14,6 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.telephony.TelephonyManager;
-
-import net.xpece.android.widget.ItemSize;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -38,47 +37,9 @@ public class AndroidUtils {
     public static final boolean API_19 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
     public static final boolean API_21 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     public static final boolean API_22 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1;
+    public static final boolean API_23 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
 
     private AndroidUtils() {}
-
-    @TargetApi(13)
-    @Deprecated
-    public static int getColumnCount(Context context) {
-        if (API_13) {
-            int screenWidthDp = context.getResources().getConfiguration().screenWidthDp;
-//    if (screenWidthDp > 820) return 4;
-            if (screenWidthDp >= 720) return 3;
-            if (screenWidthDp >= 480) return 2;
-        }
-
-        return 1;
-    }
-
-    /**
-     * TODO: Larger on tablets - multiplier
-     * TODO: Padding aware?
-     * @param context
-     * @param itemSize
-     * @param large
-     * @param availableSpace
-     * @return
-     */
-    public static int getGridColumnCount(Context context, ItemSize itemSize, boolean large, int availableSpace) {
-        int itemSizeInt;
-        if (large) {
-            itemSizeInt = itemSize.getGridItemWidthLarge(context);
-        } else {
-            itemSizeInt = itemSize.getGridItemWidth(context);
-        }
-
-        int columns = availableSpace / itemSizeInt;
-        if (columns < 1) columns = 1;
-        return columns;
-    }
-
-    public static int getGridColumnCount(Context context, ItemSize itemSize, boolean large) {
-        return getGridColumnCount(context, itemSize, large, context.getResources().getDisplayMetrics().widthPixels);
-    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static boolean isRtl(Context context) {
@@ -135,6 +96,7 @@ public class AndroidUtils {
      * @param context
      * @return
      */
+    @SuppressLint("MissingPermission")
     public static boolean isMobileDataEnabled(Context context) {
         boolean mobileDataEnabled = false; // Assume disabled
 
@@ -170,6 +132,14 @@ public class AndroidUtils {
         return networkInfo != null && networkInfo.isConnected();
     }
 
+    /**
+     * Requires {@link android.Manifest.permission#ACCESS_WIFI_STATE}
+     * and {@link android.Manifest.permission#CHANGE_WIFI_STATE} permissions.
+     *
+     * @param context
+     * @return
+     */
+    @SuppressLint("MissingPermission")
     public static int disconnectWifi(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -183,6 +153,14 @@ public class AndroidUtils {
         return -1;
     }
 
+    /**
+     * Requires {@link android.Manifest.permission#ACCESS_WIFI_STATE}
+     * and {@link android.Manifest.permission#CHANGE_WIFI_STATE} permissions.
+     *
+     * @param context
+     * @return
+     */
+    @SuppressLint("MissingPermission")
     public static void reconnectWifi(Context context, int networkId) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);

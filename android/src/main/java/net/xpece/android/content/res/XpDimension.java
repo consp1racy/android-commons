@@ -9,7 +9,7 @@ import android.util.TypedValue;
 /**
  * Created by pechanecjr on 4. 1. 2015.
  */
-public class XpDimen {
+public class XpDimension {
 
     private static final DimensionLruCache DIMENSION_LRU_CACHE = new DimensionLruCache(10);
 
@@ -26,89 +26,81 @@ public class XpDimen {
         sContext = context.getApplicationContext();
     }
 
-    private XpDimen(float dimen) {
+    private XpDimension(float dimen) {
         mDimen = dimen;
     }
 
-    @Deprecated
-    public static XpDimen fromAttribute(Context context, @AttrRes int attr) {
+    private static XpDimension fromAttribute(Context context, @AttrRes int attr) {
         int resId = XpResources.resolveResourceId(context, attr, 0);
         return fromResource(context, resId);
     }
 
-    @Deprecated
-    public static XpDimen fromResource(Context context, @DimenRes int resId) {
-        return new XpDimen(context.getResources().getDimension(resId));
+    private static XpDimension fromResource(Context context, @DimenRes int resId) {
+        return new XpDimension(context.getResources().getDimension(resId));
     }
 
-    @Deprecated
-    public static XpDimen fromDp(Context context, int dp) {
+    private static XpDimension fromDp(Context context, int dp) {
         float density = context.getResources().getDisplayMetrics().density;
-        XpDimen result = DIMENSION_LRU_CACHE.get(density, dp);
+        XpDimension result = DIMENSION_LRU_CACHE.get(density, dp);
         if (result == null) {
-            result = new XpDimen(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics()));
+            result = new XpDimension(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics()));
             DIMENSION_LRU_CACHE.put(density, dp, result);
         }
         return result;
     }
 
-    @Deprecated
-    public static XpDimen fromSp(Context context, int sp) {
+    private static XpDimension fromSp(Context context, int sp) {
         float density = context.getResources().getDisplayMetrics().scaledDensity;
-        XpDimen result = DIMENSION_LRU_CACHE.get(density, sp);
+        XpDimension result = DIMENSION_LRU_CACHE.get(density, sp);
         if (result == null) {
-            result = new XpDimen(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, context.getResources().getDisplayMetrics()));
+            result = new XpDimension(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, context.getResources().getDisplayMetrics()));
             DIMENSION_LRU_CACHE.put(density, sp, result);
         }
         return result;
     }
 
-    @SuppressWarnings("deprecation")
-    public static XpDimen fromAttribute(@AttrRes int attr) {
+    public static XpDimension fromAttribute(@AttrRes int attr) {
         return fromAttribute(sContext, attr);
     }
 
-    @SuppressWarnings("deprecation")
-    public static XpDimen fromResource(@DimenRes int resId) {
+    public static XpDimension fromResource(@DimenRes int resId) {
         return fromResource(sContext, resId);
     }
 
-    @SuppressWarnings("deprecation")
-    public static XpDimen fromDp(int dp) {
+    public static XpDimension fromDp(int dp) {
         return fromDp(sContext, dp);
     }
 
-    @SuppressWarnings("deprecation")
-    public static XpDimen fromSp(int sp) {
+    public static XpDimension fromSp(int sp) {
         return fromSp(sContext, sp);
     }
 
-    public static XpDimen fromPx(float px) {
-        return new XpDimen(px);
+    public static XpDimension fromPx(float px) {
+        return new XpDimension(px);
     }
 
-    public XpDimen plus(XpDimen that) {
-        return new XpDimen(this.mDimen + that.mDimen);
+    public XpDimension plus(XpDimension that) {
+        return new XpDimension(this.mDimen + that.mDimen);
     }
 
-    public XpDimen minus(XpDimen that) {
-        return new XpDimen(this.mDimen - that.mDimen);
+    public XpDimension minus(XpDimension that) {
+        return new XpDimension(this.mDimen - that.mDimen);
     }
 
-    public XpDimen plus(float that) {
-        return new XpDimen(this.mDimen + that);
+    public XpDimension plus(float that) {
+        return new XpDimension(this.mDimen + that);
     }
 
-    public XpDimen minus(float that) {
-        return new XpDimen(this.mDimen - that);
+    public XpDimension minus(float that) {
+        return new XpDimension(this.mDimen - that);
     }
 
-    public XpDimen multiply(float q) {
-        return new XpDimen(this.mDimen * q);
+    public XpDimension multiply(float q) {
+        return new XpDimension(this.mDimen * q);
     }
 
-    public XpDimen divide(float d) {
-        return new XpDimen(this.mDimen / d);
+    public XpDimension divide(float d) {
+        return new XpDimension(this.mDimen / d);
     }
 
     public float getValue() { return mDimen; }
@@ -117,17 +109,17 @@ public class XpDimen {
 
     public int getPixelOffset() { return (int) (mDimen);}
 
-    private static class DimensionLruCache extends LruCache<Integer, XpDimen> {
+    private static class DimensionLruCache extends LruCache<Integer, XpDimension> {
 
         public DimensionLruCache(int maxSize) {
             super(maxSize);
         }
 
-        XpDimen get(float density, int request) {
+        XpDimension get(float density, int request) {
             return get(generateCacheKey(density, request));
         }
 
-        XpDimen put(float density, int request, XpDimen result) {
+        XpDimension put(float density, int request, XpDimension result) {
             return put(generateCacheKey(density, request), result);
         }
 

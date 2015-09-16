@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="xpc_try_again">Zkusit znovu</string>
+    <string name="xpc_error_connection">Došlo k chybě připojení. Zkuste to později.</string>
+</resources>

@@ -10,9 +10,9 @@ import net.xpece.android.location.BestLocationProvider.LocationType;
  */
 public abstract class BestLocationListener {
 
-  public abstract void onLocationUpdate(Location location, LocationType type, boolean isFresh);
+  public abstract void onLocationUpdate(Location location, @LocationType int type, boolean isFresh);
 
-  public void onLocationUpdateTimeoutExceeded(LocationType type) {}
+  public void onLocationUpdateTimeoutExceeded(@LocationType int type) {}
 
   public void onStatusChanged(String provider, int status, Bundle extras) {}
 

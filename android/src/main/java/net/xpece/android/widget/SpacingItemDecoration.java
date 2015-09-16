@@ -8,16 +8,22 @@ import android.view.View;
  * Created by pechanecjr on 21. 12. 2014.
  */
 public class SpacingItemDecoration extends RecyclerView.ItemDecoration {
+    private final Rect mPadding = new Rect();
 
-  private float mPadding;
+    public SpacingItemDecoration(int padding) {
+        mPadding.set(padding, padding, padding, padding);
+    }
 
-  public SpacingItemDecoration(float padding) {
-    mPadding = padding;
-  }
+    public SpacingItemDecoration(int horizontal, int vertical) {
+        mPadding.set(horizontal, vertical, horizontal, vertical);
+    }
 
-  @Override
-  public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-    int padding = (int) mPadding;
-    outRect.set(padding, padding, padding, padding);
-  }
+    public SpacingItemDecoration(int left, int top, int right, int bottom) {
+        mPadding.set(left, top, right, bottom);
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        outRect.set(mPadding);
+    }
 }

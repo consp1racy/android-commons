@@ -29,7 +29,7 @@ public class IntentQueue {
 
     private static final String FILENAME = "intent.q";
 
-    private static volatile IntentQueue sInstance = null;
+    private static final IntentQueue sInstance = new IntentQueue();
 
     private ConcurrentLinkedQueue<Intent> mQueue = null;
 
@@ -38,14 +38,6 @@ public class IntentQueue {
     private Check mCheck = null;
 
     public static IntentQueue getInstance() {
-        if (sInstance == null) {
-            synchronized (IntentQueue.class) {
-                if (sInstance == null) {
-                    sInstance = new IntentQueue();
-                }
-            }
-        }
-
         return sInstance;
     }
 
@@ -227,15 +219,15 @@ public class IntentQueue {
         }
     }
 
-    public static interface RemoveHandler {
-        public static final RemoveHandler EQUALS = new RemoveHandler() {
+    public interface RemoveHandler {
+        RemoveHandler EQUALS = new RemoveHandler() {
             @Override
             public boolean shouldBeRemoved(Intent intent, Intent subjectToRemoval) {
                 return intent != null && intent.equals(subjectToRemoval);
             }
         };
 
-        public boolean shouldBeRemoved(Intent intent, Intent subjectToRemoval);
+        boolean shouldBeRemoved(Intent intent, Intent subjectToRemoval);
     }
 
     public static class ConnectivityReceiver extends BroadcastReceiver {
