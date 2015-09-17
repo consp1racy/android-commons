@@ -15,7 +15,6 @@ import android.widget.EdgeEffect;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import net.xpece.android.AndroidUtils;
 import net.xpece.android.graphics.TintUtils;
@@ -74,32 +73,6 @@ public class XpView {
             v.getViewTreeObserver().removeGlobalOnLayoutListener(l);
         } else {
             v.getViewTreeObserver().removeOnGlobalLayoutListener(l);
-        }
-    }
-
-    /**
-     * @deprecated Use {@link android.support.v4.widget.TextViewCompat#setCompoundDrawablesRelative(TextView, Drawable, Drawable, Drawable, Drawable)}.
-     */
-    @Deprecated
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static void setCompoundDrawablesRelative(TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            tv.setCompoundDrawables(start, top, end, bottom);
-        } else {
-            tv.setCompoundDrawablesRelative(start, top, end, bottom);
-        }
-    }
-
-    /**
-     * @deprecated Use {@link android.support.v4.widget.TextViewCompat#setCompoundDrawablesRelativeWithIntrinsicBounds(TextView, int, int, int, int)}.
-     */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    @Deprecated
-    public static void setCompoundDrawablesRelativeWithIntrinsicBounds(TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            tv.setCompoundDrawablesWithIntrinsicBounds(start, top, end, bottom);
-        } else {
-            tv.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
         }
     }
 

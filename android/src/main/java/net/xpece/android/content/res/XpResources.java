@@ -1,36 +1,16 @@
 package net.xpece.android.content.res;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.AttrRes;
-import android.support.annotation.DrawableRes;
 
 /**
  * Created by Eugen on 20. 3. 2015.
  */
 public class XpResources {
     private XpResources() {}
-
-    /**
-     * @deprecated Use {@link android.support.v4.content.ContextCompat#getDrawable(Context, int)} instead.
-     * @param context
-     * @param did
-     * @return
-     */
-    @SuppressWarnings("deprecation")
-    @TargetApi(21)
-    @Deprecated
-    public static Drawable getDrawable(Context context, @DrawableRes int did) {
-        if (Build.VERSION.SDK_INT < 21) {
-            return context.getResources().getDrawable(did);
-        } else {
-            return context.getDrawable(did);
-        }
-    }
 
     public static boolean resolveBoolean(Context context, @AttrRes int attr, boolean fallback) {
         TypedArray ta = context.obtainStyledAttributes(new int[]{attr});

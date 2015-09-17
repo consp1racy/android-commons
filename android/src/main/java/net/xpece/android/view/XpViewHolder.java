@@ -7,7 +7,7 @@ import android.view.View;
 
 /**
  * Extended to support arbitrary objects alongside views.
- * <p/>
+ * <p></p>
  * Sauce: Pierre-Yves Ricau http://www.piwai.info/android-adapter-good-practices/
  */
 public class XpViewHolder {

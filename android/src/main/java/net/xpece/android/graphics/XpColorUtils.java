@@ -19,7 +19,7 @@ public class XpColorUtils {
 
     /**
      * Compute text color based on background luminance.
-     * <p/>
+     * <p></p>
      * Sauce: http://stackoverflow.com/questions/1855884/determine-font-color-based-on-background-color
      * More sauce: http://stackoverflow.com/a/596243/2444099
      *
