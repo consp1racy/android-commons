@@ -27,13 +27,13 @@ public class XpTintManager {
     private XpTintManager() {
     }
 
-    static Drawable getDrawable(Context context, @DrawableRes int drawableId, @ColorRes int colorId) {
+    public static Drawable tintDrawable(Context context, @DrawableRes int drawableId, @ColorRes int colorId) {
         Drawable d = ContextCompat.getDrawable(context, drawableId).mutate();
         int c = ContextCompat.getColor(context, colorId);
-        return getDrawable(d, c);
+        return tintDrawable(d, c);
     }
 
-    static Drawable getDrawable(Drawable d, int c) {
+    public static Drawable tintDrawable(Drawable d, int c) {
         PorterDuffColorFilter cf = COLOR_FILTER_CACHE.get(c);
         if (cf == null) {
             cf = new PorterDuffColorFilter(c, PorterDuff.Mode.SRC_IN);
@@ -46,7 +46,7 @@ public class XpTintManager {
     public static void tintMenuItem(MenuItem item, int color) {
         Drawable icon = item.getIcon();
         if (icon != null) {
-            icon = XpTintManager.getDrawable(icon, color);
+            icon = tintDrawable(icon, color);
             item.setIcon(icon);
         }
     }
