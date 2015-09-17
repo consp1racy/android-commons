@@ -2,22 +2,17 @@ package net.xpece.android.view;
 
 import android.animation.LayoutTransition;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.EdgeEffect;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import net.xpece.android.AndroidUtils;
-import net.xpece.android.graphics.TintUtils;
 import net.xpece.commons.android.BuildConfig;
 import net.xpece.commons.android.R;
 
@@ -34,24 +29,12 @@ public class XpView {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressWarnings("deprecation")
-    public static void setBackground(android.view.View v, Drawable d) {
+    public static void setBackground(View v, Drawable d) {
         if (Build.VERSION.SDK_INT < 16) {
             v.setBackgroundDrawable(d);
         } else {
             v.setBackground(d);
         }
-    }
-
-    public static void setBackground(View v, @DrawableRes int drawableId, @ColorRes int colorId) {
-        Context context = v.getContext();
-        Drawable d = TintUtils.getDrawable(context, drawableId, colorId);
-        setBackground(v, d);
-    }
-
-    public static void setImageDrawable(ImageView v, @DrawableRes int drawableId, @ColorRes int colorId) {
-        Context context = v.getContext();
-        Drawable d = TintUtils.getDrawable(context, drawableId, colorId);
-        v.setImageDrawable(d);
     }
 
     /**

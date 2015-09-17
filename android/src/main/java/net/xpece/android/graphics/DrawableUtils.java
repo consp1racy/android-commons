@@ -9,21 +9,21 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
 import android.util.StateSet;
 
 import net.xpece.android.AndroidUtils;
 import net.xpece.commons.android.R;
-import net.xpece.android.content.res.XpResources;
 
 /**
  * Created by pechanecjr on 7. 1. 2015.
  */
+@Deprecated
 public class DrawableUtils {
     private DrawableUtils() {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    @Deprecated
     public static Drawable getDividerDrawable(Context context, boolean doInset) {
         ColorDrawable color = new ColorDrawable(XpColorUtils.getDividerColor(context));
         if (doInset) {
@@ -36,8 +36,8 @@ public class DrawableUtils {
     }
 
     public static Drawable getDisabledDrawable(Context context, @DrawableRes int did, @ColorRes int cid) {
-        Drawable d = XpResources.getDrawable(context, did);
-        int c = context.getResources().getColor(cid);
+        Drawable d = ContextCompat.getDrawable(context, did);
+        int c = ContextCompat.getColor(context, cid);
         return getDisabledDrawable(d, c);
     }
 
@@ -51,8 +51,8 @@ public class DrawableUtils {
         int disabledColor = XpColorUtils.setColorAlpha(color, alpha);
 
         StateListDrawable sld = new StateListDrawable();
-        sld.addState(new int[]{-android.R.attr.state_enabled}, TintUtils.getDrawable(d.getConstantState().newDrawable(), disabledColor));
-        sld.addState(StateSet.WILD_CARD, TintUtils.getDrawable(d.getConstantState().newDrawable(), color));
+        sld.addState(new int[]{-android.R.attr.state_enabled}, XpTintManager.getDrawable(d.getConstantState().newDrawable(), disabledColor));
+        sld.addState(StateSet.WILD_CARD, XpTintManager.getDrawable(d.getConstantState().newDrawable(), color));
         return sld;
     }
 

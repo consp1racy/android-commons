@@ -107,6 +107,7 @@ public abstract class ExpandableRecyclerViewAdapter<T extends Expandable<?>>
     public abstract RecyclerView.ViewHolder onCreateSecondaryRegularItemViewHolder(ViewGroup parent);
 
     @Override
+    @SuppressWarnings("unchecked")
     protected final void onBindContentItemViewHolder(RecyclerView.ViewHolder contentViewHolder, int position) {
         int categoryIndex = getCategoryIndex(position);
         int categoryPosition = mCategoryPositions[categoryIndex];
