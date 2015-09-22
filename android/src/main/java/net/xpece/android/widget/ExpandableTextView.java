@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.Layout;
@@ -102,6 +104,23 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
         }
 
         setOnClickListener(this);
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Bundle b = new Bundle();
+        b.putParcelable("super", super.onSaveInstanceState());
+        b.putBoolean("mCollapsed", mCollapsed);
+        return b;
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            mCollapsed = ((Bundle) state).getBoolean("mCollapsed");
+            state = ((Bundle) state).getParcelable("super");
+        }
+        super.onRestoreInstanceState(state);
     }
 
     @Override

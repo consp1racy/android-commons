@@ -1,6 +1,8 @@
 package net.xpece.android.content.res;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.res.Resources;
 import android.support.annotation.AttrRes;
 import android.support.annotation.DimenRes;
 import android.support.v4.util.LruCache;
@@ -10,10 +12,16 @@ import android.util.TypedValue;
  * Created by pechanecjr on 4. 1. 2015.
  */
 public class XpDimension {
+    private static final String TAG = XpDimension.class.getSimpleName();
 
     private static final DimensionLruCache DIMENSION_LRU_CACHE = new DimensionLruCache(10);
 
-    private static Context sContext = null;
+    private static Context sContext = new ContextWrapper(null) {
+        @Override
+        public Resources getResources() {
+            throw new IllegalStateException("You forgot to call " + TAG + ".init(Context).");
+        }
+    };
 
     private final float mDimen;
 
@@ -30,16 +38,16 @@ public class XpDimension {
         mDimen = dimen;
     }
 
-    private static XpDimension fromAttribute(Context context, @AttrRes int attr) {
+    public static XpDimension fromAttribute(Context context, @AttrRes int attr) {
         int resId = XpResources.resolveResourceId(context, attr, 0);
         return fromResource(context, resId);
     }
 
-    private static XpDimension fromResource(Context context, @DimenRes int resId) {
+    public static XpDimension fromResource(Context context, @DimenRes int resId) {
         return new XpDimension(context.getResources().getDimension(resId));
     }
 
-    private static XpDimension fromDp(Context context, int dp) {
+    public static XpDimension fromDp(Context context, int dp) {
         float density = context.getResources().getDisplayMetrics().density;
         XpDimension result = DIMENSION_LRU_CACHE.get(density, dp);
         if (result == null) {
@@ -49,7 +57,7 @@ public class XpDimension {
         return result;
     }
 
-    private static XpDimension fromSp(Context context, int sp) {
+    public static XpDimension fromSp(Context context, int sp) {
         float density = context.getResources().getDisplayMetrics().scaledDensity;
         XpDimension result = DIMENSION_LRU_CACHE.get(density, sp);
         if (result == null) {
@@ -59,9 +67,9 @@ public class XpDimension {
         return result;
     }
 
-    public static XpDimension fromAttribute(@AttrRes int attr) {
-        return fromAttribute(sContext, attr);
-    }
+//    public static XpDimension fromAttribute(@AttrRes int attr) {
+//        return fromAttribute(sContext, attr);
+//    }
 
     public static XpDimension fromResource(@DimenRes int resId) {
         return fromResource(sContext, resId);
