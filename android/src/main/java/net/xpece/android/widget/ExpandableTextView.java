@@ -46,6 +46,7 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
     private boolean mCollapsed = true; // Show short version as default.
 
     private int mMaxCollapsedLines;
+    private int mMinCollapsedLines;
 
     private Drawable mExpandDrawable;
     private Drawable mCollapseDrawable;
@@ -91,6 +92,7 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableTextView, defStyleAttr, defStyleRes);
         mMaxCollapsedLines = typedArray.getInt(R.styleable.ExpandableTextView_maxCollapsedLines, MAX_COLLAPSED_LINES);
+        mMinCollapsedLines = typedArray.getInt(R.styleable.ExpandableTextView_minCollapsedLines, mMaxCollapsedLines);
         mAnimationDuration = typedArray.getInt(R.styleable.ExpandableTextView_animDuration, DEFAULT_ANIM_DURATION);
         mExpandDrawable = typedArray.getDrawable(R.styleable.ExpandableTextView_expandDrawable);
         mCollapseDrawable = typedArray.getDrawable(R.styleable.ExpandableTextView_collapseDrawable);
@@ -277,7 +279,7 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
 
     private void setProperMaxLines() {
         if (mCollapsed) {
-            mTv.setMaxLines(mMaxCollapsedLines);
+            mTv.setMaxLines(mMinCollapsedLines);
         } else {
             mTv.setMaxLines(Integer.MAX_VALUE);
         }

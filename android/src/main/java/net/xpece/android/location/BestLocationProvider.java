@@ -7,6 +7,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.util.Log;
 
 import java.lang.annotation.Retention;
@@ -23,12 +24,13 @@ public class BestLocationProvider {
 
     private static final String TAG = BestLocationProvider.class.getSimpleName();
 
+    @IntDef({TYPE_GPS, TYPE_CELL, TYPE_UNKNOWN})
     @Retention(RetentionPolicy.SOURCE)
     public @interface LocationType {}
 
-    @LocationType public static final int TYPE_GPS = 0;
-    @LocationType public static final int TYPE_CELL = 1;
-    @LocationType public static final int TYPE_UNKNOWN = 2;
+    public static final int TYPE_GPS = 0;
+    public static final int TYPE_CELL = 1;
+    public static final int TYPE_UNKNOWN = 2;
 
     private static final int TOO_OLD_LOCATION_DELTA = 1000 * 60 * 2;
     public static final float TOO_INACURATE_LOCATION_DELTA = 200;

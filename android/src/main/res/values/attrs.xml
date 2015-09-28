@@ -20,6 +20,7 @@
     </declare-styleable>
 
     <declare-styleable name="ExpandableTextView">
+        <attr name="minCollapsedLines" format="integer"/>
         <attr name="maxCollapsedLines" format="integer"/>
         <attr name="animDuration" format="integer"/>
         <attr name="expandDrawable" format="reference"/>

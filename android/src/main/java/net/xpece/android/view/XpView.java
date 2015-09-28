@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.IntDef;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
@@ -157,20 +158,17 @@ public class XpView {
         }
     }
 
+    @IntDef({ALWAYS, PRE_HONEYCOMB, PRE_KITKAT, PRE_LOLLIPOP})
     @Retention(RetentionPolicy.SOURCE)
     public @interface EdgeGlowColorApi {}
 
-    @XpView.EdgeGlowColorApi
     public static final int ALWAYS = 0;
-    @XpView.EdgeGlowColorApi
     public static final int PRE_HONEYCOMB = Build.VERSION_CODES.HONEYCOMB;
-    @XpView.EdgeGlowColorApi
     public static final int PRE_KITKAT = Build.VERSION_CODES.KITKAT;
-    @XpView.EdgeGlowColorApi
     public static final int PRE_LOLLIPOP = Build.VERSION_CODES.LOLLIPOP;
 
     public static void setEdgeGlowColor(AbsListView listView, int color, @EdgeGlowColorApi int when) {
-        if (Build.VERSION.SDK_INT < when || when == 0) {
+        if (Build.VERSION.SDK_INT < when || when == ALWAYS) {
             setEdgeGlowColor(listView, color);
         }
     }
@@ -188,7 +186,7 @@ public class XpView {
     }
 
     public static void setEdgeGlowColor(ScrollView scrollView, int color, @EdgeGlowColorApi int when) {
-        if (Build.VERSION.SDK_INT < when || when == 0) {
+        if (Build.VERSION.SDK_INT < when || when == ALWAYS) {
             setEdgeGlowColor(scrollView, color);
         }
     }

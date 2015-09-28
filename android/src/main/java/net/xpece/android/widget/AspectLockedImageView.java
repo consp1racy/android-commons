@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
@@ -18,17 +19,22 @@ import java.lang.annotation.RetentionPolicy;
 public class AspectLockedImageView extends ImageView {
     private static final String TAG = net.xpece.android.widget.AspectLockedImageView.class.getSimpleName();
 
-    @Adjust
     public static final int ADJUST_DETERMINE = 0;
-    @Adjust
     public static final int ADJUST_HEIGHT = 1;
-    @Adjust
     public static final int ADJUST_WIDTH = 2;
 
-    @AspectRatioSource
+    @IntDef({ADJUST_DETERMINE, ADJUST_HEIGHT, ADJUST_WIDTH})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Adjust {
+    }
+
     public static final int SOURCE_SPECIFIED = 0;
-    @AspectRatioSource
     public static final int SOURCE_DRAWABLE = 1;
+
+    @IntDef({SOURCE_DRAWABLE, SOURCE_SPECIFIED})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface AspectRatioSource {
+    }
 
     private float mAspectRatio;
     private int mAdjust;
@@ -165,13 +171,5 @@ public class AspectLockedImageView extends ImageView {
             mSource = source;
             requestLayout();
         }
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Adjust {
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface AspectRatioSource {
     }
 }
