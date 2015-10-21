@@ -11,14 +11,14 @@ import java.util.Collection;
 /**
  * Created by Eugen on 26.08.2015.
  */
-public abstract class ExpandableRecyclerViewAdapter<T extends Expandable<?>>
+public abstract class ExpandableRecyclerViewAdapter<G extends Expandable<C>, C>
     extends HeaderFooterRecyclerViewAdapter {
 
     private static final int TYPE_PRIMARY_REGULAR = 0;
     private static final int TYPE_PRIMARY_EXPANDABLE = 1;
     private static final int TYPE_SECONDARY_REGULAR = 2;
 
-    private final ArrayList<T> mCategories = new ArrayList<>();
+    private final ArrayList<G> mCategories = new ArrayList<>();
 
     // caches for numbers
     private int mCategoryCount = 0;
@@ -27,7 +27,7 @@ public abstract class ExpandableRecyclerViewAdapter<T extends Expandable<?>>
     private int[] mCategoryPositions = new int[0];
     private int[] mCategorySizes = new int[0];
 
-    public void setItems(Collection<T> items) {
+    public void setItems(Collection<G> items) {
         mCategories.clear();
         mCategories.addAll(items);
         int size = mCategories.size();
@@ -39,7 +39,7 @@ public abstract class ExpandableRecyclerViewAdapter<T extends Expandable<?>>
         mCategoryPositions = new int[size]; // very dynamic, but at first very sequential
 
         for (int i = 0; i < size; i++) {
-            T category = mCategories.get(i);
+            G category = mCategories.get(i);
             boolean expandable = category.canExpand();
             mExpandableCategories[i] = expandable;
             if (expandable) {
@@ -55,7 +55,7 @@ public abstract class ExpandableRecyclerViewAdapter<T extends Expandable<?>>
         notifyDataSetChanged();
     }
 
-    public ArrayList<T> getItems() {
+    public ArrayList<G> getItems() {
         return mCategories;
     }
 
@@ -112,7 +112,7 @@ public abstract class ExpandableRecyclerViewAdapter<T extends Expandable<?>>
         int categoryIndex = getCategoryIndex(position);
         int categoryPosition = mCategoryPositions[categoryIndex];
 
-        T category = mCategories.get(categoryIndex);
+        G category = mCategories.get(categoryIndex);
         if (position == categoryPosition) { // primary category
             if (mExpandableCategories[categoryIndex]) {
                 onBindPrimaryExpandableItemViewHolder(contentViewHolder, category, categoryIndex);
@@ -121,16 +121,16 @@ public abstract class ExpandableRecyclerViewAdapter<T extends Expandable<?>>
             }
         } else { // subcategory
             int subcategoryIndex = position - categoryPosition - 1;
-            category = (T) category.getChildren().get(subcategoryIndex);
-            onBindSecondaryRegularItemViewHolder(contentViewHolder, category);
+            C child = category.getChildren().get(subcategoryIndex);
+            onBindSecondaryRegularItemViewHolder(contentViewHolder, child);
         }
     }
 
-    public abstract void onBindPrimaryExpandableItemViewHolder(RecyclerView.ViewHolder holder, T category, int categoryIndex);
+    public abstract void onBindPrimaryExpandableItemViewHolder(RecyclerView.ViewHolder holder, G category, int categoryIndex);
 
-    public abstract void onBindPrimaryRegularItemViewHolder(RecyclerView.ViewHolder holder, T category);
+    public abstract void onBindPrimaryRegularItemViewHolder(RecyclerView.ViewHolder holder, G category);
 
-    public abstract void onBindSecondaryRegularItemViewHolder(RecyclerView.ViewHolder holder, T category);
+    public abstract void onBindSecondaryRegularItemViewHolder(RecyclerView.ViewHolder holder, C category);
 
     public void expandCategory(int categoryIndex) {
         if (!mExpandedCategories[categoryIndex]) {
@@ -171,7 +171,7 @@ public abstract class ExpandableRecyclerViewAdapter<T extends Expandable<?>>
         for (int i = fromCategory + 1, size = mCategoryCount; i < size; i++) {
             position++;
             if (mExpandedCategories[i - 1]) {
-                T prevCat = mCategories.get(i - 1);
+                G prevCat = mCategories.get(i - 1);
                 int prevSize = prevCat.canExpand() ? prevCat.getChildren().size() : 0;
                 position += prevSize;
             }
