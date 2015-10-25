@@ -62,11 +62,11 @@ public class AspectLockedImageView extends ImageView {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        TypedArray ta = context.obtainStyledAttributes(attrs, net.xpece.commons.android.R.styleable.AspectLockedImageView, defStyleAttr, defStyleRes);
-        float width = ta.getInteger(net.xpece.commons.android.R.styleable.AspectLockedImageView_aspectRatioWidth, 1);
-        float height = ta.getInteger(net.xpece.commons.android.R.styleable.AspectLockedImageView_aspectRatioHeight, 1);
-        mAdjust = ta.getInteger(net.xpece.commons.android.R.styleable.AspectLockedImageView_aspectRatioAdjust, 0);
-        mSource = ta.getInteger(net.xpece.commons.android.R.styleable.AspectLockedImageView_aspectRatioSource, 0);
+        TypedArray ta = context.obtainStyledAttributes(attrs, net.xpece.android.R.styleable.AspectLockedImageView, defStyleAttr, defStyleRes);
+        float width = ta.getInteger(net.xpece.android.R.styleable.AspectLockedImageView_aspectRatioWidth, 1);
+        float height = ta.getInteger(net.xpece.android.R.styleable.AspectLockedImageView_aspectRatioHeight, 1);
+        mAdjust = ta.getInteger(net.xpece.android.R.styleable.AspectLockedImageView_aspectRatioAdjust, 0);
+        mSource = ta.getInteger(net.xpece.android.R.styleable.AspectLockedImageView_aspectRatioSource, 0);
         ta.recycle();
         mAspectRatio = width / height;
     }

@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import net.xpece.android.AndroidUtils;
-import net.xpece.commons.android.BuildConfig;
+import net.xpece.android.BuildConfig;
 import net.xpece.android.R;
 
 import java.lang.annotation.Retention;
