@@ -133,25 +133,31 @@ public abstract class ExpandableRecyclerViewAdapter<G extends Expandable<C>, C>
     public abstract void onBindSecondaryRegularItemViewHolder(RecyclerView.ViewHolder holder, C category);
 
     public void expandCategory(int categoryIndex) {
-        if (!mExpandedCategories[categoryIndex]) {
+        boolean expanded = mExpandedCategories[categoryIndex];
+        if (!expanded) {
             mExpandedCategories[categoryIndex] = true;
             recalculateCategoryPositions(categoryIndex);
             int start = mCategoryPositions[categoryIndex];
             int size = mCategories.get(categoryIndex).getChildren().size();
             notifyContentItemRangeInserted(start + 1, size);
-            notifyContentItemChanged(start);
+            onCategoryExpansionChanged(start, categoryIndex, expanded);
         }
     }
 
     public void collapseCategory(int categoryIndex) {
-        if (mExpandedCategories[categoryIndex]) {
+        boolean expanded = mExpandedCategories[categoryIndex];
+        if (expanded) {
             int start = mCategoryPositions[categoryIndex];
             int size = mCategories.get(categoryIndex).getChildren().size();
             notifyContentItemRangeRemoved(start + 1, size);
-            notifyContentItemChanged(start);
+            onCategoryExpansionChanged(start, categoryIndex, expanded);
             mExpandedCategories[categoryIndex] = false;
             recalculateCategoryPositions(categoryIndex);
         }
+    }
+
+    public void onCategoryExpansionChanged(int adapterPosition, int index, boolean expanded) {
+        notifyContentItemChanged(adapterPosition);
     }
 
     public boolean isCategoryExpanded(int categoryIndex) {

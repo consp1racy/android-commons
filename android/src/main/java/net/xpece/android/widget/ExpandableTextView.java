@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.xpece.android.graphics.drawable.XpDrawable;
-import net.xpece.commons.android.R;
+import net.xpece.android.R;
 
 /**
  * @author Eugen

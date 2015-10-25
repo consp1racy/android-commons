@@ -13,7 +13,7 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
-import net.xpece.commons.android.R;
+import net.xpece.android.R;
 
 /**
  * Created by Eugen on 02.09.2015.

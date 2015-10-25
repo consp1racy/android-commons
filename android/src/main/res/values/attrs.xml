@@ -42,4 +42,11 @@
             <flag name="center" value="0x11"/>
         </attr>
     </declare-styleable>
+
+    <!-- The set of attributes that describe a AlertDialog's theme. -->
+    <declare-styleable name="AlertDialog">
+        <attr name="progressLayout" format="reference" />
+        <attr name="horizontalProgressLayout" format="reference" />
+    </declare-styleable>
+
 </resources>

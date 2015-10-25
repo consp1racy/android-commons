@@ -296,7 +296,7 @@ public class BestLocationProvider {
     //timeout threads
     private class Timeout extends AsyncTask<Void, Void, Void> {
 
-        private @LocationType int mLocationType;
+        @LocationType private int mLocationType;
         private long mTimeout;
         private long mStartTime;
 

@@ -12,20 +12,20 @@ import java.lang.reflect.Field;
 @TargetApi(16)
 public class XpImageView {
 
-    private static final Field FIELD_GET_ADJUST_VIEW_BOUNDS;
+    private static final Field FIELD_ADJUST_VIEW_BOUNDS;
 
     static {
         if (Build.VERSION.SDK_INT < 16) {
-            Field getAdjustViewBounds = null;
+            Field adjustViewBounds = null;
             try {
-                getAdjustViewBounds = ImageView.class.getDeclaredField("mAdjustViewBounds");
-                getAdjustViewBounds.setAccessible(true);
+                adjustViewBounds = ImageView.class.getDeclaredField("mAdjustViewBounds");
+                adjustViewBounds.setAccessible(true);
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
             }
-            FIELD_GET_ADJUST_VIEW_BOUNDS = getAdjustViewBounds;
+            FIELD_ADJUST_VIEW_BOUNDS = adjustViewBounds;
         } else {
-            FIELD_GET_ADJUST_VIEW_BOUNDS = null;
+            FIELD_ADJUST_VIEW_BOUNDS = null;
         }
     }
 
@@ -35,7 +35,7 @@ public class XpImageView {
     public static boolean getAdjustViewBounds(ImageView imageView) {
         if (Build.VERSION.SDK_INT < 16) {
             try {
-                return FIELD_GET_ADJUST_VIEW_BOUNDS.getBoolean(imageView);
+                return FIELD_ADJUST_VIEW_BOUNDS.getBoolean(imageView);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
                 return false;

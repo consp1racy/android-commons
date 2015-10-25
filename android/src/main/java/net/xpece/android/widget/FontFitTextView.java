@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
 
-import net.xpece.commons.android.R;
+import net.xpece.android.R;
 
 /**
  * Created by Eugen on 10. 2. 2015.

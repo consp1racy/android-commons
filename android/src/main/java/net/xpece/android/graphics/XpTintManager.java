@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import net.xpece.android.content.res.XpResources;
-import net.xpece.commons.android.R;
+import net.xpece.android.R;
 
 /**
  * Created by pechanecjr on 4. 1. 2015.

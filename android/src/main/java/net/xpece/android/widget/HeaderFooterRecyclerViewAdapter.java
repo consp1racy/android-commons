@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import net.xpece.commons.android.R;
+import net.xpece.android.R;
 
 public abstract class HeaderFooterRecyclerViewAdapter
     extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

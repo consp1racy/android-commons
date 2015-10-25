@@ -3,7 +3,7 @@ package net.xpece.android.content.res;
 import android.content.Context;
 import android.support.annotation.DimenRes;
 
-import net.xpece.commons.android.R;
+import net.xpece.android.R;
 
 /**
  * Created by Eugen on 24. 4. 2015.

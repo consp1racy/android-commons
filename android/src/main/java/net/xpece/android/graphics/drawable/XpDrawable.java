@@ -19,7 +19,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import net.xpece.android.AndroidUtils;
 import net.xpece.android.graphics.XpColorUtils;
 import net.xpece.android.graphics.XpTintManager;
-import net.xpece.commons.android.R;
+import net.xpece.android.R;
 
 /**
  * @author Eugen
