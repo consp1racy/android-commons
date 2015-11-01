@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @since API 8
  */
 @TargetApi(8)
+@Deprecated
 public class HeaderExpandableListAdapter extends ExpandableListAdapterWrapper {
 
     private ArrayList<FixedViewInfo> mHeaderViewInfos = Lists.newArrayList();

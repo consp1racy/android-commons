@@ -12,6 +12,7 @@ import android.widget.BaseExpandableListAdapter;
  * @since API 8
  */
 @TargetApi(8)
+@Deprecated
 public class ExpandableListAdapterWrapper extends BaseExpandableListAdapter {
 
     private final BaseExpandableListAdapter mAdapter;
