@@ -140,19 +140,19 @@ public abstract class ExpandableRecyclerViewAdapter<G extends Expandable<C>, C>
             int start = mCategoryPositions[categoryIndex];
             int size = mCategories.get(categoryIndex).getChildren().size();
             notifyContentItemRangeInserted(start + 1, size);
-            onCategoryExpansionChanged(start, categoryIndex, expanded);
+            onCategoryExpansionChanged(start, categoryIndex, true);
         }
     }
 
     public void collapseCategory(int categoryIndex) {
         boolean expanded = mExpandedCategories[categoryIndex];
         if (expanded) {
+            mExpandedCategories[categoryIndex] = false;
+            recalculateCategoryPositions(categoryIndex);
             int start = mCategoryPositions[categoryIndex];
             int size = mCategories.get(categoryIndex).getChildren().size();
             notifyContentItemRangeRemoved(start + 1, size);
-            onCategoryExpansionChanged(start, categoryIndex, expanded);
-            mExpandedCategories[categoryIndex] = false;
-            recalculateCategoryPositions(categoryIndex);
+            onCategoryExpansionChanged(start, categoryIndex, false);
         }
     }
 
