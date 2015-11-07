@@ -168,20 +168,25 @@ public abstract class HeaderFooterRecyclerViewAdapter
 
     public boolean isItemHeader(int adapterPosition) {
         int headerItemCount = getHeaderItemCount();
-        return headerItemCount > 0 && adapterPosition < headerItemCount;
+        return headerItemCount > 0
+            && adapterPosition < headerItemCount;
     }
 
     public boolean isItemContent(int adapterPosition) {
         int headerItemCount = getHeaderItemCount();
         int contentItemCount = getContentItemCount();
-        return contentItemCount > 0 && adapterPosition < headerItemCount + contentItemCount;
+        return contentItemCount > 0
+            && adapterPosition < headerItemCount + contentItemCount
+            && adapterPosition >= headerItemCount;
     }
 
     public boolean isItemFooter(int adapterPosition) {
         int headerItemCount = getHeaderItemCount();
         int contentItemCount = getContentItemCount();
         int footerItemCount = getFooterItemCount();
-        return footerItemCount > 0 && adapterPosition < headerItemCount + contentItemCount + footerItemCount;
+        return footerItemCount > 0
+            && adapterPosition < headerItemCount + contentItemCount + footerItemCount
+            && adapterPosition >= headerItemCount + contentItemCount;
     }
 
     /**
