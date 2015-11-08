@@ -150,6 +150,14 @@ public abstract class HeaderFooterRecyclerViewAdapter
         }
     }
 
+    public void hideAny() {
+        @StateView int stateView = mStateView;
+        if (stateView != NO_VIEW_TYPE) {
+            mStateView = NO_VIEW_TYPE;
+            notifyFooterItemRemoved(0);
+        }
+    }
+
     private void showMessageInternal() {
         @StateView int stateView = mStateView;
         switch (stateView) {
@@ -248,7 +256,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.xpc_try_again, parent, false);
-        return new ErrorViewHolder(view);
+        return new TextWithButtonViewHolder(view);
     }
 
     /**
@@ -264,14 +272,22 @@ public abstract class HeaderFooterRecyclerViewAdapter
             onBindHeaderItemViewHolder(viewHolder, position);
         } else if (contentItemCount > 0 && position - headerItemCount < contentItemCount) {
             onBindContentItemViewHolder(viewHolder, position - headerItemCount);
-        } else if (position == headerItemCount + contentItemCount && mStateView == ERROR_VIEW_TYPE) {
-            onBindErrorItemViewHolder((ErrorViewHolder) viewHolder);
+        } else if (position == headerItemCount + contentItemCount) {
+            if (mStateView == ERROR_VIEW_TYPE) {
+                onBindErrorItemViewHolder((TextWithButtonViewHolder) viewHolder);
+            } else if (mStateView == MESSAGE_VIEW_TYPE) {
+                onBindMessageItemViewHolder((TextViewHolder) viewHolder);
+            } else if (mStateView == PROGRESS_VIEW_TYPE) {
+                // Do nothing.
+            } else {
+                onBindFooterItemViewHolder(viewHolder, position - headerItemCount - contentItemCount);
+            }
         } else {
             onBindFooterItemViewHolder(viewHolder, position - headerItemCount - contentItemCount);
         }
     }
 
-    private void onBindErrorItemViewHolder(ErrorViewHolder holder) {
+    private void onBindErrorItemViewHolder(TextWithButtonViewHolder holder) {
         if (mErrorTextId != 0) {
             holder.textView.setText(mErrorTextId);
         } else {
@@ -283,6 +299,14 @@ public abstract class HeaderFooterRecyclerViewAdapter
             holder.button.setText(mErrorButtonText);
         }
         holder.button.setOnClickListener(mErrorOnClickListener);
+    }
+
+    private void onBindMessageItemViewHolder(TextViewHolder holder) {
+        if (mMessageTextId != 0) {
+            holder.textView.setText(mMessageTextId);
+        } else {
+            holder.textView.setText(mMessageText);
+        }
     }
 
     /**
@@ -594,6 +618,10 @@ public abstract class HeaderFooterRecyclerViewAdapter
         notifyItemRangeRemoved(positionStart + headerItemCount + contentItemCount, itemCount);
     }
 
+    public int getFooterOffset() {
+        return mStateView == NO_VIEW_TYPE ? 0 : 1;
+    }
+
     /**
      * Gets the header item view type. By default, this method returns 0.
      *
@@ -719,13 +747,21 @@ public abstract class HeaderFooterRecyclerViewAdapter
         }
     }
 
-    public static class ErrorViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
-        public Button button;
+    public static class TextViewHolder extends EmptyViewHolder {
 
-        public ErrorViewHolder(View itemView) {
+        public TextView textView;
+
+        public TextViewHolder(final View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(android.R.id.text1);
+        }
+    }
+
+    public static class TextWithButtonViewHolder extends TextViewHolder {
+        public Button button;
+
+        public TextWithButtonViewHolder(View itemView) {
+            super(itemView);
             button = (Button) itemView.findViewById(android.R.id.button1);
         }
     }
