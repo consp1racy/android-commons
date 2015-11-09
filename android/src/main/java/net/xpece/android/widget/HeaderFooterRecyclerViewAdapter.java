@@ -174,13 +174,13 @@ public abstract class HeaderFooterRecyclerViewAdapter
         }
     }
 
-    public boolean isItemHeader(int adapterPosition) {
+    public final boolean isItemHeader(int adapterPosition) {
         int headerItemCount = getHeaderItemCount();
         return headerItemCount > 0
             && adapterPosition < headerItemCount;
     }
 
-    public boolean isItemContent(int adapterPosition) {
+    public final boolean isItemContent(int adapterPosition) {
         int headerItemCount = getHeaderItemCount();
         int contentItemCount = getContentItemCount();
         return contentItemCount > 0
@@ -188,7 +188,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
             && adapterPosition >= headerItemCount;
     }
 
-    public boolean isItemFooter(int adapterPosition) {
+    public final boolean isItemFooter(int adapterPosition) {
         int headerItemCount = getHeaderItemCount();
         int contentItemCount = getContentItemCount();
         int footerItemCount = getFooterItemCount();
@@ -657,7 +657,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
      *
      * @return the header item count.
      */
-    protected int getHeaderItemCount() {
+    public int getHeaderItemCount() {
         return 0;
     }
 
@@ -666,11 +666,11 @@ public abstract class HeaderFooterRecyclerViewAdapter
      *
      * @return the footer item count.
      */
-    protected int getFooterItemCount() {
+    public int getFooterItemCount() {
         return 0;
     }
 
-    private int getRealFooterItemCount() {
+    public final int getRealFooterItemCount() {
         return getFooterItemCount() + (mStateView != NO_VIEW_TYPE ? 1 : 0);
     }
 
@@ -679,7 +679,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
      *
      * @return the content item count.
      */
-    protected abstract int getContentItemCount();
+    public abstract int getContentItemCount();
 
     /**
      * This method works exactly the same as {@link #onCreateViewHolder(ViewGroup, int)}, but for header items.
