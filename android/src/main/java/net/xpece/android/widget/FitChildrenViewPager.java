@@ -21,19 +21,27 @@ public class FitChildrenViewPager extends ViewPager {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int height = 0;
+        setMeasuredDimension(getDefaultSize(0, widthMeasureSpec),
+            getDefaultSize(0, heightMeasureSpec));
+
+        final int measuredWidth = getMeasuredWidth();
+        int childWidthSize = measuredWidth - getPaddingLeft() - getPaddingRight();
+
+        int measuredHeight = 0;
         for (int i = 0; i < getChildCount(); i++) {
+            final int widthSpec = MeasureSpec.makeMeasureSpec(childWidthSize, MeasureSpec.EXACTLY);
+            final int heightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+
             View child = getChildAt(i);
-            child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+            child.measure(widthSpec, heightSpec);
+
             int h = child.getMeasuredHeight();
-            if (h > height) height = h;
+            if (h > measuredHeight) measuredHeight = h;
         }
 
-        height += getPaddingTop();
-        height += getPaddingBottom();
+        measuredHeight += getPaddingTop();
+        measuredHeight += getPaddingBottom();
 
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
-
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(measuredWidth, measuredHeight);
     }
 }

@@ -75,7 +75,7 @@ public abstract class ExpandableRecyclerViewAdapter<G extends Expandable<C>, C>
     }
 
     @Override
-    protected int getContentItemCount() {
+    public int getContentItemCount() {
         int categories = mCategoryCount;
         int subcategories = 0;
         for (int i = 0; i < categories; i++) {

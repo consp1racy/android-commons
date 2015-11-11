@@ -33,7 +33,11 @@ public class AppCompatContextMenu {
 
     private static final WeakHashMap<Window, AppCompatContextMenu> MAP = new WeakHashMap<>();
 
-    public static AppCompatContextMenu getInstance(View view) {
+    public static void showContextMenu(View v) {
+        AppCompatContextMenu.getInstance(v).showContextMenuForChild(v);
+    }
+
+    private static AppCompatContextMenu getInstance(View view) {
         ContextWrapper context = (ContextWrapper) view.getContext();
         while (!(context instanceof Activity)) {
             context = (ContextWrapper) context.getBaseContext();
@@ -42,7 +46,7 @@ public class AppCompatContextMenu {
         return getInstance(activity.getWindow());
     }
 
-    public static AppCompatContextMenu getInstance(Window window) {
+    private static AppCompatContextMenu getInstance(Window window) {
         AppCompatContextMenu menu = MAP.get(window);
         if (menu == null) {
             menu = new AppCompatContextMenu(window);
@@ -111,7 +115,7 @@ public class AppCompatContextMenu {
      *
      * @param menu The context menu to populate
      */
-    public static void createContextMenu(View view, ContextMenu menu) {
+    private static void createContextMenu(View view, ContextMenu menu) {
         ContextMenu.ContextMenuInfo menuInfo = ContextMenuViewCompat.getContextMenuInfo(view);
 
         // Sets the current menu info so all items added to menu will have
