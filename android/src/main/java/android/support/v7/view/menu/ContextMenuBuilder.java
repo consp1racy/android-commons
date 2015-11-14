@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package net.xpece.android.menu;
+package android.support.v7.view.menu;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.IBinder;
-import android.support.v7.internal.view.menu.MenuBuilder;
-import android.support.v7.internal.view.menu.MenuDialogHelper;
 import android.util.EventLog;
 import android.view.ContextMenu;
 import android.view.View;
@@ -68,7 +66,7 @@ public class ContextMenuBuilder extends MenuBuilder implements ContextMenu {
     /**
      * Shows this context menu, allowing the optional original view (and its
      * ancestors) to add items.
-     * 
+     *
      * @param originalView Optional, the original view that triggered the
      *        context menu.
      * @param token Optional, the window token that should be set on the context
@@ -86,14 +84,46 @@ public class ContextMenuBuilder extends MenuBuilder implements ContextMenu {
 
         if (getVisibleItems().size() > 0) {
             EventLog.writeEvent(50001, 1);
-            
+
             MenuDialogHelper helper = new MenuDialogHelper(this);
             helper.show(token);
-            
+
             return helper;
         }
-        
+
         return null;
     }
-    
+
+    /**
+     * Shows this context menu, allowing the optional original view (and its
+     * ancestors) to add items.
+     *
+     * @param originalView Optional, the original view that triggered the
+     *        context menu.
+     * @param token Optional, the window token that should be set on the context
+     *        menu's window.
+     * @param info Optional, override context menu info provided by the view.
+     * @return If the context menu was shown, the {@link MenuDialogHelper} for
+     *         dismissing it. Otherwise, null.
+     */
+    public MenuDialogHelper show(View originalView, IBinder token, ContextMenuInfo info) {
+        if (originalView != null) {
+            // Let relevant views and their populate context listeners populate
+            // the context menu
+//            originalView.createContextMenu(this);
+            AppCompatContextMenu.createContextMenu(originalView, this, info);
+        }
+
+        if (getVisibleItems().size() > 0) {
+            EventLog.writeEvent(50001, 1);
+
+            MenuDialogHelper helper = new MenuDialogHelper(this);
+            helper.show(token);
+
+            return helper;
+        }
+
+        return null;
+    }
+
 }

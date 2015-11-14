@@ -25,16 +25,18 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    provided 'com.android.support:recyclerview-v7:23.1.0'
-    provided 'com.android.support:palette-v7:23.1.0'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    provided 'com.android.support:recyclerview-v7:23.1.1'
+    provided 'com.android.support:palette-v7:23.1.1'
     provided 'com.squareup.picasso:picasso:2.5.2'
+
+    provided 'org.parceler:parceler-api:1.0.4'
 }
 
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.4.10'
+    PUBLISH_VERSION = '0.5.0'
 }
 
 apply from: '../android-release-aar.gradle'

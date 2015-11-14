@@ -1,17 +1,11 @@
 package net.xpece.android.graphics;
 
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.os.Build;
-import android.util.StateSet;
-
-import net.xpece.android.content.res.XpResources;
 
 /**
  * Created by pechanecjr on 4. 1. 2015.
  */
+@Deprecated
 public class XpColorUtils {
 
     public static final int COLOR_TEXT_PRIMARY_DARK = Color.parseColor("#ffffffff"); // 100% white
@@ -114,23 +108,6 @@ public class XpColorUtils {
         float g = (Color.green(color1) * ratio) + (Color.green(color2) * inverseRatio);
         float b = (Color.blue(color1) * ratio) + (Color.blue(color2) * inverseRatio);
         return Color.argb((int) a, (int) r, (int) g, (int) b);
-    }
-
-    /**
-     * {@link android.R.attr#colorForeground} with 12% alpha.
-     *
-     * @param context
-     * @return
-     */
-    public static int getDividerColor(Context context) {
-        return XpResources.resolveColor(context, android.R.attr.colorForeground, 0) & 0x1effffff;
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static ColorStateList createActivatedColor(int passive, int active) {
-        return new ColorStateList(
-            new int[][]{new int[]{android.R.attr.state_activated}, StateSet.WILD_CARD},
-            new int[]{active, passive});
     }
 
     /**

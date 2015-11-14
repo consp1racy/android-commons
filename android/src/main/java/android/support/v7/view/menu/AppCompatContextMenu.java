@@ -1,10 +1,7 @@
-package net.xpece.android.menu;
+package android.support.v7.view.menu;
 
 import android.app.Activity;
 import android.content.ContextWrapper;
-import android.support.v7.internal.view.menu.MenuBuilder;
-import android.support.v7.internal.view.menu.MenuDialogHelper;
-import android.support.v7.internal.view.menu.MenuPresenter;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +15,8 @@ import java.util.WeakHashMap;
  * @author Eugen on 31. 10. 2015.
  */
 public class AppCompatContextMenu {
+    private static final WeakHashMap<Window, AppCompatContextMenu> MAP = new WeakHashMap<>();
+
     private static final Method METHOD_IS_DESTROYED;
 
     static {
@@ -29,30 +28,6 @@ public class AppCompatContextMenu {
             e.printStackTrace();
         }
         METHOD_IS_DESTROYED = isDestroyed;
-    }
-
-    private static final WeakHashMap<Window, AppCompatContextMenu> MAP = new WeakHashMap<>();
-
-    public static void showContextMenu(View v) {
-        AppCompatContextMenu.getInstance(v).showContextMenuForChild(v);
-    }
-
-    private static AppCompatContextMenu getInstance(View view) {
-        ContextWrapper context = (ContextWrapper) view.getContext();
-        while (!(context instanceof Activity)) {
-            context = (ContextWrapper) context.getBaseContext();
-        }
-        Activity activity = (Activity) context;
-        return getInstance(activity.getWindow());
-    }
-
-    private static AppCompatContextMenu getInstance(Window window) {
-        AppCompatContextMenu menu = MAP.get(window);
-        if (menu == null) {
-            menu = new AppCompatContextMenu(window);
-            MAP.put(window, menu);
-        }
-        return menu;
     }
 
     private final WeakReference<Window> mWindow;
@@ -83,7 +58,37 @@ public class AppCompatContextMenu {
         }
     }
 
+    private static AppCompatContextMenu getInstance(View view) {
+        ContextWrapper context = (ContextWrapper) view.getContext();
+        while (!(context instanceof Activity)) {
+            context = (ContextWrapper) context.getBaseContext();
+        }
+        Activity activity = (Activity) context;
+        return getInstance(activity.getWindow());
+    }
+
+    private static AppCompatContextMenu getInstance(Window window) {
+        AppCompatContextMenu menu = MAP.get(window);
+        if (menu == null) {
+            menu = new AppCompatContextMenu(window);
+            MAP.put(window, menu);
+        }
+        return menu;
+    }
+
+    public static void showContextMenu(View v) {
+        AppCompatContextMenu.getInstance(v).showContextMenuForChild(v);
+    }
+
+    public static void showContextMenu(View v, ContextMenu.ContextMenuInfo info) {
+        AppCompatContextMenu.getInstance(v).showContextMenuForChild(v, info);
+    }
+
     public boolean showContextMenuForChild(View originalView) {
+        return showContextMenuForChild(originalView, null);
+    }
+
+    public boolean showContextMenuForChild(View originalView, ContextMenu.ContextMenuInfo info) {
         // Reuse the context menu builder
         if (mContextMenu == null) {
             mContextMenu = new ContextMenuBuilder(originalView.getContext());
@@ -92,8 +97,7 @@ public class AppCompatContextMenu {
             mContextMenu.clearAll();
         }
 
-        final MenuDialogHelper helper = mContextMenu.show(originalView,
-            originalView.getWindowToken());
+        final MenuDialogHelper helper = provideMenuDialogHelper(originalView, info);
         if (helper != null) {
             helper.setPresenterCallback(mContextMenuCallback);
         } else if (mContextMenuHelper != null) {
@@ -103,6 +107,18 @@ public class AppCompatContextMenu {
         }
         mContextMenuHelper = helper;
         return helper != null;
+    }
+
+    private MenuDialogHelper provideMenuDialogHelper(View originalView, ContextMenu.ContextMenuInfo info) {
+        if (info == null) {
+            // Use View.getContextMenuInfo().
+            return mContextMenu.show(originalView,
+                originalView.getWindowToken());
+        } else {
+            // Use info parameter.
+            return mContextMenu.show(originalView,
+                originalView.getWindowToken(), info);
+        }
     }
 
     /**
@@ -115,10 +131,13 @@ public class AppCompatContextMenu {
      *
      * @param menu The context menu to populate
      */
-    private static void createContextMenu(View view, ContextMenu menu) {
+    static void createContextMenu(View view, ContextMenu menu) {
         ContextMenu.ContextMenuInfo menuInfo = ContextMenuViewCompat.getContextMenuInfo(view);
+        createContextMenu(view, menu, menuInfo);
+    }
 
-        // Sets the current menu info so all items added to menu will have
+    static void createContextMenu(View view, ContextMenu menu, ContextMenu.ContextMenuInfo menuInfo) {
+    // Sets the current menu info so all items added to menu will have
         // my extra info set.
         ((MenuBuilder) menu).setCurrentMenuInfo(menuInfo);
 

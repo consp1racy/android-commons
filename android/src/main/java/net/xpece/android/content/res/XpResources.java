@@ -14,6 +14,16 @@ public class XpResources {
 
     private XpResources() {}
 
+    public static float resolveFloat(Context context, @AttrRes int attr, float fallback) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(TEMP_ARRAY);
+        try {
+            return ta.getFloat(0, fallback);
+        } finally {
+            ta.recycle();
+        }
+    }
+
     public static boolean resolveBoolean(Context context, @AttrRes int attr, boolean fallback) {
         TEMP_ARRAY[0] = attr;
         TypedArray ta = context.obtainStyledAttributes(TEMP_ARRAY);
