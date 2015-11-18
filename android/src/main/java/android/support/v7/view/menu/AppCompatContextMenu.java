@@ -2,6 +2,7 @@ package android.support.v7.view.menu;
 
 import android.app.Activity;
 import android.content.ContextWrapper;
+import android.support.annotation.NonNull;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -80,7 +81,7 @@ public class AppCompatContextMenu {
         AppCompatContextMenu.getInstance(v).showContextMenuForChild(v);
     }
 
-    public static void showContextMenu(View v, ContextMenu.ContextMenuInfo info) {
+    public static void showContextMenu(View v, @NonNull ContextMenu.ContextMenuInfo info) {
         AppCompatContextMenu.getInstance(v).showContextMenuForChild(v, info);
     }
 

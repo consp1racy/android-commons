@@ -78,19 +78,19 @@ public class XpTintManager {
     }
 
     public static Drawable getControlNormalDrawable(Context context, @DrawableRes int drawableId) {
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId).mutate();
         int color = XpResources.resolveColor(context, R.attr.colorControlNormal, 0);
         return getDrawable(drawable, color);
     }
 
     public static Drawable getControlActivatedDrawable(Context context, @DrawableRes int drawableId) {
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId).mutate();
         int color = XpResources.resolveColor(context, R.attr.colorControlActivated, 0);
         return getDrawable(drawable, color);
     }
 
     public static Drawable getControlDrawable(Context context, @DrawableRes int drawableId) {
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId).mutate();
         return getControlDrawable(context, drawable);
     }
 
@@ -101,7 +101,7 @@ public class XpTintManager {
 
     public static Drawable getDisabledDrawable(Context context, @DrawableRes int drawableId, @ColorRes int colorId) {
         float alpha = XpResources.resolveFloat(context, android.R.attr.disabledAlpha, DISABLED_ALPHA);
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId).mutate();
         int color = ContextCompat.getColor(context, colorId);
         return getDisabledDrawable(alpha, drawable, color);
     }
@@ -180,7 +180,7 @@ public class XpTintManager {
     public static void tintMenuItem(MenuItem item, ColorStateList color) {
         Drawable icon = item.getIcon();
         if (icon != null) {
-            icon = getDrawable(icon, color);
+            icon = getDrawable(icon.mutate(), color);
             item.setIcon(icon);
         }
     }
@@ -188,7 +188,7 @@ public class XpTintManager {
     public static void tintMenuItem(MenuItem item, @ColorInt int color) {
         Drawable icon = item.getIcon();
         if (icon != null) {
-            icon = getDrawable(icon, color);
+            icon = getDrawable(icon.mutate(), color);
             item.setIcon(icon);
         }
     }
