@@ -172,6 +172,13 @@ public abstract class ExpandableRecyclerViewAdapter<G extends Expandable<C>, C>
         return mCategorySizes[categoryIndex];
     }
 
+    public boolean isCategory(int position) {
+        for (int i = 0, size = mCategoryPositions.length; i < size; i ++) {
+            if (position == mCategoryPositions[i]) return true;
+        }
+        return false;
+    }
+
     private void recalculateCategoryPositions(int fromCategory) {
         int position = mCategoryPositions[fromCategory];
         for (int i = fromCategory + 1, size = mCategoryCount; i < size; i++) {
