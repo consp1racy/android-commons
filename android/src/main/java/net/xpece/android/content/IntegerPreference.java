@@ -10,27 +10,27 @@ import android.content.SharedPreferences;
 public class IntegerPreference {
     private final SharedPreferences preferences;
     private final String key;
-    private final long defaultValue;
+    private final int defaultValue;
 
     public IntegerPreference(SharedPreferences preferences, String key) {
         this(preferences, key, 0);
     }
 
-    public IntegerPreference(SharedPreferences preferences, String key, long defaultValue) {
+    public IntegerPreference(SharedPreferences preferences, String key, int defaultValue) {
         this.preferences = preferences;
         this.key = key;
         this.defaultValue = defaultValue;
     }
 
-    public long get() {
-        return preferences.getLong(key, defaultValue);
+    public int get() {
+        return preferences.getInt(key, defaultValue);
     }
 
     public boolean isSet() {
         return preferences.contains(key);
     }
 
-    public void set(long value) {
+    public void set(int value) {
         preferences.edit().putLong(key, value).apply();
     }
 

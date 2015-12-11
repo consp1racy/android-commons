@@ -19,7 +19,6 @@ package android.support.v7.view.menu;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.IBinder;
-import android.util.EventLog;
 import android.view.ContextMenu;
 import android.view.View;
 
@@ -83,7 +82,7 @@ public class ContextMenuBuilder extends MenuBuilder implements ContextMenu {
         }
 
         if (getVisibleItems().size() > 0) {
-            EventLog.writeEvent(50001, 1);
+//            EventLog.writeEvent(50001, 1);
 
             MenuDialogHelper helper = new MenuDialogHelper(this);
             helper.show(token);
@@ -115,7 +114,7 @@ public class ContextMenuBuilder extends MenuBuilder implements ContextMenu {
         }
 
         if (getVisibleItems().size() > 0) {
-            EventLog.writeEvent(50001, 1);
+//            EventLog.writeEvent(50001, 1);
 
             MenuDialogHelper helper = new MenuDialogHelper(this);
             helper.show(token);

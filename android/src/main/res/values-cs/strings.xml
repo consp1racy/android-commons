@@ -2,4 +2,8 @@
 <resources>
     <string name="xpc_try_again">Zkusit znovu</string>
     <string name="xpc_error_connection">Došlo k chybě připojení. Zkuste to později.</string>
+
+  <string name="xpc_no_intent_handler">
+    Žádná aplikace nedokáže vyřídit tento požadavek.
+  </string>
 </resources>

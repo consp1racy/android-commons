@@ -2,4 +2,8 @@
 <resources>
     <string name="xpc_try_again">Try again</string>
     <string name="xpc_error_connection">A connection error occurred. Try again later.</string>
+
+  <string name="xpc_no_intent_handler">
+    There are no applications available to handle this action.
+  </string>
 </resources>
