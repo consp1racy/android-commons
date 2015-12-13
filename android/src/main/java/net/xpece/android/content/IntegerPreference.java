@@ -31,7 +31,7 @@ public class IntegerPreference {
     }
 
     public void set(int value) {
-        preferences.edit().putLong(key, value).apply();
+        preferences.edit().putInt(key, value).apply();
     }
 
     public void delete() {
