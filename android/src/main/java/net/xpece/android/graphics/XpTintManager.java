@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -109,6 +110,21 @@ public class XpTintManager {
     public static Drawable getDisabledDrawable(float alpha, Drawable drawable, @ColorInt int color) {
         ColorStateList csl = getDisabledColorStateList(alpha, color);
         return getDrawable(drawable, csl);
+    }
+
+    public static Drawable getDisabledDrawable(Context context, @DrawableRes int drawableId) {
+        float alpha = XpResources.resolveFloat(context, android.R.attr.disabledAlpha, DISABLED_ALPHA);
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId).mutate();
+        return getDisabledDrawable(alpha, drawable);
+    }
+
+    public static Drawable getDisabledDrawable(float alpha, Drawable drawable) {
+        Drawable disabled = drawable.getConstantState().newDrawable().mutate();
+        disabled.setAlpha((int)(alpha * 255));
+        StateListDrawable stateful = new StateListDrawable();
+        stateful.addState(DISABLED_STATE_SET, disabled);
+        stateful.addState(EMPTY_STATE_SET, drawable);
+        return stateful;
     }
 
     @NonNull
