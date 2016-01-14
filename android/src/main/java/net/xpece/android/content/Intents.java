@@ -39,7 +39,7 @@ public final class Intents {
             context.startActivity(intent);
             return true;
         } else {
-            Toast.makeText(context, R.string.xpc_no_intent_handler, LENGTH_LONG).show();
+//            showNoActivityError(context);
             return false;
         }
     }
@@ -49,7 +49,7 @@ public final class Intents {
             activity.startActivityForResult(intent, requestCode);
             return true;
         } else {
-            Toast.makeText(activity, R.string.xpc_no_intent_handler, LENGTH_LONG).show();
+//            showNoActivityError(activity);
             return false;
         }
     }
@@ -60,15 +60,19 @@ public final class Intents {
             fragment.startActivityForResult(intent, requestCode);
             return true;
         } else {
-            Toast.makeText(context, R.string.xpc_no_intent_handler, LENGTH_LONG).show();
+//            showNoActivityError(context);
             return false;
         }
+    }
+
+    public static void showNoActivityError(final Context context) {
+        Toast.makeText(context, R.string.xpc_no_intent_handler, LENGTH_LONG).show();
     }
 
     /**
      * Queries on-device packages for a handler for the supplied {@link Intent}.
      */
-    private static boolean hasHandler(Context context, Intent intent) {
+    public static boolean hasHandler(Context context, Intent intent) {
         List<ResolveInfo> handlers = context.getPackageManager().queryIntentActivities(intent, 0);
         return !handlers.isEmpty();
     }

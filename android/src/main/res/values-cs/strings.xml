@@ -6,4 +6,6 @@
   <string name="xpc_no_intent_handler">
     Žádná aplikace nedokáže vyřídit tento požadavek.
   </string>
+
+    <string name="xpc_please_wait">Čekejte prosím…</string>
 </resources>

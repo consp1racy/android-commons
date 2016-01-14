@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <public type="string" name="xpc_try_again"/>
+    <public type="string" name="xpc_please_wait"/>
+    <public type="string" name="xpc_error_connection"/>
+    <public type="string" name="xpc_no_intent_handler"/>
 
     <public type="integer" name="button_pressed_animation_duration_material"/>
     <public type="integer" name="button_pressed_animation_delay_material"/>
