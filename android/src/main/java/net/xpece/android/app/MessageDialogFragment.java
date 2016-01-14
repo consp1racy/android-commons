@@ -6,7 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;import java.lang.CharSequence;import java.lang.IllegalStateException;import java.lang.Override;import java.lang.String;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 /**
  * @author Eugen on 31. 12. 2015.
@@ -23,7 +24,12 @@ public final class MessageDialogFragment extends BaseDialogFragment
     public void onAttach(final Context context) {
         super.onAttach(context);
         if (!FragmentCallbacksHelper.overrideCallbacks(this)) {
-            mCallbacks = (DialogFragmentCallbacks) context;
+            if (context instanceof DialogFragmentCallbacks) {
+                mCallbacks = (DialogFragmentCallbacks) context;
+            } else {
+                Log.w(TAG, this + " does not have DialogFragmentCallbacks.");
+                mCallbacks = DialogFragmentCallbacks.DUMMY;
+            }
         }
     }
 
