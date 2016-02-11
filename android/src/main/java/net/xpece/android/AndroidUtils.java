@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 /**
  * Created by pechanecjr on 4. 1. 2015.
  */
-public class AndroidUtils {
+public final class AndroidUtils {
     public static final boolean API_8 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;
     public static final boolean API_9 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD;
     public static final boolean API_10 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1;

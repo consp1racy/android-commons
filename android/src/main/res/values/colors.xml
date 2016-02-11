@@ -306,27 +306,29 @@
   <!-- WHITE -->
   <color name="material_white_100p">#ffffffff</color>
   <color name="material_white_70p">#b3ffffff</color>
+  <color name="material_white_38p">#60ffffff</color>
   <color name="material_white_30p">#4dffffff</color>
   <color name="material_white_12p">#1effffff</color>
 
   <color name="material_white_text_primary">@color/material_white_100p</color>
   <color name="material_white_text_secondary">@color/material_white_70p</color>
   <color name="material_white_icons">@color/material_white_100p</color>
-  <color name="material_white_disabled">@color/material_white_30p</color>
-  <color name="material_white_hints">@color/material_white_30p</color>
+  <color name="material_white_disabled">@color/material_white_38p</color>
+  <color name="material_white_hints">@color/material_white_38p</color>
   <color name="material_white_dividers">@color/material_white_12p</color>
 
   <!-- BLACK -->
   <color name="material_black_87p">#de000000</color>
   <color name="material_black_54p">#8a000000</color>
+  <color name="material_black_38p">#60000000</color>
   <color name="material_black_26p">#42000000</color>
   <color name="material_black_12p">#1e000000</color>
 
   <color name="material_black_text_primary">@color/material_black_87p</color>
   <color name="material_black_text_secondary">@color/material_black_54p</color>
   <color name="material_black_icons">@color/material_black_54p</color>
-  <color name="material_black_disabled">@color/material_black_26p</color>
-  <color name="material_black_hints">@color/material_black_26p</color>
+  <color name="material_black_disabled">@color/material_black_38p</color>
+  <color name="material_black_hints">@color/material_black_38p</color>
   <color name="material_black_dividers">@color/material_black_12p</color>
 
   <!-- light theme -->

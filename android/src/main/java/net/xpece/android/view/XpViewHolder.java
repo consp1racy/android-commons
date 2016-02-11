@@ -10,7 +10,7 @@ import android.view.View;
  * <p></p>
  * Sauce: Pierre-Yves Ricau http://www.piwai.info/android-adapter-good-practices/
  */
-public class XpViewHolder {
+public final class XpViewHolder {
     private static final String TAG = XpViewHolder.class.getSimpleName();
 
     public static <T> void putObject(View view, int id, T obj) {

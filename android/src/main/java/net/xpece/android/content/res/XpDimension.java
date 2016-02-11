@@ -11,7 +11,7 @@ import android.util.TypedValue;
 /**
  * Created by pechanecjr on 4. 1. 2015.
  */
-public class XpDimension {
+public final class XpDimension {
     private static final String TAG = XpDimension.class.getSimpleName();
 
     private static final DimensionLruCache DIMENSION_LRU_CACHE = new DimensionLruCache(10);

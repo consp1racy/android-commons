@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
  * @author Eugen on 1. 9. 2015.
  */
 @TargetApi(16)
-public class XpImageView {
+public final class XpImageView {
 
     private static final Field FIELD_ADJUST_VIEW_BOUNDS;
 

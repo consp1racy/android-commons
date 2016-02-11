@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 /**
  * Created by Eugen on 8. 3. 2015.
  */
-public class XpStateListDrawable {
+public final class XpStateListDrawable {
 
     private static final Method METHOD_GET_STATE_COUNT;
     private static final Method METHOD_GET_STATE_SET;

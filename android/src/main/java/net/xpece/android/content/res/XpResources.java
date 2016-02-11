@@ -9,7 +9,7 @@ import android.support.annotation.AttrRes;
 /**
  * Created by Eugen on 20. 3. 2015.
  */
-public class XpResources {
+public final class XpResources {
     private static final int[] TEMP_ARRAY = new int[1];
 
     private XpResources() {}

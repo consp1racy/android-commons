@@ -6,7 +6,7 @@ import android.graphics.Color;
  * Created by pechanecjr on 4. 1. 2015.
  */
 @Deprecated
-public class XpColorUtils {
+public final class XpColorUtils {
 
     public static final int COLOR_TEXT_PRIMARY_DARK = Color.parseColor("#ffffffff"); // 100% white
     public static final int COLOR_TEXT_PRIMARY_LIGHT = Color.parseColor("#de000000"); // 87% black

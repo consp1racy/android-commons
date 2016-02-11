@@ -10,7 +10,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 /**
  * @author Eugen
  */
-public class XpDrawable {
+public final class XpDrawable {
 
     public static final int MAX_LEVEL = 10000;
     public static final int MIN_LEVEL = 0;

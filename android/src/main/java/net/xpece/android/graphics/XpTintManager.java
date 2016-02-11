@@ -23,7 +23,7 @@ import net.xpece.android.content.res.XpResources;
 /**
  * Created by pechanecjr on 4. 1. 2015.
  */
-public class XpTintManager {
+public final class XpTintManager {
     private static final ThreadLocal<TypedValue> TL_TYPED_VALUE = new ThreadLocal<>();
 
     public static final int[] DISABLED_STATE_SET = new int[]{-android.R.attr.state_enabled};
@@ -55,7 +55,7 @@ public class XpTintManager {
         DISABLED_STATE_SET,
         EMPTY_STATE_SET
     };
-    private static final float DISABLED_ALPHA = 0.3f;
+    private static final float DISABLED_ALPHA = 0.38f;
 
     private XpTintManager() {
     }
@@ -120,7 +120,7 @@ public class XpTintManager {
 
     public static Drawable getDisabledDrawable(float alpha, Drawable drawable) {
         Drawable disabled = drawable.getConstantState().newDrawable().mutate();
-        disabled.setAlpha((int)(alpha * 255));
+        disabled.setAlpha((int) (alpha * 255));
         StateListDrawable stateful = new StateListDrawable();
         stateful.addState(DISABLED_STATE_SET, disabled);
         stateful.addState(EMPTY_STATE_SET, drawable);

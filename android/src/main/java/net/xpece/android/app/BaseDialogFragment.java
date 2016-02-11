@@ -37,6 +37,18 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
             mArgs = new Bundle();
         }
 
+        public B buttonsOkCancel() {
+            mArgs.putCharSequence(KEY_POSITIVE, mContext.getText(android.R.string.ok));
+            mArgs.putCharSequence(KEY_NEGATIVE, mContext.getText(android.R.string.cancel));
+            return (B) this;
+        }
+
+        public B buttonsYesNo() {
+            mArgs.putCharSequence(KEY_POSITIVE, mContext.getText(android.R.string.yes));
+            mArgs.putCharSequence(KEY_NEGATIVE, mContext.getText(android.R.string.no));
+            return (B) this;
+        }
+
         public B positiveButtonOk() {
             mArgs.putCharSequence(KEY_POSITIVE, mContext.getText(android.R.string.ok));
             return (B) this;

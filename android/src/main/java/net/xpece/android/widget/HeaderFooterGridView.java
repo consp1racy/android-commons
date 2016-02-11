@@ -44,6 +44,7 @@ import java.util.ArrayList;
  * This source code is based from
  * http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android-apps/4.4_r1/com/android/photos/views/HeaderGridView.java
  */
+@Deprecated
 public class HeaderFooterGridView extends GridView {
     private static final String TAG = "HeaderFooterGridView";
 

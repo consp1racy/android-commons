@@ -40,6 +40,7 @@ import java.util.Map;
  * appended clause is combined using {@code AND}. This class is <em>not</em>
  * thread safe.
  */
+@Deprecated
 public class SelectionBuilder {
 //  private static final String TAG = SelectionBuilder.class.getSimpleName();
 

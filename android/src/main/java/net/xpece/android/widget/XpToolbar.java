@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 /**
  * Created by Eugen on 12.11.2015.
  */
-public class XpToolbar {
+public final class XpToolbar {
     private static final Field FIELD_COLLAPSE_ICON;
 
     static {
