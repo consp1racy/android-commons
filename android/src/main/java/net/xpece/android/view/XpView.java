@@ -117,6 +117,9 @@ public class XpView {
     private static final Field EDGE_GLOW_FIELD_EDGE;
     private static final Field EDGE_GLOW_FIELD_GLOW;
 
+    private static final Field EDGE_EFFECT_FIELD_EDGE;
+    private static final Field EDGE_EFFECT_FIELD_GLOW;
+
     private static final Field EDGE_EFFECT_COMPAT_FIELD_EDGE_EFFECT;
 
     static {
@@ -232,6 +235,8 @@ public class XpView {
             EDGE_GLOW_FIELD_EDGE = null;
             EDGE_GLOW_FIELD_GLOW = null;
         }
+        EDGE_EFFECT_FIELD_EDGE = EDGE_GLOW_FIELD_EDGE;
+        EDGE_EFFECT_FIELD_GLOW = EDGE_GLOW_FIELD_GLOW;
 
         Field efc = null;
         try {
@@ -349,6 +354,18 @@ public class XpView {
             try {
                 final Drawable mEdge = (Drawable) EDGE_GLOW_FIELD_EDGE.get(edgeEffect);
                 final Drawable mGlow = (Drawable) EDGE_GLOW_FIELD_GLOW.get(edgeEffect);
+                mEdge.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+                mGlow.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+                mEdge.setCallback(null); // free up any references
+                mGlow.setCallback(null); // free up any references
+            } catch (Exception ex) {
+                if (BuildConfig.DEBUG) ex.printStackTrace();
+            }
+        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            // EdgeEffect
+            try {
+                final Drawable mEdge = (Drawable) EDGE_EFFECT_FIELD_EDGE.get(edgeEffect);
+                final Drawable mGlow = (Drawable) EDGE_EFFECT_FIELD_GLOW.get(edgeEffect);
                 mEdge.setColorFilter(color, PorterDuff.Mode.SRC_IN);
                 mGlow.setColorFilter(color, PorterDuff.Mode.SRC_IN);
                 mEdge.setCallback(null); // free up any references
