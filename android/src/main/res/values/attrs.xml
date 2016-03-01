@@ -12,6 +12,8 @@
             <enum name="specified" value="0"/>
             <enum name="drawable" value="1"/>
         </attr>
+        <attr name="aspectRatioAdjustPadding" format="boolean"/>
+        <attr name="android:gravity"/>
     </declare-styleable>
 
     <declare-styleable name="FontFitTextView">

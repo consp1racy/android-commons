@@ -245,6 +245,8 @@ public abstract class HeaderFooterRecyclerViewAdapter
         } else if (viewType == PROGRESS_VIEW_TYPE) {
             return onCreateProgressItemViewHolder(parent);
         } else if (viewType == ERROR_VIEW_TYPE) {
+            return onCreateMessageItemViewHolder(parent);
+        } else if (viewType == MESSAGE_VIEW_TYPE) {
             return onCreateErrorItemViewHolder(parent);
         } else {
             // This shouldn't happen as we check that the viewType provided by the client is valid.
@@ -264,6 +266,13 @@ public abstract class HeaderFooterRecyclerViewAdapter
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.xpc_try_again, parent, false);
         return new TextWithButtonViewHolder(view);
+    }
+
+    private RecyclerView.ViewHolder onCreateMessageItemViewHolder(ViewGroup parent) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.xpc_text, parent, false);
+        return new TextViewHolder(view);
     }
 
     /**
