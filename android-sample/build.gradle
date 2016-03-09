@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "net.xpece.commons.android.sample"
@@ -24,5 +24,4 @@ dependencies {
 //  debugCompile project(path: ':android', configuration: 'debug');
 //  releaseCompile project(path: ':android', configuration: 'release');
     compile project(':android')
-    compile 'com.android.support:appcompat-v7:23.1.0'
 }
