@@ -245,9 +245,9 @@ public abstract class HeaderFooterRecyclerViewAdapter
         } else if (viewType == PROGRESS_VIEW_TYPE) {
             return onCreateProgressItemViewHolder(parent);
         } else if (viewType == ERROR_VIEW_TYPE) {
-            return onCreateMessageItemViewHolder(parent);
-        } else if (viewType == MESSAGE_VIEW_TYPE) {
             return onCreateErrorItemViewHolder(parent);
+        } else if (viewType == MESSAGE_VIEW_TYPE) {
+            return onCreateMessageItemViewHolder(parent);
         } else {
             // This shouldn't happen as we check that the viewType provided by the client is valid.
             throw new IllegalStateException();
