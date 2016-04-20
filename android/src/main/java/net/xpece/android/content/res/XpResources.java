@@ -5,6 +5,8 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.AttrRes;
+import android.support.annotation.ColorInt;
+import android.support.annotation.StyleRes;
 
 /**
  * Created by Eugen on 20. 3. 2015.
@@ -34,6 +36,7 @@ public final class XpResources {
         }
     }
 
+    @ColorInt
     public static int resolveColor(Context context, @AttrRes int attr, int fallback) {
         TEMP_ARRAY[0] = attr;
         TypedArray ta = context.obtainStyledAttributes(TEMP_ARRAY);
@@ -107,6 +110,107 @@ public final class XpResources {
     public static int resolveResourceId(Context context, @AttrRes int attr, int fallback) {
         TEMP_ARRAY[0] = attr;
         TypedArray ta = context.obtainStyledAttributes(TEMP_ARRAY);
+        try {
+            return ta.getResourceId(0, fallback);
+        } finally {
+            ta.recycle();
+        }
+    }
+
+    public static float resolveFloat(Context context, @StyleRes int style, @AttrRes int attr, float fallback) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(style, TEMP_ARRAY);
+        try {
+            return ta.getFloat(0, fallback);
+        } finally {
+            ta.recycle();
+        }
+    }
+
+    public static boolean resolveBoolean(Context context, @StyleRes int style, @AttrRes int attr, boolean fallback) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(style, TEMP_ARRAY);
+        try {
+            return ta.getBoolean(0, fallback);
+        } finally {
+            ta.recycle();
+        }
+    }
+
+    @ColorInt
+    public static int resolveColor(Context context, @StyleRes int style, @AttrRes int attr, int fallback) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(style, TEMP_ARRAY);
+        try {
+            return ta.getColor(0, fallback);
+        } finally {
+            ta.recycle();
+        }
+    }
+
+    public static ColorStateList resolveColorStateList(Context context, @StyleRes int style, @AttrRes int attr) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(style, TEMP_ARRAY);
+        try {
+            return ta.getColorStateList(0);
+        } finally {
+            ta.recycle();
+        }
+    }
+
+    public static float resolveDimension(Context context, @StyleRes int style, @AttrRes int attr, float fallback) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(style, TEMP_ARRAY);
+        try {
+            return ta.getDimension(0, fallback);
+        } finally {
+            ta.recycle();
+        }
+    }
+
+    public static int resolveDimensionPixelOffset(Context context, @StyleRes int style, @AttrRes int attr, float fallback) {
+        float dimen = resolveDimension(context, style, attr, fallback);
+        return (int) (dimen);
+    }
+
+    public static int resolveDimensionPixelSize(Context context, @StyleRes int style, @AttrRes int attr, float fallback) {
+        float dimen = resolveDimension(context, style, attr, fallback);
+        return (int) (dimen + 0.5f);
+    }
+
+    public static Drawable resolveDrawable(Context context, @StyleRes int style, @AttrRes int attr) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(style, TEMP_ARRAY);
+        try {
+            return ta.getDrawable(0);
+        } finally {
+            ta.recycle();
+        }
+    }
+
+    public static String resolveString(Context context, @StyleRes int style, @AttrRes int attr) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(style, TEMP_ARRAY);
+        try {
+            return ta.getString(0);
+        } finally {
+            ta.recycle();
+        }
+    }
+
+    public static CharSequence resolveText(Context context, @StyleRes int style, @AttrRes int attr) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(style, TEMP_ARRAY);
+        try {
+            return ta.getText(0);
+        } finally {
+            ta.recycle();
+        }
+    }
+
+    public static int resolveResourceId(Context context, @StyleRes int style, @AttrRes int attr, int fallback) {
+        TEMP_ARRAY[0] = attr;
+        TypedArray ta = context.obtainStyledAttributes(style, TEMP_ARRAY);
         try {
             return ta.getResourceId(0, fallback);
         } finally {

@@ -7,12 +7,13 @@ android {
     defaultConfig {
         applicationId "net.xpece.commons.android.sample"
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -20,7 +21,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
 //  debugCompile project(path: ':android', configuration: 'debug');
 //  releaseCompile project(path: ':android', configuration: 'release');
     compile project(':android')
