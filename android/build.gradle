@@ -31,13 +31,13 @@ dependencies {
     provided "uk.co.chrisjenx:calligraphy:2.2.0@aar"
     provided 'com.squareup.picasso:picasso:2.5.2'
 
-    provided 'org.parceler:parceler-api:1.0.4'
+    provided 'org.parceler:parceler-api:1.1.2'
 }
 
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.6.0'
+    PUBLISH_VERSION = '0.6.1'
 }
 
 apply from: '../android-release-aar.gradle'

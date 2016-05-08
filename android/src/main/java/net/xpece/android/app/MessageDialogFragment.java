@@ -1,18 +1,20 @@
 package net.xpece.android.app;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 /**
  * @author Eugen on 31. 12. 2015.
  */
-public final class MessageDialogFragment extends BaseDialogFragment
+public class MessageDialogFragment extends BaseDialogFragment
     implements DialogInterface.OnClickListener,
     FragmentCallbacksHelper.ICanOverrideCallbacks<DialogFragmentCallbacks> {
     public static final String TAG = MessageDialogFragment.class.getSimpleName();
@@ -21,12 +23,15 @@ public final class MessageDialogFragment extends BaseDialogFragment
 
     @Override
     @CallSuper
-    public void onAttach(final Context context) {
-        super.onAttach(context);
+    public void onAttach(final Activity activity) {
+        super.onAttach(activity);
         if (!FragmentCallbacksHelper.overrideCallbacks(this)) {
-            if (context instanceof DialogFragmentCallbacks) {
-                mCallbacks = (DialogFragmentCallbacks) context;
-            } else {
+            Fragment targetFragment = getTargetFragment();
+            if (targetFragment instanceof DialogFragmentCallbacks){
+                mCallbacks = (DialogFragmentCallbacks) targetFragment;
+            } else if (activity instanceof DialogFragmentCallbacks) {
+                mCallbacks = (DialogFragmentCallbacks) activity;
+            } else  {
                 Log.w(TAG, this + " does not have DialogFragmentCallbacks.");
                 mCallbacks = DialogFragmentCallbacks.DUMMY;
             }
@@ -50,13 +55,20 @@ public final class MessageDialogFragment extends BaseDialogFragment
         CharSequence negative = args.getCharSequence(KEY_NEGATIVE);
         CharSequence neutral= args.getCharSequence(KEY_NEUTRAL);
 
-        return new AlertDialog.Builder(getContext())
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
             .setPositiveButton(positive, this)
             .setNegativeButton(negative, this)
             .setNeutralButton(neutral, this)
             .setTitle(title)
-            .setMessage(message)
-            .create();
+            .setMessage(message);
+
+        onPrepareDialogBuilder(builder, savedInstanceState);
+
+        return builder.create();
+    }
+
+    public void onPrepareDialogBuilder(final AlertDialog.Builder builder, final Bundle savedInstanceState) {
+
     }
 
     @Override

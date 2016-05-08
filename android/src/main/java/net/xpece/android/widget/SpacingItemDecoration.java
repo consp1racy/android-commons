@@ -19,14 +19,21 @@ public class SpacingItemDecoration extends RecyclerView.ItemDecoration {
 
     public SpacingItemDecoration(int padding) {
         mPadding.set(padding, padding, padding, padding);
+        init();
     }
 
     public SpacingItemDecoration(int horizontal, int vertical) {
         mPadding.set(horizontal, vertical, horizontal, vertical);
+        init();
     }
 
     public SpacingItemDecoration(int left, int top, int right, int bottom) {
         mPadding.set(left, top, right, bottom);
+        init();
+    }
+
+    private void init() {
+        mPaint.setColor(0);
     }
 
     public boolean getPaintPadding() {
@@ -103,7 +110,7 @@ public class SpacingItemDecoration extends RecyclerView.ItemDecoration {
 
             // Paint bottom
             if (padding.bottom > 0) {
-                rect.set(left, top + bottom - padding.bottom, right, bottom);
+                rect.set(left, bottom - padding.bottom, right, bottom);
                 c.drawRect(rect, mPaint);
             }
 
@@ -115,7 +122,7 @@ public class SpacingItemDecoration extends RecyclerView.ItemDecoration {
 
             // Paint right
             if (padding.right > 0) {
-                rect.set(left + right - padding.right, top + padding.top, right, bottom - padding.bottom);
+                rect.set(right - padding.right, top + padding.top, right, bottom - padding.bottom);
                 c.drawRect(rect, mPaint);
             }
         }
