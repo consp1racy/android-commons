@@ -12,9 +12,11 @@ import android.support.v4.app.Fragment;
  *
  * @author Eugen on 12. 10. 2015.
  */
+@Deprecated
 public final class FragmentCallbacksHelper {
-    public static final String KEY_CALLBACKS_FRAGMENT_ID = "net.xpece.android.app.FragmentCallbacksHelper.CALLBACKS_FRAGMENT_ID";
-    public static final String KEY_CALLBACKS_FRAGMENT_TAG = "net.xpece.android.app.FragmentCallbacksHelper.CALLBACKS_FRAGMENT_TAG";
+    private static final String TAG = FragmentCallbacksHelper.class.getSimpleName();
+    public static final String KEY_CALLBACKS_FRAGMENT_ID = TAG + ".CALLBACKS_FRAGMENT_ID";
+    public static final String KEY_CALLBACKS_FRAGMENT_TAG = TAG + ".CALLBACKS_FRAGMENT_TAG";
 
     private FragmentCallbacksHelper() {
     }
@@ -36,7 +38,7 @@ public final class FragmentCallbacksHelper {
     public static <C, F extends Fragment & ICanOverrideCallbacks<C>> boolean overrideCallbacks(F provider) {
         Bundle args = provider.getArguments();
 
-        String parentTag = args.getString(KEY_CALLBACKS_FRAGMENT_TAG, null);
+        String parentTag = args.getString(KEY_CALLBACKS_FRAGMENT_TAG);
         if (parentTag != null) {
             final C fragment = (C) provider.getFragmentManager().findFragmentByTag(parentTag);
             if (fragment != null) {

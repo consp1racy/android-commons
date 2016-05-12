@@ -1,5 +1,6 @@
 package net.xpece.android.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringRes;
@@ -43,6 +44,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
     private String mMessageText = null;
     private int mMessageTextId = 0;
 
+    @SuppressLint("SwitchIntDef")
     public void showProgress() {
         @StateView int stateView = mStateView;
         switch (stateView) {
@@ -62,6 +64,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
         }
     }
 
+    @SuppressLint("SwitchIntDef")
     public void hideProgress() {
         @StateView int stateView = mStateView;
         switch (stateView) {
@@ -93,6 +96,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
         showErrorInternal();
     }
 
+    @SuppressLint("SwitchIntDef")
     private void showErrorInternal() {
         @StateView int stateView = mStateView;
         switch (stateView) {
@@ -109,6 +113,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
         }
     }
 
+    @SuppressLint("SwitchIntDef")
     public void hideError() {
         @StateView int stateView = mStateView;
         switch (stateView) {
@@ -138,6 +143,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
         showMessageInternal();
     }
 
+    @SuppressLint("SwitchIntDef")
     private void showMessageInternal() {
         @StateView int stateView = mStateView;
         switch (stateView) {
@@ -154,6 +160,7 @@ public abstract class HeaderFooterRecyclerViewAdapter
         }
     }
 
+    @SuppressLint("SwitchIntDef")
     public void hideMessage() {
         @StateView int stateView = mStateView;
         switch (stateView) {

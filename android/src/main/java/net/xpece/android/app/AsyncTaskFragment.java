@@ -1,5 +1,6 @@
 package net.xpece.android.app;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -10,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.annotation.WorkerThread;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.os.AsyncTaskCompat;
@@ -30,6 +32,7 @@ import net.xpece.android.R;
 public abstract class AsyncTaskFragment<Progress, Result> extends BaseDialogFragment
     implements
     FragmentCallbacksHelper.ICanOverrideCallbacks<AsyncTaskFragment.Callbacks<Progress, Result>> {
+    private static final String TAG = AsyncTaskFragment.class.getSimpleName();
 
     public static final String KEY_SHOW_DIALOG = "net.xpece.android.app.AsyncTaskFragment.SHOW_DIALOG";
 
@@ -145,12 +148,22 @@ public abstract class AsyncTaskFragment<Progress, Result> extends BaseDialogFrag
 
     @Override
     @CallSuper
+    @SuppressWarnings("unchecked")
     public void onStart() {
         super.onStart();
 
         if (!FragmentCallbacksHelper.overrideCallbacks(this)) {
-            //noinspection unchecked
-            mCallbacks = (Callbacks) getContext();
+            Fragment targetFragment = getTargetFragment();
+            if (targetFragment instanceof Callbacks) {
+                mCallbacks = (Callbacks) targetFragment;
+            } else {
+                Activity activity = getActivity();
+                if (activity instanceof Callbacks) {
+                    mCallbacks = (Callbacks) activity;
+                } else {
+                    throw new IllegalStateException(this + " does not have Callbacks.");
+                }
+            }
         }
 
         if (mTask.getStatus() == AsyncTask.Status.PENDING) {

@@ -24,6 +24,7 @@ import java.lang.reflect.Field;
 /**
  * @author Eugen on 11. 2. 2016.
  */
+@TargetApi(14)
 public final class XpEdgeEffect {
     private XpEdgeEffect() {}
 
@@ -152,15 +153,14 @@ public final class XpEdgeEffect {
             Field edge = null, glow = null;
 
             Class cls = null;
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                cls = EdgeEffect.class;
+            } else {
                 try {
                     cls = Class.forName("android.widget.EdgeGlow");
                 } catch (ClassNotFoundException e) {
                     if (BuildConfig.DEBUG) e.printStackTrace();
                 }
-            } else {
-                cls = EdgeEffect.class;
-
             }
 
             if (cls != null) {

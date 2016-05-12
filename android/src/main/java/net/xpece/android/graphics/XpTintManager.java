@@ -1,10 +1,12 @@
 package net.xpece.android.graphics;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -23,6 +25,7 @@ import net.xpece.android.content.res.XpResources;
 /**
  * Created by pechanecjr on 4. 1. 2015.
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public final class XpTintManager {
     private static final ThreadLocal<TypedValue> TL_TYPED_VALUE = new ThreadLocal<>();
 
