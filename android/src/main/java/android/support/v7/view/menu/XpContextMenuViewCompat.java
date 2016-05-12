@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 /**
  * @author Eugen on 31. 10. 2015.
  */
-class ContextMenuViewCompat {
+class XpContextMenuViewCompat {
 
     private static final Method METHOD_GET_CONTEXT_MENU_INFO;
     private static final Method METHOD_ON_CREATE_CONTEXT_MENU;

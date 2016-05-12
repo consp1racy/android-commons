@@ -97,7 +97,7 @@ public enum Badge {
 
   // == CONSTANT CLASS ATTRIBUTES ============================================
 
-  private static final String TAG = Badge.class.getSimpleName();
+  static final String TAG = Badge.class.getSimpleName();
 
   // == VARIABLE CLASS ATTRIBUTES ============================================
   // == STATIC INITIALIZER (CLASS CONSTRUCTOR) ===============================
@@ -105,9 +105,6 @@ public enum Badge {
   // == VARIABLE INSTANCE ATTRIBUTES =========================================
   // == CLASS GETTERS AND SETTERS ============================================
   // == OTHER NON-PRIVATE CLASS METHODS ======================================
-
-  private Badge() {
-  }
 
   // #########################################################################
   // == CONSTUCTORS AND FACTORY METHODS ======================================

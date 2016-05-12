@@ -15,8 +15,8 @@ import java.util.WeakHashMap;
 /**
  * @author Eugen on 31. 10. 2015.
  */
-public class AppCompatContextMenu {
-    private static final WeakHashMap<Window, AppCompatContextMenu> MAP = new WeakHashMap<>();
+public class XpAppCompatContextMenu {
+    private static final WeakHashMap<Window, XpAppCompatContextMenu> MAP = new WeakHashMap<>();
 
     private static final Method METHOD_IS_DESTROYED;
 
@@ -39,18 +39,18 @@ public class AppCompatContextMenu {
      */
     final DialogMenuCallback mContextMenuCallback = new DialogMenuCallback(Window.FEATURE_CONTEXT_MENU);
 
-    private ContextMenuBuilder mContextMenu;
+    private XpContextMenuBuilder mContextMenu;
     private MenuDialogHelper mContextMenuHelper;
 
-    private AppCompatContextMenu(final Window window) {
+    private XpAppCompatContextMenu(final Window window) {
         mWindow = new WeakReference<>(window);
     }
 
-    private Window getWindow() {
+    Window getWindow() {
         return mWindow.get();
     }
 
-    private boolean isWindowDestroyed() {
+    boolean isWindowDestroyed() {
         try {
             return (boolean) METHOD_IS_DESTROYED.invoke(getWindow());
         } catch (Exception e) {
@@ -59,7 +59,7 @@ public class AppCompatContextMenu {
         }
     }
 
-    private static AppCompatContextMenu getInstance(View view) {
+    private static XpAppCompatContextMenu getInstance(View view) {
         ContextWrapper context = (ContextWrapper) view.getContext();
         while (!(context instanceof Activity)) {
             context = (ContextWrapper) context.getBaseContext();
@@ -68,21 +68,21 @@ public class AppCompatContextMenu {
         return getInstance(activity.getWindow());
     }
 
-    private static AppCompatContextMenu getInstance(Window window) {
-        AppCompatContextMenu menu = MAP.get(window);
+    private static XpAppCompatContextMenu getInstance(Window window) {
+        XpAppCompatContextMenu menu = MAP.get(window);
         if (menu == null) {
-            menu = new AppCompatContextMenu(window);
+            menu = new XpAppCompatContextMenu(window);
             MAP.put(window, menu);
         }
         return menu;
     }
 
     public static void showContextMenu(View v) {
-        AppCompatContextMenu.getInstance(v).showContextMenuForChild(v);
+        XpAppCompatContextMenu.getInstance(v).showContextMenuForChild(v);
     }
 
     public static void showContextMenu(View v, @NonNull ContextMenu.ContextMenuInfo info) {
-        AppCompatContextMenu.getInstance(v).showContextMenuForChild(v, info);
+        XpAppCompatContextMenu.getInstance(v).showContextMenuForChild(v, info);
     }
 
     public boolean showContextMenuForChild(View originalView) {
@@ -92,7 +92,7 @@ public class AppCompatContextMenu {
     public boolean showContextMenuForChild(View originalView, ContextMenu.ContextMenuInfo info) {
         // Reuse the context menu builder
         if (mContextMenu == null) {
-            mContextMenu = new ContextMenuBuilder(originalView.getContext());
+            mContextMenu = new XpContextMenuBuilder(originalView.getContext());
             mContextMenu.setCallback(mContextMenuCallback);
         } else {
             mContextMenu.clearAll();
@@ -133,7 +133,7 @@ public class AppCompatContextMenu {
      * @param menu The context menu to populate
      */
     static void createContextMenu(View view, ContextMenu menu) {
-        ContextMenu.ContextMenuInfo menuInfo = ContextMenuViewCompat.getContextMenuInfo(view);
+        ContextMenu.ContextMenuInfo menuInfo = XpContextMenuViewCompat.getContextMenuInfo(view);
         createContextMenu(view, menu, menuInfo);
     }
 
@@ -142,12 +142,12 @@ public class AppCompatContextMenu {
         // my extra info set.
         ((MenuBuilder) menu).setCurrentMenuInfo(menuInfo);
 
-        ContextMenuViewCompat.onCreateContextMenu(view, menu);
+        XpContextMenuViewCompat.onCreateContextMenu(view, menu);
 //        ListenerInfo li = mListenerInfo;
 //        if (li != null && li.mOnCreateContextMenuListener != null) {
 //            li.mOnCreateContextMenuListener.onCreateContextMenu(menu, view, menuInfo);
 //        }
-        View.OnCreateContextMenuListener li = ContextMenuViewCompat.getOnCreateContextMenuListener(view);
+        View.OnCreateContextMenuListener li = XpContextMenuViewCompat.getOnCreateContextMenuListener(view);
         if (li != null) {
             li.onCreateContextMenu(menu, view, menuInfo);
         }
@@ -180,7 +180,7 @@ public class AppCompatContextMenu {
      * Dismisses just the context menu UI. To close the context menu, use
      * {@link #closeContextMenu()}.
      */
-    private synchronized void dismissContextMenu() {
+    synchronized void dismissContextMenu() {
         mContextMenu = null;
 
         if (mContextMenuHelper != null) {

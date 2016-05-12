@@ -43,22 +43,22 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
     protected ImageButton mButton; // Button to expand/collapse
 
     private boolean mRelayout;
-    private boolean mCollapsed = true; // Show short version as default.
+    boolean mCollapsed = true; // Show short version as default.
 
     private int mMaxCollapsedLines;
     private int mMinCollapsedLines;
 
-    private Drawable mExpandDrawable;
-    private Drawable mCollapseDrawable;
+    Drawable mExpandDrawable;
+    Drawable mCollapseDrawable;
 
-    private int mAnimationDuration;
+    int mAnimationDuration;
 
-    private boolean mAnimating;
+    boolean mAnimating;
     private boolean mFits;
 
     private int mCollapsedHeight;
     private int mTextHeightWithMaxLines;
-    private int mMarginBetweenTxtAndBottom;
+    int mMarginBetweenTxtAndBottom;
     private Runnable mMarginRunnable = new Runnable() {
         @Override
         public void run() {
@@ -277,7 +277,7 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
         }
     }
 
-    private void setProperMaxLines() {
+    void setProperMaxLines() {
         if (mCollapsed) {
             mTv.setMaxLines(mMinCollapsedLines);
         } else {

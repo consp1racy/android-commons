@@ -31,14 +31,14 @@ import android.view.View;
  * view was added directly to the window manager) and needs to show
  * context menus, it will use this class.
  * <p>
- * To use this class, instantiate it via {@link #ContextMenuBuilder(Context)},
+ * To use this class, instantiate it via {@link #XpContextMenuBuilder(Context)},
  * and optionally populate it with any of your custom items.  Finally,
  * call {@link #show(View, IBinder)} which will populate the menu
  * with a view's context menu items and show the context menu.
  */
-public class ContextMenuBuilder extends MenuBuilder implements ContextMenu {
+public class XpContextMenuBuilder extends MenuBuilder implements ContextMenu {
 
-    public ContextMenuBuilder(Context context) {
+    public XpContextMenuBuilder(Context context) {
         super(context);
     }
 
@@ -78,7 +78,7 @@ public class ContextMenuBuilder extends MenuBuilder implements ContextMenu {
             // Let relevant views and their populate context listeners populate
             // the context menu
 //            originalView.createContextMenu(this);
-            AppCompatContextMenu.createContextMenu(originalView, this);
+            XpAppCompatContextMenu.createContextMenu(originalView, this);
         }
 
         if (getVisibleItems().size() > 0) {
@@ -110,7 +110,7 @@ public class ContextMenuBuilder extends MenuBuilder implements ContextMenu {
             // Let relevant views and their populate context listeners populate
             // the context menu
 //            originalView.createContextMenu(this);
-            AppCompatContextMenu.createContextMenu(originalView, this, info);
+            XpAppCompatContextMenu.createContextMenu(originalView, this, info);
         }
 
         if (getVisibleItems().size() > 0) {

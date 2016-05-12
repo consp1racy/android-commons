@@ -33,9 +33,9 @@ public abstract class AsyncTaskFragment<Progress, Result> extends BaseDialogFrag
 
     public static final String KEY_SHOW_DIALOG = "net.xpece.android.app.AsyncTaskFragment.SHOW_DIALOG";
 
-    private boolean mPending;
-    private Result mPendingResult;
-    private boolean mPendingCancelled;
+    boolean mPending;
+    Result mPendingResult;
+    boolean mPendingCancelled;
 
     private final Callbacks<Progress, Result> mDefaultCallbacks = new Callbacks<Progress, Result>() {
         @Override

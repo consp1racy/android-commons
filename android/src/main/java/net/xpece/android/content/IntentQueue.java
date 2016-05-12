@@ -198,7 +198,7 @@ public class IntentQueue {
         mCheck = check;
     }
 
-    private static void doWork(Context context) {
+    static void doWork(Context context) {
         if (!AndroidUtils.isAnyNetworkConnected(context)) {
             return;
         }

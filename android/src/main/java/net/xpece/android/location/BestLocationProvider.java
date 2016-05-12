@@ -22,7 +22,7 @@ import java.util.Date;
 @SuppressLint("MissingPermission")
 public class BestLocationProvider {
 
-    private static final String TAG = BestLocationProvider.class.getSimpleName();
+    static final String TAG = BestLocationProvider.class.getSimpleName();
 
     @IntDef({TYPE_GPS, TYPE_CELL, TYPE_UNKNOWN})
     @Retention(RetentionPolicy.SOURCE)
@@ -32,18 +32,18 @@ public class BestLocationProvider {
     public static final int TYPE_CELL = 1;
     public static final int TYPE_UNKNOWN = 2;
 
-    private static final int TOO_OLD_LOCATION_DELTA = 1000 * 60 * 2;
+    public static final int TOO_OLD_LOCATION_DELTA = 1000 * 60 * 2;
     public static final float TOO_INACURATE_LOCATION_DELTA = 200;
 
     private WeakReference<Context> mContext;
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
-    private Location mLocation;
+    Location mLocation;
 
-    private Timeout mGPSTimeout;
-    private Timeout mCellTimeout;
+    Timeout mGPSTimeout;
+    Timeout mCellTimeout;
 
-    private BestLocationListener mListener;
+    BestLocationListener mListener;
 
     //config
     private final boolean mUseGPSLocation;
@@ -131,7 +131,7 @@ public class BestLocationProvider {
         }
     }
 
-    private void restartTimeout(@LocationType int type) {
+    void restartTimeout(@LocationType int type) {
 
         if (type == TYPE_GPS) {
             if (mGPSTimeout != null) {
@@ -154,7 +154,7 @@ public class BestLocationProvider {
         }
     }
 
-    private void updateLocation(Location location, @LocationType int type, boolean isFresh) {
+    void updateLocation(Location location, @LocationType int type, boolean isFresh) {
         mLocation = location;
         mListener.onLocationUpdate(location, type, isFresh);
     }
@@ -209,7 +209,7 @@ public class BestLocationProvider {
     }
 
     @LocationType
-    private int providerToLocationType(String provider) {
+    int providerToLocationType(String provider) {
         if (provider.equals(LocationManager.GPS_PROVIDER)) {
             return TYPE_GPS;
         } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {

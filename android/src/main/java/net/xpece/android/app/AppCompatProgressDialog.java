@@ -54,14 +54,14 @@ public class AppCompatProgressDialog extends AlertDialog {
      */
     public static final int STYLE_HORIZONTAL = 1;
 
-    private ProgressBar mProgress;
+    ProgressBar mProgress;
     private TextView mMessageView;
 
     private int mProgressStyle = STYLE_SPINNER;
-    private TextView mProgressNumber;
-    private String mProgressNumberFormat;
-    private TextView mProgressPercent;
-    private NumberFormat mProgressPercentFormat;
+    TextView mProgressNumber;
+    String mProgressNumberFormat;
+    TextView mProgressPercent;
+    NumberFormat mProgressPercentFormat;
 
     private int mMax;
     private int mProgressVal;
@@ -93,23 +93,23 @@ public class AppCompatProgressDialog extends AlertDialog {
     }
 
     public static AppCompatProgressDialog show(Context context, CharSequence title,
-                                      CharSequence message) {
+                                               CharSequence message) {
         return show(context, title, message, false);
     }
 
     public static AppCompatProgressDialog show(Context context, CharSequence title,
-                                      CharSequence message, boolean indeterminate) {
+                                               CharSequence message, boolean indeterminate) {
         return show(context, title, message, indeterminate, false, null);
     }
 
     public static AppCompatProgressDialog show(Context context, CharSequence title,
-                                      CharSequence message, boolean indeterminate, boolean cancelable) {
+                                               CharSequence message, boolean indeterminate, boolean cancelable) {
         return show(context, title, message, indeterminate, cancelable, null);
     }
 
     public static AppCompatProgressDialog show(Context context, CharSequence title,
-                                      CharSequence message, boolean indeterminate,
-                                      boolean cancelable, OnCancelListener cancelListener) {
+                                               CharSequence message, boolean indeterminate,
+                                               boolean cancelable, OnCancelListener cancelListener) {
         AppCompatProgressDialog dialog = new AppCompatProgressDialog(context);
         dialog.setTitle(title);
         dialog.setMessage(message);
