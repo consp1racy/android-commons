@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.EdgeEffectCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,9 @@ public final class XpEdgeEffect {
     private static final Field SCROLL_VIEW_FIELD_EDGE_GLOW_TOP;
     private static final Field SCROLL_VIEW_FIELD_EDGE_GLOW_BOTTOM;
 
+    private static final Class<ViewPager> CLASS_VIEW_PAGER = ViewPager.class;
+    private static final Field VIEW_PAGER_FIELD_LEFT_EDGE;
+    private static final Field VIEW_PAGER_FIELD_RIGHT_EDGE;
 
     private static final Class<HorizontalScrollView> CLASS_HORIZONTAL_SCROLL_VIEW = HorizontalScrollView.class;
     private static final Field HORIZONTAL_SCROLL_VIEW_FIELD_EDGE_GLOW_LEFT;
@@ -84,6 +88,22 @@ public final class XpEdgeEffect {
         RECYCLER_VIEW_FIELD_EDGE_GLOW_BOTTOM = edgeGlowBottom;
         RECYCLER_VIEW_FIELD_EDGE_GLOW_LEFT = edgeGlowLeft;
         RECYCLER_VIEW_FIELD_EDGE_GLOW_RIGHT = edgeGlowRight;
+
+        for (Field f : CLASS_VIEW_PAGER.getDeclaredFields()) {
+            switch (f.getName()) {
+                case "mLeftEdge":
+                    f.setAccessible(true);
+                    edgeGlowLeft = f;
+                    break;
+                case "mRightEdge":
+                    f.setAccessible(true);
+                    edgeGlowRight = f;
+                    break;
+            }
+        }
+
+        VIEW_PAGER_FIELD_LEFT_EDGE = edgeGlowLeft;
+        VIEW_PAGER_FIELD_RIGHT_EDGE = edgeGlowRight;
 
         for (Field f : CLASS_NESTED_SCROLL_VIEW.getDeclaredFields()) {
             switch (f.getName()) {
@@ -257,6 +277,24 @@ public final class XpEdgeEffect {
             setColor(ee, color);
         } catch (Exception ex) {
             XpLog.logException(ex, scrollView);
+        }
+    }
+
+    public static void setColor(ViewPager viewPager, @ColorInt int color, @EdgeGlowColorApi int when) {
+        if (Build.VERSION.SDK_INT < when) {
+            setColor(viewPager, color);
+        }
+    }
+
+    public static void setColor(ViewPager viewPager, @ColorInt int color) {
+        try {
+            Object ee;
+            ee = VIEW_PAGER_FIELD_LEFT_EDGE.get(viewPager);
+            setColor(ee, color);
+            ee = VIEW_PAGER_FIELD_RIGHT_EDGE.get(viewPager);
+            setColor(ee, color);
+        } catch (Exception ex) {
+            XpLog.logException(ex, viewPager);
         }
     }
 

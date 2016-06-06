@@ -53,14 +53,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
@@ -69,6 +61,14 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
     </content>
     <content url="file://R:/gradle/build/xpece-commons-android/android">
       <sourceFolder url="file://R:/gradle/build/xpece-commons-android/android/generated/source/r/debug" isTestSource="false" generated="true" />
@@ -83,6 +83,7 @@
       <sourceFolder url="file://R:/gradle/build/xpece-commons-android/android/generated/source/rs/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://R:/gradle/build/xpece-commons-android/android/generated/res/rs/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://R:/gradle/build/xpece-commons-android/android/generated/res/resValues/androidTest/debug" type="java-test-resource" />
+      <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/docs" />
       <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/intermediates/annotations" />
       <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/intermediates/assets" />
       <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/intermediates/blame" />
@@ -106,7 +107,11 @@
       <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/intermediates/shaders" />
       <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/intermediates/symbols" />
       <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/intermediates/transforms" />
+      <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/ivy.xml" />
+      <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/libs" />
       <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/outputs" />
+      <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/poms" />
+      <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/release" />
       <excludeFolder url="file://R:/gradle/build/xpece-commons-android/android/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
