@@ -208,6 +208,7 @@ public final class XpEdgeEffect {
         Field efc = null;
         try {
             efc = EdgeEffectCompat.class.getDeclaredField("mEdgeEffect");
+            efc.setAccessible(true);
         } catch (NoSuchFieldException e) {
             if (BuildConfig.DEBUG) e.printStackTrace();
         }
