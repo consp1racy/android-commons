@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package support.v7.widget;
+package android.support.v7.widget;
 
+import android.annotation.TargetApi;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -25,18 +26,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.TextViewCompat;
-import android.support.v7.widget.AppCompatDrawableManager;
-import android.support.v7.widget.DrawableUtils;
-import android.support.v7.widget.TintInfo;
-import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.widget.TextView;
 
-import java.lang.ref.WeakReference;
+import net.xpece.android.R;
 
-import cz.quickjobs.android.R;
-import timber.log.Timber;
+import java.lang.ref.WeakReference;
 
 /**
  * @hide
@@ -71,42 +67,42 @@ class XpAppCompatCompoundDrawableHelper {
         TintTypedArray a = null;
         try {
             a = TintTypedArray.obtainStyledAttributes(mView.getContext(), attrs,
-                R.styleable.XpAppCompatTextView, defStyleAttr, 0);
+                R.styleable.XpAppCompatCompoundDrawableHelper, defStyleAttr, 0);
 
             Drawable[] ds = mView.getCompoundDrawables();
-            if (a.hasValue(R.styleable.XpAppCompatTextView_drawableLeft)) {
-                ds[0] = resolveDrawable(a, R.styleable.XpAppCompatTextView_drawableLeft, LEFT);
+            if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableLeft)) {
+                ds[0] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableLeft, LEFT);
             }
-            if (a.hasValue(R.styleable.XpAppCompatTextView_drawableTop)) {
-                ds[1] = resolveDrawable(a, R.styleable.XpAppCompatTextView_drawableTop, TOP);
+            if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableTop)) {
+                ds[1] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableTop, TOP);
             }
-            if (a.hasValue(R.styleable.XpAppCompatTextView_drawableRight)) {
-                ds[2] = resolveDrawable(a, R.styleable.XpAppCompatTextView_drawableRight, RIGHT);
+            if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableRight)) {
+                ds[2] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableRight, RIGHT);
             }
-            if (a.hasValue(R.styleable.XpAppCompatTextView_drawableBottom)) {
-                ds[3] = resolveDrawable(a, R.styleable.XpAppCompatTextView_drawableBottom, BOTTOM);
+            if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableBottom)) {
+                ds[3] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableBottom, BOTTOM);
             }
             mView.setCompoundDrawablesWithIntrinsicBounds(ds[0], ds[1], ds[2], ds[3]);
 
             boolean hasRelativeCompoundDrawables = false;
             ds = XpTextViewCompat.getCompoundDrawablesRelative(mView);
-            if (a.hasValue(R.styleable.XpAppCompatTextView_drawableStart)) {
-                ds[0] = resolveDrawable(a, R.styleable.XpAppCompatTextView_drawableStart, START);
+            if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableStart)) {
+                ds[0] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableStart, START);
                 hasRelativeCompoundDrawables = true;
             }
-            if (a.hasValue(R.styleable.XpAppCompatTextView_drawableEnd)) {
-                ds[2] = resolveDrawable(a, R.styleable.XpAppCompatTextView_drawableEnd, END);
+            if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableEnd)) {
+                ds[2] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableEnd, END);
                 hasRelativeCompoundDrawables = true;
             }
             if (hasRelativeCompoundDrawables) {
                 TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(mView, ds[0], ds[1], ds[2], ds[3]);
             }
 
-            if (a.hasValue(R.styleable.XpAppCompatTextView_drawableTint)) {
-                XpTextViewCompat.setCompoundDrawableTintList(mView, a.getColorStateList(R.styleable.XpAppCompatTextView_drawableTint));
+            if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableTint)) {
+                XpTextViewCompat.setCompoundDrawableTintList(mView, a.getColorStateList(R.styleable.XpAppCompatCompoundDrawableHelper_drawableTint));
             }
-            if (a.hasValue(R.styleable.XpAppCompatTextView_drawableTintMode)) {
-                XpTextViewCompat.setCompoundDrawableTintMode(mView, DrawableUtils.parseTintMode(a.getInt(R.styleable.XpAppCompatTextView_drawableTintMode, -1), null));
+            if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableTintMode)) {
+                XpTextViewCompat.setCompoundDrawableTintMode(mView, DrawableUtils.parseTintMode(a.getInt(R.styleable.XpAppCompatCompoundDrawableHelper_drawableTintMode, -1), null));
             }
         } finally {
             if (a != null) {
@@ -144,7 +140,6 @@ class XpAppCompatCompoundDrawableHelper {
     }
 
     private void onSetCompoundDrawables(@DrawableRes int left, @DrawableRes int top, @DrawableRes int right, @DrawableRes int bottom) {
-        Timber.d("Setting internal tint.");
         Drawable[] ds = mView.getCompoundDrawables();
         // Update the default background tint
         setInternalTint(ds[0], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), left) : null, LEFT);
@@ -154,7 +149,6 @@ class XpAppCompatCompoundDrawableHelper {
     }
 
     private void onSetCompoundDrawablesRelative(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
-        Timber.d("Setting relative internal tint.");
         Drawable[] ds = XpTextViewCompat.getCompoundDrawablesRelative(mView);
         // Update the default background tint
         setInternalTint(ds[0], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), start) : null, START);
@@ -168,9 +162,8 @@ class XpAppCompatCompoundDrawableHelper {
             top == mDrawables.get(TOP).get() &&
             right == mDrawables.get(RIGHT).get() &&
             bottom == mDrawables.get(BOTTOM).get()) {
-            Timber.d("Known compound drawables, not clearing internal tint.");
+            //
         } else {
-            Timber.d("Unknown compound drawables, clearing internal tint.");
             clearInternalTint();
         }
     }
@@ -180,9 +173,8 @@ class XpAppCompatCompoundDrawableHelper {
             top == mDrawables.get(TOP).get() &&
             end == mDrawables.get(END).get() &&
             bottom == mDrawables.get(BOTTOM).get()) {
-            Timber.d("Known relative compound drawables, not clearing internal tint.");
+            //
         } else {
-            Timber.d("Unknown relative compound drawables, clearing internal tint.");
             clearInternalTint();
         }
     }
@@ -239,6 +231,7 @@ class XpAppCompatCompoundDrawableHelper {
         }
     }
 
+    @TargetApi(17)
     void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
         Drawable[] ds = new Drawable[4];
         ds[0] = resolveDrawable(start, 4);

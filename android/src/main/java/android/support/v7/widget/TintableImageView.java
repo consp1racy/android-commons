@@ -1,4 +1,4 @@
-package support.v7.widget;
+package android.support.v7.widget;
 
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;

@@ -9,7 +9,7 @@
     <public type="integer" name="abc_button_pressed_animation_delay_material"/>
 
     <public type="drawable" name="ic_chevron_left_black_24dp"/>
-    <public type="drawable" name="ic_chevron_right_black_24dp"/>
+    <!--<public type="drawable" name="ic_chevron_right_black_24dp"/>-->
     <public type="drawable" name="ic_expand_less_black_24dp"/>
     <public type="drawable" name="ic_expand_more_black_24dp"/>
 
@@ -50,8 +50,8 @@
     <public type="dimen" name="material_grid_item_size_small"/>
     <public type="dimen" name="material_grid_item_size_micro"/>
 
-    <public type="color" name="material_red_a400"/>
-    <public type="color" name="material_pink_a700"/>
+    <public type="color" name="material_red_a400_alt"/>
+    <public type="color" name="material_pink_a700_alt"/>
 
     <!--reds-->
     <public type="color" name="material_red_50"/>

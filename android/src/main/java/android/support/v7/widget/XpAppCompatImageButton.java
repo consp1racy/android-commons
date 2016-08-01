@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package support.v7.widget;
+package android.support.v7.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

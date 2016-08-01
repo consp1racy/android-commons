@@ -1,4 +1,4 @@
-package support.v7.widget;
+package android.support.v7.widget;
 
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
@@ -10,7 +10,7 @@ import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import cz.quickjobs.android.R;
+import net.xpece.android.R;
 
 /**
  * @hide
@@ -32,11 +32,11 @@ public class XpAppCompatImageHelper {
         TintTypedArray a = null;
         try {
             a = TintTypedArray.obtainStyledAttributes(mView.getContext(), attrs,
-                R.styleable.XpAppCompatImageView, defStyleAttr, 0);
+                R.styleable.XpAppCompatImageHelper, defStyleAttr, 0);
 
-            int srcResId = a.getResourceId(R.styleable.XpAppCompatImageView_android_src, -1);
-            if (a.hasValue(R.styleable.XpAppCompatImageView_srcCompat)) {
-                srcResId = a.getResourceId(R.styleable.XpAppCompatImageView_srcCompat, -1);
+            int srcResId = a.getResourceId(R.styleable.XpAppCompatImageHelper_android_src, -1);
+            if (a.hasValue(R.styleable.XpAppCompatImageHelper_srcCompat)) {
+                srcResId = a.getResourceId(R.styleable.XpAppCompatImageHelper_srcCompat, -1);
             }
             if (srcResId != -1) {
                 ColorStateList tint = mDrawableManager.getTintList(mView.getContext(), srcResId);
@@ -44,11 +44,11 @@ public class XpAppCompatImageHelper {
                     setInternalTint(tint);
                 }
             }
-            if (a.hasValue(R.styleable.XpAppCompatImageView_tint)) {
-                XpImageViewCompat.setImageTintList(mView, a.getColorStateList(R.styleable.XpAppCompatImageView_tint));
+            if (a.hasValue(R.styleable.XpAppCompatImageHelper_tint)) {
+                XpImageViewCompat.setImageTintList(mView, a.getColorStateList(R.styleable.XpAppCompatImageHelper_tint));
             }
-            if (a.hasValue(R.styleable.XpAppCompatImageView_tintMode)) {
-                XpImageViewCompat.setImageTintMode(mView, DrawableUtils.parseTintMode(a.getInt(R.styleable.XpAppCompatImageView_tintMode, -1), null));
+            if (a.hasValue(R.styleable.XpAppCompatImageHelper_tintMode)) {
+                XpImageViewCompat.setImageTintMode(mView, DrawableUtils.parseTintMode(a.getInt(R.styleable.XpAppCompatImageHelper_tintMode, -1), null));
             }
         } finally {
             if (a != null) {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package support.design.widget;
+package android.support.design.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -22,7 +22,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.AppCompatDrawableManager;
 import android.support.v7.widget.TintContextWrapper;
 import android.support.v7.widget.TintableImageView;
