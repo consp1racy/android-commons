@@ -5,17 +5,14 @@
     <public type="string" name="xpc_error_connection"/>
     <public type="string" name="xpc_no_intent_handler"/>
 
-    <public type="integer" name="button_pressed_animation_duration_material"/>
-    <public type="integer" name="button_pressed_animation_delay_material"/>
+    <public type="integer" name="abc_button_pressed_animation_duration_material"/>
+    <public type="integer" name="abc_button_pressed_animation_delay_material"/>
 
-    <public type="drawable" name="xpc_selectable_item_background_dark"/>
-    <public type="drawable" name="xpc_selectable_item_background_light"/>
+    <public type="drawable" name="ic_chevron_left_black_24dp"/>
+    <public type="drawable" name="ic_chevron_right_black_24dp"/>
+    <public type="drawable" name="ic_expand_less_black_24dp"/>
+    <public type="drawable" name="ic_expand_more_black_24dp"/>
 
-    <public type="drawable" name="ic_chevron_left_white_24dp"/>
-    <public type="drawable" name="ic_chevron_right_white_24dp"/>
-    <public type="drawable" name="ic_expand_less_white_24dp"/>
-    <public type="drawable" name="ic_expand_more_white_24dp"/>
-    
     <public type="id" name="expandable_text"/>
     <public type="id" name="expand_collapse"/>
 
@@ -52,7 +49,10 @@
     <public type="dimen" name="material_grid_item_size_medium"/>
     <public type="dimen" name="material_grid_item_size_small"/>
     <public type="dimen" name="material_grid_item_size_micro"/>
-    
+
+    <public type="color" name="material_red_a400"/>
+    <public type="color" name="material_pink_a700"/>
+
     <!--reds-->
     <public type="color" name="material_red_50"/>
     <public type="color" name="material_red_100"/>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="ic_close_black_24dp">@drawable/abc_ic_clear_material</drawable>
+    <drawable name="ic_clear_black_24dp">@drawable/abc_ic_clear_material</drawable>
+    <drawable name="ic_arrow_back_black_24dp">@drawable/abc_ic_ab_back_material</drawable>
+    <drawable name="ic_chevron_right_black_24dp">@drawable/abc_ic_go_search_api_material</drawable>
+    <drawable name="ic_search_black_24dp">@drawable/abc_ic_search_api_material</drawable>
+    <drawable name="ic_mic_black_24dp">@drawable/abc_ic_voice_search_api_material</drawable>
+    <drawable name="ic_more_vert_black_24dp">@drawable/abc_ic_menu_overflow_material</drawable>
+</resources>

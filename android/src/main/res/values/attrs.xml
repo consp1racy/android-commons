@@ -50,5 +50,4 @@
         <attr name="progressLayout" format="reference" />
         <attr name="horizontalProgressLayout" format="reference" />
     </declare-styleable>
-
 </resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="XpAppCompatCompoundDrawableHelper">
+        <attr name="drawableLeft" format="reference"/>
+        <attr name="drawableRight" format="reference"/>
+        <attr name="drawableTop" format="reference"/>
+        <attr name="drawableBottom" format="reference"/>
+        <attr name="drawableStart" format="reference"/>
+        <attr name="drawableEnd" format="reference"/>
+        <attr name="drawableTint" format="color"/>
+        <attr name="drawableTintMode" format="enum">
+            <enum name="src_over" value="3" />
+            <enum name="src_in" value="5" />
+            <enum name="src_atop" value="9" />
+            <enum name="multiply" value="14" />
+            <enum name="screen" value="15" />
+            <enum name="add" value="16" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="XpAppCompatTextView">
+        <attr name="drawableLeft"/>
+        <attr name="drawableRight"/>
+        <attr name="drawableTop"/>
+        <attr name="drawableBottom"/>
+        <attr name="drawableStart"/>
+        <attr name="drawableEnd"/>
+        <attr name="drawableTint"/>
+        <attr name="drawableTintMode"/>
+    </declare-styleable>
+    <declare-styleable name="XpAppCompatCheckedTextView">
+        <attr name="drawableLeft"/>
+        <attr name="drawableRight"/>
+        <attr name="drawableTop"/>
+        <attr name="drawableBottom"/>
+        <attr name="drawableStart"/>
+        <attr name="drawableEnd"/>
+        <attr name="drawableTint"/>
+        <attr name="drawableTintMode"/>
+    </declare-styleable>
+    <declare-styleable name="XpAppCompatButtonTextView">
+        <attr name="drawableLeft"/>
+        <attr name="drawableRight"/>
+        <attr name="drawableTop"/>
+        <attr name="drawableBottom"/>
+        <attr name="drawableStart"/>
+        <attr name="drawableEnd"/>
+        <attr name="drawableTint"/>
+        <attr name="drawableTintMode"/>
+    </declare-styleable>
+
+    <declare-styleable name="XpAppCompatImageHelper">
+        <attr name="android:src"/>
+        <attr name="srcCompat"/>
+        <attr name="tint" format="color"/>
+        <attr name="tintMode" format="enum">
+            <enum name="src_over" value="3" />
+            <enum name="src_in" value="5" />
+            <enum name="src_atop" value="9" />
+            <enum name="multiply" value="14" />
+            <enum name="screen" value="15" />
+            <enum name="add" value="16" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="XpAppCompatImageView">
+        <attr name="tint"/>
+        <attr name="tintMode"/>
+    </declare-styleable>
+    <declare-styleable name="XpAppCompatImageButton">
+        <attr name="tint"/>
+        <attr name="tintMode"/>
+    </declare-styleable>
+</resources>

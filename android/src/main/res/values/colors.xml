@@ -6,9 +6,9 @@
   <color name="xpc_selected_light">#4000</color>
 
   <!-- was #ff1744 -->
-  <color name="material_red_a400">#ff1717</color>
+  <color name="material_red_a400_alt">#ff1717</color>
   <!-- was #c51162 -->
-  <color name="material_pink_a700">#c50062</color>
+  <color name="material_pink_a700_alt">#c50062</color>
 
   <!--reds-->
   <color name="material_red_50">#FFEBEE</color>
@@ -23,7 +23,7 @@
   <color name="material_red_900">#B71C1C</color>
   <color name="material_red_a100">#FF8A80</color>
   <color name="material_red_a200">#FF5252</color>
-  <!--<color name="material_red_a400">#FF1744</color>-->
+  <color name="material_red_a400">#FF1744</color>
   <color name="material_red_a700">#D50000</color>
 
   <!-- pinks -->
@@ -40,7 +40,7 @@
   <color name="material_pink_a100">#FF80AB</color>
   <color name="material_pink_a200">#FF4081</color>
   <color name="material_pink_a400">#F50057</color>
-  <!--<color name="material_pink_a700">#C51162</color>-->
+  <color name="material_pink_a700">#C51162</color>
 
   <!-- purples -->
   <color name="material_purple_50">#F3E5F5</color>

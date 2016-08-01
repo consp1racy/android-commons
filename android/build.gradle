@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         minSdkVersion 10
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -22,22 +22,29 @@ android {
     lintOptions {
         abortOnError true
     }
+
+    sourceSets {
+        main {
+//            java.srcDirs += 'src/main/kotlin'
+            res.srcDirs += 'src/main/res2'
+        }
+    }
 }
 
 dependencies {
-    compile "com.android.support:design:23.4.0"
-    provided "com.android.support:palette-v7:23.4.0"
+    compile "com.android.support:design:24.1.1"
+    provided "com.android.support:palette-v7:24.1.1"
 
     provided "uk.co.chrisjenx:calligraphy:2.2.0@aar"
     provided 'com.squareup.picasso:picasso:2.5.2'
 
-    provided 'org.parceler:parceler-api:1.1.2'
+    provided 'org.parceler:parceler-api:1.1.5'
 }
 
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.7.0'
+    PUBLISH_VERSION = '0.8.0'
 }
 
 apply from: '../android-release-aar.gradle'

@@ -99,10 +99,10 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
         typedArray.recycle();
 
         if (mExpandDrawable == null) {
-            mExpandDrawable = ContextCompat.getDrawable(context, R.drawable.ic_expand_more_white_24dp);
+            mExpandDrawable = ContextCompat.getDrawable(context, R.drawable.ic_expand_more_black_24dp);
         }
         if (mCollapseDrawable == null) {
-            mCollapseDrawable = ContextCompat.getDrawable(context, R.drawable.ic_expand_less_white_24dp);
+            mCollapseDrawable = ContextCompat.getDrawable(context, R.drawable.ic_expand_less_black_24dp);
         }
 
         setOnClickListener(this);
