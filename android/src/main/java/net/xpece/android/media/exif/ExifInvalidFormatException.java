@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc. All rights reserved.
+ * Copyright (C) 2012 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,10 @@
  * limitations under the License.
  */
 
-package net.xpece.android.util;
+package net.xpece.android.media.exif;
 
-import java.util.HashMap;
-
-/**
- * Provides static methods for creating mutable {@code Maps} instances easily.
- *
- * @deprecated Use Guava.
- */
-@Deprecated
-public class Maps {
-    /**
-     * Creates a {@code HashMap} instance.
-     *
-     * @return a newly-created, initially-empty {@code HashMap}
-     */
-    public static <K, V> HashMap<K, V> newHashMap() {
-        return new HashMap<K, V>();
+public class ExifInvalidFormatException extends Exception {
+    public ExifInvalidFormatException(String meg) {
+        super(meg);
     }
 }

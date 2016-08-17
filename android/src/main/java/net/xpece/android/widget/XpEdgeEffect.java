@@ -241,7 +241,7 @@ public final class XpEdgeEffect {
             ee = LIST_VIEW_FIELD_EDGE_GLOW_BOTTOM.get(listView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(ex, listView);
+            XpLog.logException(listView, ex);
         }
     }
 
@@ -259,7 +259,7 @@ public final class XpEdgeEffect {
             ee = SCROLL_VIEW_FIELD_EDGE_GLOW_BOTTOM.get(scrollView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(ex, scrollView);
+            XpLog.logException(scrollView, ex);
         }
     }
 
@@ -277,7 +277,7 @@ public final class XpEdgeEffect {
             ee = HORIZONTAL_SCROLL_VIEW_FIELD_EDGE_GLOW_RIGHT.get(scrollView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(ex, scrollView);
+            XpLog.logException(scrollView, ex);
         }
     }
 
@@ -295,7 +295,7 @@ public final class XpEdgeEffect {
             ee = VIEW_PAGER_FIELD_RIGHT_EDGE.get(viewPager);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(ex, viewPager);
+            XpLog.logException(viewPager, ex);
         }
     }
 
@@ -313,7 +313,7 @@ public final class XpEdgeEffect {
             ee = NESTED_SCROLL_VIEW_FIELD_EDGE_GLOW_BOTTOM.get(scrollView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(ex, scrollView);
+            XpLog.logException(scrollView, ex);
         }
     }
 
@@ -335,7 +335,7 @@ public final class XpEdgeEffect {
             ee = RECYCLER_VIEW_FIELD_EDGE_GLOW_RIGHT.get(scrollView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(ex, scrollView);
+            XpLog.logException(scrollView, ex);
         }
     }
 

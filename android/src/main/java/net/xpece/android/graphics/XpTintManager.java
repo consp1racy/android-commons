@@ -25,6 +25,7 @@ import net.xpece.android.content.res.XpResources;
 /**
  * Created by pechanecjr on 4. 1. 2015.
  */
+@Deprecated
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public final class XpTintManager {
     private static final ThreadLocal<TypedValue> TL_TYPED_VALUE = new ThreadLocal<>();

@@ -38,6 +38,7 @@ public final class AndroidUtils {
     public static final boolean API_21 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     public static final boolean API_22 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1;
     public static final boolean API_23 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+    public static final boolean API_24 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
 
     private AndroidUtils() {}
 

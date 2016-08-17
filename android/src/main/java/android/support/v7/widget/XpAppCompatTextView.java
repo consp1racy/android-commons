@@ -24,9 +24,6 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.TintableBackgroundView;
-import android.support.v7.widget.AppCompatBackgroundHelper;
-import android.support.v7.widget.AppCompatDrawableManager;
-import android.support.v7.widget.TintContextWrapper;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -65,13 +62,13 @@ public class XpAppCompatTextView extends TextView
         super(TintContextWrapper.wrap(context), attrs, defStyleAttr);
 
         mDrawableManager = AppCompatDrawableManager.get();
-        mBackgroundTintHelper = new AppCompatBackgroundHelper(this, mDrawableManager);
+        mBackgroundTintHelper = new AppCompatBackgroundHelper(this);
         mBackgroundTintHelper.loadFromAttributes(attrs, defStyleAttr);
 
         mTextHelper = new XpAppCompatTextHelper(this);
         mTextHelper.loadFromAttributes(attrs, defStyleAttr);
 
-        mTextCompoundDrawableHelper = new XpAppCompatCompoundDrawableHelper(this, mDrawableManager);
+        mTextCompoundDrawableHelper = new XpAppCompatCompoundDrawableHelper(this);
         mTextCompoundDrawableHelper.loadFromAttributes(attrs, defStyleAttr);
     }
 

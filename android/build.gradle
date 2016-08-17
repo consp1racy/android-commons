@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 24
@@ -25,26 +26,29 @@ android {
 
     sourceSets {
         main {
-//            java.srcDirs += 'src/main/kotlin'
+            java.srcDirs += 'src/main/kotlin'
             res.srcDirs += 'src/main/res2'
         }
     }
 }
 
 dependencies {
-    compile "com.android.support:design:24.1.1"
-    provided "com.android.support:palette-v7:24.1.1"
+    ext.supportLibsVersion = "24.2.0"
+    compile "com.android.support:design:$supportLibsVersion"
+    provided "com.android.support:palette-v7:$supportLibsVersion"
 
     provided "uk.co.chrisjenx:calligraphy:2.2.0@aar"
     provided 'com.squareup.picasso:picasso:2.5.2'
-
     provided 'org.parceler:parceler-api:1.1.5'
+    provided 'io.requery:sqlite-android:3.14.0'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.8.0'
+    PUBLISH_VERSION = '0.9.0'
 }
 
 apply from: '../android-release-aar.gradle'

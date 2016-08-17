@@ -9,7 +9,6 @@
     <public type="integer" name="abc_button_pressed_animation_delay_material"/>
 
     <public type="drawable" name="ic_chevron_left_black_24dp"/>
-    <!--<public type="drawable" name="ic_chevron_right_black_24dp"/>-->
     <public type="drawable" name="ic_expand_less_black_24dp"/>
     <public type="drawable" name="ic_expand_more_black_24dp"/>
 
@@ -24,26 +23,10 @@
     <public type="dimen" name="material_list_item_height_medium"/>
     <public type="dimen" name="material_list_item_height_large"/>
 
-    <public type="dimen" name="material_touch_size"/>
-
     <public type="dimen" name="material_content_keyline_base"/>
     <public type="dimen" name="material_content_keyline"/>
 
-    <public type="dimen" name="material_grid_spacing_micro"/>
-    <public type="dimen" name="material_grid_spacing_small"/>
-
     <public type="dimen" name="material_activity_padding_horizontal"/>
-    <public type="dimen" name="material_list_padding_vertical"/>
-
-    <public type="dimen" name="material_list_item_text_inset_vertical"/>
-    <public type="dimen" name="material_full_width_text_inset_vertical"/>
-
-    <public type="dimen" name="material_content_inset_all"/>
-    <public type="dimen" name="material_container_padding_all"/>
-
-    <public type="dimen" name="material_content_spacing_small"/>
-    <public type="dimen" name="material_content_spacing_medium"/>
-    <public type="dimen" name="material_content_spacing_large"/>
 
     <public type="dimen" name="material_grid_item_size_large"/>
     <public type="dimen" name="material_grid_item_size_medium"/>

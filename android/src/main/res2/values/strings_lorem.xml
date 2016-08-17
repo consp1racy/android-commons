@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string translatable="false" name="lorem_date">22. 2. 2016</string>
+    <string translatable="false" name="lorem_date_interval">2 anni</string>
+    <string translatable="false" name="lorem_time">14:20</string>
+    <string translatable="false" name="lorem_time_interval">14:20 – 20:00</string>
+    <string translatable="false" name="lorem_datetime">22. 2. 2016 14:20</string>
+    <string translatable="false" name="lorem_integer">6</string>
+    <string translatable="false" name="lorem_decimal">4.4</string>
+    <string translatable="false" name="lorem_micro">Lorem ipsum</string>
+    <string translatable="false" name="lorem_short">Lorem ipsum dolor sit amet.</string>
+    <string translatable="false" name="lorem_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies bibendum eros, id pharetra elit malesuada a. Sed a erat quis turpis posuere tincidunt. Mauris rhoncus cursus velit, nec interdum diam luctus et. </string>
+    <string translatable="false" name="lorem_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies bibendum eros, id pharetra elit malesuada a. Sed a erat quis turpis posuere tincidunt. Mauris rhoncus cursus velit, nec interdum diam luctus et. Sed a mi eu orci viverra fermentum. Maecenas ut tortor quis turpis malesuada malesuada. Etiam porttitor tincidunt leo vel condimentum. Nullam interdum ultricies est, ac interdum ante sodales nec. Vestibulum sed dolor risus. Pellentesque efficitur maximus ante, sagittis porttitor mi lacinia efficitur. Donec pellentesque gravida elit, vel dapibus tortor finibus at. Integer eu maximus mauris, quis fermentum metus. Proin interdum libero in eros laoreet pellentesque. Morbi cursus tempus est, at consequat diam scelerisque ut. Integer arcu nunc, mollis ac lobortis ut, lobortis ut felis.</string>
+</resources>

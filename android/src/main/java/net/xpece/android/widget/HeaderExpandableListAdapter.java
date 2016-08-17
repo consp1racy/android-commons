@@ -5,8 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
-import net.xpece.android.util.Lists;
-
 import java.util.ArrayList;
 
 /**
@@ -18,8 +16,8 @@ import java.util.ArrayList;
 @Deprecated
 public class HeaderExpandableListAdapter extends ExpandableListAdapterWrapper {
 
-    private ArrayList<FixedViewInfo> mHeaderViewInfos = Lists.newArrayList();
-    private ArrayList<FixedViewInfo> mFooterViewInfos = Lists.newArrayList();
+    private ArrayList<FixedViewInfo> mHeaderViewInfos = new ArrayList<>();
+    private ArrayList<FixedViewInfo> mFooterViewInfos = new ArrayList<>();
 
     public HeaderExpandableListAdapter(BaseExpandableListAdapter adapter) {
         super(adapter);

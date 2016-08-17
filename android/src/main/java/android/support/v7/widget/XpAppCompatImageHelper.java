@@ -3,10 +3,6 @@ package android.support.v7.widget;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatDrawableManager;
-import android.support.v7.widget.DrawableUtils;
-import android.support.v7.widget.TintInfo;
-import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 

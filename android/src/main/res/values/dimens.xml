@@ -13,35 +13,9 @@
     <!-- extra 8dp padding on tablets -->
     <dimen name="material_activity_padding_horizontal">0dp</dimen>
 
-    <dimen name="material_touch_size">48dp</dimen>
-
     <!-- 16dp margin + 40dp icon + 16dp spacing -->
     <dimen name="material_content_keyline_base">72dp</dimen>
     <dimen name="material_content_keyline">72dp</dimen>
-
-    <!-- grid view spacing -->
-    <dimen name="material_grid_spacing_micro">1dp</dimen>
-    <dimen name="material_grid_spacing_small">4dp</dimen>
-
-    <!-- spacing at top and bottom of the list (without header/footer) -->
-    <dimen name="material_list_padding_vertical">8dp</dimen>
-
-    <!-- vertical padding for text inside a list item -->
-    <dimen name="material_list_item_text_inset_vertical">16dp</dimen>
-
-    <!-- vertical padding for text inside a list item -->
-    <dimen name="material_full_width_text_inset_vertical">20dp</dimen>
-
-    <!-- default margin for widgets -->
-    <dimen name="material_content_inset_all">4dp</dimen>
-
-    <!-- container padding for use in activities -->
-    <dimen name="material_container_padding_all">12dp</dimen>
-
-    <!-- spaces between widgets -->
-    <dimen name="material_content_spacing_small">4dp</dimen>
-    <dimen name="material_content_spacing_medium">8dp</dimen>
-    <dimen name="material_content_spacing_large">16dp</dimen>
 
     <!-- Two on Nexus 7 (600dp). -->
     <dimen name="material_grid_item_size_large">300dp</dimen>

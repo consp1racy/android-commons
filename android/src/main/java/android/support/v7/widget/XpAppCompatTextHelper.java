@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.support.v7.text.AllCapsTransformationMethod;
-import android.support.v7.widget.TintTypedArray;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.widget.TextView;

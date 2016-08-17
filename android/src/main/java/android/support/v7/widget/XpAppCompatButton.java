@@ -51,7 +51,6 @@ import android.widget.Button;
 public class XpAppCompatButton extends Button
     implements TintableBackgroundView, TintableCompoundDrawableView {
 
-    private final AppCompatDrawableManager mDrawableManager;
     private final AppCompatBackgroundHelper mBackgroundTintHelper;
     private final AppCompatTextHelper mTextHelper;
     private final XpAppCompatCompoundDrawableHelper mTextCompoundDrawableHelper;
@@ -67,14 +66,13 @@ public class XpAppCompatButton extends Button
     public XpAppCompatButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(TintContextWrapper.wrap(context), attrs, defStyleAttr);
 
-        mDrawableManager = AppCompatDrawableManager.get();
-        mBackgroundTintHelper = new AppCompatBackgroundHelper(this, mDrawableManager);
+        mBackgroundTintHelper = new AppCompatBackgroundHelper(this);
         mBackgroundTintHelper.loadFromAttributes(attrs, defStyleAttr);
 
         mTextHelper = AppCompatTextHelper.create(this);
         mTextHelper.loadFromAttributes(attrs, defStyleAttr);
 
-        mTextCompoundDrawableHelper = new XpAppCompatCompoundDrawableHelper(this, mDrawableManager);
+        mTextCompoundDrawableHelper = new XpAppCompatCompoundDrawableHelper(this);
         mTextCompoundDrawableHelper.loadFromAttributes(attrs, defStyleAttr);
     }
 
@@ -174,6 +172,7 @@ public class XpAppCompatButton extends Button
     }
 
     @Override
+    @TargetApi(14)
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
         info.setClassName(Button.class.getName());

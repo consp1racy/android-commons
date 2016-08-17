@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Widget.Preview.ActionBar" parent="android:Widget.Holo.ActionBar.Solid">
+        <item name="android:titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item>
+        <item name="android:subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:displayOptions">showTitle</item>
+    </style>
+
+    <style name="Widget.Preview.Light.ActionBar" parent="android:Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item>
+        <item name="android:subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:displayOptions">showTitle</item>
+    </style>
+
+    <style name="Widget.Preview.Light.ActionBar.Inverse" parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item>
+        <item name="android:subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:displayOptions">showTitle</item>
+    </style>
+
+</resources>
