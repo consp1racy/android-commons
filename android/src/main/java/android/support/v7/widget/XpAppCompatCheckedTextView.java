@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.TintableBackgroundView;
+import android.support.v7.content.res.AppCompatResources;
 import android.util.AttributeSet;
 import android.widget.CheckedTextView;
 
@@ -40,7 +41,6 @@ public class XpAppCompatCheckedTextView extends CheckedTextView
         android.R.attr.checkMark
     };
 
-    private final AppCompatDrawableManager mDrawableManager;
     private final AppCompatBackgroundHelper mBackgroundTintHelper;
     private final AppCompatTextHelper mTextHelper;
     private XpAppCompatCompoundDrawableHelper mTextCompoundDrawableHelper;
@@ -56,7 +56,6 @@ public class XpAppCompatCheckedTextView extends CheckedTextView
     public XpAppCompatCheckedTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(TintContextWrapper.wrap(context), attrs, defStyleAttr);
 
-        mDrawableManager = AppCompatDrawableManager.get();
         mBackgroundTintHelper = new AppCompatBackgroundHelper(this);
         mBackgroundTintHelper.loadFromAttributes(attrs, defStyleAttr);
 
@@ -74,11 +73,7 @@ public class XpAppCompatCheckedTextView extends CheckedTextView
 
     @Override
     public void setCheckMarkDrawable(@DrawableRes int resId) {
-        if (mDrawableManager != null) {
-            setCheckMarkDrawable(mDrawableManager.getDrawable(getContext(), resId));
-        } else {
-            super.setCheckMarkDrawable(resId);
-        }
+        setCheckMarkDrawable(AppCompatResources.getDrawable(getContext(), resId));
     }
 
     @Override

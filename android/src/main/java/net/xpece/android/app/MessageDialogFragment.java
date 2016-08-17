@@ -1,6 +1,5 @@
 package net.xpece.android.app;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,27 +14,24 @@ import android.util.Log;
  * @author Eugen on 31. 12. 2015.
  */
 public class MessageDialogFragment extends BaseDialogFragment
-    implements DialogInterface.OnClickListener,
-    FragmentCallbacksHelper.ICanOverrideCallbacks<DialogFragmentCallbacks> {
+    implements DialogInterface.OnClickListener {
     public static final String TAG = MessageDialogFragment.class.getSimpleName();
 
     private DialogFragmentCallbacks mCallbacks = DialogFragmentCallbacks.DUMMY;
 
     @Override
     @CallSuper
-    public void onAttach(final Activity activity) {
-        super.onAttach(activity);
-        if (!FragmentCallbacksHelper.overrideCallbacks(this)) {
+    public void onAttach(final Context context) {
+        super.onAttach(context);
             Fragment targetFragment = getTargetFragment();
             if (targetFragment instanceof DialogFragmentCallbacks){
                 mCallbacks = (DialogFragmentCallbacks) targetFragment;
-            } else if (activity instanceof DialogFragmentCallbacks) {
-                mCallbacks = (DialogFragmentCallbacks) activity;
+            } else if (context instanceof DialogFragmentCallbacks) {
+                mCallbacks = (DialogFragmentCallbacks) context;
             } else  {
                 Log.w(TAG, this + " does not have DialogFragmentCallbacks.");
                 mCallbacks = DialogFragmentCallbacks.DUMMY;
             }
-        }
     }
 
     @Override
@@ -74,15 +70,6 @@ public class MessageDialogFragment extends BaseDialogFragment
     @Override
     public void onClick(final DialogInterface dialog, final int which) {
         mCallbacks.onClick(this, dialog, which);
-    }
-
-    @Override
-    public void setCallbacks(final DialogFragmentCallbacks callbacks) {
-        if (isAdded()) {
-            mCallbacks = callbacks;
-        } else {
-            throw new IllegalStateException("Fragment not added. Cannot override callbacks.");
-        }
     }
 
     public static final class Builder extends BaseBuilder<Builder, MessageDialogFragment> {

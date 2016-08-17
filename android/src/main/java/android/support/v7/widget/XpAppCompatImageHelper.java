@@ -19,9 +19,9 @@ public class XpAppCompatImageHelper {
     private TintInfo mInternalTint;
     private TintInfo mTint;
 
-    public XpAppCompatImageHelper(ImageView view, AppCompatDrawableManager drawableManager) {
+    public XpAppCompatImageHelper(ImageView view) {
         mView = view;
-        mDrawableManager = drawableManager;
+        mDrawableManager = AppCompatDrawableManager.get();
     }
 
     public void loadFromAttributes(AttributeSet attrs, int defStyleAttr) {

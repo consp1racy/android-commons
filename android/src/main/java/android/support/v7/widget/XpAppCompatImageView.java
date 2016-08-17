@@ -53,8 +53,7 @@ public class XpAppCompatImageView extends AppCompatImageView implements Tintable
     public XpAppCompatImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(TintContextWrapper.wrap(context), attrs, defStyleAttr);
 
-        final AppCompatDrawableManager drawableManager = AppCompatDrawableManager.get();
-        mImageHelper = new XpAppCompatImageHelper(this, drawableManager);
+        mImageHelper = new XpAppCompatImageHelper(this);
         mImageHelper.loadFromAttributes(attrs, defStyleAttr);
     }
 

@@ -54,9 +54,9 @@ class XpAppCompatCompoundDrawableHelper {
     private static final int START = 4;
     private static final int END = 5;
 
-    public XpAppCompatCompoundDrawableHelper(@NonNull TextView view, @Nullable AppCompatDrawableManager drawableManager) {
+    public XpAppCompatCompoundDrawableHelper(@NonNull TextView view) {
         mView = view;
-        mDrawableManager = drawableManager;
+        mDrawableManager = AppCompatDrawableManager.get();
 
         for (int i = 0, count = 6; i < count; i++) {
             mDrawables.put(i, new WeakReference<Drawable>(null));

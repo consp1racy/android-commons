@@ -8,7 +8,9 @@ def version = project.PUBLISH_VERSION
 def localReleaseDest = "${buildDir}/release/${version}"
 
 task androidJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
+    failOnError  false
+//    source = android.sourceSets.main.java.srcDirs
+    source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 
     // http://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html

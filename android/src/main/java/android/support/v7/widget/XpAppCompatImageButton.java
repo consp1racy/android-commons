@@ -25,6 +25,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 
+import net.xpece.android.R;
+
 /**
  * A {@link ImageButton} which supports compatible features on older version of the platform,
  * including:
@@ -47,14 +49,13 @@ public class XpAppCompatImageButton extends AppCompatImageButton implements Tint
     }
 
     public XpAppCompatImageButton(Context context, AttributeSet attrs) {
-        this(context, attrs, android.support.v7.appcompat.R.attr.imageButtonStyle);
+        this(context, attrs, R.attr.imageButtonStyle);
     }
 
     public XpAppCompatImageButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(TintContextWrapper.wrap(context), attrs, defStyleAttr);
 
-        final AppCompatDrawableManager drawableManager = AppCompatDrawableManager.get();
-        mImageTintHelper = new XpAppCompatImageHelper(this, drawableManager);
+        mImageTintHelper = new XpAppCompatImageHelper(this);
         mImageTintHelper.loadFromAttributes(attrs, defStyleAttr);
     }
 

@@ -22,7 +22,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatDrawableManager;
 import android.support.v7.widget.TintContextWrapper;
 import android.support.v7.widget.TintableImageView;
 import android.support.v7.widget.XpAppCompatImageHelper;
@@ -59,8 +58,7 @@ public class XpFloatingActionButton extends FloatingActionButton implements Tint
     public XpFloatingActionButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(TintContextWrapper.wrap(context), attrs, defStyleAttr);
 
-        final AppCompatDrawableManager drawableManager = AppCompatDrawableManager.get();
-        mImageTintHelper = new XpAppCompatImageHelper(this, drawableManager);
+        mImageTintHelper = new XpAppCompatImageHelper(this);
         mImageTintHelper.loadFromAttributes(attrs, defStyleAttr);
     }
 

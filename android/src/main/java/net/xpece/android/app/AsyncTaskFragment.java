@@ -29,9 +29,7 @@ import net.xpece.android.R;
  *
  * @author Eugen on 11. 10. 2015.
  */
-public abstract class AsyncTaskFragment<Progress, Result> extends BaseDialogFragment
-    implements
-    FragmentCallbacksHelper.ICanOverrideCallbacks<AsyncTaskFragment.Callbacks<Progress, Result>> {
+public abstract class AsyncTaskFragment<Progress, Result> extends BaseDialogFragment {
     private static final String TAG = AsyncTaskFragment.class.getSimpleName();
 
     public static final String KEY_SHOW_DIALOG = "net.xpece.android.app.AsyncTaskFragment.SHOW_DIALOG";
@@ -68,15 +66,6 @@ public abstract class AsyncTaskFragment<Progress, Result> extends BaseDialogFrag
     private Callbacks<Progress, Result> mCallbacks = mDefaultCallbacks;
 
     private final ManagedAsyncTask mTask = new ManagedAsyncTask();
-
-    @Override
-    public void setCallbacks(final Callbacks<Progress, Result> callbacks) {
-        if (isAdded()) {
-            mCallbacks = callbacks;
-        } else {
-            throw new IllegalStateException("Fragment not added. Cannot override callbacks.");
-        }
-    }
 
     public static <Progress, Result> void showAsDialog(AsyncTaskFragment<Progress, Result> fragment, Context context) {
         showAsDialog(fragment, R.string.xpc_please_wait, context);
@@ -152,17 +141,15 @@ public abstract class AsyncTaskFragment<Progress, Result> extends BaseDialogFrag
     public void onStart() {
         super.onStart();
 
-        if (!FragmentCallbacksHelper.overrideCallbacks(this)) {
-            Fragment targetFragment = getTargetFragment();
-            if (targetFragment instanceof Callbacks) {
-                mCallbacks = (Callbacks) targetFragment;
+        Fragment targetFragment = getTargetFragment();
+        if (targetFragment instanceof Callbacks) {
+            mCallbacks = (Callbacks) targetFragment;
+        } else {
+            Activity activity = getActivity();
+            if (activity instanceof Callbacks) {
+                mCallbacks = (Callbacks) activity;
             } else {
-                Activity activity = getActivity();
-                if (activity instanceof Callbacks) {
-                    mCallbacks = (Callbacks) activity;
-                } else {
-                    throw new IllegalStateException(this + " does not have Callbacks.");
-                }
+                throw new IllegalStateException(this + " does not have Callbacks.");
             }
         }
 

@@ -24,14 +24,12 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.TintableBackgroundView;
-import android.support.v7.widget.AppCompatBackgroundHelper;
-import android.support.v7.widget.AppCompatDrawableManager;
-import android.support.v7.widget.AppCompatTextHelper;
-import android.support.v7.widget.TintContextWrapper;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
+
+import net.xpece.android.R;
 
 /**
  * A {@link Button} which supports compatible features on older version of the platform,
@@ -60,7 +58,7 @@ public class XpAppCompatButton extends Button
     }
 
     public XpAppCompatButton(Context context, AttributeSet attrs) {
-        this(context, attrs, android.support.v7.appcompat.R.attr.buttonStyle);
+        this(context, attrs, R.attr.buttonStyle);
     }
 
     public XpAppCompatButton(Context context, AttributeSet attrs, int defStyleAttr) {
