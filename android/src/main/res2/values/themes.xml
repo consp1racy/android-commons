@@ -1,9 +1,34 @@
 <resources>
 
-    <style name="Theme.Preview.Light" parent="@android:style/Theme.Light.NoTitleBar"/>
 
-    <style name="Theme.Preview" parent="@android:style/Theme.NoTitleBar"/>
+    <style name="Theme.Preview" parent="Base.Theme.Preview">
+        <item name="colorPrimary">@color/primary_material_dark</item>
+        <item name="colorPrimaryDark">@color/primary_dark_material_dark</item>
+        <item name="colorAccent">@color/accent_material_dark</item>
+        <item name="android:windowBackground">@color/background_material_dark</item>
+        <!-- Specify colorPrimary, colorPrimaryDark, colorAccent and ltRuntimeTheme. -->
+    </style>
 
-    <style name="Theme.Preview.Light.DarkActionBar" parent="@android:style/Theme.Light.NoTitleBar"/>
+    <style name="Theme.Preview.Light" parent="Base.Theme.Preview.Light">
+        <item name="colorPrimary">@color/primary_material_light</item>
+        <item name="colorPrimaryDark">@color/primary_dark_material_light</item>
+        <item name="colorAccent">@color/accent_material_light</item>
+        <item name="android:windowBackground">@color/background_material_light</item>
+        <!-- Specify colorPrimary, colorPrimaryDark, colorAccent and ltRuntimeTheme. -->
+    </style>
+
+    <style name="Theme.Preview.Light.DarkActionBar" parent="Base.Theme.Preview.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary_material_dark</item>
+        <item name="colorPrimaryDark">@color/primary_dark_material_dark</item>
+        <item name="colorAccent">@color/accent_material_light</item>
+        <item name="android:windowBackground">@color/background_material_light</item>
+        <!-- Specify colorPrimary, colorPrimaryDark, colorAccent and ltRuntimeTheme. -->
+    </style>
+
+    <style name="Base.Theme.Preview" parent="@android:style/Theme.NoTitleBar"/>
+
+    <style name="Base.Theme.Preview.Light" parent="@android:style/Theme.Light.NoTitleBar"/>
+
+    <style name="Base.Theme.Preview.Light.DarkActionBar" parent="@android:style/Theme.Light.NoTitleBar"/>
 
 </resources>
