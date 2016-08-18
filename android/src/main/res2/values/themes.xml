@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="Theme.Preview.Light" parent="@android:style/Theme.Light.NoTitleBar"/>
+
+    <style name="Theme.Preview" parent="@android:style/Theme.NoTitleBar"/>
+
+    <style name="Theme.Preview.Light.DarkActionBar" parent="@android:style/Theme.Light.NoTitleBar"/>
+
+</resources>

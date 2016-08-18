@@ -4,21 +4,21 @@
         <item name="android:colorPrimary">?colorPrimary</item>
         <item name="android:colorPrimaryDark">?colorPrimaryDark</item>
         <item name="android:colorAccent">?colorAccent</item>
-        <!-- Specify ltRuntimeTheme, colorPrimary, colorPrimaryDark, colorAccent and ltRuntimeTheme. -->
+        <!-- Specify colorPrimary, colorPrimaryDark, colorAccent and ltRuntimeTheme. -->
     </style>
 
     <style name="Theme.Preview.Light" parent="@android:style/Theme.Material.Light">
         <item name="android:colorPrimary">?colorPrimary</item>
         <item name="android:colorPrimaryDark">?colorPrimaryDark</item>
         <item name="android:colorAccent">?colorAccent</item>
-        <!-- Specify ltRuntimeTheme, colorPrimary, colorPrimaryDark, colorAccent and ltRuntimeTheme. -->
+        <!-- Specify colorPrimary, colorPrimaryDark, colorAccent and ltRuntimeTheme. -->
     </style>
 
     <style name="Theme.Preview.Light.DarkActionBar" parent="@android:style/Theme.Material.Light.DarkActionBar">
         <item name="android:colorPrimary">?colorPrimary</item>
         <item name="android:colorPrimaryDark">?colorPrimaryDark</item>
         <item name="android:colorAccent">?colorAccent</item>
-        <!-- Specify ltRuntimeTheme, colorPrimary, colorPrimaryDark, colorAccent and ltRuntimeTheme. -->
+        <!-- Specify colorPrimary, colorPrimaryDark, colorAccent and ltRuntimeTheme. -->
     </style>
 
 </resources>
