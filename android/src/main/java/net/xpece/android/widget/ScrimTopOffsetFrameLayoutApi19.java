@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.WindowInsetsCompat;
@@ -18,8 +19,9 @@ import net.xpece.android.R;
  * FrameLayout that offsets its content according to supplied window insets and scrims top.
  * Can be used as child of SingleLayout.
  * Do not use as top level container. Anything extending FrameLayout is ignored.
+ * Fixed for API 19.
  */
-public class ScrimTopOffsetFrameLayout extends FrameLayout {
+public class ScrimTopOffsetFrameLayoutApi19 extends FrameLayout {
 
     private Drawable mInsetForeground;
 
@@ -27,15 +29,15 @@ public class ScrimTopOffsetFrameLayout extends FrameLayout {
 
     private Rect mTempRect = new Rect();
 
-    public ScrimTopOffsetFrameLayout(Context context) {
+    public ScrimTopOffsetFrameLayoutApi19(Context context) {
         this(context, null);
     }
 
-    public ScrimTopOffsetFrameLayout(Context context, AttributeSet attrs) {
+    public ScrimTopOffsetFrameLayoutApi19(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ScrimTopOffsetFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ScrimTopOffsetFrameLayoutApi19(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         final TypedArray a = context.obtainStyledAttributes(attrs,
@@ -59,11 +61,39 @@ public class ScrimTopOffsetFrameLayout extends FrameLayout {
                         insets.getSystemWindowInsetBottom());
                     onInsetsChanged(mInsets);
                     setWillNotDraw(mInsets.isEmpty() || mInsetForeground == null);
-                    ViewCompat.postInvalidateOnAnimation(ScrimTopOffsetFrameLayout.this);
+                    ViewCompat.postInvalidateOnAnimation(ScrimTopOffsetFrameLayoutApi19.this);
                     return insets.replaceSystemWindowInsets(insets.getSystemWindowInsetLeft(), 0, insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
 //                    return insets.consumeSystemWindowInsets();
                 }
             });
+    }
+
+    @Override
+    protected boolean fitSystemWindows(final Rect insets) {
+        if (Build.VERSION.SDK_INT == 19 || Build.VERSION.SDK_INT == 20) {
+            if (null == mInsets) {
+                mInsets = new Rect();
+            }
+            mInsets.set(insets);
+            onInsetsChanged(mInsets);
+            setWillNotDraw(mInsets.isEmpty() || mInsetForeground == null);
+            ViewCompat.postInvalidateOnAnimation(ScrimTopOffsetFrameLayoutApi19.this);
+            insets.top = 0;
+
+            boolean done = false;
+            final int count = getChildCount();
+            for (int i = 0; i < count; i++) {
+                final View child = getChildAt(i);
+//                done = child.fitSystemWindows(insets);
+                done = ViewUtils.fitSystemWindows(child, insets);
+                if (done) {
+                    break;
+                }
+            }
+            return done;
+        } else {
+            return super.fitSystemWindows(insets);
+        }
     }
 
     @Override
