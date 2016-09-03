@@ -16,6 +16,7 @@ import android.view.ViewGroup;
  *
  * @author Eugen on 19. 4. 2016.
  */
+@Deprecated
 public class AppBarShadowBehavior extends CoordinatorLayout.Behavior<View> {
 
     private static final AppBarShadowBehaviorImpl IMPL;

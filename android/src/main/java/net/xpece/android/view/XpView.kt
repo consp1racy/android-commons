@@ -4,14 +4,16 @@ package net.xpece.android.view
 
 import android.animation.LayoutTransition
 import android.annotation.TargetApi
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.TransitionDrawable
 import android.os.Build
+import android.support.annotation.DrawableRes
+import android.support.v4.view.ViewCompat
+import android.support.v7.widget.AppCompatDrawableManager
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.SearchView
-import android.widget.TextView
+import android.widget.*
 import net.xpece.android.AndroidUtils
 import net.xpece.android.R
 
@@ -38,9 +40,9 @@ fun View.isVisible(): Boolean = visibility == View.VISIBLE
 
 fun View.setVisible(visible: Boolean) = if (visible) visibility = View.VISIBLE else visibility = View.GONE
 
-fun TextView.setTextAndVisibility(text: CharSequence?) {
+fun TextView.setTextAndVisibility(text: CharSequence?, invisible: Boolean) {
     if (text.isNullOrBlank()) {
-        gone()
+        if (invisible) invisible() else gone()
         setText(null)
     } else {
         setText(text)
@@ -93,4 +95,26 @@ fun setSearchViewLayoutTransition(view: android.support.v7.widget.SearchView) {
     if (!AndroidUtils.API_11) return
     val searchBar = view.findViewById(R.id.search_bar) as LinearLayout
     searchBar.layoutTransition = LayoutTransition()
+}
+
+fun ImageView.switchImage(d: Drawable, duration: Int = 100) {
+    if (ViewCompat.isLaidOut(this)) {
+        var old = drawable
+        if (old is TransitionDrawable) {
+            old = old.getDrawable(1)
+        } else if (old == null) {
+            old = ColorDrawable(0)
+        }
+        val d2 = TransitionDrawable(arrayOf(old, d))
+        d2.isCrossFadeEnabled = true
+        setImageDrawable(d2)
+        d2.startTransition(duration)
+    } else {
+        setImageDrawable(d)
+    }
+}
+
+fun ImageView.switchImage(@DrawableRes resId: Int, duration: Int = 100) {
+    val d = AppCompatDrawableManager.get().getDrawable(context, resId)
+    switchImage(d, duration)
 }

@@ -15,6 +15,8 @@ import java.util.regex.Pattern
  * Created by Eugen on 30.07.2016.
  */
 
+fun String?.nullIfEmpty(): String? = if (isNullOrEmpty()) null else this
+
 private val PATTERN_UNACCENT = Pattern.compile("\\p{InCombiningDiacriticalMarks}+")
 
 /**
@@ -25,9 +27,7 @@ fun CharSequence.unaccent(): String {
     return PATTERN_UNACCENT.matcher(temp).replaceAll("")
 }
 
-fun CharSequence.unaccentAndLower(locale: Locale = Locale.getDefault()): String {
-    return this.unaccent().toLowerCase(locale)
-}
+fun CharSequence.unaccentAndLower(locale: Locale = Locale.getDefault()) = this.unaccent().toLowerCase(locale)
 
 /**
  * @param subject Original string with accents
@@ -74,22 +74,16 @@ private val IMPL: TextUtilsImpl by lazy {
     }
 }
 
-fun getMediumSpan(): Any {
-    return IMPL.getMediumSpan()
-}
+fun getMediumSpan() = IMPL.getMediumSpan()
 
 internal interface TextUtilsImpl {
     fun getMediumSpan(): Any
 }
 
 internal open class BaseTextUtilsImpl : TextUtilsImpl {
-    override fun getMediumSpan(): Any {
-        return StyleSpan(Typeface.BOLD)
-    }
+    override fun getMediumSpan(): Any = StyleSpan(Typeface.BOLD)
 }
 
 internal open class LollipopTextUtilsImpl() : BaseTextUtilsImpl() {
-    override fun getMediumSpan(): Any {
-        return TypefaceSpan("sans-serif-medium")
-    }
+    override fun getMediumSpan(): Any = TypefaceSpan("sans-serif-medium")
 }

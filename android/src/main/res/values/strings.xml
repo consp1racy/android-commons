@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="hide_on_lollipop_behavior" translatable="false">net.xpece.android.widget.HideOnLollipopBehavior</string>
+
     <string name="xpc_try_again">Try again</string>
     <string name="xpc_error_connection">A connection error occurred. Try again later.</string>
 
@@ -8,4 +10,8 @@
   </string>
 
     <string name="xpc_please_wait">Please wait…</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
 </resources>

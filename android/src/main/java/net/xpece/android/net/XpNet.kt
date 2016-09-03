@@ -1,0 +1,23 @@
+@file:JvmName("XpNet")
+
+package net.xpece.android.net
+
+import android.annotation.TargetApi
+import android.content.Context
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
+import net.xpece.android.content.connectivityManager
+
+/**
+ * Gets the state of Airplane Mode.
+ * @return true if enabled.
+ */
+@get:TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+val Context.isAirplaneModeOn: Boolean
+    get() = Settings.Global.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
+
+fun String?.toUri() = if (this != null) Uri.parse(this) else null
+
+val Context.isAnyNetworkConnected: Boolean
+    get() = connectivityManager.activeNetworkInfo?.isConnected ?: false

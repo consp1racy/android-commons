@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Widget.Design.AppBarLayout.Fixed">
+        <item name="android:stateListAnimator" tools:ignore="NewApi">@null</item>
+        <item name="android:elevation" tools:ignore="NewApi">@dimen/design_appbar_elevation</item>
+    </style>
+
+    <style name="TextAppearance.Section" parent="TextAppearance.AppCompat.Body2">
+        <!--<item name="android:textColor">?android:textColorSecondary</item>-->
+        <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="Widget.Shadow.AppBar" parent="">
+        <item name="android:background">@drawable/shadow_below</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="layout_anchorGravity">bottom</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="layout_behavior">@string/hide_on_lollipop_behavior</item>
+    </style>
+
+    <style name="Widget.Shadow.BottomBar" parent="">
+        <item name="android:background">@drawable/shadow_above</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="layout_anchorGravity">top</item>
+        <item name="android:layout_gravity">top</item>
+        <item name="layout_behavior">@string/hide_on_lollipop_behavior</item>
+    </style>
+
+</resources>

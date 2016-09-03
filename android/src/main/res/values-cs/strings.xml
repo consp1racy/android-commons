@@ -8,4 +8,8 @@
   </string>
 
     <string name="xpc_please_wait">Čekejte prosím…</string>
+
+    <string name="navigation_drawer_open">Otevřít navigační panel</string>
+    <string name="navigation_drawer_close">Zavřít navigační panel</string>
+    <string name="action_settings">Nastavení</string>
 </resources>

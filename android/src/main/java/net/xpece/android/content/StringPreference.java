@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
  * @since API 9
  */
 @TargetApi(9)
+@Deprecated
 public class StringPreference {
     private final SharedPreferences preferences;
     private final String key;

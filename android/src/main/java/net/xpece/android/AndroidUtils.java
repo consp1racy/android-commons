@@ -21,7 +21,10 @@ import java.lang.reflect.Method;
 
 /**
  * Created by pechanecjr on 4. 1. 2015.
+ *
+ * @hide
  */
+@Deprecated
 public final class AndroidUtils {
     public static final boolean API_8 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;
     public static final boolean API_9 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD;
@@ -41,15 +44,6 @@ public final class AndroidUtils {
     public static final boolean API_24 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
 
     private AndroidUtils() {}
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static boolean isRtl(Context context) {
-        return API_17 && context.getResources().getConfiguration().getLayoutDirection() == ViewCompat.LAYOUT_DIRECTION_RTL;
-    }
-
-    public static boolean isDebugBuild(Context context) {
-        return (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
-    }
 
     public static ActivityManager.RunningServiceInfo getServiceInfo(Context context, Class<? extends Service> cls) {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -97,7 +91,6 @@ public final class AndroidUtils {
      * @param context
      * @return
      */
-    @SuppressLint("MissingPermission")
     public static boolean isMobileDataEnabled(Context context) {
         boolean mobileDataEnabled = false; // Assume disabled
 
@@ -124,13 +117,6 @@ public final class AndroidUtils {
         }
 
         return mobileDataEnabled;
-    }
-
-    public static boolean isAnyNetworkConnected(final Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isConnected();
     }
 
     /**

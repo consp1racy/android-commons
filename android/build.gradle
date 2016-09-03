@@ -3,10 +3,10 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
-        minSdkVersion 10
+        minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -37,10 +37,18 @@ dependencies {
     compile "com.android.support:design:$supportLibsVersion"
     provided "com.android.support:palette-v7:$supportLibsVersion"
 
+    provided "com.google.android.gms:play-services-gcm:9.0.0"
     provided "uk.co.chrisjenx:calligraphy:2.2.0@aar"
+    provided 'com.jakewharton.timber:timber:4.1.2'
+    provided 'com.github.devlight.shadowlayout:library:1.0.2'
+    provided 'com.jakewharton.threetenabp:threetenabp:1.0.3'
     provided 'com.squareup.picasso:picasso:2.5.2'
     provided 'org.parceler:parceler-api:1.1.5'
     provided 'io.requery:sqlite-android:3.14.0'
+    provided "io.requery:requery:1.0.0-rc3"
+    provided 'com.birbit:android-priority-jobqueue:2.0.0'
+    provided 'com.squareup.moshi:moshi:1.2.0'
+//    provided 'com.squareup.okio:okio:1.10.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
@@ -48,7 +56,7 @@ dependencies {
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.9.1'
+    PUBLISH_VERSION = '0.10.0'
 }
 
 apply from: '../android-release-aar.gradle'

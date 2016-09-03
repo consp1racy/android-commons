@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <public type="string" name="hide_on_lollipop_behavior"/>
+
     <public type="string" name="xpc_try_again"/>
     <public type="string" name="xpc_please_wait"/>
     <public type="string" name="xpc_error_connection"/>
     <public type="string" name="xpc_no_intent_handler"/>
+
+    <public type="string" name="navigation_drawer_open"/>
+    <public type="string" name="navigation_drawer_close"/>
+    <public type="string" name="action_settings"/>
 
     <public type="integer" name="abc_button_pressed_animation_duration_material"/>
     <public type="integer" name="abc_button_pressed_animation_delay_material"/>

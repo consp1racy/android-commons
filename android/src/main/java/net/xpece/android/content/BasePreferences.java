@@ -3,7 +3,6 @@
  */
 package net.xpece.android.content;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,7 +16,7 @@ import net.xpece.android.AndroidUtils;
  * @author pechanecjr
  * @version 0.0.0000 - 2.10.2013
  */
-@SuppressLint("deprecation")
+@Deprecated
 public class BasePreferences<T extends BasePreferences> {
     private final SharedPreferences mPrefs;
 
