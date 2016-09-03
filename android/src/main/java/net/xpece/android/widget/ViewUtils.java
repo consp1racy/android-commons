@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 
 /**
  * @author Eugen on 18.08.2016.
+ * @hide
  */
 
 public final class ViewUtils {

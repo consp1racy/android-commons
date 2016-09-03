@@ -39,7 +39,7 @@ fun View.isVisible(): Boolean = visibility == View.VISIBLE
 
 fun View.setVisible(visible: Boolean) = if (visible) visibility = View.VISIBLE else visibility = View.GONE
 
-fun TextView.setTextAndVisibility(text: CharSequence?, invisible: Boolean) {
+fun TextView.setTextAndVisibility(text: CharSequence?, invisible: Boolean = false) {
     if (text.isNullOrBlank()) {
         if (invisible) invisible() else gone()
         setText(null)

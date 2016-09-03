@@ -1,4 +1,4 @@
-package cz.uctenkar.android.ui
+package net.xpece.android.app
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
