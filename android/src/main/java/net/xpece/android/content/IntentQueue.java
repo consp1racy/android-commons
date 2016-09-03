@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.util.Log;
 
-import net.xpece.android.AndroidUtils;
+import net.xpece.android.net.XpNet;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,6 +23,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * Created by pechanecjr on 17. 9. 2014.
  */
+@Deprecated
 public class IntentQueue {
 
     private static final String TAG = IntentQueue.class.getSimpleName();
@@ -75,7 +76,7 @@ public class IntentQueue {
 
         if (mLoaded) {
             Log.d(TAG, "Loaded " + mQueue.size() + " intents.");
-            if (AndroidUtils.isAnyNetworkConnected(context)) {
+            if (XpNet.isAnyNetworkConnected(context)) {
                 doWork(context);
             } else {
                 IntentQueue.ConnectivityReceiver.setEnabled(context, true);
@@ -199,7 +200,7 @@ public class IntentQueue {
     }
 
     static void doWork(Context context) {
-        if (!AndroidUtils.isAnyNetworkConnected(context)) {
+        if (!XpNet.isAnyNetworkConnected(context)) {
             return;
         }
 

@@ -76,7 +76,7 @@ open class ConnectivityReceiver : BroadcastReceiver() {
     }
 
     private fun onAirplaneModeAction(context: Context, suppressIfEnabled: Boolean = false) {
-        val airplaneModeEnabled = context.isAirplaneModeOn()
+        val airplaneModeEnabled = context.isAirplaneModeOn
         if (airplaneModeEnabled != this.airplaneModeEnabled) {
             td { "onAirplaneModeChanged: $airplaneModeEnabled" }
             this.airplaneModeEnabled = airplaneModeEnabled

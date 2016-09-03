@@ -14,7 +14,6 @@ import android.support.v7.widget.AppCompatDrawableManager
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.*
-import net.xpece.android.AndroidUtils
 import net.xpece.android.R
 
 /**
@@ -84,7 +83,7 @@ fun ScrollView.canScroll(): Boolean {
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 fun setSearchViewLayoutTransition(view: SearchView) {
-    if (!AndroidUtils.API_11) return
+    if (Build.VERSION.SDK_INT < 11) return
     val searchBarId = view.context.resources.getIdentifier("android:id/search_bar", null, null)
     val searchBar = view.findViewById(searchBarId) as LinearLayout
     searchBar.layoutTransition = LayoutTransition()
@@ -92,7 +91,7 @@ fun setSearchViewLayoutTransition(view: SearchView) {
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 fun setSearchViewLayoutTransition(view: android.support.v7.widget.SearchView) {
-    if (!AndroidUtils.API_11) return
+    if (Build.VERSION.SDK_INT < 11) return
     val searchBar = view.findViewById(R.id.search_bar) as LinearLayout
     searchBar.layoutTransition = LayoutTransition()
 }
