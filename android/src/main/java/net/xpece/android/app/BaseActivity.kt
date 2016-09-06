@@ -11,7 +11,7 @@ import net.xpece.android.content.ensureRuntimeTheme
  * A version of activity which switches from preview to runtime theme.
  */
 
-abstract class BaseActivity : AppCompatActivity(), CustomRootActivity {
+abstract class BaseActivity : AppCompatActivity() {
 
     private lateinit var root: ViewGroup
 
@@ -24,11 +24,11 @@ abstract class BaseActivity : AppCompatActivity(), CustomRootActivity {
 
     open fun provideRootView() : ViewGroup = ViewContainer.DEFAULT.forActivity(this)
 
-    override fun superSetContentView(view: View) {
+    fun superSetContentView(view: View) {
         super.setContentView(view)
     }
 
-    override fun superSetContentView(@LayoutRes layoutResId: Int) {
+    fun superSetContentView(@LayoutRes layoutResId: Int) {
         super.setContentView(layoutResId)
     }
 
