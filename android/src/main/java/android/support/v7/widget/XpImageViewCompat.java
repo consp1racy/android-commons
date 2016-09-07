@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 /**
- * Created by Eugen on 30.07.2016.
+ * @hide
  */
 
 public final class XpImageViewCompat {

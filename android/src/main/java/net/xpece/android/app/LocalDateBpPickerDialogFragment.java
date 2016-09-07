@@ -107,11 +107,11 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
                 throw new IllegalStateException("Activity does not implement Callbacks.");
             }
             LocalDate date = getLocalDate();
-            callbacks.onDateSelected(date);
+            callbacks.onDateSelected(this, date);
         }
     }
 
     public interface Callbacks {
-        void onDateSelected(LocalDate date);
+        void onDateSelected(LocalDateBpPickerDialogFragment fragment, LocalDate date);
     }
 }

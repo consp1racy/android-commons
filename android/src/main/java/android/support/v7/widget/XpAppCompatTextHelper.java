@@ -26,6 +26,9 @@ import android.widget.TextView;
 
 import net.xpece.android.R;
 
+/**
+ * @hide
+ */
 class XpAppCompatTextHelper {
 
     final TextView mView;

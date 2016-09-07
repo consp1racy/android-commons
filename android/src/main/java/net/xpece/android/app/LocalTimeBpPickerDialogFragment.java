@@ -110,11 +110,11 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
                 throw new IllegalStateException("Activity does not implement Callbacks.");
             }
             LocalTime time = getLocalTime();
-            callbacks.onTimeSelected(time);
+            callbacks.onTimeSelected(this, time);
         }
     }
 
     public interface Callbacks {
-        void onTimeSelected(LocalTime time);
+        void onTimeSelected(LocalTimeBpPickerDialogFragment fragment, LocalTime time);
     }
 }

@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * Created by Eugen on 30.07.2016.
+ * @hide
  */
 
 public final class XpTextViewCompat {
