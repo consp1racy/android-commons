@@ -58,7 +58,7 @@ public class ScrimTopOffsetFrameLayout extends FrameLayout {
                         insets.getSystemWindowInsetRight(),
                         insets.getSystemWindowInsetBottom());
                     onInsetsChanged(mInsets);
-                    setWillNotDraw(mInsets.isEmpty() || mInsetForeground == null);
+                    setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
                     ViewCompat.postInvalidateOnAnimation(ScrimTopOffsetFrameLayout.this);
                     return insets.replaceSystemWindowInsets(insets.getSystemWindowInsetLeft(), 0, insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
 //                    return insets.consumeSystemWindowInsets();

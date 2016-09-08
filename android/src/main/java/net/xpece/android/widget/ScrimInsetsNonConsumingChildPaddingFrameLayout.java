@@ -70,7 +70,7 @@ public class ScrimInsetsNonConsumingChildPaddingFrameLayout extends FrameLayout 
                         insets.getSystemWindowInsetRight(),
                         insets.getSystemWindowInsetBottom());
                     onInsetsChanged(insets);
-                    setWillNotDraw(mInsets.isEmpty() || mInsetForeground == null);
+                    setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
                     ViewCompat.postInvalidateOnAnimation(ScrimInsetsNonConsumingChildPaddingFrameLayout.this);
                     return insets;
                 }

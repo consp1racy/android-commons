@@ -79,7 +79,7 @@ public class ScrimInsetsLinearLayout extends LinearLayout {
                                 insets.getSystemWindowInsetRight(),
                                 insets.getSystemWindowInsetBottom());
                         onInsetsChanged(mInsets);
-                        setWillNotDraw(mInsets.isEmpty() || mInsetForeground == null);
+                        setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
                         ViewCompat.postInvalidateOnAnimation(ScrimInsetsLinearLayout.this);
                         return insets.consumeSystemWindowInsets();
                     }

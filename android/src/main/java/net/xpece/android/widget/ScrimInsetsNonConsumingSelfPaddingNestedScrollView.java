@@ -70,7 +70,7 @@ public class ScrimInsetsNonConsumingSelfPaddingNestedScrollView extends NestedSc
                         insets.getSystemWindowInsetRight(),
                         insets.getSystemWindowInsetBottom());
                     onInsetsChanged(insets);
-                    setWillNotDraw(mInsets.isEmpty() || mInsetForeground == null);
+                    setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
                     ViewCompat.postInvalidateOnAnimation(ScrimInsetsNonConsumingSelfPaddingNestedScrollView.this);
                     return insets;
                 }

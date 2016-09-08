@@ -60,7 +60,7 @@ public class ScrimTopOffsetFrameLayoutApi19 extends FrameLayout {
                         insets.getSystemWindowInsetRight(),
                         insets.getSystemWindowInsetBottom());
                     onInsetsChanged(mInsets);
-                    setWillNotDraw(mInsets.isEmpty() || mInsetForeground == null);
+                    setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
                     ViewCompat.postInvalidateOnAnimation(ScrimTopOffsetFrameLayoutApi19.this);
                     return insets.replaceSystemWindowInsets(insets.getSystemWindowInsetLeft(), 0, insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
 //                    return insets.consumeSystemWindowInsets();
@@ -76,7 +76,7 @@ public class ScrimTopOffsetFrameLayoutApi19 extends FrameLayout {
             }
             mInsets.set(insets);
             onInsetsChanged(mInsets);
-            setWillNotDraw(mInsets.isEmpty() || mInsetForeground == null);
+            setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
             ViewCompat.postInvalidateOnAnimation(ScrimTopOffsetFrameLayoutApi19.this);
             insets.top = 0;
 
