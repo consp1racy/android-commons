@@ -10,13 +10,16 @@ inline fun SharedPreferences.update(func: SharedPreferences.Editor.() -> Unit) {
     editor.apply()
 }
 
-fun SharedPreferences.Editor.put(pair: Pair<String, Any>) {
-    when (pair.second) {
-        is String -> putString(pair.first, pair.second as String)
-        is Int -> putInt(pair.first, pair.second as Int)
-        is Boolean -> putBoolean(pair.first, pair.second as Boolean)
-        is Float -> putFloat(pair.first, pair.second as Float)
-        is Long -> putLong(pair.first, pair.second as Long)
+fun SharedPreferences.Editor.put(pair: Pair<String, Any?>) {
+    val key = pair.first
+    val value = pair.second
+    when (value) {
+        null -> remove(key)
+        is String -> putString(key, value)
+        is Int -> putInt(key, value)
+        is Boolean -> putBoolean(key, value)
+        is Float -> putFloat(key, value)
+        is Long -> putLong(key, value)
         else -> throw IllegalArgumentException()
     }
 }
