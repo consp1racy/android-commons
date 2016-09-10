@@ -1,5 +1,6 @@
 package com.birbit.android.jobqueue.scheduling
 
+import android.annotation.TargetApi
 import android.content.Context
 
 /**
@@ -13,6 +14,7 @@ object SchedulerFactory {
     }
 
     @JvmStatic
+    @TargetApi(21)
     fun createSchedulerForFrameworkJobSchedulerService(appContext: Context, klass: Class<out FrameworkJobSchedulerService>): Scheduler {
         return FrameworkJobSchedulerService.createSchedulerFor(appContext, klass)
     }
