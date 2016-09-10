@@ -3,8 +3,8 @@
 
     <application>
         <provider
-            android:name=".content.DimenInitProvider"
-            android:authorities="net.xpece.android.content.dimen"
+            android:name=".content.XpInitProvider"
+            android:authorities="net.xpece.android.initprovider"
             android:exported="false"/>
     </application>
 

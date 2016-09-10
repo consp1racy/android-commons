@@ -1,12 +1,12 @@
 package net.xpece.android.content.res
 
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.res.Resources
 import android.support.annotation.AttrRes
 import android.support.annotation.DimenRes
 import android.support.v4.util.LruCache
 import android.util.TypedValue
+import net.xpece.android.content.XpInitProvider
 import net.xpece.android.content.resolveResourceId
 
 /**
@@ -86,17 +86,8 @@ data class Dimen internal constructor(val value: Float) {
 
         private val DIMENSION_LRU_CACHE = DimensionLruCache(10)
 
-        private var sContext: Context = object : ContextWrapper(null) {
-            override fun getResources(): Resources {
-                throw IllegalStateException("You forgot to call $TAG.init(Context).")
-            }
-        }
+        private var sContext: Context = XpInitProvider.CONTEXT
 
-        /**
-         * Call this method in your [android.app.Application] class.
-
-         * @param context
-         */
         @JvmStatic
         fun init(context: Context) {
             sContext = context.applicationContext
