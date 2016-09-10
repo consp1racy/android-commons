@@ -4,7 +4,7 @@
     <application>
         <provider
             android:name=".content.XpInitProvider"
-            android:authorities="net.xpece.android.initprovider"
+            android:authorities="${applicationId}.xpinitprovider"
             android:exported="false"/>
     </application>
 
