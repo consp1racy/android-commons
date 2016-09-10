@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.TimePicker;
 
 import net.xpece.android.R;
-import net.xpece.android.content.res.XpResources;
+import net.xpece.android.content.XpContext;
 import net.xpece.android.widget.XpTimePicker;
 
 import org.threeten.bp.LocalTime;
@@ -72,7 +72,7 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         final View view = inflater.inflate(R.layout.dialog_time_picker, null, false);
 
         final TimePicker timePicker = (TimePicker) view.findViewById(R.id.timePicker);
-        XpTimePicker.setSelectionDividerTint(timePicker, XpResources.resolveColorStateList(context, R.attr.colorControlNormal));
+        XpTimePicker.setSelectionDividerTint(timePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
         LocalTime time = mTime;
         timePicker.setCurrentHour(time.getHour());
         timePicker.setCurrentMinute(time.getMinute());

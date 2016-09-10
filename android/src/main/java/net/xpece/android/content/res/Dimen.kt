@@ -1,0 +1,165 @@
+package net.xpece.android.content.res
+
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.res.Resources
+import android.support.annotation.AttrRes
+import android.support.annotation.DimenRes
+import android.support.v4.util.LruCache
+import android.util.TypedValue
+import net.xpece.android.content.resolveResourceId
+
+/**
+ * Created by pechanecjr on 4. 1. 2015.
+ */
+data class Dimen internal constructor(val value: Float) {
+
+    operator fun plus(that: Dimen): Dimen {
+        return Dimen(this.value + that.value)
+    }
+
+    operator fun minus(that: Dimen): Dimen {
+        return Dimen(this.value - that.value)
+    }
+
+    operator fun plus(that: Number): Dimen {
+        return Dimen(this.value + that.toFloat())
+    }
+
+    operator fun minus(that: Number): Dimen {
+        return Dimen(this.value - that.toFloat())
+    }
+
+    operator fun unaryMinus() = Dimen(-this.value)
+
+    operator fun unaryPlus() = Dimen(this.value)
+
+    fun times(q: Number): Dimen {
+        return Dimen(this.value * q.toFloat())
+    }
+
+    fun div(d: Number): Dimen {
+        return Dimen(this.value / d.toFloat())
+    }
+
+    val pixelSize: Int
+        get() = (value + 0.5f).toInt()
+
+    val pixelOffset: Int
+        get() = value.toInt()
+
+    override fun toString(): String {
+        return "${value}px"
+    }
+
+    /**
+     * Along px prints also dp and sp values according to provided context.
+     */
+    fun toString(context: Context): String {
+        val density = context.resources.displayMetrics.density
+        val dp = Math.round(value / density)
+        val scaledDensity = context.resources.displayMetrics.scaledDensity
+        val sp = Math.round(value / scaledDensity)
+        return "${value}px ~ ${dp}dp ~ ${sp}sp"
+    }
+
+    internal class DimensionLruCache(maxSize: Int) : LruCache<Int, Dimen>(maxSize) {
+
+        internal operator fun get(density: Float, request: Float): Dimen? {
+            return get(generateCacheKey(density, request))
+        }
+
+        internal operator fun set(density: Float, request: Float, result: Dimen): Dimen? {
+            return put(generateCacheKey(density, request), result)
+        }
+
+        private fun generateCacheKey(density: Float, request: Float): Int {
+            var hashCode = 1
+            hashCode = 31 * hashCode + java.lang.Float.floatToIntBits(density)
+            hashCode = 31 * hashCode + java.lang.Float.floatToIntBits(request)
+            return hashCode
+        }
+    }
+
+    internal companion object {
+        private val TAG = Dimen::class.java.simpleName
+
+        private val DIMENSION_LRU_CACHE = DimensionLruCache(10)
+
+        private var sContext: Context = object : ContextWrapper(null) {
+            override fun getResources(): Resources {
+                throw IllegalStateException("You forgot to call $TAG.init(Context).")
+            }
+        }
+
+        /**
+         * Call this method in your [android.app.Application] class.
+
+         * @param context
+         */
+        @JvmStatic
+        fun init(context: Context) {
+            sContext = context.applicationContext
+        }
+
+        @JvmStatic
+        fun attr(context: Context, @AttrRes attr: Int, fallback : Number = 0): Dimen {
+            val resId = context.resolveResourceId(attr, 0)
+            return res(context, resId, fallback)
+        }
+
+        @JvmStatic
+        private fun res(context: Context, @DimenRes resId: Int, fallback : Number = 0): Dimen {
+            try {
+                return Dimen(context.resources.getDimension(resId))
+            } catch (erx :Resources.NotFoundException) {
+                return Dimen(fallback.toFloat())
+            }
+        }
+
+        @JvmStatic
+        private fun dp(context: Context, dp: Number): Dimen {
+            val dpf = dp.toFloat()
+            val density = context.resources.displayMetrics.density
+            var result: Dimen? = DIMENSION_LRU_CACHE[density, dpf]
+            if (result == null) {
+                val value = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpf, context.resources.displayMetrics)
+                result = Dimen(value)
+                DIMENSION_LRU_CACHE[density, dpf] = result
+            }
+            return result
+        }
+
+        @JvmStatic
+        private fun sp(context: Context, sp: Number): Dimen {
+            val spf = sp.toFloat()
+            val density = context.resources.displayMetrics.scaledDensity
+            var result: Dimen? = DIMENSION_LRU_CACHE[density, spf]
+            if (result == null) {
+                result = Dimen(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spf, context.resources.displayMetrics))
+                DIMENSION_LRU_CACHE[density, spf] = result
+            }
+            return result
+        }
+
+        @JvmStatic
+        fun res(@DimenRes resId: Int): Dimen {
+            return res(sContext, resId)
+        }
+
+        @JvmStatic
+        fun dp(dp: Number): Dimen {
+            return dp(sContext, dp)
+        }
+
+        @JvmStatic
+        fun sp(sp: Number): Dimen {
+            return sp(sContext, sp)
+        }
+
+        @JvmStatic
+        fun px(px: Int): Dimen {
+            return Dimen(px.toFloat())
+        }
+    }
+}

@@ -20,7 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import net.xpece.android.R;
-import net.xpece.android.content.res.XpResources;
+import net.xpece.android.content.XpContext;
 
 /**
  * Created by pechanecjr on 4. 1. 2015.
@@ -84,13 +84,13 @@ public final class XpTintManager {
 
     public static Drawable getControlNormalDrawable(Context context, @DrawableRes int drawableId) {
         Drawable drawable = ContextCompat.getDrawable(context, drawableId).mutate();
-        int color = XpResources.resolveColor(context, R.attr.colorControlNormal, 0);
+        int color = XpContext.resolveColor(context, R.attr.colorControlNormal, 0);
         return getDrawable(drawable, color);
     }
 
     public static Drawable getControlActivatedDrawable(Context context, @DrawableRes int drawableId) {
         Drawable drawable = ContextCompat.getDrawable(context, drawableId).mutate();
-        int color = XpResources.resolveColor(context, R.attr.colorControlActivated, 0);
+        int color = XpContext.resolveColor(context, R.attr.colorControlActivated, 0);
         return getDrawable(drawable, color);
     }
 
@@ -105,7 +105,7 @@ public final class XpTintManager {
     }
 
     public static Drawable getDisabledDrawable(Context context, @DrawableRes int drawableId, @ColorRes int colorId) {
-        float alpha = XpResources.resolveFloat(context, android.R.attr.disabledAlpha, DISABLED_ALPHA);
+        float alpha = XpContext.resolveFloat(context, android.R.attr.disabledAlpha, DISABLED_ALPHA);
         Drawable drawable = ContextCompat.getDrawable(context, drawableId).mutate();
         int color = ContextCompat.getColor(context, colorId);
         return getDisabledDrawable(alpha, drawable, color);
@@ -117,7 +117,7 @@ public final class XpTintManager {
     }
 
     public static Drawable getDisabledDrawable(Context context, @DrawableRes int drawableId) {
-        float alpha = XpResources.resolveFloat(context, android.R.attr.disabledAlpha, DISABLED_ALPHA);
+        float alpha = XpContext.resolveFloat(context, android.R.attr.disabledAlpha, DISABLED_ALPHA);
         Drawable drawable = ContextCompat.getDrawable(context, drawableId).mutate();
         return getDisabledDrawable(alpha, drawable);
     }
@@ -133,8 +133,8 @@ public final class XpTintManager {
 
     @NonNull
     public static ColorStateList getControlColorStateList(Context context) {
-        final int activated = XpResources.resolveColor(context, R.attr.colorControlActivated, Color.BLUE);
-        final int normal = XpResources.resolveColor(context, R.attr.colorControlNormal, Color.GRAY);
+        final int activated = XpContext.resolveColor(context, R.attr.colorControlActivated, Color.BLUE);
+        final int normal = XpContext.resolveColor(context, R.attr.colorControlNormal, Color.GRAY);
         final int disabled = getDisabledThemeAttrColor(context, R.attr.colorControlNormal);
 
         return new ColorStateList(DEFAULT_STATE_LIST, new int[]{
@@ -150,8 +150,8 @@ public final class XpTintManager {
 
     @NonNull
     public static ColorStateList getMenuColorStateList(Context context) {
-        final int activated = XpResources.resolveColor(context, R.attr.colorControlActivated, Color.BLUE);
-        final int normal = XpResources.resolveColor(context, R.attr.colorControlNormal, Color.GRAY);
+        final int activated = XpContext.resolveColor(context, R.attr.colorControlActivated, Color.BLUE);
+        final int normal = XpContext.resolveColor(context, R.attr.colorControlNormal, Color.GRAY);
         final int disabled = getDisabledThemeAttrColor(context, R.attr.colorControlNormal);
 
         return new ColorStateList(MENU_STATE_LIST, new int[]{
@@ -178,7 +178,7 @@ public final class XpTintManager {
     }
 
     private static int getDisabledThemeAttrColor(Context context, int attr) {
-        final ColorStateList csl = XpResources.resolveColorStateList(context, attr);
+        final ColorStateList csl = XpContext.resolveColorStateList(context, attr);
         if (csl != null && csl.isStateful()) {
             // If the CSL is stateful, we'll assume it has a disabled state and use it
             return csl.getColorForState(DISABLED_STATE_SET, csl.getDefaultColor());
@@ -190,7 +190,7 @@ public final class XpTintManager {
             context.getTheme().resolveAttribute(android.R.attr.disabledAlpha, tv, true);
             final float disabledAlpha = tv.getFloat();
 
-            int color = XpResources.resolveColor(context, attr, 0);
+            int color = XpContext.resolveColor(context, attr, 0);
             final int originalAlpha = Color.alpha(color);
             color = ColorUtils.setAlphaComponent(color, Math.round(originalAlpha * disabledAlpha));
             return color;

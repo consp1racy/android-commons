@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.DatePicker;
 
 import net.xpece.android.R;
-import net.xpece.android.content.res.XpResources;
+import net.xpece.android.content.XpContext;
 import net.xpece.android.widget.XpDatePicker;
 
 import org.threeten.bp.LocalDate;
@@ -71,7 +71,7 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         final View view = inflater.inflate(R.layout.dialog_date_picker, null, false);
 
         final DatePicker datePicker = (DatePicker) view.findViewById(R.id.datePicker);
-        XpDatePicker.setSelectionDividerTint(datePicker, XpResources.resolveColorStateList(context, R.attr.colorControlNormal));
+        XpDatePicker.setSelectionDividerTint(datePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
         LocalDate date = mDate;
         datePicker.updateDate(date.getYear(), date.getMonthValue() - 1, date.getDayOfMonth());
         mDatePicker = datePicker;

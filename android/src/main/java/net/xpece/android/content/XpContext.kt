@@ -1,4 +1,5 @@
 @file:JvmName("XpContext")
+@file:JvmMultifileClass
 
 package net.xpece.android.content
 
@@ -8,6 +9,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.location.LocationManager
 import android.media.AudioManager
@@ -34,10 +36,30 @@ import net.xpece.android.R
 
 private val TYPED_VALUE = TypedValue()
 
+@ColorInt
+fun Context.getColorCompat(@ColorRes resId: Int, @ColorInt fallback: Int = 0): Int =
+        AppCompatResources.getColorStateList(this, resId)?.defaultColor ?: fallback
+
+fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList? {
+    try {
+        return AppCompatResources.getColorStateList(this, resId)
+    } catch (ex: Resources.NotFoundException) {
+        return null
+    }
+}
+
+fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
+    try {
+        return AppCompatResources.getDrawable(this, resId)
+    } catch (ex: Resources.NotFoundException) {
+        return null
+    }
+}
+
 @UiThread
 fun Context.ensureRuntimeTheme() {
     theme.resolveAttribute(R.attr.ltRuntimeTheme, TYPED_VALUE, true)
-    val resourceId = TYPED_VALUE.resourceId
+    val resourceId = resolveResourceId(R.attr.ltRuntimeTheme, 0)
     if (resourceId != 0) {
         setTheme(resourceId)
     }
@@ -70,17 +92,30 @@ fun <T : Activity> Context.createIntent(activity: Class<T>, func: Intent.() -> U
 fun Context.view(uri: String, func: Intent.() -> Unit = {})
         = view(Uri.parse(uri), func)
 
-fun Context.view(uri: Uri, func: Intent.() -> Unit) {
-    val i = Intent(Intent.ACTION_VIEW, uri)
-    i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
-    i.func()
+fun Context.view(uri: Uri, func: Intent.() -> Unit = {}) {
+    val i = viewIntent(uri, func)
     if (!maybeStartActivity(i)) {
         showNoActivityError(this)
     }
 }
 
+fun viewIntent(uri: String, func: Intent.() -> Unit): Intent
+        = viewIntent(Uri.parse(uri)!!, func)
+
+fun viewIntent(uri: Uri, func: Intent.() -> Unit): Intent {
+    val i = Intent(Intent.ACTION_VIEW, uri)
+    i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+    i.func()
+    return i
+}
+
 fun Context.openPlayStore(packageName: String = this.packageName)
-        = view("http://play.google.com/store/apps/details?id=$packageName")
+        = view(getPlayStoreUri(packageName))
+
+fun Context.openPlayStoreIntent(packageName: String = this.packageName, func: Intent.() -> Unit = {}): Intent
+        = viewIntent(getPlayStoreUri(packageName), func)
+
+fun getPlayStoreUri(packageName: String) = Uri.parse("http://play.google.com/store/apps/details?id=$packageName")!!
 
 @UiThread
 fun Context.getLayoutInflater(): LayoutInflater =
@@ -93,16 +128,6 @@ fun Context.inflate(@LayoutRes layout: Int): View =
 @UiThread
 fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = true): View =
         context.getLayoutInflater().inflate(layout, this, attachToRoot)
-
-@ColorInt
-fun Context.getColorCompat(@ColorRes resId: Int): Int =
-        AppCompatResources.getColorStateList(this, resId)!!.defaultColor
-
-fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList? =
-        AppCompatResources.getColorStateList(this, resId)
-
-fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? =
-        AppCompatResources.getDrawable(this, resId)
 
 fun Context.grantUriPermission(intent: Intent, uri: Uri, modeFlags: Int) {
     val resolvedIntentActivities = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)

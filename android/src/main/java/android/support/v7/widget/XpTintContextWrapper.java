@@ -6,7 +6,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.support.v7.view.ContextThemeWrapper;
 
-import net.xpece.android.content.res.XpResources;
+import net.xpece.android.content.XpContext;
 
 import java.util.WeakHashMap;
 
@@ -47,7 +47,7 @@ public class XpTintContextWrapper extends ContextWrapper {
     private static boolean isLightTheme(final Context context) {
         Boolean value = CACHE.get(context);
         if (value == null) {
-            value = XpResources.resolveBoolean(context, android.support.v7.appcompat.R.attr.isLightTheme, false);
+            value = XpContext.resolveBoolean(context, android.support.v7.appcompat.R.attr.isLightTheme, false);
             CACHE.put(context, value);
         }
         return value;
