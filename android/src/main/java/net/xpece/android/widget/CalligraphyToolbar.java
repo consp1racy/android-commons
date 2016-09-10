@@ -44,24 +44,32 @@ public class CalligraphyToolbar extends Toolbar {
     @Override
     public void setTitle(final CharSequence title) {
         super.setTitle(title);
-        getCalligraphyHelper().onSetTitle();
+        if (!isInEditMode()) {
+            getCalligraphyHelper().onSetTitle();
+        }
     }
 
     @Override
     public void setTitleTextAppearance(final Context context, @StyleRes final int resId) {
         super.setTitleTextAppearance(context, resId);
-        getCalligraphyHelper().onSetTitleTextAppearance();
+        if (!isInEditMode()) {
+            getCalligraphyHelper().onSetTitleTextAppearance();
+        }
     }
 
     @Override
     public void setSubtitle(final CharSequence subtitle) {
         super.setSubtitle(subtitle);
-        getCalligraphyHelper().onSetSubtitle();
+        if (!isInEditMode()) {
+            getCalligraphyHelper().onSetSubtitle();
+        }
     }
 
     @Override
     public void setSubtitleTextAppearance(final Context context, @StyleRes final int resId) {
         super.setSubtitleTextAppearance(context, resId);
-        getCalligraphyHelper().onSetSubtitleTextAppearance();
+        if (!isInEditMode()) {
+            getCalligraphyHelper().onSetSubtitleTextAppearance();
+        }
     }
 }

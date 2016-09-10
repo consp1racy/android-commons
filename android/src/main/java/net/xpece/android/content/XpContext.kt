@@ -9,7 +9,6 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.location.LocationManager
 import android.media.AudioManager
@@ -37,24 +36,14 @@ import net.xpece.android.R
 private val TYPED_VALUE = TypedValue()
 
 @ColorInt
-fun Context.getColorCompat(@ColorRes resId: Int, @ColorInt fallback: Int = 0): Int =
-        AppCompatResources.getColorStateList(this, resId)?.defaultColor ?: fallback
+fun Context.getColorCompat(@ColorRes resId: Int): Int
+        = AppCompatResources.getColorStateList(this, resId).defaultColor
 
-fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList? {
-    try {
-        return AppCompatResources.getColorStateList(this, resId)
-    } catch (ex: Resources.NotFoundException) {
-        return null
-    }
-}
+fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList
+        = AppCompatResources.getColorStateList(this, resId)
 
-fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
-    try {
-        return AppCompatResources.getDrawable(this, resId)
-    } catch (ex: Resources.NotFoundException) {
-        return null
-    }
-}
+fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable?
+        = AppCompatResources.getDrawable(this, resId)
 
 @UiThread
 fun Context.ensureRuntimeTheme() {

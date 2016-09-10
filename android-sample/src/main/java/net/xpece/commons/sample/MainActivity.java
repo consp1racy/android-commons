@@ -1,19 +1,24 @@
-package net.xpece.commons;
+package net.xpece.commons.sample;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.xpece.android.content.XpContext;
 import net.xpece.android.content.res.Dimen;
 import net.xpece.android.widget.XpEdgeEffect;
 import net.xpece.commons.android.sample.R;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by Eugen on 25. 4. 2015.
@@ -33,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
         Dimen d = Dimen.dp(16);
         Log.d(TAG, "Dimension real size: " + d.toString(this));
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        Drawable icon = XpContext.resolveDrawable(toolbar.getContext(), R.attr.homeAsUpIndicator);
+        toolbar.setNavigationIcon(icon);
+        String title = XpContext.resolveString(this, R.style.Widget_AppCompat_ActionButton_Overflow, android.R.attr.contentDescription);
+        toolbar.setTitle(title);
     }
 
     static class MyPagerAdapter extends PagerAdapter {
@@ -60,5 +72,10 @@ public class MainActivity extends AppCompatActivity {
             final View view = (View) object;
             container.removeView(view);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(final Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

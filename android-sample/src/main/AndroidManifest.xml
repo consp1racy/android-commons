@@ -7,13 +7,17 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name="net.xpece.commons.MainActivity">
+        <activity android:name="net.xpece.commons.sample.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             </activity>
+        <provider
+            android:name="net.xpece.commons.sample.MyInitProvider"
+            android:authorities="${applicationId}.myinitprovider"
+            android:exported="false"/>
     </application>
 
 </manifest>
