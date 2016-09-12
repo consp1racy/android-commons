@@ -5,6 +5,7 @@ import android.support.v7.util.SortedList;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class SortedListEx<T> extends SortedList<T> {
     private final Class<T> mTClass;
 
     private final StateCallback<T> mCallback;
+
+    // TODO Make a setter.
+    private NotifyChangedStrategy<T> mChangedStrategy = new NotifyChangedStrategy.Move<>();
 
     public static <T> SortedListEx<T> newInstance(Class<T> klass, Callback<T> callback) {
         StateCallback<T> stateCallback = new StateCallback<>(callback);
@@ -58,7 +62,14 @@ public class SortedListEx<T> extends SortedList<T> {
         return items;
     }
 
-    public void set(T... items) {
+    public void set(Collection<T> items) {
+        T[] copy = (T[]) Array.newInstance(mTClass, items.size());
+        items.toArray(copy);
+        set(copy);
+    }
+
+    @SafeVarargs
+    public final void set(final T... items) {
         mCallback.setEnabled(false);
 
         final Callback<T> callback = mCallback.getWrappedCallback();
@@ -68,9 +79,12 @@ public class SortedListEx<T> extends SortedList<T> {
         clear();
         addAll(items);
 
+        // Continue with the sorted array you fool!
+        T[] newItems = asArray();
+
 //        notifyChangedEasy(callback, oldSize, newSize);
-        notifyChangedMove(callback, oldItems, items);
-//        notifyChangedFade(callback, oldItems, items);
+        notifyChangedMove(callback, oldItems, newItems);
+//        notifyChangedFade(callback, oldItems, newItems);
 
         mCallback.setEnabled(true);
     }
@@ -111,48 +125,6 @@ public class SortedListEx<T> extends SortedList<T> {
             int extras = oldSize - same;
             callback.onRemoved(newSize, extras);
         }
-    }
-
-    private static <T> void notifyChangedFade(Callback<T> callback, T[] oldItems, T[] newItems) {
-        final int newSize = newItems.length;
-        final int oldSize = oldItems.length;
-        final int smaller = newSize < oldSize ? newSize : oldSize;
-        for (int i = 0; i < smaller; i++) {
-            final T oldItem = oldItems[i];
-            final T newItem = newItems[i];
-            if (callback.areItemsTheSame(oldItem, newItem)) {
-                if (!callback.areContentsTheSame(oldItem, newItem)) {
-                    callback.onChanged(i, 1);
-                }
-            } else {
-                callback.onChanged(i, 1);
-            }
-        }
-        if (newSize > oldSize) {
-            callback.onInserted(oldSize, newSize - oldSize);
-        } else if (newSize < oldSize) {
-            callback.onRemoved(newSize, oldSize - newSize);
-        }
-    }
-
-    private static <T> void notifyChangedEasy(Callback<T> callback, T[] oldItems, T[] newItems) {
-        final int newSize = newItems.length;
-        final int oldSize = oldItems.length;
-        if (oldSize < newSize) {
-            callback.onChanged(0, oldSize);
-            callback.onInserted(oldSize, newSize - oldSize);
-        } else if (oldSize > newSize) {
-            callback.onChanged(0, newSize);
-            callback.onRemoved(newSize, oldSize - newSize);
-        } else {
-            callback.onChanged(0, newSize);
-        }
-    }
-
-    public void set(Collection<T> items) {
-        T[] copy = (T[]) Array.newInstance(mTClass, items.size());
-        items.toArray(copy);
-        set(copy);
     }
 
     private static class StateCallback<T2> extends Callback<T2> {
@@ -222,4 +194,98 @@ public class SortedListEx<T> extends SortedList<T> {
         }
     }
 
+    public interface NotifyChangedStrategy<T3> {
+        void notifyChanged(Callback<T3> callback, T3[] oldItems, T3[] newItems);
+
+        /**
+         * Fades all items, inserts missing, removes obsolete.
+         *
+         * @param <T4>
+         */
+        class FadeAll<T4> implements NotifyChangedStrategy<T4> {
+            @Override
+            public void notifyChanged(Callback<T4> callback, T4[] oldItems, T4[] newItems) {
+                final int newSize = newItems.length;
+                final int oldSize = oldItems.length;
+                if (oldSize < newSize) {
+                    callback.onChanged(0, oldSize);
+                    callback.onInserted(oldSize, newSize - oldSize);
+                } else if (oldSize > newSize) {
+                    callback.onChanged(0, newSize);
+                    callback.onRemoved(newSize, oldSize - newSize);
+                } else {
+                    callback.onChanged(0, newSize);
+                }
+            }
+        }
+
+        /**
+         * Keeps items which didn't change position or content, fades the rest, inserts missing, removes obsolete.
+         *
+         * @param <T4>
+         */
+        class FadeSelective<T4> implements NotifyChangedStrategy<T4> {
+            @Override
+            public void notifyChanged(Callback<T4> callback, T4[] oldItems, T4[] newItems) {
+                final int newSize = newItems.length;
+                final int oldSize = oldItems.length;
+                final int smaller = newSize < oldSize ? newSize : oldSize;
+                for (int i = 0; i < smaller; i++) {
+                    final T4 oldItem = oldItems[i];
+                    final T4 newItem = newItems[i];
+                    if (callback.areItemsTheSame(oldItem, newItem)) {
+                        if (!callback.areContentsTheSame(oldItem, newItem)) {
+                            callback.onChanged(i, 1);
+                        }
+                    } else {
+                        callback.onChanged(i, 1);
+                    }
+                }
+                if (newSize > oldSize) {
+                    callback.onInserted(oldSize, newSize - oldSize);
+                } else if (newSize < oldSize) {
+                    callback.onRemoved(newSize, oldSize - newSize);
+                }
+            }
+        }
+
+        class Move<T4> implements NotifyChangedStrategy<T4> {
+            @Override
+            public void notifyChanged(Callback<T4> callback, T4[] oldItems, T4[] newItems) {
+                final int newSize = newItems.length;
+                final int oldSize = oldItems.length;
+
+                List<T4> working = new LinkedList<>();
+                Collections.addAll(working, oldItems);
+
+                int same = 0;
+                outer:
+                for (int i = 0; i < newSize; i++) {
+                    final T4 newItem = newItems[i];
+                    for (int j = 0; j < oldSize; j++) {
+                        final T4 oldItem = working.get(j);
+                        if (callback.areItemsTheSame(oldItem, newItem)) {
+                            same++;
+                            if (!callback.areContentsTheSame(oldItem, newItem)) {
+                                callback.onChanged(j, 1);
+                            }
+                            if (i != j) {
+                                callback.onMoved(j, i);
+
+                                working.remove(oldItem);
+                                working.add(i, oldItem);
+                            }
+                            continue outer;
+                        }
+                    }
+                    callback.onInserted(i, 1);
+                    working.add(i, newItem);
+                }
+                if (same < oldSize) {
+                    int extras = oldSize - same;
+                    callback.onRemoved(newSize, extras);
+                }
+            }
+        }
+    }
 }
