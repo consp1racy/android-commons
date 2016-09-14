@@ -34,13 +34,9 @@ data class Dimen internal constructor(val value: Float) {
 
     operator fun unaryPlus() = Dimen(this.value)
 
-    fun times(q: Number): Dimen {
-        return Dimen(this.value * q.toFloat())
-    }
+    operator fun times(q: Number) = Dimen(this.value * q.toFloat())
 
-    fun div(d: Number): Dimen {
-        return Dimen(this.value / d.toFloat())
-    }
+    operator fun div(d: Number) = Dimen(this.value / d.toFloat())
 
     val pixelSize: Int
         get() = (value + 0.5f).toInt()

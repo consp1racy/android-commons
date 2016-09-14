@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    ext.supportLibsVersion = "24.2.0"
+    ext.supportLibsVersion = "24.2.1"
     compile "com.android.support:design:$supportLibsVersion"
     provided "com.android.support:palette-v7:$supportLibsVersion"
 
