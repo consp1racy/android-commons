@@ -15,6 +15,9 @@ fun Context.copy(inputUri: Uri, outputUri: Uri) {
     input.copyTo(output)
     output.flush()
 
+    input.close()
+    output.close()
+
 //    val source = Okio.buffer(Okio.source(input))
 //    val sink = Okio.buffer(Okio.sink(output))
 //
