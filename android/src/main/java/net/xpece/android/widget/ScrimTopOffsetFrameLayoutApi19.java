@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import net.xpece.android.R;
+import net.xpece.android.graphics.XpRect;
 
 /**
  * FrameLayout that offsets its content according to supplied window insets and scrims top.
@@ -60,7 +61,7 @@ public class ScrimTopOffsetFrameLayoutApi19 extends FrameLayout {
                         insets.getSystemWindowInsetRight(),
                         insets.getSystemWindowInsetBottom());
                     onInsetsChanged(mInsets);
-                    setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
+                    setWillNotDraw(XpRect.isZero(mInsets) || mInsetForeground == null);
                     ViewCompat.postInvalidateOnAnimation(ScrimTopOffsetFrameLayoutApi19.this);
                     return insets.replaceSystemWindowInsets(insets.getSystemWindowInsetLeft(), 0, insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
 //                    return insets.consumeSystemWindowInsets();
@@ -76,7 +77,7 @@ public class ScrimTopOffsetFrameLayoutApi19 extends FrameLayout {
             }
             mInsets.set(insets);
             onInsetsChanged(mInsets);
-            setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
+            setWillNotDraw(XpRect.isZero(mInsets) || mInsetForeground == null);
             ViewCompat.postInvalidateOnAnimation(ScrimTopOffsetFrameLayoutApi19.this);
             insets.top = 0;
 
@@ -85,7 +86,7 @@ public class ScrimTopOffsetFrameLayoutApi19 extends FrameLayout {
             for (int i = 0; i < count; i++) {
                 final View child = getChildAt(i);
 //                done = child.fitSystemWindows(insets);
-                done = ViewUtils.fitSystemWindows(child, insets);
+                done = XpView.fitSystemWindows(child, insets);
                 if (done) {
                     break;
                 }

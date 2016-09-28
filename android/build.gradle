@@ -44,8 +44,8 @@ dependencies {
     provided 'com.jakewharton.threetenabp:threetenabp:1.0.3'
     provided 'com.squareup.picasso:picasso:2.5.2'
     provided 'org.parceler:parceler-api:1.1.5'
-    provided 'io.requery:sqlite-android:3.14.0'
-    provided "io.requery:requery:1.0.0-rc3"
+    provided 'io.requery:sqlite-android:3.14.2'
+    provided "io.requery:requery:1.0.0-rc4"
     provided 'com.birbit:android-priority-jobqueue:2.0.0'
     provided 'com.squareup.moshi:moshi:1.2.0'
 //    provided 'com.squareup.okio:okio:1.10.0'
@@ -56,7 +56,7 @@ dependencies {
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.11.3'
+    PUBLISH_VERSION = '0.12.0'
 }
 
 apply from: '../android-release-aar.gradle'

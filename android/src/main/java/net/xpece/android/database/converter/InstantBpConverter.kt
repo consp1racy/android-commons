@@ -18,17 +18,17 @@ package net.xpece.android.database.converter
 
 import io.requery.Converter
 import org.threeten.bp.DateTimeUtils
-import org.threeten.bp.LocalDateTime
+import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import java.sql.Timestamp
 
 /**
- * Converts from a [LocalDateTime] to a [T].
+ * Converts from a [Instant] to a [T].
  */
-abstract class LocalDateTimeBpConverter<T> : Converter<LocalDateTime, T> {
+abstract class InstantBpConverter<T> : Converter<Instant, T> {
 
-    override fun getMappedType(): Class<LocalDateTime> {
-        return LocalDateTime::class.java
+    override fun getMappedType(): Class<Instant> {
+        return Instant::class.java
     }
 
     override fun getPersistedSize(): Int? {
@@ -36,39 +36,39 @@ abstract class LocalDateTimeBpConverter<T> : Converter<LocalDateTime, T> {
     }
 
     /**
-     * Converts from a [LocalDateTime] to a [String].
-     * Can be compared as long as year is in range of 0 to 9999.
+     * Converts from a [Instant] to a [String].
+     * Can be compared until Wed Nov 16 5138 09:46:39.
      */
-    object WithString : LocalDateTimeBpConverter<String>() {
+    object WithString : InstantBpConverter<String>() {
         override fun getPersistedType(): Class<String> {
             return String::class.java
         }
 
-        override fun convertToPersisted(value: LocalDateTime?): String? {
+        override fun convertToPersisted(value: Instant?): String? {
             if (value == null) {
                 return null
             }
-            return value.toString()
+            return value.toString().padStart(14, '0')
         }
 
-        override fun convertToMapped(type: Class<out LocalDateTime>?, value: String?): LocalDateTime? {
+        override fun convertToMapped(type: Class<out Instant>?, value: String?): Instant? {
             if (value == null) {
                 return null
             }
-            return LocalDateTime.parse(value)
+            return Instant.parse(value.trimStart('0'))
         }
     }
 
     /**
-     * Converts from a [LocalDateTime] to a [Timestamp].
+     * Converts from a [Instant] to a [Timestamp].
      * Safe to use once requery is fixed. requery-rc5 whould be fine.
      */
-    object WithTimestamp : LocalDateTimeBpConverter<Timestamp>() {
+    object WithTimestamp : InstantBpConverter<Timestamp>() {
         override fun getPersistedType(): Class<Timestamp> {
             return Timestamp::class.java
         }
 
-        override fun convertToPersisted(value: LocalDateTime?): Timestamp? {
+        override fun convertToPersisted(value: Instant?): Timestamp? {
             if (value == null) {
                 return null
             }
@@ -76,12 +76,12 @@ abstract class LocalDateTimeBpConverter<T> : Converter<LocalDateTime, T> {
             return DateTimeUtils.toSqlTimestamp(instant)
         }
 
-        override fun convertToMapped(type: Class<out LocalDateTime>,
-                                     value: Timestamp?): LocalDateTime? {
+        override fun convertToMapped(type: Class<out Instant>,
+                                     value: Timestamp?): Instant? {
             if (value == null) {
                 return null
             }
-            return DateTimeUtils.toLocalDateTime(value)
+            return DateTimeUtils.toInstant(value)
         }
 
     }

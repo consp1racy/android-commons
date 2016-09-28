@@ -47,7 +47,7 @@ public class IrresponsibleAbsoluteLayoutApi19 extends AbsoluteLayout {
             for (int i = 0; i < count; i++) {
                 final View child = getChildAt(i);
 //                done = child.fitSystemWindows(insets);
-                done = ViewUtils.fitSystemWindows(child, insets);
+                done = XpView.fitSystemWindows(child, insets);
                 if (done) {
                     break;
                 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import net.xpece.android.R;
+import net.xpece.android.graphics.XpRect;
 
 /**
  * FrameLayout that offsets its content according to supplied window insets and scrims top.
@@ -58,7 +59,7 @@ public class ScrimTopOffsetFrameLayout extends FrameLayout {
                         insets.getSystemWindowInsetRight(),
                         insets.getSystemWindowInsetBottom());
                     onInsetsChanged(mInsets);
-                    setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
+                    setWillNotDraw(XpRect.isZero(mInsets) || mInsetForeground == null);
                     ViewCompat.postInvalidateOnAnimation(ScrimTopOffsetFrameLayout.this);
                     return insets.replaceSystemWindowInsets(insets.getSystemWindowInsetLeft(), 0, insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
 //                    return insets.consumeSystemWindowInsets();

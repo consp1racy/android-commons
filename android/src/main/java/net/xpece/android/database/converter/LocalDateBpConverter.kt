@@ -23,34 +23,64 @@ import org.threeten.bp.ZoneId
 import java.sql.Date
 
 /**
- * Converts from a [LocalDate] to a [java.sql.Date] for Java 8.
+ * Converts from a [LocalDate] to a [T].
  */
-object LocalDateBpConverter : Converter<LocalDate, Date> {
+abstract class LocalDateBpConverter<T> : Converter<LocalDate, T> {
 
     override fun getMappedType(): Class<LocalDate> {
         return LocalDate::class.java
-    }
-
-    override fun getPersistedType(): Class<Date> {
-        return Date::class.java
     }
 
     override fun getPersistedSize(): Int? {
         return null
     }
 
-    override fun convertToPersisted(value: LocalDate?): Date? {
-        if (value == null) {
-            return null
+    /**
+     * Converts from a [LocalDate] to a [String].
+     * Can be compared as long as year is in range of 0 to 9999.
+     */
+    object WithString : LocalDateBpConverter<String>() {
+        override fun getPersistedType(): Class<String> {
+            return String::class.java
         }
-        val instant = value.atStartOfDay(ZoneId.systemDefault()).toInstant()
-        return Date(instant.toEpochMilli())
+
+        override fun convertToPersisted(value: LocalDate?): String? {
+            if (value == null) {
+                return null
+            }
+            return value.toString()
+        }
+
+        override fun convertToMapped(type: Class<out LocalDate>?, value: String?): LocalDate? {
+            if (value == null) {
+                return null
+            }
+            return LocalDate.parse(value)
+        }
     }
 
-    override fun convertToMapped(type: Class<out LocalDate>, value: Date?): LocalDate? {
-        if (value == null) {
-            return null
+    /**
+     * Converts from a [LocalDate] to a [Date].
+     * Safe to use once requery is fixed. requery-rc5 whould be fine.
+     */
+    object WithDate : LocalDateBpConverter<Date>() {
+        override fun getPersistedType(): Class<Date> {
+            return Date::class.java
         }
-        return DateTimeUtils.toLocalDate(value)
+
+        override fun convertToPersisted(value: LocalDate?): Date? {
+            if (value == null) {
+                return null
+            }
+            val instant = value.atStartOfDay(ZoneId.systemDefault()).toInstant()
+            return Date(instant.toEpochMilli())
+        }
+
+        override fun convertToMapped(type: Class<out LocalDate>, value: Date?): LocalDate? {
+            if (value == null) {
+                return null
+            }
+            return DateTimeUtils.toLocalDate(value)
+        }
     }
 }

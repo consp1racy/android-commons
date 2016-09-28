@@ -18,40 +18,72 @@ package net.xpece.android.database.converter
 
 import io.requery.Converter
 import org.threeten.bp.DateTimeUtils
+import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneId
 import java.sql.Timestamp
 
 /**
- * Converts from a [OffsetDateTime] to a [java.sql.Timestamp] for Java 8.
+ * Converts from a [OffsetDateTime] to a [T].
  */
-object OffsetDateTimeBpConverter : Converter<OffsetDateTime, Timestamp> {
+abstract class OffsetDateTimeBpConverter<T> : Converter<OffsetDateTime, T> {
 
     override fun getMappedType(): Class<OffsetDateTime> {
         return OffsetDateTime::class.java
-    }
-
-    override fun getPersistedType(): Class<Timestamp> {
-        return Timestamp::class.java
     }
 
     override fun getPersistedSize(): Int? {
         return null
     }
 
-    override fun convertToPersisted(value: OffsetDateTime?): Timestamp? {
-        if (value == null) {
-            return null
+    /**
+     * Converts from a [OffsetDateTime] to a [String].
+     * Strips zone ID.
+     */
+    object WithString : OffsetDateTimeBpConverter<String>() {
+        override fun getPersistedType(): Class<String> {
+            return String::class.java
         }
-        val instant = value.toInstant()
-        return DateTimeUtils.toSqlTimestamp(instant)
+
+        override fun convertToPersisted(value: OffsetDateTime?): String? {
+            if (value == null) {
+                return null
+            }
+            return value.toInstant().toString().padStart(14, '0')
+        }
+
+        override fun convertToMapped(type: Class<out OffsetDateTime>?, value: String?): OffsetDateTime? {
+            if (value == null) {
+                return null
+            }
+            return OffsetDateTime.ofInstant(Instant.parse(value.trimStart('0')), ZoneId.systemDefault())
+        }
     }
 
-    override fun convertToMapped(type: Class<out OffsetDateTime>,
-                                 value: Timestamp?): OffsetDateTime? {
-        if (value == null) {
-            return null
+    /**
+     * Converts from a [OffsetDateTime] to a [Timestamp].
+     * Safe to use once requery is fixed. requery-rc5 whould be fine.
+     * Strips zone ID.
+     */
+    object WithTimestamp : OffsetDateTimeBpConverter<Timestamp>() {
+        override fun getPersistedType(): Class<Timestamp> {
+            return Timestamp::class.java
         }
-        return OffsetDateTime.ofInstant(DateTimeUtils.toInstant(value), ZoneId.systemDefault())
+
+        override fun convertToPersisted(value: OffsetDateTime?): Timestamp? {
+            if (value == null) {
+                return null
+            }
+            val instant = value.toInstant()
+            return DateTimeUtils.toSqlTimestamp(instant)
+        }
+
+        override fun convertToMapped(type: Class<out OffsetDateTime>,
+                                     value: Timestamp?): OffsetDateTime? {
+            if (value == null) {
+                return null
+            }
+            return OffsetDateTime.ofInstant(DateTimeUtils.toInstant(value), ZoneId.systemDefault())
+        }
     }
 }

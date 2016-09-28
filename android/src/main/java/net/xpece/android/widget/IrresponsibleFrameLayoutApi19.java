@@ -48,7 +48,7 @@ public class IrresponsibleFrameLayoutApi19 extends FrameLayout {
             for (int i = 0; i < count; i++) {
                 final View child = getChildAt(i);
 //                done = child.fitSystemWindows(insets);
-                done = ViewUtils.fitSystemWindows(child, insets);
+                done = XpView.fitSystemWindows(child, insets);
                 if (done) {
                     break;
                 }

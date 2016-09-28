@@ -1,12 +1,10 @@
-package net.xpece.android.graphics;
+package com.squareup.picasso;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
-
-import com.squareup.picasso.Transformation;
 
 import java.util.Map;
 import java.util.WeakHashMap;

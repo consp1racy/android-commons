@@ -28,6 +28,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import net.xpece.android.graphics.XpRect;
+
 /**
  * @hide
  */
@@ -70,7 +72,7 @@ public class ScrimInsetsNonConsumingChildPaddingFrameLayout extends FrameLayout 
                         insets.getSystemWindowInsetRight(),
                         insets.getSystemWindowInsetBottom());
                     onInsetsChanged(insets);
-                    setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
+                    setWillNotDraw(XpRect.isZero(mInsets) || mInsetForeground == null);
                     ViewCompat.postInvalidateOnAnimation(ScrimInsetsNonConsumingChildPaddingFrameLayout.this);
                     return insets;
                 }

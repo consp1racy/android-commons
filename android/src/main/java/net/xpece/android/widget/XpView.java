@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
  * @hide
  */
 
-public final class ViewUtils {
+public final class XpView {
     private static final Method METHOD_FIT_SYSTEM_WINDOWS;
 
     static {
@@ -24,7 +24,7 @@ public final class ViewUtils {
         METHOD_FIT_SYSTEM_WINDOWS = fitSystemWindows;
     }
 
-    private ViewUtils() {
+    private XpView() {
     }
 
     public static boolean fitSystemWindows(View view, Rect insets) {

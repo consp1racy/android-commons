@@ -28,6 +28,8 @@ import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.View;
 
+import net.xpece.android.graphics.XpRect;
+
 /**
  * @hide
  */
@@ -70,7 +72,7 @@ public class ScrimInsetsNonConsumingSelfPaddingNestedScrollView extends NestedSc
                         insets.getSystemWindowInsetRight(),
                         insets.getSystemWindowInsetBottom());
                     onInsetsChanged(insets);
-                    setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
+                    setWillNotDraw(XpRect.isZero(mInsets) || mInsetForeground == null);
                     ViewCompat.postInvalidateOnAnimation(ScrimInsetsNonConsumingSelfPaddingNestedScrollView.this);
                     return insets;
                 }

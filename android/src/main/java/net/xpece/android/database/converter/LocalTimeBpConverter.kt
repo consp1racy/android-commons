@@ -24,34 +24,63 @@ import org.threeten.bp.ZoneId
 import java.sql.Time
 
 /**
- * Converts from a [LocalTime] to a [java.sql.Time] for Java 8.
+ * Converts from a [LocalTime] to a [T].
  */
-object LocalTimeBpConverter : Converter<LocalTime, Time> {
+abstract class LocalTimeBpConverter<T> : Converter<LocalTime, T> {
 
     override fun getMappedType(): Class<LocalTime> {
         return LocalTime::class.java
-    }
-
-    override fun getPersistedType(): Class<Time> {
-        return Time::class.java
     }
 
     override fun getPersistedSize(): Int? {
         return null
     }
 
-    override fun convertToPersisted(value: LocalTime?): Time? {
-        if (value == null) {
-            return null
+    /**
+     * Converts from a [LocalTime] to a [String].
+     */
+    object WithString : LocalTimeBpConverter<String>() {
+        override fun getPersistedType(): Class<String> {
+            return String::class.java
         }
-        val instant = value.atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant()
-        return Time(instant.toEpochMilli())
+
+        override fun convertToPersisted(value: LocalTime?): String? {
+            if (value == null) {
+                return null
+            }
+            return value.toString()
+        }
+
+        override fun convertToMapped(type: Class<out LocalTime>?, value: String?): LocalTime? {
+            if (value == null) {
+                return null
+            }
+            return LocalTime.parse(value)
+        }
     }
 
-    override fun convertToMapped(type: Class<out LocalTime>, value: Time?): LocalTime? {
-        if (value == null) {
-            return null
+    /**
+     * Converts from a [LocalTime] to a [Time].
+     * Safe to use once requery is fixed. requery-rc5 whould be fine.
+     */
+    object WithTime : LocalTimeBpConverter<Time>() {
+        override fun getPersistedType(): Class<Time> {
+            return Time::class.java
         }
-        return DateTimeUtils.toLocalTime(value)
+
+        override fun convertToPersisted(value: LocalTime?): Time? {
+            if (value == null) {
+                return null
+            }
+            val instant = value.atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant()
+            return Time(instant.toEpochMilli())
+        }
+
+        override fun convertToMapped(type: Class<out LocalTime>, value: Time?): LocalTime? {
+            if (value == null) {
+                return null
+            }
+            return DateTimeUtils.toLocalTime(value)
+        }
     }
 }

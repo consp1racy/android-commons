@@ -31,6 +31,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import net.xpece.android.graphics.XpRect;
+
 /**
  * @hide
  */
@@ -79,7 +81,7 @@ public class ScrimInsetsLinearLayout extends LinearLayout {
                                 insets.getSystemWindowInsetRight(),
                                 insets.getSystemWindowInsetBottom());
                         onInsetsChanged(mInsets);
-                        setWillNotDraw(RectExtensionsKt.isZero(mInsets) || mInsetForeground == null);
+                        setWillNotDraw(XpRect.isZero(mInsets) || mInsetForeground == null);
                         ViewCompat.postInvalidateOnAnimation(ScrimInsetsLinearLayout.this);
                         return insets.consumeSystemWindowInsets();
                     }
