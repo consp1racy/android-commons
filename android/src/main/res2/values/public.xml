@@ -7,4 +7,18 @@
     <public type="drawable" name="ic_search_black_24dp"/>
     <public type="drawable" name="ic_mic_black_24dp"/>
     <public type="drawable" name="ic_more_vert_black_24dp"/>
+
+    <public type="string" name="lorem_date"/>
+    <public type="string" name="lorem_date_interval"/>
+    <public type="string" name="lorem_time"/>
+    <public type="string" name="lorem_time_interval"/>
+    <public type="string" name="lorem_datetime"/>
+    <public type="string" name="lorem_integer"/>
+    <public type="string" name="lorem_decimal"/>
+    <public type="string" name="lorem_micro"/>
+    <public type="string" name="lorem_short"/>
+    <public type="string" name="lorem_medium"/>
+    <public type="string" name="lorem_long"/>
+    <public type="string" name="lorem_price"/>
+    <public type="string" name="lorem_name"/>
 </resources>
