@@ -17,6 +17,7 @@ import net.xpece.android.content.XpContext;
 import net.xpece.android.widget.XpDatePicker;
 
 import org.threeten.bp.LocalDate;
+import org.threeten.bp.ZoneId;
 
 /**
  * Created by Eugen on 06.05.2016.
@@ -27,10 +28,26 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
 
     private DatePicker mDatePicker;
     private LocalDate mDate;
+    private LocalDate mMaxDate;
+    private LocalDate mMinDate;
 
     public static LocalDateBpPickerDialogFragment newInstance(LocalDate date) {
+        return newInstance(date, null, null);
+    }
+
+    public static LocalDateBpPickerDialogFragment newInstanceWithMax(LocalDate date, LocalDate max) {
+        return newInstance(date, null, max);
+    }
+
+    public static LocalDateBpPickerDialogFragment newInstanceWithMin(LocalDate date, LocalDate min) {
+        return newInstance(date, min, null);
+    }
+
+    public static LocalDateBpPickerDialogFragment newInstance(LocalDate date, LocalDate min, LocalDate max) {
         Bundle args = new Bundle();
         args.putSerializable("mDate", date);
+        args.putSerializable("mMinDate", min);
+        args.putSerializable("mMaxDate", max);
         LocalDateBpPickerDialogFragment fragment = new LocalDateBpPickerDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -47,6 +64,8 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         final Bundle args = getArguments();
         if (args != null) {
             mDate = (LocalDate) args.getSerializable("mDate");
+            mMinDate = (LocalDate) args.getSerializable("mMinDate");
+            mMaxDate = (LocalDate) args.getSerializable("mMaxDate");
         }
     }
 
@@ -74,6 +93,14 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         XpDatePicker.setSelectionDividerTint(datePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
         LocalDate date = mDate;
         datePicker.updateDate(date.getYear(), date.getMonthValue() - 1, date.getDayOfMonth());
+        if (mMinDate != null) {
+            long min = mMinDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            datePicker.setMinDate(min);
+        }
+        if (mMaxDate != null) {
+            long max = mMaxDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            datePicker.setMaxDate(max);
+        }
         mDatePicker = datePicker;
 
         builder.setView(view);
