@@ -57,7 +57,7 @@ class XpAppCompatTextHelper {
 
         // First check TextAppearance's textAllCaps value
         if (ap != -1) {
-            a = TintTypedArray.obtainStyledAttributes(context, ap, android.support.v7.appcompat.R.styleable.TextAppearance);
+            a = TintTypedArray.obtainStyledAttributes(context, ap, R.styleable.TextAppearance);
             if (!hasPwdTm && a.hasValue(R.styleable.TextAppearance_textAllCaps)) {
                 allCapsSet = true;
                 allCaps = a.getBoolean(R.styleable.TextAppearance_textAllCaps, false);
@@ -72,7 +72,7 @@ class XpAppCompatTextHelper {
         }
 
         // Now read the style's values
-        a = TintTypedArray.obtainStyledAttributes(context, attrs, android.support.v7.appcompat.R.styleable.TextAppearance,
+        a = TintTypedArray.obtainStyledAttributes(context, attrs, R.styleable.TextAppearance,
                 defStyleAttr, 0);
         if (!hasPwdTm && a.hasValue(R.styleable.TextAppearance_textAllCaps)) {
             allCapsSet = true;
