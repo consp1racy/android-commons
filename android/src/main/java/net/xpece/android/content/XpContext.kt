@@ -4,6 +4,7 @@
 package net.xpece.android.content
 
 import android.app.Activity
+import android.app.AlarmManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -210,9 +211,27 @@ val Context.locationManager: LocationManager
     get() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 val Context.powerManager: PowerManager
     get() = getSystemService(Context.POWER_SERVICE) as PowerManager
+val Context.alarmManager: AlarmManager
+    get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
 val Context.isRtl: Boolean
     get() = resources.configuration.layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL
 
 val Context.isDebugBuild: Boolean
     get() = 0 != (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
+
+fun Context.email(address: String) {
+    val i = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", address, null))
+    i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+    if (!maybeStartActivity(i)) {
+        Toast.makeText(this, R.string.xpc_no_intent_handler, Toast.LENGTH_LONG).show()
+    }
+}
+
+fun Context.dial(number: String) {
+    val i = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null))
+    i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+    if (!maybeStartActivity(i)) {
+        Toast.makeText(this, R.string.xpc_no_intent_handler, Toast.LENGTH_LONG).show()
+    }
+}

@@ -4,13 +4,16 @@ package net.xpece.android.view
 
 import android.animation.LayoutTransition
 import android.annotation.TargetApi
+import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
 import android.os.Build
 import android.support.annotation.DrawableRes
+import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.AppCompatDrawableManager
+import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.*
@@ -39,6 +42,7 @@ fun View.isVisible(): Boolean = visibility == View.VISIBLE
 
 fun View.setVisible(visible: Boolean) = if (visible) visibility = View.VISIBLE else visibility = View.GONE
 
+@JvmOverloads
 fun TextView.setTextAndVisibility(text: CharSequence?, invisible: Boolean = false) {
     if (text.isNullOrBlank()) {
         if (invisible) invisible() else gone()
@@ -96,6 +100,7 @@ fun setSearchViewLayoutTransition(view: android.support.v7.widget.SearchView) {
     searchBar.layoutTransition = LayoutTransition()
 }
 
+@JvmOverloads
 fun ImageView.switchImage(d: Drawable, duration: Int = 100) {
     if (ViewCompat.isLaidOut(this)) {
         var old = drawable
@@ -113,7 +118,41 @@ fun ImageView.switchImage(d: Drawable, duration: Int = 100) {
     }
 }
 
+@JvmOverloads
 fun ImageView.switchImage(@DrawableRes resId: Int, duration: Int = 100) {
     val d = AppCompatDrawableManager.get().getDrawable(context, resId)
     switchImage(d, duration)
 }
+
+@JvmOverloads
+fun View.toastContentDescription(text: CharSequence = this.contentDescription): Boolean {
+    val screenPos = IntArray(2)
+    val displayFrame = Rect()
+    getLocationOnScreen(screenPos)
+    getWindowVisibleDisplayFrame(displayFrame)
+
+    val context = context
+    val width = width
+    val height = height
+    val midy = screenPos[1] + height / 2
+    var referenceX = screenPos[0] + width / 2
+    if (ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+        val screenWidth = context.resources.displayMetrics.widthPixels
+        referenceX = screenWidth - referenceX // mirror
+    }
+
+    val cheatSheet = Toast.makeText(context, text, Toast.LENGTH_SHORT)
+    if (midy < displayFrame.height()) {
+        // Show below the tab view
+        cheatSheet.setGravity(Gravity.TOP or GravityCompat.END, referenceX,
+                screenPos[1] + height - displayFrame.top)
+    } else {
+        // Show along the bottom center
+        cheatSheet.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, height)
+    }
+    cheatSheet.show()
+    return true
+}
+
+val View.isRtl: Boolean
+    get() = this.layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL
