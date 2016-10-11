@@ -9,5 +9,9 @@ import android.support.annotation.DrawableRes
  */
 
 interface DrawableResolver {
+    companion object {
+        var isDrawableResolversEnabled = false
+        val drawableResolvers = mutableListOf<DrawableResolver>()
+    }
     fun getDrawable(context: Context, @DrawableRes resId: Int): Drawable?
 }

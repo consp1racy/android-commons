@@ -32,11 +32,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import net.xpece.android.R
 
-object XpContext {
-    var isDrawableResolversEnabled = false
-    val drawableResolvers = mutableListOf<DrawableResolver>()
-}
-
 private val TYPED_VALUE = TypedValue()
 
 @ColorInt
@@ -46,21 +41,21 @@ fun Context.getColorCompat(@ColorRes resId: Int): Int
 fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList {
     try {
         return AppCompatResources.getColorStateList(this, resId)
-    } catch (ex : NoSuchMethodError) {
+    } catch (ex: NoSuchMethodError) {
         return ContextCompat.getColorStateList(this, resId)
     }
 }
 
 fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
-    if (XpContext.isDrawableResolversEnabled) {
-        XpContext.drawableResolvers.forEach {
+    if (DrawableResolver.isDrawableResolversEnabled) {
+        DrawableResolver.drawableResolvers.forEach {
             val d = it.getDrawable(this, resId)
             if (d != null) return d
         }
     }
     try {
         return AppCompatResources.getDrawable(this, resId)
-    } catch (ex : NoSuchMethodError) {
+    } catch (ex: NoSuchMethodError) {
         return AppCompatDrawableManager.get().getDrawable(this, resId)
     }
 }
