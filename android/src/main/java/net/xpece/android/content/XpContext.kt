@@ -19,9 +19,11 @@ import android.os.PowerManager
 import android.support.annotation.*
 import android.support.v4.app.Fragment
 import android.support.v4.app.NotificationManagerCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.NotificationCompat
 import android.support.v7.content.res.AppCompatResources
+import android.support.v7.widget.AppCompatDrawableManager
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -30,21 +32,38 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import net.xpece.android.R
 
-/**
- * @author Eugen on 28.07.2016.
- */
+object XpContext {
+    var isDrawableResolversEnabled = false
+    val drawableResolvers = mutableListOf<DrawableResolver>()
+}
 
 private val TYPED_VALUE = TypedValue()
 
 @ColorInt
 fun Context.getColorCompat(@ColorRes resId: Int): Int
-        = AppCompatResources.getColorStateList(this, resId).defaultColor
+        = getColorStateListCompat(resId).defaultColor
 
-fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList
-        = AppCompatResources.getColorStateList(this, resId)
+fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList {
+    try {
+        return AppCompatResources.getColorStateList(this, resId)
+    } catch (ex : NoSuchMethodError) {
+        return ContextCompat.getColorStateList(this, resId)
+    }
+}
 
-fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable?
-        = AppCompatResources.getDrawable(this, resId)
+fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
+    if (XpContext.isDrawableResolversEnabled) {
+        XpContext.drawableResolvers.forEach {
+            val d = it.getDrawable(this, resId)
+            if (d != null) return d
+        }
+    }
+    try {
+        return AppCompatResources.getDrawable(this, resId)
+    } catch (ex : NoSuchMethodError) {
+        return AppCompatDrawableManager.get().getDrawable(this, resId)
+    }
+}
 
 @UiThread
 fun Context.ensureRuntimeTheme() {
