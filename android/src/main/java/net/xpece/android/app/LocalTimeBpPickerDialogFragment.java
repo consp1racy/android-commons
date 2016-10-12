@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TimePicker;
@@ -27,6 +28,14 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
 
     private TimePicker mTimePicker;
     private LocalTime mTime;
+    private boolean mIs24HourFormat;
+
+    public static LocalTimeBpPickerDialogFragment newInstance(LocalTime time, boolean is24HourFormat) {
+        LocalTimeBpPickerDialogFragment f = newInstance(time);
+        Bundle args = f.getArguments();
+        args.putBoolean("mIs24HourFormat", is24HourFormat);
+        return f;
+    }
 
     public static LocalTimeBpPickerDialogFragment newInstance(LocalTime time) {
         Bundle args = new Bundle();
@@ -45,8 +54,17 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         super.onCreate(savedInstanceState);
 
         final Bundle args = getArguments();
+        if (savedInstanceState != null) {
+            mTime = (LocalTime) savedInstanceState.getSerializable("mTime");
+            mIs24HourFormat = savedInstanceState.getBoolean("mIs24HourFormat");
+        }
         if (args != null) {
             mTime = (LocalTime) args.getSerializable("mTime");
+            if (args.containsKey("mIs24HourFormat")) {
+                mIs24HourFormat = args.getBoolean("mIs24HourFormat");
+            } else {
+                mIs24HourFormat = DateFormat.is24HourFormat(getContext());
+            }
         }
     }
 
@@ -62,20 +80,21 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
     @NonNull
     @SuppressWarnings("deprecation")
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            mTime = (LocalTime) savedInstanceState.getSerializable("mTime");
-        }
-
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final Context context = builder.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view = inflater.inflate(R.layout.dialog_time_picker, null, false);
 
         final TimePicker timePicker = (TimePicker) view.findViewById(R.id.timePicker);
-        XpTimePicker.setSelectionDividerTint(timePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
+        timePicker.setIs24HourView(mIs24HourFormat);
+        onCreateTimePicker(timePicker);
+
         LocalTime time = mTime;
-        timePicker.setCurrentHour(time.getHour());
-        timePicker.setCurrentMinute(time.getMinute());
+        if (time != null) {
+            timePicker.setCurrentHour(time.getHour());
+            timePicker.setCurrentMinute(time.getMinute());
+        }
+
         mTimePicker = timePicker;
 
         builder.setView(view);
@@ -84,11 +103,17 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         return builder.create();
     }
 
+    protected void onCreateTimePicker(TimePicker timePicker) {
+        Context context = timePicker.getContext();
+        XpTimePicker.setSelectionDividerTint(timePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
+    }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         LocalTime time = getLocalTime();
         outState.putSerializable("mTime", time);
+        outState.putBoolean("mIs24HourFormat", mIs24HourFormat);
     }
 
     @NonNull

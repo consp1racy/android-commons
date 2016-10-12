@@ -90,23 +90,32 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         final View view = inflater.inflate(R.layout.dialog_date_picker, null, false);
 
         final DatePicker datePicker = (DatePicker) view.findViewById(R.id.datePicker);
-        XpDatePicker.setSelectionDividerTint(datePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
+        onCreateDatePicker(datePicker);
+
         LocalDate date = mDate;
-        datePicker.updateDate(date.getYear(), date.getMonthValue() - 1, date.getDayOfMonth());
-        if (mMinDate != null) {
-            long min = mMinDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
-            datePicker.setMinDate(min);
+        if (date != null) {
+            datePicker.updateDate(date.getYear(), date.getMonthValue() - 1, date.getDayOfMonth());
+            if (mMinDate != null) {
+                long min = mMinDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                datePicker.setMinDate(min);
+            }
+            if (mMaxDate != null) {
+                long max = mMaxDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                datePicker.setMaxDate(max);
+            }
         }
-        if (mMaxDate != null) {
-            long max = mMaxDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
-            datePicker.setMaxDate(max);
-        }
+
         mDatePicker = datePicker;
 
         builder.setView(view);
         builder.setPositiveButton(android.R.string.ok, this);
         builder.setNegativeButton(android.R.string.cancel, this);
         return builder.create();
+    }
+
+    private void onCreateDatePicker(DatePicker datePicker) {
+        Context context = datePicker.getContext();
+        XpDatePicker.setSelectionDividerTint(datePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
     }
 
     @Override
