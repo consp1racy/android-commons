@@ -113,7 +113,7 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         return builder.create();
     }
 
-    private void onCreateDatePicker(DatePicker datePicker) {
+    protected void onCreateDatePicker(DatePicker datePicker) {
         Context context = datePicker.getContext();
         XpDatePicker.setSelectionDividerTint(datePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
     }
