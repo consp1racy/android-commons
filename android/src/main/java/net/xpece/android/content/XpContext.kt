@@ -3,6 +3,7 @@
 
 package net.xpece.android.content
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlarmManager
 import android.content.Context
@@ -33,32 +34,6 @@ import android.widget.Toast
 import net.xpece.android.R
 
 private val TYPED_VALUE = ThreadLocal<TypedValue>()
-
-@ColorInt
-fun Context.getColorCompat(@ColorRes resId: Int): Int
-        = getColorStateListCompat(resId).defaultColor
-
-fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList {
-    try {
-        return AppCompatResources.getColorStateList(this, resId)
-    } catch (ex: NoSuchMethodError) {
-        return ContextCompat.getColorStateList(this, resId)
-    }
-}
-
-fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
-    if (DrawableResolver.isDrawableResolversEnabled) {
-        DrawableResolver.drawableResolvers.forEach {
-            val d = it.getDrawable(this, resId)
-            if (d != null) return d
-        }
-    }
-    try {
-        return AppCompatResources.getDrawable(this, resId)
-    } catch (ex: NoSuchMethodError) {
-        return AppCompatDrawableManager.get().getDrawable(this, resId)
-    }
-}
 
 @UiThread
 fun Context.ensureRuntimeTheme() {
@@ -253,6 +228,15 @@ fun Context.email(address: String) {
 
 fun Context.dial(number: String) {
     val i = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null))
+    i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+    if (!maybeStartActivity(i)) {
+        Toast.makeText(this, R.string.xpc_no_intent_handler, Toast.LENGTH_LONG).show()
+    }
+}
+
+@RequiresPermission(Manifest.permission.CALL_PHONE)
+fun Context.call(number: String) {
+    val i = Intent(Intent.ACTION_CALL, Uri.fromParts("tel", number, null))
     i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
     if (!maybeStartActivity(i)) {
         Toast.makeText(this, R.string.xpc_no_intent_handler, Toast.LENGTH_LONG).show()

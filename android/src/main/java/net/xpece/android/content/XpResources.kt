@@ -7,10 +7,10 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
-import android.support.annotation.AttrRes
-import android.support.annotation.ColorInt
-import android.support.annotation.DimenRes
-import android.support.annotation.StyleRes
+import android.support.annotation.*
+import android.support.v4.content.ContextCompat
+import android.support.v7.content.res.AppCompatResources
+import android.support.v7.widget.AppCompatDrawableManager
 import net.xpece.android.content.res.Dimen
 
 private val TEMP_ARRAY = ThreadLocal<IntArray>()
@@ -22,6 +22,36 @@ private fun getTempArray(): IntArray {
         TEMP_ARRAY.set(tempArray)
     }
     return tempArray
+}
+
+@ColorInt
+fun Context.getColorCompat(@ColorRes resId: Int): Int
+        = getColorStateListCompat(resId).defaultColor
+
+fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList {
+    try {
+        return AppCompatResources.getColorStateList(this, resId)
+    } catch (ex: NoSuchMethodError) {
+        return ContextCompat.getColorStateList(this, resId)
+    }
+}
+
+fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
+    if (DrawableResolver.isDrawableResolversEnabled) {
+        DrawableResolver.drawableResolvers.forEach {
+            val d = it.getDrawable(this, resId)
+            if (d != null) return d
+        }
+    }
+    try {
+        return AppCompatResources.getDrawable(this, resId)
+    } catch (ex: NoSuchMethodError) {
+        try {
+            return AppCompatDrawableManager.get().getDrawable(this, resId)
+        } catch (ex2 : NoSuchMethodError) {
+            return ContextCompat.getDrawable(this, resId)
+        }
+    }
 }
 
 fun Context.resolveFloat(@AttrRes attr: Int, fallback: Float = 0F) = resolveFloat(0, attr, fallback)
