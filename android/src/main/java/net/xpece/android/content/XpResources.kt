@@ -5,6 +5,7 @@ package net.xpece.android.content
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.support.annotation.AttrRes
 import android.support.annotation.ColorInt
@@ -47,9 +48,7 @@ fun Context.resolveText(@AttrRes attr: Int) = resolveText(0, attr)
 fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int) = resolveResourceId(0, attr, fallback)
 
 fun Context.resolveFloat(@StyleRes style: Int, @AttrRes attr: Int, fallback: Float): Float {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         return ta.getFloat(0, fallback)
     } finally {
@@ -58,9 +57,7 @@ fun Context.resolveFloat(@StyleRes style: Int, @AttrRes attr: Int, fallback: Flo
 }
 
 fun Context.resolveBoolean(@StyleRes style: Int, @AttrRes attr: Int, fallback: Boolean): Boolean {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         return ta.getBoolean(0, fallback)
     } finally {
@@ -70,9 +67,7 @@ fun Context.resolveBoolean(@StyleRes style: Int, @AttrRes attr: Int, fallback: B
 
 @ColorInt
 fun Context.resolveColor(@StyleRes style: Int, @AttrRes attr: Int, @ColorInt fallback: Int = 0): Int {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
@@ -88,9 +83,7 @@ fun Context.resolveColor(@StyleRes style: Int, @AttrRes attr: Int, @ColorInt fal
 }
 
 fun Context.resolveColorStateList(@StyleRes style: Int, @AttrRes attr: Int): ColorStateList? {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
@@ -106,9 +99,7 @@ fun Context.resolveColorStateList(@StyleRes style: Int, @AttrRes attr: Int): Col
 }
 
 fun Context.resolveDimension(@StyleRes style: Int, @AttrRes attr: Int, fallback: Float = 0F): Float {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         return ta.getDimension(0, fallback)
     } finally {
@@ -117,9 +108,7 @@ fun Context.resolveDimension(@StyleRes style: Int, @AttrRes attr: Int, fallback:
 }
 
 fun Context.resolveDimensionPixelOffset(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         return ta.getDimensionPixelOffset(0, fallback)
     } finally {
@@ -128,9 +117,7 @@ fun Context.resolveDimensionPixelOffset(@StyleRes style: Int, @AttrRes attr: Int
 }
 
 fun Context.resolveDimensionPixelSize(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         return ta.getDimensionPixelSize(0, fallback)
     } finally {
@@ -139,9 +126,7 @@ fun Context.resolveDimensionPixelSize(@StyleRes style: Int, @AttrRes attr: Int, 
 }
 
 fun Context.resolveDrawable(@StyleRes style: Int, @AttrRes attr: Int): Drawable? {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
@@ -157,9 +142,7 @@ fun Context.resolveDrawable(@StyleRes style: Int, @AttrRes attr: Int): Drawable?
 }
 
 fun Context.resolveString(@StyleRes style: Int, @AttrRes attr: Int): String? {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
@@ -175,9 +158,7 @@ fun Context.resolveString(@StyleRes style: Int, @AttrRes attr: Int): String? {
 }
 
 fun Context.resolveText(@StyleRes style: Int, @AttrRes attr: Int): CharSequence? {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
@@ -193,9 +174,7 @@ fun Context.resolveText(@StyleRes style: Int, @AttrRes attr: Int): CharSequence?
 }
 
 fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int): Int {
-    val tempArray = getTempArray()
-    tempArray[0] = attr
-    val ta = obtainStyledAttributes(style, tempArray)
+    val ta = obtainTypedArray(style, attr)
     try {
         return ta.getResourceId(0, fallback)
     } finally {
@@ -207,3 +186,10 @@ fun sp(sp: Int): Dimen = Dimen.sp(sp)
 fun dp(dp: Int): Dimen = Dimen.dp(dp)
 fun dimen(@DimenRes resId: Int): Dimen = Dimen.res(resId)
 fun Context.dimenAttr(@AttrRes attrId: Int): Dimen = Dimen.attr(this, attrId)
+
+private fun Context.obtainTypedArray(style: Int, attr: Int): TypedArray {
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
+    return ta
+}
