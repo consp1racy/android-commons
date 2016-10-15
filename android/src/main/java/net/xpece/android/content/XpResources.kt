@@ -12,7 +12,16 @@ import android.support.annotation.DimenRes
 import android.support.annotation.StyleRes
 import net.xpece.android.content.res.Dimen
 
-private val TEMP_ARRAY = IntArray(1)
+private val TEMP_ARRAY = ThreadLocal<IntArray>()
+
+private fun getTempArray(): IntArray {
+    var tempArray = TEMP_ARRAY.get()
+    if (tempArray == null) {
+        tempArray = IntArray(1)
+        TEMP_ARRAY.set(tempArray)
+    }
+    return tempArray
+}
 
 fun Context.resolveFloat(@AttrRes attr: Int, fallback: Float = 0F) = resolveFloat(0, attr, fallback)
 
@@ -38,8 +47,9 @@ fun Context.resolveText(@AttrRes attr: Int) = resolveText(0, attr)
 fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int) = resolveResourceId(0, attr, fallback)
 
 fun Context.resolveFloat(@StyleRes style: Int, @AttrRes attr: Int, fallback: Float): Float {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
         return ta.getFloat(0, fallback)
     } finally {
@@ -48,8 +58,9 @@ fun Context.resolveFloat(@StyleRes style: Int, @AttrRes attr: Int, fallback: Flo
 }
 
 fun Context.resolveBoolean(@StyleRes style: Int, @AttrRes attr: Int, fallback: Boolean): Boolean {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
         return ta.getBoolean(0, fallback)
     } finally {
@@ -59,10 +70,11 @@ fun Context.resolveBoolean(@StyleRes style: Int, @AttrRes attr: Int, fallback: B
 
 @ColorInt
 fun Context.resolveColor(@StyleRes style: Int, @AttrRes attr: Int, @ColorInt fallback: Int = 0): Int {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
-        val resId = resolveResourceId(style, attr, 0)
+        val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
             // It's a reference, let Context handle it.
             return getColorCompat(resId)
@@ -76,10 +88,11 @@ fun Context.resolveColor(@StyleRes style: Int, @AttrRes attr: Int, @ColorInt fal
 }
 
 fun Context.resolveColorStateList(@StyleRes style: Int, @AttrRes attr: Int): ColorStateList? {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
-        val resId = resolveResourceId(style, attr, 0)
+        val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
             // It's a reference, let Context handle it.
             return getColorStateListCompat(resId)
@@ -93,8 +106,9 @@ fun Context.resolveColorStateList(@StyleRes style: Int, @AttrRes attr: Int): Col
 }
 
 fun Context.resolveDimension(@StyleRes style: Int, @AttrRes attr: Int, fallback: Float = 0F): Float {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
         return ta.getDimension(0, fallback)
     } finally {
@@ -103,8 +117,9 @@ fun Context.resolveDimension(@StyleRes style: Int, @AttrRes attr: Int, fallback:
 }
 
 fun Context.resolveDimensionPixelOffset(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
         return ta.getDimensionPixelOffset(0, fallback)
     } finally {
@@ -113,8 +128,9 @@ fun Context.resolveDimensionPixelOffset(@StyleRes style: Int, @AttrRes attr: Int
 }
 
 fun Context.resolveDimensionPixelSize(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
         return ta.getDimensionPixelSize(0, fallback)
     } finally {
@@ -123,10 +139,11 @@ fun Context.resolveDimensionPixelSize(@StyleRes style: Int, @AttrRes attr: Int, 
 }
 
 fun Context.resolveDrawable(@StyleRes style: Int, @AttrRes attr: Int): Drawable? {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
-        val resId = resolveResourceId(style, attr, 0)
+        val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
             // It's a reference, let Context handle it.
             return getDrawableCompat(resId)
@@ -140,8 +157,9 @@ fun Context.resolveDrawable(@StyleRes style: Int, @AttrRes attr: Int): Drawable?
 }
 
 fun Context.resolveString(@StyleRes style: Int, @AttrRes attr: Int): String? {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
         val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
@@ -157,8 +175,9 @@ fun Context.resolveString(@StyleRes style: Int, @AttrRes attr: Int): String? {
 }
 
 fun Context.resolveText(@StyleRes style: Int, @AttrRes attr: Int): CharSequence? {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
         val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
@@ -174,8 +193,9 @@ fun Context.resolveText(@StyleRes style: Int, @AttrRes attr: Int): CharSequence?
 }
 
 fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int): Int {
-    TEMP_ARRAY[0] = attr
-    val ta = obtainStyledAttributes(style, TEMP_ARRAY)
+    val tempArray = getTempArray()
+    tempArray[0] = attr
+    val ta = obtainStyledAttributes(style, tempArray)
     try {
         return ta.getResourceId(0, fallback)
     } finally {

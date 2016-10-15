@@ -32,7 +32,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import net.xpece.android.R
 
-private val TYPED_VALUE = TypedValue()
+private val TYPED_VALUE = ThreadLocal<TypedValue>()
 
 @ColorInt
 fun Context.getColorCompat(@ColorRes resId: Int): Int
@@ -62,11 +62,20 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
 
 @UiThread
 fun Context.ensureRuntimeTheme() {
-    theme.resolveAttribute(R.attr.ltRuntimeTheme, TYPED_VALUE, true)
+    theme.resolveAttribute(R.attr.ltRuntimeTheme, getTypedValue(), true)
     val resourceId = resolveResourceId(R.attr.ltRuntimeTheme, 0)
     if (resourceId != 0) {
         setTheme(resourceId)
     }
+}
+
+private fun getTypedValue(): TypedValue {
+    var typedValue = TYPED_VALUE.get()
+    if (typedValue == null) {
+        typedValue = TypedValue()
+        TYPED_VALUE.set(typedValue)
+    }
+    return typedValue
 }
 
 fun <T : Activity> Context.startActivity(activity: Class<T>, func: Intent.() -> Unit = {}) {
