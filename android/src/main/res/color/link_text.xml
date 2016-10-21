@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- This affects color of all ClickableSpans while only one is pressed. -->
+    <!--<item android:color="?android:textColorPrimary" android:state_enabled="true" android:state_pressed="true"/>-->
+    <item android:alpha="?android:disabledAlpha" android:color="?colorAccent" android:state_enabled="false"/>
+    <item android:color="?colorAccent"/>
+</selector>

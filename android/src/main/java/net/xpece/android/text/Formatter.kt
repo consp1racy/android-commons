@@ -1,0 +1,20 @@
+package net.xpece.android.text
+
+import java.text.NumberFormat
+import java.util.*
+
+/**
+ * @author Eugen on 10.09.2016.
+ */
+
+object Formatter {
+    val CS_CZ = Locale("cs", "CZ")
+    val CZK = Currency.getInstance("CZK")!!
+
+    fun getCurrencyFormatter(currency: Currency, minimumFractionDigits: Int = 0, locale: Locale = Locale.getDefault()): NumberFormat {
+        val format = NumberFormat.getCurrencyInstance(locale)
+        format.currency = currency
+        format.minimumFractionDigits = minimumFractionDigits
+        return format
+    }
+}

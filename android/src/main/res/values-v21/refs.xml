@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="cardview_dark_foreground" type="drawable" format="reference">@drawable/cardview_foreground</item>
+    <item name="cardview_light_foreground" type="drawable" format="reference">@drawable/cardview_foreground</item>
+</resources>

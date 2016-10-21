@@ -13,13 +13,38 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <TextView
-        fontPath="fonts/DINNextRoundedLTPro-Bold.otf"
-        android:text="@string/action_settings"
-        android:textSize="60dp"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingPrefix"/>
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:foreground="@drawable/cardview_light_foreground">
+
+        <TextView
+            fontPath="fonts/DINNextRoundedLTPro-Bold.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_settings"
+            android:textSize="60dp"
+            tools:ignore="MissingPrefix"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:foreground="@drawable/cardview_dark_foreground"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <TextView
+            fontPath="fonts/DINNextRoundedLTPro-Bold.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_settings"
+            android:textSize="60dp"
+            tools:ignore="MissingPrefix"/>
+    </android.support.v7.widget.CardView>
 
     <net.xpece.android.widget.CalligraphyToolbar
         android:id="@+id/toolbar"

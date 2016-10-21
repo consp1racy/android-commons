@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enterFadeDuration="100" android:exitFadeDuration="100">
+
+    <!-- Even though these two point to the same resource, have two states so the drawable will invalidate itself when coming out of pressed state. -->
+    <item android:drawable="@drawable/cardview_dark_foreground_in" android:state_enabled="false" android:state_focused="true" android:state_pressed="true"/>
+    <item android:drawable="@drawable/cardview_dark_foreground_in" android:state_enabled="false" android:state_focused="true"/>
+    <item android:drawable="@drawable/cardview_dark_foreground_in" android:state_focused="true" android:state_pressed="true"/>
+    <item android:drawable="@drawable/cardview_dark_foreground_in" android:state_focused="false" android:state_pressed="true"/>
+    <item android:drawable="@drawable/cardview_dark_foreground_in" android:state_focused="true"/>
+    <item android:drawable="@android:color/transparent"/>
+</selector>

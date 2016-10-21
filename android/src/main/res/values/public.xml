@@ -18,6 +18,12 @@
     <public type="drawable" name="ic_expand_less_black_24dp"/>
     <public type="drawable" name="ic_expand_more_black_24dp"/>
 
+    <public type="drawable" name="shadow_above"/>
+    <public type="drawable" name="shadow_below"/>
+
+    <public type="drawable" name="cardview_dark_foreground"/>
+    <public type="drawable" name="cardview_light_foreground"/>
+
     <public type="id" name="expandable_text"/>
     <public type="id" name="expand_collapse"/>
 
@@ -38,6 +44,9 @@
     <public type="dimen" name="material_grid_item_size_medium"/>
     <public type="dimen" name="material_grid_item_size_small"/>
     <public type="dimen" name="material_grid_item_size_micro"/>
+
+    <public type="color" name="activated_text"/>
+    <public type="color" name="link_text"/>
 
     <public type="color" name="material_red_a400_alt"/>
     <public type="color" name="material_pink_a700_alt"/>

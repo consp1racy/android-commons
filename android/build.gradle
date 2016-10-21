@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 17
@@ -33,7 +33,6 @@ android {
 }
 
 dependencies {
-    ext.supportLibsVersion = "24.2.1"
     compile "com.android.support:design:$supportLibsVersion"
     provided "com.android.support:palette-v7:$supportLibsVersion"
 
@@ -45,7 +44,7 @@ dependencies {
     provided 'com.squareup.picasso:picasso:2.5.2'
     provided 'org.parceler:parceler-api:1.1.5'
     provided 'io.requery:sqlite-android:3.14.2'
-    provided "io.requery:requery:1.0.0-rc4"
+    provided "io.requery:requery:1.0.0"
     provided 'com.birbit:android-priority-jobqueue:2.0.0'
     provided 'com.squareup.moshi:moshi:1.2.0'
 //    provided 'com.squareup.okio:okio:1.10.0'
@@ -56,7 +55,7 @@ dependencies {
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.12.4'
+    PUBLISH_VERSION = '0.12.5'
 }
 
 apply from: '../android-release-aar.gradle'

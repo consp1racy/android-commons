@@ -30,8 +30,8 @@
     </declare-styleable>
 
     <declare-styleable name="OverlayImageView">
-        <attr name="oiv_overlay" format="reference" />
-        <attr name="oiv_overlayPadding" format="dimension|reference" />
+        <attr name="oiv_overlay" format="reference"/>
+        <attr name="oiv_overlayPadding" format="dimension|reference"/>
         <attr name="oiv_overlayGravity">
             <flag name="top" value="0x30"/>
             <flag name="bottom" value="0x50"/>
@@ -47,7 +47,23 @@
 
     <!-- The set of attributes that describe a AlertDialog's theme. -->
     <declare-styleable name="AlertDialog">
-        <attr name="progressLayout" format="reference" />
-        <attr name="horizontalProgressLayout" format="reference" />
+        <attr name="progressLayout" format="reference"/>
+        <attr name="horizontalProgressLayout" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="CheckedFrameLayout">
+        <attr name="android:checked"/>
+    </declare-styleable>
+
+    <declare-styleable name="ArbitraryInputLayout">
+        <attr name="android:hint"/>
+
+        <attr name="hintEnabled" format="boolean"/>
+        <attr name="hintTextAppearance" format="reference"/>
+        <attr name="android:textColorHint"/>
+
+        <attr name="errorEnabled" format="boolean"/>
+        <attr name="errorTextAppearance" format="reference"/>
+        <attr name="textColorError"/>
     </declare-styleable>
 </resources>
