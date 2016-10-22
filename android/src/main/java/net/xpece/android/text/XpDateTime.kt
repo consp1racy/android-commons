@@ -44,14 +44,17 @@ fun getFormatterTimeHuman(locale: Locale): DateFormat {
     return f!!
 }
 
+@JvmOverloads
 fun Date.printHumanReadableTime(locale: Locale = Locale.getDefault()): String {
     return getFormatterTimeHuman(locale).format(this)
 }
 
+@JvmOverloads
 fun Date.printHumanReadableDate(locale: Locale = Locale.getDefault()): String {
     return getFormatterDateHuman(locale).format(this)
 }
 
+@JvmOverloads
 fun Date.printHumanReadableDateTime(locale: Locale = Locale.getDefault()): String {
     return getFormatterDateTimeHuman(locale).format(this)
 }

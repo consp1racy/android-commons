@@ -27,6 +27,7 @@ fun CharSequence.unaccent(): String {
     return PATTERN_UNACCENT.matcher(temp).replaceAll("")
 }
 
+@JvmOverloads
 fun CharSequence.unaccentAndLower(locale: Locale = Locale.getDefault()) = this.unaccent().toLowerCase(locale)
 
 /**

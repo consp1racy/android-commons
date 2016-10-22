@@ -55,7 +55,7 @@ dependencies {
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.12.5'
+    PUBLISH_VERSION = '0.13.0'
 }
 
 apply from: '../android-release-aar.gradle'

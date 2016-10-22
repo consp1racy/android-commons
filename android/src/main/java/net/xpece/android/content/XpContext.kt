@@ -10,21 +10,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
 import android.location.LocationManager
 import android.media.AudioManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.PowerManager
-import android.support.annotation.*
+import android.support.annotation.LayoutRes
+import android.support.annotation.RequiresPermission
+import android.support.annotation.UiThread
 import android.support.v4.app.Fragment
 import android.support.v4.app.NotificationManagerCompat
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.NotificationCompat
-import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.AppCompatDrawableManager
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -97,9 +94,11 @@ fun viewIntent(uri: Uri, func: Intent.() -> Unit): Intent {
     return i
 }
 
+@JvmOverloads
 fun Context.openPlayStore(packageName: String = this.packageName)
         = view(getPlayStoreUri(packageName))
 
+@JvmOverloads
 fun Context.openPlayStoreIntent(packageName: String = this.packageName, func: Intent.() -> Unit = {}): Intent
         = viewIntent(getPlayStoreUri(packageName), func)
 
@@ -114,6 +113,7 @@ fun Context.inflate(@LayoutRes layout: Int): View =
         getLayoutInflater().inflate(layout, null, false)
 
 @UiThread
+@JvmOverloads
 fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = true): View =
         context.getLayoutInflater().inflate(layout, this, attachToRoot)
 

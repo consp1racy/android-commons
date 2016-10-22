@@ -30,6 +30,7 @@ fun Context.copy(inputUri: Uri, outputUri: Uri) {
 //    }
 }
 
+@JvmOverloads
 fun InputStream.readToString(charset: String = "UTF-8"): String {
     return Scanner(this, charset).useDelimiter("\\A").next()
 }
