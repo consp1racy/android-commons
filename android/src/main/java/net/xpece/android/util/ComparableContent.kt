@@ -6,7 +6,7 @@ package net.xpece.android.util
 interface ComparableContent<in T> {
     fun isSame(other: T): Boolean
     fun isContentSame(other: T): Boolean {
-        return this.equals(other)
+        return this == other
     }
 
     companion object {
