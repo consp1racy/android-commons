@@ -7,9 +7,6 @@ android {
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
     }
     buildTypes {
         release {
@@ -55,7 +52,7 @@ dependencies {
 ext {
     PUBLISH_GROUP_ID = 'net.xpece.android'
     PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.13.1'
+    PUBLISH_VERSION = '0.13.2'
 }
 
 apply from: '../android-release-aar.gradle'

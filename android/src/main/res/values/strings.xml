@@ -14,4 +14,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+
+    <string name="scrim_status_bar_behavior" translatable="false">net.xpece.android.widget.StatusBarScrimBehavior</string>
+    <string name="appbar_fill_horizontal_behavior" translatable="false">net.xpece.android.widget.AppBarFillHorizontalBehavior</string>
+
 </resources>

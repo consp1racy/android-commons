@@ -29,4 +29,12 @@
         <item name="layout_behavior">@string/hide_on_lollipop_behavior</item>
     </style>
 
+    <style name="Widget.Scrim.StatusBar" parent="">
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:background">?colorPrimaryDark</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="layout_behavior">@string/scrim_status_bar_behavior</item>
+    </style>
+
 </resources>
