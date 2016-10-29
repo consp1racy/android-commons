@@ -38,6 +38,4 @@ abstract class BaseFragment : Fragment() {
 
         outState.putBoolean(s, mPlayedEnterAnimation)
     }
-
-    open fun invalidateOptionsMenu() = activity?.apply { supportInvalidateOptionsMenu() }
 }

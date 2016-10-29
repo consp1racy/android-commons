@@ -61,7 +61,7 @@ abstract class LocalDateBpConverter<T> : Converter<LocalDate, T> {
 
     /**
      * Converts from a [LocalDate] to a [Date].
-     * Safe to use once requery is fixed. requery-rc5 whould be fine.
+     * Safe to use since requery-1.0.0.
      */
     object WithDate : LocalDateBpConverter<Date>() {
         override fun getPersistedType(): Class<Date> {

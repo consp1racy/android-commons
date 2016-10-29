@@ -38,6 +38,7 @@ abstract class OffsetDateTimeBpConverter<T> : Converter<OffsetDateTime, T> {
 
     /**
      * Converts from a [OffsetDateTime] to a [String].
+     * Can be compared as long as year is in range of 0 to 9999.
      * Strips zone ID.
      */
     object WithString : OffsetDateTimeBpConverter<String>() {
@@ -62,7 +63,7 @@ abstract class OffsetDateTimeBpConverter<T> : Converter<OffsetDateTime, T> {
 
     /**
      * Converts from a [OffsetDateTime] to a [Timestamp].
-     * Safe to use once requery is fixed. requery-rc5 whould be fine.
+     * Safe to use since requery-1.0.0.
      * Strips zone ID.
      */
     object WithTimestamp : OffsetDateTimeBpConverter<Timestamp>() {

@@ -61,7 +61,7 @@ abstract class InstantBpConverter<T> : Converter<Instant, T> {
 
     /**
      * Converts from a [Instant] to a [Timestamp].
-     * Safe to use once requery is fixed. requery-rc5 whould be fine.
+     * Safe to use since requery-1.0.0.
      */
     object WithTimestamp : InstantBpConverter<Timestamp>() {
         override fun getPersistedType(): Class<Timestamp> {

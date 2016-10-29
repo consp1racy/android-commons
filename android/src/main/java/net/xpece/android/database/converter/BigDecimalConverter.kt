@@ -17,11 +17,10 @@
 package net.xpece.android.database.converter
 
 import io.requery.Converter
-import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
 /**
- * Converts from a [LocalDate] to a [java.sql.Date] for Java 8.
+ * Converts from a [BigDecimal] to a [String].
  */
 object BigDecimalConverter : Converter<BigDecimal, String> {
 
