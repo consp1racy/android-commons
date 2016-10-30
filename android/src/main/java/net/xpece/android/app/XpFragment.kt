@@ -1,3 +1,5 @@
+@file:JvmName("XpFragment")
+
 package net.xpece.android.app
 
 import android.support.v4.app.Fragment
