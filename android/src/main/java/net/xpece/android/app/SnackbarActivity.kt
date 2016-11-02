@@ -1,4 +1,4 @@
-package cz.quickjobs.android.util
+package net.xpece.android.app
 
 import android.support.annotation.ColorRes
 import android.support.annotation.StringRes
