@@ -39,7 +39,13 @@ data class Dimen internal constructor(val value: Float) {
     operator fun div(d: Number) = Dimen(this.value / d.toFloat())
 
     val pixelSize: Int
-        get() = (value + 0.5f).toInt()
+        get() {
+            val res = (value + 0.5F).toInt()
+            if (res != 0) return res
+            if (value == 0F) return 0
+            if (value > 0) return 1
+            return -1
+        }
 
     val pixelOffset: Int
         get() = value.toInt()
@@ -90,16 +96,16 @@ data class Dimen internal constructor(val value: Float) {
         }
 
         @JvmStatic
-        fun attr(context: Context, @AttrRes attr: Int, fallback : Number = 0): Dimen {
+        fun attr(context: Context, @AttrRes attr: Int, fallback: Number = 0): Dimen {
             val resId = context.resolveResourceId(attr, 0)
             return res(context, resId, fallback)
         }
 
         @JvmStatic
-        private fun res(context: Context, @DimenRes resId: Int, fallback : Number = 0): Dimen {
+        private fun res(context: Context, @DimenRes resId: Int, fallback: Number = 0): Dimen {
             try {
                 return Dimen(context.resources.getDimension(resId))
-            } catch (erx :Resources.NotFoundException) {
+            } catch (erx: Resources.NotFoundException) {
                 return Dimen(fallback.toFloat())
             }
         }
