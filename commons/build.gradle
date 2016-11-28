@@ -14,6 +14,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 //    publishNonDefault true
 //    defaultPublishConfig "release"
 
@@ -49,10 +50,11 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
-ext {
-    PUBLISH_GROUP_ID = 'net.xpece.android'
-    PUBLISH_ARTIFACT_ID = 'commons'
-    PUBLISH_VERSION = '0.13.3'
+repositories {
+    jcenter()
 }
 
-apply from: '../android-release-aar.gradle'
+group = rootProject.GROUP_ID
+version = rootProject.VERSION_NAME
+
+apply from: rootProject.file('android-release.gradle')

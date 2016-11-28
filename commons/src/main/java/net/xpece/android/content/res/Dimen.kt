@@ -151,7 +151,7 @@ data class Dimen internal constructor(val value: Float) {
         }
 
         @JvmStatic
-        fun px(px: Int): Dimen {
+        fun px(px: Number): Dimen {
             return Dimen(px.toFloat())
         }
     }

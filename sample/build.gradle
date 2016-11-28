@@ -23,10 +23,12 @@ android {
 dependencies {
 //  debugCompile project(path: ':android', configuration: 'debug');
 //  releaseCompile project(path: ':android', configuration: 'release');
-    compile project(':android')
+    compile project(':commons')
 
     compile "com.android.support:cardview-v7:$supportLibsVersion"
-
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+}
 
+repositories {
+    jcenter()
 }

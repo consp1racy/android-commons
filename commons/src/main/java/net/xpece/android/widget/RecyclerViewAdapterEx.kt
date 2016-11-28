@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import net.xpece.android.widget.HeaderFooterRecyclerViewAdapter
 import net.xpece.android.R
 
 /**
@@ -101,8 +100,8 @@ abstract class RecyclerViewAdapterEx<T : RecyclerView.ViewHolder> : HeaderFooter
         return EmptyViewHolder(view)
     }
 
-    override fun onBindPreFooterItemViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        model!!.bind(holder)
+    override fun onBindPreFooterItemViewHolder(footerViewHolder: RecyclerView.ViewHolder, position: Int) {
+        model!!.bind(footerViewHolder)
     }
 
     internal class EmptyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

@@ -1,5 +1,6 @@
 package net.xpece.android.app;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -79,6 +80,7 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
 
     @Override
     @NonNull
+    @SuppressLint("InflateParams")
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             mDate = (LocalDate) savedInstanceState.getSerializable("mDate");

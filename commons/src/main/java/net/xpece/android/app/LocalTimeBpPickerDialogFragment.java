@@ -1,5 +1,6 @@
 package net.xpece.android.app;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -79,6 +80,7 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
     @Override
     @NonNull
     @SuppressWarnings("deprecation")
+    @SuppressLint("InflateParams")
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final Context context = builder.getContext();

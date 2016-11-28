@@ -1,31 +1,27 @@
 buildscript {
-    ext.kotlin_version = '1.0.4'
+    ext.kotlin_version = '1.0.5-2'
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
 ext {
     compileSdkVersion = 25
-    buildToolsVersion = "25.0.0"
-    supportLibsVersion = "25.0.0"
+    buildToolsVersion = "25.0.1"
+    supportLibsVersion = "25.0.1"
 }
 
 // http://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html
-if (JavaVersion.current().isJava8Compatible()) {
+//if (JavaVersion.current().isJava8Compatible()) {
     allprojects {
         tasks.withType(Javadoc) {
             options.addStringOption('Xdoclint:none', '-quiet')
+            excludes = ['**/*.kt']
         }
     }
-}
+//}

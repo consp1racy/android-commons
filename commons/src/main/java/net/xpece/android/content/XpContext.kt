@@ -139,12 +139,12 @@ fun Context.maybeStartActivity(intent: Intent) = maybeStartActivity(intent, fals
 fun Context.maybeStartChooser(intent: Intent) = maybeStartActivity(intent, true)
 
 fun Context.maybeStartActivity(intent: Intent, chooser: Boolean): Boolean {
-    var intent = intent
-    if (hasHandler(intent)) {
+    var intent2 = intent
+    if (hasHandler(intent2)) {
         if (chooser) {
-            intent = Intent.createChooser(intent, null)
+            intent2 = Intent.createChooser(intent2, null)
         }
-        startActivity(intent)
+        startActivity(intent2)
         return true
     } else {
         //            showNoActivityError(context);
