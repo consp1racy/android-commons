@@ -4,10 +4,13 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.WindowInsets;
 import android.widget.AbsoluteLayout;
+
+import net.xpece.android.view.XpView;
 
 /**
  * AbsoluteLayout that doesn't consume window insets.
@@ -27,12 +30,7 @@ public class IrresponsibleAbsoluteLayoutApi19 extends AbsoluteLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public IrresponsibleAbsoluteLayoutApi19(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
-    @TargetApi(21)
+    @RequiresApi(21)
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         return insets;
@@ -40,6 +38,7 @@ public class IrresponsibleAbsoluteLayoutApi19 extends AbsoluteLayout {
 
     @SuppressWarnings("deprecation")
     @Override
+    @TargetApi(19)
     protected boolean fitSystemWindows(final Rect insets) {
         if (Build.VERSION.SDK_INT == 19 || Build.VERSION.SDK_INT == 20) {
             boolean done = false;

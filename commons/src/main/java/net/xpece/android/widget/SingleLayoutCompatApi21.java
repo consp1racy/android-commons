@@ -17,10 +17,10 @@
 
 package net.xpece.android.widget;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
@@ -28,7 +28,7 @@ import android.view.WindowInsets;
 /**
  * Provides functionality for DrawerLayout unique to API 21
  */
-@TargetApi(21)
+@RequiresApi(21)
 class SingleLayoutCompatApi21 {
 
     private static final int[] THEME_ATTRS = {

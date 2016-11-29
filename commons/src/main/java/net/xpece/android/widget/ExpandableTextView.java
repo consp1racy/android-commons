@@ -1,10 +1,8 @@
 package net.xpece.android.widget;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -23,8 +21,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.xpece.android.graphics.drawable.XpDrawable;
 import net.xpece.android.R;
+import net.xpece.android.graphics.drawable.XpDrawable;
 
 /**
  * @author Eugen
@@ -77,16 +75,9 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
         init(context, attrs, 0, 0);
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public ExpandableTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context, attrs, defStyle, 0);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public ExpandableTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs, defStyleAttr, defStyleRes);
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {

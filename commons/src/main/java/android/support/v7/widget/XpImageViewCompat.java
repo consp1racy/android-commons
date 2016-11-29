@@ -56,7 +56,6 @@ public final class XpImageViewCompat {
         PorterDuff.Mode getImageTintMode(@NonNull ImageView imageView);
     }
 
-    @TargetApi(4)
     static class BaseXpImageViewCompatImpl implements XpImageViewCompatImpl {
         @Override
         public void setImageTintList(@NonNull ImageView imageView, @Nullable ColorStateList tint) {

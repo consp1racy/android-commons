@@ -1,6 +1,5 @@
 package net.xpece.android.widget;
 
-import android.annotation.TargetApi;
 import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +7,7 @@ import android.widget.BaseExpandableListAdapter;
 
 /**
  * Created by Eugen on 24. 3. 2015.
- *
- * @since API 8
  */
-@TargetApi(8)
 @Deprecated
 public class ExpandableListAdapterWrapper extends BaseExpandableListAdapter {
 

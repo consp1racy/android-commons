@@ -1,6 +1,5 @@
 package net.xpece.android.widget;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.Keep;
@@ -51,7 +50,6 @@ public class AppBarShadowBehavior extends CoordinatorLayout.Behavior<View> {
     }
 
     @Override
-    @TargetApi(11)
     public boolean onDependentViewChanged(final CoordinatorLayout parent, final View child, final View dependency) {
         if (dependency.getVisibility() == View.VISIBLE) {
             ViewGroup.MarginLayoutParams dlp = (ViewGroup.MarginLayoutParams) dependency.getLayoutParams();
@@ -65,7 +63,6 @@ public class AppBarShadowBehavior extends CoordinatorLayout.Behavior<View> {
     }
 
     @Override
-    @TargetApi(11)
     public void onDependentViewRemoved(final CoordinatorLayout parent, final View child, final View dependency) {
         ViewCompat.setTranslationY(child, 0);
         child.setVisibility(View.GONE);

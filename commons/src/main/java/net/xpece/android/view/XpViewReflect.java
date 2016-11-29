@@ -1,4 +1,4 @@
-package net.xpece.android.widget;
+package net.xpece.android.view;
 
 import android.graphics.Rect;
 import android.view.View;
@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
  * @hide
  */
 
-public final class XpView {
+final class XpViewReflect {
     private static final Method METHOD_FIT_SYSTEM_WINDOWS;
 
     static {
@@ -24,7 +24,7 @@ public final class XpView {
         METHOD_FIT_SYSTEM_WINDOWS = fitSystemWindows;
     }
 
-    private XpView() {
+    private XpViewReflect() {
     }
 
     public static boolean fitSystemWindows(View view, Rect insets) {

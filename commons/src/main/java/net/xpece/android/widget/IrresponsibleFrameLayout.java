@@ -1,8 +1,7 @@
 package net.xpece.android.widget;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
@@ -25,12 +24,7 @@ public class IrresponsibleFrameLayout extends FrameLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public IrresponsibleFrameLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
-    @TargetApi(21)
+    @RequiresApi(21)
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
         return insets;

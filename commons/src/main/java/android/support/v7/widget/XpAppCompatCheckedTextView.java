@@ -16,13 +16,14 @@
 
 package android.support.v7.widget;
 
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.TintableBackgroundView;
 import android.support.v7.content.res.AppCompatResources;
 import android.util.AttributeSet;
@@ -34,6 +35,8 @@ import android.widget.CheckedTextView;
  * <p>This will automatically be used when you use {@link CheckedTextView} in your layouts.
  * You should only need to manually use this class when writing custom views.</p>
  */
+@SuppressLint("AppCompatCustomView")
+@SuppressWarnings("RestrictedApi")
 public class XpAppCompatCheckedTextView extends CheckedTextView
     implements TintableBackgroundView, TintableCompoundDrawableView {
 
@@ -166,7 +169,7 @@ public class XpAppCompatCheckedTextView extends CheckedTextView
     }
 
     @Override
-    @TargetApi(4)
+    @RequiresApi(17)
     public void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
         if (mTextCompoundDrawableHelper != null) {
             mTextCompoundDrawableHelper.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);

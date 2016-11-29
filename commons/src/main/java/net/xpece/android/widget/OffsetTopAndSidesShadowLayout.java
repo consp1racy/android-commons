@@ -24,6 +24,7 @@ public class OffsetTopAndSidesShadowLayout extends ShadowLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected boolean fitSystemWindows(final Rect insets) {
         final boolean value = super.fitSystemWindows(insets);

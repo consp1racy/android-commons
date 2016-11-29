@@ -3,7 +3,6 @@ package net.xpece.android.graphics.drawable;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.graphics.drawable.Drawable;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
@@ -23,7 +22,6 @@ public final class XpDrawable {
         animate(d, duration, MIN_LEVEL, MAX_LEVEL);
     }
 
-    @TargetApi(11)
     public static void animate(final Drawable d, final int duration, final int from, final int to) {
         ValueAnimator a = ValueAnimator.ofInt(from, to);
         a.setDuration(duration);

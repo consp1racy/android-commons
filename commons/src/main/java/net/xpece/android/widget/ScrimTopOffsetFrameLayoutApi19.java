@@ -1,5 +1,6 @@
 package net.xpece.android.widget;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -15,6 +16,7 @@ import android.widget.FrameLayout;
 
 import net.xpece.android.R;
 import net.xpece.android.graphics.XpRect;
+import net.xpece.android.view.XpView;
 
 /**
  * FrameLayout that offsets its content according to supplied window insets and scrims top.
@@ -70,6 +72,8 @@ public class ScrimTopOffsetFrameLayoutApi19 extends FrameLayout {
     }
 
     @Override
+    @TargetApi(19)
+    @SuppressWarnings("deprecation")
     protected boolean fitSystemWindows(final Rect insets) {
         if (Build.VERSION.SDK_INT == 19 || Build.VERSION.SDK_INT == 20) {
             if (null == mInsets) {

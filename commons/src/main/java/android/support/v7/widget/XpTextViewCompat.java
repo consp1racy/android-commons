@@ -68,7 +68,6 @@ public final class XpTextViewCompat {
         PorterDuff.Mode getCompoundDrawableTintMode(@NonNull TextView textView);
     }
 
-    @TargetApi(4)
     static class BaseXpTextViewCompatImpl implements XpTextViewCompatImpl {
         @Override
         public Drawable[] getCompoundDrawablesRelative(@NonNull TextView textView) {

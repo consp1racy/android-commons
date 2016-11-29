@@ -1,14 +1,11 @@
 package net.xpece.android.widget;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.view.View;
 import android.widget.SearchView;
 
 /**
  * Created by pechanecjr on 21. 12. 2014.
  */
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SearchViewListenerAdapter implements SearchView.OnCloseListener,
     SearchView.OnQueryTextListener, SearchView.OnSuggestionListener, View.OnClickListener {
   @Override

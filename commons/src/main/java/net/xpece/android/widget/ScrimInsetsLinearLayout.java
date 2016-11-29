@@ -16,13 +16,11 @@
 
 package net.xpece.android.widget;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.R;
 import android.support.v4.view.ViewCompat;
@@ -54,7 +52,6 @@ public class ScrimInsetsLinearLayout extends LinearLayout {
         init(context, attrs, 0);
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public ScrimInsetsLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr);

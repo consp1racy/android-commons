@@ -21,8 +21,10 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.TintableBackgroundView;
 import android.util.AttributeSet;
 import android.widget.EditText;
@@ -159,8 +161,8 @@ public class XpAppCompatEditText extends EditText
         }
     }
 
+    @RequiresApi(17)
     @Override
-    @TargetApi(4)
     public void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
         if (mTextCompoundDrawableHelper != null) {
             mTextCompoundDrawableHelper.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);

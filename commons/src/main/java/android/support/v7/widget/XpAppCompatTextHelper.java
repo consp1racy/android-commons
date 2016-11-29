@@ -29,6 +29,7 @@ import net.xpece.android.R;
 /**
  * @hide
  */
+@SuppressWarnings("RestrictedApi")
 class XpAppCompatTextHelper {
 
     final TextView mView;

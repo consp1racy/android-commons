@@ -3,6 +3,8 @@ package net.xpece.android.widget;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.View;
@@ -48,6 +50,7 @@ public class DelegatePaddingSwipeRefreshLayout extends SwipeRefreshLayout {
     }
 
     @Override
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void setPaddingRelative(final int start, final int top, final int end, final int bottom) {
         hasPaddingRelative = true;
         getInsets().set(start, top, end, bottom);

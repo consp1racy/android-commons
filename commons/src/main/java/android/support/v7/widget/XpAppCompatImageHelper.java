@@ -11,6 +11,7 @@ import net.xpece.android.R;
 /**
  * @hide
  */
+@SuppressWarnings("RestrictedApi")
 public class XpAppCompatImageHelper {
 
     private final ImageView mView;

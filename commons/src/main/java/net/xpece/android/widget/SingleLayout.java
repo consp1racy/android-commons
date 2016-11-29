@@ -1,5 +1,6 @@
 package net.xpece.android.widget;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -58,6 +59,8 @@ public class SingleLayout extends ViewGroup implements SingleLayoutImpl {
         }
     }
 
+//    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     static class SingleLayoutCompatImplApi21 implements SingleLayoutCompatImpl {
         public void configureApplyInsets(View drawerLayout) {
             SingleLayoutCompatApi21.configureApplyInsets(drawerLayout);
@@ -84,6 +87,7 @@ public class SingleLayout extends ViewGroup implements SingleLayoutImpl {
     static {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 21) {
+
             IMPL = new SingleLayoutCompatImplApi21();
         } else {
             IMPL = new SingleLayoutCompatImplBase();

@@ -23,6 +23,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.TintableBackgroundView;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -160,7 +161,7 @@ public class XpAppCompatTextView extends TextView
     }
 
     @Override
-    @TargetApi(4)
+    @RequiresApi(17)
     public void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
         if (mTextCompoundDrawableHelper != null) {
             mTextCompoundDrawableHelper.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);

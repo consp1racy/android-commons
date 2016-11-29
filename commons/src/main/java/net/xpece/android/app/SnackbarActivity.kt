@@ -27,7 +27,8 @@ interface SnackbarActivity {
             val background = AppCompatResources.getColorStateList(view.context, backgroundId).defaultColor
             val d = DrawableCompat.wrap(view.background)
             DrawableCompat.setTint(d, background)
-            view.background = d
+            @Suppress("DEPRECATION")
+            view.setBackgroundDrawable(d)
         }
         this.snackbar = snackbar
         snackbar.show()

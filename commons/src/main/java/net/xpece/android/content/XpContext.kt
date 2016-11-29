@@ -14,6 +14,7 @@ import android.location.LocationManager
 import android.media.AudioManager
 import android.net.ConnectivityManager
 import android.net.Uri
+import android.os.Build
 import android.os.PowerManager
 import android.support.annotation.LayoutRes
 import android.support.annotation.RequiresPermission
@@ -213,7 +214,11 @@ val Context.alarmManager: AlarmManager
     get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
 val Context.isRtl: Boolean
-    get() = resources.configuration.layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL
+    get() = if (Build.VERSION.SDK_INT < 17) {
+        false
+    } else {
+        resources.configuration.layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL
+    }
 
 val Context.isDebugBuild: Boolean
     get() = 0 != (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)

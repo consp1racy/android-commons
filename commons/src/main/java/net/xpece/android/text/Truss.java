@@ -1,6 +1,5 @@
 package net.xpece.android.text;
 
-import android.annotation.TargetApi;
 import android.text.SpannableStringBuilder;
 
 import java.util.ArrayDeque;
@@ -10,10 +9,7 @@ import static android.text.Spanned.SPAN_INCLUSIVE_EXCLUSIVE;
 
 /**
  * A {@link SpannableStringBuilder} wrapper whose API doesn't make me want to stab my eyes out.
- *
- * @since API 9
  */
-@TargetApi(9)
 public class Truss {
     private final SpannableStringBuilder builder;
     private final Deque<Span> stack;

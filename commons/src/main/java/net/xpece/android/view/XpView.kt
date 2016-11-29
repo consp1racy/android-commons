@@ -54,9 +54,9 @@ fun TextView.setTextAndVisibility(text: CharSequence?, invisible: Boolean = fals
 }
 
 @TargetApi(16)
-@Suppress("deprecation")
 fun View.setBackgroundCompat(d: Drawable) {
     if (Build.VERSION.SDK_INT < 16) {
+        @Suppress("DEPRECATION")
         setBackgroundDrawable(d)
     } else {
         background = d
@@ -64,9 +64,9 @@ fun View.setBackgroundCompat(d: Drawable) {
 }
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-@Suppress("deprecation")
 fun View.removeOnGlobalLayoutListenerCompat(l: ViewTreeObserver.OnGlobalLayoutListener) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+        @Suppress("deprecation")
         viewTreeObserver.removeGlobalOnLayoutListener(l)
     } else {
         viewTreeObserver.removeOnGlobalLayoutListener(l)
@@ -85,7 +85,6 @@ fun ScrollView.canScroll(): Boolean {
     return false
 }
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 fun setSearchViewLayoutTransition(view: SearchView) {
     if (Build.VERSION.SDK_INT < 11) return
     val searchBarId = view.context.resources.getIdentifier("android:id/search_bar", null, null)
@@ -93,7 +92,6 @@ fun setSearchViewLayoutTransition(view: SearchView) {
     searchBar.layoutTransition = LayoutTransition()
 }
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 fun setSearchViewLayoutTransition(view: android.support.v7.widget.SearchView) {
     if (Build.VERSION.SDK_INT < 11) return
     val searchBar = view.findViewById(R.id.search_bar) as LinearLayout
@@ -155,4 +153,6 @@ fun View.toastContentDescription(text: CharSequence = this.contentDescription): 
 }
 
 val View.isRtl: Boolean
-    get() = this.layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL
+    get() = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL
+
+fun View.fitSystemWindows(insets: Rect) = XpViewReflect.fitSystemWindows(this, insets)

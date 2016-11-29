@@ -16,13 +16,16 @@
 
 package android.support.v7.widget;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.TintableBackgroundView;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityEvent;
@@ -46,6 +49,8 @@ import net.xpece.android.R;
  * <p>This will automatically be used when you use {@link Button} in your
  * layouts. You should only need to manually use this class when writing custom views.</p>
  */
+@SuppressWarnings("RestrictedApi")
+@SuppressLint("AppCompatCustomView")
 public class XpAppCompatButton extends Button
     implements TintableBackgroundView, TintableCompoundDrawableView {
 
@@ -192,7 +197,7 @@ public class XpAppCompatButton extends Button
     }
 
     @Override
-    @TargetApi(4)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
         if (mTextCompoundDrawableHelper != null) {
             mTextCompoundDrawableHelper.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);

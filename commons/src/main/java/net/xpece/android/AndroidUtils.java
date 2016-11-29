@@ -1,18 +1,15 @@
 package net.xpece.android;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.support.v4.view.ViewCompat;
 import android.telephony.TelephonyManager;
 
 import java.io.File;
@@ -26,12 +23,6 @@ import java.lang.reflect.Method;
  */
 @Deprecated
 public final class AndroidUtils {
-    public static final boolean API_8 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;
-    public static final boolean API_9 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD;
-    public static final boolean API_10 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1;
-    public static final boolean API_11 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
-    public static final boolean API_12 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1;
-    public static final boolean API_13 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2;
     public static final boolean API_14 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
     public static final boolean API_15 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1;
     public static final boolean API_16 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
@@ -42,6 +33,7 @@ public final class AndroidUtils {
     public static final boolean API_22 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1;
     public static final boolean API_23 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     public static final boolean API_24 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
+    public static final boolean API_25 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1;
 
     private AndroidUtils() {}
 

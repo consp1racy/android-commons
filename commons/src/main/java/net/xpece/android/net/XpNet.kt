@@ -15,7 +15,11 @@ import net.xpece.android.content.connectivityManager
  */
 @get:TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 val Context.isAirplaneModeOn: Boolean
-    get() = Settings.Global.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
+    get() = if (Build.VERSION.SDK_INT < 17) {
+        Settings.System.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
+    } else {
+        Settings.Global.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
+    }
 
 fun String?.toUri() = if (this != null) Uri.parse(this) else null
 

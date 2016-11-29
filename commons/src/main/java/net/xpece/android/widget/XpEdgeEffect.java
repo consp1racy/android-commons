@@ -25,7 +25,6 @@ import java.lang.reflect.Field;
 /**
  * @author Eugen on 11. 2. 2016.
  */
-@TargetApi(14)
 public final class XpEdgeEffect {
     private XpEdgeEffect() {}
 
