@@ -4,7 +4,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.2.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
@@ -12,8 +12,8 @@ buildscript {
 
 ext {
     compileSdkVersion = 25
-    buildToolsVersion = "25.0.1"
-    supportLibsVersion = "25.0.1"
+    buildToolsVersion = "25.0.2"
+    supportLibsVersion = "25.1.0"
 }
 
 // http://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html
