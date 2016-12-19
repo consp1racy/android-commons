@@ -13,8 +13,8 @@ object Keyboards {
 
     fun hideKeyboard(activity: Activity) {
         val currentFocus = activity.currentFocus
-        currentFocus.clearFocus()
         if (currentFocus != null) {
+            currentFocus.clearFocus()
             getInputManager(activity).hideSoftInputFromWindow(currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
     }
