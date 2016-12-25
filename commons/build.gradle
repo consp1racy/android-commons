@@ -25,8 +25,7 @@ android {
 }
 
 dependencies {
-    project(':appcompat-extra')
-    project(':design-extra')
+    compile project(':design-extra')
 
     compile "com.android.support:design:$supportLibsVersion"
     provided "com.android.support:palette-v7:$supportLibsVersion"
@@ -45,7 +44,6 @@ dependencies {
 //    provided 'com.squareup.okio:okio:1.10.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile project(path: ':appcompat-extra')
 }
 
 repositories {
