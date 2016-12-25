@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CardButton">
+        <attr name="backgroundTint"/>
+        <attr name="backgroundTintMode"/>
+        <attr name="rippleColor"/>
+        <attr name="elevation"/>
+        <attr name="pressedTranslationZ"/>
+        <attr name="borderWidth"/>
+        <attr name="useCompatPadding"/>
+
+        <attr name="carb_contentPadding" format="dimension"/>
+        <attr name="carb_contentPaddingLeft" format="dimension"/>
+        <attr name="carb_contentPaddingRight" format="dimension"/>
+        <attr name="carb_contentPaddingTop" format="dimension"/>
+        <attr name="carb_contentPaddingBottom" format="dimension"/>
+
+        <attr name="carb_contentMinHeight" format="dimension"/>
+        <attr name="carb_contentMinWidth" format="dimension"/>
+
+        <attr name="carb_borderColor" format="color"/>
+        <attr name="carb_cornerRadius" format="dimension"/>
+
+        <attr name="drawableLeft"/>
+        <attr name="drawableRight"/>
+        <attr name="drawableTop"/>
+        <attr name="drawableBottom"/>
+        <attr name="drawableStart"/>
+        <attr name="drawableEnd"/>
+        <attr name="drawableTint"/>
+        <attr name="drawableTintMode"/>
+    </declare-styleable>
+</resources>

@@ -14,6 +14,7 @@ import java.util.WeakHashMap;
  * @author Eugen on 05.08.2016.
  */
 
+@SuppressWarnings("RestrictedApi")
 public class XpTintContextWrapper extends ContextWrapper {
 
     /**

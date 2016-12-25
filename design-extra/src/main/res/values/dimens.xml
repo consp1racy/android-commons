@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="carb_button_elevation">2dp</dimen>
+    <dimen name="carb_button_pressed_translation_z">6dp</dimen>
+    <dimen name="carb_button_border_width">1dp</dimen>
+</resources>

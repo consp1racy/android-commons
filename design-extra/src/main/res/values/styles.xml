@@ -1,0 +1,51 @@
+<resources>
+
+    <style name="Widget.Design.CardButton" parent="android:Widget">
+        <item name="backgroundTint">?colorButtonNormal</item>
+        <item name="elevation">@dimen/carb_button_elevation</item>
+        <item name="pressedTranslationZ">@dimen/carb_button_pressed_translation_z</item>
+        <item name="rippleColor">?colorControlHighlight</item>
+        <item name="borderWidth">0dp</item>
+
+        <item name="carb_contentMinHeight">36dip</item>
+        <item name="carb_contentMinWidth">80dip</item>
+        <item name="carb_contentPaddingLeft">@dimen/abc_button_padding_horizontal_material</item>
+        <item name="carb_contentPaddingRight">@dimen/abc_button_padding_horizontal_material</item>
+        <item name="carb_contentPaddingTop">@dimen/abc_button_padding_vertical_material</item>
+        <item name="carb_contentPaddingBottom">@dimen/abc_button_padding_vertical_material</item>
+
+        <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+
+        <item name="carb_cornerRadius">@dimen/abc_control_corner_material</item>
+        <item name="carb_borderColor">@null</item>
+    </style>
+
+    <style name="Widget.Design.CardButton.Colored">
+        <item name="backgroundTint">?colorAccent</item>
+    </style>
+
+    <style name="Widget.Design.CardButton.Borderless">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="elevation">0dp</item>
+        <item name="pressedTranslationZ">0dp</item>
+        <item name="rippleColor">?colorControlHighlight</item>
+    </style>
+
+    <style name="Widget.Design.CardButton.Borderless.Colored">
+        <item name="android:textColor">@color/abc_btn_colored_borderless_text_material</item>
+        <item name="carb_borderColor">@color/abc_btn_colored_borderless_text_material</item>
+    </style>
+
+    <style name="Widget.Design.CardButton.Bordered" parent="Widget.Design.CardButton.Borderless">
+        <item name="borderWidth">@dimen/carb_button_border_width</item>
+        <item name="carb_borderColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="Widget.Design.CardButton.Bordered.Colored">
+        <item name="android:textColor">@color/abc_btn_colored_borderless_text_material</item>
+        <item name="carb_borderColor">@color/abc_btn_colored_borderless_text_material</item>
+    </style>
+</resources>
