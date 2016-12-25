@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 9
@@ -13,3 +13,12 @@ dependencies {
     compile "com.android.support:design:$supportLibsVersion"
 	compile project(':appcompat-extra')
 }
+
+repositories {
+    jcenter()
+}
+
+group = rootProject.GROUP_ID
+version = rootProject.VERSION_NAME
+
+apply from: rootProject.file('android-release.gradle')

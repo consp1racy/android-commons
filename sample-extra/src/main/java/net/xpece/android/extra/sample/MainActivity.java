@@ -1,4 +1,4 @@
-package net.xpece.android.cardbutton.sample;
+package net.xpece.android.extra.sample;
 
 import android.os.Bundle;
 import android.support.design.widget.CardButton;

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context="net.xpece.android.cardbutton.sample.MainActivity">
+    tools:context="net.xpece.android.extra.sample.MainActivity">
 
     <LinearLayout
         android:id="@+id/activity_main"
