@@ -114,6 +114,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     private final Rect mTouchArea = new Rect();
 
     private CardButtonImpl mImpl;
+    private boolean mSuperInit = false;
 
     public CardButton(Context context) {
         this(context, null);
@@ -126,11 +127,13 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public CardButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        init(context, attrs, defStyleAttr, 0);
+        init(context, attrs, 0, 0);
     }
 
     @SuppressWarnings("RestrictedApi")
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        mSuperInit = true;
+
         ThemeUtils.checkAppCompatTheme(context);
 
         TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs,
@@ -207,6 +210,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     @Override
     public void setMinWidth(int minWidth) {
+        if (!mSuperInit) return;
+
         if (mContentMinWidth != minWidth) {
             mContentMinWidth = minWidth;
             super.setMinWidth(mShadowPadding.left + mShadowPadding.right + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
@@ -215,6 +220,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     @Override
     public void setMinHeight(int minHeight) {
+        if (!mSuperInit) return;
+
         if (mContentMinHeight != minHeight) {
             mContentMinHeight = minHeight;
             super.setMinHeight(mShadowPadding.top + mShadowPadding.bottom + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
@@ -223,6 +230,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     @Override
     public void setMinimumWidth(int minWidth) {
+        if (!mSuperInit) return;
+
         if (mContentMinWidth != minWidth) {
             mContentMinWidth = minWidth;
             super.setMinimumWidth(mShadowPadding.left + mShadowPadding.right + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
@@ -231,6 +240,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     @Override
     public void setMinimumHeight(int minHeight) {
+        if (!mSuperInit) return;
+
         if (mContentMinHeight != minHeight) {
             mContentMinHeight = minHeight;
             super.setMinimumHeight(mShadowPadding.top + mShadowPadding.bottom + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));

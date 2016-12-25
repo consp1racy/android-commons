@@ -20,6 +20,25 @@
         android:paddingTop="8dp">
 
         <android.support.design.widget.CardButton
+            android:id="@+id/cb0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/control_margin"
+            android:layout_marginTop="@dimen/control_margin"
+            android:text="No style"
+            app:drawableStart="@drawable/ic_android_control_24dp"/>
+
+        <android.support.design.widget.CardButton
+            android:id="@+id/cb0b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/control_margin"
+            android:layout_marginTop="@dimen/control_margin"
+            android:text="No style"
+            android:enabled="false"
+            app:drawableStart="@drawable/ic_android_control_24dp"/>
+
+        <android.support.design.widget.CardButton
             android:id="@+id/cb1"
             style="@style/Widget.Design.CardButton"
             android:layout_width="wrap_content"
