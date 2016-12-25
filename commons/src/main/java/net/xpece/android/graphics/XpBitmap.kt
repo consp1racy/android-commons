@@ -25,9 +25,9 @@ fun Bitmap.withContrastBrightness(contrast: Float, brightness: Float) : Bitmap {
 
     val ret = Bitmap.createBitmap(width, height, config)
 
-    val canvas = Canvas(ret);
+    val canvas = Canvas(ret)
 
-    val paint = Paint();
+    val paint = Paint()
     paint.colorFilter = ColorMatrixColorFilter(cm)
     canvas.drawBitmap(this, 0f, 0f, paint)
 
@@ -40,9 +40,9 @@ fun Bitmap.withContrastBrightness(contrast: Float, brightness: Float) : Bitmap {
 fun Bitmap.withColorMatrix(cm : ColorMatrix) : Bitmap {
     val ret = Bitmap.createBitmap(width, height, config)
 
-    val canvas = Canvas(ret);
+    val canvas = Canvas(ret)
 
-    val paint = Paint();
+    val paint = Paint()
     paint.colorFilter = ColorMatrixColorFilter(cm)
     canvas.drawBitmap(this, 0f, 0f, paint)
 

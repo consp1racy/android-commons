@@ -85,6 +85,6 @@ internal open class BaseTextUtilsImpl : TextUtilsImpl {
     override fun getMediumSpan(): Any = StyleSpan(Typeface.BOLD)
 }
 
-internal open class LollipopTextUtilsImpl() : BaseTextUtilsImpl() {
+internal open class LollipopTextUtilsImpl : BaseTextUtilsImpl() {
     override fun getMediumSpan(): Any = TypefaceSpan("sans-serif-medium")
 }

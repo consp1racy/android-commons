@@ -880,10 +880,7 @@ public class ExifTag {
     }
 
     private boolean checkBadComponentCount(int count) {
-        if (mHasDefinedDefaultComponentCount && (mComponentCountActual != count)) {
-            return true;
-        }
-        return false;
+        return mHasDefinedDefaultComponentCount && (mComponentCountActual != count);
     }
 
     private static String convertTypeToString(short type) {

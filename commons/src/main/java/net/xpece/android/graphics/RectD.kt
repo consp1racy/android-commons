@@ -15,8 +15,7 @@ class RectD : Parcelable {
     var right = 0.0
     var bottom = 0.0
 
-    constructor() {
-    }
+    constructor()
 
     constructor(r: RectF) {
         this.left = r.left.toDouble()

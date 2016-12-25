@@ -15,12 +15,10 @@ import android.view.View
  */
 
 class StatusBarScrimBehavior : CoordinatorLayout.Behavior<View> {
-    constructor() : super() {
-    }
+    constructor() : super()
 
     @Keep
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-    }
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     override fun onApplyWindowInsets(coordinatorLayout: CoordinatorLayout, child: View, insets: WindowInsetsCompat): WindowInsetsCompat {
         val top = insets.systemWindowInsetTop
