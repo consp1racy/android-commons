@@ -25,7 +25,7 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
     public XpAppCompatView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(TintContextWrapper.wrap(context), attrs, defStyleAttr);
 
-        mBackgroundTintHelper = new AppCompatBackgroundHelper(this);
+        mBackgroundTintHelper = XpAppCompatBackgroundHelper.create(this);
         mBackgroundTintHelper.loadFromAttributes(attrs, defStyleAttr);
     }
 

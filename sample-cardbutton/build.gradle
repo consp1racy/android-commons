@@ -5,7 +5,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "net.xpece.android.extra.sample"
+        applicationId "net.xpece.android.widget.cardbutton.sample"
         minSdkVersion 9
         targetSdkVersion 25
         versionCode 1
@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    compile project(':design-extra')
+    compile project(':widget-cardbutton')
 }
 
 repositories {
@@ -34,7 +34,7 @@ repositories {
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         if (details.requested.group == 'com.android.support' && details.requested.name != 'support-annotations') {
-            details.useVersion '23.2.0'
+            details.useVersion '25.0.0'
         }
     }
 }

@@ -10,7 +10,12 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$supportLibsVersionExtra"
+    compile "com.android.support:support-annotations:$supportAnnotationsVersionExtra"
+
+    compile("com.android.support:appcompat-v7:$supportLibsVersionExtra")
+//        {
+//        exclude module: "support-annotations"
+//    }
 }
 
 repositories {

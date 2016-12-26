@@ -1,1 +1,1 @@
-include ':sample-commons', ':commons', ':appcompat-extra', ':design-extra', ':sample-extra',':widget-cardbutton'
+include ':sample-commons', ':commons', ':appcompat-extra', ':design-extra', ':sample-extra', ':widget-cardbutton', ':sample-cardbutton'

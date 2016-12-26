@@ -9,240 +9,60 @@
     tools:context="net.xpece.android.extra.sample.MainActivity">
 
     <LinearLayout
+        android:id="@+id/activity_main2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="?listPreferredItemPaddingLeft"
+        android:paddingRight="?listPreferredItemPaddingRight"
+        android:paddingTop="8dp">
 
-        <LinearLayout
-            android:id="@+id/activity_main1"
-            android:layout_width="0dp"
+        <android.support.v7.widget.XpAppCompatTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="8dp"
-            android:paddingLeft="?listPreferredItemPaddingLeft"
-            android:paddingRight="?listPreferredItemPaddingRight"
-            android:paddingTop="8dp">
+            android:drawablePadding="8dp"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="Sample"
+            app:drawableEnd="@drawable/ic_android_black_24dp"
+            app:drawableStart="@drawable/ic_android_black_24dp"
+            app:drawableTint="?colorAccent"/>
 
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:text="No style"
-                app:drawableStart="@drawable/ic_android_control_24dp"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb0b"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:enabled="false"
-                android:text="No style"
-                app:drawableStart="@drawable/ic_android_control_24dp"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb1"
-                style="@style/Widget.Design.CardButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                app:drawableStart="@drawable/ic_android_control_24dp"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb1b"
-                style="@style/Widget.Design.CardButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:enabled="false"
-                app:drawableStart="@drawable/ic_android_control_24dp"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb2"
-                style="@style/Widget.Design.CardButton.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:text="Short"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb2b"
-                style="@style/Widget.Design.CardButton.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:enabled="false"
-                android:text="Round"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb3"
-                style="@style/Widget.Design.CardButton.Bordered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:text="Long-ass text"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb3b"
-                style="@style/Widget.Design.CardButton.Bordered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:enabled="false"
-                android:text="Dumb and dumber"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb4"
-                style="@style/Widget.Design.CardButton.Bordered.Colored"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:text="XXX"
-                app:drawableBottom="@drawable/ic_android_black_24dp"
-                app:drawableEnd="@drawable/ic_android_black_24dp"
-                app:drawableStart="@drawable/ic_android_black_24dp"
-                app:drawableTint="@color/abc_btn_colored_borderless_text_material"
-                app:drawableTop="@drawable/ic_android_black_24dp"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb4b"
-                style="@style/Widget.Design.CardButton.Bordered.Colored"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:enabled="false"
-                android:text="YYY"
-                app:drawableBottom="@drawable/ic_android_black_24dp"
-                app:drawableEnd="@drawable/ic_android_black_24dp"
-                app:drawableStart="@drawable/ic_android_black_24dp"
-                app:drawableTint="@color/abc_btn_colored_borderless_text_material"
-                app:drawableTop="@drawable/ic_android_black_24dp"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb5"
-                style="@style/Widget.Design.CardButton.Borderless"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:text="ZZZ"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb5b"
-                style="@style/Widget.Design.CardButton.Borderless"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:enabled="false"
-                android:text="WWW"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb6"
-                style="@style/Widget.Design.CardButton.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:text="Borderless 1"/>
-
-            <android.support.design.widget.CardButton
-                android:id="@+id/cb6b"
-                style="@style/Widget.Design.CardButton.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:enabled="false"
-                android:text="Borderless 2"/>
-
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:src="@android:drawable/ic_dialog_dialer"/>
-
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/control_margin"
-                android:layout_marginTop="@dimen/control_margin"
-                android:enabled="false"
-                android:src="@android:drawable/ic_dialog_dialer"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/activity_main2"
-            android:layout_width="0dp"
+        <android.support.v7.widget.XpAppCompatButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="8dp"
-            android:paddingLeft="?listPreferredItemPaddingLeft"
-            android:paddingRight="?listPreferredItemPaddingRight"
-            android:paddingTop="8dp">
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="Sample"
+            app:drawableEnd="@drawable/ic_android_control_24dp"
+            app:drawableStart="@drawable/ic_android_control_24dp"/>
 
-            <android.support.v7.widget.XpAppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:enabled="false"
-                android:gravity="center"
-                android:text="Sample"
-                app:drawableEnd="@drawable/ic_android_black_24dp"
-                app:drawableStart="@drawable/ic_android_black_24dp"
-                app:drawableTint="?colorAccent"/>
+        <android.support.v7.widget.XpAppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:enabled="false"
+            app:srcCompat="@drawable/ic_android_black_24dp"
+            app:tint="?colorAccent"/>
 
-            <android.support.v7.widget.XpAppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawablePadding="8dp"
-                android:enabled="false"
-                android:gravity="center"
-                android:text="Sample"
-                app:drawableEnd="@drawable/ic_android_control_24dp"
-                app:drawableStart="@drawable/ic_android_control_24dp"/>
+        <android.support.v7.widget.XpAppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:enabled="false"
+            app:srcCompat="@drawable/ic_android_control_24dp"/>
 
-            <android.support.v7.widget.XpAppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:enabled="false"
-                app:srcCompat="@drawable/ic_android_black_24dp"
-                app:tint="?colorAccent"/>
-
-            <android.support.v7.widget.XpAppCompatImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:enabled="false"
-                app:srcCompat="@drawable/ic_android_control_24dp"/>
-
-            <android.support.design.widget.XpFloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:enabled="false"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:srcCompat="@drawable/ic_android_control_24dp"/>
-        </LinearLayout>
+        <android.support.design.widget.XpFloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:enabled="false"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:srcCompat="@drawable/ic_android_control_24dp"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

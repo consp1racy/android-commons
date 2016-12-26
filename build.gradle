@@ -16,12 +16,9 @@ ext {
     compileSdkVersion = 25
     supportLibsVersion = "25.1.0"
 
-    // No RequiresApi and RestrictTo support annotations :(
-//    compileSdkVersionExtra = 23
-//    supportLibsVersionExtra = "23.2.0"
-
-    compileSdkVersionExtra = 25
-    supportLibsVersionExtra = "25.0.0"
+    compileSdkVersionExtra = 23
+    supportLibsVersionExtra = "23.2.0"
+    supportAnnotationsVersionExtra = "25.0.0"
 
     compileSdkVersionCardButton = 25
     supportLibsVersionCardButton = "25.0.0"
