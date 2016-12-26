@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion rootProject.ext.compileSdkVersionExtra
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
@@ -10,7 +10,7 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:design:$supportLibsVersion"
+    compile "com.android.support:design:$supportLibsVersionExtra"
 	compile project(':appcompat-extra')
 }
 
@@ -19,6 +19,6 @@ repositories {
 }
 
 group = rootProject.GROUP_ID
-version = rootProject.VERSION_NAME
+version = rootProject.EXTRA_VERSION_NAME
 
 apply from: rootProject.file('android-release.gradle')

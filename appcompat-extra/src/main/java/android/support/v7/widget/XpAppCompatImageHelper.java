@@ -14,7 +14,7 @@ import net.xpece.android.widget.XpImageViewCompat;
  * @hide
  */
 @SuppressWarnings("RestrictedApi")
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@RestrictTo(RestrictTo.Scope.GROUP_ID)
 public final class XpAppCompatImageHelper {
 
     private final ImageView mView;
@@ -33,6 +33,11 @@ public final class XpAppCompatImageHelper {
         try {
             a = TintTypedArray.obtainStyledAttributes(mView.getContext(), attrs,
                 R.styleable.XpAppCompatImageHelper, defStyleAttr, 0);
+
+            // ImageView does not read enabled state from XML. Fuck me, right?
+            if (a.hasValue(R.styleable.XpAppCompatImageHelper_android_enabled)) {
+                mView.setEnabled(a.getBoolean(R.styleable.XpAppCompatImageHelper_android_enabled, mView.isEnabled()));
+            }
 
             int srcResId = a.getResourceId(R.styleable.XpAppCompatImageHelper_android_src, -1);
             if (a.hasValue(R.styleable.XpAppCompatImageHelper_srcCompat)) {

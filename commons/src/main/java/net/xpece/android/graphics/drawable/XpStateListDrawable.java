@@ -24,9 +24,13 @@ public final class XpStateListDrawable {
         Class<StateListDrawable> cls = StateListDrawable.class;
         try {
             getStateCount = cls.getDeclaredMethod("getStateCount");
+            getStateCount.setAccessible(true);
             getStateSet = cls.getDeclaredMethod("getStateSet", int.class);
+            getStateSet.setAccessible(true);
             getStateDrawable = cls.getDeclaredMethod("getStateDrawable", int.class);
+            getStateDrawable.setAccessible(true);
             getStateDrawableIndex = cls.getDeclaredMethod("getStateDrawableIndex", int[].class);
+            getStateDrawableIndex.setAccessible(true);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

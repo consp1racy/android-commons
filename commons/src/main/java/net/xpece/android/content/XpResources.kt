@@ -44,13 +44,9 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
         }
     }
     try {
-        return AppCompatResources.getDrawable(this, resId)
-    } catch (ex: NoSuchMethodError) {
-        try {
-            return AppCompatDrawableManager.get().getDrawable(this, resId)
-        } catch (ex2 : NoSuchMethodError) {
-            return ContextCompat.getDrawable(this, resId)
-        }
+        return AppCompatDrawableManager.get().getDrawable(this, resId)
+    } catch (ex2: NoSuchMethodError) {
+        return ContextCompat.getDrawable(this, resId)
     }
 }
 

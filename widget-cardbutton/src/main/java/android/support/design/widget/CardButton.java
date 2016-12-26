@@ -39,7 +39,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 
-import net.xpece.android.designextra.R;
+import net.xpece.android.widget.cardbutton.R;
 import net.xpece.android.widget.TintableCompoundDrawableView;
 
 @CoordinatorLayout.DefaultBehavior(CardButton.Behavior.class)

@@ -51,6 +51,6 @@ repositories {
 }
 
 group = rootProject.GROUP_ID
-version = rootProject.VERSION_NAME
+version = rootProject.COMMONS_VERSION_NAME
 
 apply from: rootProject.file('android-release.gradle')

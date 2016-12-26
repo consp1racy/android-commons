@@ -8,8 +8,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -165,7 +165,7 @@ public class SingleLayout extends ViewGroup implements SingleLayoutImpl {
      * @param resId Resource id of a background drawable to draw behind the status bar
      */
     public void setStatusBarBackground(int resId) {
-        mStatusBarBackground = resId != 0 ? ContextCompat.getDrawable(getContext(), resId) : null;
+        mStatusBarBackground = resId != 0 ? AppCompatResources.getDrawable(getContext(), resId) : null;
         invalidate();
     }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetBottom="3dp"
-    android:insetLeft="2dp"
-    android:insetRight="2dp"
-    android:insetTop="3dp">
+    android:insetBottom="2.4142135623730950488016887242097dp"
+    android:insetLeft="1.4142135623730950488016887242097dp"
+    android:insetRight="1.4142135623730950488016887242097dp"
+    android:insetTop="2.4142135623730950488016887242097dp">
     <shape>
         <corners android:radius="2dp"/>
         <solid android:color="@color/ripple_material_dark"/>

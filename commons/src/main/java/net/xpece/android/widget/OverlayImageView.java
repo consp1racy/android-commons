@@ -6,9 +6,9 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
@@ -147,6 +147,6 @@ public class OverlayImageView extends AspectLockedImageView {
     }
 
     public void setOverlay(@DrawableRes int resId) {
-        setOverlay(ContextCompat.getDrawable(getContext(), resId));
+        setOverlay(AppCompatResources.getDrawable(getContext(), resId));
     }
 }

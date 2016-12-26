@@ -39,7 +39,7 @@ import java.lang.ref.WeakReference;
 /**
  * @hide
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@RestrictTo(RestrictTo.Scope.GROUP_ID)
 @SuppressWarnings("RestrictedApi")
 public final class XpAppCompatCompoundDrawableHelper {
 

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersionExtra
+    compileSdkVersion rootProject.ext.compileSdkVersionCardButton
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
@@ -10,7 +10,8 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$supportLibsVersionExtra"
+    compile "com.android.support:design:$supportLibsVersionCardButton"
+	compile project(':appcompat-extra')
 }
 
 repositories {
@@ -18,6 +19,6 @@ repositories {
 }
 
 group = rootProject.GROUP_ID
-version = rootProject.EXTRA_VERSION_NAME
+version = rootProject.CARDBUTTON_VERSION_NAME
 
 apply from: rootProject.file('android-release.gradle')

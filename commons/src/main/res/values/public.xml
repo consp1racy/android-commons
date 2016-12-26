@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <public type="string" name="lorem_date"/>
+    <public type="string" name="lorem_date_interval"/>
+    <public type="string" name="lorem_time"/>
+    <public type="string" name="lorem_time_interval"/>
+    <public type="string" name="lorem_datetime"/>
+    <public type="string" name="lorem_integer"/>
+    <public type="string" name="lorem_decimal"/>
+    <public type="string" name="lorem_micro"/>
+    <public type="string" name="lorem_short"/>
+    <public type="string" name="lorem_medium"/>
+    <public type="string" name="lorem_long"/>
+    <public type="string" name="lorem_price"/>
+    <public type="string" name="lorem_name"/>
+
     <public type="string" name="hide_on_lollipop_behavior"/>
 
     <public type="string" name="xpc_try_again"/>
@@ -14,7 +28,6 @@
     <public type="integer" name="abc_button_pressed_animation_duration_material"/>
     <public type="integer" name="abc_button_pressed_animation_delay_material"/>
 
-    <public type="drawable" name="ic_chevron_left_black_24dp"/>
     <public type="drawable" name="ic_expand_less_black_24dp"/>
     <public type="drawable" name="ic_expand_more_black_24dp"/>
 
