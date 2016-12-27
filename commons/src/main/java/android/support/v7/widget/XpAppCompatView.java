@@ -4,15 +4,21 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.TintableBackgroundView;
+import android.support.v7.content.res.AppCompatResources;
 import android.util.AttributeSet;
 import android.view.View;
+
+import net.xpece.android.R;
 
 @SuppressWarnings("RestrictedApi")
 public class XpAppCompatView extends View implements TintableBackgroundView {
     private AppCompatBackgroundHelper mBackgroundTintHelper;
+
+    private int mBackgroundResource;
 
     public XpAppCompatView(Context context) {
         this(context, null);
@@ -27,23 +33,56 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
 
         mBackgroundTintHelper = XpAppCompatBackgroundHelper.create(this);
         mBackgroundTintHelper.loadFromAttributes(attrs, defStyleAttr);
-    }
 
-    @Override
-    public void setBackgroundResource(@DrawableRes int resId) {
-        super.setBackgroundResource(resId);
-        if (mBackgroundTintHelper != null) {
-            mBackgroundTintHelper.onSetBackgroundResource(resId);
+        final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs, R.styleable.ViewBackgroundHelper, defStyleAttr, 0);
+        try {
+            if (a.hasValue(R.styleable.ViewBackgroundHelper_android_background)) {
+                setBackgroundResource(a.getResourceId(R.styleable.ViewBackgroundHelper_android_background, 0));
+            }
+        } finally {
+            a.recycle();
         }
     }
 
     @Override
     @SuppressWarnings("deprecation")
+    public void setBackgroundResource(@DrawableRes int resId) {
+//        super.setBackgroundResource(resId);
+//        if (mBackgroundTintHelper != null) {
+//            mBackgroundTintHelper.onSetBackgroundResource(resId);
+//        }
+
+        if (resId != 0 && resId == mBackgroundResource) {
+            return;
+        }
+
+        Drawable d = null;
+        if (resId != 0) {
+            try {
+                d = AppCompatResources.getDrawable(getContext(), resId);
+            } catch (NoSuchMethodError ex) {
+                d = AppCompatDrawableManager.get().getDrawable(getContext(), resId, false);
+            }
+        }
+        setBackgroundDrawable(d);
+
+        mBackgroundResource = resId;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
     public void setBackgroundDrawable(Drawable background) {
+        mBackgroundResource = 0;
         super.setBackgroundDrawable(background);
         if (mBackgroundTintHelper != null) {
             mBackgroundTintHelper.onSetBackgroundDrawable(background);
         }
+    }
+
+    @Override
+    public void setBackgroundColor(@ColorInt int color) {
+        mBackgroundResource = 0;
+        super.setBackgroundColor(color);
     }
 
     /**

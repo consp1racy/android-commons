@@ -29,6 +29,11 @@
             tools:ignore="MissingPrefix"/>
     </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.XpAppCompatView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?dividerHorizontal"/>
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
