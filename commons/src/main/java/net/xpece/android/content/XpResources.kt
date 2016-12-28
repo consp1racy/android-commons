@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable
 import android.support.annotation.*
 import android.support.v4.content.ContextCompat
 import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.AppCompatDrawableManager
+import android.support.v7.widget.XpAppCompatResources
 import net.xpece.android.content.res.Dimen
 
 private val TEMP_ARRAY = ThreadLocal<IntArray>()
@@ -44,8 +44,8 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
         }
     }
     try {
-        return AppCompatDrawableManager.get().getDrawable(this, resId)
-    } catch (ex2: NoSuchMethodError) {
+        return XpAppCompatResources.getDrawable(this, resId)
+    } catch (ex: NoSuchMethodError) {
         return ContextCompat.getDrawable(this, resId)
     }
 }

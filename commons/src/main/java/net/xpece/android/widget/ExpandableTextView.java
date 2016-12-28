@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.v7.content.res.AppCompatResources;
+import android.support.v7.widget.XpAppCompatResources;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -90,10 +90,10 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
         typedArray.recycle();
 
         if (mExpandDrawable == null) {
-            mExpandDrawable = AppCompatResources.getDrawable(context, R.drawable.ic_expand_more_white_24dp);
+            mExpandDrawable = XpAppCompatResources.getDrawable(context, R.drawable.ic_expand_more_white_24dp);
         }
         if (mCollapseDrawable == null) {
-            mCollapseDrawable = AppCompatResources.getDrawable(context, R.drawable.ic_expand_less_white_24dp);
+            mCollapseDrawable = XpAppCompatResources.getDrawable(context, R.drawable.ic_expand_less_white_24dp);
         }
 
         setOnClickListener(this);

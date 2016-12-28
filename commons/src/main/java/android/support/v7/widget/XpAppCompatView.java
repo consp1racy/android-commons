@@ -8,7 +8,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.TintableBackgroundView;
-import android.support.v7.content.res.AppCompatResources;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -58,11 +57,7 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
 
         Drawable d = null;
         if (resId != 0) {
-            try {
-                d = AppCompatResources.getDrawable(getContext(), resId);
-            } catch (NoSuchMethodError ex) {
-                d = AppCompatDrawableManager.get().getDrawable(getContext(), resId, false);
-            }
+            d = XpAppCompatResources.getDrawable(getContext(), resId);
         }
         setBackgroundDrawable(d);
 

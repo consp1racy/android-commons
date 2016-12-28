@@ -4,6 +4,7 @@ package net.xpece.android.view
 
 import android.animation.LayoutTransition
 import android.annotation.TargetApi
+import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -12,7 +13,7 @@ import android.os.Build
 import android.support.annotation.DrawableRes
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewCompat
-import android.support.v7.widget.AppCompatDrawableManager
+import android.support.v7.widget.XpAppCompatResources
 import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
@@ -99,18 +100,23 @@ fun setSearchViewLayoutTransition(view: android.support.v7.widget.SearchView) {
 }
 
 @JvmOverloads
-fun ImageView.switchImage(d: Drawable, duration: Int = 100) {
+fun ImageView.switchImage(d: Drawable?, duration: Int = 100) {
     if (ViewCompat.isLaidOut(this)) {
         var old = drawable
         if (old is TransitionDrawable) {
             old = old.getDrawable(1)
         } else if (old == null) {
-            old = ColorDrawable(0)
+            if (d == null) {
+                return
+            } else {
+                old = ColorDrawable(Color.TRANSPARENT)
+            }
         }
-        val d2 = TransitionDrawable(arrayOf(old, d))
-        d2.isCrossFadeEnabled = true
-        setImageDrawable(d2)
-        d2.startTransition(duration)
+        val target = d ?: ColorDrawable(Color.TRANSPARENT)
+        val transition = TransitionDrawable(arrayOf(old, target))
+        transition.isCrossFadeEnabled = true
+        setImageDrawable(transition)
+        transition.startTransition(duration)
     } else {
         setImageDrawable(d)
     }
@@ -118,7 +124,7 @@ fun ImageView.switchImage(d: Drawable, duration: Int = 100) {
 
 @JvmOverloads
 fun ImageView.switchImage(@DrawableRes resId: Int, duration: Int = 100) {
-    val d = AppCompatDrawableManager.get().getDrawable(context, resId)
+    val d = XpAppCompatResources.getDrawable(context, resId)
     switchImage(d, duration)
 }
 
