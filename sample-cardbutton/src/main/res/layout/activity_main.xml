@@ -20,6 +20,17 @@
         android:paddingRight="?listPreferredItemPaddingRight"
         android:paddingTop="8dp">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Platform"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="Platform"/>
+
         <android.support.design.widget.CardButton
             android:id="@+id/cb0"
             android:layout_width="wrap_content"
@@ -164,5 +175,10 @@
             android:layout_marginTop="@dimen/control_margin"
             android:enabled="false"
             android:text="Borderless 2"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

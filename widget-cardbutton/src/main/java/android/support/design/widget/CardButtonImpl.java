@@ -22,6 +22,9 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
+import android.graphics.drawable.shapes.Shape;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
 import android.widget.Button;
@@ -169,8 +172,11 @@ abstract class CardButtonImpl {
         return d;
     }
 
-    XpRoundRectDrawable createSimpleShapeDrawable(float cornerRadius) {
-        return new XpRoundRectDrawable(ColorStateList.valueOf(Color.WHITE), cornerRadius);
+    Drawable createSimpleShapeDrawable(float cornerRadius) {
+        final Shape s = new RoundRectShape(new float[]{cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius}, null, null);
+        final ShapeDrawable d = new ShapeDrawable(s);
+        d.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        return d;
     }
 
     GradientDrawable newGradientDrawableForShape() {

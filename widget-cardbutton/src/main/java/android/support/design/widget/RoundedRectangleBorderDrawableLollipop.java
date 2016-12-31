@@ -18,6 +18,7 @@ package android.support.design.widget;
 
 import android.annotation.TargetApi;
 import android.graphics.Outline;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 
@@ -27,9 +28,26 @@ import android.support.annotation.RequiresApi;
 @RequiresApi(21)
 @TargetApi(21)
 class RoundedRectangleBorderDrawableLollipop extends RoundedRectangleBorderDrawable {
+    static class BorderDrawableStateLollipop extends BorderDrawableState {
+        @NonNull
+        @Override
+        public Drawable newDrawable() {
+            RoundedRectangleBorderDrawable d = new RoundedRectangleBorderDrawable();
+            d.setBorderWidth(mBorderWidth);
+            d.setCornerRadius(mCornerRadius);
+            d.setBorderTint(mBorderTint);
+            return d;
+        }
+    }
+
     @Override
     public void getOutline(@NonNull Outline outline) {
         copyBounds(mRect);
-        outline.setRoundRect(mRect, mCornerRadius);
+        outline.setRoundRect(mRect, mDrawableState.mCornerRadius);
+    }
+
+    @Override
+    protected BorderDrawableState createConstantState() {
+        return new BorderDrawableStateLollipop();
     }
 }

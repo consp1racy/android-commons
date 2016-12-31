@@ -28,7 +28,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
-import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
@@ -67,8 +66,9 @@ class CardButtonLollipop extends CardButtonIcs {
             rippleContent = mShapeDrawable;
         }
 
-        mRippleDrawable = new RippleDrawable(ColorStateList.valueOf(rippleColor),
-            rippleContent, createSimpleShapeDrawable(cornerRadius));
+        // Round rectangle GradientDrawable produces weird masks. Use something else.
+        Drawable mask = createSimpleShapeDrawable(cornerRadius);
+        mRippleDrawable = new RippleDrawable(ColorStateList.valueOf(rippleColor), rippleContent, mask);
 
         mContentBackground = mRippleDrawable;
 
@@ -86,22 +86,7 @@ class CardButtonLollipop extends CardButtonIcs {
 
     @Override
     void onElevationsChanged(final float elevation, final float pressedTranslationZ) {
-        final int sdk = Build.VERSION.SDK_INT;
-        if (sdk == 21) {
-            // Animations produce NPE in version 21. Bluntly set the values instead (matching the
-            // logic in the animations below).
-            if (mView.isEnabled()) {
-                mView.setElevation(elevation);
-                if (mView.isFocused() || mView.isPressed()) {
-                    mView.setTranslationZ(pressedTranslationZ);
-                } else {
-                    mView.setTranslationZ(0);
-                }
-            } else {
-                mView.setElevation(0);
-                mView.setTranslationZ(0);
-            }
-        } else {
+        try {
             final StateListAnimator stateListAnimator = new StateListAnimator();
 
             // Animate elevation and translationZ to our values when pressed
@@ -143,6 +128,20 @@ class CardButtonLollipop extends CardButtonIcs {
             stateListAnimator.addState(EMPTY_STATE_SET, set);
 
             mView.setStateListAnimator(stateListAnimator);
+        } catch (NullPointerException npe) {
+            // Animations produce NPE in version 21. Bluntly set the values instead (matching the
+            // logic in the animations below).
+            if (mView.isEnabled()) {
+                mView.setElevation(elevation);
+                if (mView.isFocused() || mView.isPressed()) {
+                    mView.setTranslationZ(pressedTranslationZ);
+                } else {
+                    mView.setTranslationZ(0);
+                }
+            } else {
+                mView.setElevation(0);
+                mView.setTranslationZ(0);
+            }
         }
 
         if (mShadowViewDelegate.isCompatPaddingEnabled()) {

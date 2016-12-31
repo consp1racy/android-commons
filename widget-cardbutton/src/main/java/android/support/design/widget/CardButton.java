@@ -39,11 +39,14 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 
-import net.xpece.android.widget.cardbutton.R;
 import net.xpece.android.widget.TintableCompoundDrawableView;
+import net.xpece.android.widget.cardbutton.R;
 
 @CoordinatorLayout.DefaultBehavior(CardButton.Behavior.class)
 public class CardButton extends AppCompatButton implements TintableCompoundDrawableView {
+    static boolean DEBUG = true;
+
+    public static boolean AUTO_VISUAL_MARGIN_ENABLED = true;
 
     private static final String LOG_TAG = "CardButton";
 
@@ -92,6 +95,23 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
             lp.bottomMargin -= cardButton.getShadowPaddingBottom();
         } catch (ClassCastException ex) {
             Log.e(LOG_TAG, "Margins are not supported.");
+        }
+    }
+
+    @Override
+    public void setLayoutParams(ViewGroup.LayoutParams params) {
+        super.setLayoutParams(params);
+        if (AUTO_VISUAL_MARGIN_ENABLED) {
+            try {
+                final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) params;
+                if (MarginLayoutParamsCompat.isMarginRelative(lp)) {
+                    setVisualMarginRelativeOriginal(this);
+                } else {
+                    setVisualMarginOriginal(this);
+                }
+            } catch (ClassCastException ex) {
+                //
+            }
         }
     }
 
@@ -167,6 +187,10 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         mTextCompoundDrawableHelper = new XpAppCompatCompoundDrawableHelper(this);
         mTextCompoundDrawableHelper.loadFromAttributes(attrs, defStyleAttr);
+
+        if (DEBUG) {
+            Log.d(LOG_TAG, "CardButton " + getId() + " created.");
+        }
     }
 
     private void updateMinSize() {

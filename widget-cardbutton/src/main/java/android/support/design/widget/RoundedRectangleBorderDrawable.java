@@ -27,11 +27,38 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * A drawable which draws a rounded rectangle 'border'.
  */
 class RoundedRectangleBorderDrawable extends Drawable {
+    static class BorderDrawableState extends ConstantState {
+        int mChangingConfigurations;
+
+        float mBorderWidth;
+        float mCornerRadius;
+        ColorStateList mBorderTint;
+
+        @NonNull
+        @Override
+        public Drawable newDrawable() {
+            RoundedRectangleBorderDrawable d = new RoundedRectangleBorderDrawable();
+            d.setBorderWidth(mBorderWidth);
+            d.setCornerRadius(mCornerRadius);
+            d.setBorderTint(mBorderTint);
+            return d;
+        }
+
+        @Override
+        public int getChangingConfigurations() {
+            return mChangingConfigurations;
+        }
+    }
+
+    protected BorderDrawableState createConstantState() {
+        return new BorderDrawableState();
+    }
 
     /**
      * We actually draw the stroke wider than the border size given. This is to reduce any
@@ -40,20 +67,17 @@ class RoundedRectangleBorderDrawable extends Drawable {
      */
     private static final float DRAW_STROKE_WIDTH_MULTIPLE = 1.3333f;
 
+    final BorderDrawableState mDrawableState;
+
     final Paint mPaint;
     final Rect mRect = new Rect();
     final RectF mRectF = new RectF();
-
-    float mBorderWidth;
-
-    float mCornerRadius;
 
 //    private int mTopOuterStrokeColor;
 //    private int mTopInnerStrokeColor;
 //    private int mBottomOuterStrokeColor;
 //    private int mBottomInnerStrokeColor;
 
-    private ColorStateList mBorderTint;
     private int mCurrentBorderTintColor;
 
     private boolean mInvalidateShader = true;
@@ -61,6 +85,7 @@ class RoundedRectangleBorderDrawable extends Drawable {
     private float mRotation;
 
     public RoundedRectangleBorderDrawable() {
+        mDrawableState = createConstantState();
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
     }
@@ -77,8 +102,8 @@ class RoundedRectangleBorderDrawable extends Drawable {
      * Set the border width.
      */
     void setBorderWidth(float width) {
-        if (mBorderWidth != width) {
-            mBorderWidth = width;
+        if (mDrawableState.mBorderWidth != width) {
+            mDrawableState.mBorderWidth = width;
             mPaint.setStrokeWidth(width * DRAW_STROKE_WIDTH_MULTIPLE);
             mInvalidateShader = true;
             invalidateSelf();
@@ -89,21 +114,21 @@ class RoundedRectangleBorderDrawable extends Drawable {
      * Set the corner radius.
      */
     void setCornerRadius(float cornerRadius) {
-        if (cornerRadius != mCornerRadius) {
-            mCornerRadius = cornerRadius;
+        if (cornerRadius != mDrawableState.mCornerRadius) {
+            mDrawableState.mCornerRadius = cornerRadius;
             invalidateSelf();
         }
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(@NonNull Canvas canvas) {
         if (mInvalidateShader) {
             mPaint.setShader(createGradientShader());
             mInvalidateShader = false;
         }
 
-        final float rx = mCornerRadius;
-        final float ry = mCornerRadius;
+        final float rx = mDrawableState.mCornerRadius;
+        final float ry = mDrawableState.mCornerRadius;
 
         final float halfBorderWidth = mPaint.getStrokeWidth() / 2f;
         final RectF rectF = mRectF;
@@ -126,7 +151,7 @@ class RoundedRectangleBorderDrawable extends Drawable {
 
     @Override
     public boolean getPadding(@NonNull Rect padding) {
-        final int borderWidth = Math.round(mBorderWidth);
+        final int borderWidth = Math.round(mDrawableState.mBorderWidth);
         //noinspection SuspiciousNameCombination
         padding.set(borderWidth, borderWidth, borderWidth, borderWidth);
         return true;
@@ -142,7 +167,7 @@ class RoundedRectangleBorderDrawable extends Drawable {
         if (tint != null) {
             mCurrentBorderTintColor = tint.getColorForState(getState(), mCurrentBorderTintColor);
         }
-        mBorderTint = tint;
+        mDrawableState.mBorderTint = tint;
         mInvalidateShader = true;
         invalidateSelf();
     }
@@ -155,7 +180,7 @@ class RoundedRectangleBorderDrawable extends Drawable {
 
     @Override
     public int getOpacity() {
-        return mBorderWidth > 0 ? PixelFormat.TRANSLUCENT : PixelFormat.TRANSPARENT;
+        return mDrawableState.mBorderWidth > 0 ? PixelFormat.TRANSLUCENT : PixelFormat.TRANSPARENT;
     }
 
     final void setRotation(float rotation) {
@@ -172,13 +197,13 @@ class RoundedRectangleBorderDrawable extends Drawable {
 
     @Override
     public boolean isStateful() {
-        return (mBorderTint != null && mBorderTint.isStateful()) || super.isStateful();
+        return (mDrawableState.mBorderTint != null && mDrawableState.mBorderTint.isStateful()) || super.isStateful();
     }
 
     @Override
     protected boolean onStateChange(int[] state) {
-        if (mBorderTint != null) {
-            final int newColor = mBorderTint.getColorForState(state, mCurrentBorderTintColor);
+        if (mDrawableState.mBorderTint != null) {
+            final int newColor = mDrawableState.mBorderTint.getColorForState(state, mCurrentBorderTintColor);
             if (newColor != mCurrentBorderTintColor) {
                 mInvalidateShader = true;
                 mCurrentBorderTintColor = newColor;
@@ -188,6 +213,18 @@ class RoundedRectangleBorderDrawable extends Drawable {
             invalidateSelf();
         }
         return mInvalidateShader;
+    }
+
+    @Nullable
+    @Override
+    public ConstantState getConstantState() {
+        mDrawableState.mChangingConfigurations = getChangingConfigurations();
+        return mDrawableState;
+    }
+
+    @Override
+    public int getChangingConfigurations() {
+        return super.getChangingConfigurations() | mDrawableState.getChangingConfigurations();
     }
 
     /**
