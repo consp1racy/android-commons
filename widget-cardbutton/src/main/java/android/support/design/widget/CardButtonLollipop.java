@@ -21,6 +21,7 @@ import android.animation.ObjectAnimator;
 import android.animation.StateListAnimator;
 import android.annotation.TargetApi;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -28,6 +29,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
@@ -42,6 +44,10 @@ class CardButtonLollipop extends CardButtonIcs {
     CardButtonLollipop(Button view,
                        ShadowViewDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
         super(view, shadowViewDelegate, animatorCreator);
+    }
+
+    private boolean isTransparent(@NonNull ColorStateList csl) {
+        return !csl.isStateful() && Color.alpha(csl.getDefaultColor()) == 0;
     }
 
     @Override
@@ -60,7 +66,7 @@ class CardButtonLollipop extends CardButtonIcs {
         final Drawable rippleContent;
         if (borderWidth > 0) {
             mBorderDrawable = createBorderDrawable(borderWidth, borderColor != null ? borderColor : backgroundTint, cornerRadius);
-            rippleContent = new LayerDrawable(new Drawable[]{mBorderDrawable, mShapeDrawable});
+            rippleContent = new LayerDrawable(new Drawable[]{mShapeDrawable, mBorderDrawable});
         } else {
             mBorderDrawable = null;
             rippleContent = mShapeDrawable;
@@ -183,11 +189,6 @@ class CardButtonLollipop extends CardButtonIcs {
     @Override
     boolean requirePreDrawListener() {
         return false;
-    }
-
-    @Override
-    RoundedRectangleBorderDrawable newRoundedRectangleDrawable() {
-        return new RoundedRectangleBorderDrawableLollipop();
     }
 
     @Override

@@ -20,16 +20,27 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.graphics.drawable.shapes.Shape;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
+import android.support.annotation.Px;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
 import android.widget.Button;
 
+import java.util.Arrays;
+
 abstract class CardButtonImpl {
+
+    private static final float[] TEMP_CORNER_RADII_OUT = new float[8];
+    private static final float[] TEMP_CORNER_RADII_IN = new float[8];
+    private static final RectF TEMP_RECTF = new RectF();
 
     static final Interpolator ANIM_INTERPOLATOR = AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR;
     static final int PRESSED_ANIM_DURATION = 100;
@@ -37,7 +48,7 @@ abstract class CardButtonImpl {
 
     Drawable mShapeDrawable;
     Drawable mRippleDrawable;
-    RoundedRectangleBorderDrawable mBorderDrawable;
+    Drawable mBorderDrawable;
     Drawable mContentBackground;
 
     float mElevation;
@@ -131,22 +142,15 @@ abstract class CardButtonImpl {
         return false;
     }
 
-    RoundedRectangleBorderDrawable createBorderDrawable(int borderWidth, ColorStateList backgroundTint, float cornerRadius) {
-        RoundedRectangleBorderDrawable borderDrawable = newRoundedRectangleDrawable();
-//        final Context context = mView.getContext();
-//        borderDrawable.setGradientColors(
-//            ContextCompat.getColor(context, R.color.design_fab_stroke_top_outer_color),
-//            ContextCompat.getColor(context, R.color.design_fab_stroke_top_inner_color),
-//            ContextCompat.getColor(context, R.color.design_fab_stroke_end_inner_color),
-//            ContextCompat.getColor(context, R.color.design_fab_stroke_end_outer_color));
-        borderDrawable.setBorderWidth(borderWidth);
-        borderDrawable.setBorderTint(backgroundTint);
-        borderDrawable.setCornerRadius(cornerRadius);
-        return borderDrawable;
-    }
-
-    RoundedRectangleBorderDrawable newRoundedRectangleDrawable() {
-        return new RoundedRectangleBorderDrawable();
+    Drawable createBorderDrawable(@IntRange(from = 0) @Px int borderWidth, ColorStateList backgroundTint, @FloatRange(from = 0) float cornerRadius) {
+        fillRectF(borderWidth);
+        Arrays.fill(TEMP_CORNER_RADII_OUT, cornerRadius);
+        Arrays.fill(TEMP_CORNER_RADII_IN, Math.max(0, cornerRadius - borderWidth));
+        final RoundRectShape s = new RoundRectShape(TEMP_CORNER_RADII_OUT, TEMP_RECTF, TEMP_CORNER_RADII_IN);
+        final ShapeDrawable d = new ShapeDrawable(s);
+        final Drawable w = DrawableCompat.wrap(d);
+        DrawableCompat.setTintList(w, backgroundTint);
+        return w;
     }
 
     void onPreDraw() {
@@ -173,7 +177,8 @@ abstract class CardButtonImpl {
     }
 
     Drawable createSimpleShapeDrawable(float cornerRadius) {
-        final Shape s = new RoundRectShape(new float[]{cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius}, null, null);
+        Arrays.fill(TEMP_CORNER_RADII_OUT, cornerRadius);
+        final Shape s = new RoundRectShape(TEMP_CORNER_RADII_OUT, null, null);
         final ShapeDrawable d = new ShapeDrawable(s);
         d.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         return d;
@@ -181,5 +186,9 @@ abstract class CardButtonImpl {
 
     GradientDrawable newGradientDrawableForShape() {
         return new GradientDrawable();
+    }
+
+    private void fillRectF(@FloatRange(from = 0) final float stroke) {
+        TEMP_RECTF.set(stroke, stroke, stroke, stroke);
     }
 }

@@ -67,8 +67,8 @@ class CardButtonIcs extends CardButtonGingerbread {
         if (mShadowDrawable != null) {
             mShadowDrawable.setRotation(-mRotation);
         }
-        if (mBorderDrawable != null) {
-            mBorderDrawable.setRotation(-mRotation);
-        }
+//        if (mBorderDrawable != null) {
+//            mBorderDrawable.setRotation(-mRotation);
+//        }
     }
 }

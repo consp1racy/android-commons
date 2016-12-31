@@ -83,7 +83,7 @@ class CardButtonGingerbread extends CardButtonImpl {
         final Drawable[] layers;
         if (borderWidth > 0) {
             mBorderDrawable = createBorderDrawable(borderWidth, borderColor != null ? borderColor : backgroundTint, cornerRadius);
-            layers = new Drawable[]{mBorderDrawable, mShapeDrawable, mRippleDrawable};
+            layers = new Drawable[]{mShapeDrawable, mBorderDrawable, mRippleDrawable};
         } else {
             mBorderDrawable = null;
             layers = new Drawable[]{mShapeDrawable, mRippleDrawable};
@@ -107,7 +107,7 @@ class CardButtonGingerbread extends CardButtonImpl {
             DrawableCompat.setTintList(mShapeDrawable, tint);
         }
         if (mBorderDrawable != null) {
-            mBorderDrawable.setBorderTint(tint);
+            DrawableCompat.setTintList(mBorderDrawable, tint);
         }
     }
 
@@ -120,9 +120,9 @@ class CardButtonGingerbread extends CardButtonImpl {
 
     @Override
     void setRippleColor(int rippleColor) {
-//        if (mRippleDrawable != null) {
-//            DrawableCompat.setTintList(mRippleDrawable, createColorStateList(rippleColor));
-//        }
+        if (mRippleDrawable != null) {
+            DrawableCompat.setTintList(mRippleDrawable, ColorStateList.valueOf(rippleColor));
+        }
     }
 
     @Override
