@@ -28,7 +28,7 @@ public final class XpTimePicker {
                     f = cls.getDeclaredField("mAmPmSpinner");
                     f.setAccessible(true);
                 } catch (NoSuchFieldException e) {
-                    // There was no AM/PM spinner on Android 2.
+                    e.printStackTrace();
                 }
                 FIELD_AM_PM_SPINNER = f;
 
@@ -37,6 +37,7 @@ public final class XpTimePicker {
                     f = cls.getDeclaredField("mMinuteSpinner");
                     f.setAccessible(true);
                 } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
                 }
                 FIELD_MINUTE_SPINNER = f;
 
@@ -45,6 +46,7 @@ public final class XpTimePicker {
                     f = cls.getDeclaredField("mHourSpinner");
                     f.setAccessible(true);
                 } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
                 }
                 FIELD_HOUR_SPINNER = f;
 
@@ -60,34 +62,46 @@ public final class XpTimePicker {
                 }
                 FIELD_DELEGATE = f;
 
-                try {
-                    cls = Class.forName("android.widget.TimePickerSpinnerDelegate");
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                if (Build.VERSION.SDK_INT == 21) {
+                    try {
+                        cls = Class.forName("android.widget.TimePickerClockDelegate");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    CLASS_SPINNER_DELEGATE = cls;
+                } else {
+                    try {
+                        cls = Class.forName("android.widget.TimePickerSpinnerDelegate");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    CLASS_SPINNER_DELEGATE = cls;
                 }
-                CLASS_SPINNER_DELEGATE = cls;
 
                 f = null;
                 try {
-                    f = cls.getDeclaredField("mYearSpinner");
+                    f = cls.getDeclaredField("mAmPmSpinner");
                     f.setAccessible(true);
                 } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
                 }
                 FIELD_AM_PM_SPINNER = f;
 
                 f = null;
                 try {
-                    f = cls.getDeclaredField("mMonthSpinner");
+                    f = cls.getDeclaredField("mMinuteSpinner");
                     f.setAccessible(true);
                 } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
                 }
                 FIELD_MINUTE_SPINNER = f;
 
                 f = null;
                 try {
-                    f = cls.getDeclaredField("mDaySpinner");
+                    f = cls.getDeclaredField("mHourSpinner");
                     f.setAccessible(true);
                 } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
                 }
                 FIELD_HOUR_SPINNER = f;
             }

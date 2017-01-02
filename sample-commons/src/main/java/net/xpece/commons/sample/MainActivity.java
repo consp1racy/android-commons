@@ -1,6 +1,7 @@
 package net.xpece.commons.sample;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,10 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import net.xpece.android.content.XpContext;
 import net.xpece.android.content.res.Dimen;
+import net.xpece.android.widget.XpDatePicker;
 import net.xpece.android.widget.XpEdgeEffect;
+import net.xpece.android.widget.XpTimePicker;
 import net.xpece.commons.android.sample.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -62,7 +67,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             final Context context = container.getContext();
-            final View view = new View(context);
+            final View view;
+            if (position == 0) {
+                final ColorStateList csl = ColorStateList.valueOf(Color.RED);
+                final TimePicker tp = new TimePicker(context);
+                XpTimePicker.setSelectionDividerTint(tp, csl);
+                view = tp;
+            } else if (position == 1) {
+                final ColorStateList csl = ColorStateList.valueOf(Color.RED);
+                final DatePicker dp = new DatePicker(context);
+                XpDatePicker.setSelectionDividerTint(dp, csl);
+                view = dp;
+            } else {
+                view = new View(context);
+            }
             container.addView(view);
             return view;
         }

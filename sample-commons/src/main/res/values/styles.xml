@@ -1,35 +1,46 @@
 <resources>
 
-  <style name="AppTheme" parent="Theme.AppCompat.DayNight">
-    <item name="toolbarStyle">@style/Widget.MamVybrano.Toolbar</item>
-    <item name="actionBarStyle">@style/Widget.MamVybrano.ActionBar.Solid</item>
-    <item name="actionModeStyle">@style/Widget.MamVybrano.ActionMode</item>
-  </style>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <item name="toolbarStyle">@style/Widget.MamVybrano.Toolbar</item>
+        <item name="actionBarStyle">@style/Widget.MamVybrano.ActionBar.Solid</item>
+        <item name="actionModeStyle">@style/Widget.MamVybrano.ActionMode</item>
 
-  <style name="Widget.MamVybrano.Toolbar" parent="Widget.AppCompat.Toolbar">
-    <item name="titleTextAppearance">@style/TextAppearance.Widget.MamVybrano.Toolbar.Title
-    </item>
-    <item name="subtitleTextAppearance">
-      @style/TextAppearance.Widget.MamVybrano.Toolbar.Subtitle
-    </item>
-  </style>
+        <item name="android:datePickerStyle">@style/Widget.MyApp.DatePicker</item>
+        <item name="android:timePickerStyle">@style/Widget.MyApp.TimePicker</item>
+    </style>
 
-  <style name="Widget.MamVybrano.ActionBar" parent="Widget.AppCompat.ActionBar">
-    <item name="titleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Title</item>
-    <item name="subtitleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Subtitle
-    </item>
-  </style>
+    <style name="Widget.MyApp.TimePicker" parent="android:Widget">
+        <item name="android:timePickerMode">spinner</item>
+    </style>
 
-  <style name="Widget.MamVybrano.ActionBar.Solid" parent="Widget.AppCompat.ActionBar.Solid">
-    <item name="titleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Title</item>
-    <item name="subtitleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Subtitle
-    </item>
-  </style>
+    <style name="Widget.MyApp.DatePicker" parent="android:Widget">
+        <item name="android:datePickerMode">spinner</item>
+    </style>
 
-  <style name="Widget.MamVybrano.ActionMode" parent="Widget.AppCompat.ActionMode">
-    <item name="titleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Title</item>
-    <item name="subtitleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Subtitle
-    </item>
-  </style>
+    <style name="Widget.MamVybrano.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.Widget.MamVybrano.Toolbar.Title
+        </item>
+        <item name="subtitleTextAppearance">
+            @style/TextAppearance.Widget.MamVybrano.Toolbar.Subtitle
+        </item>
+    </style>
+
+    <style name="Widget.MamVybrano.ActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Title</item>
+        <item name="subtitleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Subtitle
+        </item>
+    </style>
+
+    <style name="Widget.MamVybrano.ActionBar.Solid" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="titleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Title</item>
+        <item name="subtitleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Subtitle
+        </item>
+    </style>
+
+    <style name="Widget.MamVybrano.ActionMode" parent="Widget.AppCompat.ActionMode">
+        <item name="titleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Title</item>
+        <item name="subtitleTextStyle">@style/TextAppearance.Widget.MamVybrano.ActionBar.Subtitle
+        </item>
+    </style>
 
 </resources>

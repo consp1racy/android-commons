@@ -16,6 +16,7 @@ public class MyInitProvider extends EmptyContentProvider {
             .setFontAttrId(R.attr.fontPath)
             .build()
         );
+
         return false;
     }
 }

@@ -23,30 +23,6 @@ public final class XpDatePicker {
             Field f;
             Class<?> cls = DatePicker.class;
             if (Build.VERSION.SDK_INT < 21) {
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mYearSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                }
-                FIELD_YEAR_SPINNER = f;
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mMonthSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                }
-                FIELD_MONTH_SPINNER = f;
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mDaySpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                }
-                FIELD_DAY_SPINNER = f;
-
                 CLASS_SPINNER_DELEGATE = null;
                 FIELD_DELEGATE = null;
             } else {
@@ -59,37 +35,49 @@ public final class XpDatePicker {
                 }
                 FIELD_DELEGATE = f;
 
-                try {
-                    cls = Class.forName("android.widget.DatePicker$DatePickerSpinnerDelegate");
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                if (Build.VERSION.SDK_INT < 24) {
+                    try {
+                        cls = Class.forName("android.widget.DatePicker$DatePickerSpinnerDelegate");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    CLASS_SPINNER_DELEGATE = cls;
+                } else {
+                    try {
+                        cls = Class.forName("android.widget.DatePickerSpinnerDelegate");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    CLASS_SPINNER_DELEGATE = cls;
                 }
-                CLASS_SPINNER_DELEGATE = cls;
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mYearSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                }
-                FIELD_YEAR_SPINNER = f;
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mMonthSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                }
-                FIELD_MONTH_SPINNER = f;
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mDaySpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                }
-                FIELD_DAY_SPINNER = f;
             }
+
+            f = null;
+            try {
+                f = cls.getDeclaredField("mYearSpinner");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            FIELD_YEAR_SPINNER = f;
+
+            f = null;
+            try {
+                f = cls.getDeclaredField("mMonthSpinner");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            FIELD_MONTH_SPINNER = f;
+
+            f = null;
+            try {
+                f = cls.getDeclaredField("mDaySpinner");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            FIELD_DAY_SPINNER = f;
         } else {
             FIELD_DAY_SPINNER = null;
             FIELD_MONTH_SPINNER = null;
