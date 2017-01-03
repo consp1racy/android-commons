@@ -30,6 +30,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -1455,7 +1456,7 @@ public class LayerDrawableCompat extends Drawable implements Drawable.Callback {
             // Explicit dimensions override intrinsic dimensions.
             final int resolvedW = layerW < 0 ? intrinsicW : layerW;
             final int resolvedH = layerH < 0 ? intrinsicH : layerH;
-            Gravity.apply(gravity, resolvedW, resolvedH, container, outRect, layoutDirection);
+            GravityCompat.apply(gravity, resolvedW, resolvedH, container, outRect, layoutDirection);
             d.setBounds(outRect);
 
             if (isPaddingNested) {
