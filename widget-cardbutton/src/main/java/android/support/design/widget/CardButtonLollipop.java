@@ -29,11 +29,15 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
-import android.support.annotation.NonNull;
+import android.support.annotation.ColorInt;
+import android.support.annotation.IntRange;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiresApi(21)
 @TargetApi(21)
@@ -46,39 +50,51 @@ class CardButtonLollipop extends CardButtonIcs {
         super(view, shadowViewDelegate, animatorCreator);
     }
 
-    private boolean isTransparent(@NonNull ColorStateList csl) {
-        return !csl.isStateful() && Color.alpha(csl.getDefaultColor()) == 0;
-    }
-
     @Override
-    void setBackgroundDrawable(ColorStateList backgroundTint,
-                               PorterDuff.Mode backgroundTintMode, int rippleColor, int borderWidth,
-                               ColorStateList borderColor) {
+    void setBackgroundDrawable(@Nullable ColorStateList backgroundTint,
+                               @Nullable PorterDuff.Mode backgroundTintMode, @ColorInt int rippleColor, @IntRange(from = 0) int borderWidth,
+                               @Nullable ColorStateList borderColor) {
         final float cornerRadius = mShadowViewDelegate.getRadius();
 
-        // Now we need to tint the shape background with the tint
-        mShapeDrawable = DrawableCompat.wrap(createShapeDrawable(cornerRadius));
-        DrawableCompat.setTintList(mShapeDrawable, backgroundTint);
-        if (backgroundTintMode != null) {
-            DrawableCompat.setTintMode(mShapeDrawable, backgroundTintMode);
+        final boolean hasBorder = borderWidth > 0 && isNotTransparent(borderColor);
+        final boolean hasBackground = isNotTransparent(backgroundTint);
+
+        if (hasBackground) {
+            mShapeDrawable = createShapeDrawable(cornerRadius);
+            mShapeDrawable.setTintList(backgroundTint);
+            if (backgroundTintMode != null) {
+                mShapeDrawable.setTintMode(backgroundTintMode);
+            }
+        } else {
+            mShapeDrawable = null;
         }
 
-        final Drawable rippleContent;
-        if (borderWidth > 0) {
-            mBorderDrawable = createBorderDrawable(borderWidth, borderColor != null ? borderColor : backgroundTint, cornerRadius);
-            rippleContent = new LayerDrawable(new Drawable[]{mShapeDrawable, mBorderDrawable});
+        if (hasBorder) {
+            mBorderDrawable = createBorderDrawable(borderWidth, cornerRadius, borderColor);
         } else {
             mBorderDrawable = null;
-            rippleContent = mShapeDrawable;
         }
 
-        // Round rectangle GradientDrawable produces weird masks. Use something else.
-        Drawable mask = createSimpleShapeDrawable(cornerRadius);
+        final List<Drawable> layers = new ArrayList<>();
+        if (mShapeDrawable != null) layers.add(mShapeDrawable);
+        if (mBorderDrawable != null) layers.add(mBorderDrawable);
+
+        final Drawable rippleContent;
+        final int size = layers.size();
+        if (size == 0) {
+            rippleContent = null;
+        } else if (size == 1) {
+            rippleContent = layers.get(0);
+        } else {
+            rippleContent = new LayerDrawable(layers.toArray(new Drawable[size]));
+        }
+
+        Drawable mask = createMaskDrawable(cornerRadius);
         mRippleDrawable = new RippleDrawable(ColorStateList.valueOf(rippleColor), rippleContent, mask);
 
         mContentBackground = mRippleDrawable;
 
-        mShadowViewDelegate.setBackgroundDrawable(mRippleDrawable);
+        mShadowViewDelegate.setBackgroundDrawable(mContentBackground);
     }
 
     @Override
@@ -191,9 +207,8 @@ class CardButtonLollipop extends CardButtonIcs {
         return false;
     }
 
-    @Override
-    GradientDrawable newGradientDrawableForShape() {
-        return new AlwaysStatefulGradientDrawable();
+    Drawable createMaskDrawable(float cornerRadius) {
+        return CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, Color.WHITE);
     }
 
     @Override

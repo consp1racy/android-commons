@@ -20,27 +20,15 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
-import android.graphics.drawable.shapes.Shape;
-import android.support.annotation.FloatRange;
+import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
-import android.support.annotation.Px;
-import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.annotation.Nullable;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
 import android.widget.Button;
 
-import java.util.Arrays;
-
 abstract class CardButtonImpl {
-
-    private static final float[] TEMP_CORNER_RADII_OUT = new float[8];
-    private static final float[] TEMP_CORNER_RADII_IN = new float[8];
-    private static final RectF TEMP_RECTF = new RectF();
 
     static final Interpolator ANIM_INTERPOLATOR = AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR;
     static final int PRESSED_ANIM_DURATION = 100;
@@ -75,9 +63,9 @@ abstract class CardButtonImpl {
         mAnimatorCreator = animatorCreator;
     }
 
-    abstract void setBackgroundDrawable(ColorStateList backgroundTint,
-                                        PorterDuff.Mode backgroundTintMode, int rippleColor, int borderWidth,
-                                        ColorStateList borderColor);
+    abstract void setBackgroundDrawable(@Nullable ColorStateList backgroundTint,
+                                        @Nullable PorterDuff.Mode backgroundTintMode, @ColorInt int rippleColor, @IntRange(from = 0) int borderWidth,
+                                        @Nullable ColorStateList borderColor);
 
     abstract void setBackgroundTintList(ColorStateList tint);
 
@@ -142,17 +130,6 @@ abstract class CardButtonImpl {
         return false;
     }
 
-    Drawable createBorderDrawable(@IntRange(from = 0) @Px int borderWidth, ColorStateList backgroundTint, @FloatRange(from = 0) float cornerRadius) {
-        fillRectF(borderWidth);
-        Arrays.fill(TEMP_CORNER_RADII_OUT, cornerRadius);
-        Arrays.fill(TEMP_CORNER_RADII_IN, Math.max(0, cornerRadius - borderWidth));
-        final RoundRectShape s = new RoundRectShape(TEMP_CORNER_RADII_OUT, TEMP_RECTF, TEMP_CORNER_RADII_IN);
-        final ShapeDrawable d = new ShapeDrawable(s);
-        final Drawable w = DrawableCompat.wrap(d);
-        DrawableCompat.setTintList(w, backgroundTint);
-        return w;
-    }
-
     void onPreDraw() {
     }
 
@@ -168,27 +145,8 @@ abstract class CardButtonImpl {
         }
     }
 
-    GradientDrawable createShapeDrawable(float cornerRadius) {
-        GradientDrawable d = newGradientDrawableForShape();
-        d.setShape(GradientDrawable.RECTANGLE);
-        d.setColor(Color.WHITE);
-        d.setCornerRadius(cornerRadius);
-        return d;
+    static boolean isNotTransparent(@Nullable ColorStateList borderColor) {
+        return borderColor != null && (borderColor.isStateful() || Color.alpha(borderColor.getDefaultColor()) > 0);
     }
 
-    Drawable createSimpleShapeDrawable(float cornerRadius) {
-        Arrays.fill(TEMP_CORNER_RADII_OUT, cornerRadius);
-        final Shape s = new RoundRectShape(TEMP_CORNER_RADII_OUT, null, null);
-        final ShapeDrawable d = new ShapeDrawable(s);
-        d.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-        return d;
-    }
-
-    GradientDrawable newGradientDrawableForShape() {
-        return new GradientDrawable();
-    }
-
-    private void fillRectF(@FloatRange(from = 0) final float stroke) {
-        TEMP_RECTF.set(stroke, stroke, stroke, stroke);
-    }
 }

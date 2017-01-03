@@ -21,15 +21,21 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.Px;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.StateSet;
 import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.List;
 
 class CardButtonGingerbread extends CardButtonImpl {
 
@@ -57,57 +63,72 @@ class CardButtonGingerbread extends CardButtonImpl {
     }
 
     @Override
-    void setBackgroundDrawable(ColorStateList backgroundTint,
-                               PorterDuff.Mode backgroundTintMode, int rippleColor, int borderWidth,
-                               ColorStateList borderColor) {
+    void setBackgroundDrawable(@Nullable ColorStateList backgroundTint,
+                               @Nullable PorterDuff.Mode backgroundTintMode, @ColorInt int rippleColor, @IntRange(from = 0) int borderWidth,
+                               @Nullable ColorStateList borderColor) {
         final float cornerRadius = mShadowViewDelegate.getRadius();
 
-        // Now we need to tint the original background with the tint, using
-        // an InsetDrawable if we have a border width
-        mShapeDrawable = DrawableCompat.wrap(createShapeDrawable(cornerRadius));
-        DrawableCompat.setTintList(mShapeDrawable, backgroundTint);
-        if (backgroundTintMode != null) {
-            DrawableCompat.setTintMode(mShapeDrawable, backgroundTintMode);
+        final boolean hasBorder = borderWidth > 0 && isNotTransparent(borderColor);
+        final boolean hasBackground = isNotTransparent(backgroundTint);
+
+        if (hasBackground) {
+            mShapeDrawable = createShapeDrawable(cornerRadius);
+            DrawableCompat.setTintList(mShapeDrawable, backgroundTint);
+            if (backgroundTintMode != null) {
+                DrawableCompat.setTintMode(mShapeDrawable, backgroundTintMode);
+            }
+        } else {
+            mShapeDrawable = null;
         }
 
-        // Now we created a mask Drawable which will be used for touch feedback.
-//        GradientDrawable touchFeedbackShape = createShapeDrawable(cornerRadius);
-
-        // We'll now wrap that touch feedback mask drawable with a ColorStateList. We do not need
-        // to inset for any border here as LayerDrawable will nest the padding for us
-//        mRippleDrawable = DrawableCompat.wrap(touchFeedbackShape);
-//        DrawableCompat.setTintList(mRippleDrawable, createColorStateList(rippleColor));
+        if (hasBorder) {
+            mBorderDrawable = createBorderDrawable(borderWidth, cornerRadius, borderColor);
+        } else {
+            mBorderDrawable = null;
+        }
 
         mRippleDrawable = createRippleDrawable(rippleColor, cornerRadius);
 
-        final Drawable[] layers;
-        if (borderWidth > 0) {
-            mBorderDrawable = createBorderDrawable(borderWidth, borderColor != null ? borderColor : backgroundTint, cornerRadius);
-            layers = new Drawable[]{mShapeDrawable, mBorderDrawable, mRippleDrawable};
-        } else {
-            mBorderDrawable = null;
-            layers = new Drawable[]{mShapeDrawable, mRippleDrawable};
-        }
+        makeAndSetBackground(cornerRadius);
+    }
 
-        mContentBackground = new LayerDrawable(layers);
+    private void makeAndSetBackground(final float radius) {
+        final List<Drawable> layers = new ArrayList<>();
+        if (mShapeDrawable != null) layers.add(mShapeDrawable);
+        if (mBorderDrawable != null) layers.add(mBorderDrawable);
+        layers.add(mRippleDrawable);
+
+        final int size = layers.size();
+        if (size > 1) {
+            mContentBackground = new LayerDrawable(layers.toArray(new Drawable[size]));
+        } else {
+            mContentBackground = layers.get(0);
+        }
 
         mShadowDrawable = new ShadowDrawableWrapper(
             mView.getContext(),
             mContentBackground,
-            cornerRadius,
+            radius,
             mElevation,
             mElevation + mPressedTranslationZ);
         mShadowDrawable.setAddPaddingForCorners(false);
         mShadowViewDelegate.setBackgroundDrawable(mShadowDrawable);
     }
 
+    Drawable createShapeDrawable(float cornerRadius) {
+        return CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, Color.WHITE);
+    }
+
+    Drawable createBorderDrawable(@IntRange(from = 0) @Px final int borderWidth, @FloatRange(from = 0) final float cornerRadius, @NonNull final ColorStateList borderTint) {
+        final Drawable drawable = CardButtonDrawableFactory.newBorderShapeDrawableCompat(borderWidth, cornerRadius);
+        DrawableCompat.setTintList(drawable, borderTint);
+        return drawable;
+    }
+
     @Override
     void setBackgroundTintList(ColorStateList tint) {
         if (mShapeDrawable != null) {
             DrawableCompat.setTintList(mShapeDrawable, tint);
-        }
-        if (mBorderDrawable != null) {
-            DrawableCompat.setTintList(mBorderDrawable, tint);
         }
     }
 
@@ -119,10 +140,10 @@ class CardButtonGingerbread extends CardButtonImpl {
     }
 
     @Override
-    void setRippleColor(int rippleColor) {
-        if (mRippleDrawable != null) {
-            DrawableCompat.setTintList(mRippleDrawable, ColorStateList.valueOf(rippleColor));
-        }
+    void setRippleColor(@ColorInt int rippleColor) {
+        final float radius = mShadowViewDelegate.getRadius();
+        mRippleDrawable = createRippleDrawable(rippleColor, radius);
+        makeAndSetBackground(radius);
     }
 
     @Override
@@ -239,34 +260,10 @@ class CardButtonGingerbread extends CardButtonImpl {
         }
     }
 
-//    private static ColorStateList createColorStateList(int selectedColor) {
-//        final int[][] states = new int[3][];
-//        final int[] colors = new int[3];
-//        int i = 0;
-//
-//        states[i] = FOCUSED_ENABLED_STATE_SET;
-//        colors[i] = selectedColor;
-//        i++;
-//
-//        states[i] = PRESSED_ENABLED_STATE_SET;
-//        colors[i] = selectedColor;
-//        i++;
-//
-//        // Default enabled state
-//        states[i] = new int[0];
-//        colors[i] = Color.TRANSPARENT;
-//        i++;
-//
-//        return new ColorStateList(states, colors);
-//    }
-
     private Drawable createRippleDrawable(@ColorInt int rippleColor, float cornerRadius) {
-        GradientDrawable focused = createShapeDrawable(cornerRadius);
-        focused.setColor(rippleColor);
-        GradientDrawable pressed = createShapeDrawable(cornerRadius);
-        pressed.setColor(rippleColor);
-        GradientDrawable other = createShapeDrawable(cornerRadius);
-        other.setColor(Color.TRANSPARENT);
+        Drawable focused = CardButtonDrawableFactory.newGradientDrawableCompat(cornerRadius, rippleColor);
+        Drawable pressed = CardButtonDrawableFactory.newGradientDrawableCompat(cornerRadius, rippleColor);
+        Drawable other = CardButtonDrawableFactory.newGradientDrawableCompat(cornerRadius, Color.TRANSPARENT);
         StateListDrawable states = new StateListDrawable();
         states.addState(FOCUSED_ENABLED_STATE_SET, focused);
         states.addState(PRESSED_ENABLED_STATE_SET, pressed);

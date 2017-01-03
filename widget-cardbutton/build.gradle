@@ -7,9 +7,13 @@ android {
     defaultConfig {
         minSdkVersion 9
     }
+
+    publishNonDefault true
+    defaultPublishConfig "release"
 }
 
 dependencies {
+    compile "com.android.support:cardview-v7:$supportLibsVersionCardButton"
     compile "com.android.support:design:$supportLibsVersionCardButton"
 	compile project(':appcompat-extra')
 }

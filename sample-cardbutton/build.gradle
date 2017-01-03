@@ -23,7 +23,8 @@ android {
 }
 
 dependencies {
-    compile project(':widget-cardbutton')
+    debugCompile project(path: ':widget-cardbutton', configuration: 'debug')
+    releaseCompile project(path: ':widget-cardbutton', configuration: 'release')
 }
 
 repositories {
