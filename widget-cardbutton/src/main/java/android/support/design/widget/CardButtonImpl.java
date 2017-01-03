@@ -50,14 +50,13 @@ abstract class CardButtonImpl {
     static final int[] EMPTY_STATE_SET = new int[0];
 
     final Button mView;
-    final ShadowViewDelegate mShadowViewDelegate;
+    final CardButtonDelegate mShadowViewDelegate;
     final ValueAnimatorCompat.Creator mAnimatorCreator;
 
     private final Rect mTmpRect = new Rect();
     private ViewTreeObserver.OnPreDrawListener mPreDrawListener;
 
-    CardButtonImpl(Button view,
-                   ShadowViewDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
+    CardButtonImpl(Button view, CardButtonDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
         mView = view;
         mShadowViewDelegate = shadowViewDelegate;
         mAnimatorCreator = animatorCreator;

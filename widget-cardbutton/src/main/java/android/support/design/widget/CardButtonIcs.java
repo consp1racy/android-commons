@@ -28,8 +28,7 @@ class CardButtonIcs extends CardButtonGingerbread {
 
     private float mRotation;
 
-    CardButtonIcs(Button view,
-                  ShadowViewDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
+    CardButtonIcs(Button view, CardButtonDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
         super(view, shadowViewDelegate, animatorCreator);
         mRotation = mView.getRotation();
     }

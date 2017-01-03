@@ -24,8 +24,8 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
@@ -45,8 +45,7 @@ class CardButtonLollipop extends CardButtonIcs {
 
     private InsetDrawable mInsetDrawable;
 
-    CardButtonLollipop(Button view,
-                       ShadowViewDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
+    CardButtonLollipop(Button view, CardButtonDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
         super(view, shadowViewDelegate, animatorCreator);
     }
 
@@ -82,19 +81,36 @@ class CardButtonLollipop extends CardButtonIcs {
         final Drawable rippleContent;
         final int size = layers.size();
         if (size == 0) {
-            rippleContent = null;
+            rippleContent = new ColorDrawable(0);
         } else if (size == 1) {
             rippleContent = layers.get(0);
         } else {
             rippleContent = new LayerDrawable(layers.toArray(new Drawable[size]));
         }
+        mContentBackground = rippleContent;
 
         Drawable mask = createMaskDrawable(cornerRadius);
-        mRippleDrawable = new RippleDrawable(ColorStateList.valueOf(rippleColor), rippleContent, mask);
-
-        mContentBackground = mRippleDrawable;
+        mRippleDrawable = new RippleDrawable(ColorStateList.valueOf(rippleColor), null, mask);
 
         mShadowViewDelegate.setBackgroundDrawable(mContentBackground);
+        mShadowViewDelegate.setForegroundDrawable(mRippleDrawable);
+
+//        final Drawable rippleContent;
+//        final int size = layers.size();
+//        if (size == 0) {
+//            rippleContent = null;
+//        } else if (size == 1) {
+//            rippleContent = layers.get(0);
+//        } else {
+//            rippleContent = new LayerDrawable(layers.toArray(new Drawable[size]));
+//        }
+//
+//        Drawable mask = createMaskDrawable(cornerRadius);
+//        mRippleDrawable = new RippleDrawable(ColorStateList.valueOf(rippleColor), rippleContent, mask);
+//
+//        mContentBackground = mRippleDrawable;
+//
+//        mShadowViewDelegate.setBackgroundDrawable(mContentBackground);
     }
 
     @Override
@@ -184,11 +200,11 @@ class CardButtonLollipop extends CardButtonIcs {
     @Override
     void onPaddingUpdated(Rect padding) {
         if (mShadowViewDelegate.isCompatPaddingEnabled()) {
-            mInsetDrawable = new InsetDrawable(mRippleDrawable,
+            mInsetDrawable = new InsetDrawable(mContentBackground,
                 padding.left, padding.top, padding.right, padding.bottom);
             mShadowViewDelegate.setBackgroundDrawable(mInsetDrawable);
         } else {
-            mShadowViewDelegate.setBackgroundDrawable(mRippleDrawable);
+            mShadowViewDelegate.setBackgroundDrawable(mContentBackground);
         }
     }
 
@@ -223,19 +239,6 @@ class CardButtonLollipop extends CardButtonIcs {
             rect.set(hPadding, vPadding, hPadding, vPadding);
         } else {
             rect.set(0, 0, 0, 0);
-        }
-    }
-
-    /**
-     * LayerDrawable on L+ caches its isStateful() state and doesn't refresh it,
-     * meaning that if we apply a tint to one of its children, the parent doesn't become
-     * stateful and the tint doesn't work for state changes. We workaround it by saying that we
-     * are always stateful. If we don't have a stateful tint, the change is ignored anyway.
-     */
-    static class AlwaysStatefulGradientDrawable extends GradientDrawable {
-        @Override
-        public boolean isStateful() {
-            return true;
         }
     }
 }

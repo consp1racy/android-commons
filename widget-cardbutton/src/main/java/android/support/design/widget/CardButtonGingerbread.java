@@ -20,6 +20,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -43,8 +44,7 @@ class CardButtonGingerbread extends CardButtonImpl {
 
     ShadowDrawableWrapper mShadowDrawable;
 
-    CardButtonGingerbread(Button view,
-                          ShadowViewDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
+    CardButtonGingerbread(Button view, CardButtonDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
         super(view, shadowViewDelegate, animatorCreator);
 
         mStateListAnimator = new StateListAnimator();
@@ -96,13 +96,15 @@ class CardButtonGingerbread extends CardButtonImpl {
         final List<Drawable> layers = new ArrayList<>();
         if (mShapeDrawable != null) layers.add(mShapeDrawable);
         if (mBorderDrawable != null) layers.add(mBorderDrawable);
-        layers.add(mRippleDrawable);
+//        layers.add(mRippleDrawable);
 
         final int size = layers.size();
         if (size > 1) {
             mContentBackground = new LayerDrawable(layers.toArray(new Drawable[size]));
-        } else {
+        } else if (size == 1) {
             mContentBackground = layers.get(0);
+        } else {
+            mContentBackground = new ColorDrawable(0);
         }
 
         mShadowDrawable = new ShadowDrawableWrapper(
@@ -113,6 +115,8 @@ class CardButtonGingerbread extends CardButtonImpl {
             mElevation + mPressedTranslationZ);
         mShadowDrawable.setAddPaddingForCorners(false);
         mShadowViewDelegate.setBackgroundDrawable(mShadowDrawable);
+
+        mShadowViewDelegate.setForegroundDrawable(mRippleDrawable);
     }
 
     Drawable createShapeDrawable(float cornerRadius) {

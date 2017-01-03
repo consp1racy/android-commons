@@ -19,6 +19,7 @@ package android.support.design.widget;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -134,6 +135,10 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     private CardButtonImpl mImpl;
     private boolean mSuperInit = false;
+
+    private Drawable mForeground;
+    private boolean mForegroundBoundsChanged;
+    private final Rect mForegroundBounds = new Rect();
 
     public CardButton(Context context) {
         this(context, null);
@@ -468,6 +473,49 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         Log.i(TAG, "Setting a custom background is not supported.");
     }
 
+    @Override
+    public void setForeground(Drawable foreground) {
+        Log.i(TAG, "Setting a custom foreground is not supported.");
+    }
+
+    @Override
+    public void setForegroundGravity(int gravity) {
+        Log.i(TAG, "Setting a custom foreground is not supported.");
+    }
+
+    @Override
+    public void setForegroundTintList(@Nullable ColorStateList tint) {
+        Log.i(TAG, "Setting a custom foreground is not supported.");
+    }
+
+    @Override
+    public void setForegroundTintMode(@Nullable PorterDuff.Mode tintMode) {
+        Log.i(TAG, "Setting a custom foreground is not supported.");
+    }
+
+    private void setForegroundCompat(Drawable drawable) {
+        if (mForeground != drawable) {
+            if (mForeground != null) {
+                mForeground.setCallback(null);
+                unscheduleDrawable(mForeground);
+            }
+
+            mForeground = drawable;
+
+            if (drawable != null) {
+                setWillNotDraw(false);
+                drawable.setCallback(this);
+                if (drawable.isStateful()) {
+                    drawable.setState(getDrawableState());
+                }
+            } else {
+                setWillNotDraw(true);
+            }
+            requestLayout();
+            invalidate();
+        }
+    }
+
     /**
      * Set whether CardButton should add inner padding on platforms Lollipop and after,
      * to ensure consistent dimensions on all platforms.
@@ -509,11 +557,28 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     }
 
     @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+        if (mForeground != null) {
+            mForeground.setVisible(visibility == VISIBLE, false);
+        }
+    }
+
+    @Override
+    protected boolean verifyDrawable(@NonNull Drawable who) {
+        return super.verifyDrawable(who) || (who == mForeground);
+    }
+
+    @Override
     protected void drawableStateChanged() {
         super.drawableStateChanged();
-        getImpl().onDrawableStateChanged(getDrawableState());
+        final int[] stateSet = getDrawableState();
+        getImpl().onDrawableStateChanged(stateSet);
         if (mTextCompoundDrawableHelper != null) {
             mTextCompoundDrawableHelper.applySupportTint();
+        }
+        if (mForeground != null && mForeground.isStateful()) {
+            mForeground.setState(stateSet);
         }
     }
 
@@ -522,6 +587,42 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public void jumpDrawablesToCurrentState() {
         super.jumpDrawablesToCurrentState();
         getImpl().jumpDrawableToCurrentState();
+        if (mForeground != null) {
+            mForeground.jumpToCurrentState();
+        }
+    }
+
+    @Override
+    @RequiresApi(21)
+    public void drawableHotspotChanged(float x, float y) {
+        super.drawableHotspotChanged(x, y);
+
+        if (mForeground != null) {
+            mForeground.setHotspot(x, y);
+        }
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mForegroundBoundsChanged = true;
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+
+        if (mForeground != null) {
+            final Drawable foreground = mForeground;
+
+            if (mForegroundBoundsChanged) {
+                mForegroundBoundsChanged = false;
+                getContentRect(mForegroundBounds);
+                foreground.setBounds(mForegroundBounds);
+            }
+
+            foreground.draw(canvas);
+        }
     }
 
     /**
@@ -683,17 +784,28 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
     private CardButtonImpl createImpl() {
         final int sdk = Build.VERSION.SDK_INT;
+        final CardButtonDelegate delegate = createDelegateImpl();
         if (sdk >= 21) {
-            return new CardButtonLollipop(this, new ShadowDelegateImpl(), ViewUtils.DEFAULT_ANIMATOR_CREATOR);
+            return new CardButtonLollipop(this, delegate, ViewUtils.DEFAULT_ANIMATOR_CREATOR);
         } else if (sdk >= 14) {
-            return new CardButtonIcs(this, new ShadowDelegateImpl(), ViewUtils.DEFAULT_ANIMATOR_CREATOR);
+            return new CardButtonIcs(this, delegate, ViewUtils.DEFAULT_ANIMATOR_CREATOR);
         } else {
-            return new CardButtonGingerbread(this, new ShadowDelegateImpl(), ViewUtils.DEFAULT_ANIMATOR_CREATOR);
+            return new CardButtonGingerbread(this, delegate, ViewUtils.DEFAULT_ANIMATOR_CREATOR);
         }
     }
 
-    private class ShadowDelegateImpl implements ShadowViewDelegate {
-        ShadowDelegateImpl() {
+    @TargetApi(Build.VERSION_CODES.M)
+    private CardButtonDelegate createDelegateImpl() {
+        final int sdk = Build.VERSION.SDK_INT;
+        if (sdk >= 23) {
+            return new CardButtonDelegateM();
+        } else {
+            return new CardButtonDelegateImpl();
+        }
+    }
+
+    private class CardButtonDelegateImpl implements CardButtonDelegate {
+        CardButtonDelegateImpl() {
         }
 
         @Override
@@ -704,6 +816,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         @Override
         public void setShadowPadding(int left, int top, int right, int bottom) {
             mShadowPadding.set(left, top, right, bottom);
+            mForegroundBoundsChanged = true;
             final Rect contentPadding = mContentPadding;
             setPadding(left + contentPadding.left, top + contentPadding.top,
                 right + contentPadding.right, bottom + contentPadding.bottom);
@@ -719,6 +832,20 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         @Override
         public boolean isCompatPaddingEnabled() {
             return mCompatPadding;
+        }
+
+        @Override
+        public void setForegroundDrawable(Drawable foreground) {
+            CardButton.this.setForegroundCompat(foreground);
+        }
+    }
+
+    @RequiresApi(23)
+    @TargetApi(23)
+    private class CardButtonDelegateM extends CardButtonDelegateImpl {
+        @Override
+        public void setForegroundDrawable(Drawable foreground) {
+            CardButton.super.setForeground(foreground);
         }
     }
 }
