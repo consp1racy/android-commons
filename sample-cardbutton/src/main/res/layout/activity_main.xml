@@ -71,6 +71,9 @@
 
         <android.support.design.widget.CardButton
             android:id="@+id/cb2"
+            android:rotation="60"
+            android:translationX="-60dp"
+            android:translationY="30dp"
             style="@style/Widget.Design.CardButton.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,6 +84,9 @@
 
         <android.support.design.widget.CardButton
             android:id="@+id/cb2b"
+            android:rotation="60"
+            android:translationX="60dp"
+            android:translationY="-30dp"
             style="@style/Widget.Design.CardButton.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -179,6 +185,7 @@
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:rotation="60"
             android:clickable="true"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

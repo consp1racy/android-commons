@@ -40,6 +40,17 @@ import android.support.v4.graphics.drawable.TintAwareDrawable;
  * Simpler and uses less resources compared to GradientDrawable or ShapeDrawable.
  */
 class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
+    private static final RoundRectHelper sHelper;
+
+    static {
+//        final int sdk = Build.VERSION.SDK_INT;
+//        if (sdk >= 17) {
+            sHelper = new RoundRectHelperImpl();
+//        } else {
+//            sHelper = new RoundRectHelperGingerbread();
+//        }
+    }
+
     private RoundRectConstantState mState;
     private boolean mMutated = false;
 
@@ -78,7 +89,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
             clearColorFilter = false;
         }
 
-        canvas.drawRoundRect(mState.mBoundsF, mState.mRadius, mState.mRadius, paint);
+        sHelper.drawRoundRect(canvas, mState.mBoundsF, mState.mRadius, paint);
 
         if (clearColorFilter) {
             paint.setColorFilter(null);
@@ -107,6 +118,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
         outline.setRoundRect(mState.mBoundsI, mState.mRadius);
     }
 
+    @SuppressWarnings("unused")
     void setRadius(float radius) {
         if (radius == mState.mRadius) {
             return;
@@ -143,6 +155,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
         return PixelFormat.TRANSLUCENT;
     }
 
+    @SuppressWarnings("unused")
     public float getRadius() {
         return mState.mRadius;
     }
@@ -285,6 +298,65 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
         @Override
         public int getChangingConfigurations() {
             return mChangingConfigurations;
+        }
+    }
+
+    interface RoundRectHelper {
+        void drawRoundRect(Canvas canvas, RectF bounds, float cornerRadius, Paint paint);
+    }
+
+    // Don't use now. Produces unwanted results when working with translucent colors.
+//    static class RoundRectHelperGingerbread implements RoundRectHelper {
+//        final RectF sCornerRect = new RectF();
+//
+//        /**
+//         * Draws a round rect using 7 draw operations. This is faster than using
+//         * canvas.drawRoundRect before JBMR1 because API 11-16 used alpha mask textures to draw
+//         * shapes.
+//         */
+//        @Override
+//        public void drawRoundRect(Canvas canvas, RectF bounds, float cornerRadius, Paint paint) {
+//            final float twoRadius = cornerRadius * 2;
+//            final float innerWidth = bounds.width() - twoRadius - 1;
+//            final float innerHeight = bounds.height() - twoRadius - 1;
+//            if (cornerRadius >= 1f) {
+//                // increment corner radius to account for half pixels.
+//                float roundedCornerRadius = cornerRadius + .5f;
+//                sCornerRect.set(-roundedCornerRadius, -roundedCornerRadius, roundedCornerRadius,
+//                    roundedCornerRadius);
+//                int saved = canvas.save();
+//                canvas.translate(bounds.left + roundedCornerRadius,
+//                    bounds.top + roundedCornerRadius);
+//                canvas.drawArc(sCornerRect, 180, 90, true, paint);
+//                canvas.translate(innerWidth, 0);
+//                canvas.rotate(90);
+//                canvas.drawArc(sCornerRect, 180, 90, true, paint);
+//                canvas.translate(innerHeight, 0);
+//                canvas.rotate(90);
+//                canvas.drawArc(sCornerRect, 180, 90, true, paint);
+//                canvas.translate(innerWidth, 0);
+//                canvas.rotate(90);
+//                canvas.drawArc(sCornerRect, 180, 90, true, paint);
+//                canvas.restoreToCount(saved);
+//                //draw top and bottom pieces
+//                canvas.drawRect(bounds.left + roundedCornerRadius - 1f, bounds.top,
+//                    bounds.right - roundedCornerRadius + 1f,
+//                    bounds.top + roundedCornerRadius, paint);
+//
+//                canvas.drawRect(bounds.left + roundedCornerRadius - 1f,
+//                    bounds.bottom - roundedCornerRadius,
+//                    bounds.right - roundedCornerRadius + 1f, bounds.bottom, paint);
+//            }
+//            // center
+//            canvas.drawRect(bounds.left, bounds.top + cornerRadius,
+//                bounds.right, bounds.bottom - cornerRadius, paint);
+//        }
+//    }
+
+    static class RoundRectHelperImpl implements RoundRectHelper {
+        @Override
+        public void drawRoundRect(Canvas canvas, RectF bounds, float cornerRadius, Paint paint) {
+            canvas.drawRoundRect(bounds, cornerRadius, cornerRadius, paint);
         }
     }
 }

@@ -50,6 +50,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     private static final String TAG = "CardButton";
 
+    @SuppressWarnings("unused")
     public static void setVisualMargin(final CardButton cardButton, final int left, final int top, final int right, final int bottom) {
         try {
             final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) cardButton.getLayoutParams();
@@ -62,6 +63,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public static void setVisualMarginOriginal(final CardButton cardButton) {
         try {
             final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) cardButton.getLayoutParams();
@@ -74,6 +76,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public static void setVisualMarginRelative(final CardButton cardButton, final int start, final int top, final int end, final int bottom) {
         try {
             final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) cardButton.getLayoutParams();
@@ -86,6 +89,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public static void setVisualMarginRelativeOriginal(final CardButton cardButton) {
         try {
             final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) cardButton.getLayoutParams();
@@ -121,7 +125,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     @IntRange(from = 0) private int mBorderWidth;
     @ColorInt private int mRippleColor;
 
-    @FloatRange(from = 0) private float mCornerRadius;
+    @FloatRange(from = 0) float mCornerRadius;
     final Rect mContentPadding = new Rect();
     @IntRange(from = 0) private int mContentMinHeight;
     @IntRange(from = 0) private int mContentMinWidth;
@@ -137,7 +141,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     private boolean mSuperInit = false;
 
     private Drawable mForeground;
-    private boolean mForegroundBoundsChanged;
+    boolean mForegroundBoundsChanged;
     private final Rect mForegroundBounds = new Rect();
 
     public CardButton(Context context) {
@@ -203,19 +207,22 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
-    private void updateMinSize() {
+    void updateMinSize() {
         super.setMinWidth(mShadowPadding.left + mShadowPadding.right + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
         super.setMinHeight(mShadowPadding.top + mShadowPadding.bottom + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
     }
 
+    @SuppressWarnings("unused")
     public int getShadowPaddingLeft() {
         return mShadowPadding.left;
     }
 
+    @SuppressWarnings("unused")
     public int getShadowPaddingRight() {
         return mShadowPadding.right;
     }
 
+    @SuppressWarnings("unused")
     public int getShadowPaddingEnd() {
         final boolean rtl = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
         if (rtl) {
@@ -225,6 +232,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public int getShadowPaddingStart() {
         final boolean rtl = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
         if (rtl) {
@@ -234,10 +242,12 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public int getShadowPaddingTop() {
         return mShadowPadding.top;
     }
 
+    @SuppressWarnings("unused")
     public int getShadowPaddingBottom() {
         return mShadowPadding.bottom;
     }
@@ -282,11 +292,13 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public void setContentPadding(int left, int top, int right, int bottom) {
         mContentPadding.set(left, top, right, bottom);
         getImpl().updatePadding();
     }
 
+    @SuppressWarnings("unused")
     public void setContentPaddingRelative(int start, int top, int end, int bottom) {
         final boolean rtl = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
         final int left = rtl ? end : start;
@@ -295,14 +307,17 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         getImpl().updatePadding();
     }
 
+    @SuppressWarnings("unused")
     public int getContentPaddingLeft() {
         return mContentPadding.left;
     }
 
+    @SuppressWarnings("unused")
     public int getContentPaddingRight() {
         return mContentPadding.right;
     }
 
+    @SuppressWarnings("unused")
     public int getContentPaddingEnd() {
         final boolean rtl = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
         if (rtl) {
@@ -312,6 +327,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public int getContentPaddingStart() {
         final boolean rtl = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
         if (rtl) {
@@ -321,14 +337,17 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public int getContentPaddingTop() {
         return mContentPadding.top;
     }
 
+    @SuppressWarnings("unused")
     public int getContentPaddingBottom() {
         return mContentPadding.bottom;
     }
 
+    @SuppressWarnings("unused")
     public void setCornerRadius(float cornerRadius) {
         if (mCornerRadius != cornerRadius) {
             mCornerRadius = cornerRadius;
@@ -356,6 +375,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
      * @see #setRippleColor(int)
      */
     @ColorInt
+    @SuppressWarnings("unused")
     public int getRippleColor() {
         return mRippleColor;
     }
@@ -367,9 +387,9 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
      * rather than a ripple.</p>
      *
      * @param color ARGB color to use for the ripple
-     * @attr ref android.support.design.R.styleable#CardButton_rippleColor
      * @see #getRippleColor()
      */
+    @SuppressWarnings("unused")
     public void setRippleColor(@ColorInt int color) {
         if (mRippleColor != color) {
             mRippleColor = color;
@@ -438,6 +458,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public void setBorderColor(@Nullable ColorStateList borderColor) {
         if (mBorderColor != borderColor) {
             mBorderColor = borderColor;
@@ -448,6 +469,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     }
 
     @Nullable
+    @SuppressWarnings("unused")
     public ColorStateList getBorderColor() {
         return mBorderColor;
     }
@@ -455,6 +477,11 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     @IntRange(from = 0)
     public int getBorderWidth() {
         return mBorderWidth;
+    }
+
+    @SuppressWarnings("deprecation")
+    void superSetBackgroundDrawable(Drawable background) {
+        super.setBackgroundDrawable(background);
     }
 
     @SuppressWarnings("deprecation")
@@ -474,26 +501,34 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     }
 
     @Override
+    @RequiresApi(23)
+    @TargetApi(23)
     public void setForeground(Drawable foreground) {
         Log.i(TAG, "Setting a custom foreground is not supported.");
     }
 
     @Override
+    @RequiresApi(23)
+    @TargetApi(23)
     public void setForegroundGravity(int gravity) {
         Log.i(TAG, "Setting a custom foreground is not supported.");
     }
 
     @Override
+    @RequiresApi(23)
+    @TargetApi(23)
     public void setForegroundTintList(@Nullable ColorStateList tint) {
         Log.i(TAG, "Setting a custom foreground is not supported.");
     }
 
     @Override
+    @RequiresApi(23)
+    @TargetApi(23)
     public void setForegroundTintMode(@Nullable PorterDuff.Mode tintMode) {
         Log.i(TAG, "Setting a custom foreground is not supported.");
     }
 
-    private void setForegroundCompat(Drawable drawable) {
+    void setForegroundCompat(Drawable drawable) {
         if (mForeground != drawable) {
             if (mForeground != null) {
                 mForeground.setCallback(null);
@@ -522,7 +557,6 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
      *
      * @param useCompatPadding true if CardButton is adding inner padding on platforms
      * Lollipop and after, to ensure consistent dimensions on all platforms.
-     * @attr ref android.support.design.R.styleable#CardButton_useCompatPadding
      * @see #getUseCompatPadding()
      */
     public void setUseCompatPadding(boolean useCompatPadding) {
@@ -537,7 +571,6 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
      *
      * @return true if CardButton is adding inner padding on platforms Lollipop and after,
      * to ensure consistent dimensions on all platforms.
-     * @attr ref android.support.design.R.styleable#CardButton_useCompatPadding
      * @see #setUseCompatPadding(boolean)
      */
     public boolean getUseCompatPadding() {
@@ -612,13 +645,13 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
-        if (mForeground != null) {
-            final Drawable foreground = mForeground;
-
+        final Drawable foreground = mForeground;
+        if (foreground != null) {
             if (mForegroundBoundsChanged) {
                 mForegroundBoundsChanged = false;
-                getContentRect(mForegroundBounds);
-                foreground.setBounds(mForegroundBounds);
+                final Rect bounds = mForegroundBounds;
+                getContentRect(bounds);
+                foreground.setBounds(bounds);
             }
 
             foreground.draw(canvas);
@@ -648,6 +681,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
      * Returns the CardButton's background, minus any compatible shadow implementation.
      */
     @NonNull
+    @SuppressWarnings("unused")
     public Drawable getContentBackground() {
         return getImpl().getContentBackground();
     }
@@ -733,9 +767,9 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
      * Returns the backward compatible elevation of the CardButton.
      *
      * @return the backward compatible elevation in pixels.
-     * @attr ref android.support.design.R.styleable#CardButton_elevation
      * @see #setCompatElevation(float)
      */
+    @SuppressWarnings("unused")
     public float getCompatElevation() {
         return getImpl().getElevation();
     }
@@ -744,10 +778,10 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
      * Updates the backward compatible elevation of the CardButton.
      *
      * @param elevation The backward compatible elevation in pixels.
-     * @attr ref android.support.design.R.styleable#CardButton_elevation
      * @see #getCompatElevation()
      * @see #setUseCompatPadding(boolean)
      */
+    @SuppressWarnings("unused")
     public void setCompatElevation(float elevation) {
         getImpl().setElevation(elevation);
     }
@@ -796,12 +830,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     @TargetApi(Build.VERSION_CODES.M)
     private CardButtonDelegate createDelegateImpl() {
-        final int sdk = Build.VERSION.SDK_INT;
-        if (sdk >= 23) {
-            return new CardButtonDelegateM();
-        } else {
-            return new CardButtonDelegateImpl();
-        }
+        return new CardButtonDelegateImpl();
     }
 
     private class CardButtonDelegateImpl implements CardButtonDelegate {
@@ -826,7 +855,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         @SuppressWarnings("deprecation")
         @Override
         public void setBackgroundDrawable(Drawable background) {
-            CardButton.super.setBackgroundDrawable(background);
+            CardButton.this.superSetBackgroundDrawable(background);
         }
 
         @Override
@@ -837,15 +866,6 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         @Override
         public void setForegroundDrawable(Drawable foreground) {
             CardButton.this.setForegroundCompat(foreground);
-        }
-    }
-
-    @RequiresApi(23)
-    @TargetApi(23)
-    private class CardButtonDelegateM extends CardButtonDelegateImpl {
-        @Override
-        public void setForegroundDrawable(Drawable foreground) {
-            CardButton.super.setForeground(foreground);
         }
     }
 }

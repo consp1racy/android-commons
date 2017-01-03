@@ -13,7 +13,6 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:cardview-v7:$supportLibsVersionCardButton"
     compile "com.android.support:design:$supportLibsVersionCardButton"
 	compile project(':appcompat-extra')
 }
