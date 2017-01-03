@@ -261,9 +261,9 @@ class CardButtonGingerbread extends CardButtonImpl {
     }
 
     private Drawable createRippleDrawable(@ColorInt int rippleColor, float cornerRadius) {
-        Drawable focused = CardButtonDrawableFactory.newGradientDrawableCompat(cornerRadius, rippleColor);
-        Drawable pressed = CardButtonDrawableFactory.newGradientDrawableCompat(cornerRadius, rippleColor);
-        Drawable other = CardButtonDrawableFactory.newGradientDrawableCompat(cornerRadius, Color.TRANSPARENT);
+        Drawable focused = CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, rippleColor);
+        Drawable pressed = CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, rippleColor);
+        Drawable other = CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, Color.TRANSPARENT);
         StateListDrawable states = new StateListDrawable();
         states.addState(FOCUSED_ENABLED_STATE_SET, focused);
         states.addState(PRESSED_ENABLED_STATE_SET, pressed);

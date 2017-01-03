@@ -28,7 +28,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -56,7 +55,6 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
     private void onSetBackground() {
         final int color = getColorForState(getState());
         mState.mPaint.setColor(color);
-        updatePaintAlpha(color, getAlpha());
         invalidateSelf();
     }
 
@@ -65,14 +63,12 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
         return state.mBackground.getColorForState(stateSet, state.mBackground.getDefaultColor());
     }
 
-    private void updatePaintAlpha(@ColorInt final int color, @IntRange(from = 0, to = 255) final int alpha) {
-        int colorAlpha = Color.alpha(color);
-        mState.mPaint.setAlpha(alpha * colorAlpha / 255);
-    }
-
     @Override
     public void draw(@NonNull Canvas canvas) {
         final Paint paint = mState.mPaint;
+
+        final int prevAlpha = paint.getAlpha();
+        paint.setAlpha(modulateAlpha(prevAlpha, mState.mAlpha));
 
         final boolean clearColorFilter;
         if (mState.mTintFilter != null && paint.getColorFilter() == null) {
@@ -87,6 +83,8 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
         if (clearColorFilter) {
             paint.setColorFilter(null);
         }
+
+        paint.setAlpha(prevAlpha);
     }
 
     private void updateBounds(Rect bounds) {
@@ -120,12 +118,13 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
     @Override
     public void setAlpha(int alpha) {
         mState.mAlpha = alpha;
-        updatePaintAlpha(getColorForState(getState()), alpha);
+        invalidateSelf();
     }
 
     @Override
     public void setColorFilter(ColorFilter cf) {
         mState.mPaint.setColorFilter(cf);
+        invalidateSelf();
     }
 
     @Override
@@ -183,7 +182,6 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
         final boolean colorChanged = newColor != mState.mPaint.getColor();
         if (colorChanged) {
             mState.mPaint.setColor(newColor);
-            updatePaintAlpha(newColor, getAlpha());
         }
         if (mState.mTint != null && mState.mTintMode != null) {
             mState.mTintFilter = createTintFilter(mState.mTint, mState.mTintMode);
@@ -212,6 +210,11 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
             mMutated = true;
         }
         return this;
+    }
+
+    private static int modulateAlpha(int paintAlpha, int alpha) {
+        int scale = alpha + (alpha >>> 7); // convert to 0..256
+        return paintAlpha * scale >>> 8;
     }
 
     /**

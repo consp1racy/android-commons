@@ -3,7 +3,6 @@ package android.support.design.widget;
 import android.content.res.ColorStateList;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.ColorInt;
@@ -32,19 +31,19 @@ class CardButtonDrawableFactory {
         TEMP_RECTF.set(stroke, stroke, stroke, stroke);
     }
 
-    @NonNull
-    static Drawable newGradientDrawableCompat(final float cornerRadius, @ColorInt final int color) {
-        return DrawableCompat.wrap(newGradientDrawable(cornerRadius, color));
-    }
+//    @NonNull
+//    static Drawable newGradientDrawableCompat(final float cornerRadius, @ColorInt final int color) {
+//        return DrawableCompat.wrap(newGradientDrawable(cornerRadius, color));
+//    }
 
-    @NonNull
-    private static GradientDrawable newGradientDrawable(final float cornerRadius, @ColorInt final int color) {
-        GradientDrawable d = new GradientDrawable();
-        d.setShape(GradientDrawable.RECTANGLE);
-        d.setColor(color);
-        d.setCornerRadius(cornerRadius);
-        return d;
-    }
+//    @NonNull
+//    private static GradientDrawable newGradientDrawable(final float cornerRadius, @ColorInt final int color) {
+//        GradientDrawable d = new GradientDrawable();
+//        d.setShape(GradientDrawable.RECTANGLE);
+//        d.setColor(color);
+//        d.setCornerRadius(cornerRadius);
+//        return d;
+//    }
 
 //    @NonNull
 //    private static ShapeDrawable newShapeDrawable(float cornerRadius) {
