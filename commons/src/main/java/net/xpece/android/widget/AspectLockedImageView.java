@@ -1,14 +1,12 @@
 package net.xpece.android.widget;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.IntDef;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,8 +14,8 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * Created by pechanecjr on 14. 11. 2014.
  */
-public class AspectLockedImageView extends ImageView {
-    private static final String TAG = net.xpece.android.widget.AspectLockedImageView.class.getSimpleName();
+public class AspectLockedImageView extends AppCompatImageView {
+    private static final String TAG = AspectLockedImageView.class.getSimpleName();
 
     public static final int ADJUST_DETERMINE = 0;
     public static final int ADJUST_HEIGHT = 1;
@@ -53,12 +51,6 @@ public class AspectLockedImageView extends ImageView {
     public AspectLockedImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr, 0);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public AspectLockedImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs, defStyleAttr, defStyleRes);
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {

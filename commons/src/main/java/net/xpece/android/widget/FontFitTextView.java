@@ -3,9 +3,9 @@ package net.xpece.android.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.widget.TextView;
 
 import net.xpece.android.R;
 
@@ -15,7 +15,7 @@ import net.xpece.android.R;
  *
  * @author speedplane
  */
-public class FontFitTextView extends TextView {
+public class FontFitTextView extends AppCompatTextView {
     private static final float THRESHOLD = 0.5f;
 
     //Attributes
@@ -25,22 +25,25 @@ public class FontFitTextView extends TextView {
     private float mMaxTextSize;
 
     public FontFitTextView(Context context) {
-        super(context);
-        initialize(context, null);
+        this(context, null);
     }
 
     public FontFitTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initialize(context, attrs);
+        this(context, attrs, android.R.attr.textViewStyle);
     }
 
-    private void initialize(Context context, AttributeSet attrs) {
+    public FontFitTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initialize(context, attrs, defStyleAttr);
+    }
+
+    private void initialize(Context context, AttributeSet attrs, int defStyleAttr) {
         mTestPaint = new Paint();
         mTestPaint.set(getPaint());
         //max size defaults to the initially specified text size unless it is too small
 
         float textSize = getTextSize();
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.FontFitTextView);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.FontFitTextView, defStyleAttr, 0);
         mMinTextSize = ta.getDimension(R.styleable.FontFitTextView_minTextSize, textSize);
         mMaxTextSize = ta.getDimension(R.styleable.FontFitTextView_maxTextSize, textSize);
         ta.recycle();

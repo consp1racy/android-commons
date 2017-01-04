@@ -1,20 +1,20 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <item name="toolbarStyle">@style/Widget.MamVybrano.Toolbar</item>
         <item name="actionBarStyle">@style/Widget.MamVybrano.ActionBar.Solid</item>
         <item name="actionModeStyle">@style/Widget.MamVybrano.ActionMode</item>
 
-        <item name="android:datePickerStyle">@style/Widget.MyApp.DatePicker</item>
-        <item name="android:timePickerStyle">@style/Widget.MyApp.TimePicker</item>
+        <item name="android:datePickerStyle" tools:targetApi="lollipop">@style/Widget.MyApp.DatePicker</item>
+        <item name="android:timePickerStyle" tools:targetApi="lollipop">@style/Widget.MyApp.TimePicker</item>
     </style>
 
     <style name="Widget.MyApp.TimePicker" parent="android:Widget">
-        <item name="android:timePickerMode">spinner</item>
+        <item name="android:timePickerMode" tools:targetApi="lollipop">spinner</item>
     </style>
 
     <style name="Widget.MyApp.DatePicker" parent="android:Widget">
-        <item name="android:datePickerMode">spinner</item>
+        <item name="android:datePickerMode" tools:targetApi="lollipop">spinner</item>
     </style>
 
     <style name="Widget.MamVybrano.Toolbar" parent="Widget.AppCompat.Toolbar">

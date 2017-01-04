@@ -93,7 +93,7 @@ public final class AndroidUtils {
                 Method method = tmClass.getDeclaredMethod("getDataEnabled");
                 method.setAccessible(true);
                 mobileDataEnabled = (Boolean) method.invoke(tm);
-            } catch (ClassNotFoundException | NoSuchMethodException | IllegalArgumentException | IllegalAccessException | InvocationTargetException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else {
@@ -103,7 +103,7 @@ public final class AndroidUtils {
                 Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
                 method.setAccessible(true);
                 mobileDataEnabled = (Boolean) method.invoke(cm);
-            } catch (ClassNotFoundException | NoSuchMethodException | IllegalArgumentException | IllegalAccessException | InvocationTargetException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
