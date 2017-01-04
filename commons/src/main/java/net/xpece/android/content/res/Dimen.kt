@@ -83,9 +83,11 @@ data class Dimen internal constructor(val value: Float) {
         }
     }
 
+    /**
+     * Internal companion class is not accessible from outside of package in Kotlin but in Java
+     * it's merged into the public parent class. Brilliant!
+     */
     internal companion object {
-        private val TAG = Dimen::class.java.simpleName
-
         private val DIMENSION_LRU_CACHE = DimensionLruCache(10)
 
         private var sContext: Context = XpInitProvider.CONTEXT
