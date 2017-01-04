@@ -114,6 +114,8 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         init(context)
     }
 
+    fun register(callback: (connectivity: ConnectivityReceiver) -> (Unit)) = register(ConnectivityCallback { callback(it) })
+
     @Suppress("UNUSED")
     fun unregister() {
         if (callback != null) {
