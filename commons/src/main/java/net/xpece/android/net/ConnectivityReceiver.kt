@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
+import android.support.annotation.CheckResult
 import android.support.annotation.IntDef
 
 /**
@@ -33,7 +34,8 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
             }
         }
 
-        fun getInstance(context: Context) = ConnectivityReceiver(context.applicationContext)
+        @Suppress("UNUSED")
+        fun newInstance(context: Context) = ConnectivityReceiver(context.applicationContext)
     }
 
     @IntDef(STATE_CONNECTED, STATE_CONNECTING, STATE_DISCONNECTED)
@@ -51,26 +53,9 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         }
     }
 
-    var isAirplaneModeEnabled: Boolean = false
-        private set
+    var info = ConnectivityInfo.DEFAULT
 
-    @State
-    var state: Long = STATE_CONNECTED
-        private set
-
-    @Suppress("UNUSED")
-    val isConnected: Boolean
-        get() = state == STATE_CONNECTED
-
-    @Suppress("UNUSED")
-    val isConnecting: Boolean
-        get() = state == STATE_CONNECTING
-
-    @Suppress("UNUSED")
-    val isDisconnected: Boolean
-        get() = state == STATE_DISCONNECTED
-
-    private var callback: ConnectivityCallback? = null
+    private val callbacks: MutableList<ConnectivityCallback> = mutableListOf()
 
     private val context: Context
 
@@ -90,8 +75,7 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
     }
 
     private fun reset() {
-        isAirplaneModeEnabled = false
-        state = STATE_CONNECTED
+        info = ConnectivityInfo.DEFAULT
     }
 
     private fun init(context: Context) {
@@ -101,34 +85,62 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
     }
 
     @Suppress("UNUSED")
+    @CheckResult
     fun register(callback: ConnectivityCallback) {
-        if (this.callback == callback) {
+        if (callbacks.contains(callback)) {
             return
-        } else if (this.callback != null) {
-            unregister()
         }
 
-        this.callback = callback
+        callbacks.add(callback)
+
+        if (callbacks.size == 1) {
+            // First callback added, start listening.
+            startListening()
+        }
+    }
+
+    @Suppress("UNUSED")
+    fun register(callback: (connectivity: ConnectivityInfo) -> Unit) =
+            register(ConnectivityCallback { callback(it) })
+
+    /**
+     * Unregister all [ConnectivityCallback]s and stop listening for connectivity changes.
+     */
+    @Suppress("UNUSED")
+    fun unregister() {
+        val count = callbacks.size
+        if (count > 0) {
+            callbacks.clear()
+            stopListening()
+        }
+    }
+
+    @Suppress("UNUSED")
+    fun unregister(callback: ConnectivityCallback) {
+        if (callbacks.contains(callback)) {
+            callbacks.remove(callback)
+            if (callbacks.size == 0) {
+                // Removed last callback, stop listening.
+                stopListening()
+            }
+        } else {
+            throw IllegalArgumentException("Cannot unregister callback $callback, was not registered.")
+        }
+    }
+
+    private fun startListening() {
         context.registerReceiver(airplaneModeBroadcastReceiver, airplaneModeIntentFilter)
         impl.onStartListening(context)
         init(context)
     }
 
-    fun register(callback: (connectivity: ConnectivityReceiver) -> (Unit)) = register(ConnectivityCallback { callback(it) })
-
-    @Suppress("UNUSED")
-    fun unregister() {
-        if (callback != null) {
-            try {
-                context.unregisterReceiver(airplaneModeBroadcastReceiver)
-            } catch (ex: IllegalArgumentException) {
-                //
-            }
-            impl.onStopListening(context)
-            callback = null
-        } else {
-            throw  IllegalStateException("No callback registered.")
+    private fun stopListening() {
+        try {
+            context.unregisterReceiver(airplaneModeBroadcastReceiver)
+        } catch (ex: IllegalArgumentException) {
+            //
         }
+        impl.onStopListening(context)
     }
 
     private fun onConnectivityAction(context: Context, forceIfDisconnected: Boolean = false) {
@@ -136,16 +148,16 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         val ni = connectivityManager!!.activeNetworkInfo
         val state = toSimpleState(ni?.state)
         val shouldForce = (forceIfDisconnected && state == STATE_DISCONNECTED)
-        if (state != this.state || shouldForce) {
-            this.state = state
+        if (state != info.state || shouldForce) {
+            info = info.copy(state = state)
             onActiveNetworkChanged()
         }
     }
 
     private fun onAirplaneModeAction(context: Context, suppressIfEnabled: Boolean = false) {
         val airplaneModeEnabled = context.isAirplaneModeOn
-        if (airplaneModeEnabled != this.isAirplaneModeEnabled) {
-            this.isAirplaneModeEnabled = airplaneModeEnabled
+        if (airplaneModeEnabled != info.isAirplaneModeEnabled) {
+            info = info.copy(isAirplaneModeEnabled = airplaneModeEnabled)
 //            onAirplaneModeChanged()
 
             if (airplaneModeEnabled && !suppressIfEnabled) {
@@ -153,7 +165,7 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
                     // Call from init will be handled by onConnectivityAction.
                 } else {
                     // Once airplane mode is enabled all connection is ceased.
-                    this.state = STATE_DISCONNECTED
+                    info = info.copy(state = STATE_DISCONNECTED)
                     onActiveNetworkChanged()
                 }
             } else {
@@ -174,7 +186,7 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
     }
 
     private fun onActiveNetworkChanged() {
-        callback!!.onConnectivityChanged(this)
+        callbacks.forEach { it.onConnectivityChanged(info) }
     }
 
 }
