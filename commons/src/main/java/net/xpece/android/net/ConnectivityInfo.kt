@@ -37,4 +37,24 @@ class ConnectivityInfo(@ConnectivityReceiver.State val state: Long, val isAirpla
         }
         throw IllegalArgumentException("Unrecognized state $state.")
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is ConnectivityInfo) return false
+
+        if (state != other.state) return false
+        if (isAirplaneModeEnabled != other.isAirplaneModeEnabled) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = state.hashCode()
+        result = 31 * result + isAirplaneModeEnabled.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "ConnectivityInfo(state=$state, isAirplaneModeEnabled=$isAirplaneModeEnabled)"
+    }
 }

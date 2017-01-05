@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
     override fun onStart() {
         super.onStart()
         connectivitySubscription = connectivityObservable
-                .skipWhile { !it.isConnected }
+                .skipWhile { it.isConnected }
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
