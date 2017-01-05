@@ -22,7 +22,7 @@ class ConnectivityInfo(@ConnectivityReceiver.State val state: Long, val isAirpla
         get() = state == ConnectivityReceiver.STATE_DISCONNECTED
 
     fun copy(@ConnectivityReceiver.State state: Long = this.state, isAirplaneModeEnabled: Boolean = this.isAirplaneModeEnabled): ConnectivityInfo {
-        if (isAirplaneModeEnabled) {
+        if (!isAirplaneModeEnabled) {
             when (state) {
                 ConnectivityReceiver.STATE_CONNECTED -> return CONNECTED
                 ConnectivityReceiver.STATE_CONNECTING -> return CONNECTING

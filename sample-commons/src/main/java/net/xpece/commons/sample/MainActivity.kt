@@ -26,6 +26,7 @@ import net.xpece.android.content.resolveString
 import net.xpece.android.net.ConnectivityCallback
 import net.xpece.android.net.ConnectivityInfo
 import net.xpece.android.net.ReactiveConnectivity
+import net.xpece.android.view.setVisible
 import net.xpece.android.widget.XpDatePicker
 import net.xpece.android.widget.XpEdgeEffect
 import net.xpece.android.widget.XpTimePicker
@@ -48,15 +49,18 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         } else {
             showSnackbar("Disconnected", BaseTransientBottomBar.LENGTH_INDEFINITE)
         }
+        pager.setVisible(it.isConnected)
     }
 
     private lateinit var connectivityObservable : Flowable<ConnectivityInfo>
     private lateinit var connectivitySubscription : Disposable
 
+    private lateinit var pager : ViewPager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val pager = findViewById(R.id.pager) as ViewPager
+        pager = findViewById(R.id.pager) as ViewPager
         val adapter = MyPagerAdapter()
         pager.adapter = adapter
 

@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
+import android.os.Handler
 import android.support.annotation.RequiresApi
 import net.xpece.android.content.connectivityManager
 
@@ -19,13 +20,15 @@ open internal class ConnectivityReceiverLollipop(val delegate: ConnectivityRecei
         private val networkRequest = NetworkRequest.Builder().build()
     }
 
+    private val handler = Handler()
+
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onLost(network: Network?) {
-            delegate.onConnectivityChanged()
+            handler.post { delegate.onConnectivityChanged() }
         }
 
         override fun onAvailable(network: Network?) {
-            delegate.onConnectivityChanged()
+            handler.post { delegate.onConnectivityChanged() }
         }
     }
 

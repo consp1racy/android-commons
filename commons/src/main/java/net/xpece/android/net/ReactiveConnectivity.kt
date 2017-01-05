@@ -6,43 +6,37 @@ import android.support.annotation.CheckResult
 import io.reactivex.Flowable
 import io.reactivex.annotations.SchedulerSupport
 import io.reactivex.processors.BehaviorProcessor
-import java.util.*
 
 /**
  * @author Eugen on 04.01.2017.
  */
 
 object ReactiveConnectivity {
-    // Keep fresh context available after Instant Run. // TODO Does this actually do anything?
-    @JvmStatic private val contextToConnectivityReceiver = WeakHashMap<Context, ConnectivityReceiver>()
-
-    @JvmStatic private fun obtainConnectivityReceiver(context: Context): ConnectivityReceiver {
-        val app = context.applicationContext
-        var cr = contextToConnectivityReceiver[app]
-        if (cr == null) {
-            cr = ConnectivityReceiver.newInstance(app)
-        }
-        contextToConnectivityReceiver[app] = cr
-        return cr
-    }
-
     /**
      * Creates a new [Flowable] broadcasting changes in connectivity reported by system as
      * [ConnectivityInfo] objects.
      *
+     * A typical flow would look like this:
+     *
+     *      ReactiveConnectivity.observe(context)
+     *          .subscribeOn(Schedulers.computation())
+     *          .observeOn(AndroidSchedulers.mainThread())
+     *          .skipWhile { it.isConnected } // Do not show Snackbar if starting in connected state.
+     *          .compose(RxLifecycleAndroid.bindActivity(lifecycle()))
+     *          .subscribe {
+     *              showConnectivitySnackbar(it)
+     *          }
+     * </code></pre>
+     *
      * @param context Instance of [Context] able to register [BroadcastReceiver]s.
-     * @param defaultConnectivity Can be one of the following:
-     * * Instance of [ConnectivityInfo] to start broadcast with that object.
-     * * *Default:* Pass `null` to wait for connectivity change reported by system.
      */
     @CheckResult
-    @JvmOverloads
     @JvmStatic
     @SchedulerSupport(SchedulerSupport.NONE)
     fun observe(context: Context): Flowable<ConnectivityInfo> {
         val connectivitySubject = BehaviorProcessor.create<ConnectivityInfo>()
 
-        val connectivityReceiver = obtainConnectivityReceiver(context)
+        val connectivityReceiver = ConnectivityReceiver.newInstance(context.applicationContext)
 
         return Flowable.fromCallable {
             val connectivityCallback = ConnectivityCallback {
