@@ -15,12 +15,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import net.xpece.android.app.SnackbarActivity
 import net.xpece.android.content.dp
 import net.xpece.android.content.resolveDrawable
 import net.xpece.android.content.resolveString
 import net.xpece.android.net.ConnectivityCallback
-import net.xpece.android.net.ConnectivityReceiver
+import net.xpece.android.net.ConnectivityInfo
+import net.xpece.android.net.ReactiveConnectivity
 import net.xpece.android.widget.XpDatePicker
 import net.xpece.android.widget.XpEdgeEffect
 import net.xpece.android.widget.XpTimePicker
@@ -35,7 +40,6 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         get() = findViewById(android.R.id.content)
     override var snackbar: Snackbar? = null
 
-    lateinit var connectivityReceiver: ConnectivityReceiver
     val connectivityCallback = ConnectivityCallback {
         if (it.isConnected) {
             showSnackbar("Connected", BaseTransientBottomBar.LENGTH_SHORT)
@@ -45,6 +49,9 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
             showSnackbar("Disconnected", BaseTransientBottomBar.LENGTH_INDEFINITE)
         }
     }
+
+    private lateinit var connectivityObservable : Flowable<ConnectivityInfo>
+    private lateinit var connectivitySubscription : Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,17 +72,31 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         val title = this.resolveString(R.style.Widget_AppCompat_ActionButton_Overflow, android.R.attr.contentDescription)
         toolbar.title = title
 
-        connectivityReceiver = ConnectivityReceiver.newInstance(this)
+        if (savedInstanceState == null) {
+            connectivityObservable = ReactiveConnectivity.observe(this)
+        } else {
+            connectivityObservable = lastCustomNonConfigurationInstance as Flowable<ConnectivityInfo>
+        }
+    }
+
+    override fun onRetainCustomNonConfigurationInstance(): Any {
+        return connectivityObservable
     }
 
     override fun onStart() {
         super.onStart()
-        connectivityReceiver.register(connectivityCallback)
+        connectivitySubscription = connectivityObservable
+                .skipWhile { !it.isConnected }
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    connectivityCallback.onConnectivityChanged(it)
+                }
     }
 
     override fun onStop() {
         super.onStop()
-        connectivityReceiver.unregister()
+        connectivitySubscription.dispose()
     }
 
     internal class MyPagerAdapter : PagerAdapter() {

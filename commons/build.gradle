@@ -9,8 +9,8 @@ android {
         minSdkVersion 14
     }
 
-//    publishNonDefault true
-//    defaultPublishConfig "release"
+    publishNonDefault true
+    defaultPublishConfig "release"
 
     lintOptions {
         abortOnError true
@@ -42,6 +42,7 @@ dependencies {
     provided 'com.birbit:android-priority-jobqueue:2.0.0'
     provided 'com.squareup.moshi:moshi:1.2.0'
 //    provided 'com.squareup.okio:okio:1.10.0'
+
     provided 'io.reactivex.rxjava2:rxjava:2.0.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

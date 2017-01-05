@@ -22,9 +22,12 @@ android {
 }
 
 dependencies {
-//  debugCompile project(path: ':android', configuration: 'debug');
-//  releaseCompile project(path: ':android', configuration: 'release');
-    compile project(':commons')
+    debugCompile project(path: ':commons', configuration: 'debug');
+    releaseCompile project(path: ':commons', configuration: 'release');
+//    compile project(':commons')
+
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.4'
 
     compile "com.android.support:cardview-v7:$supportLibsVersion"
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'

@@ -21,7 +21,7 @@ open internal class ConnectivityReceiverMarshmallow(delegate: ConnectivityReceiv
     private val idleBroadcastReceiver =
             object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
-                    delegate.onChange()
+                    delegate.onConnectivityChanged()
                 }
             }
 

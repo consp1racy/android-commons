@@ -19,7 +19,7 @@ open internal class ConnectivityReceiverBase(val delegate: ConnectivityReceiverD
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (action == ConnectivityManager.CONNECTIVITY_ACTION) {
-                delegate.onChange()
+                delegate.onConnectivityChanged()
             }
         }
     }

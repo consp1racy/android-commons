@@ -48,7 +48,7 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (Intent.ACTION_AIRPLANE_MODE_CHANGED == action) {
-                onAirplaneModeAction(context)
+                onAirplaneModeChanged()
             }
         }
     }
@@ -78,10 +78,10 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         info = ConnectivityInfo.DEFAULT
     }
 
-    private fun init(context: Context) {
+    private fun init() {
         reset()
-        onAirplaneModeAction(context, true)
-        onConnectivityAction(context)
+        onAirplaneModeChanged(true)
+        onConnectivityChanged()
     }
 
     @Suppress("UNUSED")
@@ -131,7 +131,7 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
     private fun startListening() {
         context.registerReceiver(airplaneModeBroadcastReceiver, airplaneModeIntentFilter)
         impl.onStartListening(context)
-        init(context)
+        init()
     }
 
     private fun stopListening() {
@@ -143,7 +143,11 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         impl.onStopListening(context)
     }
 
-    private fun onConnectivityAction(context: Context, forceIfDisconnected: Boolean = false) {
+    override fun onConnectivityChanged() {
+        onConnectivityChanged(false)
+    }
+
+    private fun onConnectivityChanged(forceIfDisconnected: Boolean) {
         ensureConnectivityManager(context)
         val ni = connectivityManager!!.activeNetworkInfo
         val state = toSimpleState(ni?.state)
@@ -154,7 +158,7 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         }
     }
 
-    private fun onAirplaneModeAction(context: Context, suppressIfEnabled: Boolean = false) {
+    private fun onAirplaneModeChanged(suppressIfEnabled: Boolean = false) {
         val airplaneModeEnabled = context.isAirplaneModeOn
         if (airplaneModeEnabled != info.isAirplaneModeEnabled) {
             info = info.copy(isAirplaneModeEnabled = airplaneModeEnabled)
@@ -170,7 +174,7 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
                 }
             } else {
                 // Check current active network.
-                onConnectivityAction(context, true)
+                onConnectivityChanged(true)
             }
         }
     }
@@ -179,10 +183,6 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         if (connectivityManager == null) {
             connectivityManager = context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         }
-    }
-
-    override fun onChange() {
-        onConnectivityAction(context)
     }
 
     private fun onActiveNetworkChanged() {

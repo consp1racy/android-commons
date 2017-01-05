@@ -1,10 +1,15 @@
 package net.xpece.android.net
 
-import net.xpece.android.net.ConnectivityReceiver
+class ConnectivityInfo(@ConnectivityReceiver.State val state: Long, val isAirplaneModeEnabled: Boolean) {
 
-data class ConnectivityInfo internal constructor(@ConnectivityReceiver.State val state: Long, val isAirplaneModeEnabled: Boolean) {
     companion object {
-        @JvmField val DEFAULT = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTED, false)
+        private val CONNECTED = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTED, false)
+        private val CONNECTING = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTING, false)
+        private val DISCONNECTED = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_DISCONNECTED, false)
+        private val CONNECTED_AIRPLANE = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTED, true)
+        private val CONNECTING_AIRPLANE = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTING, true)
+        private val DISCONNECTED_AIRPLANE = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_DISCONNECTED, true)
+        @JvmField val DEFAULT = CONNECTED
     }
 
     val isConnected: Boolean
@@ -15,4 +20,21 @@ data class ConnectivityInfo internal constructor(@ConnectivityReceiver.State val
 
     val isDisconnected: Boolean
         get() = state == ConnectivityReceiver.STATE_DISCONNECTED
+
+    fun copy(@ConnectivityReceiver.State state: Long = this.state, isAirplaneModeEnabled: Boolean = this.isAirplaneModeEnabled): ConnectivityInfo {
+        if (isAirplaneModeEnabled) {
+            when (state) {
+                ConnectivityReceiver.STATE_CONNECTED -> return CONNECTED
+                ConnectivityReceiver.STATE_CONNECTING -> return CONNECTING
+                ConnectivityReceiver.STATE_DISCONNECTED -> return DISCONNECTED
+            }
+        } else {
+            when (state) {
+                ConnectivityReceiver.STATE_CONNECTED -> return CONNECTED_AIRPLANE
+                ConnectivityReceiver.STATE_CONNECTING -> return CONNECTING_AIRPLANE
+                ConnectivityReceiver.STATE_DISCONNECTED -> return DISCONNECTED_AIRPLANE
+            }
+        }
+        throw IllegalArgumentException("Unrecognized state $state.")
+    }
 }

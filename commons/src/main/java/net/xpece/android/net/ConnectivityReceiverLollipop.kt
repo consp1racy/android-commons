@@ -21,11 +21,11 @@ open internal class ConnectivityReceiverLollipop(val delegate: ConnectivityRecei
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onLost(network: Network?) {
-            delegate.onChange()
+            delegate.onConnectivityChanged()
         }
 
         override fun onAvailable(network: Network?) {
-            delegate.onChange()
+            delegate.onConnectivityChanged()
         }
     }
 
