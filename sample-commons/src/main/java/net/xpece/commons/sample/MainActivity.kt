@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         val title = this.resolveString(R.style.Widget_AppCompat_ActionButton_Overflow, android.R.attr.contentDescription)
         toolbar.title = title
 
-        connectivityReceiver = ConnectivityReceiver(this)
+        connectivityReceiver = ConnectivityReceiver.newInstance(this)
     }
 
     override fun onStart() {

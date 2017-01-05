@@ -19,6 +19,6 @@ public class XpAppCompatImageButton2 extends XpAppCompatImageButton {
     }
 
     public XpAppCompatImageButton2(final Context context, final AttributeSet attrs, final int defStyleAttr) {
-        super(XpTintContextWrapper.wrapIfNeeded(context), attrs, defStyleAttr);
+        super(XpTintContextWrapper.wrap(context), attrs, defStyleAttr);
     }
 }
