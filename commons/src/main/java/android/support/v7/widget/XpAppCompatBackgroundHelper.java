@@ -4,10 +4,6 @@ import android.view.View;
 
 import java.lang.reflect.Constructor;
 
-/**
- * Created by Eugen on 26.12.2016.
- */
-
 @SuppressWarnings("RestrictedApi")
 class XpAppCompatBackgroundHelper {
     private static final Constructor<AppCompatBackgroundHelper> CTOR_2420;

@@ -1,5 +1,3 @@
-@file:JvmName("XpTextView")
-
 package net.xpece.android.widget
 
 import android.support.annotation.StyleRes
