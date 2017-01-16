@@ -20,7 +20,7 @@ import io.requery.Converter
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
-import org.threeten.bp.ZoneId
+import org.threeten.bp.ZoneOffset
 import java.sql.Timestamp
 
 /**
@@ -50,14 +50,15 @@ abstract class OffsetDateTimeBpConverter<T> : Converter<OffsetDateTime, T> {
             if (value == null) {
                 return null
             }
-            return value.toInstant().toString().padStart(14, '0')
+            return value.toInstant().toString()
         }
 
         override fun convertToMapped(type: Class<out OffsetDateTime>?, value: String?): OffsetDateTime? {
             if (value == null) {
                 return null
             }
-            return OffsetDateTime.ofInstant(Instant.parse(value.trimStart('0')), ZoneId.systemDefault())
+            val instant = Instant.parse(value)
+            return OffsetDateTime.ofInstant(instant, ZoneOffset.UTC)
         }
     }
 
@@ -84,7 +85,8 @@ abstract class OffsetDateTimeBpConverter<T> : Converter<OffsetDateTime, T> {
             if (value == null) {
                 return null
             }
-            return OffsetDateTime.ofInstant(DateTimeUtils.toInstant(value), ZoneId.systemDefault())
+            val instant = DateTimeUtils.toInstant(value)
+            return OffsetDateTime.ofInstant(instant, ZoneOffset.UTC)
         }
     }
 }

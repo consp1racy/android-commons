@@ -19,7 +19,6 @@ package net.xpece.android.database.converter
 import io.requery.Converter
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneId
 import java.sql.Timestamp
 
 /**
@@ -72,8 +71,7 @@ abstract class LocalDateTimeBpConverter<T> : Converter<LocalDateTime, T> {
             if (value == null) {
                 return null
             }
-            val instant = value.atZone(ZoneId.systemDefault()).toInstant()
-            return DateTimeUtils.toSqlTimestamp(instant)
+            return DateTimeUtils.toSqlTimestamp(value)
         }
 
         override fun convertToMapped(type: Class<out LocalDateTime>,

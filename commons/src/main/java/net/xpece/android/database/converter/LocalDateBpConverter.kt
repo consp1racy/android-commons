@@ -72,8 +72,7 @@ abstract class LocalDateBpConverter<T> : Converter<LocalDate, T> {
             if (value == null) {
                 return null
             }
-            val instant = value.atStartOfDay(ZoneId.systemDefault()).toInstant()
-            return Date(instant.toEpochMilli())
+            return DateTimeUtils.toSqlDate(value)
         }
 
         override fun convertToMapped(type: Class<out LocalDate>, value: Date?): LocalDate? {
