@@ -17,9 +17,9 @@
 package net.xpece.android.database.converter
 
 import io.requery.Converter
-import org.threeten.bp.DateTimeUtils
+import net.xpece.android.time.toLocalDate
+import net.xpece.android.time.toSqlDate
 import org.threeten.bp.LocalDate
-import org.threeten.bp.ZoneId
 import java.sql.Date
 
 /**
@@ -72,14 +72,14 @@ abstract class LocalDateBpConverter<T> : Converter<LocalDate, T> {
             if (value == null) {
                 return null
             }
-            return DateTimeUtils.toSqlDate(value)
+            return value.toSqlDate()
         }
 
         override fun convertToMapped(type: Class<out LocalDate>, value: Date?): LocalDate? {
             if (value == null) {
                 return null
             }
-            return DateTimeUtils.toLocalDate(value)
+            return value.toLocalDate()
         }
     }
 }

@@ -17,7 +17,8 @@
 package net.xpece.android.database.converter
 
 import io.requery.Converter
-import org.threeten.bp.DateTimeUtils
+import net.xpece.android.time.toLocalTime
+import net.xpece.android.time.toSqlTime
 import org.threeten.bp.LocalTime
 import java.sql.Time
 
@@ -70,14 +71,14 @@ abstract class LocalTimeBpConverter<T> : Converter<LocalTime, T> {
             if (value == null) {
                 return null
             }
-            return DateTimeUtils.toSqlTime(value)
+            return value.toSqlTime()
         }
 
         override fun convertToMapped(type: Class<out LocalTime>, value: Time?): LocalTime? {
             if (value == null) {
                 return null
             }
-            return DateTimeUtils.toLocalTime(value)
+            return value.toLocalTime()
         }
     }
 }

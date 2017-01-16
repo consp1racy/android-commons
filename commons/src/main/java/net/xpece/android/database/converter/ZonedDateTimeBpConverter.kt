@@ -17,18 +17,20 @@
 package net.xpece.android.database.converter
 
 import io.requery.Converter
-import net.xpece.android.time.toInstant
 import net.xpece.android.time.toSqlTimestamp
+import net.xpece.android.time.toZonedDateTime
 import org.threeten.bp.Instant
+import org.threeten.bp.ZoneOffset
+import org.threeten.bp.ZonedDateTime
 import java.sql.Timestamp
 
 /**
- * Converts from a [Instant] to a [T].
+ * Converts from a [ZonedDateTime] to a [T].
  */
-abstract class InstantBpConverter<T> : Converter<Instant, T> {
+abstract class ZonedDateTimeBpConverter<T> : Converter<ZonedDateTime, T> {
 
-    override fun getMappedType(): Class<Instant> {
-        return Instant::class.java
+    override fun getMappedType(): Class<ZonedDateTime> {
+        return ZonedDateTime::class.java
     }
 
     override fun getPersistedSize(): Int? {
@@ -36,52 +38,54 @@ abstract class InstantBpConverter<T> : Converter<Instant, T> {
     }
 
     /**
-     * Converts from a [Instant] to a [String].
-     * Can be compared until Wed Nov 16 5138 09:46:39.
+     * Converts from a [ZonedDateTime] to a [String].
+     * Can be compared as long as year is in range of 0 to 9999.
+     * Strips zone ID.
      */
-    object WithString : InstantBpConverter<String>() {
+    object WithString : ZonedDateTimeBpConverter<String>() {
         override fun getPersistedType(): Class<String> {
             return String::class.java
         }
 
-        override fun convertToPersisted(value: Instant?): String? {
+        override fun convertToPersisted(value: ZonedDateTime?): String? {
             if (value == null) {
                 return null
             }
-            return value.toString()
+            return value.withZoneSameInstant(ZoneOffset.UTC).toInstant().toString()
         }
 
-        override fun convertToMapped(type: Class<out Instant>?, value: String?): Instant? {
+        override fun convertToMapped(type: Class<out ZonedDateTime>?, value: String?): ZonedDateTime? {
             if (value == null) {
                 return null
             }
-            return Instant.parse(value)
+            val instant = Instant.parse(value)
+            return ZonedDateTime.ofInstant(instant, ZoneOffset.UTC)
         }
     }
 
     /**
-     * Converts from a [Instant] to a [Timestamp].
+     * Converts from a [ZonedDateTime] to a [Timestamp].
      * Safe to use since requery-1.0.0.
+     * Strips zone ID.
      */
-    object WithTimestamp : InstantBpConverter<Timestamp>() {
+    object WithTimestamp : ZonedDateTimeBpConverter<Timestamp>() {
         override fun getPersistedType(): Class<Timestamp> {
             return Timestamp::class.java
         }
 
-        override fun convertToPersisted(value: Instant?): Timestamp? {
+        override fun convertToPersisted(value: ZonedDateTime?): Timestamp? {
             if (value == null) {
                 return null
             }
             return value.toSqlTimestamp()
         }
 
-        override fun convertToMapped(type: Class<out Instant>,
-                                     value: Timestamp?): Instant? {
+        override fun convertToMapped(type: Class<out ZonedDateTime>,
+                                     value: Timestamp?): ZonedDateTime? {
             if (value == null) {
                 return null
             }
-            return value.toInstant()
+            return value.toZonedDateTime()
         }
-
     }
 }

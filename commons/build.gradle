@@ -25,6 +25,9 @@ android {
 }
 
 dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
     compile project(':design-extra')
 
     compile "com.android.support:design:$supportLibsVersion"

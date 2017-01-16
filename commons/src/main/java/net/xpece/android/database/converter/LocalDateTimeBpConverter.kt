@@ -17,7 +17,8 @@
 package net.xpece.android.database.converter
 
 import io.requery.Converter
-import org.threeten.bp.DateTimeUtils
+import net.xpece.android.time.toLocalDateTime
+import net.xpece.android.time.toSqlTimestamp
 import org.threeten.bp.LocalDateTime
 import java.sql.Timestamp
 
@@ -71,7 +72,7 @@ abstract class LocalDateTimeBpConverter<T> : Converter<LocalDateTime, T> {
             if (value == null) {
                 return null
             }
-            return DateTimeUtils.toSqlTimestamp(value)
+            return value.toSqlTimestamp()
         }
 
         override fun convertToMapped(type: Class<out LocalDateTime>,
@@ -79,7 +80,7 @@ abstract class LocalDateTimeBpConverter<T> : Converter<LocalDateTime, T> {
             if (value == null) {
                 return null
             }
-            return DateTimeUtils.toLocalDateTime(value)
+            return value.toLocalDateTime()
         }
 
     }

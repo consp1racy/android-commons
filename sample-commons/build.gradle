@@ -36,6 +36,8 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile 'com.jakewharton.threetenabp:threetenabp:1.0.4'
 }
 
 repositories {

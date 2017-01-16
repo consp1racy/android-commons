@@ -26,12 +26,16 @@ import net.xpece.android.content.resolveString
 import net.xpece.android.net.ConnectivityCallback
 import net.xpece.android.net.ConnectivityInfo
 import net.xpece.android.net.ReactiveConnectivity
+import net.xpece.android.time.toLocalDateTime
+import net.xpece.android.time.toSqlTimestamp
 import net.xpece.android.view.setVisible
 import net.xpece.android.widget.XpDatePicker
 import net.xpece.android.widget.XpEdgeEffect
 import net.xpece.android.widget.XpTimePicker
 import net.xpece.commons.android.sample.R
+import org.threeten.bp.LocalDateTime
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import java.sql.Timestamp
 
 /**
  * Created by Eugen on 25. 4. 2015.
@@ -52,12 +56,15 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         pager.setVisible(it.isConnected)
     }
 
-    private lateinit var connectivityObservable : Flowable<ConnectivityInfo>
-    private lateinit var connectivitySubscription : Disposable
+    private lateinit var connectivityObservable: Flowable<ConnectivityInfo>
+    private lateinit var connectivitySubscription: Disposable
 
-    private lateinit var pager : ViewPager
+    private lateinit var pager: ViewPager
+
+    private var localDateTime = LocalDateTime.of(2000, 1, 31, 16, 30)!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         pager = findViewById(R.id.pager) as ViewPager
@@ -78,13 +85,26 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
 
         if (savedInstanceState == null) {
             connectivityObservable = ReactiveConnectivity.observe(this)
+
+            val timestamp = localDateTime.toSqlTimestamp()
+            val local = timestamp.toLocalDateTime()
+            Log.w(TAG, local.toString())
         } else {
             connectivityObservable = lastCustomNonConfigurationInstance as Flowable<ConnectivityInfo>
+
+            val timestamp = savedInstanceState.getSerializable("time") as Timestamp
+            val local = timestamp.toLocalDateTime()
+            Log.w(TAG, local.toString())
         }
     }
 
     override fun onRetainCustomNonConfigurationInstance(): Any {
         return connectivityObservable
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable("time", localDateTime.toSqlTimestamp())
     }
 
     override fun onStart() {

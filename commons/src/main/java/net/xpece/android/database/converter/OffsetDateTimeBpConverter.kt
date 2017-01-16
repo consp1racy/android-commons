@@ -17,7 +17,8 @@
 package net.xpece.android.database.converter
 
 import io.requery.Converter
-import org.threeten.bp.DateTimeUtils
+import net.xpece.android.time.toOffsetDateTime
+import net.xpece.android.time.toSqlTimestamp
 import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneOffset
@@ -50,7 +51,7 @@ abstract class OffsetDateTimeBpConverter<T> : Converter<OffsetDateTime, T> {
             if (value == null) {
                 return null
             }
-            return value.toInstant().toString()
+            return value.withOffsetSameInstant(ZoneOffset.UTC).toInstant().toString()
         }
 
         override fun convertToMapped(type: Class<out OffsetDateTime>?, value: String?): OffsetDateTime? {
@@ -76,8 +77,7 @@ abstract class OffsetDateTimeBpConverter<T> : Converter<OffsetDateTime, T> {
             if (value == null) {
                 return null
             }
-            val instant = value.toInstant()
-            return DateTimeUtils.toSqlTimestamp(instant)
+            return value.toSqlTimestamp()
         }
 
         override fun convertToMapped(type: Class<out OffsetDateTime>,
@@ -85,8 +85,7 @@ abstract class OffsetDateTimeBpConverter<T> : Converter<OffsetDateTime, T> {
             if (value == null) {
                 return null
             }
-            val instant = DateTimeUtils.toInstant(value)
-            return OffsetDateTime.ofInstant(instant, ZoneOffset.UTC)
+            return value.toOffsetDateTime()
         }
     }
 }
