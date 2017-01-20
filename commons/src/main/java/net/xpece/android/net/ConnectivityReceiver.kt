@@ -16,6 +16,7 @@ import android.support.annotation.IntDef
 
 class ConnectivityReceiver private constructor(context: Context) : ConnectivityReceiverDelegate {
     companion object {
+        @JvmStatic
         private val airplaneModeIntentFilter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
 
         const val STATE_CONNECTING = 0L
@@ -23,6 +24,7 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         const val STATE_DISCONNECTED = 3L
 
         @State
+        @JvmStatic
         private fun toSimpleState(state: NetworkInfo.State?): Long {
             if (state == null) {
                 return STATE_DISCONNECTED
@@ -35,6 +37,7 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         }
 
         @Suppress("UNUSED")
+        @JvmStatic
         fun newInstance(context: Context) = ConnectivityReceiver(context.applicationContext)
     }
 

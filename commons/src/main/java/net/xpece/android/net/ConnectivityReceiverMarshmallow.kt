@@ -15,8 +15,10 @@ import android.support.annotation.RequiresApi
 @RequiresApi(23)
 @TargetApi(23)
 open internal class ConnectivityReceiverMarshmallow(delegate: ConnectivityReceiverDelegate) : ConnectivityReceiverLollipop(delegate) {
-
-    private val idleIntentFilter = IntentFilter(PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED)
+    companion object {
+        @JvmStatic
+        private val idleIntentFilter = IntentFilter(PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED)
+    }
 
     private val idleBroadcastReceiver =
             object : BroadcastReceiver() {

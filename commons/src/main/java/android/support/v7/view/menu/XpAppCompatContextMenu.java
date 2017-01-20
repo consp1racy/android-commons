@@ -15,6 +15,7 @@ import java.util.WeakHashMap;
 /**
  * @author Eugen on 31. 10. 2015.
  */
+@SuppressWarnings("RestrictedApi")
 public class XpAppCompatContextMenu {
     private static final WeakHashMap<Window, XpAppCompatContextMenu> MAP = new WeakHashMap<>();
 
@@ -39,7 +40,7 @@ public class XpAppCompatContextMenu {
      */
     final DialogMenuCallback mContextMenuCallback = new DialogMenuCallback(Window.FEATURE_CONTEXT_MENU);
 
-    private XpContextMenuBuilder mContextMenu;
+    XpContextMenuBuilder mContextMenu;
     private MenuDialogHelper mContextMenuHelper;
 
     private XpAppCompatContextMenu(final Window window) {

@@ -88,9 +88,9 @@ data class Dimen internal constructor(val value: Float) {
      * it's merged into the public parent class. Brilliant!
      */
     internal companion object {
-        private val DIMENSION_LRU_CACHE = DimensionLruCache(10)
+        val DIMENSION_LRU_CACHE = DimensionLruCache(10)
 
-        private var sContext: Context = XpInitProvider.CONTEXT
+        var sContext: Context = XpInitProvider.sContext
 
         @JvmStatic
         fun init(context: Context) {

@@ -1,4 +1,4 @@
-package cz.quickjobs.android.location
+package net.xpece.android.location
 
 import android.content.Context
 import android.location.Geocoder

@@ -27,11 +27,12 @@ class RotateTransformation(private val portrait: Boolean) : Transformation {
     }
 
     override fun key(): String {
-        return "${TAG}{portrait=$portrait}"
+        return "$TAG{portrait=$portrait}"
     }
 
     companion object {
-        private val TAG = RotateTransformation::class.java.simpleName
+        @JvmStatic
+        private val TAG = RotateTransformation::class.java.simpleName!!
     }
 
 }

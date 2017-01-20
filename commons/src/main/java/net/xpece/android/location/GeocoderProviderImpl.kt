@@ -1,4 +1,4 @@
-package cz.quickjobs.android.location
+package net.xpece.android.location
 
 import android.content.Context
 import android.location.Geocoder
@@ -9,6 +9,7 @@ import java.util.*
  */
 class GeocoderProviderImpl : GeocoderProvider {
     companion object {
+        @JvmStatic
         private val cache = WeakHashMap<Key, Geocoder>()
     }
 

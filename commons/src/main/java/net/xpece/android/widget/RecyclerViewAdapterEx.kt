@@ -119,6 +119,7 @@ abstract class RecyclerViewAdapterEx<T : RecyclerView.ViewHolder> : HeaderFooter
 
     open class ProgressModel : Model {
         companion object {
+            @JvmField
             val INSTANCE = ProgressModel()
         }
 

@@ -3,12 +3,12 @@ package net.xpece.android.net
 class ConnectivityInfo(@ConnectivityReceiver.State val state: Long, val isAirplaneModeEnabled: Boolean) {
 
     companion object {
-        private val CONNECTED = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTED, false)
-        private val CONNECTING = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTING, false)
-        private val DISCONNECTED = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_DISCONNECTED, false)
-        private val CONNECTED_AIRPLANE = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTED, true)
-        private val CONNECTING_AIRPLANE = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTING, true)
-        private val DISCONNECTED_AIRPLANE = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_DISCONNECTED, true)
+        @JvmStatic private val CONNECTED = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTED, false)
+        @JvmStatic private val CONNECTING = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTING, false)
+        @JvmStatic private val DISCONNECTED = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_DISCONNECTED, false)
+        @JvmStatic private val CONNECTED_AIRPLANE = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTED, true)
+        @JvmStatic private val CONNECTING_AIRPLANE = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTING, true)
+        @JvmStatic private val DISCONNECTED_AIRPLANE = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_DISCONNECTED, true)
         @JvmField val DEFAULT = CONNECTED
     }
 

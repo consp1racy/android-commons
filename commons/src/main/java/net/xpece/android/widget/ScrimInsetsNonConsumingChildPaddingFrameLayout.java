@@ -30,14 +30,11 @@ import android.widget.FrameLayout;
 
 import net.xpece.android.graphics.XpRect;
 
-/**
- * @hide
- */
 public class ScrimInsetsNonConsumingChildPaddingFrameLayout extends FrameLayout {
 
-    private Drawable mInsetForeground;
+    Drawable mInsetForeground;
 
-    private Rect mInsets;
+    Rect mInsets;
 
     private Rect mTempRect = new Rect();
 

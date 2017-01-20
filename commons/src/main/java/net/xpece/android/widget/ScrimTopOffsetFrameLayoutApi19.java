@@ -26,9 +26,9 @@ import net.xpece.android.view.XpView;
  */
 public class ScrimTopOffsetFrameLayoutApi19 extends FrameLayout {
 
-    private Drawable mInsetForeground;
+    Drawable mInsetForeground;
 
-    private Rect mInsets;
+    Rect mInsets;
 
     private Rect mTempRect = new Rect();
 

@@ -12,6 +12,7 @@ import android.net.ConnectivityManager
 
 open internal class ConnectivityReceiverBase(val delegate: ConnectivityReceiverDelegate) : ConnectivityReceiverImpl {
     companion object {
+        @JvmStatic
         private val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
     }
 

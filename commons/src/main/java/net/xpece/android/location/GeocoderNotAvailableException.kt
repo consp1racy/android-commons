@@ -1,4 +1,4 @@
-package cz.quickjobs.android.location
+package net.xpece.android.location
 
 /**
  * @author Eugen on 20.12.2016.

@@ -9,12 +9,13 @@ import android.content.res.Resources
  */
 class XpInitProvider : EmptyContentProvider() {
     override fun onCreate(): Boolean {
-        CONTEXT = context.applicationContext
+        sContext = context.applicationContext
         return false
     }
 
     companion object {
-        var CONTEXT : Context = object : ContextWrapper(null) {
+        @JvmField
+        var sContext: Context = object : ContextWrapper(null) {
             override fun getResources(): Resources {
                 throw IllegalStateException("You forgot to call init(Context).")
             }

@@ -71,7 +71,7 @@ public class AppCompatChronometer extends AppCompatTextView {
     private long mNow; // the currently displayed time
     private boolean mVisible;
     private boolean mStarted;
-    private boolean mRunning;
+    boolean mRunning;
     private boolean mLogged;
     private String mFormat;
     private Formatter mFormatter;
@@ -259,7 +259,7 @@ public class AppCompatChronometer extends AppCompatTextView {
         updateRunning();
     }
 
-    private synchronized void updateText(long now) {
+    synchronized void updateText(long now) {
         mNow = now;
         long seconds = mCountDown ? mBase - now : now - mBase;
         seconds /= 1000;
@@ -335,7 +335,7 @@ public class AppCompatChronometer extends AppCompatTextView {
         }
     }
 
-    private final Runnable mTickRunnable = new Runnable() {
+    final Runnable mTickRunnable = new Runnable() {
         @Override
         public void run() {
             if (mRunning) {

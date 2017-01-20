@@ -30,14 +30,11 @@ import android.view.View;
 
 import net.xpece.android.graphics.XpRect;
 
-/**
- * @hide
- */
 public class ScrimInsetsNonConsumingSelfPaddingNestedScrollView extends NestedScrollView {
 
-    private Drawable mInsetForeground;
+    Drawable mInsetForeground;
 
-    private Rect mInsets;
+    Rect mInsets;
 
     private Rect mTempRect = new Rect();
 

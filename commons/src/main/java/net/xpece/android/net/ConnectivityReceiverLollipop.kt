@@ -15,12 +15,13 @@ import net.xpece.android.content.connectivityManager
 
 @RequiresApi(21)
 @TargetApi(21)
-open internal class ConnectivityReceiverLollipop(val delegate: ConnectivityReceiverDelegate) : ConnectivityReceiverImpl {
+open internal class ConnectivityReceiverLollipop(internal val delegate: ConnectivityReceiverDelegate) : ConnectivityReceiverImpl {
     companion object {
+        @JvmStatic
         private val networkRequest = NetworkRequest.Builder().build()
     }
 
-    private val handler = Handler()
+    internal val handler = Handler()
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onLost(network: Network?) {

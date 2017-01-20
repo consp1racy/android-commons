@@ -1790,9 +1790,9 @@ public class LayerDrawableCompat extends Drawable implements Drawable.Callback {
         private boolean mHaveIsStateful;
         private boolean mIsStateful;
 
-        private boolean mAutoMirrored = false;
+        boolean mAutoMirrored = false;
 
-        private int mPaddingMode = PADDING_MODE_NEST;
+        int mPaddingMode = PADDING_MODE_NEST;
 
         LayerState(@Nullable LayerState orig, @NonNull LayerDrawableCompat owner,
                    @Nullable Resources res) {
