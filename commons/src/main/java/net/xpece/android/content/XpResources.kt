@@ -43,11 +43,7 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
             if (d != null) return d
         }
     }
-    try {
-        return XpAppCompatResources.getDrawable(this, resId)
-    } catch (ex: NoSuchMethodError) {
-        return ContextCompat.getDrawable(this, resId)
-    }
+    return XpAppCompatResources.getDrawable(this, resId)
 }
 
 fun Context.resolveFloat(@AttrRes attr: Int, fallback: Float = 0F) = resolveFloat(0, attr, fallback)
