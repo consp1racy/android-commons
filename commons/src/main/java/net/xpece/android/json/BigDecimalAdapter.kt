@@ -1,4 +1,4 @@
-package cz.quickjobs.android.json
+package net.xpece.android.json
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson

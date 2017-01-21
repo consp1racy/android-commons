@@ -1,4 +1,4 @@
-package cz.quickjobs.android.content.loader
+package net.xpece.android.content
 
 import android.os.Bundle
 import android.support.v4.content.Loader
