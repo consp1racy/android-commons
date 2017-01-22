@@ -21,7 +21,8 @@ android {
     sourceSets {
         main {
             java.srcDirs += 'src/main/kotlin'
-            res.srcDirs += 'src/main/res2'
+            res.srcDirs += 'src/main/res-preview'
+            res.srcDirs += 'src/main/res-support'
         }
     }
 }

@@ -37,4 +37,13 @@
         <item name="layout_behavior">@string/scrim_status_bar_behavior</item>
     </style>
 
+    <style name="Widget.Design.BottomSheet.Modal.ExpandedOnly" parent="Widget.Design.BottomSheet.Modal">
+        <item name="behavior_peekHeight">9999dp</item>
+        <item name="behavior_hideable">false</item>
+        <item name="behavior_skipCollapsed">true</item>
+    </style>
+
+    <style name="Widget.Xpece.ArbitraryInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColorHint">@color/activated_text</item>
+    </style>
 </resources>
