@@ -192,6 +192,11 @@ fun showNoActivityError(context: Context) = Toast.makeText(context, R.string.xpc
  */
 fun Context.hasHandler(intent: Intent) = packageManager.queryIntentActivities(intent, 0).isNotEmpty()
 
+/**
+ * Queries on-device packages for a handler for the supplied [Intent].
+ */
+fun Context.getHandlerCount(intent: Intent) = packageManager.queryIntentActivities(intent, 0).size
+
 fun Context.notification(func: NotificationCompat.Builder.() -> Unit): NotificationCompat.Builder {
     val builder = NotificationCompat.Builder(this)
     builder.func()

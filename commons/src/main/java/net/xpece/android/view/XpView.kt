@@ -11,14 +11,18 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
 import android.os.Build
 import android.support.annotation.DrawableRes
+import android.support.annotation.StyleRes
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewCompat
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.XpAppCompatResources
 import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.*
 import net.xpece.android.R
+import net.xpece.android.content.resolveColor
 
 /**
  * @author Eugen on 29.07.2016.
@@ -162,3 +166,10 @@ val View.isRtl: Boolean
     get() = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL
 
 fun View.fitSystemWindows(insets: Rect) = XpViewReflect.fitSystemWindows(this, insets)
+
+fun SwipeRefreshLayout.setupDefaultColors() {
+    setColorSchemeColors(context.resolveColor(R.attr.colorAccent, Color.BLACK))
+    setProgressBackgroundColorSchemeColor(context.resolveColor(R.attr.colorBackgroundFloating, Color.WHITE))
+}
+
+fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) = TextViewCompat.setTextAppearance(this, resId)
