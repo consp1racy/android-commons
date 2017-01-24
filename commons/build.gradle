@@ -37,6 +37,7 @@ dependencies {
     provided "com.android.support:palette-v7:$supportLibsVersion"
 
     provided "com.google.android.gms:play-services-gcm:9.0.0"
+    provided "com.google.android.gms:play-services-maps:9.0.0"
 
     provided "uk.co.chrisjenx:calligraphy:2.0.0@aar"
     provided 'com.github.devlight.shadowlayout:library:1.0.0'
@@ -59,8 +60,6 @@ dependencies {
     provided 'io.reactivex.rxjava2:rxjava:2.0.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-    compile "org.jetbrains:annotations:15.0"
 }
 
 repositories {

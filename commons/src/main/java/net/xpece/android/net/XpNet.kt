@@ -21,7 +21,5 @@ val Context.isAirplaneModeOn: Boolean
         Settings.Global.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
     }
 
-fun String?.toUri() = if (this != null) Uri.parse(this) else null
-
 val Context.isAnyNetworkConnected: Boolean
     get() = connectivityManager.activeNetworkInfo?.isConnected ?: false

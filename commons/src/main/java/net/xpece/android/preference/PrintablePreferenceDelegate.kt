@@ -2,7 +2,6 @@ package net.xpece.android.preference
 
 import android.content.SharedPreferences
 import net.xpece.android.content.update
-import org.jetbrains.annotations.Contract
 import kotlin.reflect.KProperty
 
 /**
@@ -23,9 +22,7 @@ abstract class PrintablePreferenceDelegate<T>(val prefs: SharedPreferences, val 
         }
     }
 
-    @Contract("null -> null")
     open protected fun toString(input: T?) = input?.toString()
 
-    @Contract("null -> null")
     abstract protected fun fromString(input: String?) : T?
 }

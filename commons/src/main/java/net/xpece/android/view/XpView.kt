@@ -16,6 +16,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v4.widget.TextViewCompat
+import android.support.v7.app.ActionBar
 import android.support.v7.widget.XpAppCompatResources
 import android.view.Gravity
 import android.view.View
@@ -173,3 +174,16 @@ fun SwipeRefreshLayout.setupDefaultColors() {
 }
 
 fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) = TextViewCompat.setTextAppearance(this, resId)
+
+fun View.setLayerTypeSafe(layerType: Int) {
+    if (this.layerType != layerType) {
+        setLayerType(layerType, null)
+    }
+}
+
+fun ActionBar.setDisplayShowTitleAndHomeAsUp() {
+    setDisplayShowTitleEnabled(true)
+    setDisplayHomeAsUpEnabled(true)
+    setDisplayShowHomeEnabled(true)
+//    displayOptions = ActionBar.DISPLAY_SHOW_TITLE or ActionBar.DISPLAY_HOME_AS_UP or ActionBar.DISPLAY_SHOW_HOME
+}

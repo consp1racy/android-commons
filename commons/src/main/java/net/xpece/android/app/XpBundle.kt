@@ -1,5 +1,9 @@
 package net.xpece.android.app
 
+import android.os.Bundle
+import android.os.ParcelUuid
+import java.util.*
+
 /// Kotlin > 1.1 - using bound callable references =================================================
 
 //@JvmName("putBoolean")
