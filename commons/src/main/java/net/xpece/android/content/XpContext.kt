@@ -3,13 +3,12 @@
 
 package net.xpece.android.content
 
-import android.Manifest
 import android.app.Activity
 import android.app.AlarmManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.location.LocationManager
 import android.media.AudioManager
 import android.net.ConnectivityManager
@@ -17,7 +16,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
 import android.support.annotation.LayoutRes
-import android.support.annotation.RequiresPermission
 import android.support.annotation.UiThread
 import android.support.v4.app.Fragment
 import android.support.v4.app.NotificationManagerCompat
@@ -29,7 +27,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import net.xpece.android.R
 
 private val TYPED_VALUE = ThreadLocal<TypedValue>()
@@ -151,3 +148,12 @@ val Context.isRtl: Boolean
 
 val Context.isDebugBuild: Boolean
     get() = 0 != (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
+
+val Context.colorPrimary: ColorStateList
+    get() = resolveColorStateList(R.attr.colorPrimary)!!
+
+val Context.colorAccent: ColorStateList
+    get() = resolveColorStateList(R.attr.colorAccent)!!
+
+val Context.colorControlNormal: ColorStateList
+    get() = resolveColorStateList(R.attr.colorControlNormal)!!
