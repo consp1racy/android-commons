@@ -88,6 +88,8 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private final Rect mBounds = new Rect();
 
+    private boolean mDrawOver = false;
+
     /**
      * Creates a divider {@link RecyclerView.ItemDecoration} that can be used with a
      * {@link LinearLayoutManager}.
@@ -101,6 +103,19 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
         mDivider = a.getDrawable(0);
         a.recycle();
         setOrientation(orientation);
+    }
+
+    public XpDividerItemDecoration drawOver(boolean drawOver) {
+        mDrawOver = drawOver;
+        return this;
+    }
+
+    public void setDrawOver(boolean drawOver) {
+        mDrawOver = drawOver;
+    }
+
+    public boolean isDrawOver() {
+        return mDrawOver;
     }
 
     /**
