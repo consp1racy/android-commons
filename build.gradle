@@ -1,6 +1,6 @@
 buildscript {
-//    ext.kotlin_version = '1.0.6'
-    ext.kotlin_version = '1.1.0-beta-38'
+    ext.kotlin_version = '1.0.6'
+//    ext.kotlin_version = '1.1.0-beta-38'
     repositories {
         jcenter()
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
