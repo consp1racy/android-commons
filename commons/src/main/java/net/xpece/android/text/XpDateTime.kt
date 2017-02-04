@@ -45,33 +45,33 @@ fun getFormatterTimeHuman(locale: Locale): DateFormat {
 }
 
 @JvmOverloads
-fun Date.printHumanReadableTime(locale: Locale = Locale.getDefault()): String {
+inline fun Date.printHumanReadableTime(locale: Locale = Locale.getDefault()): String {
     return getFormatterTimeHuman(locale).format(this)
 }
 
 @JvmOverloads
-fun Date.printHumanReadableDate(locale: Locale = Locale.getDefault()): String {
+inline fun Date.printHumanReadableDate(locale: Locale = Locale.getDefault()): String {
     return getFormatterDateHuman(locale).format(this)
 }
 
 @JvmOverloads
-fun Date.printHumanReadableDateTime(locale: Locale = Locale.getDefault()): String {
+inline fun Date.printHumanReadableDateTime(locale: Locale = Locale.getDefault()): String {
     return getFormatterDateTimeHuman(locale).format(this)
 }
 
-fun Date.printMachineReadableDate(): String {
+inline fun Date.printMachineReadableDate(): String {
     return FORMATTER_DATE_MACHINE.format(this)
 }
 
-fun String.parseMachineReadableDate(): Date {
+inline fun String.parseMachineReadableDate(): Date {
     return FORMATTER_DATE_MACHINE.parse(this)
 }
 
-fun Date.printMachineReadableDateTime(): String {
+inline fun Date.printMachineReadableDateTime(): String {
     return FORMATTER_ISO8601.format(this)
 }
 
-fun String.parseMachineReadableDateTime(): Date {
+inline fun String.parseMachineReadableDateTime(): Date {
     return FORMATTER_ISO8601.parse(this)
 }
 

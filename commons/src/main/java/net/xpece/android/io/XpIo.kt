@@ -9,25 +9,11 @@ import java.io.InputStream
 import java.util.*
 
 fun Context.copy(inputUri: Uri, outputUri: Uri) {
-    val input = contentResolver.openInputStream(inputUri)
-    val output = contentResolver.openOutputStream(outputUri)
-
-    input.copyTo(output)
-    output.flush()
-
-    input.close()
-    output.close()
-
-//    val source = Okio.buffer(Okio.source(input))
-//    val sink = Okio.buffer(Okio.sink(output))
-//
-//    try {
-//        sink.writeAll(source)
-//        sink.flush()
-//    } finally {
-//        sink.close()
-//        source.close()
-//    }
+    contentResolver.openInputStream(inputUri).use { input ->
+        contentResolver.openOutputStream(outputUri).use { output ->
+            input.copyTo(output)
+        }
+    }
 }
 
 @JvmOverloads

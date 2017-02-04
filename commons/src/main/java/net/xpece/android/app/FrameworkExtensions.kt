@@ -4,7 +4,7 @@ import android.content.res.ColorStateList
 import android.support.annotation.ColorInt
 import java.util.*
 
-fun @receiver:ColorInt Int.toColorStateList() = ColorStateList.valueOf(this)!!
+inline fun @receiver:ColorInt Int.toColorStateList() = ColorStateList.valueOf(this)!!
 
 fun <E> List<E>.asArrayList(): ArrayList<E> {
     if (this is ArrayList<E>) {

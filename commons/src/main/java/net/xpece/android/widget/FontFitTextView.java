@@ -80,11 +80,15 @@ public class FontFitTextView extends AppCompatTextView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        final int maxWidth;
+        if (widthMode == MeasureSpec.UNSPECIFIED) {
+            maxWidth = Integer.MAX_VALUE >> 2;
+        } else {
+            maxWidth = MeasureSpec.getSize(widthMeasureSpec);
+        }
+        refitText(getText(), maxWidth);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
-        int height = getMeasuredHeight();
-        refitText(getText(), parentWidth);
-        setMeasuredDimension(parentWidth, height);
     }
 
     @Override

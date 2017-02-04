@@ -10,12 +10,12 @@ inline fun SharedPreferences.update(func: SharedPreferences.Editor.() -> Unit) {
     editor.apply()
 }
 
-operator fun SharedPreferences.Editor.set(key: String, value: String) = putString(key, value)!!
-operator fun SharedPreferences.Editor.set(key: String, value: Int) = putInt(key, value)!!
-operator fun SharedPreferences.Editor.set(key: String, value: Long) = putLong(key, value)!!
-operator fun SharedPreferences.Editor.set(key: String, value: Boolean) = putBoolean(key, value)!!
-operator fun SharedPreferences.Editor.set(key: String, value: Float) = putFloat(key, value)!!
-operator fun SharedPreferences.Editor.set(key: String, value: Set<String>) = putStringSet(key, value)!!
+inline operator fun SharedPreferences.Editor.set(key: String, value: String) = putString(key, value)!!
+inline operator fun SharedPreferences.Editor.set(key: String, value: Int) = putInt(key, value)!!
+inline operator fun SharedPreferences.Editor.set(key: String, value: Long) = putLong(key, value)!!
+inline operator fun SharedPreferences.Editor.set(key: String, value: Boolean) = putBoolean(key, value)!!
+inline operator fun SharedPreferences.Editor.set(key: String, value: Float) = putFloat(key, value)!!
+inline operator fun SharedPreferences.Editor.set(key: String, value: Set<String>) = putStringSet(key, value)!!
 
 @Deprecated("")
 fun SharedPreferences.Editor.put(pair: Pair<String, Any?>) {

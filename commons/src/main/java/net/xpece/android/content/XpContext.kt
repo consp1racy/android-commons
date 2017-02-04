@@ -101,42 +101,42 @@ fun Context.openPlayStore(packageName: String = this.packageName)
 fun Context.openPlayStoreIntent(packageName: String = this.packageName, func: Intent.() -> Unit = {}): Intent
         = viewIntent(getPlayStoreUri(packageName), func)
 
-fun getPlayStoreUri(packageName: String) = Uri.parse("http://play.google.com/store/apps/details?id=$packageName")!!
+inline fun getPlayStoreUri(packageName: String) = Uri.parse("http://play.google.com/store/apps/details?id=$packageName")!!
 
 @UiThread
-fun Context.getLayoutInflater(): LayoutInflater =
+inline fun Context.getLayoutInflater(): LayoutInflater =
         LayoutInflater.from(this)
 
 @UiThread
-fun Context.inflate(@LayoutRes layout: Int): View =
+inline fun Context.inflate(@LayoutRes layout: Int): View =
         getLayoutInflater().inflate(layout, null, false)
 
 @UiThread
 @JvmOverloads
-fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = true): View =
+inline fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = true): View =
         context.getLayoutInflater().inflate(layout, this, attachToRoot)
 
-fun Context.notification(func: NotificationCompat.Builder.() -> Unit): NotificationCompat.Builder {
+inline fun Context.notification(func: NotificationCompat.Builder.() -> Unit): NotificationCompat.Builder {
     val builder = NotificationCompat.Builder(this)
     builder.func()
     return builder
 }
 
-val Context.notificationManager: NotificationManagerCompat
+inline val Context.notificationManager: NotificationManagerCompat
     get() = NotificationManagerCompat.from(this)
-val Context.connectivityManager: ConnectivityManager
+inline val Context.connectivityManager: ConnectivityManager
     get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-val Context.audioManager: AudioManager
+inline val Context.audioManager: AudioManager
     get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-val Context.inputMethodManager: InputMethodManager
+inline val Context.inputMethodManager: InputMethodManager
     get() = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-val Context.locationManager: LocationManager
+inline val Context.locationManager: LocationManager
     get() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-val Context.powerManager: PowerManager
+inline val Context.powerManager: PowerManager
     get() = getSystemService(Context.POWER_SERVICE) as PowerManager
-val Context.alarmManager: AlarmManager
+inline val Context.alarmManager: AlarmManager
     get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-val Context.telephonyManager: TelephonyManager?
+inline val Context.telephonyManager: TelephonyManager?
     get() = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
 
 val Context.isRtl: Boolean
@@ -149,11 +149,11 @@ val Context.isRtl: Boolean
 val Context.isDebugBuild: Boolean
     get() = 0 != (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
 
-val Context.colorPrimary: ColorStateList
+inline val Context.colorPrimary: ColorStateList
     get() = resolveColorStateList(R.attr.colorPrimary)!!
 
-val Context.colorAccent: ColorStateList
+inline val Context.colorAccent: ColorStateList
     get() = resolveColorStateList(R.attr.colorAccent)!!
 
-val Context.colorControlNormal: ColorStateList
+inline val Context.colorControlNormal: ColorStateList
     get() = resolveColorStateList(R.attr.colorControlNormal)!!

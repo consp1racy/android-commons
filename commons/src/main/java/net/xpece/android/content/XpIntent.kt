@@ -105,19 +105,19 @@ fun android.app.Fragment.maybeStartActivityForResult(intent: Intent, requestCode
     }
 }
 
-fun showNoActivityError(context: Context) = Toast.makeText(context, R.string.xpc_no_intent_handler, Toast.LENGTH_LONG).show()
+inline fun showNoActivityError(context: Context) = Toast.makeText(context, R.string.xpc_no_intent_handler, Toast.LENGTH_LONG).show()
 
 /**
  * Queries on-device packages for a handler for the supplied [Intent].
  */
-fun Context.hasHandler(intent: Intent) = packageManager.queryIntentActivities(intent, 0).isNotEmpty()
+inline fun Context.hasHandler(intent: Intent) = packageManager.queryIntentActivities(intent, 0).isNotEmpty()
 
 /**
  * Queries on-device packages for a handler for the supplied [Intent].
  */
-fun Context.getHandlerCount(intent: Intent) = packageManager.queryIntentActivities(intent, 0).size
+inline fun Context.getHandlerCount(intent: Intent) = packageManager.queryIntentActivities(intent, 0).size
 
-fun getMapIntent(query: String, latLng: LatLng?): Intent {
+inline fun getMapIntent(query: String, latLng: LatLng?): Intent {
     val uri = Uri.parse("geo:+${latLng?.latitude ?: 0},${latLng?.longitude ?: 0}?q=$query")
     return Intent(Intent.ACTION_VIEW, uri)
 }
@@ -130,9 +130,9 @@ fun Context.getAppDetailIntent(packageName: String = this.packageName): Intent {
     return i
 }
 
-fun intent(context: Context, activity: Class<out Any>, func: Intent.() -> Intent) = Intent(context, activity).func()
+inline fun intent(context: Context, activity: Class<out Any>, func: Intent.() -> Intent) = Intent(context, activity).func()
 
-private fun getMapIntent(query: String, latitude: Double, longitude: Double): Intent {
+inline private fun getMapIntent(query: String, latitude: Double, longitude: Double): Intent {
     val uri = Uri.parse("geo:+$latitude,$longitude?q=$query")
     return Intent(Intent.ACTION_VIEW, uri)
 }

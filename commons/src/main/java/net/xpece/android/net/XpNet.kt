@@ -4,7 +4,6 @@ package net.xpece.android.net
 
 import android.annotation.TargetApi
 import android.content.Context
-import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import net.xpece.android.content.connectivityManager
@@ -21,5 +20,5 @@ val Context.isAirplaneModeOn: Boolean
         Settings.Global.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
     }
 
-val Context.isAnyNetworkConnected: Boolean
+inline val Context.isAnyNetworkConnected: Boolean
     get() = connectivityManager.activeNetworkInfo?.isConnected ?: false

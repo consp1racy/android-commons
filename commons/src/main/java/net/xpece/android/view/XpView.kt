@@ -44,9 +44,9 @@ fun View.visible(): View {
     return this
 }
 
-fun View.isVisible(): Boolean = visibility == View.VISIBLE
+inline fun View.isVisible(): Boolean = visibility == View.VISIBLE
 
-fun View.setVisible(visible: Boolean) = if (visible) visibility = View.VISIBLE else visibility = View.GONE
+inline fun View.setVisible(visible: Boolean) = if (visible) visibility = View.VISIBLE else visibility = View.GONE
 
 @JvmOverloads
 fun TextView.setTextAndVisibility(text: CharSequence?, invisible: Boolean = false) {
@@ -163,25 +163,25 @@ fun View.toastContentDescription(text: CharSequence = this.contentDescription): 
     return true
 }
 
-val View.isRtl: Boolean
+inline val View.isRtl: Boolean
     get() = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL
 
 fun View.fitSystemWindows(insets: Rect) = XpViewReflect.fitSystemWindows(this, insets)
 
-fun SwipeRefreshLayout.setupDefaultColors() {
+inline fun SwipeRefreshLayout.setupDefaultColors() {
     setColorSchemeColors(context.resolveColor(R.attr.colorAccent, Color.BLACK))
     setProgressBackgroundColorSchemeColor(context.resolveColor(R.attr.colorBackgroundFloating, Color.WHITE))
 }
 
-fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) = TextViewCompat.setTextAppearance(this, resId)
+inline fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) = TextViewCompat.setTextAppearance(this, resId)
 
-fun View.setLayerTypeSafe(layerType: Int) {
+inline fun View.setLayerTypeSafe(layerType: Int) {
     if (this.layerType != layerType) {
         setLayerType(layerType, null)
     }
 }
 
-fun ActionBar.setDisplayShowTitleAndHomeAsUp() {
+inline fun ActionBar.setDisplayShowTitleAndHomeAsUp() {
     setDisplayShowTitleEnabled(true)
     setDisplayHomeAsUpEnabled(true)
     setDisplayShowHomeEnabled(true)
