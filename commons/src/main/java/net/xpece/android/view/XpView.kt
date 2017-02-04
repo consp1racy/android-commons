@@ -163,7 +163,7 @@ fun View.toastContentDescription(text: CharSequence = this.contentDescription): 
     return true
 }
 
-inline val View.isRtl: Boolean
+val View.isRtl: Boolean
     get() = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL
 
 fun View.fitSystemWindows(insets: Rect) = XpViewReflect.fitSystemWindows(this, insets)

@@ -122,21 +122,21 @@ inline fun Context.notification(func: NotificationCompat.Builder.() -> Unit): No
     return builder
 }
 
-inline val Context.notificationManager: NotificationManagerCompat
+val Context.notificationManager: NotificationManagerCompat
     get() = NotificationManagerCompat.from(this)
-inline val Context.connectivityManager: ConnectivityManager
+val Context.connectivityManager: ConnectivityManager
     get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-inline val Context.audioManager: AudioManager
+val Context.audioManager: AudioManager
     get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-inline val Context.inputMethodManager: InputMethodManager
+val Context.inputMethodManager: InputMethodManager
     get() = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-inline val Context.locationManager: LocationManager
+val Context.locationManager: LocationManager
     get() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-inline val Context.powerManager: PowerManager
+val Context.powerManager: PowerManager
     get() = getSystemService(Context.POWER_SERVICE) as PowerManager
-inline val Context.alarmManager: AlarmManager
+val Context.alarmManager: AlarmManager
     get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-inline val Context.telephonyManager: TelephonyManager?
+val Context.telephonyManager: TelephonyManager?
     get() = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
 
 val Context.isRtl: Boolean
@@ -149,11 +149,11 @@ val Context.isRtl: Boolean
 val Context.isDebugBuild: Boolean
     get() = 0 != (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
 
-inline val Context.colorPrimary: ColorStateList
+val Context.colorPrimary: ColorStateList
     get() = resolveColorStateList(R.attr.colorPrimary)!!
 
-inline val Context.colorAccent: ColorStateList
+val Context.colorAccent: ColorStateList
     get() = resolveColorStateList(R.attr.colorAccent)!!
 
-inline val Context.colorControlNormal: ColorStateList
+val Context.colorControlNormal: ColorStateList
     get() = resolveColorStateList(R.attr.colorControlNormal)!!

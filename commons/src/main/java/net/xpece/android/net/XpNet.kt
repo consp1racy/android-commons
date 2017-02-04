@@ -20,5 +20,5 @@ val Context.isAirplaneModeOn: Boolean
         Settings.Global.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
     }
 
-inline val Context.isAnyNetworkConnected: Boolean
+val Context.isAnyNetworkConnected: Boolean
     get() = connectivityManager.activeNetworkInfo?.isConnected ?: false

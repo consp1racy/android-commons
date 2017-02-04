@@ -3,10 +3,10 @@ package net.xpece.android.telephony
 import android.os.Build
 import android.telephony.TelephonyManager
 
-inline val TelephonyManager.isSimStateReady: Boolean
+val TelephonyManager.isSimStateReady: Boolean
     get() = simState == TelephonyManager.SIM_STATE_READY
 
-inline val TelephonyManager.isCallStateIdle: Boolean
+val TelephonyManager.isCallStateIdle: Boolean
     get() = callState == TelephonyManager.CALL_STATE_IDLE
 
 val TelephonyManager?.isCallCapableInstantly: Boolean
