@@ -7,3 +7,8 @@
     int mSubtitleTextAppearance;
     android.graphics.drawable.Drawable mCollapseIcon;
 }
+
+-dontwarn com.birbit.android.jobqueue.scheduling.**
+-dontwarn com.squareup.picasso.ExifContentStreamRequestHandler
+-dontwarn com.squareup.picasso.PaletteTransformation
+-dontwarn com.squareup.picasso.RotateTransformation
