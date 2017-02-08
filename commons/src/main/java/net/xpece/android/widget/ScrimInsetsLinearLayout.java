@@ -17,7 +17,6 @@
 package net.xpece.android.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -25,6 +24,7 @@ import android.support.annotation.NonNull;
 import android.support.design.R;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.WindowInsetsCompat;
+import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -57,8 +57,9 @@ public class ScrimInsetsLinearLayout extends LinearLayout {
         init(context, attrs, defStyleAttr);
     }
 
+    @SuppressWarnings("RestrictedApi")
     private void init(final Context context, final AttributeSet attrs, final int defStyleAttr) {
-        final TypedArray a = context.obtainStyledAttributes(attrs,
+        final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs,
                 R.styleable.ScrimInsetsFrameLayout, defStyleAttr,
                 R.style.Widget_Design_ScrimInsetsFrameLayout);
         mInsetForeground = a.getDrawable(R.styleable.ScrimInsetsFrameLayout_insetForeground);

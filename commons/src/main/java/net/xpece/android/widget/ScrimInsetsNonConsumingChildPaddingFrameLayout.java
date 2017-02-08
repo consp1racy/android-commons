@@ -17,13 +17,13 @@
 package net.xpece.android.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.WindowInsetsCompat;
+import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -46,10 +46,11 @@ public class ScrimInsetsNonConsumingChildPaddingFrameLayout extends FrameLayout 
         this(context, attrs, 0);
     }
 
+    @SuppressWarnings("RestrictedApi")
     public ScrimInsetsNonConsumingChildPaddingFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        final TypedArray a = context.obtainStyledAttributes(attrs,
+        final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs,
             android.support.design.R.styleable.ScrimInsetsFrameLayout, defStyleAttr,
             android.support.design.R.style.Widget_Design_ScrimInsetsFrameLayout);
         mInsetForeground = a.getDrawable(android.support.design.R.styleable.ScrimInsetsFrameLayout_insetForeground);

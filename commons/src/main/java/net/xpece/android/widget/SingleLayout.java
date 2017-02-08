@@ -2,13 +2,13 @@ package net.xpece.android.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.TintTypedArray;
 import android.support.v7.widget.XpAppCompatResources;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -110,6 +110,7 @@ public class SingleLayout extends ViewGroup implements SingleLayoutImpl {
         this(context, attrs, 0);
     }
 
+    @SuppressWarnings("RestrictedApi")
     public SingleLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
@@ -117,7 +118,7 @@ public class SingleLayout extends ViewGroup implements SingleLayoutImpl {
             IMPL.configureApplyInsets(this);
             mStatusBarBackground = IMPL.getDefaultStatusBarBackground(context);
 
-            final TypedArray a = context.obtainStyledAttributes(attrs, android.support.design.R.styleable.ScrimInsetsFrameLayout, defStyleAttr, 0);
+            final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs, android.support.design.R.styleable.ScrimInsetsFrameLayout, defStyleAttr, 0);
             if (a.hasValue(android.support.design.R.styleable.ScrimInsetsFrameLayout_insetForeground)) {
                 mStatusBarBackground = a.getDrawable(android.support.design.R.styleable.ScrimInsetsFrameLayout_insetForeground);
             }

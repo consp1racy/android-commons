@@ -18,9 +18,9 @@
 package net.xpece.android.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.TintTypedArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
@@ -61,8 +61,9 @@ class SingleLayoutCompatApi21 {
         return insets != null ? ((WindowInsets) insets).getSystemWindowInsetTop() : 0;
     }
 
+    @SuppressWarnings("RestrictedApi")
     public static Drawable getDefaultStatusBarBackground(Context context) {
-        final TypedArray a = context.obtainStyledAttributes(THEME_ATTRS);
+        final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, 0, THEME_ATTRS);
         try {
             return a.getDrawable(0);
         } finally {

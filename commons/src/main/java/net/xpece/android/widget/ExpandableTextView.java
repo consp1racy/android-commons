@@ -1,11 +1,11 @@
 package net.xpece.android.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.TintTypedArray;
 import android.support.v7.widget.XpAppCompatResources;
 import android.text.Layout;
 import android.text.TextUtils;
@@ -80,8 +80,9 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
         init(context, attrs, defStyle, 0);
     }
 
+    @SuppressWarnings("RestrictedApi")
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableTextView, defStyleAttr, defStyleRes);
+        final TintTypedArray typedArray = TintTypedArray.obtainStyledAttributes(context, attrs, R.styleable.ExpandableTextView, defStyleAttr, defStyleRes);
         mMaxCollapsedLines = typedArray.getInt(R.styleable.ExpandableTextView_maxCollapsedLines, MAX_COLLAPSED_LINES);
         mMinCollapsedLines = typedArray.getInt(R.styleable.ExpandableTextView_minCollapsedLines, mMaxCollapsedLines);
         mAnimationDuration = typedArray.getInt(R.styleable.ExpandableTextView_animDuration, DEFAULT_ANIM_DURATION);

@@ -2,12 +2,12 @@ package net.xpece.android.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.TintTypedArray;
 import android.support.v7.widget.XpAppCompatResources;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -44,8 +44,9 @@ public class OverlayImageView extends AspectLockedImageView {
         init(context, attrs, defStyleAttr, 0);
     }
 
+    @SuppressWarnings("RestrictedApi")
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.OverlayImageView, defStyleAttr, defStyleRes);
+        TintTypedArray ta = TintTypedArray.obtainStyledAttributes(context, attrs, R.styleable.OverlayImageView, defStyleAttr, defStyleRes);
         mOverlay = ta.getDrawable(R.styleable.OverlayImageView_oiv_overlay);
         mOverlayGravity = ta.getInt(R.styleable.OverlayImageView_oiv_overlayGravity, Gravity.TOP | GravityCompat.START);
         mOverlayGravity = GravityCompat.getAbsoluteGravity(mOverlayGravity, ViewCompat.getLayoutDirection(this));
