@@ -34,6 +34,8 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
     private LocalTime mTime;
     private boolean mIs24HourFormat;
 
+    private boolean mForceLegacy;
+
     @StyleRes
     private static int resolveDialogTheme(@NonNull Context context, @StyleRes int themeResId) {
         if (Build.VERSION.SDK_INT >= 21 && themeResId == 0) {
@@ -60,6 +62,11 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         return fragment;
     }
 
+    public LocalTimeBpPickerDialogFragment forceLegacy(final boolean forceLegacy) {
+        mForceLegacy = forceLegacy;
+        return this;
+    }
+
     public LocalTimeBpPickerDialogFragment() {
         setRetainInstance(true);
     }
@@ -72,6 +79,7 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         if (savedInstanceState != null) {
             mTime = (LocalTime) savedInstanceState.getSerializable("mTime");
             mIs24HourFormat = savedInstanceState.getBoolean("mIs24HourFormat");
+            mForceLegacy = savedInstanceState.getBoolean("mForceLegacy");
         }
         if (args != null) {
             mTime = (LocalTime) args.getSerializable("mTime");
@@ -100,7 +108,12 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         final AlertDialog.Builder builder = new AlertDialog.Builder(context, resolveDialogTheme(context, getTheme()));
         context = builder.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
-        final View view = inflater.inflate(R.layout.dialog_time_picker, null, false);
+        final View view;
+        if (mForceLegacy) {
+            view = inflater.inflate(R.layout.dialog_time_picker_legacy, null, false);
+        } else {
+            view = inflater.inflate(R.layout.dialog_time_picker, null, false);
+        }
 
         final TimePicker timePicker = (TimePicker) view.findViewById(R.id.timePicker);
         timePicker.setIs24HourView(mIs24HourFormat);

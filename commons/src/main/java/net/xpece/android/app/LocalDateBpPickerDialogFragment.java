@@ -35,6 +35,8 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
     private LocalDate mMaxDate;
     private LocalDate mMinDate;
 
+    private boolean mForceLegacy;
+
     @StyleRes
     private static int resolveDialogTheme(@NonNull Context context, @StyleRes int themeResId) {
         if (Build.VERSION.SDK_INT >= 21 && themeResId == 0) {
@@ -68,6 +70,11 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         return fragment;
     }
 
+    public LocalDateBpPickerDialogFragment forceLegacy(final boolean forceLegacy) {
+        mForceLegacy = forceLegacy;
+        return this;
+    }
+
     public LocalDateBpPickerDialogFragment() {
         setRetainInstance(true);
     }
@@ -81,6 +88,9 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
             mDate = (LocalDate) args.getSerializable("mDate");
             mMinDate = (LocalDate) args.getSerializable("mMinDate");
             mMaxDate = (LocalDate) args.getSerializable("mMaxDate");
+        }
+        if (savedInstanceState != null) {
+            mForceLegacy = savedInstanceState.getBoolean("mForceLegacy");
         }
     }
 
@@ -104,7 +114,12 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         final AlertDialog.Builder builder = new AlertDialog.Builder(context, resolveDialogTheme(context, getTheme()));
         context = builder.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
-        final View view = inflater.inflate(R.layout.dialog_date_picker, null, false);
+        final View view;
+        if (mForceLegacy) {
+            view = inflater.inflate(R.layout.dialog_date_picker_legacy, null, false);
+        } else {
+            view = inflater.inflate(R.layout.dialog_date_picker, null, false);
+        }
 
         final DatePicker datePicker = (DatePicker) view.findViewById(R.id.datePicker);
         onCreateDatePicker(datePicker);
