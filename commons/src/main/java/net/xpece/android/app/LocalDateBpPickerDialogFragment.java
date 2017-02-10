@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -31,6 +34,17 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
     private LocalDate mDate;
     private LocalDate mMaxDate;
     private LocalDate mMinDate;
+
+    @StyleRes
+    private static int resolveDialogTheme(@NonNull Context context, @StyleRes int themeResId) {
+        if (Build.VERSION.SDK_INT >= 21 && themeResId == 0) {
+            final TypedValue outValue = new TypedValue();
+            context.getTheme().resolveAttribute(R.attr.dialogTheme, outValue, true);
+            return outValue.resourceId;
+        } else {
+            return themeResId;
+        }
+    }
 
     public static LocalDateBpPickerDialogFragment newInstance(LocalDate date) {
         return newInstance(date, null, null);
@@ -86,8 +100,9 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
             mDate = (LocalDate) savedInstanceState.getSerializable("mDate");
         }
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        final Context context = builder.getContext();
+        Context context = getContext();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context, resolveDialogTheme(context, getTheme()));
+        context = builder.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view = inflater.inflate(R.layout.dialog_date_picker, null, false);
 

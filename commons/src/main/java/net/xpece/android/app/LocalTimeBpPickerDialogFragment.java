@@ -4,12 +4,15 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.format.DateFormat;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TimePicker;
@@ -30,6 +33,17 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
     private TimePicker mTimePicker;
     private LocalTime mTime;
     private boolean mIs24HourFormat;
+
+    @StyleRes
+    private static int resolveDialogTheme(@NonNull Context context, @StyleRes int themeResId) {
+        if (Build.VERSION.SDK_INT >= 21 && themeResId == 0) {
+            final TypedValue outValue = new TypedValue();
+            context.getTheme().resolveAttribute(R.attr.dialogTheme, outValue, true);
+            return outValue.resourceId;
+        } else {
+            return themeResId;
+        }
+    }
 
     public static LocalTimeBpPickerDialogFragment newInstance(LocalTime time, boolean is24HourFormat) {
         LocalTimeBpPickerDialogFragment f = newInstance(time);
@@ -82,8 +96,9 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
     @SuppressWarnings("deprecation")
     @SuppressLint("InflateParams")
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        final Context context = builder.getContext();
+        Context context = getContext();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context, resolveDialogTheme(context, getTheme()));
+        context = builder.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view = inflater.inflate(R.layout.dialog_time_picker, null, false);
 
