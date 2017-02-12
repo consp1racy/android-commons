@@ -49,7 +49,7 @@ dependencies {
 
     provided 'io.requery:sqlite-android:3.12.0'
     provided 'com.sun.mail:android-activation:1.5.5'
-    provided 'com.jakewharton.timber:timber:4.2.0'
+    provided 'com.jakewharton.timber:timber:4.5.0'
     provided 'com.squareup.picasso:picasso:2.5.0'
 
     provided 'com.squareup.moshi:moshi:1.0.0'
