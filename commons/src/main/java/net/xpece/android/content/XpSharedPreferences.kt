@@ -2,12 +2,18 @@
 
 package net.xpece.android.content
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 
-inline fun SharedPreferences.update(func: SharedPreferences.Editor.() -> Unit) {
+@SuppressLint("CommitPrefEdits")
+inline fun SharedPreferences.update(commit: Boolean = false, func: SharedPreferences.Editor.() -> Unit) {
     val editor = edit()
     editor.func()
-    editor.apply()
+    if (commit) {
+        editor.commit()
+    } else {
+        editor.apply()
+    }
 }
 
 inline operator fun SharedPreferences.Editor.set(key: String, value: String) = putString(key, value)!!
