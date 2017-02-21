@@ -4,11 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.WindowInsets;
-import android.widget.RelativeLayout;
 
 import net.xpece.android.view.XpView;
 
@@ -18,7 +15,7 @@ import net.xpece.android.view.XpView;
  * Do not use as top level container. Anything extending FrameLayout is ignored.
  * Fixed for API 19.
  */
-public class IrresponsibleRelativeLayoutApi19 extends RelativeLayout {
+public class IrresponsibleRelativeLayoutApi19 extends IrresponsibleRelativeLayout {
     public IrresponsibleRelativeLayoutApi19(Context context) {
         super(context);
     }
@@ -29,12 +26,6 @@ public class IrresponsibleRelativeLayoutApi19 extends RelativeLayout {
 
     public IrresponsibleRelativeLayoutApi19(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @RequiresApi(21)
-    @Override
-    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        return insets;
     }
 
     @SuppressWarnings("deprecation")

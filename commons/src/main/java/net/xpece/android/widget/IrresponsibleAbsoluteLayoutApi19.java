@@ -4,11 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.WindowInsets;
-import android.widget.AbsoluteLayout;
 
 import net.xpece.android.view.XpView;
 
@@ -17,7 +14,7 @@ import net.xpece.android.view.XpView;
  * Ideal as fragment container.
  */
 @SuppressWarnings("deprecation")
-public class IrresponsibleAbsoluteLayoutApi19 extends AbsoluteLayout {
+public class IrresponsibleAbsoluteLayoutApi19 extends IrresponsibleAbsoluteLayout {
     public IrresponsibleAbsoluteLayoutApi19(Context context) {
         super(context);
     }
@@ -28,12 +25,6 @@ public class IrresponsibleAbsoluteLayoutApi19 extends AbsoluteLayout {
 
     public IrresponsibleAbsoluteLayoutApi19(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @RequiresApi(21)
-    @Override
-    public WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        return insets;
     }
 
     @SuppressWarnings("deprecation")
