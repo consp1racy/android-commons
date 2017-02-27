@@ -204,8 +204,9 @@ fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback
     }
 }
 
-fun sp(sp: Int): Dimen = Dimen.sp(sp)
-fun dp(dp: Int): Dimen = Dimen.dp(dp)
+fun px(px: Number): Dimen = Dimen.px(px)
+fun sp(sp: Number): Dimen = Dimen.sp(sp)
+fun dp(dp: Number): Dimen = Dimen.dp(dp)
 fun dimen(@DimenRes resId: Int): Dimen = Dimen.res(resId)
 fun Context.dimenAttr(@AttrRes attrId: Int): Dimen = Dimen.attr(this, attrId)
 
