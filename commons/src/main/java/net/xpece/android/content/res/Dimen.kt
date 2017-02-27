@@ -12,7 +12,8 @@ import net.xpece.android.content.resolveResourceId
 /**
  * Created by pechanecjr on 4. 1. 2015.
  */
-data class Dimen internal constructor(val value: Float) {
+data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
+    override fun compareTo(other: Dimen) = this.value.compareTo(other.value)
 
     operator fun plus(that: Dimen): Dimen {
         return Dimen(this.value + that.value)
