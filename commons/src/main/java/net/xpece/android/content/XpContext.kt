@@ -4,29 +4,20 @@
 package net.xpece.android.content
 
 import android.app.Activity
-import android.app.AlarmManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.res.ColorStateList
-import android.location.LocationManager
-import android.media.AudioManager
-import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
-import android.os.PowerManager
 import android.support.annotation.LayoutRes
 import android.support.annotation.UiThread
 import android.support.v4.app.Fragment
-import android.support.v4.app.NotificationManagerCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.NotificationCompat
-import android.telephony.TelephonyManager
 import android.util.TypedValue
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import net.xpece.android.R
 
 private val TYPED_VALUE = ThreadLocal<TypedValue>()
@@ -103,41 +94,18 @@ fun Context.openPlayStoreIntent(packageName: String = this.packageName, func: In
 
 inline fun getPlayStoreUri(packageName: String) = Uri.parse("http://play.google.com/store/apps/details?id=$packageName")!!
 
-@UiThread
-inline fun Context.getLayoutInflater(): LayoutInflater =
-        LayoutInflater.from(this)
-
-@UiThread
 inline fun Context.inflate(@LayoutRes layout: Int): View =
-        getLayoutInflater().inflate(layout, null, false)
+        layoutInflater.inflate(layout, null, false)
 
-@UiThread
 @JvmOverloads
 inline fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = true): View =
-        context.getLayoutInflater().inflate(layout, this, attachToRoot)
+        context.layoutInflater.inflate(layout, this, attachToRoot)
 
 inline fun Context.notification(func: NotificationCompat.Builder.() -> Unit): NotificationCompat.Builder {
     val builder = NotificationCompat.Builder(this)
     builder.func()
     return builder
 }
-
-val Context.notificationManager: NotificationManagerCompat
-    get() = NotificationManagerCompat.from(this)
-val Context.connectivityManager: ConnectivityManager
-    get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-val Context.audioManager: AudioManager
-    get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-val Context.inputMethodManager: InputMethodManager
-    get() = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-val Context.locationManager: LocationManager
-    get() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-val Context.powerManager: PowerManager
-    get() = getSystemService(Context.POWER_SERVICE) as PowerManager
-val Context.alarmManager: AlarmManager
-    get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-val Context.telephonyManager: TelephonyManager?
-    get() = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
 
 val Context.isRtl: Boolean
     get() = if (Build.VERSION.SDK_INT < 17) {

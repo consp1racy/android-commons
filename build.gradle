@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.0.6'
+    ext.kotlin_version = '1.1.0'
 //    ext.kotlin_version = '1.1.0-beta-38'
     repositories {
         jcenter()
@@ -7,7 +7,7 @@ buildscript {
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }

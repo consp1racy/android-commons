@@ -35,12 +35,16 @@ dependencies {
 
     compile "com.android.support:design:$supportLibsVersion"
     provided "com.android.support:palette-v7:$supportLibsVersion"
+    provided "com.android.support:exifinterface:25.1.0" // Oldest available.
 
     provided "com.google.android.gms:play-services-gcm:9.0.0"
     provided "com.google.android.gms:play-services-maps:9.0.0"
 
     provided "uk.co.chrisjenx:calligraphy:2.0.0@aar"
     provided 'com.github.devlight.shadowlayout:library:1.0.0'
+    provided 'org.sufficientlysecure:html-textview:3.3'
+    provided "com.facebook.fresco:fresco:1.0.0"
+
     provided 'com.jakewharton.threetenabp:threetenabp:1.0.0'
     provided 'org.parceler:parceler-api:1.0.0'
     provided "io.requery:requery:1.0.0"
@@ -50,12 +54,12 @@ dependencies {
     provided 'io.requery:sqlite-android:3.12.0'
     provided 'com.sun.mail:android-activation:1.5.5'
     provided 'com.jakewharton.timber:timber:4.5.0'
-    provided 'com.squareup.picasso:picasso:2.5.0'
 
     provided 'com.squareup.moshi:moshi:1.0.0'
     provided 'com.squareup.okio:okio:1.0.0'
     provided 'com.squareup.okhttp3:okhttp:3.0.0'
     provided 'com.squareup.retrofit2:retrofit:2.0.0'
+    provided 'com.squareup.picasso:picasso:2.5.0'
 
     provided 'io.reactivex.rxjava2:rxjava:2.0.0'
 

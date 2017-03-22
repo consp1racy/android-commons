@@ -34,12 +34,12 @@ open internal class ConnectivityReceiverLollipop(internal val delegate: Connecti
     }
 
     override fun onStartListening(context: Context) {
-        context.applicationContext.connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
+        context.applicationContext.connectivityManager?.registerNetworkCallback(networkRequest, networkCallback)
     }
 
     override fun onStopListening(context: Context) {
         try {
-            context.applicationContext.connectivityManager.unregisterNetworkCallback(networkCallback)
+            context.applicationContext.connectivityManager?.unregisterNetworkCallback(networkCallback)
         } catch (ex: IllegalArgumentException) {
             //
         }

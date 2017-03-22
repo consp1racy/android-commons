@@ -21,4 +21,4 @@ val Context.isAirplaneModeOn: Boolean
     }
 
 val Context.isAnyNetworkConnected: Boolean
-    get() = connectivityManager.activeNetworkInfo?.isConnected ?: false
+    get() = connectivityManager?.activeNetworkInfo?.isConnected ?: false

@@ -8,7 +8,7 @@ import android.support.annotation.RestrictTo
  *
  * https://code.google.com/p/android/issues/detail?id=227136
  *
- * Remove when the bug is fixed in support-v4.
+ * ~Remove when the bug is fixed in support-v4.~ This has been fixed in v25.3.0.
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 fun Fragment.updateLoaderManagerHostController() {
