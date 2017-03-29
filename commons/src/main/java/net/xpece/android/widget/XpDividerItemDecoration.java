@@ -71,11 +71,11 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * Show dividers between each item in the group.
      */
-    public static final int SHOW_DIVIDER_MIDDLE = 2;
+    public static final int SHOW_DIVIDER_MIDDLE = 1 << 1;
     /**
      * Show a divider at the end of the group.
      */
-    public static final int SHOW_DIVIDER_END = 4;
+    public static final int SHOW_DIVIDER_END = 1 << 2;
 
     private int mShowDividers;
 

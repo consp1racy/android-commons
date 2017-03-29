@@ -12,3 +12,6 @@
 -dontwarn com.squareup.picasso.ExifContentStreamRequestHandler
 -dontwarn com.squareup.picasso.PaletteTransformation
 -dontwarn com.squareup.picasso.RotateTransformation
+
+-dontwarn org.sufficientlysecure.htmltextview.AppCompatHtmlTextView
+-dontwarn org.sufficientlysecure.htmltextview.AppCompatJellyBeanSpanFixHtmlTextView

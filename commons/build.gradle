@@ -35,7 +35,7 @@ dependencies {
 
     compile "com.android.support:design:$supportLibsVersion"
     provided "com.android.support:palette-v7:$supportLibsVersion"
-    provided "com.android.support:exifinterface:25.1.0" // Oldest available.
+    provided "com.android.support:exifinterface:$supportLibsVersion" // Oldest available is 25.1.0.
 
     provided "com.google.android.gms:play-services-gcm:9.0.0"
     provided "com.google.android.gms:play-services-maps:9.0.0"

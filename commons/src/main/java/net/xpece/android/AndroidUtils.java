@@ -1,5 +1,6 @@
 package net.xpece.android;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Service;
@@ -10,10 +11,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -118,13 +119,15 @@ public final class AndroidUtils {
      * @param context
      * @return
      */
-    @SuppressLint("MissingPermission")
+    @RequiresPermission(allOf = {Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.CHANGE_WIFI_STATE})
     public static int disconnectWifi(Context context) {
+        context = context.getApplicationContext();
+
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
         if (ni != null && ni.isConnectedOrConnecting()) {
-            WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            @SuppressLint("WifiManagerPotentialLeak") WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             int id = wm.getConnectionInfo().getNetworkId();
             return wm.disconnect() ? id : -1;
         }
@@ -139,13 +142,15 @@ public final class AndroidUtils {
      * @param context
      * @return
      */
-    @SuppressLint("MissingPermission")
+    @RequiresPermission(allOf = {Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.CHANGE_WIFI_STATE})
     public static void reconnectWifi(Context context, int networkId) {
+        context = context.getApplicationContext();
+
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
         if (ni != null) {
-            WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            @SuppressLint("WifiManagerPotentialLeak") WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             if (networkId > -1) {
                 wm.enableNetwork(networkId, true);
             }

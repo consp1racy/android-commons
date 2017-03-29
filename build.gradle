@@ -17,7 +17,7 @@ ext {
     buildToolsVersion = "25.0.2"
 
     compileSdkVersion = 25
-    supportLibsVersion = "25.2.0"
+    supportLibsVersion = "25.3.1"
 
     compileSdkVersionExtra = 23
     supportLibsVersionExtra = "23.2.0"
