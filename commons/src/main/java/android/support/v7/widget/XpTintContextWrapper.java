@@ -29,7 +29,7 @@ public class XpTintContextWrapper extends ContextWrapper {
     private static final WeakHashMap<Context, Boolean> CACHE = new WeakHashMap<>();
 
     private static boolean shouldBeUsed() {
-        return Build.VERSION.SDK_INT < 21 || VectorEnabledTintResources.shouldBeUsed();
+        return Build.VERSION.SDK_INT < 21;
     }
 
     public static Context wrap(final Context context) {

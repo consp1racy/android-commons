@@ -39,17 +39,17 @@ public class XpAppCompatResources {
                 final Drawable d = AppCompatResources.getDrawable(context, resId);
                 sDrawableGetter = new DrawableGetterAppCompatPublic();
                 return d;
-            } catch (NoSuchMethodError ex) {
+            } catch (Throwable ex) {
                 try {
                     final Drawable d = AppCompatDrawableManager.get().getDrawable(context, resId, false);
                     sDrawableGetter = new DrawableGetterAppCompatPrivate();
                     return d;
-                } catch (NoSuchMethodError ex2) {
+                } catch (Throwable ex2) {
                     try {
                         final Drawable d = ContextCompat.getDrawable(context, resId);
                         sDrawableGetter = new DrawableGetterSupportV4();
                         return d;
-                    } catch (NoSuchMethodError ex3) {
+                    } catch (Throwable ex3) {
                         if (Build.VERSION.SDK_INT < 21) {
                             sDrawableGetter = new DrawableGetterBase();
                         } else {
