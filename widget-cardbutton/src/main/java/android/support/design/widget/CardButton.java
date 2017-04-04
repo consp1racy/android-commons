@@ -42,7 +42,6 @@ import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 import net.xpece.android.widget.TintableCompoundDrawableView;
-import net.xpece.android.widget.cardbutton.BuildConfig;
 import net.xpece.android.widget.cardbutton.R;
 
 public class CardButton extends AppCompatButton implements TintableCompoundDrawableView {
@@ -54,10 +53,10 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public static void setVisualMargin(final CardButton cardButton, final int left, final int top, final int right, final int bottom) {
         try {
             final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) cardButton.getLayoutParams();
-            lp.leftMargin = left - cardButton.getShadowPaddingLeft();
-            lp.topMargin = top - cardButton.getShadowPaddingTop();
-            lp.rightMargin = right - cardButton.getShadowPaddingRight();
-            lp.bottomMargin = bottom - cardButton.getShadowPaddingBottom();
+            lp.leftMargin = left - Math.max(cardButton.getShadowPaddingLeft(), cardButton.getContentInsetLeft());
+            lp.topMargin = top - Math.max(cardButton.getShadowPaddingTop(), cardButton.getContentInsetTop());
+            lp.rightMargin = right - Math.max(cardButton.getShadowPaddingRight(), cardButton.getContentInsetRight());
+            lp.bottomMargin = bottom - Math.max(cardButton.getShadowPaddingBottom(), cardButton.getContentInsetBottom());
         } catch (ClassCastException ex) {
             Log.e(TAG, "Margins are not supported.");
         }
@@ -67,10 +66,10 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public static void setVisualMarginOriginal(final CardButton cardButton) {
         try {
             final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) cardButton.getLayoutParams();
-            lp.leftMargin -= cardButton.getShadowPaddingLeft();
-            lp.topMargin -= cardButton.getShadowPaddingTop();
-            lp.rightMargin -= cardButton.getShadowPaddingRight();
-            lp.bottomMargin -= cardButton.getShadowPaddingBottom();
+            lp.leftMargin -= Math.max(cardButton.getShadowPaddingLeft(), cardButton.getContentInsetLeft());
+            lp.topMargin -= Math.max(cardButton.getShadowPaddingTop(), cardButton.getContentInsetTop());
+            lp.rightMargin -= Math.max(cardButton.getShadowPaddingRight(), cardButton.getContentInsetRight());
+            lp.bottomMargin -= Math.max(cardButton.getShadowPaddingBottom(), cardButton.getContentInsetBottom());
         } catch (ClassCastException ex) {
             Log.e(TAG, "Margins are not supported.");
         }
@@ -80,10 +79,10 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public static void setVisualMarginRelative(final CardButton cardButton, final int start, final int top, final int end, final int bottom) {
         try {
             final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) cardButton.getLayoutParams();
-            MarginLayoutParamsCompat.setMarginStart(lp, start - cardButton.getShadowPaddingStart());
-            lp.topMargin = top - cardButton.getShadowPaddingTop();
-            MarginLayoutParamsCompat.setMarginEnd(lp, end - cardButton.getShadowPaddingEnd());
-            lp.bottomMargin = bottom - cardButton.getShadowPaddingBottom();
+            MarginLayoutParamsCompat.setMarginStart(lp, start - Math.max(cardButton.getShadowPaddingStart(), cardButton.getContentInsetStart()));
+            lp.topMargin = top - Math.max(cardButton.getShadowPaddingTop(), cardButton.getContentInsetTop());
+            MarginLayoutParamsCompat.setMarginEnd(lp, end - Math.max(cardButton.getShadowPaddingEnd(), cardButton.getContentInsetEnd()));
+            lp.bottomMargin = bottom - Math.max(cardButton.getShadowPaddingBottom(), cardButton.getContentInsetBottom());
         } catch (ClassCastException ex) {
             Log.e(TAG, "Margins are not supported.");
         }
@@ -93,10 +92,10 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public static void setVisualMarginRelativeOriginal(final CardButton cardButton) {
         try {
             final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) cardButton.getLayoutParams();
-            MarginLayoutParamsCompat.setMarginStart(lp, MarginLayoutParamsCompat.getMarginStart(lp) - cardButton.getShadowPaddingStart());
-            lp.topMargin -= cardButton.getShadowPaddingTop();
-            MarginLayoutParamsCompat.setMarginEnd(lp, MarginLayoutParamsCompat.getMarginEnd(lp) - cardButton.getShadowPaddingEnd());
-            lp.bottomMargin -= cardButton.getShadowPaddingBottom();
+            MarginLayoutParamsCompat.setMarginStart(lp, MarginLayoutParamsCompat.getMarginStart(lp) - Math.max(cardButton.getShadowPaddingStart(), cardButton.getContentInsetStart()));
+            lp.topMargin -= Math.max(cardButton.getShadowPaddingTop(), cardButton.getContentInsetTop());
+            MarginLayoutParamsCompat.setMarginEnd(lp, MarginLayoutParamsCompat.getMarginEnd(lp) - Math.max(cardButton.getShadowPaddingEnd(), cardButton.getContentInsetEnd()));
+            lp.bottomMargin -= Math.max(cardButton.getShadowPaddingBottom(), cardButton.getContentInsetBottom());
         } catch (ClassCastException ex) {
             Log.e(TAG, "Margins are not supported.");
         }
@@ -104,6 +103,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
+        mEatRequestLayout = true;
         super.setLayoutParams(params);
         if (AUTO_VISUAL_MARGIN_ENABLED) {
             try {
@@ -117,7 +117,26 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
                 //
             }
         }
+        mEatRequestLayout = false;
+        requestLayout();
     }
+
+    @Override
+    public void requestLayout() {
+        if (!mEatRequestLayout) {
+            super.requestLayout();
+        }
+    }
+
+    @Override
+    public void invalidate() {
+        if (!mEatInvalidate) {
+            super.invalidate();
+        }
+    }
+
+    private boolean mEatRequestLayout = false;
+    private boolean mEatInvalidate = false;
 
     @Nullable private ColorStateList mBackgroundTint;
     @Nullable private PorterDuff.Mode mBackgroundTintMode;
@@ -130,6 +149,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     @IntRange(from = 0) private int mContentMinHeight;
     @IntRange(from = 0) private int mContentMinWidth;
     @Nullable private ColorStateList mBorderColor;
+
+    final Rect mContentInset = new Rect();
 
     private XpAppCompatCompoundDrawableHelper mTextCompoundDrawableHelper;
 
@@ -160,11 +181,9 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     @SuppressWarnings("RestrictedApi")
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        // if (Build.VERSION.SDK_INT == 21) {
         // Sincerely, fuck you, AppCompatBackgroundHelper.applyFrameworkTintUsingColorFilter().
         // Remove on all platforms for consistency. And we handle background ourselves.
         CardButtonReflection.removeAppCompatBackgroundHelper(this);
-        // }
 
         mSuperInit = true;
 
@@ -183,14 +202,19 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         mCompatPadding = a.getBoolean(R.styleable.CardButton_useCompatPadding, false);
 
         mCornerRadius = a.getDimension(R.styleable.CardButton_carb_cornerRadius, 0f);
-        int defaultPadding = a.getDimensionPixelSize(R.styleable.CardButton_carb_contentPadding, 0);
-        mContentPadding.left = a.getDimensionPixelSize(R.styleable.CardButton_carb_contentPaddingLeft, defaultPadding);
-        mContentPadding.top = a.getDimensionPixelSize(R.styleable.CardButton_carb_contentPaddingTop, defaultPadding);
-        mContentPadding.right = a.getDimensionPixelSize(R.styleable.CardButton_carb_contentPaddingRight, defaultPadding);
-        mContentPadding.bottom = a.getDimensionPixelSize(R.styleable.CardButton_carb_contentPaddingBottom, defaultPadding);
-        mContentMinWidth = a.getDimensionPixelOffset(R.styleable.CardButton_carb_contentMinWidth, 0);
-        mContentMinHeight = a.getDimensionPixelOffset(R.styleable.CardButton_carb_contentMinHeight, 0);
+        int defaultPadding = a.getDimensionPixelOffset(R.styleable.CardButton_carb_contentPadding, 0);
+        mContentPadding.left = a.getDimensionPixelOffset(R.styleable.CardButton_carb_contentPaddingLeft, defaultPadding);
+        mContentPadding.top = a.getDimensionPixelOffset(R.styleable.CardButton_carb_contentPaddingTop, defaultPadding);
+        mContentPadding.right = a.getDimensionPixelOffset(R.styleable.CardButton_carb_contentPaddingRight, defaultPadding);
+        mContentPadding.bottom = a.getDimensionPixelOffset(R.styleable.CardButton_carb_contentPaddingBottom, defaultPadding);
+        mContentMinWidth = a.getDimensionPixelSize(R.styleable.CardButton_carb_contentMinWidth, 0);
+        mContentMinHeight = a.getDimensionPixelSize(R.styleable.CardButton_carb_contentMinHeight, 0);
         mBorderColor = a.getColorStateList(R.styleable.CardButton_carb_borderColor);
+
+        mContentInset.left = a.getDimensionPixelOffset(R.styleable.CardButton_carb_insetLeft, 0);
+        mContentInset.top = a.getDimensionPixelOffset(R.styleable.CardButton_carb_insetTop, 0);
+        mContentInset.right = a.getDimensionPixelOffset(R.styleable.CardButton_carb_insetRight, 0);
+        mContentInset.bottom = a.getDimensionPixelOffset(R.styleable.CardButton_carb_insetBottom, 0);
         a.recycle();
 
         updateBackgroundDrawable();
@@ -201,15 +225,43 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         mTextCompoundDrawableHelper = new XpAppCompatCompoundDrawableHelper(this);
         mTextCompoundDrawableHelper.loadFromAttributes(attrs, defStyleAttr);
-
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "CardButton " + getId() + " created.");
-        }
     }
 
     void updateMinSize() {
-        super.setMinWidth(mShadowPadding.left + mShadowPadding.right + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
-        super.setMinHeight(mShadowPadding.top + mShadowPadding.bottom + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
+        super.setMinWidth(Math.max(mShadowPadding.left, mContentInset.left) + Math.max(mShadowPadding.right, mContentInset.right) + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
+        super.setMinHeight(Math.max(mShadowPadding.top, mContentInset.top) + Math.max(mShadowPadding.bottom, mContentInset.bottom) + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
+    }
+
+    @SuppressWarnings("unused")
+    public int getContentInsetLeft() { return mContentInset.left; }
+
+    @SuppressWarnings("unused")
+    public int getContentInsetRight() { return mContentInset.right; }
+
+    @SuppressWarnings("unused")
+    public int getContentInsetTop() { return mContentInset.top; }
+
+    @SuppressWarnings("unused")
+    public int getContentInsetBottom() { return mContentInset.bottom; }
+
+    @SuppressWarnings("unused")
+    public int getContentInsetEnd() {
+        final boolean rtl = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
+        if (rtl) {
+            return mContentInset.left;
+        } else {
+            return mContentInset.right;
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public int getContentInsetStart() {
+        final boolean rtl = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
+        if (rtl) {
+            return mContentInset.right;
+        } else {
+            return mContentInset.left;
+        }
     }
 
     @SuppressWarnings("unused")
@@ -258,7 +310,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         if (mContentMinWidth != minWidth) {
             mContentMinWidth = minWidth;
-            super.setMinWidth(mShadowPadding.left + mShadowPadding.right + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
+            super.setMinWidth(Math.max(mShadowPadding.left, mContentInset.left) + Math.max(mShadowPadding.right, mContentInset.right) + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
         }
     }
 
@@ -268,7 +320,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         if (mContentMinHeight != minHeight) {
             mContentMinHeight = minHeight;
-            super.setMinHeight(mShadowPadding.top + mShadowPadding.bottom + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
+            super.setMinHeight(Math.max(mShadowPadding.top, mContentInset.top) + Math.max(mShadowPadding.bottom, mContentInset.bottom) + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
         }
     }
 
@@ -278,7 +330,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         if (mContentMinWidth != minWidth) {
             mContentMinWidth = minWidth;
-            super.setMinimumWidth(mShadowPadding.left + mShadowPadding.right + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
+            super.setMinimumWidth(Math.max(mShadowPadding.left, mContentInset.left) + Math.max(mShadowPadding.right, mContentInset.right) + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
         }
     }
 
@@ -288,7 +340,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         if (mContentMinHeight != minHeight) {
             mContentMinHeight = minHeight;
-            super.setMinimumHeight(mShadowPadding.top + mShadowPadding.bottom + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
+            super.setMinimumHeight(Math.max(mShadowPadding.top, mContentInset.top) + Math.max(mShadowPadding.bottom, mContentInset.bottom) + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
         }
     }
 
@@ -304,6 +356,21 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         final int left = rtl ? end : start;
         final int right = rtl ? start : end;
         mContentPadding.set(left, top, right, bottom);
+        getImpl().updatePadding();
+    }
+
+    @SuppressWarnings("unused")
+    public void setContentInset(int left, int top, int right, int bottom) {
+        mContentInset.set(left, top, right, bottom);
+        getImpl().updatePadding();
+    }
+
+    @SuppressWarnings("unused")
+    public void setContentInsetRelative(int start, int top, int end, int bottom) {
+        final boolean rtl = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
+        final int left = rtl ? end : start;
+        final int right = rtl ? start : end;
+        mContentInset.set(left, top, right, bottom);
         getImpl().updatePadding();
     }
 
@@ -667,10 +734,29 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public boolean getContentRect(@NonNull Rect rect) {
         if (ViewCompat.isLaidOut(this)) {
             rect.set(0, 0, getWidth(), getHeight());
-            rect.left += mShadowPadding.left;
-            rect.top += mShadowPadding.top;
-            rect.right -= mShadowPadding.right;
-            rect.bottom -= mShadowPadding.bottom;
+            rect.left += Math.max(mShadowPadding.left, mContentInset.left);
+            rect.top += Math.max(mShadowPadding.top, mContentInset.top);
+            rect.right -= Math.max(mShadowPadding.right, mContentInset.right);
+            rect.bottom -= Math.max(mShadowPadding.bottom, mContentInset.bottom);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Return in {@code rect} the bounds of the button touch target in view-local
+     * coordinates. This is defined as content + content inset.
+     *
+     * @return true if this view actually has been laid out and has a touch rect, else false.
+     */
+    public boolean getTouchRect(@NonNull Rect rect) {
+        if (ViewCompat.isLaidOut(this)) {
+            rect.set(0, 0, getWidth(), getHeight());
+            rect.left += Math.max(0, mShadowPadding.left - mContentInset.left);
+            rect.top += Math.max(0, mShadowPadding.top - mContentInset.top);
+            rect.right -= Math.max(0, mShadowPadding.right - mContentInset.right);
+            rect.bottom -= Math.max(0, mShadowPadding.bottom - mContentInset.bottom);
             return true;
         } else {
             return false;
@@ -754,7 +840,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 // Skipping the gesture if it doesn't start in in the FAB 'content' area
-                if (getContentRect(mTouchArea)
+                if (getTouchRect(mTouchArea)
                     && !mTouchArea.contains((int) ev.getX(), (int) ev.getY())) {
                     return false;
                 }
@@ -843,19 +929,39 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
 
         @Override
-        public void setShadowPadding(int left, int top, int right, int bottom) {
+        public void setShadowPadding(final int left, final int top, final int right, final int bottom) {
+            mEatRequestLayout = true;
+            mEatInvalidate = true;
+
             mShadowPadding.set(left, top, right, bottom);
             mForegroundBoundsChanged = true;
             final Rect contentPadding = mContentPadding;
-            setPadding(left + contentPadding.left, top + contentPadding.top,
-                right + contentPadding.right, bottom + contentPadding.bottom);
+            final Rect contentInset = mContentInset;
+
+            final InsetDrawable2 background = (InsetDrawable2) getBackground();
+            final int left2 = Math.max(0, contentInset.left - left);
+            final int top2 = Math.max(0, contentInset.top - top);
+            final int right2 = Math.max(0, contentInset.right - right);
+            final int bottom2 = Math.max(0, contentInset.bottom - bottom);
+            background.set(left2, top2, right2, bottom2);
+
+            setPadding(Math.max(left, contentInset.left) + contentPadding.left,
+                Math.max(top, contentInset.top) + contentPadding.top,
+                Math.max(right, contentInset.right) + contentPadding.right,
+                Math.max(bottom, contentInset.bottom) + contentPadding.bottom);
             updateMinSize();
+
+            mEatRequestLayout = false;
+            mEatInvalidate = false;
+            requestLayout();
+            invalidate();
         }
 
         @SuppressWarnings("deprecation")
         @Override
         public void setBackgroundDrawable(Drawable background) {
-            CardButton.this.superSetBackgroundDrawable(background);
+            final Drawable d = new InsetDrawable2(background);
+            CardButton.this.superSetBackgroundDrawable(d);
         }
 
         @Override

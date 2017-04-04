@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public name="Widget.Design.CardButton" type="style"/>
+    <public name="Widget.Design.CardButton.Colored" type="style"/>
+    <public name="Widget.Design.CardButton.Borderless" type="style"/>
+    <public name="Widget.Design.CardButton.Borderless.Colored" type="style"/>
+    <public name="Widget.Design.CardButton.Bordered" type="style"/>
+    <public name="Widget.Design.CardButton.Bordered.Colored" type="style"/>
+
+    <public name="carb_contentPadding" type="attr"/>
+    <public name="carb_contentPaddingLeft" type="attr"/>
+    <public name="carb_contentPaddingRight" type="attr"/>
+    <public name="carb_contentPaddingTop" type="attr"/>
+    <public name="carb_contentPaddingBottom" type="attr"/>
+
+    <public name="carb_contentMinHeight" type="attr"/>
+    <public name="carb_contentMinWidth" type="attr"/>
+
+    <public name="carb_borderColor" type="attr"/>
+    <public name="carb_cornerRadius" type="attr"/>
+
+    <public name="carb_insetTop" type="attr"/>
+    <public name="carb_insetBottom" type="attr"/>
+    <public name="carb_insetLeft" type="attr"/>
+    <public name="carb_insetRight" type="attr"/>
+</resources>

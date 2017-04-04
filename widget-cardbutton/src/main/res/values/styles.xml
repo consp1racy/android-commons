@@ -20,7 +20,12 @@
         <item name="android:gravity">center_vertical|center_horizontal</item>
 
         <item name="carb_cornerRadius">@dimen/carb_button_corner</item>
-        <item name="carb_borderColor">@null</item>
+        <item name="carb_borderColor">?colorControlNormal</item>
+
+        <item name="carb_insetLeft">@dimen/abc_button_inset_horizontal_material</item>
+        <item name="carb_insetRight">@dimen/abc_button_inset_horizontal_material</item>
+        <item name="carb_insetTop">@dimen/abc_button_inset_vertical_material</item>
+        <item name="carb_insetBottom">@dimen/abc_button_inset_vertical_material</item>
     </style>
 
     <style name="Widget.Design.CardButton.Colored">

@@ -29,5 +29,10 @@
         <attr name="drawableEnd"/>
         <attr name="drawableTint"/>
         <attr name="drawableTintMode"/>
+
+        <attr name="carb_insetTop" format="dimension"/>
+        <attr name="carb_insetBottom" format="dimension"/>
+        <attr name="carb_insetLeft" format="dimension"/>
+        <attr name="carb_insetRight" format="dimension"/>
     </declare-styleable>
 </resources>

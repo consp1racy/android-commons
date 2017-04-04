@@ -56,6 +56,9 @@ abstract class CardButtonImpl {
     private final Rect mTmpRect = new Rect();
     private ViewTreeObserver.OnPreDrawListener mPreDrawListener;
 
+    private boolean mHasUpdatedPadding = false;
+    private final Rect mLastPadding = new Rect();
+
     CardButtonImpl(Button view, CardButtonDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
         mView = view;
         mShadowViewDelegate = shadowViewDelegate;
@@ -103,8 +106,12 @@ abstract class CardButtonImpl {
     final void updatePadding() {
         Rect rect = mTmpRect;
         getPadding(rect);
-        onPaddingUpdated(rect);
-        mShadowViewDelegate.setShadowPadding(rect.left, rect.top, rect.right, rect.bottom);
+        if (!rect.equals(mLastPadding) || !mHasUpdatedPadding) {
+            mLastPadding.set(rect);
+            mHasUpdatedPadding = true;
+            onPaddingUpdated(rect);
+            mShadowViewDelegate.setShadowPadding(rect.left, rect.top, rect.right, rect.bottom);
+        }
     }
 
     abstract void getPadding(Rect rect);
