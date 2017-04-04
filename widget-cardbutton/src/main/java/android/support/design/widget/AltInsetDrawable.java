@@ -2,21 +2,37 @@ package android.support.design.widget;
 
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.graphics.drawable.DrawableWrapper;
 
 /**
  * @author Eugen on 03.04.2017.
  */
 
-class InsetDrawable2 extends DrawableWrapper {
+class AltInsetDrawable extends DrawableWrapper {
+    public static AltInsetDrawable create(final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            return new AltInsetDrawableApi21(drawable, insetLeft, insetTop, insetRight, insetBottom);
+        } else {
+            return new AltInsetDrawable(drawable, insetLeft, insetTop, insetRight, insetBottom);
+        }
+    }
+
+    public static AltInsetDrawable create(final Drawable drawable) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            return new AltInsetDrawableApi21(drawable);
+        } else {
+            return new AltInsetDrawable(drawable);
+        }
+    }
 
     private Rect mInset = new Rect();
 
-    public InsetDrawable2(final Drawable drawable) {
+    protected AltInsetDrawable(final Drawable drawable) {
         super(drawable);
     }
 
-    public InsetDrawable2(final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
+    protected AltInsetDrawable(final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
         super(drawable);
         mInset.set(insetLeft, insetTop, insetRight, insetBottom);
     }

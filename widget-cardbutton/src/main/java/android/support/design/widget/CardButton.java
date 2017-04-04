@@ -938,7 +938,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
             final Rect contentPadding = mContentPadding;
             final Rect contentInset = mContentInset;
 
-            final InsetDrawable2 background = (InsetDrawable2) getBackground();
+            final AltInsetDrawable background = (AltInsetDrawable) getBackground();
             final int left2 = Math.max(0, contentInset.left - left);
             final int top2 = Math.max(0, contentInset.top - top);
             final int right2 = Math.max(0, contentInset.right - right);
@@ -960,7 +960,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         @SuppressWarnings("deprecation")
         @Override
         public void setBackgroundDrawable(Drawable background) {
-            final Drawable d = new InsetDrawable2(background);
+            final Drawable d = AltInsetDrawable.create(background);
             CardButton.this.superSetBackgroundDrawable(d);
         }
 
