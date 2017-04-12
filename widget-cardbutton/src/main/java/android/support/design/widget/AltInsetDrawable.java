@@ -26,6 +26,8 @@ class AltInsetDrawable extends DrawableWrapper {
         }
     }
 
+    private final Rect mTmpRect = new Rect();
+
     private Rect mInset = new Rect();
 
     protected AltInsetDrawable(final Drawable drawable) {
@@ -46,11 +48,13 @@ class AltInsetDrawable extends DrawableWrapper {
 
     @Override
     protected void onBoundsChange(final Rect bounds) {
-        bounds.left += mInset.left;
-        bounds.top += mInset.top;
-        bounds.right -= mInset.right;
-        bounds.bottom -= mInset.bottom;
-        super.onBoundsChange(bounds);
+        final Rect r = mTmpRect; // DO NOT MODIFY bounds ON LOLLIPOP!
+        r.set(bounds);
+        r.left += mInset.left;
+        r.top += mInset.top;
+        r.right -= mInset.right;
+        r.bottom -= mInset.bottom;
+        super.onBoundsChange(r);
     }
 
     @Override
