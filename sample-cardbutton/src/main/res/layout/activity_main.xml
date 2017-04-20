@@ -71,30 +71,30 @@
 
         <android.support.design.widget.CardButton
             android:id="@+id/cb2"
-            android:rotation="60"
-            android:translationX="-60dp"
-            android:translationY="30dp"
             style="@style/Widget.Design.CardButton.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/control_margin"
             android:layout_marginTop="@dimen/control_margin"
+            android:rotation="60"
             android:text="Short"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:translationX="-60dp"
+            android:translationY="30dp"/>
 
         <android.support.design.widget.CardButton
             android:id="@+id/cb2b"
-            android:rotation="60"
-            android:translationX="60dp"
-            android:translationY="-30dp"
             style="@style/Widget.Design.CardButton.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/control_margin"
             android:layout_marginTop="@dimen/control_margin"
             android:enabled="false"
+            android:rotation="60"
             android:text="Round"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:translationX="60dp"
+            android:translationY="-30dp"/>
 
         <android.support.design.widget.CardButton
             android:id="@+id/cb3"
@@ -185,7 +185,18 @@
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:rotation="60"
-            android:clickable="true"/>
+            android:clickable="true"
+            android:rotation="60"/>
+
+        <AbsoluteLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.CardButton
+                style="@style/Widget.Design.CardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@android:string/unknownName"/>
+        </AbsoluteLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

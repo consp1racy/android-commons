@@ -18,12 +18,14 @@ package android.support.design.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Debug;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.FloatRange;
@@ -34,6 +36,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.view.MarginLayoutParamsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.TintTypedArray;
 import android.support.v7.widget.XpAppCompatCompoundDrawableHelper;
 import android.util.AttributeSet;
@@ -48,6 +51,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public static boolean AUTO_VISUAL_MARGIN_ENABLED = true;
 
     private static final String TAG = "CardButton";
+
+    private Boolean mDebuggable = null;
 
     @SuppressWarnings("unused")
     public static void setVisualMargin(final CardButton cardButton, final int left, final int top, final int right, final int bottom) {
@@ -107,18 +112,39 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         super.setLayoutParams(params);
         if (AUTO_VISUAL_MARGIN_ENABLED) {
             try {
-                final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) params;
-                if (MarginLayoutParamsCompat.isMarginRelative(lp)) {
-                    setVisualMarginRelativeOriginal(this);
+                if (params instanceof RecyclerView.LayoutParams) {
+                    throwUnsupportedVisualMarginLayoutParams(params);
+                } else if (params instanceof ViewGroup.MarginLayoutParams) {
+                    final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) params;
+                    if (MarginLayoutParamsCompat.isMarginRelative(lp)) {
+                        setVisualMarginRelativeOriginal(this);
+                    } else {
+                        setVisualMarginOriginal(this);
+                    }
                 } else {
-                    setVisualMarginOriginal(this);
+                    throwUnsupportedVisualMarginLayoutParams(params);
                 }
-            } catch (ClassCastException ex) {
-                //
+            } catch (UnsupportedOperationException ex) {
+                if (isDebuggable()) {
+                    Log.w(TAG, this + " cannot automatically alter visual margins.", ex);
+                }
             }
         }
         mEatRequestLayout = false;
         requestLayout();
+    }
+
+    private void throwUnsupportedVisualMarginLayoutParams(final ViewGroup.LayoutParams params) {
+        throw new UnsupportedOperationException(params.getClass().getCanonicalName() + " does not support altering visual margins.");
+    }
+
+    private boolean isDebuggable() {
+        if (mDebuggable == null) {
+            final Context context = getContext();
+            final ApplicationInfo appInfo = context.getApplicationInfo();
+            mDebuggable = (0 != (appInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE));
+        }
+        return mDebuggable || Debug.isDebuggerConnected() || Debug.waitingForDebugger();
     }
 
     @Override
