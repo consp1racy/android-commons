@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -49,6 +50,8 @@ import net.xpece.android.widget.cardbutton.R;
 
 public class CardButton extends AppCompatButton implements TintableCompoundDrawableView {
     public static boolean AUTO_VISUAL_MARGIN_ENABLED = true;
+
+    private static boolean FOREGROUND_NEEDS_CLIPPING_PATH = Build.VERSION.SDK_INT >= 21 && Build.VERSION.SDK_INT < 23;
 
     private static final String TAG = "CardButton";
 
@@ -161,8 +164,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
-    private boolean mEatRequestLayout = false;
-    private boolean mEatInvalidate = false;
+    boolean mEatRequestLayout = false;
+    boolean mEatInvalidate = false;
 
     @Nullable private ColorStateList mBackgroundTint;
     @Nullable private PorterDuff.Mode mBackgroundTintMode;
@@ -190,6 +193,9 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     private Drawable mForeground;
     boolean mForegroundBoundsChanged;
     private final Rect mForegroundBounds = new Rect();
+
+    // Only used on Lollipop. Ripple over round rect mask has weird outline otherwise.
+    private final Path mForegroundClippingPath = new Path();
 
     public CardButton(Context context) {
         this(context, null);
@@ -254,9 +260,17 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     }
 
     void updateMinSize() {
-        super.setMinWidth(Math.max(mShadowPadding.left, mContentInset.left) + Math.max(mShadowPadding.right, mContentInset.right) + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
-        super.setMinHeight(Math.max(mShadowPadding.top, mContentInset.top) + Math.max(mShadowPadding.bottom, mContentInset.bottom) + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
+        super.setMinWidth(getEffectiveInsetLeft() + getEffectiveInsetRight() + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
+        super.setMinHeight(getEffectiveInsetTop() + getEffectiveInsetBottom() + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
     }
+
+    int getEffectiveInsetLeft() {return Math.max(mShadowPadding.left, mContentInset.left);}
+
+    int getEffectiveInsetTop() {return Math.max(mShadowPadding.top, mContentInset.top);}
+
+    int getEffectiveInsetRight() {return Math.max(mShadowPadding.right, mContentInset.right);}
+
+    int getEffectiveInsetBottom() {return Math.max(mShadowPadding.bottom, mContentInset.bottom);}
 
     @SuppressWarnings("unused")
     public int getContentInsetLeft() { return mContentInset.left; }
@@ -336,7 +350,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         if (mContentMinWidth != minWidth) {
             mContentMinWidth = minWidth;
-            super.setMinWidth(Math.max(mShadowPadding.left, mContentInset.left) + Math.max(mShadowPadding.right, mContentInset.right) + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
+            super.setMinWidth(getEffectiveInsetLeft() + getEffectiveInsetRight() + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
         }
     }
 
@@ -346,7 +360,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         if (mContentMinHeight != minHeight) {
             mContentMinHeight = minHeight;
-            super.setMinHeight(Math.max(mShadowPadding.top, mContentInset.top) + Math.max(mShadowPadding.bottom, mContentInset.bottom) + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
+            super.setMinHeight(getEffectiveInsetTop() + getEffectiveInsetBottom() + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
         }
     }
 
@@ -356,7 +370,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         if (mContentMinWidth != minWidth) {
             mContentMinWidth = minWidth;
-            super.setMinimumWidth(Math.max(mShadowPadding.left, mContentInset.left) + Math.max(mShadowPadding.right, mContentInset.right) + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
+            super.setMinimumWidth(getEffectiveInsetLeft() + getEffectiveInsetRight() + Math.max(mContentMinWidth, mContentPadding.left + mContentPadding.right));
         }
     }
 
@@ -366,7 +380,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         if (mContentMinHeight != minHeight) {
             mContentMinHeight = minHeight;
-            super.setMinimumHeight(Math.max(mShadowPadding.top, mContentInset.top) + Math.max(mShadowPadding.bottom, mContentInset.bottom) + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
+            super.setMinimumHeight(getEffectiveInsetTop() + getEffectiveInsetBottom() + Math.max(mContentMinHeight, mContentPadding.top + mContentPadding.bottom));
         }
     }
 
@@ -740,14 +754,28 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         final Drawable foreground = mForeground;
         if (foreground != null) {
+
             if (mForegroundBoundsChanged) {
                 mForegroundBoundsChanged = false;
                 final Rect bounds = mForegroundBounds;
                 getContentRect(bounds);
                 foreground.setBounds(bounds);
+
+                if (FOREGROUND_NEEDS_CLIPPING_PATH) {
+                    final Path path = mForegroundClippingPath;
+                    path.reset();
+                    path.addRoundRect(bounds.left, bounds.top, bounds.right, bounds.bottom, mCornerRadius, mCornerRadius, Path.Direction.CW);
+                }
             }
 
-            foreground.draw(canvas);
+            if (FOREGROUND_NEEDS_CLIPPING_PATH) {
+                final int save = canvas.save();
+                canvas.clipPath(mForegroundClippingPath);
+                foreground.draw(canvas);
+                canvas.restoreToCount(save);
+            } else {
+                foreground.draw(canvas);
+            }
         }
     }
 
@@ -760,10 +788,10 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     public boolean getContentRect(@NonNull Rect rect) {
         if (ViewCompat.isLaidOut(this)) {
             rect.set(0, 0, getWidth(), getHeight());
-            rect.left += Math.max(mShadowPadding.left, mContentInset.left);
-            rect.top += Math.max(mShadowPadding.top, mContentInset.top);
-            rect.right -= Math.max(mShadowPadding.right, mContentInset.right);
-            rect.bottom -= Math.max(mShadowPadding.bottom, mContentInset.bottom);
+            rect.left += getEffectiveInsetLeft();
+            rect.top += getEffectiveInsetTop();
+            rect.right -= getEffectiveInsetRight();
+            rect.bottom -= getEffectiveInsetBottom();
             return true;
         } else {
             return false;
