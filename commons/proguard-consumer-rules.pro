@@ -15,3 +15,5 @@
 
 -dontwarn org.sufficientlysecure.htmltextview.AppCompatHtmlTextView
 -dontwarn org.sufficientlysecure.htmltextview.AppCompatJellyBeanSpanFixHtmlTextView
+
+-dontwarn com.pluscubed.recyclerfastscroll.**

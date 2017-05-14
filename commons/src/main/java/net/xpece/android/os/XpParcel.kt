@@ -1,6 +1,8 @@
-package net.xpece.android.app
+package net.xpece.android.os
 
 import android.os.Parcel
+import net.xpece.android.app.toBoolean
+import net.xpece.android.app.toByte
 
 fun Parcel.writeBoolean(value: Boolean?) {
     val byte = value.toByte()

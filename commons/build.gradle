@@ -44,6 +44,7 @@ dependencies {
     provided 'com.github.devlight.shadowlayout:library:1.0.0'
     provided 'org.sufficientlysecure:html-textview:3.3'
     provided "com.facebook.fresco:fresco:1.0.0"
+    provided 'com.github.pluscubed:recycler-fast-scroll:0.3.2@aar'
 
     provided 'com.jakewharton.threetenabp:threetenabp:1.0.0'
     provided 'org.parceler:parceler-api:1.0.0'
@@ -69,7 +70,7 @@ dependencies {
 repositories {
     jcenter()
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
+    maven { url "https://jitpack.io" }
 }
 
 group = rootProject.GROUP_ID

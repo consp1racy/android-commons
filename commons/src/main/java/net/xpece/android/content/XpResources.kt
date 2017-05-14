@@ -6,6 +6,7 @@ package net.xpece.android.content
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
+import android.graphics.Point
 import android.graphics.drawable.Drawable
 import android.support.annotation.*
 import android.support.v4.content.ContextCompat
@@ -205,9 +206,17 @@ fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback
 }
 
 fun px(px: Number): Dimen = Dimen.px(px)
+
+@Deprecated("Not suitable for multiscreen environment.")
 fun sp(sp: Number): Dimen = Dimen.sp(sp)
+@Deprecated("Not suitable for multiscreen environment.")
 fun dp(dp: Number): Dimen = Dimen.dp(dp)
+@Deprecated("Not suitable for multiscreen environment.")
 fun dimen(@DimenRes resId: Int): Dimen = Dimen.res(resId)
+
+fun Context.sp(sp: Number): Dimen = Dimen.sp(this, sp)
+fun Context.dp(dp: Number): Dimen = Dimen.dp(this, dp)
+fun Context.dimen(@DimenRes resId: Int): Dimen = Dimen.res(this, resId)
 fun Context.dimenAttr(@AttrRes attrId: Int): Dimen = Dimen.attr(this, attrId)
 
 private fun Context.obtainTypedArray(style: Int, attr: Int): TypedArray {
@@ -216,3 +225,21 @@ private fun Context.obtainTypedArray(style: Int, attr: Int): TypedArray {
     val ta = obtainStyledAttributes(style, tempArray)
     return ta
 }
+
+private val TL_POINT = object : ThreadLocal<Point>() {
+    override fun initialValue() = Point()
+}
+
+val Context.windowWidth: Int
+    get() {
+        val point = TL_POINT.get()
+        windowManager!!.defaultDisplay.getSize(point)
+        return point.x
+    }
+
+val Context.smallestWindowWidth: Int
+    get() {
+        val point = TL_POINT.get()
+        windowManager!!.defaultDisplay.getSize(point)
+        return Math.min(point.x, point.y)
+    }

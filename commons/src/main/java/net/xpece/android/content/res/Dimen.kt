@@ -39,6 +39,8 @@ data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
 
     operator fun div(d: Number) = Dimen(this.value / d.toFloat())
 
+    operator fun div(d: Dimen) = this.value / d.value
+
     val pixelSize: Int
         get() {
             val res = (value + 0.5F).toInt()
@@ -52,7 +54,7 @@ data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
         get() = value.toInt()
 
     override fun toString(): String {
-        return "${value}px"
+        return "Dimen(${value}px)"
     }
 
     /**
@@ -63,7 +65,7 @@ data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
         val dp = Math.round(value / density)
         val scaledDensity = context.resources.displayMetrics.scaledDensity
         val sp = Math.round(value / scaledDensity)
-        return "${value}px ~ ${dp}dp ~ ${sp}sp"
+        return "Dimen(${value}px ~ ${dp}dp ~ ${sp}sp)"
     }
 
     internal class DimensionLruCache(maxSize: Int) : LruCache<Int, Dimen>(maxSize) {
@@ -105,7 +107,7 @@ data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
         }
 
         @JvmStatic
-        private fun res(context: Context, @DimenRes resId: Int, fallback: Number = 0): Dimen {
+        fun res(context: Context, @DimenRes resId: Int, fallback: Number = 0): Dimen {
             try {
                 return Dimen(context.resources.getDimension(resId))
             } catch (erx: Resources.NotFoundException) {
@@ -114,7 +116,7 @@ data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
         }
 
         @JvmStatic
-        private fun dp(context: Context, dp: Number): Dimen {
+        fun dp(context: Context, dp: Number): Dimen {
             val dpf = dp.toFloat()
             val density = context.resources.displayMetrics.density
             var result: Dimen? = DIMENSION_LRU_CACHE[density, dpf]
@@ -127,7 +129,7 @@ data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
         }
 
         @JvmStatic
-        private fun sp(context: Context, sp: Number): Dimen {
+        fun sp(context: Context, sp: Number): Dimen {
             val spf = sp.toFloat()
             val density = context.resources.displayMetrics.scaledDensity
             var result: Dimen? = DIMENSION_LRU_CACHE[density, spf]
