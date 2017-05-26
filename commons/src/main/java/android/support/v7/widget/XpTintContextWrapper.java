@@ -1,5 +1,6 @@
 package android.support.v7.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
@@ -34,7 +35,7 @@ public class XpTintContextWrapper extends ContextWrapper {
 
     public static Context wrap(final Context context) {
         if (shouldBeUsed()) {
-            if (context instanceof ContextThemeWrapper) {
+            if (context instanceof ContextThemeWrapper || context instanceof Activity) {
                 if (FORCE) {
                     return TintContextWrapper.wrap(new XpTintContextWrapper(context));
                 }
