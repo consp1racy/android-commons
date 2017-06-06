@@ -51,7 +51,6 @@ abstract class CardButtonImpl {
 
     final Button mView;
     final CardButtonDelegate mShadowViewDelegate;
-    final ValueAnimatorCompat.Creator mAnimatorCreator;
 
     private final Rect mTmpRect = new Rect();
     private ViewTreeObserver.OnPreDrawListener mPreDrawListener;
@@ -59,10 +58,9 @@ abstract class CardButtonImpl {
     private boolean mHasUpdatedPadding = false;
     private final Rect mLastPadding = new Rect();
 
-    CardButtonImpl(Button view, CardButtonDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
+    CardButtonImpl(Button view, CardButtonDelegate shadowViewDelegate) {
         mView = view;
         mShadowViewDelegate = shadowViewDelegate;
-        mAnimatorCreator = animatorCreator;
     }
 
     abstract void setBackgroundDrawable(@Nullable ColorStateList backgroundTint,

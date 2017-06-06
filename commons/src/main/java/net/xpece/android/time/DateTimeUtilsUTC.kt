@@ -14,45 +14,45 @@ private val CALENDAR = object : ThreadLocal<Calendar>() {
 }
 
 fun java.util.Date.toLocalDateTime(): LocalDateTime {
-    val instant = toInstant()
+    val instant = toInstantCompat()
     val local = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
     return local
 }
 
 fun java.util.Date.toOffsetDateTime(): OffsetDateTime {
-    val instant = toInstant()
+    val instant = toInstantCompat()
     val offset = OffsetDateTime.ofInstant(instant, ZoneOffset.UTC)
     return offset
 }
 
 fun java.util.Date.toZonedDateTime(): ZonedDateTime {
-    val instant = toInstant()
+    val instant = toInstantCompat()
     val zoned = ZonedDateTime.ofInstant(instant, ZoneOffset.UTC)
     return zoned
 }
 
 fun java.util.Date.toLocalTime(): LocalTime {
-    val instant = toInstant()
+    val instant = toInstantCompat()
     val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
     val localTime = localDateTime.toLocalTime()
     return localTime
 }
 
 fun java.util.Date.toLocalDate(): LocalDate {
-    val instant = toInstant()
+    val instant = toInstantCompat()
     val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
     val localDate = localDateTime.toLocalDate()
     return localDate
 }
 
-fun java.util.Date.toInstant(): Instant {
+fun java.util.Date.toInstantCompat(): Instant {
     val seconds = time / 1000
     val nanos = (time % 1000) * 1000000
     val instant = Instant.ofEpochSecond(seconds, nanos)
     return instant
 }
 
-fun Timestamp.toInstant(): Instant {
+fun Timestamp.toInstantCompat(): Instant {
     val seconds = time / 1000
     val instant = Instant.ofEpochSecond(seconds, nanos.toLong())
     return instant

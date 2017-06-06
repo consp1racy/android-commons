@@ -24,7 +24,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
@@ -40,26 +39,10 @@ import java.util.List;
 
 class CardButtonGingerbread extends CardButtonImpl {
 
-    private final StateListAnimator mStateListAnimator;
-
     ShadowDrawableWrapper mShadowDrawable;
 
-    CardButtonGingerbread(Button view, CardButtonDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
-        super(view, shadowViewDelegate, animatorCreator);
-
-        mStateListAnimator = new StateListAnimator();
-
-        // Elevate with translationZ when pressed or focused
-        mStateListAnimator.addState(PRESSED_ENABLED_STATE_SET,
-            createAnimator(new ElevateToTranslationZAnimation()));
-        mStateListAnimator.addState(FOCUSED_ENABLED_STATE_SET,
-            createAnimator(new ElevateToTranslationZAnimation()));
-        // Reset back to elevation by default
-        mStateListAnimator.addState(ENABLED_STATE_SET,
-            createAnimator(new ResetElevationAnimation()));
-        // Set to 0 when disabled
-        mStateListAnimator.addState(EMPTY_STATE_SET,
-            createAnimator(new DisabledElevationAnimation()));
+    CardButtonGingerbread(Button view, CardButtonDelegate shadowViewDelegate) {
+        super(view, shadowViewDelegate);
     }
 
     @Override
@@ -164,13 +147,13 @@ class CardButtonGingerbread extends CardButtonImpl {
     }
 
     @Override
-    void onDrawableStateChanged(int[] state) {
-        mStateListAnimator.setState(state);
+    void onDrawableStateChanged(final int[] state) {
+        // Ignore on Gingerbread
     }
 
     @Override
     void jumpDrawableToCurrentState() {
-        mStateListAnimator.jumpToCurrentState();
+        // Ignore on Gingerbread
     }
 
     @Override
@@ -183,87 +166,6 @@ class CardButtonGingerbread extends CardButtonImpl {
         mShadowDrawable.getPadding(rect);
     }
 
-    private ValueAnimatorCompat createAnimator(@NonNull ShadowAnimatorImpl impl) {
-        final ValueAnimatorCompat animator = mAnimatorCreator.createAnimator();
-        animator.setInterpolator(ANIM_INTERPOLATOR);
-        animator.setDuration(PRESSED_ANIM_DURATION);
-        animator.addListener(impl);
-        animator.addUpdateListener(impl);
-        animator.setFloatValues(0, 1);
-        return animator;
-    }
-
-    private abstract class ShadowAnimatorImpl extends ValueAnimatorCompat.AnimatorListenerAdapter
-        implements ValueAnimatorCompat.AnimatorUpdateListener {
-        private boolean mValidValues;
-        private float mShadowSizeStart;
-        private float mShadowSizeEnd;
-
-        @Override
-        public void onAnimationStart(ValueAnimatorCompat animator) {
-//            if (mShadowDrawable == null) {
-//                animator.cancel();
-//            }
-        }
-
-        @Override
-        public void onAnimationUpdate(ValueAnimatorCompat animator) {
-            if (mShadowDrawable != null) {
-                if (!mValidValues) {
-                    mShadowSizeStart = mShadowDrawable.getShadowSize();
-                    mShadowSizeEnd = getTargetShadowSize();
-                    mValidValues = true;
-                }
-
-                mShadowDrawable.setShadowSize(mShadowSizeStart
-                    + ((mShadowSizeEnd - mShadowSizeStart) * animator.getAnimatedFraction()));
-            }
-        }
-
-        @Override
-        public void onAnimationEnd(ValueAnimatorCompat animator) {
-            if (mShadowDrawable != null) {
-                mShadowDrawable.setShadowSize(mShadowSizeEnd);
-            }
-            mValidValues = false;
-        }
-
-        /**
-         * @return the shadow size we want to animate to.
-         */
-        protected abstract float getTargetShadowSize();
-    }
-
-    private class ResetElevationAnimation extends ShadowAnimatorImpl {
-        ResetElevationAnimation() {
-        }
-
-        @Override
-        protected float getTargetShadowSize() {
-            return mElevation;
-        }
-    }
-
-    private class ElevateToTranslationZAnimation extends ShadowAnimatorImpl {
-        ElevateToTranslationZAnimation() {
-        }
-
-        @Override
-        protected float getTargetShadowSize() {
-            return mElevation + mPressedTranslationZ;
-        }
-    }
-
-    private class DisabledElevationAnimation extends ShadowAnimatorImpl {
-        DisabledElevationAnimation() {
-        }
-
-        @Override
-        protected float getTargetShadowSize() {
-            return 0f;
-        }
-    }
-
     private Drawable createRippleDrawable(@ColorInt int rippleColor, float cornerRadius) {
         Drawable focused = CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, rippleColor);
         Drawable pressed = CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, rippleColor);
@@ -272,10 +174,8 @@ class CardButtonGingerbread extends CardButtonImpl {
         states.addState(FOCUSED_ENABLED_STATE_SET, focused);
         states.addState(PRESSED_ENABLED_STATE_SET, pressed);
         states.addState(StateSet.WILD_CARD, other);
-        if (Build.VERSION.SDK_INT >= 11) {
-            states.setEnterFadeDuration(PRESSED_ANIM_DURATION);
-            states.setExitFadeDuration(PRESSED_ANIM_DURATION);
-        }
+        states.setEnterFadeDuration(PRESSED_ANIM_DURATION);
+        states.setExitFadeDuration(PRESSED_ANIM_DURATION);
         return states;
     }
 

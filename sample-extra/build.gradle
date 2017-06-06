@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    compile project(':design-extra')
+    implementation project(':design-extra')
 }
 
 repositories {

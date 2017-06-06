@@ -10,14 +10,14 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:support-annotations:$supportAnnotationsVersionExtra"
+    implementation "com.android.support:support-annotations:$supportAnnotationsVersionExtra"
 
-    compile ("com.android.support:design:$supportLibsVersionExtra")
+    api ("com.android.support:design:$supportLibsVersionExtra")
 //        {
 //        exclude module: "support-annotations"
 //    }
 
-	compile project(':appcompat-extra')
+	api project(':appcompat-extra')
 }
 
 repositories {
