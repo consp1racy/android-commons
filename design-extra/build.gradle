@@ -22,6 +22,7 @@ dependencies {
 
 repositories {
     jcenter()
+    maven { url "https://maven.google.com" }
 }
 
 group = rootProject.GROUP_ID

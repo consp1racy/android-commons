@@ -47,34 +47,18 @@
             <enum name="src_atop" value="9"/>
             <enum name="multiply" value="14"/>
             <enum name="screen" value="15"/>
-            <enum name="add" value="16"/>
         </attr>
     </declare-styleable>
 
     <declare-styleable name="XpAppCompatImageHelper">
         <attr name="android:enabled"/>
-        <attr name="android:src"/>
-        <attr name="srcCompat"/>
-        <attr name="tint" format="color"/>
-        <attr name="tintMode" format="enum">
-            <enum name="src_over" value="3"/>
-            <enum name="src_in" value="5"/>
-            <enum name="src_atop" value="9"/>
-            <enum name="multiply" value="14"/>
-            <enum name="screen" value="15"/>
-            <enum name="add" value="16"/>
-        </attr>
     </declare-styleable>
 
     <declare-styleable name="XpAppCompatImageView">
         <attr name="android:enabled"/>
-        <attr name="tint"/>
-        <attr name="tintMode"/>
     </declare-styleable>
 
     <declare-styleable name="XpAppCompatImageButton">
         <attr name="android:enabled"/>
-        <attr name="tint"/>
-        <attr name="tintMode"/>
     </declare-styleable>
 </resources>

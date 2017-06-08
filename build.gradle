@@ -5,24 +5,24 @@ buildscript {
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
 ext {
-    buildToolsVersion = "25.0.2"
+    buildToolsVersion = "25.0.3"
 
     compileSdkVersion = 25
-    supportLibsVersion = "25.3.1"
+    supportLibsVersion = "25.4.0"
 
-    compileSdkVersionExtra = 23
-    supportLibsVersionExtra = "23.2.0"
-    supportAnnotationsVersionExtra = "25.0.0"
+    compileSdkVersionExtra = 25
+    supportLibsVersionExtra = "25.4.0"
+    supportAnnotationsVersionExtra = "25.4.0"
 
     compileSdkVersionCardButton = 25
-    supportLibsVersionCardButton = "25.0.0"
+    supportLibsVersionCardButton = "25.4.0"
 }
 
 // http://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html

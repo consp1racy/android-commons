@@ -9,6 +9,7 @@ import android.support.v7.graphics.drawable.DrawableWrapper;
  * @author Eugen on 03.04.2017.
  */
 
+@SuppressWarnings("RestrictedApi")
 class AltInsetDrawable extends DrawableWrapper {
     public static AltInsetDrawable create(final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
         if (Build.VERSION.SDK_INT >= 21) {

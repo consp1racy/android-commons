@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi;
  */
 
 @RequiresApi(21)
+@SuppressWarnings("RestrictedApi")
 class AltInsetDrawableApi21 extends AltInsetDrawable {
     protected AltInsetDrawableApi21(final Drawable drawable) {
         super(drawable);

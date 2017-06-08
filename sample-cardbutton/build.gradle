@@ -29,13 +29,14 @@ dependencies {
 
 repositories {
     jcenter()
+    maven { url "https://maven.google.com" }
 }
 
 // For testing compatibility with oldest supported support library.
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         if (details.requested.group == 'com.android.support' && details.requested.name != 'support-annotations') {
-            details.useVersion '25.0.0'
+            details.useVersion '25.4.0'
         }
     }
 }

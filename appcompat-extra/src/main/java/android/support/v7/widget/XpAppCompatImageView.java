@@ -17,19 +17,12 @@
 package android.support.v7.widget;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-
-import net.xpece.android.widget.TintableImageView;
 
 /**
  * {@link android.widget.ImageView} which supports image drawable tint on all platforms.
  */
-public class XpAppCompatImageView extends AppCompatImageView implements TintableImageView {
+public class XpAppCompatImageView extends AppCompatImageView {
 
     private XpAppCompatImageHelper mImageHelper;
 
@@ -46,69 +39,5 @@ public class XpAppCompatImageView extends AppCompatImageView implements Tintable
 
         mImageHelper = new XpAppCompatImageHelper(this);
         mImageHelper.loadFromAttributes(attrs, defStyleAttr);
-    }
-
-    @Override
-    public void setImageResource(@DrawableRes int resId) {
-        super.setImageResource(resId);
-        if (mImageHelper != null) {
-            mImageHelper.onSetImageResource(resId);
-        }
-    }
-
-    @Override
-    public void setImageDrawable(Drawable drawable) {
-        super.setImageDrawable(drawable);
-        if (mImageHelper != null) {
-            mImageHelper.onSetImageDrawable(drawable);
-        }
-    }
-
-    /**
-     * @hide
-     */
-    @Override
-    public void setSupportImageTintList(@Nullable ColorStateList tint) {
-        if (mImageHelper != null) {
-            mImageHelper.setSupportTintList(tint);
-        }
-    }
-
-    /**
-     * @hide
-     */
-    @Override
-    @Nullable
-    public ColorStateList getSupportImageTintList() {
-        return mImageHelper != null
-            ? mImageHelper.getSupportTintList() : null;
-    }
-
-    /**
-     * @hide
-     */
-    @Override
-    public void setSupportImageTintMode(@Nullable PorterDuff.Mode tintMode) {
-        if (mImageHelper != null) {
-            mImageHelper.setSupportTintMode(tintMode);
-        }
-    }
-
-    /**
-     * @hide
-     */
-    @Override
-    @Nullable
-    public PorterDuff.Mode getSupportImageTintMode() {
-        return mImageHelper != null
-            ? mImageHelper.getSupportTintMode() : null;
-    }
-
-    @Override
-    protected void drawableStateChanged() {
-        super.drawableStateChanged();
-        if (mImageHelper != null) {
-            mImageHelper.applySupportTint();
-        }
     }
 }

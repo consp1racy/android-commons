@@ -1,7 +1,9 @@
 package net.xpece.android.widget
 
+import android.annotation.TargetApi
 import android.content.ComponentCallbacks2
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Looper
 import android.util.LruCache
 import android.webkit.WebView
@@ -18,10 +20,11 @@ object WebViewCache : ComponentCallbacks2 {
         // No-op.
     }
 
+    @TargetApi(17)
     override fun onTrimMemory(level: Int) {
         if (level >= ComponentCallbacks2.TRIM_MEMORY_COMPLETE) {
             cache.evictAll()
-        } else if (level >= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
+        } else if (level >= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN && Build.VERSION.SDK_INT >= 17) {
             cache.trimToSize(1)
         }
     }

@@ -36,6 +36,7 @@ import android.view.View;
  * call {@link #show(View, IBinder)} which will populate the menu
  * with a view's context menu items and show the context menu.
  */
+@SuppressWarnings("RestrictedApi")
 public class XpContextMenuBuilder extends MenuBuilder implements ContextMenu {
 
     public XpContextMenuBuilder(Context context) {

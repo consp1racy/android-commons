@@ -28,6 +28,7 @@ import kotlin.collections.ArraysKt;
  * Created by Eugen on 20.10.2016.
  */
 
+@SuppressWarnings("RestrictedApi")
 public class ArbitraryInputLayout extends LinearLayoutCompat {
     private static final int[] TEXT_COLOR_ATTR = {android.R.attr.textColor};
 

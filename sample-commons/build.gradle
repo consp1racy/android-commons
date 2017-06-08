@@ -44,4 +44,5 @@ repositories {
     jcenter()
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
+    maven { url "https://maven.google.com" }
 }
