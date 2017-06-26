@@ -107,8 +107,15 @@ class CardButtonGingerbread extends CardButtonImpl {
     }
 
     Drawable createBorderDrawable(@IntRange(from = 0) @Px final int borderWidth, @FloatRange(from = 0) final float cornerRadius, @NonNull final ColorStateList borderTint) {
-        final Drawable drawable = CardButtonDrawableFactory.newBorderShapeDrawableCompat(borderWidth, cornerRadius);
-        DrawableCompat.setTintList(drawable, borderTint);
+        final Drawable drawable;
+        if (mView.isInEditMode()) {
+            drawable = CardButtonDrawableFactory.newBorderShapeDrawableCompatForEditMode(borderWidth, cornerRadius);
+            final int color = borderTint.getColorForState(mView.getDrawableState(), borderTint.getDefaultColor());
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        } else {
+            drawable = CardButtonDrawableFactory.newBorderShapeDrawableCompat(borderWidth, cornerRadius);
+            DrawableCompat.setTintList(drawable, borderTint);
+        }
         return drawable;
     }
 

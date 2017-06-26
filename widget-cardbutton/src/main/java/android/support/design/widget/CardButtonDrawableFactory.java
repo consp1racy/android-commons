@@ -1,8 +1,10 @@
 package android.support.design.widget;
 
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.ColorInt;
@@ -73,5 +75,14 @@ class CardButtonDrawableFactory {
         final RoundRectShape s = new RoundRectShape(TEMP_CORNER_RADII_OUT, TEMP_RECTF, TEMP_CORNER_RADII_IN);
         final ShapeDrawable d = new ShapeDrawable(s);
         return DrawableCompat.wrap(d);
+    }
+
+    @NonNull
+    static Drawable newBorderShapeDrawableCompatForEditMode(@IntRange(from = 0) @Px final int borderWidth, @FloatRange(from = 0) final float cornerRadius) {
+        final GradientDrawable d = new GradientDrawable();
+        d.setColor(0);
+        d.setCornerRadius(cornerRadius);
+        d.setStroke(borderWidth, Color.WHITE);
+        return d;
     }
 }
