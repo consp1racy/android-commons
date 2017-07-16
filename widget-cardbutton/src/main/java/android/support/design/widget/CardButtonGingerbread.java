@@ -46,16 +46,21 @@ class CardButtonGingerbread extends CardButtonImpl {
     }
 
     @Override
-    void setBackgroundDrawable(@Nullable ColorStateList backgroundTint,
+    void setBackgroundDrawable(@Nullable Drawable backgroundPrototype,
+                               @Nullable ColorStateList backgroundTint,
                                @Nullable PorterDuff.Mode backgroundTintMode, @ColorInt int rippleColor, @IntRange(from = 0) int borderWidth,
                                @Nullable ColorStateList borderColor) {
         final float cornerRadius = mShadowViewDelegate.getRadius();
 
         final boolean hasBorder = borderWidth > 0 && isNotTransparent(borderColor);
-        final boolean hasBackground = isNotTransparent(backgroundTint);
+        final boolean hasBackground = isNotTransparent(backgroundTint) || backgroundPrototype != null;
 
         if (hasBackground) {
-            mShapeDrawable = createShapeDrawable(cornerRadius);
+            if (backgroundPrototype != null) {
+                mShapeDrawable = DrawableCompat.wrap(backgroundPrototype);
+            } else {
+                mShapeDrawable = createShapeDrawable(cornerRadius);
+            }
             DrawableCompat.setTintList(mShapeDrawable, backgroundTint);
             if (backgroundTintMode != null) {
                 DrawableCompat.setTintMode(mShapeDrawable, backgroundTintMode);

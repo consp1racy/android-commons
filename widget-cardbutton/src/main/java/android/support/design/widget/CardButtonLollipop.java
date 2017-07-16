@@ -33,6 +33,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.widget.Button;
 
@@ -50,16 +51,21 @@ class CardButtonLollipop extends CardButtonIcs {
     }
 
     @Override
-    void setBackgroundDrawable(@Nullable ColorStateList backgroundTint,
+    void setBackgroundDrawable(@Nullable Drawable backgroundPrototype,
+                               @Nullable ColorStateList backgroundTint,
                                @Nullable PorterDuff.Mode backgroundTintMode, @ColorInt int rippleColor, @IntRange(from = 0) int borderWidth,
                                @Nullable ColorStateList borderColor) {
         final float cornerRadius = mShadowViewDelegate.getRadius();
 
         final boolean hasBorder = borderWidth > 0 && isNotTransparent(borderColor);
-        final boolean hasBackground = isNotTransparent(backgroundTint);
+        final boolean hasBackground = isNotTransparent(backgroundTint) || backgroundPrototype != null;
 
         if (hasBackground) {
-            mShapeDrawable = createShapeDrawable(cornerRadius);
+            if (backgroundPrototype != null) {
+                mShapeDrawable = DrawableCompat.wrap(backgroundPrototype);
+            } else {
+                mShapeDrawable = createShapeDrawable(cornerRadius);
+            }
             mShapeDrawable.setTintList(backgroundTint);
             if (backgroundTintMode != null) {
                 mShapeDrawable.setTintMode(backgroundTintMode);

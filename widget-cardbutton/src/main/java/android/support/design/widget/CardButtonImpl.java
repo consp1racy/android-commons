@@ -63,7 +63,8 @@ abstract class CardButtonImpl {
         mShadowViewDelegate = shadowViewDelegate;
     }
 
-    abstract void setBackgroundDrawable(@Nullable ColorStateList backgroundTint,
+    abstract void setBackgroundDrawable(@Nullable Drawable backgroundPrototype,
+                                        @Nullable ColorStateList backgroundTint,
                                         @Nullable PorterDuff.Mode backgroundTintMode, @ColorInt int rippleColor, @IntRange(from = 0) int borderWidth,
                                         @Nullable ColorStateList borderColor);
 

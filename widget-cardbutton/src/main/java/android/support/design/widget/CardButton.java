@@ -197,6 +197,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     // Only used on Lollipop. Ripple over round rect mask has weird outline otherwise.
     private final Path mForegroundClippingPath = new Path();
 
+    private Drawable mBackgroundPrototype;
+
     public CardButton(Context context) {
         this(context, null);
     }
@@ -223,6 +225,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs,
             R.styleable.CardButton, defStyleAttr, defStyleRes);
+        mBackgroundPrototype = a.getDrawable(R.styleable.CardButton_android_background);
         mBackgroundTint = a.getColorStateList(R.styleable.CardButton_backgroundTint);
         mBackgroundTintMode = ViewUtils.parseTintMode(a.getInt(
             R.styleable.CardButton_backgroundTintMode, -1), null);
@@ -463,7 +466,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     }
 
     private void updateBackgroundDrawable() {
-        getImpl().setBackgroundDrawable(mBackgroundTint, mBackgroundTintMode,
+        getImpl().setBackgroundDrawable(mBackgroundPrototype, mBackgroundTint, mBackgroundTintMode,
             mRippleColor, mBorderWidth,
             mBorderColor);
     }
