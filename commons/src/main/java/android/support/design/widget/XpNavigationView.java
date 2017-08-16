@@ -2,6 +2,7 @@ package android.support.design.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.support.annotation.Nullable;
 import android.support.v4.view.WindowInsetsCompat;
 import android.util.AttributeSet;
 
@@ -17,11 +18,11 @@ public class XpNavigationView extends NavigationView {
         super(context);
     }
 
-    public XpNavigationView(Context context, AttributeSet attrs) {
+    public XpNavigationView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public XpNavigationView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public XpNavigationView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

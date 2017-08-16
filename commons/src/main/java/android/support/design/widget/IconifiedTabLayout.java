@@ -1,6 +1,7 @@
 package android.support.design.widget;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
 
@@ -15,11 +16,11 @@ public class IconifiedTabLayout extends TabLayout {
         super(context);
     }
 
-    public IconifiedTabLayout(final Context context, final AttributeSet attrs) {
+    public IconifiedTabLayout(final Context context, @Nullable final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public IconifiedTabLayout(final Context context, final AttributeSet attrs, final int defStyleAttr) {
+    public IconifiedTabLayout(final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

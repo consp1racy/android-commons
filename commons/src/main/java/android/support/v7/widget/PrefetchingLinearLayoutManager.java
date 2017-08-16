@@ -2,6 +2,7 @@ package android.support.v7.widget;
 
 import android.content.Context;
 import android.support.annotation.Keep;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 /**
@@ -18,7 +19,7 @@ public class PrefetchingLinearLayoutManager extends LinearLayoutManager {
     }
 
     @Keep
-    public PrefetchingLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public PrefetchingLinearLayoutManager(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

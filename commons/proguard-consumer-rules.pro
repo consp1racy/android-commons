@@ -17,3 +17,5 @@
 -dontwarn org.sufficientlysecure.htmltextview.AppCompatJellyBeanSpanFixHtmlTextView
 
 -dontwarn com.pluscubed.recyclerfastscroll.**
+
+-dontwarn javax.annotation.ParametersAreNonnullByDefault

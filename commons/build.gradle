@@ -33,6 +33,8 @@ dependencies {
 
     api "com.android.support:design:$supportLibsVersion"
 
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+
     compileOnly "com.android.support:palette-v7:$supportLibsVersion"
     compileOnly "com.android.support:exifinterface:$supportLibsVersion" // Oldest available is 25.1.0.
 

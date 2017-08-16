@@ -2,7 +2,7 @@ package android.support.v7.view.menu;
 
 import android.app.Activity;
 import android.content.ContextWrapper;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,7 +82,7 @@ public class XpAppCompatContextMenu {
         XpAppCompatContextMenu.getInstance(v).showContextMenuForChild(v);
     }
 
-    public static void showContextMenu(View v, @NonNull ContextMenu.ContextMenuInfo info) {
+    public static void showContextMenu(View v, ContextMenu.ContextMenuInfo info) {
         XpAppCompatContextMenu.getInstance(v).showContextMenuForChild(v, info);
     }
 
@@ -90,7 +90,7 @@ public class XpAppCompatContextMenu {
         return showContextMenuForChild(originalView, null);
     }
 
-    public boolean showContextMenuForChild(View originalView, ContextMenu.ContextMenuInfo info) {
+    public boolean showContextMenuForChild(View originalView, @Nullable ContextMenu.ContextMenuInfo info) {
         // Reuse the context menu builder
         if (mContextMenu == null) {
             mContextMenu = new XpContextMenuBuilder(originalView.getContext());
@@ -111,7 +111,7 @@ public class XpAppCompatContextMenu {
         return helper != null;
     }
 
-    private MenuDialogHelper provideMenuDialogHelper(View originalView, ContextMenu.ContextMenuInfo info) {
+    private MenuDialogHelper provideMenuDialogHelper(View originalView, @Nullable ContextMenu.ContextMenuInfo info) {
         if (info == null) {
             // Use View.getContextMenuInfo().
             return mContextMenu.show(originalView,

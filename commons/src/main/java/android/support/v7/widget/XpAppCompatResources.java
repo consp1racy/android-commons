@@ -21,13 +21,13 @@ public class XpAppCompatResources {
     @NonNull static DrawableGetter sDrawableGetter = new DrawableGetterDefault();
 
     @Nullable
-    public static Drawable getDrawable(@NonNull final Context context, @DrawableRes final int resId) {
+    public static Drawable getDrawable(final Context context, @DrawableRes final int resId) {
         return sDrawableGetter.getDrawable(context, resId);
     }
 
     interface DrawableGetter {
         @Nullable
-        Drawable getDrawable(@NonNull final Context context, @DrawableRes final int resId);
+        Drawable getDrawable(final Context context, @DrawableRes final int resId);
     }
 
     static class DrawableGetterDefault implements DrawableGetter {
@@ -66,7 +66,7 @@ public class XpAppCompatResources {
         @Override
         @Nullable
         @SuppressWarnings("deprecation")
-        public Drawable getDrawable(@NonNull final Context context, @DrawableRes final int resId) {
+        public Drawable getDrawable(final Context context, @DrawableRes final int resId) {
             return context.getResources().getDrawable(resId);
         }
     }
@@ -76,7 +76,7 @@ public class XpAppCompatResources {
     static class DrawableGetterLollipop implements DrawableGetter {
         @Override
         @Nullable
-        public Drawable getDrawable(@NonNull final Context context, @DrawableRes final int resId) {
+        public Drawable getDrawable(final Context context, @DrawableRes final int resId) {
             return context.getDrawable(resId);
         }
     }
@@ -84,7 +84,7 @@ public class XpAppCompatResources {
     static class DrawableGetterSupportV4 implements DrawableGetter {
         @Override
         @Nullable
-        public Drawable getDrawable(@NonNull final Context context, @DrawableRes final int resId) {
+        public Drawable getDrawable(final Context context, @DrawableRes final int resId) {
             return ContextCompat.getDrawable(context, resId);
         }
     }
@@ -93,7 +93,7 @@ public class XpAppCompatResources {
         @Override
         @Nullable
         @SuppressWarnings("RestrictedApi")
-        public Drawable getDrawable(@NonNull final Context context, @DrawableRes final int resId) {
+        public Drawable getDrawable(Context context, @DrawableRes final int resId) {
             return AppCompatDrawableManager.get().getDrawable(context, resId, false);
         }
     }
@@ -101,7 +101,7 @@ public class XpAppCompatResources {
     static class DrawableGetterAppCompatPublic implements DrawableGetter {
         @Override
         @Nullable
-        public Drawable getDrawable(@NonNull final Context context, @DrawableRes final int resId) {
+        public Drawable getDrawable(final Context context, @DrawableRes final int resId) {
             return AppCompatResources.getDrawable(context, resId);
         }
     }

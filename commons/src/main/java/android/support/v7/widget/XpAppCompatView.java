@@ -23,11 +23,11 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
         this(context, null);
     }
 
-    public XpAppCompatView(Context context, AttributeSet attrs) {
+    public XpAppCompatView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public XpAppCompatView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public XpAppCompatView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(TintContextWrapper.wrap(context), attrs, defStyleAttr);
 
         mBackgroundTintHelper = XpAppCompatBackgroundHelper.create(this);
@@ -66,7 +66,7 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
 
     @Override
     @SuppressWarnings("deprecation")
-    public void setBackgroundDrawable(Drawable background) {
+    public void setBackgroundDrawable(@Nullable Drawable background) {
         mBackgroundResource = 0;
         super.setBackgroundDrawable(background);
         if (mBackgroundTintHelper != null) {
