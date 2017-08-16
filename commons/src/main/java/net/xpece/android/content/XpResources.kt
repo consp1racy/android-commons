@@ -11,7 +11,7 @@ import android.graphics.drawable.Drawable
 import android.support.annotation.*
 import android.support.v4.content.ContextCompat
 import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.XpAppCompatResources
+import android.support.v7.widget.AppCompatDrawableManager
 import net.xpece.android.content.res.Dimen
 
 private val TEMP_ARRAY = ThreadLocal<IntArray>()
@@ -44,23 +44,30 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
             if (d != null) return d
         }
     }
-    return XpAppCompatResources.getDrawable(this, resId)
+    return AppCompatDrawableManager.get().getDrawable(this, resId)
 }
 
 fun Context.resolveFloat(@AttrRes attr: Int, fallback: Float = 0F) = resolveFloat(0, attr, fallback)
 
-fun Context.resolveBoolean(@AttrRes attr: Int, fallback: Boolean = false) = resolveBoolean(0, attr, fallback)
+fun Context.resolveBoolean(@AttrRes attr: Int, fallback: Boolean = false) = resolveBoolean(
+        0, attr, fallback)
 
 @ColorInt
-fun Context.resolveColor(@AttrRes attr: Int, @ColorInt fallback: Int = 0) = resolveColor(0, attr, fallback)
+fun Context.resolveColor(@AttrRes attr: Int, @ColorInt fallback: Int = 0) = resolveColor(
+        0, attr, fallback)
 
 fun Context.resolveColorStateList(@AttrRes attr: Int) = resolveColorStateList(0, attr)
 
-fun Context.resolveDimension(@AttrRes attr: Int, fallback: Float = 0F) = resolveDimension(0, attr, fallback)
+fun Context.resolveDimension(@AttrRes attr: Int, fallback: Float = 0F) = resolveDimension(
+        0, attr, fallback)
 
-fun Context.resolveDimensionPixelOffset(@AttrRes attr: Int, fallback: Int = 0) = resolveDimensionPixelOffset(0, attr, fallback)
+fun Context.resolveDimensionPixelOffset(
+        @AttrRes attr: Int, fallback: Int = 0) = resolveDimensionPixelOffset(
+        0, attr, fallback)
 
-fun Context.resolveDimensionPixelSize(@AttrRes attr: Int, fallback: Int = 0) = resolveDimensionPixelSize(0, attr, fallback)
+fun Context.resolveDimensionPixelSize(
+        @AttrRes attr: Int, fallback: Int = 0) = resolveDimensionPixelSize(
+        0, attr, fallback)
 
 fun Context.resolveDrawable(@AttrRes attr: Int) = resolveDrawable(0, attr)
 
@@ -68,7 +75,8 @@ fun Context.resolveString(@AttrRes attr: Int) = resolveString(0, attr)
 
 fun Context.resolveText(@AttrRes attr: Int) = resolveText(0, attr)
 
-fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int) = resolveResourceId(0, attr, fallback)
+fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int) = resolveResourceId(
+        0, attr, fallback)
 
 fun Context.resolveFloat(@StyleRes style: Int, @AttrRes attr: Int, fallback: Float): Float {
     val ta = obtainTypedArray(style, attr)
@@ -121,7 +129,8 @@ fun Context.resolveColorStateList(@StyleRes style: Int, @AttrRes attr: Int): Col
     }
 }
 
-fun Context.resolveDimension(@StyleRes style: Int, @AttrRes attr: Int, fallback: Float = 0F): Float {
+fun Context.resolveDimension(
+        @StyleRes style: Int, @AttrRes attr: Int, fallback: Float = 0F): Float {
     val ta = obtainTypedArray(style, attr)
     try {
         return ta.getDimension(0, fallback)
@@ -130,7 +139,8 @@ fun Context.resolveDimension(@StyleRes style: Int, @AttrRes attr: Int, fallback:
     }
 }
 
-fun Context.resolveDimensionPixelOffset(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
+fun Context.resolveDimensionPixelOffset(
+        @StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
     val ta = obtainTypedArray(style, attr)
     try {
         return ta.getDimensionPixelOffset(0, fallback)
@@ -139,7 +149,8 @@ fun Context.resolveDimensionPixelOffset(@StyleRes style: Int, @AttrRes attr: Int
     }
 }
 
-fun Context.resolveDimensionPixelSize(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
+fun Context.resolveDimensionPixelSize(
+        @StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
     val ta = obtainTypedArray(style, attr)
     try {
         return ta.getDimensionPixelSize(0, fallback)
@@ -209,8 +220,10 @@ fun px(px: Number): Dimen = Dimen.px(px)
 
 @Deprecated("Not suitable for multiscreen environment.")
 fun sp(sp: Number): Dimen = Dimen.sp(sp)
+
 @Deprecated("Not suitable for multiscreen environment.")
 fun dp(dp: Number): Dimen = Dimen.dp(dp)
+
 @Deprecated("Not suitable for multiscreen environment.")
 fun dimen(@DimenRes resId: Int): Dimen = Dimen.res(resId)
 

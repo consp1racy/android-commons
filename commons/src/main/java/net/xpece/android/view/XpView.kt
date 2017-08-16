@@ -17,7 +17,7 @@ import android.support.v4.view.ViewCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v4.widget.TextViewCompat
 import android.support.v7.app.ActionBar
-import android.support.v7.widget.XpAppCompatResources
+import android.support.v7.widget.AppCompatDrawableManager
 import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
@@ -129,7 +129,7 @@ fun ImageView.switchImage(d: Drawable?, duration: Int = 100) {
 
 @JvmOverloads
 fun ImageView.switchImage(@DrawableRes resId: Int, duration: Int = 100) {
-    val d = XpAppCompatResources.getDrawable(context, resId)
+    val d = AppCompatDrawableManager.get().getDrawable(context, resId)
     switchImage(d, duration)
 }
 
@@ -153,7 +153,8 @@ fun View.toastContentDescription(text: CharSequence = this.contentDescription): 
     val cheatSheet = Toast.makeText(context, text, Toast.LENGTH_SHORT)
     if (midy < displayFrame.height()) {
         // Show below the tab view
-        cheatSheet.setGravity(Gravity.TOP or GravityCompat.END, referenceX,
+        cheatSheet.setGravity(
+                Gravity.TOP or GravityCompat.END, referenceX,
                 screenPos[1] + height - displayFrame.top)
     } else {
         // Show along the bottom center
@@ -170,10 +171,15 @@ fun View.fitSystemWindows(insets: Rect) = XpViewReflect.fitSystemWindows(this, i
 
 inline fun SwipeRefreshLayout.setupDefaultColors() {
     setColorSchemeColors(context.resolveColor(R.attr.colorAccent, Color.BLACK))
-    setProgressBackgroundColorSchemeColor(context.resolveColor(R.attr.colorBackgroundFloating, Color.WHITE))
+    setProgressBackgroundColorSchemeColor(
+            context.resolveColor(
+                    R.attr.colorBackgroundFloating,
+                    Color.WHITE))
 }
 
-inline fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) = TextViewCompat.setTextAppearance(this, resId)
+inline fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) = TextViewCompat.setTextAppearance(
+        this,
+        resId)
 
 inline fun View.setLayerTypeSafe(layerType: Int) {
     if (this.layerType != layerType) {
