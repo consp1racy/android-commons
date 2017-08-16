@@ -8,19 +8,6 @@ import android.support.annotation.Nullable;
  */
 
 public interface IconifiedPagerAdapter {
-    IconifiedPagerAdapter NOOP = new IconifiedPagerAdapter() {
-        @Nullable
-        @Override
-        public Drawable getPageIcon(final int position) {
-            return null;
-        }
-
-        @Override
-        public boolean getDisplayPageTitle(final int position) {
-            return true;
-        }
-    };
-
     @Nullable
     Drawable getPageIcon(int position);
 

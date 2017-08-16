@@ -1,6 +1,7 @@
 package android.support.design.widget;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
@@ -10,6 +11,19 @@ import android.util.AttributeSet;
  */
 
 public class IconifiedTabLayout extends TabLayout {
+    private static final IconifiedPagerAdapter NOOP_ICONIFIED_PAGER_ADAPTER = new IconifiedPagerAdapter() {
+        @Nullable
+        @Override
+        public Drawable getPageIcon(final int position) {
+            return null;
+        }
+
+        @Override
+        public boolean getDisplayPageTitle(final int position) {
+            return true;
+        }
+    };
+
     private PagerAdapter mPagerAdapter = null;
 
     public IconifiedTabLayout(final Context context) {
@@ -63,7 +77,7 @@ public class IconifiedTabLayout extends TabLayout {
         if (adapter instanceof IconifiedPagerAdapter) {
             return (IconifiedPagerAdapter) adapter;
         } else {
-            return IconifiedPagerAdapter.NOOP;
+            return NOOP_ICONIFIED_PAGER_ADAPTER;
         }
     }
 }

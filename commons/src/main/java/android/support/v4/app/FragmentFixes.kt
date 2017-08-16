@@ -1,7 +1,5 @@
 package android.support.v4.app
 
-import android.support.annotation.RestrictTo
-
 /**
  * Hack to force update the LoaderManager's host to avoid a memory leak in retained/detached fragments.
  * Call this in Fragment.onAttach()
@@ -10,7 +8,7 @@ import android.support.annotation.RestrictTo
  *
  * ~Remove when the bug is fixed in support-v4.~ This has been fixed in v25.3.0.
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY)
+@Deprecated("This has been fixed in support library 25.3.0.", ReplaceWith(""))
 fun Fragment.updateLoaderManagerHostController() {
     mHost?.getLoaderManager(mWho, mLoadersStarted, false)
 }
