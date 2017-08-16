@@ -13,17 +13,3 @@ fun <E> List<E>.asArrayList(): ArrayList<E> {
         return ArrayList(this)
     }
 }
-
-internal fun Boolean?.toByte(): Byte = when (this) {
-    null -> -1
-    true -> 1
-    false -> 0
-}
-
-internal fun Byte.toBoolean(): Boolean? = if (this == 0.toByte()) {
-    false
-} else if (this > 0) {
-    true
-} else {
-    null
-}
