@@ -94,13 +94,13 @@ fun ScrollView.canScroll(): Boolean {
 fun setSearchViewLayoutTransition(view: SearchView) {
     if (Build.VERSION.SDK_INT < 11) return
     val searchBarId = view.context.resources.getIdentifier("android:id/search_bar", null, null)
-    val searchBar = view.findViewById(searchBarId) as LinearLayout
+    val searchBar = view.findViewById<LinearLayout>(searchBarId)
     searchBar.layoutTransition = LayoutTransition()
 }
 
 fun setSearchViewLayoutTransition(view: android.support.v7.widget.SearchView) {
     if (Build.VERSION.SDK_INT < 11) return
-    val searchBar = view.findViewById(R.id.search_bar) as LinearLayout
+    val searchBar = view.findViewById<LinearLayout>(R.id.search_bar)
     searchBar.layoutTransition = LayoutTransition()
 }
 

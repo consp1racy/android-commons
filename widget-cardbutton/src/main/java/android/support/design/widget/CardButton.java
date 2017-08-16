@@ -963,11 +963,11 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         final int sdk = Build.VERSION.SDK_INT;
         final CardButtonDelegate delegate = createDelegateImpl();
         if (sdk >= 21) {
-            return new CardButtonLollipop(this, delegate, ViewUtils.DEFAULT_ANIMATOR_CREATOR);
+            return new CardButtonLollipop(this, delegate);
         } else if (sdk >= 14) {
-            return new CardButtonIcs(this, delegate, ViewUtils.DEFAULT_ANIMATOR_CREATOR);
+            return new CardButtonIcs(this, delegate);
         } else {
-            return new CardButtonGingerbread(this, delegate, ViewUtils.DEFAULT_ANIMATOR_CREATOR);
+            return new CardButtonGingerbread(this, delegate);
         }
     }
 

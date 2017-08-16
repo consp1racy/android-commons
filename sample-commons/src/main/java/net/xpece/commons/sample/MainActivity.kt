@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        pager = findViewById(R.id.pager) as ViewPager
+        pager = findViewById<ViewPager>(R.id.pager)
         val adapter = MyPagerAdapter()
         pager.adapter = adapter
 
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         val d = dp(16)
         Log.d(TAG, "Dimension real size: " + d.toString(this))
 
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
 
         val icon = toolbar.context.resolveDrawable(R.attr.homeAsUpIndicator)
         toolbar.navigationIcon = icon

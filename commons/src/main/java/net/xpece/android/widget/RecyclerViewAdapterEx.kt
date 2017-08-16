@@ -138,7 +138,7 @@ abstract class RecyclerViewAdapterEx<T : RecyclerView.ViewHolder> : HeaderFooter
 
         override fun bind(holder: RecyclerView.ViewHolder) {
             val view = holder.itemView
-            val textView = view.findViewById(android.R.id.text1) as TextView
+            val textView = view.findViewById<TextView>(android.R.id.text1)
             text?.apply { textView.text = this } ?: textView.setText(textId)
         }
 
@@ -176,8 +176,8 @@ abstract class RecyclerViewAdapterEx<T : RecyclerView.ViewHolder> : HeaderFooter
 
         override fun bind(holder: RecyclerView.ViewHolder) {
             val view = holder.itemView
-            val textView = view.findViewById(android.R.id.text1) as TextView
-            val button = view.findViewById(android.R.id.button1) as Button
+            val textView = view.findViewById<TextView>(android.R.id.text1)
+            val button = view.findViewById<Button>(android.R.id.button1)
             text?.apply { textView.text = this } ?: textView.setText(textId)
             buttonText?.apply { button.text = this } ?: button.setText(buttonTextId)
             button.setOnClickListener(listener)

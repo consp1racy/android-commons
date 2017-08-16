@@ -5,16 +5,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
     }
-
-    publishNonDefault true
-    defaultPublishConfig "release"
 }
 
 dependencies {
-    compile "com.android.support:design:$supportLibsVersionCardButton"
-	compile project(':appcompat-extra')
+    api "com.android.support:design:$supportLibsVersionCardButton"
+	api project(':appcompat-extra')
 }
 
 repositories {

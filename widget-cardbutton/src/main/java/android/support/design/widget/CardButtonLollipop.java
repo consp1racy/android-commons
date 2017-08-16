@@ -46,8 +46,8 @@ class CardButtonLollipop extends CardButtonIcs {
 
     private InsetDrawable mInsetDrawable;
 
-    CardButtonLollipop(Button view, CardButtonDelegate shadowViewDelegate, ValueAnimatorCompat.Creator animatorCreator) {
-        super(view, shadowViewDelegate, animatorCreator);
+    CardButtonLollipop(Button view, CardButtonDelegate shadowViewDelegate) {
+        super(view, shadowViewDelegate);
     }
 
     @Override

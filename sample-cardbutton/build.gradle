@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "net.xpece.android.widget.cardbutton.sample"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -23,8 +23,7 @@ android {
 }
 
 dependencies {
-    debugCompile project(path: ':widget-cardbutton', configuration: 'debug')
-    releaseCompile project(path: ':widget-cardbutton', configuration: 'release')
+    implementation project(':widget-cardbutton')
 }
 
 repositories {
@@ -36,7 +35,9 @@ repositories {
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         if (details.requested.group == 'com.android.support' && details.requested.name != 'support-annotations') {
-            details.useVersion '25.4.0'
+//            details.useVersion '25.0.0'
+//            details.useVersion '25.4.0'
+            details.useVersion '26.0.0-beta2'
         }
     }
 }

@@ -17,7 +17,7 @@
 package net.xpece.android.database.converter
 
 import io.requery.Converter
-import net.xpece.android.time.toInstant
+import net.xpece.android.time.toInstantCompat
 import net.xpece.android.time.toSqlTimestamp
 import org.threeten.bp.Instant
 import java.sql.Timestamp
@@ -80,7 +80,7 @@ abstract class InstantBpConverter<T> : Converter<Instant, T> {
             if (value == null) {
                 return null
             }
-            return value.toInstant()
+            return value.toInstantCompat()
         }
 
     }
