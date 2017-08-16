@@ -1,68 +1,69 @@
 package android.support.v7.widget;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.os.Build;
-import android.support.annotation.StyleRes;
-import android.support.v7.view.ContextThemeWrapper;
-
-import net.xpece.android.content.XpContext;
-
-import java.util.WeakHashMap;
+import android.support.annotation.Nullable;
 
 /**
- * @author Eugen on 05.08.2016.
+ * This exists just so that {@link #getResources()} provides something different than
+ * {@link TintResources} or {@link VectorEnabledTintResources}.
+ * Then {@link TintContextWrapper#shouldWrap(Context)} returns true.
  */
 
-@SuppressWarnings("RestrictedApi")
-public class XpTintContextWrapper extends ContextWrapper {
-
-    /**
-     * Set to {@code false} to check only {@code isLightTheme} attribute.
-     * Set to {@code true} to wrap all {@link ContextThemeWrapper}s.
-     */
-    public static boolean FORCE = true;
+class XpTintContextWrapper extends ContextWrapper {
+    private static final boolean NEEDS_WRAPPING = Build.VERSION.SDK_INT < 21 &&
+        ContextThemeWrapperReflection.hasAppCompat();
 
     private Resources mResources = null;
 
-    private static final WeakHashMap<Context, Boolean> CACHE = new WeakHashMap<>();
-
-    private static boolean shouldBeUsed() {
-        return Build.VERSION.SDK_INT < 21;
-    }
-
+    /**
+     * If I'm not using the activity theme for creating this widget, wrap it again.
+     */
+    @SuppressLint("RestrictedApi")
     public static Context wrap(final Context context) {
-        if (shouldBeUsed()) {
-            if (context instanceof ContextThemeWrapper || context instanceof Activity) {
-                if (FORCE) {
-                    return TintContextWrapper.wrap(new XpTintContextWrapper(context));
-                }
+        if (NEEDS_WRAPPING && (context instanceof TintContextWrapper
+            || context.getResources() instanceof TintResources
+            || context.getResources() instanceof VectorEnabledTintResources)) {
+            // Only do work if this really is a candidate for wrapping.
+            // This mirrors the condition in TintContextWrapper.
 
-                final Context baseContext = ((ContextThemeWrapper) context).getBaseContext();
-                final boolean isLightTheme = isLightTheme(context);
-                final boolean baseIsLightTheme = isLightTheme(baseContext);
-                if (isLightTheme != baseIsLightTheme) {
-                    return TintContextWrapper.wrap(new XpTintContextWrapper(context));
+            // This will be the most intermediate Context available, never null.
+            // If no other ContextThemeWrappers were used this will be the Activity.
+            final ContextWrapper firstContextThemeWrapper = unwrapFirstContextThemeWrapper(context);
+
+            // This will be the *optional* follow up ContextThemeWrapper.
+            final ContextWrapper secondContextThemeWrapper = unwrapContextThemeWrapper(firstContextThemeWrapper);
+
+            if (secondContextThemeWrapper != null) {
+                final int firstTheme = ContextThemeWrapperReflection.getThemeResource(firstContextThemeWrapper);
+                final int secondTheme = ContextThemeWrapperReflection.getThemeResource(secondContextThemeWrapper);
+                if (firstTheme != secondTheme) {
+                    return new XpTintContextWrapper(context);
                 }
             }
         }
         return context;
     }
 
-    public static Context wrap(final Context context, @StyleRes final int themeResId) {
-        final Context context2 = new ContextThemeWrapper(context, themeResId);
-        return wrap(context2);
+    @Nullable
+    private static ContextWrapper unwrapFirstContextThemeWrapper(final Context context) {
+        if (context instanceof android.view.ContextThemeWrapper ||
+            ContextThemeWrapperReflection.isSupportContextThemeWrapper(context)) {
+            return (ContextWrapper) context;
+        } else if (context instanceof ContextWrapper) {
+            return unwrapContextThemeWrapper((ContextWrapper) context);
+        } else {
+            return null;
+        }
     }
 
-    private static boolean isLightTheme(final Context context) {
-        Boolean value = CACHE.get(context);
-        if (value == null) {
-            value = XpContext.resolveBoolean(context, android.support.v7.appcompat.R.attr.isLightTheme, false);
-            CACHE.put(context, value);
-        }
-        return value;
+    @Nullable
+    private static ContextWrapper unwrapContextThemeWrapper(final ContextWrapper context) {
+        final Context base = context.getBaseContext();
+        return unwrapFirstContextThemeWrapper(base);
     }
 
     public XpTintContextWrapper(final Context base) {

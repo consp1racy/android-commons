@@ -19,3 +19,7 @@
 -dontwarn com.pluscubed.recyclerfastscroll.**
 
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
+
+-keepclassmembernames android.support.v7.view.ContextThemeWrapper {
+    int mThemeResource;
+}
