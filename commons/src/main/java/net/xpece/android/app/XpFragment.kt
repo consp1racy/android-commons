@@ -2,6 +2,7 @@
 
 package net.xpece.android.app
 
+import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -55,4 +56,9 @@ fun android.app.DialogFragment.showAllowingStateLoss(fragmentTransaction: androi
     } catch (ex :IllegalStateException) {
         //
     }
+}
+
+inline fun <T : Fragment> T.withArguments(argProvider: Bundle.() -> Unit): T {
+    arguments = (arguments ?:Bundle()).apply(argProvider)
+    return this
 }
