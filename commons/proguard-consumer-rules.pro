@@ -20,6 +20,6 @@
 
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
 
--keepclassmembernames android.support.v7.view.ContextThemeWrapper {
+-keepclassmembernames class android.support.v7.view.ContextThemeWrapper {
     int mThemeResource;
 }
