@@ -15,7 +15,7 @@ inline fun Parcel.readBoolean(): Boolean = readByte() != 0.toByte()
  * Writes `null` as [Float.NaN]. Only uses 4 bytes.
  */
 @Suppress("NOTHING_TO_INLINE")
-inline fun Parcel.writeFloatNan(value: Float?) {
+inline fun Parcel.writeFloatOrNan(value: Float?) {
     writeFloat(value ?: Float.NaN)
 }
 
@@ -24,13 +24,13 @@ inline fun Parcel.writeFloatNan(value: Float?) {
  */
 @SuppressLint("ParcelClassLoader")
 @Suppress("NOTHING_TO_INLINE")
-inline fun Parcel.readFloatNan(): Float? = readFloat().takeIf { it != Float.NaN }
+inline fun Parcel.readFloatOrNull(): Float? = readFloat().takeIf { it != Float.NaN }
 
 /**
  * Writes `null` as [Double.NaN]. Only uses 4 bytes.
  */
 @Suppress("NOTHING_TO_INLINE")
-inline fun Parcel.writeDoubleNan(value: Double?) {
+inline fun Parcel.writeDoubleOrNan(value: Double?) {
     writeDouble(value ?: Double.NaN)
 }
 
@@ -39,12 +39,16 @@ inline fun Parcel.writeDoubleNan(value: Double?) {
  */
 @SuppressLint("ParcelClassLoader")
 @Suppress("NOTHING_TO_INLINE")
-inline fun Parcel.readDoubleNan(): Double? = readDouble().takeIf { it != Double.NaN }
+inline fun Parcel.readDoubleOrNull(): Double? = readDouble().takeIf { it != Double.NaN }
 
 inline fun <reified E> Parcel.readList(cl: ClassLoader? = E::class.java.classLoader): List<E> =
         mutableListOf<E>().apply {
             readList(this, cl)
         }
 
+inline fun <reified T> Parcel.readTypedValue(cl: ClassLoader? = T::class.java.classLoader): T =
+        readValue(cl) as T
+
+@Deprecated("Use readTypedValue instead.", replaceWith = ReplaceWith(expression = "readTypedValue"))
 inline fun <reified T> Parcel.readValueTyped(cl: ClassLoader? = T::class.java.classLoader): T =
         readValue(cl) as T
