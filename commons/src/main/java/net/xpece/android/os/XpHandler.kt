@@ -1,9 +1,16 @@
 package net.xpece.android.os
 
 import android.os.Handler
+import android.os.SystemClock
 
-@Suppress("NOTHING_TO_INLINE")
-inline fun Handler.postDelayed(delayMillis: Long, noinline runnable: () -> Unit) = this.postDelayed(runnable, delayMillis)
+fun Handler.postDelayed(r: Runnable, delayMillis: Int) =
+        postDelayed(r, delayMillis.toLong())
 
-@Suppress("NOTHING_TO_INLINE")
-inline fun Handler.postDelayed(delayMillis: Int, noinline runnable: () -> Unit) = this.postDelayed(runnable, delayMillis.toLong())
+fun Handler.postDelayed(delayMillis: Int, runnable: () -> Unit) =
+        this.postDelayed(runnable, delayMillis.toLong())
+
+fun Handler.postDelayed(token: Any, delayMillis: Int, r: () -> Unit) =
+        postAtTime(r, token, SystemClock.uptimeMillis() + delayMillis)
+
+fun Handler.postDelayed(r: Runnable, token: Any, delayMillis: Int) =
+        postAtTime(r, token, SystemClock.uptimeMillis() + delayMillis)
