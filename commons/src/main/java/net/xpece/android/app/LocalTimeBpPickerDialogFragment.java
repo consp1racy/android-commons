@@ -18,10 +18,11 @@ import android.view.View;
 import android.widget.TimePicker;
 
 import net.xpece.android.R;
-import net.xpece.android.content.XpContext;
 import net.xpece.android.widget.XpTimePicker;
 
 import org.threeten.bp.LocalTime;
+
+import static net.xpece.android.content.ResourcesKt.resolveColorStateList;
 
 /**
  * Created by Eugen on 06.05.2016.
@@ -135,7 +136,7 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
 
     protected void onCreateTimePicker(TimePicker timePicker) {
         Context context = timePicker.getContext();
-        XpTimePicker.setSelectionDividerTint(timePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
+        XpTimePicker.setSelectionDividerTint(timePicker, resolveColorStateList(context, R.attr.colorControlNormal));
     }
 
     @Override

@@ -17,11 +17,12 @@ import android.view.View;
 import android.widget.DatePicker;
 
 import net.xpece.android.R;
-import net.xpece.android.content.XpContext;
 import net.xpece.android.widget.XpDatePicker;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
+
+import static net.xpece.android.content.ResourcesKt.resolveColorStateList;
 
 /**
  * Created by Eugen on 06.05.2016.
@@ -147,7 +148,7 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
 
     protected void onCreateDatePicker(DatePicker datePicker) {
         Context context = datePicker.getContext();
-        XpDatePicker.setSelectionDividerTint(datePicker, XpContext.resolveColorStateList(context, R.attr.colorControlNormal));
+        XpDatePicker.setSelectionDividerTint(datePicker, resolveColorStateList(context, R.attr.colorControlNormal));
     }
 
     @Override

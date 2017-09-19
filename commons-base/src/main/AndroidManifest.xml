@@ -1,0 +1,12 @@
+<manifest package="net.xpece.android.commons.base"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:versionCode="1"
+          android:versionName="1">
+
+    <application>
+        <provider
+            android:name="net.xpece.android.content.XpInitProvider"
+            android:authorities="${applicationId}.xpinitprovider"
+            android:exported="false"/>
+    </application>
+</manifest>

@@ -3,10 +3,10 @@ package net.xpece.android.content.res;
 import android.content.Context;
 import android.widget.TextView;
 
-import net.xpece.android.content.XpContext;
-
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyUtils;
+
+import static net.xpece.android.content.ResourcesKt.resolveString;
 
 /**
  * @author Eugen on 20. 4. 2016.
@@ -23,6 +23,6 @@ public class XpCalligraphyUtils {
 
     public static String getCalligraphyFontPath(final Context context, final int titleTextAppearance) {
         int attrId = CalligraphyConfig.get().getAttrId();
-        return XpContext.resolveString(context, titleTextAppearance, attrId);
+        return resolveString(context, titleTextAppearance, attrId);
     }
 }

@@ -6,7 +6,7 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
 import android.provider.Settings
-import net.xpece.android.content.connectivityManager
+import net.xpece.android.app.connectivityManager
 
 /**
  * Gets the state of Airplane Mode.

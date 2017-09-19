@@ -3,15 +3,17 @@ package net.xpece.android.content
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
+import java.util.*
 
 /**
  * @author Eugen on 28.07.2016.
  */
 
 interface DrawableResolver {
-    companion object {
+    companion object Configuration {
         var isDrawableResolversEnabled = false
-        val drawableResolvers = mutableListOf<DrawableResolver>()
+        val drawableResolvers: MutableList<DrawableResolver> = ArrayList()
     }
+
     fun getDrawable(context: Context, @DrawableRes resId: Int): Drawable?
 }

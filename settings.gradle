@@ -1,1 +1,2 @@
 include ':sample-commons', ':commons', ':appcompat-extra', ':design-extra', ':sample-extra', ':widget-cardbutton', ':sample-cardbutton'
+include ':commons-services', ':commons-resources', ':commons-dimen', ":commons-base"

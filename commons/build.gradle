@@ -31,6 +31,11 @@ dependencies {
 
     api project(':design-extra')
 
+    api project(':commons-services')
+    api project(':commons-resources')
+    api project(':commons-dimen')
+    api project(':commons-base')
+
     api "com.android.support:design:$supportLibsVersion"
 
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'

@@ -12,6 +12,11 @@ import android.support.annotation.Nullable;
  */
 
 public abstract class EmptyContentProvider extends ContentProvider {
+    @Override
+    public boolean onCreate() {
+        return false;
+    }
+
     @Nullable
     @Override
     public Cursor query(@NonNull final Uri uri, final String[] projection, final String selection, final String[] selectionArgs, final String sortOrder) {

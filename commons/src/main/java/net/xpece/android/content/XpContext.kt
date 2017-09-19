@@ -19,6 +19,7 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import net.xpece.android.R
+import net.xpece.android.app.layoutInflater
 
 private val TYPED_VALUE = ThreadLocal<TypedValue>()
 
@@ -117,11 +118,20 @@ val Context.isRtl: Boolean
 val Context.isDebugBuild: Boolean
     get() = 0 != (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
 
+/**
+ * @throws NullPointerException
+ */
 val Context.colorPrimary: ColorStateList
     get() = resolveColorStateList(R.attr.colorPrimary)!!
 
+/**
+ * @throws NullPointerException
+ */
 val Context.colorAccent: ColorStateList
     get() = resolveColorStateList(R.attr.colorAccent)!!
 
+/**
+ * @throws NullPointerException
+ */
 val Context.colorControlNormal: ColorStateList
     get() = resolveColorStateList(R.attr.colorControlNormal)!!

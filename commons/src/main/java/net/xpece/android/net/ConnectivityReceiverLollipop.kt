@@ -7,7 +7,7 @@ import android.net.Network
 import android.net.NetworkRequest
 import android.os.Handler
 import android.support.annotation.RequiresApi
-import net.xpece.android.content.connectivityManager
+import net.xpece.android.app.connectivityManager
 
 /**
  * @author Eugen on 04.01.2017.
