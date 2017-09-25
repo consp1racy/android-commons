@@ -1,4 +1,5 @@
 @file:JvmName("Dimens")
+@file:JvmMultifileClass
 
 package net.xpece.android.content
 
@@ -19,8 +20,12 @@ private var sContext: Context = object : ContextWrapper(null) {
     }
 }
 
-fun init(context: Context) {
-    sContext = context.applicationContext
+@Deprecated("Do not use dimensions without an intermediate context.")
+object DimensLegacyInitializer {
+    @JvmStatic
+    fun init(context: Context) {
+        sContext = context.applicationContext
+    }
 }
 
 fun px(px: Number): Dimen = Dimen(px.toFloat())

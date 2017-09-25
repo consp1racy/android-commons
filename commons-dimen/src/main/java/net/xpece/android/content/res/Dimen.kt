@@ -1,9 +1,6 @@
 package net.xpece.android.content.res
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.ContextWrapper
-import android.content.res.Resources
 
 /**
  * Created by pechanecjr on 4. 1. 2015.
@@ -56,20 +53,5 @@ data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
         val scaledDensity = context.resources.displayMetrics.scaledDensity
         val sp = Math.round(value / scaledDensity)
         return "Dimen(${value}px ~ ${dp}dp ~ ${sp}sp)"
-    }
-
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        @JvmStatic
-        private var sContext: Context = object : ContextWrapper(null) {
-            override fun getResources(): Resources {
-                throw IllegalStateException("You forgot to call init(Context).")
-            }
-        }
-
-        @JvmStatic
-        fun init(context: Context) {
-            sContext = context.applicationContext
-        }
     }
 }
