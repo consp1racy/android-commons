@@ -3,10 +3,5 @@
           android:versionCode="1"
           android:versionName="1">
 
-    <application>
-        <provider
-            android:name="net.xpece.android.content.XpInitProvider"
-            android:authorities="${applicationId}.xpinitprovider"
-            android:exported="false"/>
-    </application>
+    <application/>
 </manifest>

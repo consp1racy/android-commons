@@ -58,412 +58,475 @@ import android.view.textclassifier.TextClassificationManager
 import android.view.textservice.TextServicesManager
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.activityManager: ActivityManager
     get() = getSystemServiceOrThrow(Context.ACTIVITY_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 inline val Context.alarmManager: AlarmManager
     get() = getSystemServiceOrThrow(Context.ALARM_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.audioManager: AudioManager
     get() = getSystemServiceOrThrow(Context.AUDIO_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.clipboardManager: ClipboardManager
     get() = getSystemServiceOrThrow(Context.CLIPBOARD_SERVICE)
 
-inline val Context.connectivityManager: ConnectivityManager?
-    get() = getTypedSystemService(Context.CONNECTIVITY_SERVICE)
+/**
+ * @throws ServiceNotFoundException When service is not found.
+ */
+inline val Context.connectivityManager: ConnectivityManager
+    get() = getSystemServiceOrThrow(Context.CONNECTIVITY_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.keyguardManager: KeyguardManager
     get() = getSystemServiceOrThrow(Context.KEYGUARD_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.layoutInflater: LayoutInflater
     get() = getSystemServiceOrThrow(Context.LAYOUT_INFLATER_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 inline val Context.locationManager: LocationManager
     get() = getSystemServiceOrThrow(Context.LOCATION_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.notificationManager: NotificationManager
     get() = getSystemServiceOrThrow(Context.NOTIFICATION_SERVICE)
 
+/**
+ * Never null.
+ *
+ * Requires `support-compat` library version 24.2.0 or later
+ * or `support-v4` library version 22.0.0 or later.
+ */
 inline val Context.notificationManagerCompat: NotificationManagerCompat
     get() = NotificationManagerCompat.from(this)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 inline val Context.powerManager: PowerManager
     get() = getSystemServiceOrThrow(Context.POWER_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.searchManager: SearchManager
     get() = getSystemServiceOrThrow(Context.SEARCH_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.sensorManager: SensorManager
     get() = getSystemServiceOrThrow(Context.SENSOR_SERVICE)
 
-inline val Context.telephonyManager: TelephonyManager?
-    get() = getTypedSystemService(Context.TELEPHONY_SERVICE)
-
-inline val Context.vibrator: Vibrator?
-    get() = getTypedSystemService(Context.VIBRATOR_SERVICE)
+/**
+ * Never null.
+ */
+inline val Context.telephonyManager: TelephonyManager
+    get() = getSystemServiceOrThrow(Context.TELEPHONY_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
+ */
+inline val Context.vibrator: Vibrator
+    get() = getSystemServiceOrThrow(Context.VIBRATOR_SERVICE)
+
+/**
+ * Never null.
  */
 inline val Context.wallpaperService: WallpaperManager
     get() = getSystemServiceOrThrow(Context.WALLPAPER_SERVICE)
 
-inline val Context.wifiManager: WifiManager?
+/**
+ * @throws ServiceNotFoundException When service is not found.
+ */
+inline val Context.wifiManager: WifiManager
     get() = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-        applicationContext.getTypedSystemService(Context.WIFI_SERVICE)
+        applicationContext.getSystemServiceOrThrow(Context.WIFI_SERVICE)
     } else {
-        getTypedSystemService(Context.WIFI_SERVICE)
+        getSystemServiceOrThrow(Context.WIFI_SERVICE)
     }
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.windowManager: WindowManager
     get() = getSystemServiceOrThrow(Context.WINDOW_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.inputMethodManager: InputMethodManager
     get() = getSystemServiceOrThrow(Context.INPUT_METHOD_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 inline val Context.accessibilityManager: AccessibilityManager
     get() = getSystemServiceOrThrow(Context.ACCESSIBILITY_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
+@get:RequiresApi(5)
 inline val Context.accountManager: AccountManager
     get() = getSystemServiceOrThrow(Context.ACCOUNT_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
+@get:RequiresApi(8)
 inline val Context.devicePolicyManager: DevicePolicyManager
     get() = getSystemServiceOrThrow(Context.DEVICE_POLICY_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
+@get:RequiresApi(8)
 inline val Context.dropBoxManager: DropBoxManager
     get() = getSystemServiceOrThrow(Context.DROPBOX_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
+@get:RequiresApi(8)
 inline val Context.uiModeManager: UiModeManager
     get() = getSystemServiceOrThrow(Context.UI_MODE_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
+@get:RequiresApi(9)
 inline val Context.downloadManager: DownloadManager
     get() = getSystemServiceOrThrow(Context.DOWNLOAD_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null since API 23.
+ *
+ * @throws ServiceNotFoundException When service is not found.
  */
+@get:RequiresApi(9)
 inline val Context.storageManager: StorageManager
     get() = getSystemServiceOrThrow(Context.STORAGE_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(10)
 inline val Context.nfcManager: NfcManager
     get() = getSystemServiceOrThrow(Context.NFC_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(12)
 inline val Context.usbManager: UsbManager
     get() = getSystemServiceOrThrow(Context.USB_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(14)
 inline val Context.textServicesManager: TextServicesManager
     get() = getSystemServiceOrThrow(Context.TEXT_SERVICES_MANAGER_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(14)
 inline val Context.wifiP2pManager: WifiP2pManager
     get() = getSystemServiceOrThrow(Context.WIFI_P2P_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(16)
 inline val Context.inputManager: InputManager
     get() = getSystemServiceOrThrow(Context.INPUT_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(16)
 inline val Context.mediaRouter: MediaRouter
     get() = getSystemServiceOrThrow(Context.MEDIA_ROUTER_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(16)
 inline val Context.nsdManager: NsdManager
     get() = getSystemServiceOrThrow(Context.NSD_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(17)
 inline val Context.displayManager: DisplayManager
     get() = getSystemServiceOrThrow(Context.DISPLAY_SERVICE)
 
+/**
+ * Never null.
+ *
+ * Requires `support-compat` library version 24.2.0 or later
+ * or `support-v4` library version 22.0.0 or later.
+ */
 inline val Context.displayManagerCompat: DisplayManagerCompat
     get() = DisplayManagerCompat.getInstance(this)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(17)
 inline val Context.userManager: UserManager
     get() = getSystemServiceOrThrow(Context.USER_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(18)
-inline val Context.bluetoothManager: BluetoothManager?
-    get() = getTypedSystemService(Context.BLUETOOTH_SERVICE)
+inline val Context.bluetoothManager: BluetoothManager
+    get() = getSystemServiceOrThrow(Context.BLUETOOTH_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(19)
 inline val Context.appOpsManager: AppOpsManager
     get() = getSystemServiceOrThrow(Context.APP_OPS_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(19)
 inline val Context.captioningManager: CaptioningManager
     get() = getSystemServiceOrThrow(Context.CAPTIONING_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(19)
-inline val Context.consumerIrManager: ConsumerIrManager?
-    get() = getTypedSystemService(Context.CONSUMER_IR_SERVICE)
+inline val Context.consumerIrManager: ConsumerIrManager
+    get() = getSystemServiceOrThrow(Context.CONSUMER_IR_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(19)
 inline val Context.printManager: PrintManager
     get() = getSystemServiceOrThrow(Context.PRINT_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(21)
 inline val Context.appWidgetManager: AppWidgetManager
     get() = getSystemServiceOrThrow(Context.APPWIDGET_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(21)
 inline val Context.batteryManager: BatteryManager
     get() = getSystemServiceOrThrow(Context.BATTERY_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(21)
 inline val Context.cameraManager: CameraManager
     get() = getSystemServiceOrThrow(Context.CAMERA_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(21)
 inline val Context.jobScheduler: JobScheduler
     get() = getSystemServiceOrThrow(Context.JOB_SCHEDULER_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(21)
 inline val Context.launcherApps: LauncherApps
     get() = getSystemServiceOrThrow(Context.LAUNCHER_APPS_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(21)
 inline val Context.mediaProjectionManager: MediaProjectionManager
     get() = getSystemServiceOrThrow(Context.MEDIA_PROJECTION_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(21)
 inline val Context.mediaSessionManager: MediaSessionManager
     get() = getSystemServiceOrThrow(Context.MEDIA_SESSION_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(21)
 inline val Context.restrictionsManager: RestrictionsManager
     get() = getSystemServiceOrThrow(Context.RESTRICTIONS_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(21)
-inline val Context.telecomManager: TelecomManager?
-    get() = getTypedSystemService(Context.TELECOM_SERVICE)
+inline val Context.telecomManager: TelecomManager
+    get() = getSystemServiceOrThrow(Context.TELECOM_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(21)
 inline val Context.tvInputManager: TvInputManager
     get() = getSystemServiceOrThrow(Context.TV_INPUT_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(22)
-inline val Context.subscriptionManager: SubscriptionManager?
-    get() = getTypedSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE)
+inline val Context.subscriptionManager: SubscriptionManager
+    get() = getSystemServiceOrThrow(Context.TELEPHONY_SUBSCRIPTION_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(22)
 inline val Context.usageStatsManager: UsageStatsManager
     get() = getSystemServiceOrThrow(Context.USAGE_STATS_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(23)
-inline val Context.carrierConfigManager: CarrierConfigManager?
-    get() = getTypedSystemService(Context.CARRIER_CONFIG_SERVICE)
-
-@get:RequiresApi(23)
-inline val Context.fingerprintManager: FingerprintManager?
-    get() = getTypedSystemService(Context.FINGERPRINT_SERVICE)
+inline val Context.carrierConfigManager: CarrierConfigManager
+    get() = getSystemServiceOrThrow(Context.CARRIER_CONFIG_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
+ */
+@get:RequiresApi(23)
+inline val Context.fingerprintManager: FingerprintManager
+    get() = getSystemServiceOrThrow(Context.FINGERPRINT_SERVICE)
+
+/**
+ * Never null.
+ *
+ * Requires `support-compat` library version 23.0.0 or later.
  */
 inline val Context.fingerprintManagerCompat: FingerprintManagerCompat
     get() = FingerprintManagerCompat.from(this)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(23)
 inline val Context.midiManager: MidiManager
     get() = getSystemServiceOrThrow(Context.MIDI_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(23)
-inline val Context.networkStatsManager: NetworkStatsManager?
-    get() = getTypedSystemService(Context.NETWORK_STATS_SERVICE)
+inline val Context.networkStatsManager: NetworkStatsManager
+    get() = getSystemServiceOrThrow(Context.NETWORK_STATS_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(24)
 inline val Context.hardwarePropertiesManager: HardwarePropertiesManager
     get() = getSystemServiceOrThrow(Context.HARDWARE_PROPERTIES_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(24)
 inline val Context.systemHealthManager: SystemHealthManager
     get() = getSystemServiceOrThrow(Context.SYSTEM_HEALTH_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(25)
 inline val Context.shortcutManager: ShortcutManager
     get() = getSystemServiceOrThrow(Context.SHORTCUT_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(26)
 inline val Context.companionDeviceManager: CompanionDeviceManager
     get() = getSystemServiceOrThrow(Context.COMPANION_DEVICE_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @get:RequiresApi(26)
 inline val Context.storageStatsManager: StorageStatsManager
     get() = getSystemServiceOrThrow(Context.STORAGE_STATS_SERVICE)
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * Never null.
  */
 @get:RequiresApi(26)
 inline val Context.textClassificationManager: TextClassificationManager
     get() = getSystemServiceOrThrow(Context.TEXT_CLASSIFICATION_SERVICE)
 
+/**
+ * @throws ServiceNotFoundException When service is not found.
+ */
 @get:RequiresApi(26)
-inline val Context.wifiAwareManager: WifiAwareManager?
-    get() = getTypedSystemService(Context.WIFI_AWARE_SERVICE)
+inline val Context.wifiAwareManager: WifiAwareManager
+    get() = getSystemServiceOrThrow(Context.WIFI_AWARE_SERVICE)
 
-inline fun <reified T> Context.getTypedSystemService(name: String): T? =
+inline fun <reified T> Context.getSystemServiceOrNull(name: String): T? =
         getSystemService(name) as T?
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
-inline fun <reified T> Context.getSystemServiceOrThrow(name: String) =
-        getSystemService(name) as T? ?:
-                throw SystemServiceNotFoundException(
+inline fun <reified T> Context.getSystemServiceOrThrow(name: String): T =
+        getSystemServiceOrNull<T>(name) ?:
+                throw ServiceNotFoundException(
                         "${T::class.java.simpleName} not found.")
 
 /**
- * @throws SystemServiceNotFoundException When service is not found.
+ * @throws ServiceNotFoundException When service is not found.
  */
 @RequiresApi(23)
-inline fun <reified T> Context.getSystemServiceOrThrow() =
-        getSystemService(T::class.java) ?:
-                throw SystemServiceNotFoundException(
-                        "${T::class.java.simpleName} not found.")
+inline fun <reified T> Context.getSystemServiceOrNull(): T? =
+        getSystemService(T::class.java)
 
-// TODO Provide a delegate
+/**
+ * @throws ServiceNotFoundException When service is not found.
+ */
+@RequiresApi(23)
+inline fun <reified T> Context.getSystemServiceOrThrow(): T =
+        getSystemServiceOrNull<T>() ?:
+                throw ServiceNotFoundException(
+                        "${T::class.java.simpleName} not found.")

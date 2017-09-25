@@ -1,7 +1,10 @@
 <manifest package="net.xpece.android.commons.resources"
           xmlns:android="http://schemas.android.com/apk/res/android"
           android:versionCode="1"
-          android:versionName="1">
+          android:versionName="1"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-sdk tools:overrideLibrary="android.support.compat"/>
 
     <application/>
 </manifest>

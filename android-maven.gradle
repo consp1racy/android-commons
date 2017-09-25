@@ -18,6 +18,7 @@ publishing {
                         dependencyNode.appendNode('groupId', it.group)
                         dependencyNode.appendNode('artifactId', it.name)
                         dependencyNode.appendNode('version', it.version)
+                        dependencyNode.appendNode('scope', 'compile')
                     }
                 }
                 configurations.getByName("api").allDependencies.each {
@@ -26,6 +27,7 @@ publishing {
                         dependencyNode.appendNode('groupId', it.group)
                         dependencyNode.appendNode('artifactId', it.name)
                         dependencyNode.appendNode('version', it.version)
+                        dependencyNode.appendNode('scope', 'compile')
                     }
                 }
                 configurations.getByName("implementation").allDependencies.each {
@@ -34,6 +36,7 @@ publishing {
                         dependencyNode.appendNode('groupId', it.group)
                         dependencyNode.appendNode('artifactId', it.name)
                         dependencyNode.appendNode('version', it.version)
+                        dependencyNode.appendNode('scope', 'runtime')
                     }
                 }
             }

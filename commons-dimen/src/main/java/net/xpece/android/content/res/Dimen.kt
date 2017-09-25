@@ -2,12 +2,8 @@ package net.xpece.android.content.res
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.res.Resources
-import android.support.annotation.AttrRes
-import android.support.annotation.DimenRes
-import android.util.TypedValue
-import net.xpece.android.content.XpInitProvider
-import net.xpece.android.content.resolveResourceId
 
 /**
  * Created by pechanecjr on 4. 1. 2015.
@@ -62,62 +58,18 @@ data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
         return "Dimen(${value}px ~ ${dp}dp ~ ${sp}sp)"
     }
 
-    /**
-     * Internal companion class is not accessible from outside of package in Kotlin but in Java
-     * it's merged into the public parent class. Brilliant!
-     */
-    internal companion object {
+    companion object {
         @SuppressLint("StaticFieldLeak")
-        private var sContext: Context = XpInitProvider.sContext.applicationContext
+        @JvmStatic
+        private var sContext: Context = object : ContextWrapper(null) {
+            override fun getResources(): Resources {
+                throw IllegalStateException("You forgot to call init(Context).")
+            }
+        }
 
         @JvmStatic
         fun init(context: Context) {
             sContext = context.applicationContext
         }
-
-        @JvmStatic
-        fun attr(context: Context, @AttrRes attr: Int, fallback: Number = 0): Dimen {
-            val resId = context.resolveResourceId(attr, 0)
-            return res(context, resId, fallback)
-        }
-
-        @JvmStatic
-        fun res(context: Context, @DimenRes resId: Int, fallback: Number = 0): Dimen = try {
-            Dimen(context.resources.getDimension(resId))
-        } catch (erx: Resources.NotFoundException) {
-            Dimen(fallback.toFloat())
-        }
-
-        @JvmStatic
-        fun dp(context: Context, dp: Number): Dimen {
-            val dpf = dp.toFloat()
-            val value = TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP, dpf, context.resources.displayMetrics)
-            return Dimen(value)
-        }
-
-        @JvmStatic
-        fun sp(context: Context, sp: Number): Dimen {
-            val spf = sp.toFloat()
-            val value = TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_SP, spf, context.resources.displayMetrics)
-            return Dimen(value)
-        }
-
-        @JvmStatic
-        fun res(@DimenRes resId: Int): Dimen = res(
-                sContext, resId)
-
-        @JvmStatic
-        fun dp(dp: Number): Dimen = dp(
-                sContext, dp)
-
-        @JvmStatic
-        fun sp(sp: Number): Dimen = sp(
-                sContext, sp)
-
-        @JvmStatic
-        fun px(px: Number): Dimen = Dimen(
-                px.toFloat())
     }
 }

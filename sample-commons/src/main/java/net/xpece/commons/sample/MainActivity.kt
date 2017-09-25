@@ -1,11 +1,14 @@
 package net.xpece.commons.sample
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.BaseTransientBottomBar
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
@@ -57,7 +60,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
     }
 
     private lateinit var connectivityObservable: Flowable<ConnectivityInfo>
-    private lateinit var connectivitySubscription: Disposable
+    private var connectivitySubscription: Disposable? = null
 
     private lateinit var pager: ViewPager
 
@@ -80,7 +83,8 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
 
         val icon = toolbar.context.resolveDrawable(R.attr.homeAsUpIndicator)
         toolbar.navigationIcon = icon
-        val title = this.resolveString(R.style.Widget_AppCompat_ActionButton_Overflow, android.R.attr.contentDescription)
+        val title = this.resolveString(
+                R.style.Widget_AppCompat_ActionButton_Overflow, android.R.attr.contentDescription)
         toolbar.title = title
 
         if (savedInstanceState == null) {
@@ -109,22 +113,24 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
 
     override fun onStart() {
         super.onStart()
-        connectivitySubscription = connectivityObservable
-                .skipWhile { it.isConnected }
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    connectivityCallback.onConnectivityChanged(it)
-                }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) ==
+                PackageManager.PERMISSION_GRANTED) {
+            connectivitySubscription = connectivityObservable
+                    .skipWhile { it.isConnected }
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        connectivityCallback.onConnectivityChanged(it)
+                    }
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        connectivitySubscription.dispose()
+        connectivitySubscription?.dispose()
     }
 
     internal class MyPagerAdapter : PagerAdapter() {
-
         override fun getCount(): Int {
             return 4
         }
@@ -164,6 +170,6 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
     }
 
     companion object {
-        private val TAG = MainActivity::class.java.simpleName
+        @JvmField val TAG = MainActivity::class.java.simpleName
     }
 }

@@ -6,7 +6,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 4
     }
 
     buildTypes {
@@ -18,7 +18,7 @@ android {
 
 dependencies {
     implementation "com.android.support:support-annotations:$supportLibsVersion"
-    implementation "com.android.support:support-compat:$supportLibsVersion"
+    api "com.android.support:support-compat:$supportLibsVersion"
     compileOnly "com.android.support:appcompat-v7:$supportLibsVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 

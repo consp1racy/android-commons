@@ -5,15 +5,8 @@ import android.content.res.TypedArray
 import android.support.annotation.AttrRes
 import android.support.annotation.StyleRes
 
-private val TEMP_ARRAY = ThreadLocal<IntArray>()
-
-private fun getTempArray(): IntArray {
-    var tempArray = TEMP_ARRAY.get()
-    if (tempArray == null) {
-        tempArray = IntArray(1)
-        TEMP_ARRAY.set(tempArray)
-    }
-    return tempArray
+private val TEMP_ARRAY = object : ThreadLocal<IntArray>() {
+    override fun initialValue(): IntArray = intArrayOf(0)
 }
 
 fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int): Int =
@@ -28,8 +21,8 @@ fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback
     }
 }
 
-fun Context.obtainTypedArray(style: Int, attr: Int): TypedArray {
-    val tempArray = getTempArray()
+fun Context.obtainTypedArray(@StyleRes style: Int, @AttrRes attr: Int): TypedArray {
+    val tempArray = TEMP_ARRAY.get()
     tempArray[0] = attr
     return obtainStyledAttributes(style, tempArray)
 }
