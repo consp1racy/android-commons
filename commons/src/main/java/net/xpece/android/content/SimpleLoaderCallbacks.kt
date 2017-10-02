@@ -7,7 +7,7 @@ import android.support.v4.content.Loader
 /**
  * @author Eugen on 04.01.2017.
  */
-
+@Deprecated("Don't use loaders.")
 abstract class SimpleLoaderCallbacks<D> : LoaderManager.LoaderCallbacks<D> {
     override fun onLoaderReset(loader: Loader<D>) {
         //

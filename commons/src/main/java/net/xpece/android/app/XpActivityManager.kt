@@ -6,7 +6,7 @@ import android.app.ActivityManager
 import android.app.Service
 
 @Suppress("DEPRECATION")
-inline fun <reified T : Service> ActivityManager.getServiceInfo(): ActivityManager.RunningServiceInfo? =
+inline fun <reified T : Service> ActivityManager.getRunningServiceInfo(): ActivityManager.RunningServiceInfo? =
         getRunningServices(Integer.MAX_VALUE).firstOrNull {
             T::class.java.name == it.service.className
         }

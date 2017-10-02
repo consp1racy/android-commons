@@ -1,4 +1,5 @@
 @file:JvmName("XpFragment")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.app
 
@@ -7,58 +8,49 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.app.updateLoaderManagerHostController as updateLoaderManagerHostControllerImpl
 
 /**
  * Created by Eugen on 29.10.2016.
  */
 
-fun Fragment.invalidateOptionsMenu() = activity?.apply { supportInvalidateOptionsMenu() }
+@Suppress("DEPRECATION")
+inline fun Fragment.invalidateOptionsMenu() = activity.supportInvalidateOptionsMenu()
 
-fun android.app.Fragment.invalidateOptionsMenu() = activity?.apply { invalidateOptionsMenu() }
+inline fun android.app.Fragment.invalidateOptionsMenu() = activity.invalidateOptionsMenu()
 
-/**
- * Hack to force update the LoaderManager's host to avoid a memory leak in retained/detached fragments.
- * Call this in Fragment.onAttach()
- *
- * https://code.google.com/p/android/issues/detail?id=227136
- *
- * Remove when the bug is fixed in support-v4.
- */
-fun Fragment.updateLoaderManagerHostController() {
-    updateLoaderManagerHostController()
-}
-
-fun DialogFragment.showAllowingStateLoss(fragmentManager: FragmentManager, tag: String) {
+inline fun DialogFragment.showAllowingStateLoss(fragmentManager: FragmentManager, tag: String) {
     try {
         show(fragmentManager, tag)
-    } catch (ex :IllegalStateException) {
-        //
-    }
-}
-fun DialogFragment.showAllowingStateLoss(fragmentTransaction: FragmentTransaction, tag: String) {
-    try {
-        show(fragmentTransaction, tag)
-    } catch (ex :IllegalStateException) {
-        //
+    } catch (ignored: IllegalStateException) {
     }
 }
 
-fun android.app.DialogFragment.showAllowingStateLoss(fragmentManager: android.app.FragmentManager, tag: String) {
-    try {
-        show(fragmentManager, tag)
-    } catch (ex :IllegalStateException) {
-        //
-    }
-}
-fun android.app.DialogFragment.showAllowingStateLoss(fragmentTransaction: android.app.FragmentTransaction, tag: String) {
+inline fun DialogFragment.showAllowingStateLoss(
+        fragmentTransaction: FragmentTransaction, tag: String) {
     try {
         show(fragmentTransaction, tag)
-    } catch (ex :IllegalStateException) {
-        //
+    } catch (ignored: IllegalStateException) {
+    }
+}
+
+inline fun android.app.DialogFragment.showAllowingStateLoss(
+        fragmentManager: android.app.FragmentManager, tag: String) {
+    try {
+        show(fragmentManager, tag)
+    } catch (ignored: IllegalStateException) {
+    }
+}
+
+inline fun android.app.DialogFragment.showAllowingStateLoss(
+        fragmentTransaction: android.app.FragmentTransaction, tag: String) {
+    try {
+        show(fragmentTransaction, tag)
+    } catch (ignored: IllegalStateException) {
     }
 }
 
 inline fun <T : Fragment> T.withArguments(argProvider: Bundle.() -> Unit): T {
-    arguments = (arguments ?:Bundle()).apply(argProvider)
+    arguments = (arguments ?: Bundle()).apply(argProvider)
     return this
 }

@@ -1,11 +1,12 @@
 @file:JvmName("XpPreferences")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.content
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 
-@SuppressLint("CommitPrefEdits")
+@SuppressLint("CommitPrefEdits", "ApplySharedPref")
 inline fun SharedPreferences.update(commit: Boolean = false, func: SharedPreferences.Editor.() -> Unit) {
     val editor = edit()
     editor.func()

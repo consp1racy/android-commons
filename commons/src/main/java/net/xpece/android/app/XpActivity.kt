@@ -11,6 +11,7 @@ import android.support.v4.app.TaskStackBuilder
  * Created by Eugen on 18.10.2016.
  */
 @JvmOverloads
+@Deprecated("Needs revision.")
 fun Activity.navigateUpEx(intent: Intent = NavUtils.getParentActivityIntent(this)): Boolean {
     if (callingActivity != null) {
         finish() // Deliver result.

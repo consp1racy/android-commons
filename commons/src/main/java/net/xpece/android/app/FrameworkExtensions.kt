@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package net.xpece.android.app
 
 import android.content.res.ColorStateList
@@ -6,10 +8,4 @@ import java.util.*
 
 inline fun @receiver:ColorInt Int.toColorStateList() = ColorStateList.valueOf(this)!!
 
-fun <E> List<E>.asArrayList(): ArrayList<E> {
-    if (this is ArrayList<E>) {
-        return this
-    } else {
-        return ArrayList(this)
-    }
-}
+inline fun <E> List<E>.asArrayList(): ArrayList<E> = this as? ArrayList<E> ?: ArrayList(this)
