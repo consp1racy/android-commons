@@ -1,3 +1,5 @@
+@file:JvmName("XpTelephonyManager")
+
 package net.xpece.android.telephony
 
 import android.Manifest
@@ -25,3 +27,18 @@ val TelephonyManager.isDataEnabledCompat: Boolean
     } else {
         TelephonyManagerReflection.methodGetDataEnabled.invoke(this) as Boolean
     }
+
+inline val TelephonyManager.isPhone: Boolean
+    get() = phoneType != TelephonyManager.PHONE_TYPE_NONE
+
+inline val TelephonyManager.isSimStateReady: Boolean
+    get() = simState == TelephonyManager.SIM_STATE_READY
+
+inline val TelephonyManager.isCallStateIdle: Boolean
+    get() = callState == TelephonyManager.CALL_STATE_IDLE
+
+inline val TelephonyManager.isVoiceCapableCompat: Boolean
+    get() = Build.VERSION.SDK_INT < 22 || isVoiceCapable
+
+inline val TelephonyManager.isCallCapableInstantly: Boolean
+    get() = isVoiceCapableCompat && isPhone && isSimStateReady && isCallStateIdle

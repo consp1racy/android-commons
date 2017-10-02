@@ -1,3 +1,5 @@
+@file:JvmName("XpConnectivityManager")
+
 package net.xpece.android.net
 
 import android.Manifest
