@@ -67,12 +67,6 @@ public final class XpNumberPicker {
     }
 
     public static void setSelectionDividerTint(NumberPicker picker, ColorStateList color) {
-        if (Build.VERSION.SDK_INT < 11) return;
-
-        setSelectionDividerTintInt(picker, color);
-    }
-
-    static void setSelectionDividerTintInt(final NumberPicker picker, final ColorStateList color) {
         Drawable d = getSelectionDivider(picker);
         if (d != null) {
             d = DrawableCompat.wrap(d);

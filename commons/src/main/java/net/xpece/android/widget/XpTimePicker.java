@@ -159,15 +159,15 @@ public final class XpTimePicker {
             NumberPicker np;
             np = getAmPmSpinner(picker);
             if (np != null) {
-                XpNumberPicker.setSelectionDividerTintInt(np, color);
+                XpNumberPicker.setSelectionDividerTint(np, color);
             }
             np = getMinuteSpinner(picker);
             if (np != null) {
-                XpNumberPicker.setSelectionDividerTintInt(np, color);
+                XpNumberPicker.setSelectionDividerTint(np, color);
             }
             np = getHourSpinner(picker);
             if (np != null) {
-                XpNumberPicker.setSelectionDividerTintInt(np, color);
+                XpNumberPicker.setSelectionDividerTint(np, color);
             }
         } else {
             Object delegate = getDelegate(picker);
@@ -175,15 +175,15 @@ public final class XpTimePicker {
                 NumberPicker np;
                 np = getAmPmSpinner(delegate);
                 if (np != null) {
-                    XpNumberPicker.setSelectionDividerTintInt(np, color);
+                    XpNumberPicker.setSelectionDividerTint(np, color);
                 }
                 np = getMinuteSpinner(delegate);
                 if (np != null) {
-                    XpNumberPicker.setSelectionDividerTintInt(np, color);
+                    XpNumberPicker.setSelectionDividerTint(np, color);
                 }
                 np = getHourSpinner(delegate);
                 if (np != null) {
-                    XpNumberPicker.setSelectionDividerTintInt(np, color);
+                    XpNumberPicker.setSelectionDividerTint(np, color);
                 }
             }
         }

@@ -132,15 +132,15 @@ public final class XpDatePicker {
             NumberPicker np;
             np = getYearSpinner(picker);
             if (np != null) {
-                XpNumberPicker.setSelectionDividerTintInt(np, color);
+                XpNumberPicker.setSelectionDividerTint(np, color);
             }
             np = getMonthSpinner(picker);
             if (np != null) {
-                XpNumberPicker.setSelectionDividerTintInt(np, color);
+                XpNumberPicker.setSelectionDividerTint(np, color);
             }
             np = getDaySpinner(picker);
             if (np != null) {
-                XpNumberPicker.setSelectionDividerTintInt(np, color);
+                XpNumberPicker.setSelectionDividerTint(np, color);
             }
         } else {
             Object delegate = getDelegate(picker);
@@ -148,15 +148,15 @@ public final class XpDatePicker {
                 NumberPicker np;
                 np = getYearSpinner(delegate);
                 if (np != null) {
-                    XpNumberPicker.setSelectionDividerTintInt(np, color);
+                    XpNumberPicker.setSelectionDividerTint(np, color);
                 }
                 np = getMonthSpinner(delegate);
                 if (np != null) {
-                    XpNumberPicker.setSelectionDividerTintInt(np, color);
+                    XpNumberPicker.setSelectionDividerTint(np, color);
                 }
                 np = getDaySpinner(delegate);
                 if (np != null) {
-                    XpNumberPicker.setSelectionDividerTintInt(np, color);
+                    XpNumberPicker.setSelectionDividerTint(np, color);
                 }
             }
         }
