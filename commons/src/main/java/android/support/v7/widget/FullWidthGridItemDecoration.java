@@ -3,9 +3,8 @@ package android.support.v7.widget;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.View;
-
-import timber.log.Timber;
 
 /**
  * @author Eugen on 25.04.2017.
@@ -24,7 +23,7 @@ public abstract class FullWidthGridItemDecoration extends RecyclerView.ItemDecor
             try {
                 layout = (FullWidthGridLayoutManager) parent.getLayoutManager();
             } catch (ClassCastException ex) {
-                Timber.e(parent.getLayoutManager() + " is not supported by " + TAG + ".");
+                Log.e(TAG, parent.getLayoutManager() + " is not supported by " + this.getClass() + ".");
                 super.getItemOffsets(outRect, view, parent, state);
                 return;
             }

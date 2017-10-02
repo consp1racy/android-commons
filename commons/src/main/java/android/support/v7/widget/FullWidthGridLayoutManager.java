@@ -26,8 +26,6 @@ import android.view.ViewGroup;
 
 import java.util.Arrays;
 
-import timber.log.Timber;
-
 /**
  * A {@link RecyclerView.LayoutManager} implementations that lays out items in a grid.
  * <p>
@@ -284,7 +282,7 @@ public class FullWidthGridLayoutManager extends LinearLayoutManager {
     @Override
     public void setMeasuredDimension(Rect childrenBounds, int wSpec, int hSpec) {
         if (mCachedBorders == null) {
-            Timber.w("mCachedBorders is null.");
+            Log.d(TAG, "mCachedBorders is null.");
             super.setMeasuredDimension(childrenBounds, wSpec, hSpec);
         }
         final int width, height;
