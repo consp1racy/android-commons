@@ -22,7 +22,7 @@ abstract class PrintablePreferenceDelegate<T>(val prefs: SharedPreferences, val 
         }
     }
 
-    open protected fun toString(input: T?) = input?.toString()
+    open protected fun toString(input: T) = input.toString()
 
-    abstract protected fun fromString(input: String?) : T?
+    abstract protected fun fromString(input: String) : T
 }
