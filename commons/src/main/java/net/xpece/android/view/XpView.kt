@@ -3,6 +3,7 @@
 package net.xpece.android.view
 
 import android.animation.LayoutTransition
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.graphics.Color
 import android.graphics.Rect
@@ -44,9 +45,11 @@ fun View.visible(): View {
     return this
 }
 
-inline fun View.isVisible(): Boolean = visibility == View.VISIBLE
-
-inline fun View.setVisible(visible: Boolean) = if (visible) visibility = View.VISIBLE else visibility = View.GONE
+inline var View.visible: Boolean
+    get() = visibility == View.VISIBLE
+    set(value) {
+        visibility = if (value) View.VISIBLE else View.GONE
+    }
 
 @JvmOverloads
 fun TextView.setTextAndVisibility(text: CharSequence?, invisible: Boolean = false) {
@@ -127,6 +130,7 @@ fun ImageView.switchImage(d: Drawable?, duration: Int = 100) {
     }
 }
 
+@SuppressLint("RestrictedApi")
 @JvmOverloads
 fun ImageView.switchImage(@DrawableRes resId: Int, duration: Int = 100) {
     val d = AppCompatDrawableManager.get().getDrawable(context, resId)
@@ -134,6 +138,7 @@ fun ImageView.switchImage(@DrawableRes resId: Int, duration: Int = 100) {
 }
 
 @JvmOverloads
+@Deprecated("Use tooltips from the support library version 26.")
 fun View.toastContentDescription(text: CharSequence = this.contentDescription): Boolean {
     val screenPos = IntArray(2)
     val displayFrame = Rect()
