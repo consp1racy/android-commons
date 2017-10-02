@@ -7,12 +7,14 @@ import android.support.v4.content.Loader
  * @author Eugen on 04.01.2017.
  */
 
+@Deprecated("Don't use Loaders.")
 fun <D> buildLoaderCallbacks(onCreate: () -> Loader<D>,
                              onSuccess: (loader: Loader<D>, data: D) -> (Unit)) = object : SimpleLoaderCallbacks<D>() {
     override fun onCreateLoader(id: Int, args: Bundle?) = onCreate()
     override fun onLoadSuccess(loader: Loader<D>, data: D) = onSuccess(loader, data)
 }
 
+@Deprecated("Don't use Loaders.")
 fun <D> buildLoaderCallbacks(onCreate: () -> Loader<D>,
                              onSuccess: (loader: Loader<D>, data: D) -> (Unit),
                              onError: (loader: Loader<D>) -> (Unit) = {}) = object : SimpleLoaderCallbacks<D>() {

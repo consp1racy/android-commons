@@ -11,9 +11,8 @@ interface ViewContainer {
     companion object {
         /** An [ViewContainer] which returns the normal activity content view.  */
         val DEFAULT = object : ViewContainer {
-            override fun forActivity(activity: Activity): ViewGroup {
-                return activity.findViewById<ViewGroup>(android.R.id.content)
-            }
+            override fun forActivity(activity: Activity): ViewGroup =
+                    activity.findViewById(android.R.id.content)
         }
     }
 }
