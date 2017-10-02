@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * https://github.com/ksoichiro/Android-ObservableScrollView/blob/master/library/src/main/java/com/github/ksoichiro/android/observablescrollview/CacheFragmentStatePagerAdapter.java
+ *
+ * @deprecated Don't use fragments in ViewPager. It's a pain.
  */
+@Deprecated
 public abstract class CacheFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     private static final String STATE_SUPER_STATE = "superState";
     private static final String STATE_PAGES = "pages";

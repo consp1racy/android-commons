@@ -29,6 +29,7 @@ import net.xpece.android.R;
  *
  * @author Eugen on 11. 10. 2015.
  */
+@Deprecated
 public abstract class AsyncTaskFragment<Progress, Result> extends BaseDialogFragment {
     private static final String TAG = AsyncTaskFragment.class.getSimpleName();
 

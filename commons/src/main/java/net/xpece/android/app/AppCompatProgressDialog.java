@@ -40,7 +40,10 @@ import java.text.NumberFormat;
  * Only a text message or a view can be used at the same time.</p>
  * <p>The dialog can be made cancelable on back key press.</p>
  * <p>The progress range is 0..10000.</p>
+ *
+ * @deprecated This dialog results in poor user experience. Do something else.
  */
+@Deprecated
 public class AppCompatProgressDialog extends AlertDialog {
 
     /**
