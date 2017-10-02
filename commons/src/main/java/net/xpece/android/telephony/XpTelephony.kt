@@ -9,9 +9,8 @@ val TelephonyManager.isSimStateReady: Boolean
 val TelephonyManager.isCallStateIdle: Boolean
     get() = callState == TelephonyManager.CALL_STATE_IDLE
 
-val TelephonyManager?.isCallCapableInstantly: Boolean
-    get() = this != null &&
-            (Build.VERSION.SDK_INT < 23 || phoneCount > 0) &&
+val TelephonyManager.isCallCapableInstantly: Boolean
+    get() = (Build.VERSION.SDK_INT < 23 || phoneCount > 0) &&
             (Build.VERSION.SDK_INT < 22 || isVoiceCapable) &&
             phoneType != TelephonyManager.PHONE_TYPE_NONE &&
             simState == TelephonyManager.SIM_STATE_READY &&
