@@ -1,5 +1,6 @@
 @file:JvmName("XpContext")
 @file:JvmMultifileClass
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.content
 
@@ -41,26 +42,41 @@ private fun getTypedValue(): TypedValue {
     return typedValue
 }
 
-fun <T : Activity> Context.startActivity(activity: Class<T>, func: Intent.() -> Unit = {}) {
-    val intent = Intent(this, activity)
+inline fun <reified T : Activity> Context.startActivity() {
+    startActivity<T> { }
+}
+
+inline fun <reified T : Activity> Context.startActivity(func: Intent.() -> Unit) {
+    val intent = Intent(this, T::class.java)
     intent.func()
     startActivity(intent)
 }
 
-fun <T : Activity> Fragment.startActivity(activity: Class<T>, func: Intent.() -> Unit = {}) {
-    val intent = Intent(this.context, activity)
+inline fun <reified T : Activity> Fragment.startActivity() {
+    startActivity<T> { }
+}
+
+inline fun <reified T : Activity> Fragment.startActivity(func: Intent.() -> Unit) {
+    val intent = Intent(this.context, T::class.java)
     intent.func()
     startActivity(intent)
 }
 
-fun <T : Activity> android.app.Fragment.startActivity(activity: Class<T>, func: Intent.() -> Unit = {}) {
-    val intent = Intent(this.activity, activity)
+inline fun <reified T : Activity> android.app.Fragment.startActivity() {
+    startActivity<T> { }
+}
+
+inline fun <reified T : Activity> android.app.Fragment.startActivity(func: Intent.() -> Unit) {
+    val intent = Intent(this.activity, T::class.java)
     intent.func()
     startActivity(intent)
 }
 
-fun <T : Activity> Context.createIntent(activity: Class<T>, func: Intent.() -> Unit = {}): Intent {
-    val intent = Intent(this, activity)
+inline fun <reified T : Activity> Context.createIntent(): Intent =
+        createIntent<T> { }
+
+inline fun <reified T : Activity> Context.createIntent(func: Intent.() -> Unit): Intent {
+    val intent = Intent(this, T::class.java)
     intent.func()
     return intent
 }
@@ -75,10 +91,10 @@ fun Context.view(uri: Uri, func: Intent.() -> Unit = {}) {
     }
 }
 
-fun viewIntent(uri: String, func: Intent.() -> Unit): Intent
+fun viewIntent(uri: String, func: Intent.() -> Unit = {}): Intent
         = viewIntent(Uri.parse(uri)!!, func)
 
-fun viewIntent(uri: Uri, func: Intent.() -> Unit): Intent {
+fun viewIntent(uri: Uri, func: Intent.() -> Unit = {}): Intent {
     val i = Intent(Intent.ACTION_VIEW, uri)
     i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
     i.func()
@@ -86,14 +102,16 @@ fun viewIntent(uri: Uri, func: Intent.() -> Unit): Intent {
 }
 
 @JvmOverloads
-fun Context.openPlayStore(packageName: String = this.packageName)
+inline fun Context.openPlayStore(packageName: String = this.packageName)
         = view(getPlayStoreUri(packageName))
 
 @JvmOverloads
-fun Context.openPlayStoreIntent(packageName: String = this.packageName, func: Intent.() -> Unit = {}): Intent
+fun Context.openPlayStoreIntent(
+        packageName: String = this.packageName, func: Intent.() -> Unit = {}): Intent
         = viewIntent(getPlayStoreUri(packageName), func)
 
-inline fun getPlayStoreUri(packageName: String) = Uri.parse("http://play.google.com/store/apps/details?id=$packageName")!!
+inline fun getPlayStoreUri(packageName: String) = Uri.parse(
+        "http://play.google.com/store/apps/details?id=$packageName")!!
 
 inline fun Context.inflate(@LayoutRes layout: Int): View =
         layoutInflater.inflate(layout, null, false)
@@ -102,36 +120,37 @@ inline fun Context.inflate(@LayoutRes layout: Int): View =
 inline fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = true): View =
         context.layoutInflater.inflate(layout, this, attachToRoot)
 
-inline fun Context.notification(func: NotificationCompat.Builder.() -> Unit): NotificationCompat.Builder {
+inline fun Context.notification(
+        func: NotificationCompat.Builder.() -> Unit): NotificationCompat.Builder {
     val builder = NotificationCompat.Builder(this)
     builder.func()
     return builder
 }
 
-val Context.isRtl: Boolean
+inline val Context.isRtl: Boolean
     get() = if (Build.VERSION.SDK_INT < 17) {
         false
     } else {
         resources.configuration.layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL
     }
 
-val Context.isDebugBuild: Boolean
+inline val Context.isDebugBuild: Boolean
     get() = 0 != (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
 
 /**
  * @throws NullPointerException
  */
-val Context.colorPrimary: ColorStateList
+inline val Context.colorPrimary: ColorStateList
     get() = resolveColorStateList(R.attr.colorPrimary)!!
 
 /**
  * @throws NullPointerException
  */
-val Context.colorAccent: ColorStateList
+inline val Context.colorAccent: ColorStateList
     get() = resolveColorStateList(R.attr.colorAccent)!!
 
 /**
  * @throws NullPointerException
  */
-val Context.colorControlNormal: ColorStateList
+inline val Context.colorControlNormal: ColorStateList
     get() = resolveColorStateList(R.attr.colorControlNormal)!!
