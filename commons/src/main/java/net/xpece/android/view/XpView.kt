@@ -1,4 +1,5 @@
 @file:JvmName("XpView")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.view
 
@@ -43,6 +44,18 @@ fun View.invisible(): View {
 fun View.visible(): View {
     visibility = View.VISIBLE
     return this
+}
+
+@Deprecated("Use property.", ReplaceWith("visible"))
+@JvmName("isVisibleLegacy")
+@JvmSynthetic
+inline fun View.isVisible() = visible
+
+@Deprecated("Use property.", ReplaceWith("visible"))
+@JvmName("setVisibleLegacy")
+@JvmSynthetic
+inline fun View.setVisible(visible:Boolean ) {
+     this.visible = visible
 }
 
 inline var View.visible: Boolean
