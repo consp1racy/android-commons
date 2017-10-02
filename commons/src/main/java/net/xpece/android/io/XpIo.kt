@@ -17,13 +17,14 @@ fun Context.copy(inputUri: Uri, outputUri: Uri) {
 }
 
 @JvmOverloads
-fun InputStream.readToString(charset: String = "UTF-8"): String {
-    return Scanner(this, charset).useDelimiter("\\A").next()
-}
+@Deprecated("", ReplaceWith("string"))
+fun InputStream.readToString(charset: String = "UTF-8"): String = string(charset)
 
-fun InputStream.bytes(): ByteArray {
-    ByteArrayOutputStream().use {
-        this.copyTo(it)
-        return it.toByteArray()
-    }
+@JvmOverloads
+fun InputStream.string(charset: String = "UTF-8"): String =
+        Scanner(this, charset).useDelimiter("\\A").next()
+
+fun InputStream.bytes(): ByteArray = ByteArrayOutputStream().use {
+    this.copyTo(it)
+    return it.toByteArray()
 }
