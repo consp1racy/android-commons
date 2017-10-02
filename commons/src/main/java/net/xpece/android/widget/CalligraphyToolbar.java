@@ -8,7 +8,10 @@ import android.util.AttributeSet;
 
 /**
  * @author Eugen on 19. 4. 2016.
+ *
+ * @deprecated Support library version 26 supports fonts out-of-the-box.
  */
+@Deprecated
 public class CalligraphyToolbar extends Toolbar {
 
     private CalligraphyToolbarHelper mCalligraphyHelper;

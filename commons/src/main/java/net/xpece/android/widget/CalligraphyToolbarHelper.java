@@ -11,7 +11,10 @@ import java.lang.ref.WeakReference;
 
 /**
  * @author Eugen on 19. 4. 2016.
+ *
+ * @deprecated Support library version 26 supports fonts out-of-the-box.
  */
+@Deprecated
 public final class CalligraphyToolbarHelper {
 
     private WeakReference<TextView> mTitleTextView = new WeakReference<>(null);

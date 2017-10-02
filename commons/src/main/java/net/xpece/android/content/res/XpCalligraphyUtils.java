@@ -10,7 +10,10 @@ import static net.xpece.android.content.ResourcesKt.resolveString;
 
 /**
  * @author Eugen on 20. 4. 2016.
+ *
+ * @deprecated Support library version 26 supports fonts out-of-the-box.
  */
+@Deprecated
 public class XpCalligraphyUtils {
 
     public static void applyFontToTextView(final TextView titleTextView, final int titleTextAppearance) {
