@@ -8,8 +8,10 @@ import android.view.View;
 
 /**
  * @author Eugen on 26.08.2016.
+ *
+ * @deprecated Don't even create a widget that's not going to be used.
  */
-
+@Deprecated
 public class HideOnLollipopBehavior extends CoordinatorLayout.Behavior<View> {
     public HideOnLollipopBehavior() {
     }
