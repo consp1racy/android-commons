@@ -3,16 +3,23 @@ package net.xpece.android.view
 import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.annotation.RequiresApi
+import android.util.Log
 import android.view.View
 import net.xpece.android.os.readIntegerMap
 import net.xpece.android.os.writeMap
-import net.xpece.android.util.td
 
 /**
  * Created by Eugen on 27.02.2017.
  */
 @RequiresApi(17)
 class ViewIdGenerator {
+    companion object {
+        @JvmField
+        var DEBUG = false
+        @JvmField
+        val TAG = ViewIdGenerator::class.java.simpleName!!
+    }
+
     private val cache = mutableMapOf<String, Int>()
 
     @IdRes
@@ -20,7 +27,7 @@ class ViewIdGenerator {
         var out = cache[key]
         if (out == null) {
             out = View.generateViewId()
-            td { "Cache miss! Generated view ID $out for $key." }
+            log { "Cache miss! Generated view ID $out for $key." }
             cache[key] = out
         } else {
             //td { "Cache hit! View ID $out for $key." }
@@ -37,5 +44,10 @@ class ViewIdGenerator {
         val bundle = savedInstanceState.getBundle(key)
         val map = bundle.readIntegerMap()
         cache.putAll(map)
+    }
+
+    @Suppress("ConstantConditionIf")
+    private inline fun log(priority: Int = Log.DEBUG, lazyMessage: () -> String) {
+        if (DEBUG) Log.println(priority, TAG, lazyMessage())
     }
 }
