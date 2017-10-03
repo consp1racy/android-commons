@@ -27,9 +27,20 @@ import android.widget.*
 import net.xpece.android.R
 import net.xpece.android.content.resolveColor
 
-/**
- * @author Eugen on 29.07.2016.
- */
+private val methodViewRemovePerformClickCallback by lazy(LazyThreadSafetyMode.NONE) {
+    View::class.java.getDeclaredMethod("removePerformClickCallback").apply {
+        isAccessible = true
+    }
+}
+
+fun View.cancelPendingInputEventsCompat() {
+    if (Build.VERSION.SDK_INT >= 19) {
+        cancelPendingInputEvents()
+    } else {
+        methodViewRemovePerformClickCallback.invoke(this)
+        cancelLongPress()
+    }
+}
 
 fun View.gone(): View {
     visibility = View.GONE
@@ -46,22 +57,31 @@ fun View.visible(): View {
     return this
 }
 
-@Deprecated("Use property.", ReplaceWith("visible"))
+@Deprecated("Use property access syntax.", ReplaceWith("visible"))
 @JvmName("isVisibleLegacy")
-@JvmSynthetic
-inline fun View.isVisible() = visible
+inline fun View.isVisible() = isVisible
 
-@Deprecated("Use property.", ReplaceWith("visible"))
+@Deprecated("Use property access syntax.", ReplaceWith("visible"))
 @JvmName("setVisibleLegacy")
-@JvmSynthetic
-inline fun View.setVisible(visible:Boolean ) {
-     this.visible = visible
+inline fun View.setVisible(visible: Boolean) {
+    this.isVisible = visible
 }
 
-inline var View.visible: Boolean
+inline var View.isVisible: Boolean
     get() = visibility == View.VISIBLE
     set(value) {
         visibility = if (value) View.VISIBLE else View.GONE
+    }
+
+@Deprecated("Use isVisible property.", ReplaceWith("isVisible"))
+inline var View.visible: Boolean
+    @JvmName("isVisibleRedundant")
+    @JvmSynthetic
+    get() = isVisible
+    @JvmName("setVisibleRedundant")
+    @JvmSynthetic
+    set(value) {
+        isVisible = value
     }
 
 @JvmOverloads
