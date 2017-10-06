@@ -27,8 +27,24 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/control_margin"
             android:layout_marginTop="@dimen/control_margin"
+            app:rippleColor="#8000"
+            android:drawSelectorOnTop="false"
             android:background="@drawable/gradient_background"
-            android:text="@string/app_name"
+            android:text="Draw selector below"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:backgroundTint="@null"/>
+
+        <android.support.design.widget.CardButton
+            android:id="@+id/cbg2"
+            style="@style/Widget.Design.CardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/control_margin"
+            android:layout_marginTop="@dimen/control_margin"
+            app:rippleColor="#8000"
+            android:drawSelectorOnTop="true"
+            android:background="@drawable/gradient_background"
+            android:text="Draw selector on top"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:backgroundTint="@null"/>
 

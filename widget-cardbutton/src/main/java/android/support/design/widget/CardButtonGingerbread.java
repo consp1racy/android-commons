@@ -50,6 +50,7 @@ class CardButtonGingerbread extends CardButtonImpl {
                                @Nullable ColorStateList backgroundTint,
                                @Nullable PorterDuff.Mode backgroundTintMode, @ColorInt int rippleColor, @IntRange(from = 0) int borderWidth,
                                @Nullable ColorStateList borderColor) {
+        final boolean drawSelectorOnTop = mShadowViewDelegate.getDrawSelectorOnTop();
         final float cornerRadius = mShadowViewDelegate.getRadius();
 
         final boolean hasBorder = borderWidth > 0 && isNotTransparent(borderColor);
@@ -77,14 +78,14 @@ class CardButtonGingerbread extends CardButtonImpl {
 
         mRippleDrawable = createRippleDrawable(rippleColor, cornerRadius);
 
-        makeAndSetBackground(cornerRadius);
+        makeAndSetBackground(cornerRadius, drawSelectorOnTop);
     }
 
-    private void makeAndSetBackground(final float radius) {
+    private void makeAndSetBackground(final float radius, final boolean drawSelectorOnTop) {
         final List<Drawable> layers = new ArrayList<>();
         if (mShapeDrawable != null) layers.add(mShapeDrawable);
         if (mBorderDrawable != null) layers.add(mBorderDrawable);
-//        layers.add(mRippleDrawable);
+        if (!drawSelectorOnTop && mRippleDrawable != null) layers.add(mRippleDrawable);
 
         final int size = layers.size();
         if (size > 1) {
@@ -104,7 +105,11 @@ class CardButtonGingerbread extends CardButtonImpl {
         mShadowDrawable.setAddPaddingForCorners(false);
         mShadowViewDelegate.setBackgroundDrawable(mShadowDrawable);
 
-        mShadowViewDelegate.setForegroundDrawable(mRippleDrawable);
+        if (drawSelectorOnTop) {
+            mShadowViewDelegate.setForegroundDrawable(mRippleDrawable);
+        } else {
+            mShadowViewDelegate.setForegroundDrawable(null);
+        }
     }
 
     Drawable createShapeDrawable(float cornerRadius) {
@@ -140,9 +145,10 @@ class CardButtonGingerbread extends CardButtonImpl {
 
     @Override
     void setRippleColor(@ColorInt int rippleColor) {
+        final boolean drawSelectorOnTop = mShadowViewDelegate.getDrawSelectorOnTop();
         final float radius = mShadowViewDelegate.getRadius();
         mRippleDrawable = createRippleDrawable(rippleColor, radius);
-        makeAndSetBackground(radius);
+        makeAndSetBackground(radius, drawSelectorOnTop);
     }
 
     @Override

@@ -8,4 +8,6 @@ import android.graphics.drawable.Drawable;
 
 interface CardButtonDelegate extends ShadowViewDelegate {
     void setForegroundDrawable(Drawable foreground);
+
+    boolean getDrawSelectorOnTop();
 }

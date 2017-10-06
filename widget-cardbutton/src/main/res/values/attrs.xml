@@ -9,6 +9,7 @@
         <attr name="pressedTranslationZ"/>
         <attr name="borderWidth"/>
         <attr name="useCompatPadding"/>
+        <attr name="android:drawSelectorOnTop"/>
 
         <attr name="carb_contentPadding" format="dimension"/>
         <attr name="carb_contentPaddingLeft" format="dimension"/>

@@ -199,6 +199,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     private Drawable mBackgroundPrototype;
 
+    private boolean mDrawSelectorOnTop = true; // Backwards compatibility requires true.
+
     public CardButton(Context context) {
         this(context, null);
     }
@@ -235,6 +237,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         final float pressedTranslationZ = a.getDimension(
             R.styleable.CardButton_pressedTranslationZ, 0f);
         mCompatPadding = a.getBoolean(R.styleable.CardButton_useCompatPadding, false);
+        mDrawSelectorOnTop = a.getBoolean(R.styleable.CardButton_android_drawSelectorOnTop, mDrawSelectorOnTop);
 
         mCornerRadius = a.getDimension(R.styleable.CardButton_carb_cornerRadius, 0f);
         int defaultPadding = a.getDimensionPixelOffset(R.styleable.CardButton_carb_contentPadding, 0);
@@ -687,6 +690,17 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         return mCompatPadding;
     }
 
+    public void setDrawSelectorOnTop(final boolean drawSelectorOnTop) {
+        if (mDrawSelectorOnTop != drawSelectorOnTop) {
+            mDrawSelectorOnTop = drawSelectorOnTop;
+            updateBackgroundDrawable();
+        }
+    }
+
+    public boolean getDrawSelectorOnTop() {
+        return mDrawSelectorOnTop;
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -983,6 +997,11 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         @Override
         public float getRadius() {
             return mCornerRadius;
+        }
+
+        @Override
+        public boolean getDrawSelectorOnTop() {
+            return mDrawSelectorOnTop;
         }
 
         @Override

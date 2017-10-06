@@ -55,6 +55,7 @@ class CardButtonLollipop extends CardButtonIcs {
                                @Nullable ColorStateList backgroundTint,
                                @Nullable PorterDuff.Mode backgroundTintMode, @ColorInt int rippleColor, @IntRange(from = 0) int borderWidth,
                                @Nullable ColorStateList borderColor) {
+        final boolean drawSelectorOnTop = mShadowViewDelegate.getDrawSelectorOnTop();
         final float cornerRadius = mShadowViewDelegate.getRadius();
 
         final boolean hasBorder = borderWidth > 0 && isNotTransparent(borderColor);
@@ -80,9 +81,13 @@ class CardButtonLollipop extends CardButtonIcs {
             mBorderDrawable = null;
         }
 
+        Drawable mask = createMaskDrawable(cornerRadius);
+        mRippleDrawable = new RippleDrawable(ColorStateList.valueOf(rippleColor), null, mask);
+
         final List<Drawable> layers = new ArrayList<>();
         if (mShapeDrawable != null) layers.add(mShapeDrawable);
         if (mBorderDrawable != null) layers.add(mBorderDrawable);
+        if (!drawSelectorOnTop && mRippleDrawable != null) layers.add(mRippleDrawable);
 
         final Drawable rippleContent;
         final int size = layers.size();
@@ -95,11 +100,13 @@ class CardButtonLollipop extends CardButtonIcs {
         }
         mContentBackground = rippleContent;
 
-        Drawable mask = createMaskDrawable(cornerRadius);
-        mRippleDrawable = new RippleDrawable(ColorStateList.valueOf(rippleColor), null, mask);
-
         mShadowViewDelegate.setBackgroundDrawable(mContentBackground);
-        mShadowViewDelegate.setForegroundDrawable(mRippleDrawable);
+
+        if (drawSelectorOnTop) {
+            mShadowViewDelegate.setForegroundDrawable(mRippleDrawable);
+        } else {
+            mShadowViewDelegate.setForegroundDrawable(null);
+        }
 
 //        final Drawable rippleContent;
 //        final int size = layers.size();
