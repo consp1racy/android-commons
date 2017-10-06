@@ -62,7 +62,7 @@ If you find this library to your liking know this: It's mainly for use in my own
 | 25.4.0-2 *Deprecated*  | [25.4.0]          | Custom background support                           |
 | 26.0.0-1               | [26.0.0, 27.0.0)  | Solid background, border, foreground ripple, shadow |
 | 26.0.0-2               | [26.0.0, 27.0.0)  | Custom background support                           |
-| 26.0.0-3               | [26.0.0, 27.0.0)  | Optionally draw selector behind text and drawables  |
+| 26.0.0-4               | [26.0.0, 27.0.0)  | Optionally draw selector behind text and drawables  |
 
 ## Get it!
 

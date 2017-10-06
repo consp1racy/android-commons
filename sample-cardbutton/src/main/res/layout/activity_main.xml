@@ -21,18 +21,42 @@
         android:paddingTop="8dp">
 
         <android.support.design.widget.CardButton
+            android:id="@+id/ct"
+            style="@style/Widget.Design.CardButton.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/control_margin"
+            android:layout_marginTop="@dimen/control_margin"
+            android:drawSelectorOnTop="false"
+            android:text="Draw selector below"
+            app:carb_cornerRadius="10dp"
+            app:rippleColor="#80f0"/>
+
+        <android.support.design.widget.CardButton
+            android:id="@+id/ct2"
+            style="@style/Widget.Design.CardButton.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/control_margin"
+            android:layout_marginTop="@dimen/control_margin"
+            android:drawSelectorOnTop="true"
+            android:text="Draw selector on top"
+            app:carb_cornerRadius="10dp"
+            app:rippleColor="#80f0"/>
+
+        <android.support.design.widget.CardButton
             android:id="@+id/cbg"
             style="@style/Widget.Design.CardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/control_margin"
             android:layout_marginTop="@dimen/control_margin"
-            app:rippleColor="#8000"
-            android:drawSelectorOnTop="false"
             android:background="@drawable/gradient_background"
+            android:drawSelectorOnTop="false"
             android:text="Draw selector below"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
-            app:backgroundTint="@null"/>
+            app:backgroundTint="@null"
+            app:rippleColor="#8000"/>
 
         <android.support.design.widget.CardButton
             android:id="@+id/cbg2"
@@ -41,12 +65,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/control_margin"
             android:layout_marginTop="@dimen/control_margin"
-            app:rippleColor="#8000"
-            android:drawSelectorOnTop="true"
             android:background="@drawable/gradient_background"
+            android:drawSelectorOnTop="true"
             android:text="Draw selector on top"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
-            app:backgroundTint="@null"/>
+            app:backgroundTint="@null"
+            app:rippleColor="#8000"/>
 
         <Button
             android:layout_width="wrap_content"

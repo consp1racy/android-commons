@@ -29,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
@@ -43,6 +44,7 @@ import java.util.List;
 @RequiresApi(21)
 @TargetApi(21)
 class CardButtonLollipop extends CardButtonIcs {
+    private static boolean FOREGROUND_NEEDS_CLIPPING_PATH = Build.VERSION.SDK_INT >= 21 && Build.VERSION.SDK_INT < 23;
 
     private InsetDrawable mInsetDrawable;
 
@@ -81,8 +83,7 @@ class CardButtonLollipop extends CardButtonIcs {
             mBorderDrawable = null;
         }
 
-        Drawable mask = createMaskDrawable(cornerRadius);
-        mRippleDrawable = new RippleDrawable(ColorStateList.valueOf(rippleColor), null, mask);
+        mRippleDrawable = createRippleDrawable(rippleColor, cornerRadius);
 
         final List<Drawable> layers = new ArrayList<>();
         if (mShapeDrawable != null) layers.add(mShapeDrawable);
@@ -236,8 +237,18 @@ class CardButtonLollipop extends CardButtonIcs {
         return false;
     }
 
-    Drawable createMaskDrawable(float cornerRadius) {
+    private Drawable createMaskDrawable(float cornerRadius) {
         return CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, Color.WHITE);
+    }
+
+    private RippleDrawable createRippleDrawable(@ColorInt final int rippleColor, final float cornerRadius) {
+        final ColorStateList color = ColorStateList.valueOf(rippleColor);
+        final Drawable mask = createMaskDrawable(cornerRadius);
+        if (FOREGROUND_NEEDS_CLIPPING_PATH) {
+            return new XpRoundRectRippleDrawable(color, null, mask, cornerRadius);
+        } else {
+            return new RippleDrawable(color, null, mask);
+        }
     }
 
     @Override

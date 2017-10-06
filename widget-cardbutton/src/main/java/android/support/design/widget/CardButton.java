@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
-import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -50,8 +49,6 @@ import net.xpece.android.widget.cardbutton.R;
 
 public class CardButton extends AppCompatButton implements TintableCompoundDrawableView {
     public static boolean AUTO_VISUAL_MARGIN_ENABLED = true;
-
-    private static boolean FOREGROUND_NEEDS_CLIPPING_PATH = Build.VERSION.SDK_INT >= 21 && Build.VERSION.SDK_INT < 23;
 
     private static final String TAG = "CardButton";
 
@@ -193,9 +190,6 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     private Drawable mForeground;
     boolean mForegroundBoundsChanged;
     private final Rect mForegroundBounds = new Rect();
-
-    // Only used on Lollipop. Ripple over round rect mask has weird outline otherwise.
-    private final Path mForegroundClippingPath = new Path();
 
     private Drawable mBackgroundPrototype;
 
@@ -771,28 +765,13 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         final Drawable foreground = mForeground;
         if (foreground != null) {
-
             if (mForegroundBoundsChanged) {
                 mForegroundBoundsChanged = false;
                 final Rect bounds = mForegroundBounds;
                 getContentRect(bounds);
                 foreground.setBounds(bounds);
-
-                if (FOREGROUND_NEEDS_CLIPPING_PATH) {
-                    final Path path = mForegroundClippingPath;
-                    path.reset();
-                    path.addRoundRect(bounds.left, bounds.top, bounds.right, bounds.bottom, mCornerRadius, mCornerRadius, Path.Direction.CW);
-                }
             }
-
-            if (FOREGROUND_NEEDS_CLIPPING_PATH) {
-                final int save = canvas.save();
-                canvas.clipPath(mForegroundClippingPath);
-                foreground.draw(canvas);
-                canvas.restoreToCount(save);
-            } else {
-                foreground.draw(canvas);
-            }
+            foreground.draw(canvas);
         }
     }
 
