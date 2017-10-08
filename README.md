@@ -36,12 +36,22 @@ If you find this library to your liking know this: It's mainly for use in my own
 * Following widgets now respect `android:enabled` XML attribute:
   * `ImageView`, `ImageButton`
 
+| Extras version     | AppCompat version |
+| ------------------ | ----------------- |
+| 1.1.0              | [25.0.0, 25.4.0)  |
+| 1.2.0              | [25.4.0, 27.0.0)  |
+
 ### design-extra [ ![Download](https://api.bintray.com/packages/consp1racy/maven/net.xpece.android%3Adesign-extra/images/download.svg) ](https://bintray.com/consp1racy/maven/net.xpece.android%3Adesign-extra/_latestVersion)
 
 * Proper compound drawable support with tint on all platforms for following widgets:
   * `TextInputEditText`
 * Following widgets now respect `android:enabled` XML attribute:
   * `FloatingActionButton`
+
+| Extras version     | AppCompat version |
+| ------------------ | ----------------- |
+| 1.1.0              | [25.0.0, 25.4.0)  |
+| 1.2.0              | [25.4.0, 27.0.0)  |
 
 ## Widgets
 
