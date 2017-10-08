@@ -36,10 +36,11 @@ If you find this library to your liking know this: It's mainly for use in my own
 * Following widgets now respect `android:enabled` XML attribute:
   * `ImageView`, `ImageButton`
 
-| Extras version     | AppCompat version |
-| ------------------ | ----------------- |
-| 1.1.0              | [25.0.0, 25.4.0)  |
-| 1.2.0              | [25.4.0, 27.0.0)  |
+| Extras version     | AppCompat version | Features                               |
+| ------------------ | ----------------- | -------------------------------------- |
+| 1.1.0 *Deprecated* | [25.0.0, 25.4.0)  |                                        |
+| 1.2.0 *Deprecated* | [25.4.0, 27.0.0)  |                                        |
+| 1.2.1              | [25.4.0, 27.0.0)  |                                        |
 
 ### design-extra [ ![Download](https://api.bintray.com/packages/consp1racy/maven/net.xpece.android%3Adesign-extra/images/download.svg) ](https://bintray.com/consp1racy/maven/net.xpece.android%3Adesign-extra/_latestVersion)
 
@@ -48,10 +49,11 @@ If you find this library to your liking know this: It's mainly for use in my own
 * Following widgets now respect `android:enabled` XML attribute:
   * `FloatingActionButton`
 
-| Extras version     | AppCompat version |
-| ------------------ | ----------------- |
-| 1.1.0              | [25.0.0, 25.4.0)  |
-| 1.2.0              | [25.4.0, 27.0.0)  |
+| Extras version     | AppCompat version | Features                               |
+| ------------------ | ----------------- | -------------------------------------- |
+| 1.1.0 *Deprecated* | [25.0.0, 25.4.0)  |                                        |
+| 1.2.0 *Deprecated* | [25.4.0, 27.0.0)  |                                        |
+| 1.2.1              | [25.4.0, 27.0.0)  |                                        |
 
 ## Widgets
 
@@ -73,6 +75,7 @@ If you find this library to your liking know this: It's mainly for use in my own
 | 26.0.0-1               | [26.0.0, 27.0.0)  | Solid background, border, foreground ripple, shadow |
 | 26.0.0-2               | [26.0.0, 27.0.0)  | Custom background support                           |
 | 26.0.0-4               | [26.0.0, 27.0.0)  | Optionally draw selector behind text and drawables  |
+| 26.0.0-5               | [26.0.0, 27.0.0)  | Fixed compound drawable layout preview, maybe       |
 
 ## Get it!
 

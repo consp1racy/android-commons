@@ -838,22 +838,6 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     }
 
     @Override
-    public void setCompoundDrawables(Drawable left, Drawable top, Drawable right, Drawable bottom) {
-        super.setCompoundDrawables(left, top, right, bottom);
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.onSetCompoundDrawables(left, top, right, bottom);
-        }
-    }
-
-    @Override
-    public void setCompoundDrawablesRelative(Drawable start, Drawable top, Drawable end, Drawable bottom) {
-        super.setCompoundDrawablesRelative(start, top, end, bottom);
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.onSetCompoundDrawablesRelative(start, top, end, bottom);
-        }
-    }
-
-    @Override
     public void setSupportCompoundDrawableTintList(@Nullable ColorStateList tint) {
         if (mTextCompoundDrawableHelper != null) {
             mTextCompoundDrawableHelper.setSupportTintList(tint);

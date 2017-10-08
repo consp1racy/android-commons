@@ -19,7 +19,6 @@ package android.support.v7.widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -70,22 +69,6 @@ public class XpAppCompatTextView extends AppCompatTextView implements TintableCo
     public void setCompoundDrawablesWithIntrinsicBounds(@DrawableRes int left, @DrawableRes int top, @DrawableRes int right, @DrawableRes int bottom) {
         if (mTextCompoundDrawableHelper != null) {
             mTextCompoundDrawableHelper.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
-        }
-    }
-
-    @Override
-    public void setCompoundDrawables(Drawable left, Drawable top, Drawable right, Drawable bottom) {
-        super.setCompoundDrawables(left, top, right, bottom);
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.onSetCompoundDrawables(left, top, right, bottom);
-        }
-    }
-
-    @Override
-    public void setCompoundDrawablesRelative(Drawable start, Drawable top, Drawable end, Drawable bottom) {
-        super.setCompoundDrawablesRelative(start, top, end, bottom);
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.onSetCompoundDrawablesRelative(start, top, end, bottom);
         }
     }
 

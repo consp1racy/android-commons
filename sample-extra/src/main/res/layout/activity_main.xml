@@ -21,6 +21,18 @@
         android:paddingTop="8dp">
 
         <android.support.v7.widget.XpAppCompatTextView
+            android:id="@+id/textTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="Sample"
+            app:drawableEnd="@drawable/abc_ic_ab_back_material"
+            app:drawableStart="@drawable/abc_ic_ab_back_material"
+            app:drawableTint="?colorAccent"/>
+
+        <android.support.v7.widget.XpAppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
