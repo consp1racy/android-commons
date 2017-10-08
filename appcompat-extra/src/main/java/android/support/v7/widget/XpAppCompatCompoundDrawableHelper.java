@@ -16,6 +16,7 @@
 
 package android.support.v7.widget;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -25,16 +26,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.RestrictTo;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.util.AttributeSet;
-import android.util.SparseArray;
 import android.widget.TextView;
 
 import net.xpece.android.appcompatextra.R;
 import net.xpece.android.widget.XpTextViewCompat;
-
-import java.lang.ref.WeakReference;
 
 /**
  * @hide
@@ -46,56 +43,45 @@ public final class XpAppCompatCompoundDrawableHelper {
     private final TextView mView;
     private final AppCompatDrawableManager mDrawableManager;
 
-    private final TintInfo mInternalTint[] = new TintInfo[6];
     private TintInfo mTint;
 
-    private final SparseArray<WeakReference<Drawable>> mDrawables = new SparseArray<>(6);
-
-    private static final int LEFT = 0;
-    private static final int TOP = 1;
-    private static final int RIGHT = 2;
-    private static final int BOTTOM = 3;
-    private static final int START = 4;
-    private static final int END = 5;
-
-    public XpAppCompatCompoundDrawableHelper(@NonNull TextView view) {
+    public XpAppCompatCompoundDrawableHelper(@NonNull final TextView view) {
         mView = view;
         mDrawableManager = AppCompatDrawableManager.get();
-
-        for (int i = 0, count = 6; i < count; i++) {
-            mDrawables.put(i, new WeakReference<Drawable>(null));
-        }
     }
 
-    public void loadFromAttributes(AttributeSet attrs, int defStyleAttr) {
+    public void loadFromAttributes(@Nullable final AttributeSet attrs, final int defStyleAttr) {
         TintTypedArray a = null;
         try {
             a = TintTypedArray.obtainStyledAttributes(mView.getContext(), attrs,
-                R.styleable.XpAppCompatCompoundDrawableHelper, defStyleAttr, 0);
+                    R.styleable.XpAppCompatCompoundDrawableHelper, defStyleAttr, 0);
 
             Drawable[] ds = mView.getCompoundDrawables();
             if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableLeft)) {
-                ds[0] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableLeft, LEFT);
+                ds[0] = a.getDrawable(R.styleable.XpAppCompatCompoundDrawableHelper_drawableLeft);
             }
             if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableTop)) {
-                ds[1] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableTop, TOP);
+                ds[1] = a.getDrawable(R.styleable.XpAppCompatCompoundDrawableHelper_drawableTop);
             }
             if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableRight)) {
-                ds[2] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableRight, RIGHT);
+                ds[2] = a.getDrawable(R.styleable.XpAppCompatCompoundDrawableHelper_drawableRight);
             }
             if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableBottom)) {
-                ds[3] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableBottom, BOTTOM);
+                ds[3] = a.getDrawable(R.styleable.XpAppCompatCompoundDrawableHelper_drawableBottom);
             }
+            fixDrawables(ds);
             mView.setCompoundDrawablesWithIntrinsicBounds(ds[0], ds[1], ds[2], ds[3]);
 
             boolean hasRelativeCompoundDrawables = false;
             ds = XpTextViewCompat.getCompoundDrawablesRelative(mView);
             if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableStart)) {
-                ds[0] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableStart, START);
+                ds[0] = a.getDrawable(R.styleable.XpAppCompatCompoundDrawableHelper_drawableStart);
+                fixDrawable(ds[0]);
                 hasRelativeCompoundDrawables = true;
             }
             if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableEnd)) {
-                ds[2] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableEnd, END);
+                ds[2] = a.getDrawable(R.styleable.XpAppCompatCompoundDrawableHelper_drawableEnd);
+                fixDrawable(ds[2]);
                 hasRelativeCompoundDrawables = true;
             }
             if (hasRelativeCompoundDrawables) {
@@ -115,7 +101,7 @@ public final class XpAppCompatCompoundDrawableHelper {
         }
     }
 
-    public void setSupportTintList(ColorStateList tint) {
+    public void setSupportTintList(@Nullable final ColorStateList tint) {
         if (mTint == null) {
             mTint = new TintInfo();
         }
@@ -125,11 +111,12 @@ public final class XpAppCompatCompoundDrawableHelper {
         applySupportTint();
     }
 
+    @Nullable
     public ColorStateList getSupportTintList() {
         return mTint != null ? mTint.mTintList : null;
     }
 
-    public void setSupportTintMode(PorterDuff.Mode tintMode) {
+    public void setSupportTintMode(@Nullable final PorterDuff.Mode tintMode) {
         if (mTint == null) {
             mTint = new TintInfo();
         }
@@ -143,74 +130,13 @@ public final class XpAppCompatCompoundDrawableHelper {
         return mTint != null ? mTint.mTintMode : null;
     }
 
-    private void onSetCompoundDrawables(@DrawableRes int left, @DrawableRes int top, @DrawableRes int right, @DrawableRes int bottom) {
-        Drawable[] ds = mView.getCompoundDrawables();
-        // Update the default background tint
-        setInternalTint(ds[0], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), left) : null, LEFT);
-        setInternalTint(ds[1], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), top) : null, TOP);
-        setInternalTint(ds[2], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), right) : null, RIGHT);
-        setInternalTint(ds[3], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), bottom) : null, BOTTOM);
-    }
-
-    private void onSetCompoundDrawablesRelative(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
-        Drawable[] ds = XpTextViewCompat.getCompoundDrawablesRelative(mView);
-        // Update the default background tint
-        setInternalTint(ds[0], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), start) : null, START);
-        setInternalTint(ds[1], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), top) : null, TOP);
-        setInternalTint(ds[2], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), end) : null, END);
-        setInternalTint(ds[3], mDrawableManager != null ? mDrawableManager.getTintList(mView.getContext(), bottom) : null, BOTTOM);
-    }
-
-    public void onSetCompoundDrawables(@Nullable Drawable left, @Nullable Drawable top, @Nullable Drawable right, @Nullable Drawable bottom) {
-        if (left == mDrawables.get(LEFT).get() &&
-            top == mDrawables.get(TOP).get() &&
-            right == mDrawables.get(RIGHT).get() &&
-            bottom == mDrawables.get(BOTTOM).get()) {
-            //
-        } else {
-            clearInternalTint();
-        }
-    }
-
-    public void onSetCompoundDrawablesRelative(@Nullable Drawable start, @Nullable Drawable top, @Nullable Drawable end, @Nullable Drawable bottom) {
-        if (start == mDrawables.get(START).get() &&
-            top == mDrawables.get(TOP).get() &&
-            end == mDrawables.get(END).get() &&
-            bottom == mDrawables.get(BOTTOM).get()) {
-            //
-        } else {
-            clearInternalTint();
-        }
-    }
-
-    private void clearInternalTint() {
-        for (int i = 0, count = mInternalTint.length; i < count; i++) {
-            mInternalTint[i] = null;
-        }
-        applySupportTint();
-    }
-
-    private void setInternalTint(@Nullable Drawable d, @Nullable ColorStateList tint, int index) {
-        if (tint != null) {
-            if (mInternalTint[index] == null) {
-                mInternalTint[index] = new TintInfo();
-            }
-            mInternalTint[index].mTintList = tint;
-            mInternalTint[index].mHasTintList = true;
-        } else {
-            mInternalTint[index] = null;
-        }
-        if (d != null) {
-            applySupportTint(d, index);
-        }
-    }
-
     public void applySupportTint() {
         Drawable[] ds = mView.getCompoundDrawables();
+        fixDrawables(ds);
         for (int i = 0; i < 4; i++) {
             Drawable d = ds[i];
             if (d != null) {
-                applySupportTint(d, i);
+                applySupportTint(d);
             }
         }
         if (Build.VERSION.SDK_INT >= 17) {
@@ -218,83 +144,61 @@ public final class XpAppCompatCompoundDrawableHelper {
             Drawable d;
             d = ds[0];
             if (d != null) {
-                applySupportTint(d, START);
+                applySupportTint(d);
             }
             d = ds[2];
             if (d != null) {
-                applySupportTint(d, END);
+                applySupportTint(d);
             }
         }
     }
 
-    private void applySupportTint(@NonNull Drawable d, int i) {
+    private void applySupportTint(@NonNull final Drawable d) {
         if (mTint != null) {
             AppCompatDrawableManager.tintDrawable(d, mTint, mView.getDrawableState());
-        } else if (mInternalTint[i] != null) {
-            AppCompatDrawableManager.tintDrawable(d, mInternalTint[i], mView.getDrawableState());
         }
+    }
+
+    @NonNull
+    private Context getContext() {
+        return mView.getContext();
+    }
+
+    private void fixDrawables(@NonNull final Drawable[] drawables) {
+        for (final Drawable d : drawables) {
+            fixDrawable(d);
+        }
+    }
+
+    private void fixDrawable(@Nullable final Drawable d) {
+        if (d != null) DrawableUtils.fixDrawable(d);
     }
 
     @RequiresApi(17)
-    public void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
+    public void setCompoundDrawablesRelativeWithIntrinsicBounds(
+            @DrawableRes final int start, @DrawableRes final int top,
+            @DrawableRes final int end, @DrawableRes final int bottom) {
         Drawable[] ds = new Drawable[4];
-        ds[0] = resolveDrawable(start, 4);
-        ds[1] = resolveDrawable(top, 1);
-        ds[2] = resolveDrawable(end, 5);
-        ds[3] = resolveDrawable(bottom, 3);
+        ds[0] = mDrawableManager.getDrawable(getContext(), start);
+        ds[1] = mDrawableManager.getDrawable(getContext(), top);
+        ds[2] = mDrawableManager.getDrawable(getContext(), end);
+        ds[3] = mDrawableManager.getDrawable(getContext(), bottom);
+        fixDrawables(ds);
         mView.setCompoundDrawablesRelativeWithIntrinsicBounds(ds[0], ds[1], ds[2], ds[3]);
-//        onSetCompoundDrawablesRelative(start, top, end, bottom);
+        applySupportTint();
     }
 
-    public void setCompoundDrawablesWithIntrinsicBounds(@DrawableRes int left, @DrawableRes int top, @DrawableRes int right, @DrawableRes int bottom) {
+    public void setCompoundDrawablesWithIntrinsicBounds(
+            @DrawableRes final int left, @DrawableRes final int top,
+            @DrawableRes final int right, @DrawableRes final int bottom) {
         Drawable[] ds = new Drawable[4];
-        ds[0] = resolveDrawable(left, 0);
-        ds[1] = resolveDrawable(top, 1);
-        ds[2] = resolveDrawable(right, 2);
-        ds[3] = resolveDrawable(bottom, 3);
+        ds[0] = mDrawableManager.getDrawable(getContext(), left);
+        ds[1] = mDrawableManager.getDrawable(getContext(), top);
+        ds[2] = mDrawableManager.getDrawable(getContext(), right);
+        ds[3] = mDrawableManager.getDrawable(getContext(), bottom);
+        fixDrawables(ds);
         mView.setCompoundDrawablesWithIntrinsicBounds(ds[0], ds[1], ds[2], ds[3]);
-//        onSetCompoundDrawables(left, top, right, bottom);
-    }
-
-    private Drawable resolveDrawable(@DrawableRes int resId, int index) {
-        if (resId != 0) {
-            final Drawable d = mDrawableManager != null
-                ? mDrawableManager.getDrawable(mView.getContext(), resId)
-                : ContextCompat.getDrawable(mView.getContext(), resId);
-            final ColorStateList tint = mDrawableManager != null
-                ? mDrawableManager.getTintList(mView.getContext(), resId)
-                : null;
-            setInternalTint(d, tint, index);
-            if (d != null) {
-                DrawableUtils.fixDrawable(d);
-            }
-            mDrawables.put(index, new WeakReference<>(d));
-            return d;
-        } else {
-            setInternalTint(null, null, index);
-            mDrawables.put(index, new WeakReference<Drawable>(null));
-            return null;
-        }
-    }
-
-    private Drawable resolveDrawable(TintTypedArray a, int resIndex, int index) {
-        int resId = a.getResourceId(resIndex, 0);
-        if (resId != 0) {
-            final Drawable d = a.getDrawable(resIndex);
-            final ColorStateList tint = mDrawableManager != null
-                ? mDrawableManager.getTintList(mView.getContext(), resId)
-                : null;
-            setInternalTint(d, tint, index);
-            if (d != null) {
-                DrawableUtils.fixDrawable(d);
-            }
-            mDrawables.put(index, new WeakReference<>(d));
-            return d;
-        } else {
-            setInternalTint(null, null, index);
-            mDrawables.put(index, new WeakReference<Drawable>(null));
-            return null;
-        }
+        applySupportTint();
     }
 }
 
