@@ -15,9 +15,9 @@ import android.support.v4.app.updateLoaderManagerHostController as updateLoaderM
  */
 
 @Suppress("DEPRECATION")
-inline fun Fragment.invalidateOptionsMenu() = activity.supportInvalidateOptionsMenu()
+inline fun Fragment.invalidateOptionsMenu() = activity!!.supportInvalidateOptionsMenu()
 
-inline fun android.app.Fragment.invalidateOptionsMenu() = activity.invalidateOptionsMenu()
+inline fun android.app.Fragment.invalidateOptionsMenu() = activity!!.invalidateOptionsMenu()
 
 inline fun DialogFragment.showAllowingStateLoss(fragmentManager: FragmentManager, tag: String) {
     try {

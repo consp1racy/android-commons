@@ -22,9 +22,9 @@ fun Context.getColorCompat(@ColorRes resId: Int): Int
 fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList = try {
     AppCompatResources.getColorStateList(this, resId)
 } catch (ex: NoSuchMethodError) {
-    ContextCompat.getColorStateList(this, resId)
+    ContextCompat.getColorStateList(this, resId)!!
 } catch (ex: ClassNotFoundException) {
-    ContextCompat.getColorStateList(this, resId)
+    ContextCompat.getColorStateList(this, resId)!!
 }
 
 /**
@@ -42,7 +42,7 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable {
     return try {
         AppCompatDrawableManager.get().getDrawable(this, resId)
     } catch (ex: ClassNotFoundException) {
-        ContextCompat.getDrawable(this, resId)
+        ContextCompat.getDrawable(this, resId)!!
     }
 }
 

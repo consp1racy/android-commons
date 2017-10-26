@@ -18,7 +18,7 @@ object XpGoogleApiAvailability {
         if (dialog == null) {
             return false
         } else {
-            val fm = fragment.fragmentManager
+            val fm = fragment.fragmentManager!!
             showErrorDialogFragment(fm, dialog, "GooglePlayServicesErrorDialog", cancelListener)
             return true
         }

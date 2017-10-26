@@ -4,7 +4,7 @@
           android:versionName="1"
           xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-sdk tools:overrideLibrary="android.support.compat"/>
+    <uses-sdk tools:overrideLibrary="android.support.compat,android.arch.lifecycle"/>
 
     <application/>
 </manifest>
