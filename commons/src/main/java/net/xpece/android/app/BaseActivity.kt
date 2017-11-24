@@ -13,7 +13,8 @@ import net.xpece.android.content.ensureRuntimeTheme
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    private lateinit var root: ViewGroup
+    protected lateinit var root: ViewGroup
+        private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.ensureRuntimeTheme()
@@ -22,7 +23,7 @@ abstract class BaseActivity : AppCompatActivity() {
         root = provideRootView()
     }
 
-    open fun provideRootView() : ViewGroup = ViewContainer.DEFAULT.forActivity(this)
+    open fun provideRootView(): ViewGroup = ViewContainer.DEFAULT.forActivity(this)
 
     fun superSetContentView(view: View) {
         super.setContentView(view)
