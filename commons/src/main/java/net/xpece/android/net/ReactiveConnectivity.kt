@@ -33,7 +33,7 @@ object ReactiveConnectivity {
     @CheckResult
     @JvmStatic
     @SchedulerSupport(SchedulerSupport.NONE)
-    fun observe(context: Context): Flowable<ConnectivityInfo> {
+    fun observeOld(context: Context): Flowable<ConnectivityInfo> {
         val connectivitySubject = BehaviorProcessor.create<ConnectivityInfo>()
 
         val connectivityReceiver = ConnectivityReceiver.newInstance(context.applicationContext)
@@ -52,5 +52,25 @@ object ReactiveConnectivity {
             flowable = flowable.distinctUntilChanged()
             return@flatMap flowable
         }
+    }
+
+    @CheckResult
+    @JvmStatic
+    @SchedulerSupport(SchedulerSupport.NONE)
+    fun observe(context: Context): Flowable<ConnectivityInfo> {
+        val connectivityReceiver = ConnectivityReceiver.newInstance(context.applicationContext)
+        return observe(connectivityReceiver)
+    }
+
+    @CheckResult
+    @JvmStatic
+    @SchedulerSupport(SchedulerSupport.NONE)
+    fun observe(connectivityReceiver: ConnectivityReceiver): Flowable<ConnectivityInfo> {
+        val connectivitySubject = BehaviorProcessor.createDefault(connectivityReceiver.info)
+        val connectivityCallback = ConnectivityCallback(connectivitySubject::onNext)
+        return connectivitySubject.distinctUntilChanged()
+                .doOnSubscribe { connectivityReceiver.register(connectivityCallback) }
+                .doOnCancel { connectivityReceiver.unregister(connectivityCallback) }
+                .publish().refCount()
     }
 }

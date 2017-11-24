@@ -7,7 +7,6 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
-import android.support.annotation.CheckResult
 import android.support.annotation.IntDef
 
 /**
@@ -88,7 +87,6 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
     }
 
     @Suppress("UNUSED")
-    @CheckResult
     fun register(callback: ConnectivityCallback) {
         if (callbacks.contains(callback)) {
             return
