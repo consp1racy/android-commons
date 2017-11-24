@@ -54,14 +54,14 @@ fun Context.dp(dp: Number): Dimen {
 }
 
 @JvmOverloads
-fun Context.dimen(@DimenRes resId: Int, fallback: Int = 0): Dimen = try {
+fun Context.dimen(@DimenRes resId: Int, fallback: Number = 0): Dimen = try {
     Dimen(resources.getDimension(resId))
 } catch (erx: Resources.NotFoundException) {
     Dimen(fallback.toFloat())
 }
 
 @JvmOverloads
-fun Context.dimenAttr(@AttrRes attrId: Int, fallback: Int = 0): Dimen {
+fun Context.dimenAttr(@AttrRes attrId: Int, fallback: Number = 0): Dimen {
     val resId = resolveResourceId(attrId, 0)
     return dimen(resId, fallback)
 }
