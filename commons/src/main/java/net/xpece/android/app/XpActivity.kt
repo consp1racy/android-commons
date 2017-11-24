@@ -12,7 +12,7 @@ import android.support.v4.app.TaskStackBuilder
  */
 @JvmOverloads
 @Deprecated("Needs revision.")
-fun Activity.navigateUpEx(intent: Intent = NavUtils.getParentActivityIntent(this)): Boolean {
+fun Activity.navigateUpEx(intent: Intent = NavUtils.getParentActivityIntent(this)!!): Boolean {
     if (callingActivity != null) {
         finish() // Deliver result.
     } else {

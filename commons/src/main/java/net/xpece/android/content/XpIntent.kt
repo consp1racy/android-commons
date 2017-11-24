@@ -84,7 +84,7 @@ fun Activity.maybeStartActivityForResult(intent: Intent, requestCode: Int): Bool
 }
 
 fun Fragment.maybeStartActivityForResult(intent: Intent, requestCode: Int): Boolean {
-    val context = context
+    val context = context!!
     if (context.hasHandler(intent)) {
         startActivityForResult(intent, requestCode)
         return true

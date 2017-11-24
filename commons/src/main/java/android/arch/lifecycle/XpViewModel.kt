@@ -10,7 +10,7 @@ inline fun <reified T : ViewModel> Fragment.viewModel() =
         ViewModelProviders.of(this)[T::class.java]!!
 
 inline fun <reified T : ViewModel> Fragment.activityViewModel() =
-        ViewModelProviders.of(activity)[T::class.java]!!
+        ViewModelProviders.of(activity!!)[T::class.java]!!
 
 inline fun <reified T : ViewModel> FragmentActivity.viewModel(factory: ViewModelProvider.Factory) =
         ViewModelProviders.of(this, factory)[T::class.java]!!
@@ -19,7 +19,7 @@ inline fun <reified T : ViewModel> Fragment.viewModel(factory: ViewModelProvider
         ViewModelProviders.of(this, factory)[T::class.java]!!
 
 inline fun <reified T : ViewModel> Fragment.activityViewModel(factory: ViewModelProvider.Factory) =
-        ViewModelProviders.of(activity, factory)[T::class.java]!!
+        ViewModelProviders.of(activity!!, factory)[T::class.java]!!
 
 inline fun <reified T : ViewModel> FragmentActivity.lazyViewModel(
         crossinline factory: () -> ViewModelProvider.Factory) = lazy(LazyThreadSafetyMode.NONE) {
