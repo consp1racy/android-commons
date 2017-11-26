@@ -13,14 +13,10 @@ sealed class LazyDimen {
     operator fun times(other: Number): LazyDimen = Multiply(this, other)
     operator fun div(other: Number): LazyDimen = Divide(this, other)
 
-    @Deprecated("Supported but inefficient.")
     operator fun plus(other: Dimen): LazyDimen = Add(this, Px(other.value))
-    @Deprecated("Supported but inefficient.")
     operator fun minus(other: Dimen): LazyDimen = Subtract(this, Px(other.value))
 
-    @Deprecated("Supported but inefficient.")
     operator fun unaryMinus(): LazyDimen = Multiply(this, -1)
-    @Deprecated("Supported but inefficient.")
     operator fun unaryPlus(): LazyDimen = Multiply(this, 1)
 
     internal data class Add(val first: LazyDimen, val second: LazyDimen) : LazyDimen() {
