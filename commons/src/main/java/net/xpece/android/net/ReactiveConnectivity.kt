@@ -11,6 +11,7 @@ import io.reactivex.processors.BehaviorProcessor
  * @author Eugen on 04.01.2017.
  */
 
+@Deprecated("")
 object ReactiveConnectivity {
     /**
      * Creates a new [Flowable] broadcasting changes in connectivity reported by system as
@@ -33,6 +34,7 @@ object ReactiveConnectivity {
     @CheckResult
     @JvmStatic
     @SchedulerSupport(SchedulerSupport.NONE)
+    @Deprecated("")
     fun observeOld(context: Context): Flowable<ConnectivityInfo> {
         val connectivitySubject = BehaviorProcessor.create<ConnectivityInfo>()
 

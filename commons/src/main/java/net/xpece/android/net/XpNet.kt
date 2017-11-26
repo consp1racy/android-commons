@@ -24,4 +24,4 @@ val Context.isAirplaneModeOn: Boolean
 
 val Context.isAnyNetworkConnected: Boolean
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    get() = connectivityManager.activeNetworkInfo?.isConnected ?: false
+    get() = connectivityManager?.activeNetworkInfo?.isConnected ?: false
