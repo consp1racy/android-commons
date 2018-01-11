@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Widget.Design.CardButton" parent="android:Widget">
         <item name="android:background">@null</item>
@@ -27,6 +27,8 @@
         <item name="carb_insetRight">@dimen/abc_button_inset_horizontal_material</item>
         <item name="carb_insetTop">@dimen/abc_button_inset_vertical_material</item>
         <item name="carb_insetBottom">@dimen/abc_button_inset_vertical_material</item>
+
+        <item name="android:defaultFocusHighlightEnabled" tools:ignore="NewApi">false</item>
     </style>
 
     <style name="Widget.Design.CardButton.Colored">
