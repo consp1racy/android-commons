@@ -15,47 +15,36 @@ private val CALENDAR = object : ThreadLocal<Calendar>() {
 
 fun java.util.Date.toLocalDateTime(): LocalDateTime {
     val instant = toInstantCompat()
-    val local = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
-    return local
+    return LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
 }
 
 fun java.util.Date.toOffsetDateTime(): OffsetDateTime {
     val instant = toInstantCompat()
-    val offset = OffsetDateTime.ofInstant(instant, ZoneOffset.UTC)
-    return offset
+    return OffsetDateTime.ofInstant(instant, ZoneOffset.UTC)
 }
 
 fun java.util.Date.toZonedDateTime(): ZonedDateTime {
     val instant = toInstantCompat()
-    val zoned = ZonedDateTime.ofInstant(instant, ZoneOffset.UTC)
-    return zoned
+    return ZonedDateTime.ofInstant(instant, ZoneOffset.UTC)
 }
 
 fun java.util.Date.toLocalTime(): LocalTime {
     val instant = toInstantCompat()
     val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
-    val localTime = localDateTime.toLocalTime()
-    return localTime
+    return localDateTime.toLocalTime()
 }
 
 fun java.util.Date.toLocalDate(): LocalDate {
     val instant = toInstantCompat()
     val localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
-    val localDate = localDateTime.toLocalDate()
-    return localDate
+    return localDateTime.toLocalDate()
 }
 
-fun java.util.Date.toInstantCompat(): Instant {
-    val seconds = time / 1000
-    val nanos = (time % 1000) * 1000000
-    val instant = Instant.ofEpochSecond(seconds, nanos)
-    return instant
-}
+fun java.util.Date.toInstantCompat(): Instant = Instant.ofEpochMilli(time)
 
 fun Timestamp.toInstantCompat(): Instant {
     val seconds = time / 1000
-    val instant = Instant.ofEpochSecond(seconds, nanos.toLong())
-    return instant
+    return Instant.ofEpochSecond(seconds, nanos.toLong())
 }
 
 fun LocalDateTime.toSqlTimestamp(): Timestamp {

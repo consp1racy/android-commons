@@ -8,12 +8,6 @@ import android.support.annotation.RequiresApi
  */
 object SchedulerFactory {
     @JvmStatic
-    @Deprecated("Typo.", ReplaceWith("createSchedulerForGcmJobSchedulerService"))
-    fun createSchedulerForGcmJobSchdulerService(
-            appContext: Context, klass: Class<out GcmJobSchedulerService>): Scheduler =
-            createSchedulerForGcmJobSchedulerService(appContext, klass)
-
-    @JvmStatic
     fun createSchedulerForGcmJobSchedulerService(
             appContext: Context, klass: Class<out GcmJobSchedulerService>): Scheduler =
             GcmJobSchedulerService.createSchedulerFor(appContext, klass)

@@ -19,12 +19,12 @@ import android.support.v4.view.ViewCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v4.widget.TextViewCompat
 import android.support.v7.app.ActionBar
-import android.support.v7.widget.AppCompatDrawableManager
 import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.*
 import net.xpece.android.R
+import net.xpece.android.content.getDrawableCompat
 import net.xpece.android.content.resolveColor
 
 private val methodViewRemovePerformClickCallback by lazy(LazyThreadSafetyMode.NONE) {
@@ -128,14 +128,12 @@ fun ScrollView.canScroll(): Boolean {
 }
 
 fun setSearchViewLayoutTransition(view: SearchView) {
-    if (Build.VERSION.SDK_INT < 11) return
     val searchBarId = view.context.resources.getIdentifier("android:id/search_bar", null, null)
     val searchBar = view.findViewById<LinearLayout>(searchBarId)
     searchBar.layoutTransition = LayoutTransition()
 }
 
 fun setSearchViewLayoutTransition(view: android.support.v7.widget.SearchView) {
-    if (Build.VERSION.SDK_INT < 11) return
     val searchBar = view.findViewById<LinearLayout>(R.id.search_bar)
     searchBar.layoutTransition = LayoutTransition()
 }
@@ -166,7 +164,7 @@ fun ImageView.switchImage(d: Drawable?, duration: Int = 100) {
 @SuppressLint("RestrictedApi")
 @JvmOverloads
 fun ImageView.switchImage(@DrawableRes resId: Int, duration: Int = 100) {
-    val d = AppCompatDrawableManager.get().getDrawable(context, resId)
+    val d = context.getDrawableCompat(resId)
     switchImage(d, duration)
 }
 
@@ -210,14 +208,11 @@ fun View.fitSystemWindows(insets: Rect) = XpViewReflect.fitSystemWindows(this, i
 inline fun SwipeRefreshLayout.setupDefaultColors() {
     setColorSchemeColors(context.resolveColor(R.attr.colorAccent, Color.BLACK))
     setProgressBackgroundColorSchemeColor(
-            context.resolveColor(
-                    R.attr.colorBackgroundFloating,
-                    Color.WHITE))
+            context.resolveColor(R.attr.colorBackgroundFloating, Color.WHITE))
 }
 
-inline fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) = TextViewCompat.setTextAppearance(
-        this,
-        resId)
+inline fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) =
+        TextViewCompat.setTextAppearance(this, resId)
 
 inline fun View.setLayerTypeSafe(layerType: Int) {
     if (this.layerType != layerType) {

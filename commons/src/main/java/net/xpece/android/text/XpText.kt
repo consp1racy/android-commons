@@ -32,7 +32,7 @@ fun CharSequence.unaccentAndLower(locale: Locale = Locale.getDefault()) = this.u
 
 /**
  * @param subject Original string with accents
- * @param unEmp Constraint. Unready unaccented for increased effectivity.
+ * @param unEmp Constraint. Unready unaccented for increased efficiency.
  * @return Formatted original string.
  */
 @Suppress("deprecation")

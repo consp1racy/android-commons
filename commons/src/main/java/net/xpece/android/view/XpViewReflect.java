@@ -25,8 +25,10 @@ final class XpViewReflect {
     }
 
     private XpViewReflect() {
+        throw new AssertionError("No instances!");
     }
 
+    @Deprecated
     public static boolean fitSystemWindows(View view, Rect insets) {
         try {
             return (boolean) METHOD_FIT_SYSTEM_WINDOWS.invoke(view, insets);

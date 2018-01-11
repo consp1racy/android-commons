@@ -2,23 +2,25 @@
 
 package net.xpece.android.io
 
+import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.util.*
 
+@Deprecated("Use ContentResolver.copy instead.", replaceWith = ReplaceWith("contentResolver.copy"))
 fun Context.copy(inputUri: Uri, outputUri: Uri) {
-    contentResolver.openInputStream(inputUri).use { input ->
-        contentResolver.openOutputStream(outputUri).use { output ->
+    contentResolver.copy(inputUri, outputUri)
+}
+
+fun ContentResolver.copy(inputUri: Uri, outputUri: Uri) {
+    openInputStream(inputUri).use { input ->
+        openOutputStream(outputUri).use { output ->
             input.copyTo(output)
         }
     }
 }
-
-@JvmOverloads
-@Deprecated("", ReplaceWith("string"))
-fun InputStream.readToString(charset: String = "UTF-8"): String = string(charset)
 
 @JvmOverloads
 fun InputStream.string(charset: String = "UTF-8"): String =

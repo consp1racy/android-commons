@@ -1,6 +1,6 @@
 /***
   Copyright (c) 2010 CommonsWare, LLC
-  
+
   Licensed under the Apache License, Version 2.0 (the "License"); you may
   not use this file except in compliance with the License. You may obtain
   a copy of the License at
@@ -23,12 +23,13 @@ import android.util.Log;
  * complete. Used in conjunction with a WakeLock to
  * accomplish this end.
  */
+@Deprecated
 public class WakefulThread extends HandlerThread {
   private PowerManager.WakeLock lock=null;
 
   /**
    * Constructor
-   * 
+   *
    * @param lock
    *          Already-acquired WakeLock to be released when
    *          work done

@@ -76,6 +76,7 @@ inline fun String.parseMachineReadableDateTime(): Date {
 }
 
 @Suppress("DEPRECATION")
+@Deprecated("Don't use Date.")
 fun Date.equalsDate(other: Date): Boolean {
     return this.date == other.date && this.month == other.month && this.year == other.year
 }

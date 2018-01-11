@@ -7,11 +7,9 @@ import android.os.Build
 import android.support.annotation.ColorInt
 import android.view.Window
 
-/**
- * Created by Eugen on 11.08.2016.
- */
-
-@ColorInt val DEFAULT_SCRIM = 0x44000000
+@ColorInt
+@JvmField
+val DEFAULT_SCRIM = 0x44000000
 
 @TargetApi(21)
 inline fun Window.setNavigationBarColorCompat(@ColorInt color: Int) {
@@ -19,6 +17,7 @@ inline fun Window.setNavigationBarColorCompat(@ColorInt color: Int) {
         navigationBarColor = color
     }
 }
+
 @TargetApi(21)
 inline fun Window.setStatusBarColorCompat(@ColorInt color: Int) {
     if (Build.VERSION.SDK_INT >= 21) {

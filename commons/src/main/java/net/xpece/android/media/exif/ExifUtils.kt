@@ -15,12 +15,8 @@ object ExifUtils {
      * Requires com.android.support:exifinterface:25.1.0+.
      */
     @JvmStatic
-    fun getOrientation(context: Context, uri: Uri): Int {
-        context.contentResolver.openInputStream(uri).buffered().use {
-            val orientation = getOrientation(it)
-            return orientation
-        }
-    }
+    fun getOrientation(context: Context, uri: Uri): Int =
+            context.contentResolver.openInputStream(uri).buffered().use(this::getOrientation)
 
     /**
      * Requires com.android.support:exifinterface:25.1.0+.
