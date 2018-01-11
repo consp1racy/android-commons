@@ -3,6 +3,7 @@ package android.support.design.widget;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v7.graphics.drawable.DrawableWrapper;
 
 /**
@@ -11,7 +12,7 @@ import android.support.v7.graphics.drawable.DrawableWrapper;
 
 @SuppressWarnings("RestrictedApi")
 class AltInsetDrawable extends DrawableWrapper {
-    public static AltInsetDrawable create(final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
+    public static AltInsetDrawable create(@NonNull final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
         if (Build.VERSION.SDK_INT >= 21) {
             return new AltInsetDrawableApi21(drawable, insetLeft, insetTop, insetRight, insetBottom);
         } else {
@@ -19,7 +20,7 @@ class AltInsetDrawable extends DrawableWrapper {
         }
     }
 
-    public static AltInsetDrawable create(final Drawable drawable) {
+    public static AltInsetDrawable create(@NonNull final Drawable drawable) {
         if (Build.VERSION.SDK_INT >= 21) {
             return new AltInsetDrawableApi21(drawable);
         } else {
@@ -31,11 +32,11 @@ class AltInsetDrawable extends DrawableWrapper {
 
     private Rect mInset = new Rect();
 
-    protected AltInsetDrawable(final Drawable drawable) {
+    protected AltInsetDrawable(@NonNull final Drawable drawable) {
         super(drawable);
     }
 
-    protected AltInsetDrawable(final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
+    protected AltInsetDrawable(@NonNull final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
         super(drawable);
         mInset.set(insetLeft, insetTop, insetRight, insetBottom);
     }
@@ -48,7 +49,7 @@ class AltInsetDrawable extends DrawableWrapper {
     }
 
     @Override
-    protected void onBoundsChange(final Rect bounds) {
+    protected void onBoundsChange(@NonNull final Rect bounds) {
         final Rect r = mTmpRect; // DO NOT MODIFY bounds ON LOLLIPOP!
         r.set(bounds);
         r.left += mInset.left;
@@ -79,7 +80,7 @@ class AltInsetDrawable extends DrawableWrapper {
     }
 
     @Override
-    public boolean getPadding(final Rect padding) {
+    public boolean getPadding(@NonNull final Rect padding) {
         final boolean value = super.getPadding(padding);
         padding.left += mInset.left;
         padding.top += mInset.top;

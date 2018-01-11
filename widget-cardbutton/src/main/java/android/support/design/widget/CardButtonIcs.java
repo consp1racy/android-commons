@@ -32,6 +32,7 @@ class CardButtonIcs extends CardButtonGingerbread {
 
     private float mRotation;
 
+    @NonNull
     private final StateListAnimator mStateListAnimator;
 
     CardButtonIcs(Button view, CardButtonDelegate shadowViewDelegate) {
@@ -93,7 +94,7 @@ class CardButtonIcs extends CardButtonGingerbread {
     }
 
     @Override
-    void onDrawableStateChanged(int[] state) {
+    void onDrawableStateChanged(@NonNull int[] state) {
         super.onDrawableStateChanged(state);
         mStateListAnimator.setState(state);
     }

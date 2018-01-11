@@ -1,5 +1,6 @@
 package android.support.design.widget;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatButton;
 
 import java.lang.reflect.Field;
@@ -17,17 +18,15 @@ class CardButtonReflection {
         try {
             f = AppCompatButton.class.getDeclaredField("mBackgroundTintHelper");
             f.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+        } catch (NoSuchFieldException ignored) {
         }
         FIELD_APPCOMPAT_BUTTON_BACKGROUND_HELPER = f;
     }
 
-    static void removeAppCompatBackgroundHelper(final AppCompatButton button) {
+    static void removeAppCompatBackgroundHelper(@NonNull final AppCompatButton button) {
         try {
             FIELD_APPCOMPAT_BUTTON_BACKGROUND_HELPER.set(button, null);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (IllegalAccessException ignored) {
         }
     }
 

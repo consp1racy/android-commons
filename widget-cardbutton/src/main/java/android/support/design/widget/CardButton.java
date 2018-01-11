@@ -16,6 +16,7 @@
 
 package android.support.design.widget;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -193,7 +194,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     private Drawable mBackgroundPrototype;
 
-    private boolean mDrawSelectorOnTop = true; // Backwards compatibility requires true.
+    boolean mDrawSelectorOnTop = true; // Backwards compatibility requires true.
 
     public CardButton(Context context) {
         this(context, null);
@@ -209,7 +210,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         init(context, attrs, 0, 0);
     }
 
-    @SuppressWarnings("RestrictedApi")
+    @SuppressWarnings({"RestrictedApi", "SameParameterValue"})
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         // Sincerely, fuck you, AppCompatBackgroundHelper.applyFrameworkTintUsingColorFilter().
         // Remove on all platforms for consistency. And we handle background ourselves.
@@ -635,7 +636,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         Log.i(TAG, "Setting a custom foreground is not supported.");
     }
 
-    void setForegroundCompat(Drawable drawable) {
+    void setForegroundCompat(@Nullable Drawable drawable) {
         if (mForeground != drawable) {
             if (mForeground != null) {
                 mForeground.setCallback(null);
@@ -684,6 +685,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         return mCompatPadding;
     }
 
+    @SuppressWarnings("unused")
     public void setDrawSelectorOnTop(final boolean drawSelectorOnTop) {
         if (mDrawSelectorOnTop != drawSelectorOnTop) {
             mDrawSelectorOnTop = drawSelectorOnTop;
@@ -691,6 +693,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
     }
 
+    @SuppressWarnings("unused")
     public boolean getDrawSelectorOnTop() {
         return mDrawSelectorOnTop;
     }
@@ -781,6 +784,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
      *
      * @return true if this view actually has been laid out and has a content rect, else false.
      */
+    @SuppressWarnings("UnusedReturnValue")
     public boolean getContentRect(@NonNull Rect rect) {
         if (ViewCompat.isLaidOut(this)) {
             rect.set(0, 0, getWidth(), getHeight());
@@ -870,7 +874,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent ev) {
+    @SuppressLint("ClickableViewAccessibility")
+    public boolean onTouchEvent(@NonNull MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 // Skipping the gesture if it doesn't start in in the FAB 'content' area
@@ -998,7 +1003,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         @SuppressWarnings("deprecation")
         @Override
-        public void setBackgroundDrawable(Drawable background) {
+        public void setBackgroundDrawable(@NonNull Drawable background) {
             final Drawable d = AltInsetDrawable.create(background);
             CardButton.this.superSetBackgroundDrawable(d);
         }
@@ -1009,7 +1014,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         }
 
         @Override
-        public void setForegroundDrawable(Drawable foreground) {
+        public void setForegroundDrawable(@Nullable Drawable foreground) {
             CardButton.this.setForegroundCompat(foreground);
         }
     }

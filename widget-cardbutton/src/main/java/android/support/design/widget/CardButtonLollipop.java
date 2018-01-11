@@ -32,6 +32,7 @@ import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -45,8 +46,6 @@ import java.util.List;
 @TargetApi(21)
 class CardButtonLollipop extends CardButtonIcs {
     private static boolean FOREGROUND_NEEDS_CLIPPING_PATH = Build.VERSION.SDK_INT >= 21 && Build.VERSION.SDK_INT < 23;
-
-    private InsetDrawable mInsetDrawable;
 
     CardButtonLollipop(Button view, CardButtonDelegate shadowViewDelegate) {
         super(view, shadowViewDelegate);
@@ -128,7 +127,7 @@ class CardButtonLollipop extends CardButtonIcs {
     }
 
     @Override
-    void setRippleColor(int rippleColor) {
+    void setRippleColor(@ColorInt int rippleColor) {
         if (mRippleDrawable instanceof RippleDrawable) {
             ((RippleDrawable) mRippleDrawable).setColor(ColorStateList.valueOf(rippleColor));
         } else {
@@ -212,18 +211,18 @@ class CardButtonLollipop extends CardButtonIcs {
     }
 
     @Override
-    void onPaddingUpdated(Rect padding) {
+    void onPaddingUpdated(@NonNull Rect padding) {
         if (mShadowViewDelegate.isCompatPaddingEnabled()) {
-            mInsetDrawable = new InsetDrawable(mContentBackground,
-                padding.left, padding.top, padding.right, padding.bottom);
-            mShadowViewDelegate.setBackgroundDrawable(mInsetDrawable);
+            InsetDrawable insetDrawable = new InsetDrawable(mContentBackground,
+                    padding.left, padding.top, padding.right, padding.bottom);
+            mShadowViewDelegate.setBackgroundDrawable(insetDrawable);
         } else {
             mShadowViewDelegate.setBackgroundDrawable(mContentBackground);
         }
     }
 
     @Override
-    void onDrawableStateChanged(int[] state) {
+    void onDrawableStateChanged(@NonNull int[] state) {
         // no-op
     }
 
@@ -237,10 +236,12 @@ class CardButtonLollipop extends CardButtonIcs {
         return false;
     }
 
+    @NonNull
     private Drawable createMaskDrawable(float cornerRadius) {
         return CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, Color.WHITE);
     }
 
+    @NonNull
     private RippleDrawable createRippleDrawable(@ColorInt final int rippleColor, final float cornerRadius) {
         final ColorStateList color = ColorStateList.valueOf(rippleColor);
         final Drawable mask = createMaskDrawable(cornerRadius);
@@ -252,7 +253,7 @@ class CardButtonLollipop extends CardButtonIcs {
     }
 
     @Override
-    void getPadding(Rect rect) {
+    void getPadding(@NonNull Rect rect) {
         if (mShadowViewDelegate.isCompatPaddingEnabled()) {
             final float radius = mShadowViewDelegate.getRadius();
             final float maxShadowSize = getElevation() + mPressedTranslationZ;

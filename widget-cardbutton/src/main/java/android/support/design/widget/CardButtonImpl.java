@@ -23,6 +23,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.ViewTreeObserver;
 import android.view.animation.Interpolator;
@@ -68,11 +69,11 @@ abstract class CardButtonImpl {
                                         @Nullable PorterDuff.Mode backgroundTintMode, @ColorInt int rippleColor, @IntRange(from = 0) int borderWidth,
                                         @Nullable ColorStateList borderColor);
 
-    abstract void setBackgroundTintList(ColorStateList tint);
+    abstract void setBackgroundTintList(@Nullable ColorStateList tint);
 
-    abstract void setBackgroundTintMode(PorterDuff.Mode tintMode);
+    abstract void setBackgroundTintMode(@Nullable PorterDuff.Mode tintMode);
 
-    abstract void setRippleColor(int rippleColor);
+    abstract void setRippleColor(@ColorInt int rippleColor);
 
     final void setElevation(float elevation) {
         if (mElevation != elevation) {
@@ -92,7 +93,7 @@ abstract class CardButtonImpl {
 
     abstract void onElevationsChanged(float elevation, float pressedTranslationZ);
 
-    abstract void onDrawableStateChanged(int[] state);
+    abstract void onDrawableStateChanged(@NonNull int[] state);
 
     abstract void jumpDrawableToCurrentState();
 
@@ -113,9 +114,9 @@ abstract class CardButtonImpl {
         }
     }
 
-    abstract void getPadding(Rect rect);
+    abstract void getPadding(@NonNull Rect rect);
 
-    void onPaddingUpdated(Rect padding) {}
+    void onPaddingUpdated(@NonNull Rect padding) {}
 
     void onAttachedToWindow() {
         if (requirePreDrawListener()) {

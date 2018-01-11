@@ -40,6 +40,7 @@ import android.support.v4.graphics.drawable.TintAwareDrawable;
  * Simpler and uses less resources compared to GradientDrawable or ShapeDrawable.
  */
 class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
+    @NonNull
     private static final RoundRectHelper sHelper;
 
     static {
@@ -69,7 +70,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
         invalidateSelf();
     }
 
-    private int getColorForState(final int[] stateSet) {
+    private int getColorForState(@NonNull final int[] stateSet) {
         final RoundRectConstantState state = mState;
         return state.mBackground.getColorForState(stateSet, state.mBackground.getDefaultColor());
     }
@@ -98,7 +99,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
         paint.setAlpha(prevAlpha);
     }
 
-    private void updateBounds(Rect bounds) {
+    private void updateBounds(@Nullable Rect bounds) {
         if (bounds == null) {
             bounds = getBounds();
         }
@@ -107,7 +108,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
     }
 
     @Override
-    protected void onBoundsChange(Rect bounds) {
+    protected void onBoundsChange(@NonNull Rect bounds) {
         super.onBoundsChange(bounds);
         updateBounds(bounds);
     }
@@ -134,7 +135,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
     }
 
     @Override
-    public void setColorFilter(ColorFilter cf) {
+    public void setColorFilter(@Nullable ColorFilter cf) {
         mState.mPaint.setColorFilter(cf);
         invalidateSelf();
     }
@@ -176,7 +177,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
     }
 
     @Override
-    public void setTintList(ColorStateList tint) {
+    public void setTintList(@Nullable ColorStateList tint) {
         mState.mTint = tint;
         mState.mTintFilter = createTintFilter(mState.mTint, mState.mTintMode);
         invalidateSelf();
@@ -190,7 +191,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
     }
 
     @Override
-    protected boolean onStateChange(int[] stateSet) {
+    protected boolean onStateChange(@NonNull int[] stateSet) {
         final int newColor = getColorForState(stateSet);
         final boolean colorChanged = newColor != mState.mPaint.getColor();
         if (colorChanged) {
@@ -234,6 +235,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
      * Ensures the tint filter is consistent with the current tint color and
      * mode.
      */
+    @Nullable
     private PorterDuffColorFilter createTintFilter(ColorStateList tint, PorterDuff.Mode tintMode) {
         if (tint == null || tintMode == null) {
             return null;
@@ -242,7 +244,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
         return new PorterDuffColorFilter(color, tintMode);
     }
 
-    XpRoundRectDrawable(final RoundRectConstantState state) {
+    XpRoundRectDrawable(@NonNull final RoundRectConstantState state) {
         mState = state;
         onSetBackground();
     }
@@ -302,7 +304,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
     }
 
     interface RoundRectHelper {
-        void drawRoundRect(Canvas canvas, RectF bounds, float cornerRadius, Paint paint);
+        void drawRoundRect(@NonNull Canvas canvas, @NonNull RectF bounds, float cornerRadius, @NonNull Paint paint);
     }
 
     // Don't use now. Produces unwanted results when working with translucent colors.
@@ -355,7 +357,7 @@ class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
 
     static class RoundRectHelperImpl implements RoundRectHelper {
         @Override
-        public void drawRoundRect(Canvas canvas, RectF bounds, float cornerRadius, Paint paint) {
+        public void drawRoundRect(@NonNull Canvas canvas, @NonNull RectF bounds, float cornerRadius, @NonNull Paint paint) {
             canvas.drawRoundRect(bounds, cornerRadius, cornerRadius, paint);
         }
     }

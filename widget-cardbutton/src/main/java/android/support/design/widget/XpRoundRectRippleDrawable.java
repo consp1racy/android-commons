@@ -37,7 +37,7 @@ class XpRoundRectRippleDrawable extends RippleDrawable {
     }
 
     @Override
-    protected void onBoundsChange(final Rect bounds) {
+    protected void onBoundsChange(@NonNull final Rect bounds) {
         super.onBoundsChange(bounds);
 
         final Path path = mForegroundClippingPath;

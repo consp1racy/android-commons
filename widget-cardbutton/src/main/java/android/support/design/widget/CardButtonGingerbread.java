@@ -112,10 +112,12 @@ class CardButtonGingerbread extends CardButtonImpl {
         }
     }
 
+    @NonNull
     Drawable createShapeDrawable(float cornerRadius) {
         return CardButtonDrawableFactory.newRoundRectDrawableCompat(cornerRadius, Color.WHITE);
     }
 
+    @NonNull
     Drawable createBorderDrawable(@IntRange(from = 0) @Px final int borderWidth, @FloatRange(from = 0) final float cornerRadius, @NonNull final ColorStateList borderTint) {
         final Drawable drawable;
         if (mView.isInEditMode()) {
@@ -130,14 +132,14 @@ class CardButtonGingerbread extends CardButtonImpl {
     }
 
     @Override
-    void setBackgroundTintList(ColorStateList tint) {
+    void setBackgroundTintList(@Nullable ColorStateList tint) {
         if (mShapeDrawable != null) {
             DrawableCompat.setTintList(mShapeDrawable, tint);
         }
     }
 
     @Override
-    void setBackgroundTintMode(PorterDuff.Mode tintMode) {
+    void setBackgroundTintMode(@Nullable PorterDuff.Mode tintMode) {
         if (mShapeDrawable != null) {
             DrawableCompat.setTintMode(mShapeDrawable, tintMode);
         }
@@ -165,7 +167,7 @@ class CardButtonGingerbread extends CardButtonImpl {
     }
 
     @Override
-    void onDrawableStateChanged(final int[] state) {
+    void onDrawableStateChanged(@NonNull final int[] state) {
         // Ignore on Gingerbread
     }
 
@@ -180,7 +182,7 @@ class CardButtonGingerbread extends CardButtonImpl {
     }
 
     @Override
-    void getPadding(Rect rect) {
+    void getPadding(@NonNull final Rect rect) {
         mShadowDrawable.getPadding(rect);
     }
 
