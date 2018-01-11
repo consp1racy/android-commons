@@ -2,6 +2,7 @@
 
 package net.xpece.android.widget
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
 import android.support.annotation.StyleRes
@@ -28,6 +29,7 @@ var Toolbar.collapseIcon: Drawable?
     get() = FIELD_COLLAPSE_ICON.get(this) as Drawable?
     set(value) = FIELD_COLLAPSE_ICON.set(this, value)
 
+@SuppressLint("RestrictedApi")
 fun Toolbar.setCollapseIcon(@DrawableRes iconRes: Int) {
     collapseIcon = AppCompatDrawableManager.get().getDrawable(context, iconRes)
 }
@@ -35,13 +37,17 @@ fun Toolbar.setCollapseIcon(@DrawableRes iconRes: Int) {
 val Toolbar.titleTextView: TextView?
     get() = FIELD_TITLE_TEXT_VIEW.get(this) as TextView?
 
-@get:StyleRes
-val Toolbar.titleTextAppearance: Int
-    get() = FIELD_TITLE_TEXT_APPEARANCE.getInt(this)
+var Toolbar.titleTextAppearance: Int
+    @StyleRes get() = FIELD_TITLE_TEXT_APPEARANCE.getInt(this)
+    set(@StyleRes value) {
+        setTitleTextAppearance(context, value)
+    }
 
 val Toolbar.subtitleTextView: TextView?
     get() = FIELD_SUBTITLE_TEXT_VIEW.get(this) as TextView?
 
-@get:StyleRes
-val Toolbar.subtitleTextAppearance: Int
-    get() = FIELD_SUBTITLE_TEXT_APPEARANCE.getInt(this)
+var Toolbar.subtitleTextAppearance: Int
+    @StyleRes get() = FIELD_SUBTITLE_TEXT_APPEARANCE.getInt(this)
+    set(@StyleRes value) {
+        setSubtitleTextAppearance(context, value)
+    }
