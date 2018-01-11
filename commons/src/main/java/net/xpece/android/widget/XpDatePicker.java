@@ -2,6 +2,8 @@ package net.xpece.android.widget;
 
 import android.content.res.ColorStateList;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.DatePicker;
 import android.widget.NumberPicker;
 
@@ -19,7 +21,6 @@ public final class XpDatePicker {
     private static final Field FIELD_YEAR_SPINNER;
 
     static {
-        if (Build.VERSION.SDK_INT >= 11) {
             Field f;
             Class<?> cls = DatePicker.class;
             if (Build.VERSION.SDK_INT < 21) {
@@ -78,18 +79,13 @@ public final class XpDatePicker {
                 e.printStackTrace();
             }
             FIELD_DAY_SPINNER = f;
-        } else {
-            FIELD_DAY_SPINNER = null;
-            FIELD_MONTH_SPINNER = null;
-            FIELD_YEAR_SPINNER = null;
-            FIELD_DELEGATE = null;
-            CLASS_SPINNER_DELEGATE = null;
-        }
     }
 
-    private XpDatePicker() {}
+    private XpDatePicker() {
+        throw new AssertionError("No instances!");
+    }
 
-    private static NumberPicker getYearSpinner(Object picker) {
+    private static NumberPicker getYearSpinner(@NonNull Object picker) {
         try {
             return (NumberPicker) FIELD_YEAR_SPINNER.get(picker);
         } catch (IllegalAccessException e) {
@@ -98,7 +94,7 @@ public final class XpDatePicker {
         }
     }
 
-    private static NumberPicker getMonthSpinner(Object picker) {
+    private static NumberPicker getMonthSpinner(@NonNull Object picker) {
         try {
             return (NumberPicker) FIELD_MONTH_SPINNER.get(picker);
         } catch (IllegalAccessException e) {
@@ -107,7 +103,7 @@ public final class XpDatePicker {
         }
     }
 
-    private static NumberPicker getDaySpinner(Object picker) {
+    private static NumberPicker getDaySpinner(@NonNull Object picker) {
         try {
             return (NumberPicker) FIELD_DAY_SPINNER.get(picker);
         } catch (IllegalAccessException e) {
@@ -116,7 +112,7 @@ public final class XpDatePicker {
         }
     }
 
-    private static Object getDelegate(DatePicker picker) {
+    private static Object getDelegate(@NonNull DatePicker picker) {
         try {
             return FIELD_DELEGATE.get(picker);
         } catch (IllegalAccessException e) {
@@ -125,9 +121,7 @@ public final class XpDatePicker {
         }
     }
 
-    public static void setSelectionDividerTint(DatePicker picker, ColorStateList color) {
-        if (Build.VERSION.SDK_INT < 11) return;
-
+    public static void setSelectionDividerTint(@NonNull DatePicker picker, @Nullable ColorStateList color) {
         if (Build.VERSION.SDK_INT < 21) {
             NumberPicker np;
             np = getYearSpinner(picker);

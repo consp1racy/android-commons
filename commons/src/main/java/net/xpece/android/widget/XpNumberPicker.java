@@ -1,9 +1,10 @@
 package net.xpece.android.widget;
 
-import android.annotation.TargetApi;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.widget.NumberPicker;
 
@@ -12,27 +13,22 @@ import java.lang.reflect.Field;
 /**
  * Created by Eugen on 06.05.2016.
  */
-@TargetApi(11)
 public final class XpNumberPicker {
     private static final Field FIELD_SELECTION_DIVIDER;
 
     static {
         Field f = null;
-        if (Build.VERSION.SDK_INT >= 11) {
             try {
                 f = NumberPicker.class.getDeclaredField("mSelectionDivider");
                 f.setAccessible(true);
             } catch (NoSuchFieldException e) {
             }
-        }
         FIELD_SELECTION_DIVIDER = f;
     }
 
     private XpNumberPicker() {}
 
-    public static void setSelectionDivider(NumberPicker picker, Drawable divider) {
-        if (Build.VERSION.SDK_INT < 11) return;
-
+    public static void setSelectionDivider(@NonNull NumberPicker picker, @Nullable Drawable divider) {
         Drawable old = getSelectionDivider(picker);
         if (old != divider) {
             if (old != null) {
@@ -55,9 +51,8 @@ public final class XpNumberPicker {
         }
     }
 
-    public static Drawable getSelectionDivider(NumberPicker picker) {
-        if (Build.VERSION.SDK_INT < 11) return null;
-
+    @Nullable
+    public static Drawable getSelectionDivider(@NonNull NumberPicker picker) {
         try {
             return (Drawable) FIELD_SELECTION_DIVIDER.get(picker);
         } catch (IllegalAccessException e) {
@@ -66,7 +61,7 @@ public final class XpNumberPicker {
         }
     }
 
-    public static void setSelectionDividerTint(NumberPicker picker, ColorStateList color) {
+    public static void setSelectionDividerTint(@NonNull NumberPicker picker, @Nullable ColorStateList color) {
         Drawable d = getSelectionDivider(picker);
         if (d != null) {
             d = DrawableCompat.wrap(d);

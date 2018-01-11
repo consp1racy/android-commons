@@ -1,11 +1,13 @@
 package net.xpece.android.widget;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.EdgeEffectCompat;
 import android.support.v4.widget.NestedScrollView;
@@ -25,8 +27,11 @@ import java.lang.reflect.Field;
 /**
  * @author Eugen on 11. 2. 2016.
  */
+@SuppressLint("PrivateApi")
 public final class XpEdgeEffect {
-    private XpEdgeEffect() {}
+    private XpEdgeEffect() {
+        throw new AssertionError("No instances!");
+    }
 
     private static final Class<ScrollView> CLASS_SCROLL_VIEW = ScrollView.class;
     private static final Field SCROLL_VIEW_FIELD_EDGE_GLOW_TOP;
@@ -226,13 +231,14 @@ public final class XpEdgeEffect {
     /** Replace Holo grey glow. */
     public static final int PRE_LOLLIPOP = Build.VERSION_CODES.LOLLIPOP;
 
-    public static void setColor(AbsListView listView, @ColorInt int color, @EdgeGlowColorApi int when) {
+    public static void setColor(
+            @NonNull AbsListView listView, @ColorInt int color, @EdgeGlowColorApi int when) {
         if (Build.VERSION.SDK_INT < when) {
             setColor(listView, color);
         }
     }
 
-    public static void setColor(AbsListView listView, @ColorInt int color) {
+    public static void setColor(@NonNull AbsListView listView, @ColorInt int color) {
         try {
             Object ee;
             ee = LIST_VIEW_FIELD_EDGE_GLOW_TOP.get(listView);
@@ -244,13 +250,14 @@ public final class XpEdgeEffect {
         }
     }
 
-    public static void setColor(ScrollView scrollView, @ColorInt int color, @EdgeGlowColorApi int when) {
+    public static void setColor(
+            @NonNull ScrollView scrollView, @ColorInt int color, @EdgeGlowColorApi int when) {
         if (Build.VERSION.SDK_INT < when) {
             setColor(scrollView, color);
         }
     }
 
-    public static void setColor(ScrollView scrollView, @ColorInt int color) {
+    public static void setColor(@NonNull ScrollView scrollView, @ColorInt int color) {
         try {
             Object ee;
             ee = SCROLL_VIEW_FIELD_EDGE_GLOW_TOP.get(scrollView);
@@ -262,13 +269,14 @@ public final class XpEdgeEffect {
         }
     }
 
-    public static void setColor(HorizontalScrollView scrollView, @ColorInt int color, @EdgeGlowColorApi int when) {
+    public static void setColor(
+            @NonNull HorizontalScrollView scrollView, @ColorInt int color, @EdgeGlowColorApi int when) {
         if (Build.VERSION.SDK_INT < when) {
             setColor(scrollView, color);
         }
     }
 
-    public static void setColor(HorizontalScrollView scrollView, @ColorInt int color) {
+    public static void setColor(@NonNull HorizontalScrollView scrollView, @ColorInt int color) {
         try {
             Object ee;
             ee = HORIZONTAL_SCROLL_VIEW_FIELD_EDGE_GLOW_LEFT.get(scrollView);
@@ -280,13 +288,14 @@ public final class XpEdgeEffect {
         }
     }
 
-    public static void setColor(ViewPager viewPager, @ColorInt int color, @EdgeGlowColorApi int when) {
+    public static void setColor(
+            @NonNull ViewPager viewPager, @ColorInt int color, @EdgeGlowColorApi int when) {
         if (Build.VERSION.SDK_INT < when) {
             setColor(viewPager, color);
         }
     }
 
-    public static void setColor(ViewPager viewPager, @ColorInt int color) {
+    public static void setColor(@NonNull ViewPager viewPager, @ColorInt int color) {
         try {
             Object ee;
             ee = VIEW_PAGER_FIELD_LEFT_EDGE.get(viewPager);
@@ -298,13 +307,14 @@ public final class XpEdgeEffect {
         }
     }
 
-    public static void setColor(NestedScrollView scrollView, @ColorInt int color, @EdgeGlowColorApi int when) {
+    public static void setColor(
+            @NonNull NestedScrollView scrollView, @ColorInt int color, @EdgeGlowColorApi int when) {
         if (Build.VERSION.SDK_INT < when) {
             setColor(scrollView, color);
         }
     }
 
-    public static void setColor(NestedScrollView scrollView, @ColorInt int color) {
+    public static void setColor(@NonNull NestedScrollView scrollView, @ColorInt int color) {
         try {
             Object ee;
             ee = NESTED_SCROLL_VIEW_FIELD_EDGE_GLOW_TOP.get(scrollView);
@@ -316,13 +326,14 @@ public final class XpEdgeEffect {
         }
     }
 
-    public static void setColor(RecyclerView scrollView, @ColorInt int color, @EdgeGlowColorApi int when) {
+    public static void setColor(
+            @NonNull RecyclerView scrollView, @ColorInt int color, @EdgeGlowColorApi int when) {
         if (Build.VERSION.SDK_INT < when) {
             setColor(scrollView, color);
         }
     }
 
-    public static void setColor(RecyclerView scrollView, @ColorInt int color) {
+    public static void setColor(@NonNull RecyclerView scrollView, @ColorInt int color) {
         try {
             Object ee;
             ee = RECYCLER_VIEW_FIELD_EDGE_GLOW_TOP.get(scrollView);
@@ -339,7 +350,7 @@ public final class XpEdgeEffect {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private static void setColor(Object edgeEffect, @ColorInt int color) {
+    private static void setColor(@NonNull Object edgeEffect, @ColorInt int color) {
         if (edgeEffect instanceof EdgeEffectCompat) {
             // EdgeEffectCompat
             try {

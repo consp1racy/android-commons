@@ -98,13 +98,14 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
      * @param orientation Divider orientation. Should be {@link #HORIZONTAL} or {@link #VERTICAL}.
      */
     @SuppressWarnings("RestrictedApi")
-    public XpDividerItemDecoration(Context context, int orientation) {
+    public XpDividerItemDecoration(@NonNull Context context, int orientation) {
         final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, 0, ATTRS);
         mDivider = a.getDrawable(0);
         a.recycle();
         setOrientation(orientation);
     }
 
+    @NonNull
     public XpDividerItemDecoration drawOver(boolean drawOver) {
         mDrawOver = drawOver;
         return this;
@@ -125,6 +126,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
      * {@link #SHOW_DIVIDER_MIDDLE}, or {@link #SHOW_DIVIDER_END},
      * or {@link #SHOW_DIVIDER_NONE} to show no dividers.
      */
+    @NonNull
     public XpDividerItemDecoration showDividers(@DividerMode int showDividers) {
         setShowDividers(showDividers);
         return this;
@@ -149,6 +151,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
      *
      * @param orientation {@link #HORIZONTAL} or {@link #VERTICAL}
      */
+    @NonNull
     public XpDividerItemDecoration orientation(int orientation) {
         setOrientation(orientation);
         return this;
@@ -167,6 +170,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
      *
      * @param drawable Drawable that should be used as a divider.
      */
+    @NonNull
     public XpDividerItemDecoration drawable(@NonNull Drawable drawable) {
         setDrawable(drawable);
         return this;
@@ -180,7 +184,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         if (parent.getLayoutManager() == null) {
             return;
         }
@@ -191,7 +195,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    private void drawVertical(Canvas canvas, RecyclerView parent) {
+    private void drawVertical(@NonNull Canvas canvas, @NonNull RecyclerView parent) {
         canvas.save();
 
         clipCanvasToPadding(canvas, parent);
@@ -220,7 +224,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @SuppressLint("NewApi")
-    private void clipCanvasToPadding(final Canvas canvas, final RecyclerView parent) {
+    private void clipCanvasToPadding(@NonNull final Canvas canvas, @NonNull final RecyclerView parent) {
         if (parent.getClipToPadding()) {
             final int left = parent.getPaddingLeft();
             final int right = parent.getWidth() - parent.getPaddingRight();
@@ -230,7 +234,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    private void drawVerticalAtBottomOf(final Canvas canvas, final RecyclerView parent, final View child) {
+    private void drawVerticalAtBottomOf(@NonNull final Canvas canvas, @NonNull final RecyclerView parent, @NonNull final View child) {
         getChildBounds(parent, child);
         final int left = mBounds.left + Math.round(ViewCompat.getTranslationX(child));
         final int right = left + child.getWidth();
@@ -240,17 +244,17 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
         mDivider.draw(canvas);
     }
 
-    private void drawVerticalAbove(final Canvas canvas, final RecyclerView parent, final View child) {
+    private void drawVerticalAbove(@NonNull final Canvas canvas, @NonNull final RecyclerView parent, @NonNull final View child) {
         getChildBounds(parent, child);
-        final int left = mBounds.left + Math.round(ViewCompat.getTranslationX(child));
+        final int left = mBounds.left + Math.round(child.getTranslationX());
         final int right = left + child.getWidth();
-        final int bottom = mBounds.top + Math.round(ViewCompat.getTranslationY(child));
+        final int bottom = mBounds.top + Math.round(child.getTranslationY());
         final int top = bottom - mDivider.getIntrinsicHeight();
         mDivider.setBounds(left, top, right, bottom);
         mDivider.draw(canvas);
     }
 
-    private void drawHorizontal(Canvas canvas, RecyclerView parent) {
+    private void drawHorizontal(@NonNull Canvas canvas, @NonNull RecyclerView parent) {
         canvas.save();
 
         clipCanvasToPadding(canvas, parent);
@@ -277,7 +281,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
         canvas.restore();
     }
 
-    private void drawHorizontalAtRightOf(final Canvas canvas, final RecyclerView parent, final View child) {
+    private void drawHorizontalAtRightOf(@NonNull final Canvas canvas, @NonNull final RecyclerView parent, @NonNull final View child) {
         getChildBounds(parent, child);
         final int top = mBounds.top + Math.round(ViewCompat.getTranslationY(child));
         final int bottom = top + child.getHeight();
@@ -287,7 +291,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
         mDivider.draw(canvas);
     }
 
-    private void drawHorizontalToLeftOf(final Canvas canvas, final RecyclerView parent, final View child) {
+    private void drawHorizontalToLeftOf(@NonNull final Canvas canvas, @NonNull final RecyclerView parent, @NonNull final View child) {
         getChildBounds(parent, child);
         final int top = mBounds.top + Math.round(ViewCompat.getTranslationY(child));
         final int bottom = top + child.getHeight();
@@ -297,7 +301,7 @@ public class XpDividerItemDecoration extends RecyclerView.ItemDecoration {
         mDivider.draw(canvas);
     }
 
-    private void getChildBounds(final RecyclerView parent, final View child) {
+    private void getChildBounds(@NonNull final RecyclerView parent, @NonNull final View child) {
 //        parent.getDecoratedBoundsWithMargins(child, mBounds);
 //        parent.getLayoutManager().getDecoratedBoundsWithMargins(child, mBounds);
         mBounds.set(child.getLeft(), child.getTop(), child.getRight(), child.getBottom());

@@ -2,6 +2,7 @@ package net.xpece.android.widget;
 
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import java.lang.reflect.Field;
@@ -30,9 +31,10 @@ public final class XpImageView {
     }
 
     private XpImageView() {
+        throw new AssertionError("No instances!");
     }
 
-    public static boolean getAdjustViewBounds(ImageView imageView) {
+    public static boolean getAdjustViewBounds(@NonNull ImageView imageView) {
         if (Build.VERSION.SDK_INT < 16) {
             try {
                 return FIELD_ADJUST_VIEW_BOUNDS.getBoolean(imageView);

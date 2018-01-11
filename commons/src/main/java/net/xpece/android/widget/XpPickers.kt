@@ -14,16 +14,16 @@ inline fun NumberPicker.setSelectionDivider(divider: Drawable?) {
 }
 
 @JvmSynthetic
-inline fun NumberPicker.setSelectionDividerTint(colorStateList: ColorStateList) {
+inline fun NumberPicker.setSelectionDividerTint(colorStateList: ColorStateList?) {
     XpNumberPicker.setSelectionDividerTint(this, colorStateList)
 }
 
 @JvmSynthetic
-inline fun TimePicker.setSelectionDividerTint(colorStateList: ColorStateList) {
+inline fun TimePicker.setSelectionDividerTint(colorStateList: ColorStateList?) {
     XpTimePicker.setSelectionDividerTint(this, colorStateList)
 }
 
 @JvmSynthetic
-inline fun DatePicker.setSelectionDividerTint(colorStateList: ColorStateList) {
+inline fun DatePicker.setSelectionDividerTint(colorStateList: ColorStateList?) {
     XpDatePicker.setSelectionDividerTint(this, colorStateList)
 }

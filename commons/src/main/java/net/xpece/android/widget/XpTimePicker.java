@@ -1,5 +1,6 @@
 package net.xpece.android.widget;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.widget.NumberPicker;
@@ -10,6 +11,7 @@ import java.lang.reflect.Field;
 /**
  * Created by Eugen on 06.05.2016.
  */
+@SuppressLint("PrivateApi")
 public final class XpTimePicker {
     private static final Class<?> CLASS_SPINNER_DELEGATE;
     private static final Field FIELD_DELEGATE;
@@ -19,98 +21,90 @@ public final class XpTimePicker {
     private static final Field FIELD_AM_PM_SPINNER;
 
     static {
-        if (Build.VERSION.SDK_INT >= 11) {
-            Field f;
-            Class<?> cls = TimePicker.class;
-            if (Build.VERSION.SDK_INT < 21) {
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mAmPmSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                }
-                FIELD_AM_PM_SPINNER = f;
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mMinuteSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                }
-                FIELD_MINUTE_SPINNER = f;
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mHourSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                }
-                FIELD_HOUR_SPINNER = f;
-
-                CLASS_SPINNER_DELEGATE = null;
-                FIELD_DELEGATE = null;
-            } else {
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mDelegate");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                }
-                FIELD_DELEGATE = f;
-
-                if (Build.VERSION.SDK_INT == 21) {
-                    try {
-                        cls = Class.forName("android.widget.TimePickerClockDelegate");
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    CLASS_SPINNER_DELEGATE = cls;
-                } else {
-                    try {
-                        cls = Class.forName("android.widget.TimePickerSpinnerDelegate");
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    CLASS_SPINNER_DELEGATE = cls;
-                }
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mAmPmSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                }
-                FIELD_AM_PM_SPINNER = f;
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mMinuteSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                }
-                FIELD_MINUTE_SPINNER = f;
-
-                f = null;
-                try {
-                    f = cls.getDeclaredField("mHourSpinner");
-                    f.setAccessible(true);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                }
-                FIELD_HOUR_SPINNER = f;
+        Field f;
+        Class<?> cls = TimePicker.class;
+        if (Build.VERSION.SDK_INT < 21) {
+            f = null;
+            try {
+                f = cls.getDeclaredField("mAmPmSpinner");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
             }
-        } else {
-            FIELD_AM_PM_SPINNER = null;
-            FIELD_HOUR_SPINNER = null;
-            FIELD_MINUTE_SPINNER = null;
-            FIELD_DELEGATE = null;
+            FIELD_AM_PM_SPINNER = f;
+
+            f = null;
+            try {
+                f = cls.getDeclaredField("mMinuteSpinner");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            FIELD_MINUTE_SPINNER = f;
+
+            f = null;
+            try {
+                f = cls.getDeclaredField("mHourSpinner");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            FIELD_HOUR_SPINNER = f;
+
             CLASS_SPINNER_DELEGATE = null;
+            FIELD_DELEGATE = null;
+        } else {
+            f = null;
+            try {
+                f = cls.getDeclaredField("mDelegate");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            FIELD_DELEGATE = f;
+
+            if (Build.VERSION.SDK_INT == 21) {
+                try {
+                    cls = Class.forName("android.widget.TimePickerClockDelegate");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                CLASS_SPINNER_DELEGATE = cls;
+            } else {
+                try {
+                    cls = Class.forName("android.widget.TimePickerSpinnerDelegate");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                CLASS_SPINNER_DELEGATE = cls;
+            }
+
+            f = null;
+            try {
+                f = cls.getDeclaredField("mAmPmSpinner");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            FIELD_AM_PM_SPINNER = f;
+
+            f = null;
+            try {
+                f = cls.getDeclaredField("mMinuteSpinner");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            FIELD_MINUTE_SPINNER = f;
+
+            f = null;
+            try {
+                f = cls.getDeclaredField("mHourSpinner");
+                f.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            FIELD_HOUR_SPINNER = f;
         }
     }
 
@@ -153,8 +147,6 @@ public final class XpTimePicker {
     }
 
     public static void setSelectionDividerTint(TimePicker picker, ColorStateList color) {
-        if (Build.VERSION.SDK_INT < 11) return;
-
         if (Build.VERSION.SDK_INT < 21) {
             NumberPicker np;
             np = getAmPmSpinner(picker);
