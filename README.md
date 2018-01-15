@@ -14,6 +14,11 @@ If you find this library to your liking know this: It's mainly for use in my own
 * Handy `Dimen` class for encapsulating resolved dimensions,
 * Kotlin extension functions for obtaining `Dimen` objects.
 
+### commons-dimen-lazy [ ![Download](https://api.bintray.com/packages/consp1racy/maven/net.xpece.android%3Acommons-dimen/images/download.svg) ](https://bintray.com/consp1racy/maven/net.xpece.android%3Acommons-dimen-lazy/_latestVersion)
+
+* `LazyDimen` class for encapsulating dimensions for lazy resolution,
+* Functions for obtaining `LazyDimen` objects.
+
 ### commons-resources [ ![Download](https://api.bintray.com/packages/consp1racy/maven/net.xpece.android%3Acommons-resources/images/download.svg) ](https://bintray.com/consp1racy/maven/net.xpece.android%3Acommons-resources/_latestVersion)
 
 * Kotlin extension methods 
@@ -86,7 +91,9 @@ If you find this library to your liking know this: It's mainly for use in my own
         
     dependencies {
         compile 'net.xpece.android:commons:x.x.x'
+        
         compile 'net.xpece.android:commons-dimen:x.x.x'
+        compile 'net.xpece.android:commons-dimen-lazy:x.x.x'
         compile 'net.xpece.android:commons-resources:x.x.x'
         compile 'net.xpece.android:commons-services:x.x.x'
         
