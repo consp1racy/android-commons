@@ -15,18 +15,18 @@ import android.support.v4.app.updateLoaderManagerHostController as updateLoaderM
  */
 
 @Suppress("DEPRECATION")
-inline fun Fragment.invalidateOptionsMenu() = activity!!.supportInvalidateOptionsMenu()
+inline fun Fragment.invalidateOptionsMenu() = activity?.supportInvalidateOptionsMenu()
 
-inline fun android.app.Fragment.invalidateOptionsMenu() = activity!!.invalidateOptionsMenu()
+inline fun android.app.Fragment.invalidateOptionsMenu() = activity?.invalidateOptionsMenu()
 
-inline fun DialogFragment.showAllowingStateLoss(fragmentManager: FragmentManager, tag: String) {
+fun DialogFragment.showAllowingStateLoss(fragmentManager: FragmentManager, tag: String) {
     try {
         show(fragmentManager, tag)
     } catch (ignored: IllegalStateException) {
     }
 }
 
-inline fun DialogFragment.showAllowingStateLoss(
+fun DialogFragment.showAllowingStateLoss(
         fragmentTransaction: FragmentTransaction, tag: String) {
     try {
         show(fragmentTransaction, tag)
@@ -34,7 +34,7 @@ inline fun DialogFragment.showAllowingStateLoss(
     }
 }
 
-inline fun android.app.DialogFragment.showAllowingStateLoss(
+fun android.app.DialogFragment.showAllowingStateLoss(
         fragmentManager: android.app.FragmentManager, tag: String) {
     try {
         show(fragmentManager, tag)
@@ -42,7 +42,7 @@ inline fun android.app.DialogFragment.showAllowingStateLoss(
     }
 }
 
-inline fun android.app.DialogFragment.showAllowingStateLoss(
+fun android.app.DialogFragment.showAllowingStateLoss(
         fragmentTransaction: android.app.FragmentTransaction, tag: String) {
     try {
         show(fragmentTransaction, tag)

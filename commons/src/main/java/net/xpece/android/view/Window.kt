@@ -1,4 +1,5 @@
 @file:JvmName("XpWindow")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.view
 
@@ -13,14 +14,10 @@ val DEFAULT_SCRIM = 0x44000000
 
 @TargetApi(21)
 inline fun Window.setNavigationBarColorCompat(@ColorInt color: Int) {
-    if (Build.VERSION.SDK_INT >= 21) {
-        navigationBarColor = color
-    }
+    if (Build.VERSION.SDK_INT >= 21) navigationBarColor = color
 }
 
 @TargetApi(21)
 inline fun Window.setStatusBarColorCompat(@ColorInt color: Int) {
-    if (Build.VERSION.SDK_INT >= 21) {
-        statusBarColor = color
-    }
+    if (Build.VERSION.SDK_INT >= 21) statusBarColor = color
 }

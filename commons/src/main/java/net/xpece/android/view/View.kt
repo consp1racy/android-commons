@@ -1,31 +1,24 @@
+@file:JvmMultifileClass
 @file:JvmName("XpView")
 @file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.view
 
 import android.animation.LayoutTransition
-import android.annotation.SuppressLint
 import android.annotation.TargetApi
-import android.graphics.Color
 import android.graphics.Rect
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.TransitionDrawable
 import android.os.Build
-import android.support.annotation.DrawableRes
-import android.support.annotation.StyleRes
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewCompat
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v4.widget.TextViewCompat
-import android.support.v7.app.ActionBar
 import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.*
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.SearchView
+import android.widget.Toast
 import net.xpece.android.R
-import net.xpece.android.content.getDrawableCompat
-import net.xpece.android.content.resolveColor
 
 private val methodViewRemovePerformClickCallback by lazy(LazyThreadSafetyMode.NONE) {
     View::class.java.getDeclaredMethod("removePerformClickCallback").apply {
@@ -84,17 +77,6 @@ inline var View.visible: Boolean
         isVisible = value
     }
 
-@JvmOverloads
-fun TextView.setTextAndVisibility(text: CharSequence?, invisible: Boolean = false) {
-    if (text.isNullOrBlank()) {
-        if (invisible) invisible() else gone()
-        setText(null)
-    } else {
-        setText(text)
-        visible()
-    }
-}
-
 @TargetApi(16)
 fun View.setBackgroundCompat(d: Drawable) {
     if (Build.VERSION.SDK_INT < 16) {
@@ -127,45 +109,17 @@ fun ScrollView.canScroll(): Boolean {
     return false
 }
 
+@Deprecated("")
 fun setSearchViewLayoutTransition(view: SearchView) {
     val searchBarId = view.context.resources.getIdentifier("android:id/search_bar", null, null)
     val searchBar = view.findViewById<LinearLayout>(searchBarId)
     searchBar.layoutTransition = LayoutTransition()
 }
 
+@Deprecated("")
 fun setSearchViewLayoutTransition(view: android.support.v7.widget.SearchView) {
     val searchBar = view.findViewById<LinearLayout>(R.id.search_bar)
     searchBar.layoutTransition = LayoutTransition()
-}
-
-@JvmOverloads
-fun ImageView.switchImage(d: Drawable?, duration: Int = 100) {
-    if (ViewCompat.isLaidOut(this)) {
-        var old = drawable
-        if (old is TransitionDrawable) {
-            old = old.getDrawable(1)
-        } else if (old == null) {
-            if (d == null) {
-                return
-            } else {
-                old = ColorDrawable(Color.TRANSPARENT)
-            }
-        }
-        val target = d ?: ColorDrawable(Color.TRANSPARENT)
-        val transition = TransitionDrawable(arrayOf(old, target))
-        transition.isCrossFadeEnabled = true
-        setImageDrawable(transition)
-        transition.startTransition(duration)
-    } else {
-        setImageDrawable(d)
-    }
-}
-
-@SuppressLint("RestrictedApi")
-@JvmOverloads
-fun ImageView.switchImage(@DrawableRes resId: Int, duration: Int = 100) {
-    val d = context.getDrawableCompat(resId)
-    switchImage(d, duration)
 }
 
 @JvmOverloads
@@ -200,29 +154,10 @@ fun View.toastContentDescription(text: CharSequence = this.contentDescription): 
     return true
 }
 
-val View.isRtl: Boolean
-    get() = ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL
-
 fun View.fitSystemWindows(insets: Rect) = XpViewReflect.fitSystemWindows(this, insets)
-
-inline fun SwipeRefreshLayout.setupDefaultColors() {
-    setColorSchemeColors(context.resolveColor(R.attr.colorAccent, Color.BLACK))
-    setProgressBackgroundColorSchemeColor(
-            context.resolveColor(R.attr.colorBackgroundFloating, Color.WHITE))
-}
-
-inline fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) =
-        TextViewCompat.setTextAppearance(this, resId)
 
 inline fun View.setLayerTypeSafe(layerType: Int) {
     if (this.layerType != layerType) {
         setLayerType(layerType, null)
     }
-}
-
-inline fun ActionBar.setDisplayShowTitleAndHomeAsUp() {
-    setDisplayShowTitleEnabled(true)
-    setDisplayHomeAsUpEnabled(true)
-    setDisplayShowHomeEnabled(true)
-//    displayOptions = ActionBar.DISPLAY_SHOW_TITLE or ActionBar.DISPLAY_HOME_AS_UP or ActionBar.DISPLAY_SHOW_HOME
 }
