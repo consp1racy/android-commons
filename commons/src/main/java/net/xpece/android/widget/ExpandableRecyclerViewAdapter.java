@@ -12,7 +12,7 @@ import java.util.Collection;
  * Created by Eugen on 26.08.2015.
  */
 public abstract class ExpandableRecyclerViewAdapter<G extends Expandable<C>, C>
-    extends HeaderFooterRecyclerViewAdapter {
+    extends RecyclerViewAdapterEx {
 
     private static final int TYPE_PRIMARY_REGULAR = 0;
     private static final int TYPE_PRIMARY_EXPANDABLE = 1;
