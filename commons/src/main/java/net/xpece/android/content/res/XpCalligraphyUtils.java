@@ -6,7 +6,7 @@ import android.widget.TextView;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyUtils;
 
-import static net.xpece.android.content.ResourcesKt.resolveString;
+import static net.xpece.android.content.XpResources.resolveString;
 
 /**
  * @author Eugen on 20. 4. 2016.

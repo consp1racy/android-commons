@@ -1,3 +1,4 @@
+@file:JvmName("XpTextView")
 @file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.view

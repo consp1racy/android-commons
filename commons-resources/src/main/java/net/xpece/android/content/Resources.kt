@@ -1,3 +1,5 @@
+@file:JvmName("XpResources")
+
 package net.xpece.android.content
 
 import android.annotation.SuppressLint

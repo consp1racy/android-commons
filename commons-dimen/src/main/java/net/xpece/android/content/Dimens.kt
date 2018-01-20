@@ -39,26 +39,34 @@ fun dp(dp: Number): Dimen = sContext.dp(dp)
 @Deprecated("Not suitable for multiscreen environment.")
 fun dimen(@DimenRes resId: Int): Dimen = sContext.dimen(resId)
 
-fun Context.sp(sp: Number): Dimen {
+fun Resources.sp(sp: Number): Dimen {
     val spf = sp.toFloat()
     val value = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_SP, spf, resources.displayMetrics)
+            TypedValue.COMPLEX_UNIT_SP, spf, displayMetrics)
     return Dimen(value)
 }
 
-fun Context.dp(dp: Number): Dimen {
+fun Resources.dp(dp: Number): Dimen {
     val dpf = dp.toFloat()
     val value = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, dpf, resources.displayMetrics)
+            TypedValue.COMPLEX_UNIT_DIP, dpf, displayMetrics)
     return Dimen(value)
 }
 
 @JvmOverloads
-fun Context.dimen(@DimenRes resId: Int, fallback: Number = 0): Dimen = try {
-    Dimen(resources.getDimension(resId))
+fun Resources.dimen(@DimenRes resId: Int, fallback: Number = 0): Dimen = try {
+    Dimen(getDimension(resId))
 } catch (erx: Resources.NotFoundException) {
     Dimen(fallback.toFloat())
 }
+
+fun Context.sp(sp: Number): Dimen = resources.sp(sp)
+
+fun Context.dp(dp: Number): Dimen = resources.dp(dp)
+
+@JvmOverloads
+fun Context.dimen(@DimenRes resId: Int, fallback: Number = 0): Dimen =
+        resources.dimen(resId, fallback)
 
 @JvmOverloads
 fun Context.dimenAttr(@AttrRes attrId: Int, fallback: Number = 0): Dimen {

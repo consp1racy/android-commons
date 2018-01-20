@@ -22,7 +22,7 @@ import net.xpece.android.widget.XpDatePicker;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
 
-import static net.xpece.android.content.ResourcesKt.resolveColorStateList;
+import static net.xpece.android.content.XpResources.resolveColorStateList;
 
 /**
  * Created by Eugen on 06.05.2016.

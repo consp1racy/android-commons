@@ -22,7 +22,7 @@ import net.xpece.android.widget.XpTimePicker;
 
 import org.threeten.bp.LocalTime;
 
-import static net.xpece.android.content.ResourcesKt.resolveColorStateList;
+import static net.xpece.android.content.XpResources.resolveColorStateList;
 
 /**
  * Created by Eugen on 06.05.2016.
