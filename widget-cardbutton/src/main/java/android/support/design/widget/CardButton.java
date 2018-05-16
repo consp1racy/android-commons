@@ -218,13 +218,13 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
         mSuperInit = true;
 
-        ThemeUtils.checkAppCompatTheme(context);
+        CardButtonUtils.checkAppCompatTheme(context);
 
         TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs,
             R.styleable.CardButton, defStyleAttr, defStyleRes);
         mBackgroundPrototype = a.getDrawable(R.styleable.CardButton_android_background);
         mBackgroundTint = a.getColorStateList(R.styleable.CardButton_backgroundTint);
-        mBackgroundTintMode = ViewUtils.parseTintMode(a.getInt(
+        mBackgroundTintMode = CardButtonUtils.parseTintMode(a.getInt(
             R.styleable.CardButton_backgroundTintMode, -1), null);
         mRippleColor = a.getColor(R.styleable.CardButton_rippleColor, 0);
         mBorderWidth = a.getDimensionPixelSize(R.styleable.CardButton_borderWidth, 0);
