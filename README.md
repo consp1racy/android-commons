@@ -73,11 +73,12 @@ If you find this library to your liking know this: It's mainly for use in my own
 | 25.0.0-11 *Deprecated* | [25.0.0, 25.4.0)  | Custom background support                           |
 | 25.4.0-1               | [25.4.0]          | Solid background, border, foreground ripple, shadow |
 | 25.4.0-2 *Deprecated*  | [25.4.0]          | Custom background support                           |
-| 26.0.0-1               | [26.0.0, )        | Solid background, border, foreground ripple, shadow |
-| 26.0.0-2               | [26.0.0, )        | Custom background support                           |
-| 26.0.0-4               | [26.0.0, )        | Optionally draw selector behind text and drawables  |
-| 26.0.0-5               | [26.0.0, )        | Fixed compound drawable layout preview, maybe       |
-| 26.0.0-6               | [26.0.0, )        | Fixed API26+ focus highlight when not in touch mode |
+| 26.0.0-1               | [26.0.0, 28.0.0)  | Solid background, border, foreground ripple, shadow |
+| 26.0.0-2               | [26.0.0, 28.0.0)  | Custom background support                           |
+| 26.0.0-4               | [26.0.0, 28.0.0)  | Optionally draw selector behind text and drawables  |
+| 26.0.0-5               | [26.0.0, 28.0.0)  | Fixed compound drawable layout preview, maybe       |
+| 26.0.0-6               | [26.0.0, 28.0.0)  | Fixed API26+ focus highlight when not in touch mode |
+| 26.0.0-7               | [26.0.0, )        | Compatibility with support library 28.0.0-alpha1    |
 
 ## Get it!
 
