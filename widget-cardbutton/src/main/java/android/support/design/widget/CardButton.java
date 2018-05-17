@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
+import android.graphics.Insets;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -49,7 +50,7 @@ import net.xpece.android.widget.TintableCompoundDrawableView;
 import net.xpece.android.widget.cardbutton.R;
 
 public class CardButton extends AppCompatButton implements TintableCompoundDrawableView {
-    public static boolean AUTO_VISUAL_MARGIN_ENABLED = true;
+    public static boolean AUTO_VISUAL_MARGIN_ENABLED = Build.VERSION.SDK_INT < 18;
 
     private static final String TAG = "CardButton";
 
@@ -474,6 +475,22 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         getImpl().updatePadding();
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    private Insets mOpticalInsets = null;
+
+    //@Override
+    @RequiresApi(16)
+    @SuppressWarnings("unused")
+    public Insets getOpticalInsets() {
+        if (mOpticalInsets == null) {
+            mOpticalInsets = Insets.of(
+                    getEffectiveInsetLeft(),
+                    getEffectiveInsetTop(),
+                    getEffectiveInsetRight(),
+                    getEffectiveInsetBottom());
+        }
+        return mOpticalInsets;
     }
 
     /**
@@ -994,6 +1011,8 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
                 Math.max(right, contentInset.right) + contentPadding.right,
                 Math.max(bottom, contentInset.bottom) + contentPadding.bottom);
             updateMinSize();
+
+            mOpticalInsets = null;
 
             mEatRequestLayout = false;
             mEatInvalidate = false;

@@ -1,2 +1,2 @@
-include ':sample-commons', ':commons', ':appcompat-extra', ':design-extra', ':sample-extra', ':widget-cardbutton', ':sample-cardbutton'
+include ':sample-commons', ':commons', ':appcompat-extra', ':design-extra', ':sample-extra', ':widget-cardbutton', ':sample-cardbutton', ':platform-insets'
 include ':commons-services', ':commons-resources', ':commons-dimen', ':commons-dimen-lazy', ":commons-base"

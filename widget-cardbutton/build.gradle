@@ -12,6 +12,7 @@ android {
 dependencies {
     api "com.android.support:design:$supportLibsVersionCardButton"
 	api project(':appcompat-extra')
+    compileOnly project(':platform-insets')
 }
 
 repositories {
