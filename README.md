@@ -79,6 +79,7 @@ If you find this library to your liking know this: It's mainly for use in my own
 | 26.0.0-5               | [26.0.0, 28.0.0)  | Fixed compound drawable layout preview, maybe       |
 | 26.0.0-6               | [26.0.0, 28.0.0)  | Fixed API26+ focus highlight when not in touch mode |
 | 26.0.0-7               | [26.0.0, )        | Compatibility with support library 28.0.0-alpha1    |
+| 26.0.0-8               | [26.0.0, )        | Fix pressed foreground with `singleLine="true"`     |
 
 ## Get it!
 
