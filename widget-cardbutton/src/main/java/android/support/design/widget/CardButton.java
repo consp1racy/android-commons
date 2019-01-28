@@ -772,6 +772,7 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         super.drawableHotspotChanged(x, y);
 
         if (mForeground != null) {
+            x += getScrollX();
             mForeground.setHotspot(x, y);
         }
     }
@@ -792,6 +793,9 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
                 mForegroundBoundsChanged = false;
                 final Rect bounds = mForegroundBounds;
                 getContentRect(bounds);
+                final int scrollX = getScrollX();
+                bounds.left += scrollX;
+                bounds.right += scrollX;
                 foreground.setBounds(bounds);
             }
             foreground.draw(canvas);

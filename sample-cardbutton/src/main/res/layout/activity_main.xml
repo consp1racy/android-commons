@@ -21,6 +21,25 @@
         android:paddingBottom="8dp">
 
         <android.support.design.widget.CardButton
+            android:id="@+id/sl"
+            style="@style/Widget.Design.CardButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/control_margin"
+            android:layout_marginBottom="@dimen/control_margin"
+            android:background="@null"
+            android:ellipsize="none"
+            android:singleLine="true"
+            android:text="Single line"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:backgroundTint="#f0f"
+            app:drawableStart="@drawable/ic_android_control_24dp"
+            app:rippleColor="#8000" />
+        <!--android:drawSelectorOnTop="false"-->
+        <!--android:background="@drawable/gradient_background"-->
+        <!--app:backgroundTint="@null"-->
+
+        <android.support.design.widget.CardButton
             android:id="@+id/ct"
             style="@style/Widget.Design.CardButton.Borderless"
             android:layout_width="wrap_content"
