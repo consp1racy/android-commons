@@ -58,6 +58,7 @@ dependencies {
     compileOnly 'com.birbit:android-priority-jobqueue:2.0.0'
     compileOnly 'com.facebook.network.connectionclass:connectionclass:1.0.0'
 
+//    compileOnly 'android.arch.persistence:db:1.0.0'
     compileOnly 'io.requery:sqlite-android:3.12.0'
     compileOnly 'com.sun.mail:android-activation:1.5.5'
     compileOnly 'com.jakewharton.timber:timber:4.5.0'

@@ -1,9 +1,13 @@
 @file:JvmName("XpCursor")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.database
 
 import android.database.Cursor
 import java.util.*
+import androidx.core.database.getIntOrNull as getIntOrNullImpl
+import androidx.core.database.getLongOrNull as getLongOrNullImpl
+import androidx.core.database.getStringOrNull as getStringOrNullImpl
 
 /**
  * @author Eugen on 24. 6. 2016.
@@ -24,50 +28,29 @@ fun Cursor.getColumnIndexCached(columnName: String): Int {
     return columnIndex
 }
 
-fun Cursor.getLongOrNull(index: Int): Long? {
-    if (isNull(index)) {
-        return null
-    } else {
-        return getLong(index)
-    }
-}
+@Deprecated(
+    "Use AndroidX.",
+    ReplaceWith("getLongOrNull", imports = ["androidx.core.database.getLongOrNull"])
+)
+inline fun Cursor.getLongOrNull(index: Int): Long? = getLongOrNullImpl(index)
 
-fun Cursor.getIntOrNull(index: Int): Int? {
-    if (isNull(index)) {
-        return null
-    } else {
-        return getInt(index)
-    }
-}
+@Deprecated(
+    "Use AndroidX.",
+    ReplaceWith("getIntOrNull", imports = ["androidx.core.database.getIntOrNull"])
+)
+inline fun Cursor.getIntOrNull(index: Int): Int? = getIntOrNullImpl(index)
 
-fun Cursor.getStringOrNull(index: Int): String? {
-    if (isNull(index)) {
-        return null
-    } else {
-        return getString(index)
-    }
-}
+@Deprecated(
+    "Use AndroidX.",
+    ReplaceWith("getStringOrNull", imports = ["androidx.core.database.getStringOrNull"])
+)
+inline fun Cursor.getStringOrNull(index: Int): String? = getStringOrNullImpl(index)
 
-fun Cursor.getLong(index: Int, fallback: Long): Long {
-    if (isNull(index)) {
-        return fallback
-    } else {
-        return getLong(index)
-    }
-}
+inline fun Cursor.getLong(index: Int, fallback: Long): Long =
+    getLongOrNullImpl(index) ?: fallback
 
-fun Cursor.getInt(index: Int, fallback: Int): Int {
-    if (isNull(index)) {
-        return fallback
-    } else {
-        return getInt(index)
-    }
-}
+inline fun Cursor.getInt(index: Int, fallback: Int): Int =
+    getIntOrNullImpl(index) ?: fallback
 
-fun Cursor.getString(index: Int, fallback: String): String {
-    if (isNull(index)) {
-        return fallback
-    } else {
-        return getString(index)
-    }
-}
+inline fun Cursor.getString(index: Int, fallback: String): String =
+    getStringOrNullImpl(index) ?: fallback
