@@ -8,7 +8,6 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import android.support.v4.app.updateLoaderManagerHostController as updateLoaderManagerHostControllerImpl
 
 /**
  * Created by Eugen on 29.10.2016.

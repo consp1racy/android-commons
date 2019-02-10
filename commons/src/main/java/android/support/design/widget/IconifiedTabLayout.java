@@ -64,8 +64,8 @@ public class IconifiedTabLayout extends TabLayout {
             }
 
             // Make sure we reflect the currently set ViewPager item
-            if (mViewPager != null && adapterCount > 0) {
-                final int curItem = mViewPager.getCurrentItem();
+            if (viewPager != null && adapterCount > 0) {
+                final int curItem = viewPager.getCurrentItem();
                 if (curItem != getSelectedTabPosition() && curItem < getTabCount()) {
                     selectTab(getTabAt(curItem));
                 }

@@ -18,13 +18,13 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
         @JvmStatic
         private val airplaneModeIntentFilter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
 
-        const val STATE_CONNECTING = 0L
-        const val STATE_CONNECTED = 1L
-        const val STATE_DISCONNECTED = 3L
+        const val STATE_CONNECTING = 0
+        const val STATE_CONNECTED = 1
+        const val STATE_DISCONNECTED = 3
 
         @State
         @JvmStatic
-        private fun toSimpleState(state: NetworkInfo.State?): Long {
+        private fun toSimpleState(state: NetworkInfo.State?): Int {
             if (state == null) {
                 return STATE_DISCONNECTED
             }
@@ -66,10 +66,9 @@ class ConnectivityReceiver private constructor(context: Context) : ConnectivityR
     init {
         this.context = context.applicationContext
 
-        val sdk = Build.VERSION.SDK_INT
-        if (sdk >= 23) {
+        if (Build.VERSION.SDK_INT >= 23) {
             impl = ConnectivityReceiverMarshmallow(this)
-        } else if (sdk >= 21) {
+        } else if (Build.VERSION.SDK_INT >= 21) {
             impl = ConnectivityReceiverLollipop(this)
         } else {
             impl = ConnectivityReceiverBase(this)

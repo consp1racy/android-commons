@@ -1,6 +1,6 @@
 package net.xpece.android.net
 
-class ConnectivityInfo(@ConnectivityReceiver.State val state: Long, val isAirplaneModeEnabled: Boolean) {
+class ConnectivityInfo(@ConnectivityReceiver.State val state: Int, val isAirplaneModeEnabled: Boolean) {
 
     companion object {
         @JvmStatic private val CONNECTED = ConnectivityInfo(ConnectivityReceiver.Companion.STATE_CONNECTED, false)
@@ -21,7 +21,7 @@ class ConnectivityInfo(@ConnectivityReceiver.State val state: Long, val isAirpla
     val isDisconnected: Boolean
         get() = state == ConnectivityReceiver.STATE_DISCONNECTED
 
-    fun copy(@ConnectivityReceiver.State state: Long = this.state, isAirplaneModeEnabled: Boolean = this.isAirplaneModeEnabled): ConnectivityInfo {
+    fun copy(@ConnectivityReceiver.State state: Int = this.state, isAirplaneModeEnabled: Boolean = this.isAirplaneModeEnabled): ConnectivityInfo {
         if (!isAirplaneModeEnabled) {
             when (state) {
                 ConnectivityReceiver.STATE_CONNECTED -> return CONNECTED
