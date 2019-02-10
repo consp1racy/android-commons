@@ -2,8 +2,11 @@ package net.xpece.android.graphics.drawable
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.*
-import android.graphics.drawable.ColorDrawable
+import android.graphics.Canvas
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
+import android.graphics.Rect
+import android.graphics.Region
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
 import android.support.v4.graphics.drawable.DrawableCompat
@@ -14,7 +17,9 @@ import net.xpece.android.content.getDrawableCompat
  */
 open class LazyDrawable(context: Context, @DrawableRes resId: Int) : Drawable(), Drawable.Callback {
 
-    val wrappedDrawable: Drawable by lazy { context.getDrawableCompat(resId) ?: ColorDrawable(0) }
+    val wrappedDrawable: Drawable by lazy(LazyThreadSafetyMode.NONE) {
+        context.getDrawableCompat(resId)
+    }
 
     override fun draw(canvas: Canvas) {
         wrappedDrawable.draw(canvas)
@@ -62,7 +67,7 @@ open class LazyDrawable(context: Context, @DrawableRes resId: Int) : Drawable(),
     }
 
     override fun jumpToCurrentState() {
-        DrawableCompat.jumpToCurrentState(wrappedDrawable)
+        wrappedDrawable.jumpToCurrentState()
     }
 
     override fun getCurrent(): Drawable {
