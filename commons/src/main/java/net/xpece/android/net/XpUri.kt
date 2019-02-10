@@ -3,6 +3,10 @@ package net.xpece.android.net
 import android.net.Uri
 import com.google.android.gms.maps.model.LatLng
 
+@Deprecated(
+    "Use AndroidX.",
+    ReplaceWith("toUri", imports = ["androidx.core.net.toUri"])
+)
 fun String?.toUri() = if (this != null) Uri.parse(this) else null
 
 /**
