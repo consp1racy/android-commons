@@ -30,19 +30,19 @@ fun Cursor.getColumnIndexCached(columnName: String): Int {
 
 @Deprecated(
     "Use AndroidX.",
-    ReplaceWith("getLongOrNull", imports = ["androidx.core.database.getLongOrNull"])
+    ReplaceWith("getLongOrNull(index)", imports = ["androidx.core.database.getLongOrNull"])
 )
 inline fun Cursor.getLongOrNull(index: Int): Long? = getLongOrNullImpl(index)
 
 @Deprecated(
     "Use AndroidX.",
-    ReplaceWith("getIntOrNull", imports = ["androidx.core.database.getIntOrNull"])
+    ReplaceWith("getIntOrNull(index)", imports = ["androidx.core.database.getIntOrNull"])
 )
 inline fun Cursor.getIntOrNull(index: Int): Int? = getIntOrNullImpl(index)
 
 @Deprecated(
     "Use AndroidX.",
-    ReplaceWith("getStringOrNull", imports = ["androidx.core.database.getStringOrNull"])
+    ReplaceWith("getStringOrNull(index)", imports = ["androidx.core.database.getStringOrNull"])
 )
 inline fun Cursor.getStringOrNull(index: Int): String? = getStringOrNullImpl(index)
 

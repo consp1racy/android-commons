@@ -50,11 +50,11 @@ fun View.visible(): View {
     return this
 }
 
-@Deprecated("Use property access syntax.", ReplaceWith("visible"))
+@Deprecated("Use property access syntax.", ReplaceWith("isVisible"))
 @JvmName("isVisibleLegacy")
 inline fun View.isVisible() = isVisible
 
-@Deprecated("Use property access syntax.", ReplaceWith("visible"))
+@Deprecated("Use property access syntax.")
 @JvmName("setVisibleLegacy")
 inline fun View.setVisible(visible: Boolean) {
     this.isVisible = visible

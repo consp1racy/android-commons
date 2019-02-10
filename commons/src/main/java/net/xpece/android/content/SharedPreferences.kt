@@ -8,7 +8,7 @@ import androidx.core.content.edit
 
 @Deprecated(
     "Use AndroidX.",
-    ReplaceWith("edit", imports = ["androidx.core.content.edit"])
+    ReplaceWith("edit(commit, func)", imports = ["androidx.core.content.edit"])
 )
 inline fun SharedPreferences.update(commit: Boolean = false, func: SharedPreferences.Editor.() -> Unit) {
     edit(commit, func)

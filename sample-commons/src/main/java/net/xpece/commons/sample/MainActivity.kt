@@ -18,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
+import androidx.core.view.isVisible
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -31,7 +32,6 @@ import net.xpece.android.net.ConnectivityInfo
 import net.xpece.android.net.ReactiveConnectivity
 import net.xpece.android.time.toLocalDateTime
 import net.xpece.android.time.toSqlTimestamp
-import net.xpece.android.view.setVisible
 import net.xpece.android.widget.XpDatePicker
 import net.xpece.android.widget.XpEdgeEffect
 import net.xpece.android.widget.XpTimePicker
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         } else {
             showSnackbar("Disconnected", BaseTransientBottomBar.LENGTH_INDEFINITE)
         }
-        pager.setVisible(it.isConnected)
+        pager.isVisible = it.isConnected
     }
 
     private lateinit var connectivityObservable: Flowable<ConnectivityInfo>

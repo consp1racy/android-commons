@@ -30,7 +30,7 @@ inline fun io.requery.android.database.sqlite.SQLiteDatabase.withTransaction(fun
 
 @Deprecated(
     "Use AndroidX.",
-    ReplaceWith("transaction", imports = ["androidx.core.database.sqlite.transaction"])
+    ReplaceWith("transaction(func)", imports = ["androidx.core.database.sqlite.transaction"])
 )
 inline fun android.database.sqlite.SQLiteDatabase.withTransaction(noinline func: android.database.sqlite.SQLiteDatabase.() -> Unit) {
     transaction(true, func)
