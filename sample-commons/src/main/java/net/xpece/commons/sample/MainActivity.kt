@@ -37,7 +37,6 @@ import net.xpece.android.widget.XpEdgeEffect
 import net.xpece.android.widget.XpTimePicker
 import net.xpece.commons.android.sample.R
 import org.threeten.bp.LocalDateTime
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import java.sql.Timestamp
 
 /**
@@ -78,14 +77,6 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
 
         val d = dp(16)
         Log.d(TAG, "Dimension real size: " + d.toString(this))
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-
-        val icon = toolbar.context.resolveDrawable(R.attr.homeAsUpIndicator)
-        toolbar.navigationIcon = icon
-        val title = this.resolveString(
-                R.style.Widget_AppCompat_ActionButton_Overflow, android.R.attr.contentDescription)
-        toolbar.title = title
 
         if (savedInstanceState == null) {
             connectivityObservable = ReactiveConnectivity.observe(this)
@@ -163,10 +154,6 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
             val view = `object` as View
             container.removeView(view)
         }
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
     companion object {
