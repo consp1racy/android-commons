@@ -8,40 +8,39 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
- * @author Eugen on 21.08.2016.
+ * Base class for initialization providers.
+ * Override {@link #onCreate()}, do your work, and return {@code false}.
  */
-
 public abstract class EmptyContentProvider extends ContentProvider {
-    @Override
-    public boolean onCreate() {
-        return false;
-    }
 
     @Nullable
     @Override
-    public Cursor query(@NonNull final Uri uri, final String[] projection, final String selection, final String[] selectionArgs, final String sortOrder) {
-        return null;
+    public Cursor query(@NonNull final Uri uri, final String[] projection, final String selection,
+            final String[] selectionArgs, final String sortOrder) {
+        throw new UnsupportedOperationException();
     }
 
     @Nullable
     @Override
     public String getType(@NonNull final Uri uri) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Nullable
     @Override
     public Uri insert(@NonNull final Uri uri, final ContentValues values) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public int delete(@NonNull final Uri uri, final String selection, final String[] selectionArgs) {
-        return 0;
+    public int delete(@NonNull final Uri uri, final String selection,
+            final String[] selectionArgs) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public int update(@NonNull final Uri uri, final ContentValues values, final String selection, final String[] selectionArgs) {
-        return 0;
+    public int update(@NonNull final Uri uri, final ContentValues values, final String selection,
+            final String[] selectionArgs) {
+        throw new UnsupportedOperationException();
     }
 }

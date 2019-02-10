@@ -11,16 +11,12 @@ private val TL_POINT = object : ThreadLocal<Point>() {
     override fun initialValue() = Point()
 }
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+private val point: Point
+    get() = TL_POINT.get()
+
 val Context.windowWidth: Int
-    get() {
-        val point = TL_POINT.get()
-        windowManager.defaultDisplay.getSize(point)
-        return point.x
-    }
+    get() = point.apply(windowManager.defaultDisplay::getSize).x
 
 val Context.smallestWindowWidth: Int
-    get() {
-        val point = TL_POINT.get()
-        windowManager.defaultDisplay.getSize(point)
-        return Math.min(point.x, point.y)
-    }
+    get() = point.apply(windowManager.defaultDisplay::getSize).let { minOf(it.x, it.y) }

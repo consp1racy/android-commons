@@ -120,6 +120,7 @@ inline fun Context.inflate(@LayoutRes layout: Int): View =
 inline fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = true): View =
         context.layoutInflater.inflate(layout, this, attachToRoot)
 
+@Deprecated("")
 inline fun Context.notification(
         func: NotificationCompat.Builder.() -> Unit): NotificationCompat.Builder {
     val builder = NotificationCompat.Builder(this)

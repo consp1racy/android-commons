@@ -3,18 +3,15 @@
 
 package net.xpece.android.content
 
-import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import androidx.core.content.edit
 
-@SuppressLint("CommitPrefEdits", "ApplySharedPref")
+@Deprecated(
+    "Use AndroidX.",
+    ReplaceWith("edit", imports = ["androidx.core.content.edit"])
+)
 inline fun SharedPreferences.update(commit: Boolean = false, func: SharedPreferences.Editor.() -> Unit) {
-    val editor = edit()
-    editor.func()
-    if (commit) {
-        editor.commit()
-    } else {
-        editor.apply()
-    }
+    edit(commit, func)
 }
 
 inline operator fun SharedPreferences.Editor.set(key: String, value: String) = putString(key, value)!!
@@ -23,18 +20,3 @@ inline operator fun SharedPreferences.Editor.set(key: String, value: Long) = put
 inline operator fun SharedPreferences.Editor.set(key: String, value: Boolean) = putBoolean(key, value)!!
 inline operator fun SharedPreferences.Editor.set(key: String, value: Float) = putFloat(key, value)!!
 inline operator fun SharedPreferences.Editor.set(key: String, value: Set<String>) = putStringSet(key, value)!!
-
-@Deprecated("")
-fun SharedPreferences.Editor.put(pair: Pair<String, Any?>) {
-    val key = pair.first
-    val value = pair.second
-    when (value) {
-        null -> remove(key)
-        is String -> putString(key, value)
-        is Int -> putInt(key, value)
-        is Boolean -> putBoolean(key, value)
-        is Float -> putFloat(key, value)
-        is Long -> putLong(key, value)
-        else -> throw IllegalArgumentException()
-    }
-}
