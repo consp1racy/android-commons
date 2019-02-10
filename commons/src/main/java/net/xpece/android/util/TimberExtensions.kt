@@ -4,7 +4,7 @@ package net.xpece.android.util
 
 import timber.log.Timber
 
-@Deprecated("Use TimberKt.", ReplaceWith("v(message)", "com.github.ajalt.timberkt.v"))
+@Deprecated("Use TimberKt.", ReplaceWith("v(null, message)", "com.github.ajalt.timberkt.v"))
 inline fun tv(message: () -> String) {
     if (Timber.treeCount() > 0) Timber.v(message.invoke())
 }
@@ -15,11 +15,11 @@ inline fun tv(throwable: Throwable?, message: () -> String) {
 }
 
 @Deprecated("Use TimberKt.", ReplaceWith("v(throwable)", "com.github.ajalt.timberkt.v"))
-inline fun tv(throwable: Throwable) {
+inline fun tv(throwable: Throwable?) {
     if (Timber.treeCount() > 0) Timber.v(throwable)
 }
 
-@Deprecated("Use TimberKt.", ReplaceWith("i(message)", "com.github.ajalt.timberkt.i"))
+@Deprecated("Use TimberKt.", ReplaceWith("i(null, message)", "com.github.ajalt.timberkt.i"))
 inline fun ti(message: () -> String) {
     if (Timber.treeCount() > 0) Timber.i(message.invoke())
 }
@@ -30,11 +30,11 @@ inline fun ti(throwable: Throwable?, message: () -> String) {
 }
 
 @Deprecated("Use TimberKt.", ReplaceWith("i(throwable)", "com.github.ajalt.timberkt.i"))
-inline fun ti(throwable: Throwable) {
+inline fun ti(throwable: Throwable?) {
     if (Timber.treeCount() > 0) Timber.i(throwable)
 }
 
-@Deprecated("Use TimberKt.", ReplaceWith("d(message)", "com.github.ajalt.timberkt.d"))
+@Deprecated("Use TimberKt.", ReplaceWith("d(null, message)", "com.github.ajalt.timberkt.d"))
 inline fun td(message: () -> String) {
     if (Timber.treeCount() > 0) Timber.d(message.invoke())
 }
@@ -45,11 +45,11 @@ inline fun td(throwable: Throwable?, message: () -> String) {
 }
 
 @Deprecated("Use TimberKt.", ReplaceWith("d(throwable)", "com.github.ajalt.timberkt.d"))
-inline fun td(throwable: Throwable) {
+inline fun td(throwable: Throwable?) {
     if (Timber.treeCount() > 0) Timber.d(throwable)
 }
 
-@Deprecated("Use TimberKt.", ReplaceWith("w(message)", "com.github.ajalt.timberkt.w"))
+@Deprecated("Use TimberKt.", ReplaceWith("w(null, message)", "com.github.ajalt.timberkt.w"))
 inline fun tw(message: () -> String) {
     if (Timber.treeCount() > 0) Timber.w(message.invoke())
 }
@@ -60,11 +60,11 @@ inline fun tw(throwable: Throwable?, message: () -> String) {
 }
 
 @Deprecated("Use TimberKt.", ReplaceWith("w(throwable)", "com.github.ajalt.timberkt.w"))
-inline fun tw(throwable: Throwable) {
+inline fun tw(throwable: Throwable?) {
     if (Timber.treeCount() > 0) Timber.w(throwable)
 }
 
-@Deprecated("Use TimberKt.", ReplaceWith("e(message)", "com.github.ajalt.timberkt.e"))
+@Deprecated("Use TimberKt.", ReplaceWith("e(null, message)", "com.github.ajalt.timberkt.e"))
 inline fun te(message: () -> String) {
     if (Timber.treeCount() > 0) Timber.e(message.invoke())
 }
@@ -75,7 +75,7 @@ inline fun te(throwable: Throwable?, message: () -> String) {
 }
 
 @Deprecated("Use TimberKt.", ReplaceWith("e(throwable)", "com.github.ajalt.timberkt.e"))
-inline fun te(throwable: Throwable) {
+inline fun te(throwable: Throwable?) {
     if (Timber.treeCount() > 0) Timber.e(throwable)
 }
 
@@ -90,6 +90,6 @@ inline fun twtf(throwable: Throwable?, message: () -> String) {
 }
 
 @Deprecated("Don't use WTF level logging.", level = DeprecationLevel.HIDDEN)
-inline fun twtf(throwable: Throwable) {
+inline fun twtf(throwable: Throwable?) {
     if (Timber.treeCount() > 0) Timber.wtf(throwable)
 }
