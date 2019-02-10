@@ -50,23 +50,39 @@ fun View.visible(): View {
     return this
 }
 
-@Deprecated("Use property access syntax.", ReplaceWith("isVisible"))
+@Deprecated(
+    "Use AndroidX.",
+    ReplaceWith("isVisible", imports = ["androidx.core.view.isVisible"]),
+    DeprecationLevel.ERROR
+)
 @JvmName("isVisibleLegacy")
 inline fun View.isVisible() = isVisible
 
-@Deprecated("Use property access syntax.")
+@Deprecated(
+    "Use AndroidX.",
+    level = DeprecationLevel.ERROR
+)
 @JvmName("setVisibleLegacy")
+@Suppress("DeprecatedCallableAddReplaceWith")
 inline fun View.setVisible(visible: Boolean) {
     this.isVisible = visible
 }
 
+@Deprecated(
+    "Use AndroidX.",
+    ReplaceWith("isVisible", imports = ["androidx.core.view.isVisible"])
+)
 inline var View.isVisible: Boolean
     get() = visibility == View.VISIBLE
     set(value) {
         visibility = if (value) View.VISIBLE else View.GONE
     }
 
-@Deprecated("Use isVisible property.", ReplaceWith("isVisible"))
+@Deprecated(
+    "Use AndroidX.",
+    ReplaceWith("isVisible", imports = ["androidx.core.view.isVisible"]),
+    DeprecationLevel.ERROR
+)
 inline var View.visible: Boolean
     @JvmName("isVisibleRedundant")
     @JvmSynthetic

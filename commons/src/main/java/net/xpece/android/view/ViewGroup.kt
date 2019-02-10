@@ -4,7 +4,11 @@ package net.xpece.android.view
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.children as childrenImpl
 
-@Deprecated("Replace with anko.")
+@Deprecated(
+    "Use AndroidX.",
+    ReplaceWith("children.toList()", imports = ["androidx.core.view.children"])
+)
 val ViewGroup.children: List<View>
-    get() = (0 until childCount).map { getChildAt(it) }
+    get() = childrenImpl.toList()
