@@ -1,3 +1,5 @@
+@file:JvmName("XpUri")
+
 package net.xpece.android.net
 
 import android.net.Uri
@@ -7,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng
     "Use AndroidX.",
     ReplaceWith("toUri()", imports = ["androidx.core.net.toUri"])
 )
+@JvmSynthetic
 fun String?.toUri() = if (this != null) Uri.parse(this) else null
 
 /**
@@ -18,6 +21,7 @@ fun getWebMapUri(query: String, latLng: LatLng?) =
                 .appendQueryParameterOptional("ll", latLng) { "${it.latitude},${it.longitude}" }
                 .build()!!
 
+@JvmSynthetic
 fun <T> Uri.Builder.appendQueryParameterOptional(key: String, value: T?, transform: (T) -> String = { it.toString() }) = apply {
     if (value != null) {
         val transformed = transform.invoke(value)

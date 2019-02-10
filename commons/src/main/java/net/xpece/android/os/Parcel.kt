@@ -1,3 +1,5 @@
+@file:JvmName("XpParcel")
+
 package net.xpece.android.os
 
 import android.annotation.SuppressLint
@@ -42,13 +44,13 @@ inline fun Parcel.writeDoubleOrNan(value: Double?) {
 inline fun Parcel.readDoubleOrNull(): Double? = readDouble().takeIf { it != Double.NaN }
 
 inline fun <reified E> Parcel.readList(cl: ClassLoader? = E::class.java.classLoader): List<E> =
-        mutableListOf<E>().apply {
-            readList(this, cl)
-        }
+    mutableListOf<E>().apply {
+        readList(this, cl)
+    }
 
 inline fun <reified T> Parcel.readTypedValue(cl: ClassLoader? = T::class.java.classLoader): T =
-        readValue(cl) as T
+    readValue(cl) as T
 
 @Deprecated("Use readTypedValue instead.", replaceWith = ReplaceWith(expression = "readTypedValue"))
 inline fun <reified T> Parcel.readValueTyped(cl: ClassLoader? = T::class.java.classLoader): T =
-        readValue(cl) as T
+    readValue(cl) as T

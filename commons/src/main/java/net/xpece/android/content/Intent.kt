@@ -1,3 +1,5 @@
+@file:JvmName("XpIntent")
+
 package net.xpece.android.content
 
 import android.Manifest

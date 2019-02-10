@@ -1,3 +1,4 @@
+@file:JvmName("XpDrawable")
 @file:Suppress("unused")
 
 package net.xpece.android.graphics.drawable

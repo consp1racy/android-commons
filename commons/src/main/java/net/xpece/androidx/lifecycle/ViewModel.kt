@@ -1,3 +1,4 @@
+@file:JvmName("-ViewModel")
 @file:Suppress("unused")
 
 package net.xpece.androidx.lifecycle

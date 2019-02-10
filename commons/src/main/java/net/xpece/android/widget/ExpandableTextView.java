@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.xpece.android.R;
-import net.xpece.android.graphics.drawable.XpDrawableKt;
+import net.xpece.android.graphics.drawable.XpDrawable;
 
 /**
  * @author Eugen
@@ -140,7 +140,7 @@ public class ExpandableTextView extends LinearLayout implements View.OnClickList
             public void onAnimationStart(Animation animation) {
                 if (mButton != null) {
                     mButton.setImageDrawable(mCollapsed ? mExpandDrawable : mCollapseDrawable);
-                    XpDrawableKt.reverse(mButton.getDrawable(), mAnimationDuration);
+                    XpDrawable.reverse(mButton.getDrawable(), mAnimationDuration);
                 }
             }
 

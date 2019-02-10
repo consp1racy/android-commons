@@ -1,3 +1,5 @@
+@file:JvmName("XpBundle")
+
 package net.xpece.android.os
 
 import android.os.Bundle

@@ -1,3 +1,4 @@
+@file:JvmName("-LiveData")
 @file:Suppress("unused")
 
 package net.xpece.androidx.lifecycle

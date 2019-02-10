@@ -2,7 +2,12 @@
 
 package net.xpece.android.graphics
 
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Matrix
+import android.graphics.Paint
 import android.media.ExifInterface
 
 /**

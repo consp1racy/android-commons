@@ -1,5 +1,5 @@
 @file:Suppress("FunctionName", "unused", "NOTHING_TO_INLINE")
-@file:JvmName("-XpReactiveExtensions")
+@file:JvmName("-ReactiveExtensions")
 
 package io.reactivex
 

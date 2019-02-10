@@ -1,4 +1,4 @@
-@file:JvmName("-XpHandler")
+@file:JvmName("-Handler")
 
 package net.xpece.android.os
 
