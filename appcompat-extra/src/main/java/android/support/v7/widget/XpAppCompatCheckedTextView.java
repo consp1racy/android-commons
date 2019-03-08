@@ -19,21 +19,24 @@ package android.support.v7.widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 
 import net.xpece.android.appcompatextra.R;
+import net.xpece.android.widget.TintableCheckMarkView;
 import net.xpece.android.widget.TintableCompoundDrawableView;
 
 /**
  * {@link android.widget.CheckedTextView} which supports compound drawable tint on all platforms.
  */
 public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView implements
-    TintableCompoundDrawableView {
+    TintableCompoundDrawableView, TintableCheckMarkView {
 
     private XpAppCompatCompoundDrawableHelper mTextCompoundDrawableHelper;
+    private XpAppCompatCheckMarkHelper mTextCheckMarkHelper;
 
     public XpAppCompatCheckedTextView(Context context) {
         this(context, null);
@@ -48,6 +51,9 @@ public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView impleme
 
         mTextCompoundDrawableHelper = new XpAppCompatCompoundDrawableHelper(this);
         mTextCompoundDrawableHelper.loadFromAttributes(attrs, defStyleAttr);
+
+        mTextCheckMarkHelper = new XpAppCompatCheckMarkHelper(this);
+        mTextCheckMarkHelper.loadFromAttributes(attrs, defStyleAttr);
     }
 
     @Override
@@ -55,6 +61,9 @@ public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView impleme
         super.drawableStateChanged();
         if (mTextCompoundDrawableHelper != null) {
             mTextCompoundDrawableHelper.applySupportTint();
+        }
+        if (mTextCheckMarkHelper != null) {
+            mTextCheckMarkHelper.applySupportTint();
         }
     }
 
@@ -103,5 +112,53 @@ public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView impleme
             return mTextCompoundDrawableHelper.getSupportTintMode();
         }
         return null;
+    }
+
+    @Override
+    public void setSupportCheckMarkTintList(@Nullable final ColorStateList tint) {
+        if (mTextCheckMarkHelper != null) {
+            mTextCheckMarkHelper.setSupportTintList(tint);
+        }
+    }
+
+    @Nullable
+    @Override
+    public ColorStateList getSupportCheckMarkTintList() {
+        if (mTextCheckMarkHelper != null) {
+            mTextCheckMarkHelper.getSupportTintList();
+        }
+        return null;
+    }
+
+    @Override
+    public void setSupportCheckMarkTintMode(@Nullable final PorterDuff.Mode tintMode) {
+        if (mTextCheckMarkHelper != null) {
+            mTextCheckMarkHelper.setSupportTintMode(tintMode);
+        }
+    }
+
+    @Nullable
+    @Override
+    public PorterDuff.Mode getSupportCheckMarkTintMode() {
+        if (mTextCheckMarkHelper != null) {
+            mTextCheckMarkHelper.getSupportTintMode();
+        }
+        return null;
+    }
+
+    @Override
+    public void setCheckMarkDrawable(@Nullable final Drawable d) {
+        super.setCheckMarkDrawable(d);
+        if (mTextCheckMarkHelper != null) {
+            mTextCheckMarkHelper.applySupportTint();
+        }
+    }
+
+    @Override
+    public void setCheckMarkDrawable(@DrawableRes final int resId) {
+        super.setCheckMarkDrawable(resId);
+        if (mTextCheckMarkHelper != null) {
+            mTextCheckMarkHelper.applySupportTint();
+        }
     }
 }
