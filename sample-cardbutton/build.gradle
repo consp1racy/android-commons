@@ -28,7 +28,7 @@ dependencies {
 
 repositories {
     jcenter()
-    maven { url "https://maven.google.com" }
+    google()
 }
 
 // For testing compatibility with oldest supported support library.

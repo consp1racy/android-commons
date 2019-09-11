@@ -13,14 +13,11 @@ dependencies {
     implementation "com.android.support:support-annotations:$supportAnnotationsVersionExtra"
 
     api("com.android.support:appcompat-v7:$supportLibsVersionExtra")
-//        {
-//        exclude module: "support-annotations"
-//    }
 }
 
 repositories {
     jcenter()
-    maven { url "https://maven.google.com" }
+    google()
 }
 
 group = rootProject.GROUP_ID
