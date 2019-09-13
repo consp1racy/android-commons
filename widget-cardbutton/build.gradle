@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersionCardButton
+    compileSdkVersion 28
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
@@ -13,22 +13,6 @@ dependencies {
     api 'com.google.android.material:material:1.0.0'
 	api project(':appcompat-extra')
     compileOnly project(':platform-insets')
-}
-
-repositories {
-    jcenter()
-    google()
-}
-
-configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        def requested = details.requested
-        if (requested.group == 'com.android.support') {
-            if (!requested.name.startsWith("multidex")) {
-                details.useVersion "$supportLibsVersionCardButton"
-            }
-        }
-    }
 }
 
 group = rootProject.GROUP_ID

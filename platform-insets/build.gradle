@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 14
@@ -17,9 +17,4 @@ android {
 
 dependencies {
     compileOnly 'androidx.annotation:annotation:1.0.0'
-}
-
-repositories {
-    google()
-    jcenter()
 }

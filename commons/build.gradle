@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 28
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
@@ -78,10 +78,7 @@ dependencies {
 }
 
 repositories {
-    jcenter()
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     maven { url "https://jitpack.io" }
-    google()
 }
 
 group = rootProject.GROUP_ID

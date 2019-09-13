@@ -16,16 +16,6 @@ buildscript {
 
 ext {
     buildToolsVersion = "29.0.2"
-
-    compileSdkVersion = 28
-    supportLibsVersion = "28.0.0"
-
-    compileSdkVersionExtra = 28
-    supportLibsVersionExtra = "28.0.0"
-    supportAnnotationsVersionExtra = "28.0.0"
-
-    compileSdkVersionCardButton = 28
-    supportLibsVersionCardButton = "28.0.0"
 }
 
 // http://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html
@@ -34,6 +24,11 @@ allprojects {
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet')
         excludes = ['**/*.kt']
+    }
+
+    repositories {
+        jcenter()
+        google()
     }
 }
 //}

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersionExtra
+    compileSdkVersion 28
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
@@ -13,11 +13,6 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.0.0'
 
     api('androidx.appcompat:appcompat:1.0.0')
-}
-
-repositories {
-    jcenter()
-    google()
 }
 
 group = rootProject.GROUP_ID

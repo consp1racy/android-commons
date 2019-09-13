@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersionExtra
+    compileSdkVersion 28
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
@@ -15,11 +15,6 @@ dependencies {
     api ('com.google.android.material:material:1.0.0')
 
 	api project(':appcompat-extra')
-}
-
-repositories {
-    jcenter()
-    google()
 }
 
 group = rootProject.GROUP_ID
