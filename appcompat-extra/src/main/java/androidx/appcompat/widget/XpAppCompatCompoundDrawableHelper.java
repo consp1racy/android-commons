@@ -21,14 +21,15 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.AttributeSet;
+import android.widget.TextView;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.RestrictTo;
 import androidx.core.widget.TextViewCompat;
-import android.util.AttributeSet;
-import android.widget.TextView;
 
 import net.xpece.android.appcompatextra.R;
 import net.xpece.android.widget.XpTextViewCompat;
@@ -69,7 +70,7 @@ public final class XpAppCompatCompoundDrawableHelper {
             mView.setCompoundDrawablesWithIntrinsicBounds(ds[0], ds[1], ds[2], ds[3]);
 
             boolean hasRelativeCompoundDrawables = false;
-            ds = XpTextViewCompat.getCompoundDrawablesRelative(mView);
+            ds = TextViewCompat.getCompoundDrawablesRelative(mView);
             if (a.hasValue(R.styleable.XpAppCompatCompoundDrawableHelper_drawableStart)) {
                 ds[0] = resolveDrawable(a, R.styleable.XpAppCompatCompoundDrawableHelper_drawableStart);
                 hasRelativeCompoundDrawables = true;

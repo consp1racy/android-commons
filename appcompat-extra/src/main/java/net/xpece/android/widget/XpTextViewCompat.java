@@ -5,11 +5,12 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import android.view.View;
-import android.widget.TextView;
+import androidx.core.widget.TextViewCompat;
 
 @TargetApi(23)
 public final class XpTextViewCompat {
@@ -19,10 +20,6 @@ public final class XpTextViewCompat {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 24) {
             IMPL = new NougatXpTextViewCompatImpl();
-        } else if (version >= 18) {
-            IMPL = new JbMr2XpTextViewCompatImpl();
-        } else if (version >= 17) {
-            IMPL = new JbMr1XpTextViewCompatImpl();
         } else {
             IMPL = new BaseXpTextViewCompatImpl();
         }
@@ -30,8 +27,12 @@ public final class XpTextViewCompat {
 
     private XpTextViewCompat() {}
 
+    /**
+     * @deprecated Use {@link TextViewCompat#getCompoundDrawablesRelative(TextView)}.
+     */
+    @Deprecated
     public static Drawable[] getCompoundDrawablesRelative(@NonNull TextView textView) {
-        return IMPL.getCompoundDrawablesRelative(textView);
+        return TextViewCompat.getCompoundDrawablesRelative(textView);
     }
 
     public static void setCompoundDrawableTintList(@NonNull TextView textView, @Nullable ColorStateList tint) {
@@ -53,8 +54,6 @@ public final class XpTextViewCompat {
     }
 
     interface XpTextViewCompatImpl {
-        Drawable[] getCompoundDrawablesRelative(@NonNull TextView textView);
-
         void setCompoundDrawableTintList(@NonNull TextView textView, @Nullable ColorStateList tint);
 
         @Nullable
@@ -67,11 +66,6 @@ public final class XpTextViewCompat {
     }
 
     static class BaseXpTextViewCompatImpl implements XpTextViewCompatImpl {
-        @Override
-        public Drawable[] getCompoundDrawablesRelative(@NonNull TextView textView) {
-            return textView.getCompoundDrawables();
-        }
-
         @Override
         public void setCompoundDrawableTintList(@NonNull TextView textView, @Nullable ColorStateList tint) {
             if (textView instanceof TintableCompoundDrawableView) {
@@ -105,34 +99,11 @@ public final class XpTextViewCompat {
         }
     }
 
-    @RequiresApi(17)
-    static class JbMr1XpTextViewCompatImpl extends BaseXpTextViewCompatImpl {
-        @Override
-        public Drawable[] getCompoundDrawablesRelative(@NonNull TextView textView) {
-            final boolean rtl = textView.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-            final Drawable[] result = textView.getCompoundDrawables();
-            if (rtl) {
-                Drawable temp = result[0]; // temp = left
-                result[0] = result[2]; // left = right
-                result[2] = temp; // right = temp
-            }
-            return result;
-        }
-    }
-
-    @RequiresApi(18)
-    static class JbMr2XpTextViewCompatImpl extends JbMr1XpTextViewCompatImpl {
-        @Override
-        public Drawable[] getCompoundDrawablesRelative(@NonNull TextView textView) {
-            return textView.getCompoundDrawablesRelative();
-        }
-    }
-
     /**
      * This should work since Marshmallow but tinting start and end compound drawables is broken.
      */
     @RequiresApi(23)
-    static class NougatXpTextViewCompatImpl extends JbMr2XpTextViewCompatImpl {
+    static class NougatXpTextViewCompatImpl extends BaseXpTextViewCompatImpl {
         @Override
         public void setCompoundDrawableTintList(@NonNull TextView textView, @Nullable ColorStateList tint) {
             textView.setCompoundDrawableTintList(tint);
