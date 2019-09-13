@@ -20,10 +20,11 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import android.util.AttributeSet;
 
 import net.xpece.android.appcompatextra.R;
 import net.xpece.android.widget.TintableCheckMarkView;
@@ -125,7 +126,7 @@ public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView impleme
     @Override
     public ColorStateList getSupportCheckMarkTintList() {
         if (mTextCheckMarkHelper != null) {
-            mTextCheckMarkHelper.getSupportTintList();
+            return mTextCheckMarkHelper.getSupportTintList();
         }
         return null;
     }
@@ -141,7 +142,7 @@ public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView impleme
     @Override
     public PorterDuff.Mode getSupportCheckMarkTintMode() {
         if (mTextCheckMarkHelper != null) {
-            mTextCheckMarkHelper.getSupportTintMode();
+            return mTextCheckMarkHelper.getSupportTintMode();
         }
         return null;
     }
