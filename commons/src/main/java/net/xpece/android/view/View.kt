@@ -9,8 +9,8 @@ import android.annotation.TargetApi
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.support.v4.view.GravityCompat
-import android.support.v4.view.ViewCompat
+import androidx.core.view.GravityCompat
+import androidx.core.view.ViewCompat
 import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
@@ -133,7 +133,7 @@ fun setSearchViewLayoutTransition(view: SearchView) {
 }
 
 @Deprecated("")
-fun setSearchViewLayoutTransition(view: android.support.v7.widget.SearchView) {
+fun setSearchViewLayoutTransition(view: androidx.appcompat.widget.SearchView) {
     val searchBar = view.findViewById<LinearLayout>(R.id.search_bar)
     searchBar.layoutTransition = LayoutTransition()
 }

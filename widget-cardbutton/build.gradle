@@ -10,7 +10,7 @@ android {
 }
 
 dependencies {
-    api "com.android.support:design:$supportLibsVersionCardButton"
+    api 'com.google.android.material:material:1.0.0'
 	api project(':appcompat-extra')
     compileOnly project(':platform-insets')
 }

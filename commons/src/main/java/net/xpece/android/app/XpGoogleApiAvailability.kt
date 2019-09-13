@@ -2,8 +2,8 @@ package net.xpece.android.app
 
 import android.app.Dialog
 import android.content.DialogInterface
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.SupportErrorDialogFragment
 
@@ -12,7 +12,7 @@ import com.google.android.gms.common.SupportErrorDialogFragment
  */
 object XpGoogleApiAvailability {
     @JvmOverloads
-    fun showErrorDialogFragment(fragment: Fragment, errorCode: Int, requestCode: Int, cancelListener: DialogInterface.OnCancelListener? = null): Boolean {
+    fun showErrorDialogFragment(fragment: androidx.fragment.app.Fragment, errorCode: Int, requestCode: Int, cancelListener: DialogInterface.OnCancelListener? = null): Boolean {
         val activity = fragment.activity
         val dialog = GoogleApiAvailability.getInstance().getErrorDialog(activity, errorCode, requestCode, cancelListener)
         if (dialog == null) {
@@ -24,7 +24,7 @@ object XpGoogleApiAvailability {
         }
     }
 
-    private fun showErrorDialogFragment(fm: FragmentManager, dialog: Dialog, tag: String, cancelListener: DialogInterface.OnCancelListener?) {
+    private fun showErrorDialogFragment(fm: androidx.fragment.app.FragmentManager, dialog: Dialog, tag: String, cancelListener: DialogInterface.OnCancelListener?) {
         val f = SupportErrorDialogFragment.newInstance(dialog, cancelListener)
         f.show(fm, tag)
     }

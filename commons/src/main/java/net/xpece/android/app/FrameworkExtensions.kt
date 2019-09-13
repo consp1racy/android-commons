@@ -3,7 +3,7 @@
 package net.xpece.android.app
 
 import android.content.res.ColorStateList
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import net.xpece.android.text.Truss
 import java.util.*
 

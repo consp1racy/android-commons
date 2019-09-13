@@ -1,11 +1,11 @@
 package net.xpece.android.app
 
-import android.support.annotation.ColorRes
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.support.design.widget.BaseTransientBottomBar
-import android.support.v4.graphics.drawable.DrawableCompat
-import android.support.v7.content.res.AppCompatResources
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.appcompat.content.res.AppCompatResources
 import android.view.View
 
 /**

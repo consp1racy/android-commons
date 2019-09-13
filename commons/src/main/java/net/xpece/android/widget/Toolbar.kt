@@ -5,11 +5,11 @@ package net.xpece.android.widget
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
-import android.support.annotation.StyleRes
-import android.support.v7.widget.AppCompatDrawableManager
-import android.support.v7.widget.Toolbar
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
+import androidx.annotation.StyleRes
+import androidx.appcompat.widget.AppCompatDrawableManager
+import androidx.appcompat.widget.Toolbar
 import android.widget.TextView
 
 private val CLASS_TOOLBAR = Toolbar::class.java

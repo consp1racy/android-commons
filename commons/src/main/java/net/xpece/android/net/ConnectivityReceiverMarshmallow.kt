@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.PowerManager
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 
 /**
  * @author Eugen on 04.01.2017.

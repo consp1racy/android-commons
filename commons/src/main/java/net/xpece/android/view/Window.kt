@@ -5,7 +5,7 @@ package net.xpece.android.view
 
 import android.annotation.TargetApi
 import android.os.Build
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import android.view.Window
 
 @ColorInt

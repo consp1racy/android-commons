@@ -3,8 +3,8 @@
 
 package net.xpece.android.content
 
-import android.support.annotation.AttrRes
-import android.support.annotation.DimenRes
+import androidx.annotation.AttrRes
+import androidx.annotation.DimenRes
 import net.xpece.android.content.res.LazyDimen
 
 fun lazyDp(dp: Number): LazyDimen = LazyDimen.Dp(dp)

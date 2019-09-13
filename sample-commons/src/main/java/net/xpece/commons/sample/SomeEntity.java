@@ -1,6 +1,6 @@
 package net.xpece.commons.sample;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import net.xpece.android.util.ComparableContent;
 

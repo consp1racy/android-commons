@@ -1,7 +1,7 @@
 package com.birbit.android.jobqueue.scheduling
 
 import android.content.Context
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 
 /**
  * @author Eugen on 23.08.2016.

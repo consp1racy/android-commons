@@ -4,7 +4,7 @@ package net.xpece.android.content.res
 
 import android.content.res.Configuration
 import android.os.Build
-import android.support.v4.text.TextUtilsCompat
+import androidx.core.text.TextUtilsCompat
 
 @Suppress("DEPRECATION")
 val Configuration.layoutDirectionCompat: Int

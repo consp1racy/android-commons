@@ -6,8 +6,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
-import android.support.annotation.DrawableRes
-import android.support.v4.view.ViewCompat
+import androidx.annotation.DrawableRes
+import androidx.core.view.ViewCompat
 import android.widget.ImageView
 import net.xpece.android.content.getDrawableCompat
 

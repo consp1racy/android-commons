@@ -2,7 +2,7 @@ package net.xpece.android.widget;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.ImageView;
 
 import java.lang.reflect.Field;

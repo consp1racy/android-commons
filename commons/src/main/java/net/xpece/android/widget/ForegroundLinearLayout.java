@@ -21,16 +21,19 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.appcompat.widget.TintTypedArray;
+
+import net.xpece.android.R;
+
 /**
  * Same as {@link android.support.design.internal.ForegroundLinearLayout} except it uses
- * {@link android.support.v7.widget.AppCompatDrawableManager} to load foreground.
+ * {@link androidx.appcompat.widget.AppCompatDrawableManager} to load foreground.
  */
 public class ForegroundLinearLayout extends LinearLayoutCompat {
     private Drawable mForeground;
@@ -57,19 +60,19 @@ public class ForegroundLinearLayout extends LinearLayoutCompat {
     public ForegroundLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs, android.support.design.R.styleable.ForegroundLinearLayout,
+        TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs, R.styleable.ForegroundLinearLayout,
             defStyleAttr, 0);
 
         mForegroundGravity = a.getInt(
-            android.support.design.R.styleable.ForegroundLinearLayout_android_foregroundGravity, mForegroundGravity);
+            R.styleable.ForegroundLinearLayout_android_foregroundGravity, mForegroundGravity);
 
-        final Drawable d = a.getDrawable(android.support.design.R.styleable.ForegroundLinearLayout_android_foreground);
+        final Drawable d = a.getDrawable(R.styleable.ForegroundLinearLayout_android_foreground);
         if (d != null) {
             setForeground(d);
         }
 
         mForegroundInPadding = a.getBoolean(
-            android.support.design.R.styleable.ForegroundLinearLayout_foregroundInsidePadding, true);
+            R.styleable.ForegroundLinearLayout_foregroundInsidePadding, true);
 
         a.recycle();
     }

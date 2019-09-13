@@ -1,13 +1,13 @@
 package net.xpece.android.widget
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 
 /**
  * Created by Eugen on 22.10.2016.
  */
 
-abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class HeaderFooterRecyclerViewAdapter<T : androidx.recyclerview.widget.RecyclerView.ViewHolder> : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
     companion object {
 
         internal const val VIEW_TYPE_MAX_COUNT = 0x0000ffff
@@ -136,7 +136,7 @@ abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : Re
     override final fun getItemCount() = headerItemCount + contentItemCount + preFooterItemCount + footerItemCount
 
     @Suppress("UNCHECKED_CAST")
-    override final fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override final fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         val headerItemCount = this.headerItemCount
         val contentItemCount = this.contentItemCount
         val preFooterItemCount = this.preFooterItemCount
@@ -156,7 +156,7 @@ abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : Re
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: List<@JvmSuppressWildcards Any>) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int, payloads: List<@JvmSuppressWildcards Any>) {
         val headerItemCount = this.headerItemCount
         val contentItemCount = this.contentItemCount
         val preFooterItemCount = this.preFooterItemCount
@@ -175,7 +175,7 @@ abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : Re
         }
     }
 
-    override final fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override final fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         if (viewType >= HEADER_VIEW_TYPE_OFFSET && viewType < HEADER_VIEW_TYPE_OFFSET + VIEW_TYPE_MAX_COUNT) {
             return onCreateHeaderItemViewHolder(parent, viewType - HEADER_VIEW_TYPE_OFFSET)
         } else if (viewType >= CONTENT_VIEW_TYPE_OFFSET && viewType < CONTENT_VIEW_TYPE_OFFSET + VIEW_TYPE_MAX_COUNT) {
@@ -198,7 +198,7 @@ abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : Re
      * *
      * @return the view holder.
      */
-    protected open fun onCreateHeaderItemViewHolder(parent: ViewGroup, headerViewType: Int): RecyclerView.ViewHolder {
+    protected open fun onCreateHeaderItemViewHolder(parent: ViewGroup, headerViewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         throw UnsupportedOperationException()
     }
 
@@ -211,11 +211,11 @@ abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : Re
      * *
      * @return the view holder.
      */
-    protected open fun onCreateFooterItemViewHolder(parent: ViewGroup, footerViewType: Int): RecyclerView.ViewHolder {
+    protected open fun onCreateFooterItemViewHolder(parent: ViewGroup, footerViewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         throw UnsupportedOperationException()
     }
 
-    internal open fun onCreatePreFooterItemViewHolder(parent: ViewGroup, footerViewType: Int): RecyclerView.ViewHolder {
+    internal open fun onCreatePreFooterItemViewHolder(parent: ViewGroup, footerViewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         throw UnsupportedOperationException()
     }
 
@@ -237,7 +237,7 @@ abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : Re
      * *
      * @param position the position.
      */
-    protected open fun onBindHeaderItemViewHolder(headerViewHolder: RecyclerView.ViewHolder, position: Int) {
+    protected open fun onBindHeaderItemViewHolder(headerViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
     }
 
     /**
@@ -247,10 +247,10 @@ abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : Re
      * *
      * @param position the position.
      */
-    protected open fun onBindFooterItemViewHolder(footerViewHolder: RecyclerView.ViewHolder, position: Int) {
+    protected open fun onBindFooterItemViewHolder(footerViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
     }
 
-    internal open fun onBindPreFooterItemViewHolder(footerViewHolder: RecyclerView.ViewHolder, position: Int) {
+    internal open fun onBindPreFooterItemViewHolder(footerViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
     }
 
     /**
@@ -269,7 +269,7 @@ abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : Re
      * @param position the position.
      * @param payloads A non-null list of merged payloads. Can be empty list if requires full update.
      */
-    protected open fun onBindHeaderItemViewHolder(headerViewHolder: RecyclerView.ViewHolder, position: Int, payloads: List<@JvmSuppressWildcards Any>) {
+    protected open fun onBindHeaderItemViewHolder(headerViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int, payloads: List<@JvmSuppressWildcards Any>) {
         onBindHeaderItemViewHolder(headerViewHolder, position)
     }
 
@@ -280,11 +280,11 @@ abstract class HeaderFooterRecyclerViewAdapter<T : RecyclerView.ViewHolder> : Re
      * @param position the position.
      * @param payloads A non-null list of merged payloads. Can be empty list if requires full update.
      */
-    protected open fun onBindFooterItemViewHolder(footerViewHolder: RecyclerView.ViewHolder, position: Int, payloads: List<@JvmSuppressWildcards Any>) {
+    protected open fun onBindFooterItemViewHolder(footerViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int, payloads: List<@JvmSuppressWildcards Any>) {
         onBindFooterItemViewHolder(footerViewHolder, position)
     }
 
-    internal open fun onBindPreFooterItemViewHolder(footerViewHolder: RecyclerView.ViewHolder, position: Int, payloads: List<@JvmSuppressWildcards Any>) {
+    internal open fun onBindPreFooterItemViewHolder(footerViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int, payloads: List<@JvmSuppressWildcards Any>) {
         onBindPreFooterItemViewHolder(footerViewHolder, position)
     }
 

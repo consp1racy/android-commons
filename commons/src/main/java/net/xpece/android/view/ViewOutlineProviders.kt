@@ -1,7 +1,7 @@
 package net.xpece.android.view
 
 import android.graphics.Outline
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import android.view.View
 import android.view.ViewOutlineProvider
 

@@ -17,7 +17,7 @@ android {
 }
 
 dependencies {
-    compileOnly "com.android.support:support-annotations:$supportLibsVersion"
+    compileOnly 'androidx.annotation:annotation:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     api project(':commons-dimen')

@@ -3,7 +3,7 @@
 
 package net.xpece.android.app
 
-import android.support.v7.app.ActionBar
+import androidx.appcompat.app.ActionBar
 
 inline fun ActionBar.setDisplayShowTitleAndHomeAsUp() {
     setDisplayShowTitleEnabled(true)

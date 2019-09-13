@@ -1,8 +1,8 @@
 package net.xpece.android.view
 
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.annotation.RequiresApi
+import androidx.annotation.IdRes
+import androidx.annotation.RequiresApi
 import android.util.Log
 import android.view.View
 import net.xpece.android.os.readIntegerMap

@@ -2,8 +2,8 @@ package net.xpece.android.app;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatDialogFragment;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 /**
  * @author Eugen on 14. 1. 2016.

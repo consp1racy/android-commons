@@ -20,14 +20,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.WindowInsetsCompat;
-import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.TintTypedArray;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import net.xpece.android.R;
 import net.xpece.android.graphics.XpRect;
 
 public class ScrimInsetsNonConsumingChildPaddingFrameLayout extends FrameLayout {
@@ -51,14 +53,14 @@ public class ScrimInsetsNonConsumingChildPaddingFrameLayout extends FrameLayout 
         super(context, attrs, defStyleAttr);
 
         final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs,
-            android.support.design.R.styleable.ScrimInsetsFrameLayout, defStyleAttr,
-            android.support.design.R.style.Widget_Design_ScrimInsetsFrameLayout);
-        mInsetForeground = a.getDrawable(android.support.design.R.styleable.ScrimInsetsFrameLayout_insetForeground);
+            R.styleable.ScrimInsetsFrameLayout, defStyleAttr,
+            R.style.Widget_Design_ScrimInsetsFrameLayout);
+        mInsetForeground = a.getDrawable(R.styleable.ScrimInsetsFrameLayout_insetForeground);
         a.recycle();
         setWillNotDraw(true); // No need to draw until the insets are adjusted
 
         ViewCompat.setOnApplyWindowInsetsListener(this,
-            new android.support.v4.view.OnApplyWindowInsetsListener() {
+            new androidx.core.view.OnApplyWindowInsetsListener() {
                 @Override
                 public WindowInsetsCompat onApplyWindowInsets(View v,
                                                               WindowInsetsCompat insets) {

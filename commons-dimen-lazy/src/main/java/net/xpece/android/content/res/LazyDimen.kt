@@ -1,8 +1,8 @@
 package net.xpece.android.content.res
 
 import android.content.Context
-import android.support.annotation.AttrRes
-import android.support.annotation.DimenRes
+import androidx.annotation.AttrRes
+import androidx.annotation.DimenRes
 import net.xpece.android.content.*
 
 sealed class LazyDimen {

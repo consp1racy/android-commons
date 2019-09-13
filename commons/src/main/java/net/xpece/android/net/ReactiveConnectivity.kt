@@ -2,7 +2,7 @@ package net.xpece.android.net
 
 import android.content.BroadcastReceiver
 import android.content.Context
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import io.reactivex.Flowable
 import io.reactivex.annotations.SchedulerSupport
 import io.reactivex.processors.BehaviorProcessor

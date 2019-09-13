@@ -4,11 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.AppCompatDrawableManager;
-import android.support.v7.widget.TintTypedArray;
+import androidx.annotation.DrawableRes;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.appcompat.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.Gravity;
 

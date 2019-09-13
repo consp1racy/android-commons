@@ -1,9 +1,10 @@
 package net.xpece.android.widget;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+
+import androidx.core.view.ViewCompat;
 
 /**
  * FrameLayout that doesn't consume window insets.

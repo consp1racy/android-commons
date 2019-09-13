@@ -1,6 +1,6 @@
 package net.xpece.android.widget;
 
-import android.support.v7.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 import android.view.View;
 
 /**

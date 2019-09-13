@@ -1,7 +1,7 @@
 package net.xpece.android.graphics.drawable;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * @author Eugen on 28.04.2017.

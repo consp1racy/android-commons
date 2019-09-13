@@ -4,8 +4,8 @@ package net.xpece.android.app
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v4.app.NavUtils
-import android.support.v4.app.TaskStackBuilder
+import androidx.core.app.NavUtils
+import androidx.core.app.TaskStackBuilder
 
 /**
  * Created by Eugen on 18.10.2016.

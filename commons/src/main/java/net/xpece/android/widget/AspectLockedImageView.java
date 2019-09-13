@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IntDef;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.annotation.IntDef;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 import java.lang.annotation.Retention;

@@ -3,8 +3,8 @@
 
 package net.xpece.android.view
 
-import android.support.annotation.StyleRes
-import android.support.v4.widget.TextViewCompat
+import androidx.annotation.StyleRes
+import androidx.core.widget.TextViewCompat
 import android.widget.TextView
 
 inline fun TextView.setTextAppearanceCompat(@StyleRes resId: Int) =

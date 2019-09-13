@@ -1,6 +1,6 @@
 package net.xpece.android.transition;
 
-import android.support.transition.Fade;
+import androidx.transition.Fade;
 
 /**
  * @author Eugen on 28.02.2017.

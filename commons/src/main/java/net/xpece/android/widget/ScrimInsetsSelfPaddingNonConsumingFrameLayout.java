@@ -1,7 +1,7 @@
 package net.xpece.android.widget;
 
 import android.content.Context;
-import android.support.v4.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsCompat;
 import android.util.AttributeSet;
 
 /**

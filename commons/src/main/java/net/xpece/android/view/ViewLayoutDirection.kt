@@ -5,9 +5,9 @@ package net.xpece.android.view
 
 import android.annotation.TargetApi
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.v4.text.TextUtilsCompat
-import android.support.v4.view.ViewCompat
+import androidx.annotation.RequiresApi
+import androidx.core.text.TextUtilsCompat
+import androidx.core.view.ViewCompat
 import android.view.View
 import net.xpece.android.content.res.layoutDirectionCompat
 import java.lang.reflect.Method

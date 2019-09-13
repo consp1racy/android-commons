@@ -2,7 +2,7 @@ package net.xpece.android.graphics.drawable;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.Px;
+import androidx.annotation.Px;
 
 /**
  * Created by Eugen on 28.12.2016.

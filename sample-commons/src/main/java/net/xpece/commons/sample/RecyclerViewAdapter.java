@@ -1,9 +1,9 @@
 package net.xpece.commons.sample;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.util.SortedListAdapterCallback;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SortedListAdapterCallback;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;

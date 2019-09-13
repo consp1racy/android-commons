@@ -2,7 +2,7 @@ package net.xpece.android.graphics;
 
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.support.v4.util.LruCache;
+import androidx.collection.LruCache;
 
 /**
  * Created by Eugen on 14.11.2015.

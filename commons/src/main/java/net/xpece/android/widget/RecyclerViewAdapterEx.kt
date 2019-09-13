@@ -1,8 +1,8 @@
 package net.xpece.android.widget
 
-import android.support.annotation.LayoutRes
-import android.support.annotation.StringRes
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import net.xpece.android.R
 /**
  * Created by Eugen on 22.10.2016.
  */
-abstract class RecyclerViewAdapterEx<T : RecyclerView.ViewHolder> : HeaderFooterRecyclerViewAdapter<T>() {
+abstract class RecyclerViewAdapterEx<T : androidx.recyclerview.widget.RecyclerView.ViewHolder> : HeaderFooterRecyclerViewAdapter<T>() {
     companion object {
         internal const val EX_VIEW_TYPE_ERROR = 1
         internal const val EX_VIEW_TYPE_PROGRESS = 2
@@ -95,16 +95,16 @@ abstract class RecyclerViewAdapterEx<T : RecyclerView.ViewHolder> : HeaderFooter
         return model!!.type
     }
 
-    override fun onCreatePreFooterItemViewHolder(parent: ViewGroup, footerViewType: Int): RecyclerView.ViewHolder {
+    override fun onCreatePreFooterItemViewHolder(parent: ViewGroup, footerViewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val view = model!!.createView(parent)
         return EmptyViewHolder(view)
     }
 
-    override fun onBindPreFooterItemViewHolder(footerViewHolder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindPreFooterItemViewHolder(footerViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         model!!.bind(footerViewHolder)
     }
 
-    internal class EmptyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    internal class EmptyViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView)
 
     interface Model {
         val type: Int
@@ -114,7 +114,7 @@ abstract class RecyclerViewAdapterEx<T : RecyclerView.ViewHolder> : HeaderFooter
             val inflater = LayoutInflater.from(context)!!
             return inflater.inflate(layoutId, parent, false)
         }
-        fun bind(holder: RecyclerView.ViewHolder) {}
+        fun bind(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder) {}
     }
 
     open class ProgressModel : Model {
@@ -136,7 +136,7 @@ abstract class RecyclerViewAdapterEx<T : RecyclerView.ViewHolder> : HeaderFooter
 
         override val layoutId = R.layout.xpc_text
 
-        override fun bind(holder: RecyclerView.ViewHolder) {
+        override fun bind(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder) {
             val view = holder.itemView
             val textView = view.findViewById<TextView>(android.R.id.text1)
             text?.apply { textView.text = this } ?: textView.setText(textId)
@@ -174,7 +174,7 @@ abstract class RecyclerViewAdapterEx<T : RecyclerView.ViewHolder> : HeaderFooter
 
         override val layoutId = R.layout.xpc_try_again
 
-        override fun bind(holder: RecyclerView.ViewHolder) {
+        override fun bind(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder) {
             val view = holder.itemView
             val textView = view.findViewById<TextView>(android.R.id.text1)
             val button = view.findViewById<Button>(android.R.id.button1)

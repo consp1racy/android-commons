@@ -16,7 +16,7 @@ android {
 }
 
 dependencies {
-    compileOnly "com.android.support:support-annotations:27.0.0"
+    compileOnly 'androidx.annotation:annotation:1.0.0'
 }
 
 repositories {

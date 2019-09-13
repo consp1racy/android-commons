@@ -2,8 +2,8 @@ package net.xpece.android.widget;
 
 import android.content.res.ColorStateList;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.widget.DatePicker;
 import android.widget.NumberPicker;
 

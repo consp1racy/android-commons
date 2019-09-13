@@ -1,7 +1,7 @@
 package net.xpece.android.widget;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * https://gist.github.com/ssinss/e06f12ef66c51252563e

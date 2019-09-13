@@ -4,7 +4,7 @@ package net.xpece.android.net
 
 import android.Manifest
 import android.net.ConnectivityManager
-import android.support.annotation.RequiresPermission
+import androidx.annotation.RequiresPermission
 import java.lang.reflect.Method
 
 internal object ConnectivityManagerReflection {

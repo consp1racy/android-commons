@@ -1,7 +1,7 @@
 package net.xpece.android.app;
 
 import android.content.DialogInterface;
-import android.support.v4.app.DialogFragment;import java.lang.Override;
+import androidx.fragment.app.DialogFragment;import java.lang.Override;
 
 /**
  * @author Eugen on 31. 12. 2015.

@@ -9,8 +9,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.Settings
-import android.support.annotation.RequiresPermission
-import android.support.v4.app.Fragment
+import androidx.annotation.RequiresPermission
+import androidx.fragment.app.Fragment
 import android.widget.Toast
 import com.google.android.gms.maps.model.LatLng
 import net.xpece.android.R
@@ -85,7 +85,7 @@ fun Activity.maybeStartActivityForResult(intent: Intent, requestCode: Int): Bool
     }
 }
 
-fun Fragment.maybeStartActivityForResult(intent: Intent, requestCode: Int): Boolean {
+fun androidx.fragment.app.Fragment.maybeStartActivityForResult(intent: Intent, requestCode: Int): Boolean {
     val context = context!!
     if (context.hasHandler(intent)) {
         startActivityForResult(intent, requestCode)

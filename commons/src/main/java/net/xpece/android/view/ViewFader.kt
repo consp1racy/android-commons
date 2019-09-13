@@ -1,7 +1,7 @@
 package net.xpece.android.view
 
-import android.support.annotation.RequiresApi
-import android.support.v4.view.ViewCompat
+import androidx.annotation.RequiresApi
+import androidx.core.view.ViewCompat
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.animation.AccelerateInterpolator

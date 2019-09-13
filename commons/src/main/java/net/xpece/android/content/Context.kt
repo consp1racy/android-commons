@@ -11,11 +11,11 @@ import android.content.pm.ApplicationInfo
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
-import android.support.annotation.LayoutRes
-import android.support.annotation.UiThread
-import android.support.v4.app.Fragment
-import android.support.v4.app.NotificationCompat
-import android.support.v4.view.ViewCompat
+import androidx.annotation.LayoutRes
+import androidx.annotation.UiThread
+import androidx.fragment.app.Fragment
+import androidx.core.app.NotificationCompat
+import androidx.core.view.ViewCompat
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -52,11 +52,11 @@ inline fun <reified T : Activity> Context.startActivity(func: Intent.() -> Unit)
     startActivity(intent)
 }
 
-inline fun <reified T : Activity> Fragment.startActivity() {
+inline fun <reified T : Activity> androidx.fragment.app.Fragment.startActivity() {
     startActivity<T> { }
 }
 
-inline fun <reified T : Activity> Fragment.startActivity(func: Intent.() -> Unit) {
+inline fun <reified T : Activity> androidx.fragment.app.Fragment.startActivity(func: Intent.() -> Unit) {
     val intent = Intent(this.context, T::class.java)
     intent.func()
     startActivity(intent)

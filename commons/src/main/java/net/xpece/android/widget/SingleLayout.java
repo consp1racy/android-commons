@@ -6,14 +6,17 @@ import android.graphics.Canvas;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.AppCompatDrawableManager;
-import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.appcompat.widget.TintTypedArray;
+import androidx.core.view.ViewCompat;
+
+import net.xpece.android.R;
 
 /**
  * DrawerLayout without drawers. Has working handling of custom status bar background.
@@ -118,9 +121,9 @@ public class SingleLayout extends ViewGroup implements SingleLayoutImpl {
             IMPL.configureApplyInsets(this);
             mStatusBarBackground = IMPL.getDefaultStatusBarBackground(context);
 
-            final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs, android.support.design.R.styleable.ScrimInsetsFrameLayout, defStyleAttr, 0);
-            if (a.hasValue(android.support.design.R.styleable.ScrimInsetsFrameLayout_insetForeground)) {
-                mStatusBarBackground = a.getDrawable(android.support.design.R.styleable.ScrimInsetsFrameLayout_insetForeground);
+            final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs, R.styleable.ScrimInsetsFrameLayout, defStyleAttr, 0);
+            if (a.hasValue(R.styleable.ScrimInsetsFrameLayout_insetForeground)) {
+                mStatusBarBackground = a.getDrawable(R.styleable.ScrimInsetsFrameLayout_insetForeground);
             }
             a.recycle();
         }

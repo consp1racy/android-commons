@@ -5,9 +5,9 @@ package net.xpece.android.content
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
-import android.support.annotation.AttrRes
-import android.support.annotation.StyleRes
-import android.support.v7.widget.TintTypedArray
+import androidx.annotation.AttrRes
+import androidx.annotation.StyleRes
+import androidx.appcompat.widget.TintTypedArray
 
 private val TEMP_ARRAY = object : ThreadLocal<IntArray>() {
     override fun initialValue(): IntArray = intArrayOf(0)

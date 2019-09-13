@@ -1,13 +1,13 @@
 package net.xpece.android.app
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.animation.Animation
 
 /**
  * A version of fragment which does not replay its enter animation after configuration change.
  */
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : androidx.fragment.app.Fragment() {
     companion object {
         internal const val s = "mPlayedEnterAnimation"
     }

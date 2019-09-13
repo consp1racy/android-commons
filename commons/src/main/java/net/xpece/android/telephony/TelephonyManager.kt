@@ -4,8 +4,8 @@ package net.xpece.android.telephony
 
 import android.Manifest
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.annotation.RequiresPermission
+import androidx.annotation.RequiresApi
+import androidx.annotation.RequiresPermission
 import android.telephony.TelephonyManager
 import java.lang.reflect.Method
 

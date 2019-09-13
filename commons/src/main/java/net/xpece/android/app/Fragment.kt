@@ -4,29 +4,29 @@
 package net.xpece.android.app
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 
 /**
  * Created by Eugen on 29.10.2016.
  */
 
 @Suppress("DEPRECATION")
-inline fun Fragment.invalidateOptionsMenu() = activity?.supportInvalidateOptionsMenu()
+inline fun androidx.fragment.app.Fragment.invalidateOptionsMenu() = activity?.supportInvalidateOptionsMenu()
 
 inline fun android.app.Fragment.invalidateOptionsMenu() = activity?.invalidateOptionsMenu()
 
-fun DialogFragment.showAllowingStateLoss(fragmentManager: FragmentManager, tag: String) {
+fun androidx.fragment.app.DialogFragment.showAllowingStateLoss(fragmentManager: androidx.fragment.app.FragmentManager, tag: String) {
     try {
         show(fragmentManager, tag)
     } catch (ignored: IllegalStateException) {
     }
 }
 
-fun DialogFragment.showAllowingStateLoss(
-        fragmentTransaction: FragmentTransaction, tag: String) {
+fun androidx.fragment.app.DialogFragment.showAllowingStateLoss(
+        fragmentTransaction: androidx.fragment.app.FragmentTransaction, tag: String) {
     try {
         show(fragmentTransaction, tag)
     } catch (ignored: IllegalStateException) {
@@ -49,7 +49,7 @@ fun android.app.DialogFragment.showAllowingStateLoss(
     }
 }
 
-inline fun <T : Fragment> T.withArguments(argProvider: Bundle.() -> Unit): T {
+inline fun <T : androidx.fragment.app.Fragment> T.withArguments(argProvider: Bundle.() -> Unit): T {
     arguments = (arguments ?: Bundle()).apply(argProvider)
     return this
 }

@@ -1,6 +1,6 @@
 package net.xpece.android.view;
 
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;

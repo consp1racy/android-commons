@@ -2,7 +2,7 @@ package net.xpece.android.media.exif
 
 import android.content.Context
 import android.net.Uri
-import android.support.media.ExifInterface
+import androidx.exifinterface.media.ExifInterface
 import java.io.BufferedInputStream
 
 /**
@@ -28,8 +28,8 @@ object ExifUtils {
         var orientation = 0
         try {
             buffered.mark(65535)
-            val exif = ExifInterface(buffered)
-            orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0)
+            val exif = androidx.exifinterface.media.ExifInterface(buffered)
+            orientation = exif.getAttributeInt(androidx.exifinterface.media.ExifInterface.TAG_ORIENTATION, 0)
             buffered.reset()
         } catch (ex: Exception) {
 //        Timber.e(ex, "Invalid EXIF format")

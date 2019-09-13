@@ -1,7 +1,7 @@
 package net.xpece.android.util;
 
-import android.support.v7.util.DiffUtil;
-import android.support.v7.util.SortedList;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.SortedList;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

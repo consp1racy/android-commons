@@ -1,7 +1,7 @@
 package net.xpece.android.graphics.drawable;
 
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.DisplayMetrics;
 
 /**
