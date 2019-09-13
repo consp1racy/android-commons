@@ -5,9 +5,8 @@ package net.xpece.android.io
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
-import java.io.ByteArrayOutputStream
 import java.io.InputStream
-import java.util.*
+import java.nio.charset.Charset
 
 @Deprecated("Use ContentResolver.copy instead.", replaceWith = ReplaceWith("contentResolver.copy"))
 fun Context.copy(inputUri: Uri, outputUri: Uri) {
@@ -15,18 +14,23 @@ fun Context.copy(inputUri: Uri, outputUri: Uri) {
 }
 
 fun ContentResolver.copy(inputUri: Uri, outputUri: Uri) {
-    openInputStream(inputUri).use { input ->
-        openOutputStream(outputUri).use { output ->
+    openInputStream(inputUri)!!.use { input ->
+        openOutputStream(outputUri)!!.use { output ->
             input.copyTo(output)
         }
     }
 }
 
+@Deprecated(
+        "Use standard library.",
+        replaceWith = ReplaceWith("readBytes", "kotlin.io.readBytes")
+)
 @JvmOverloads
 fun InputStream.string(charset: String = "UTF-8"): String =
-        Scanner(this, charset).useDelimiter("\\A").next()
+        reader(Charset.forName(charset)).readText()
 
-fun InputStream.bytes(): ByteArray = ByteArrayOutputStream().use {
-    this.copyTo(it)
-    return it.toByteArray()
-}
+@Deprecated(
+        "Use standard library.",
+        replaceWith = ReplaceWith("readBytes", "kotlin.io.readBytes")
+)
+fun InputStream.bytes(): ByteArray = readBytes()

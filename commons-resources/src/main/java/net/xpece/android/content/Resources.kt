@@ -2,14 +2,12 @@
 
 package net.xpece.android.content
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.AppCompatDrawableManager
 
 /**
  * @throws NullPointerException
@@ -22,7 +20,7 @@ fun Context.getColorCompat(@ColorRes resId: Int): Int
  * @throws NullPointerException
  */
 fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList = try {
-    AppCompatResources.getColorStateList(this, resId)
+    AppCompatResources.getColorStateList(this, resId)!!
 } catch (ex: NoSuchMethodError) {
     ContextCompat.getColorStateList(this, resId)!!
 } catch (ex: NoClassDefFoundError) {
@@ -32,7 +30,6 @@ fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList = try 
 /**
  * @throws NullPointerException
  */
-@SuppressLint("RestrictedApi")
 fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable {
     if (DrawableResolver.isDrawableResolversEnabled) {
         @Suppress("LoopToCallChain")
@@ -42,7 +39,7 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable {
         }
     }
     return try {
-        AppCompatDrawableManager.get().getDrawable(this, resId)
+        AppCompatResources.getDrawable(this, resId)!!
     } catch (ex: NoClassDefFoundError) {
         ContextCompat.getDrawable(this, resId)!!
     }

@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "DEPRECATION")
 
 package net.xpece.android.app
 
@@ -41,10 +41,6 @@ import android.os.*
 import android.os.health.SystemHealthManager
 import android.os.storage.StorageManager
 import android.print.PrintManager
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.hardware.display.DisplayManagerCompat
-import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import android.telecom.TelecomManager
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
@@ -56,6 +52,10 @@ import android.view.accessibility.CaptioningManager
 import android.view.inputmethod.InputMethodManager
 import android.view.textclassifier.TextClassificationManager
 import android.view.textservice.TextServicesManager
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.hardware.display.DisplayManagerCompat
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 
 /**
  * Never null.
@@ -358,6 +358,7 @@ inline val Context.usageStatsManager: UsageStatsManager?
 inline val Context.carrierConfigManager: CarrierConfigManager
     get() = getSystemServiceOrThrow(Context.CARRIER_CONFIG_SERVICE)
 
+@Deprecated("Use BiometricPrompt instead.")
 @get:RequiresApi(23)
 inline val Context.fingerprintManager: FingerprintManager?
     get() = getSystemServiceOrNull(Context.FINGERPRINT_SERVICE)
@@ -365,8 +366,9 @@ inline val Context.fingerprintManager: FingerprintManager?
 /**
  * Never null.
  *
- * Requires `support-compat` library version 23.0.0 or later.
+ * Requires AndroidX Core library.
  */
+@Deprecated("Use BiometricPrompt instead.")
 inline val Context.fingerprintManagerCompat: FingerprintManagerCompat
     get() = FingerprintManagerCompat.from(this)
 

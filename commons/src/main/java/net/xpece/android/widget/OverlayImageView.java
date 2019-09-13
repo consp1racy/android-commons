@@ -4,13 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.DrawableRes;
-import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.appcompat.widget.AppCompatDrawableManager;
-import androidx.appcompat.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.Gravity;
+
+import androidx.annotation.DrawableRes;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.TintTypedArray;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
 
 import net.xpece.android.R;
 
@@ -145,6 +146,6 @@ public class OverlayImageView extends AspectLockedImageView {
     }
 
     public void setOverlay(@DrawableRes int resId) {
-        setOverlay(AppCompatDrawableManager.get().getDrawable(getContext(), resId));
+        setOverlay(AppCompatResources.getDrawable(getContext(), resId));
     }
 }

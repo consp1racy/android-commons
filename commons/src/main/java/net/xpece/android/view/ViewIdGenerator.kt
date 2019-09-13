@@ -1,10 +1,10 @@
 package net.xpece.android.view
 
 import android.os.Bundle
-import androidx.annotation.IdRes
-import androidx.annotation.RequiresApi
 import android.util.Log
 import android.view.View
+import androidx.annotation.IdRes
+import androidx.annotation.RequiresApi
 import net.xpece.android.os.readIntegerMap
 import net.xpece.android.os.writeMap
 
@@ -38,7 +38,7 @@ class ViewIdGenerator {
     }
 
     fun onRestoreInstanceState(savedInstanceState: Bundle, key: String) {
-        val bundle = savedInstanceState.getBundle(key)
+        val bundle = savedInstanceState.getBundle(key)!!
         val map = bundle.readIntegerMap()
         cache.putAll(map)
     }

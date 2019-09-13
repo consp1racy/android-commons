@@ -22,6 +22,7 @@ final class XpInsetsHelper {
     }
 
     @NonNull
+    @SuppressLint("NewApi")
     public static Insets getOpticalBounds(final @NonNull Drawable drawable) {
         try {
             return (Insets) METHOD_GET_OPTICAL_INSETS.invoke(drawable);

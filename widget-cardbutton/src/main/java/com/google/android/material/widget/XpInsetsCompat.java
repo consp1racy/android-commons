@@ -1,5 +1,6 @@
 package com.google.android.material.widget;
 
+import android.annotation.SuppressLint;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.graphics.drawable.InsetDrawable;
@@ -19,7 +20,7 @@ import androidx.annotation.RestrictTo;
 @RequiresApi(16)
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 final class XpInsetsCompat {
-    private static final boolean SAFE = Build.VERSION.SDK_INT < 28 && !"P".equals(Build.VERSION.CODENAME);
+    private static final boolean SAFE = !"P".equals(Build.VERSION.CODENAME);
 
     public static final Insets NONE = of(0, 0, 0, 0);
 
@@ -36,6 +37,7 @@ final class XpInsetsCompat {
      * @return Insets instance with the appropriate values
      */
     @NonNull
+    @SuppressLint("NewApi")
     public static Insets of(int left, int top, int right, int bottom) {
         if (SAFE) {
             return Insets.of(left, top, right, bottom);

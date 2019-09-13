@@ -8,7 +8,7 @@ import java.io.IOException
 import java.io.InputStream
 
 /**
- * Requires com.android.support:exifinterface:25.1.0+.
+ * Requires AndroidX Exif Interface.
  *
  * *Warning!* Android PNG reader doesn't support reset stream. Open a new stream before reading the image.
  */
@@ -33,6 +33,7 @@ open class ExifContentStreamRequestHandler(val context: Context) : RequestHandle
     open fun getInputStream(request: Request): InputStream {
         val contentResolver = context.contentResolver
         return contentResolver.openInputStream(request.uri)
+                ?: throw FileNotFoundException("Couldn't open ${request.uri}.")
     }
 
 }

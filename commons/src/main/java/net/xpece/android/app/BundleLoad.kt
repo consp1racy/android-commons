@@ -8,10 +8,10 @@ import android.annotation.TargetApi
 import android.os.Bundle
 import android.os.IBinder
 import android.os.Parcelable
-import androidx.annotation.RequiresApi
 import android.util.Size
 import android.util.SizeF
 import android.util.SparseArray
+import androidx.annotation.RequiresApi
 import java.io.Serializable
 import java.util.*
 import kotlin.reflect.KMutableProperty0
@@ -58,27 +58,27 @@ inline infix fun Bundle.load(property: KMutableProperty0<Double>) {
 
 @JvmName("getString")
 inline infix fun Bundle.load(property: KMutableProperty0<String>) {
-    property.set(getString(property.name))
+    property.set(getString(property.name)!!)
 }
 
 @JvmName("getCharSequence")
 inline infix fun Bundle.load(property: KMutableProperty0<CharSequence>) {
-    property.set(getCharSequence(property.name))
+    property.set(getCharSequence(property.name)!!)
 }
 
 @JvmName("getIntegerArrayList")
 inline infix fun Bundle.load(property: KMutableProperty0<ArrayList<Int>>) {
-    property.set(getIntegerArrayList(property.name))
+    property.set(getIntegerArrayList(property.name)!!)
 }
 
 @JvmName("getStringArrayList")
 inline infix fun Bundle.load(property: KMutableProperty0<ArrayList<String>>) {
-    property.set(getStringArrayList(property.name))
+    property.set(getStringArrayList(property.name)!!)
 }
 
 @JvmName("getCharSequenceArrayList")
 inline infix fun Bundle.load(property: KMutableProperty0<ArrayList<CharSequence>>) {
-    property.set(getCharSequenceArrayList(property.name))
+    property.set(getCharSequenceArrayList(property.name)!!)
 }
 
 @JvmName("getSerializable")
@@ -88,91 +88,91 @@ inline infix fun <reified T : Serializable> Bundle.load(property: KMutableProper
 
 @JvmName("getBooleanArray")
 inline infix fun Bundle.load(property: KMutableProperty0<BooleanArray>) {
-    property.set(getBooleanArray(property.name))
+    property.set(getBooleanArray(property.name)!!)
 }
 
 @JvmName("getByteArray")
 inline infix fun Bundle.load(property: KMutableProperty0<ByteArray>) {
-    property.set(getByteArray(property.name))
+    property.set(getByteArray(property.name)!!)
 }
 
 @JvmName("getCharArray")
 inline infix fun Bundle.load(property: KMutableProperty0<CharArray>) {
-    property.set(getCharArray(property.name))
+    property.set(getCharArray(property.name)!!)
 }
 
 @JvmName("getShortArray")
 inline infix fun Bundle.load(property: KMutableProperty0<ShortArray>) {
-    property.set(getShortArray(property.name))
+    property.set(getShortArray(property.name)!!)
 }
 
 @JvmName("getIntArray")
 inline infix fun Bundle.load(property: KMutableProperty0<IntArray>) {
-    property.set(getIntArray(property.name))
+    property.set(getIntArray(property.name)!!)
 }
 
 @JvmName("getLongArray")
 inline infix fun Bundle.load(property: KMutableProperty0<LongArray>) {
-    property.set(getLongArray(property.name))
+    property.set(getLongArray(property.name)!!)
 }
 
 @JvmName("getFloatArray")
 inline infix fun Bundle.load(property: KMutableProperty0<FloatArray>) {
-    property.set(getFloatArray(property.name))
+    property.set(getFloatArray(property.name)!!)
 }
 
 @JvmName("getDoubleArray")
 inline infix fun Bundle.load(property: KMutableProperty0<DoubleArray>) {
-    property.set(getDoubleArray(property.name))
+    property.set(getDoubleArray(property.name)!!)
 }
 
 @JvmName("getStringArray")
 inline infix fun Bundle.load(property: KMutableProperty0<Array<String>>) {
-    property.set(getStringArray(property.name))
+    property.set(getStringArray(property.name)!!)
 }
 
 @JvmName("getCharSequenceArray")
 inline infix fun Bundle.load(property: KMutableProperty0<Array<CharSequence>>) {
-    property.set(getCharSequenceArray(property.name))
+    property.set(getCharSequenceArray(property.name)!!)
 }
 
 @JvmName("getParcelable")
 inline infix fun <T : Parcelable> Bundle.load(property: KMutableProperty0<T>) {
-    property.set(getParcelable(property.name))
+    property.set(getParcelable(property.name)!!)
 }
 
 @RequiresApi(21)
 @TargetApi(21)
 @JvmName("getSize")
 inline infix fun Bundle.load(property: KMutableProperty0<Size>) {
-    property.set(getSize(property.name))
+    property.set(getSize(property.name)!!)
 }
 
 @RequiresApi(21)
 @TargetApi(21)
 @JvmName("getSizeF")
 inline infix fun Bundle.load(property: KMutableProperty0<SizeF>) {
-    property.set(getSizeF(property.name))
+    property.set(getSizeF(property.name)!!)
 }
 
 @JvmName("getParcelableArray")
 inline infix fun Bundle.load(property: KMutableProperty0<Array<Parcelable>>) {
-    property.set(getParcelableArray(property.name))
+    property.set(getParcelableArray(property.name)!!)
 }
 
 @JvmName("getParcelableArrayList")
 inline infix fun <T : Parcelable> Bundle.load(property: KMutableProperty0<ArrayList<out T>>) {
-    property.set(getParcelableArrayList(property.name))
+    property.set(getParcelableArrayList(property.name)!!)
 }
 
 @JvmName("getSparseParcelableArray")
 inline infix fun <T : Parcelable> Bundle.load(property: KMutableProperty0<SparseArray<out T>>) {
-    property.set(getSparseParcelableArray(property.name))
+    property.set(getSparseParcelableArray(property.name)!!)
 }
 
 @JvmName("getBundle")
 inline infix fun Bundle.load(property: KMutableProperty0<Bundle>) {
-    property.set(getBundle(property.name))
+    property.set(getBundle(property.name)!!)
 }
 
 @RequiresApi(18)

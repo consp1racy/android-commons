@@ -31,10 +31,6 @@ import androidx.appcompat.widget.TintTypedArray;
 
 import net.xpece.android.R;
 
-/**
- * Same as {@link android.support.design.internal.ForegroundLinearLayout} except it uses
- * {@link androidx.appcompat.widget.AppCompatDrawableManager} to load foreground.
- */
 public class ForegroundLinearLayout extends LinearLayoutCompat {
     private Drawable mForeground;
 

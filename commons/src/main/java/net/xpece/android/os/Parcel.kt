@@ -6,12 +6,28 @@ import android.annotation.SuppressLint
 import android.os.Parcel
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun Parcel.writeBoolean(value: Boolean) {
-    writeByte(if (value) 1 else 0)
+@Deprecated(
+        "Shadows method since API 29.",
+        replaceWith = ReplaceWith("writeBooleanCompat"),
+        level = DeprecationLevel.HIDDEN
+)
+inline fun Parcel.writeBoolean(value: Boolean) = writeBooleanCompat(value)
+
+@Suppress("NOTHING_TO_INLINE")
+@Deprecated(
+        "Shadows method since API 29.",
+        replaceWith = ReplaceWith("readBooleanCompat"),
+        level = DeprecationLevel.HIDDEN
+)
+inline fun Parcel.readBoolean(): Boolean = readBooleanCompat()
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun Parcel.writeBooleanCompat(value: Boolean) {
+    writeInt(if (value) 1 else 0)
 }
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun Parcel.readBoolean(): Boolean = readByte() != 0.toByte()
+inline fun Parcel.readBooleanCompat(): Boolean = readInt() != 0
 
 /**
  * Writes `null` as [Float.NaN]. Only uses 4 bytes.
@@ -44,13 +60,13 @@ inline fun Parcel.writeDoubleOrNan(value: Double?) {
 inline fun Parcel.readDoubleOrNull(): Double? = readDouble().takeIf { it != Double.NaN }
 
 inline fun <reified E> Parcel.readList(cl: ClassLoader? = E::class.java.classLoader): List<E> =
-    mutableListOf<E>().apply {
-        readList(this, cl)
-    }
+        mutableListOf<E>().apply {
+            readList(this as List<*>, cl)
+        }
 
 inline fun <reified T> Parcel.readTypedValue(cl: ClassLoader? = T::class.java.classLoader): T =
-    readValue(cl) as T
+        readValue(cl) as T
 
 @Deprecated("Use readTypedValue instead.", replaceWith = ReplaceWith(expression = "readTypedValue"))
 inline fun <reified T> Parcel.readValueTyped(cl: ClassLoader? = T::class.java.classLoader): T =
-    readValue(cl) as T
+        readValue(cl) as T

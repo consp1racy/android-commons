@@ -3,20 +3,14 @@
 
 package net.xpece.android.widget
 
-import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
+import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
-import androidx.appcompat.widget.AppCompatDrawableManager
 import androidx.appcompat.widget.Toolbar
-import android.widget.TextView
 
 private val CLASS_TOOLBAR = Toolbar::class.java
-
-private val FIELD_COLLAPSE_ICON by lazy(LazyThreadSafetyMode.NONE) {
-    CLASS_TOOLBAR.getDeclaredField("mCollapseIcon").apply { isAccessible = true }
-}
 
 private val FIELD_TITLE_TEXT_VIEW by lazy(LazyThreadSafetyMode.NONE) {
     CLASS_TOOLBAR.getDeclaredField("mTitleTextView").apply { isAccessible = true }
@@ -38,15 +32,22 @@ private val FIELD_SUBTITLE_TEXT_COLOR by lazy(LazyThreadSafetyMode.NONE) {
     CLASS_TOOLBAR.getDeclaredField("mSubtitleTextColor").apply { isAccessible = true }
 }
 
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+@Deprecated("Replace with direct call.", level = DeprecationLevel.HIDDEN)
 var Toolbar.collapseIcon: Drawable?
-    get() = FIELD_COLLAPSE_ICON.get(this) as Drawable?
-    set(value) = FIELD_COLLAPSE_ICON.set(this, value)
+    get() = collapseIcon
+    set(value) {
+        collapseIcon = value
+    }
 
-@SuppressLint("RestrictedApi")
+@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+@Deprecated("Replace with direct call.", level = DeprecationLevel.HIDDEN)
 fun Toolbar.setCollapseIcon(@DrawableRes iconRes: Int) {
-    collapseIcon = AppCompatDrawableManager.get().getDrawable(context, iconRes)
+    setCollapseIcon(iconRes)
 }
 
+// There is a package-private method now.
+@Suppress("ConflictingExtensionProperty")
 val Toolbar.titleTextView: TextView?
     get() = FIELD_TITLE_TEXT_VIEW.get(this) as TextView?
 
@@ -62,6 +63,8 @@ var Toolbar.titleTextColor: Int
         setTitleTextColor(value)
     }
 
+// There is a package-private method now.
+@Suppress("ConflictingExtensionProperty")
 val Toolbar.subtitleTextView: TextView?
     get() = FIELD_SUBTITLE_TEXT_VIEW.get(this) as TextView?
 

@@ -48,7 +48,7 @@ fun Timestamp.toInstantCompat(): Instant {
 }
 
 fun LocalDateTime.toSqlTimestamp(): Timestamp {
-    val cal = CALENDAR.get()
+    val cal = CALENDAR.get()!!
     cal.clear()
     cal.set(year, monthValue - 1, dayOfMonth, hour, minute, second)
     val timestamp = Timestamp(cal.time.time)
@@ -57,7 +57,7 @@ fun LocalDateTime.toSqlTimestamp(): Timestamp {
 }
 
 fun LocalTime.toSqlTime(): Time {
-    val cal = CALENDAR.get()
+    val cal = CALENDAR.get()!!
     cal.clear()
     cal.set(1970, 0, 1, hour, minute, second)
     val time = Time(cal.time.time)
@@ -65,7 +65,7 @@ fun LocalTime.toSqlTime(): Time {
 }
 
 fun LocalDate.toSqlDate(): Date {
-    val cal = CALENDAR.get()
+    val cal = CALENDAR.get()!!
     cal.clear()
     cal.set(year, monthValue - 1, dayOfMonth)
     val date = Date(cal.time.time)

@@ -26,14 +26,14 @@ fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback
 }
 
 fun Context.obtainTypedArray(@StyleRes style: Int, @AttrRes attr: Int): TypedArray {
-    val tempArray = TEMP_ARRAY.get()
+    val tempArray = TEMP_ARRAY.get()!!
     tempArray[0] = attr
     return obtainStyledAttributes(style, tempArray)
 }
 
 @SuppressLint("RestrictedApi")
 fun Context.obtainTintTypedArray(@StyleRes style: Int, @AttrRes attr: Int): TintTypedArray {
-    val tempArray = TEMP_ARRAY.get()
+    val tempArray = TEMP_ARRAY.get()!!
     tempArray[0] = attr
     return TintTypedArray.obtainStyledAttributes(this, style, tempArray)
 }

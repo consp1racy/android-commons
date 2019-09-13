@@ -2,14 +2,12 @@ package net.xpece.android.graphics.drawable
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
-import android.graphics.Rect
-import android.graphics.Region
+import android.graphics.*
 import android.graphics.drawable.Drawable
+import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.graphics.drawable.TintAwareDrawable
 import net.xpece.android.content.getDrawableCompat
 
 /**
@@ -147,8 +145,17 @@ open class LazyDrawable(context: Context, @DrawableRes resId: Int) : Drawable(),
         DrawableCompat.setTintList(wrappedDrawable, tint)
     }
 
-    override fun setTintMode(tintMode: PorterDuff.Mode) {
-        DrawableCompat.setTintMode(wrappedDrawable, tintMode)
+    override fun setTintMode(tintMode: PorterDuff.Mode?) {
+        if (tintMode != null) {
+            DrawableCompat.setTintMode(wrappedDrawable, tintMode)
+        } else {
+            // AndroidX doesn't support null argument. Re-implement here.
+            if (Build.VERSION.SDK_INT >= 21) {
+                wrappedDrawable.setTintMode(tintMode)
+            } else if (wrappedDrawable is TintAwareDrawable) {
+                (wrappedDrawable as TintAwareDrawable).setTintMode(tintMode)
+            }
+        }
     }
 
     override fun setHotspot(x: Float, y: Float) {

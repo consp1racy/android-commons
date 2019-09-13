@@ -13,7 +13,7 @@ private val TL_POINT = object : ThreadLocal<Point>() {
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 private val point: Point
-    get() = TL_POINT.get()
+    get() = TL_POINT.get()!!
 
 val Context.windowWidth: Int
     get() = point.apply(windowManager.defaultDisplay::getSize).x

@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
@@ -36,14 +36,14 @@ dependencies {
     api project(':commons-dimen')
     api project(':commons-base')
 
-    api 'androidx.core:core-ktx:1.0.0'
+    api 'androidx.core:core-ktx:1.1.0'
     api 'com.google.android.material:material:1.0.0'
 
-    compileOnly 'androidx.annotation:annotation:1.0.0'
+    compileOnly 'androidx.annotation:annotation:1.1.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
 
     compileOnly 'androidx.palette:palette:1.0.0'
-    compileOnly 'androidx.exifinterface:exifinterface:1.0.0' // Oldest available is 25.1.0.
+    compileOnly 'androidx.exifinterface:exifinterface:1.0.0'
 
     compileOnly "com.google.android.gms:play-services-gcm:9.0.0"
     compileOnly "com.google.android.gms:play-services-maps:9.0.0"
@@ -72,6 +72,7 @@ dependencies {
 
     compileOnly 'org.reactivestreams:reactive-streams:1.0.0'
     compileOnly 'io.reactivex.rxjava2:rxjava:2.0.0'
+
     compileOnly 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
