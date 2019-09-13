@@ -10,9 +10,6 @@ import android.widget.NumberPicker;
 
 import java.lang.reflect.Field;
 
-/**
- * Created by Eugen on 06.05.2016.
- */
 public final class XpNumberPicker {
     private static final Field FIELD_SELECTION_DIVIDER;
 

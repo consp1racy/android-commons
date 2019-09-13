@@ -5,9 +5,6 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import java.lang.reflect.Field;
 
-/**
- * Created by Eugen on 03.01.2017.
- */
 
 class CardButtonReflection {
 

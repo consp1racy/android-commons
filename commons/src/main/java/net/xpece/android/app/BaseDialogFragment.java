@@ -5,9 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-/**
- * @author Eugen on 14. 1. 2016.
- */
 public abstract class BaseDialogFragment extends AppCompatDialogFragment {
 
     protected static final String KEY_MESSAGE = "net.xpece.android.app.BaseDialogFragment.MESSAGE";

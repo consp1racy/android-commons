@@ -10,9 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 
-/**
- * @author Eugen on 31. 12. 2015.
- */
 public class MessageDialogFragment extends BaseDialogFragment
     implements DialogInterface.OnClickListener {
     public static final String TAG = MessageDialogFragment.class.getSimpleName();

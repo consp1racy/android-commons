@@ -11,9 +11,6 @@ import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.image.ImageInfo;
 
-/**
- * @author Eugen on 15.03.2017.
- */
 
 public class WrapContentNonRefreshingDraweeView extends NonRefreshingDraweeView {
 

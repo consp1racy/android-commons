@@ -4,9 +4,6 @@ import androidx.annotation.NonNull;
 
 import net.xpece.android.util.ComparableContent;
 
-/**
- * Created by Eugen on 23.10.2016.
- */
 
 public class SomeEntity implements Comparable<SomeEntity>, ComparableContent<SomeEntity> {
     public int id = 0;

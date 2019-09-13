@@ -10,9 +10,6 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.google.android.material.widget.IconifiedPagerAdapter;
 
-/**
- * @author Eugen on 25.02.2017.
- */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class IconifiedTabLayout extends TabLayout {
     private static final IconifiedPagerAdapter NOOP_ICONIFIED_PAGER_ADAPTER = new IconifiedPagerAdapter() {

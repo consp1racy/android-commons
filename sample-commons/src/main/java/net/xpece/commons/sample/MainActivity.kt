@@ -39,9 +39,6 @@ import net.xpece.commons.android.sample.R
 import org.threeten.bp.LocalDateTime
 import java.sql.Timestamp
 
-/**
- * Created by Eugen on 25. 4. 2015.
- */
 class MainActivity : AppCompatActivity(), SnackbarActivity {
     override val snackbarParent: View
         get() = findViewById(android.R.id.content)

@@ -4,9 +4,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import androidx.annotation.Px;
 
-/**
- * Created by Eugen on 28.12.2016.
- */
 
 public class EmptyDrawable extends ColorDrawable {
     private final int widthPx;

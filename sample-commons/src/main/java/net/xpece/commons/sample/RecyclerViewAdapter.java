@@ -13,9 +13,6 @@ import net.xpece.android.widget.RecyclerViewAdapterEx;
 
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by Eugen on 23.10.2016.
- */
 
 public class RecyclerViewAdapter extends RecyclerViewAdapterEx<RecyclerViewAdapter.SomeViewHolder> {
 

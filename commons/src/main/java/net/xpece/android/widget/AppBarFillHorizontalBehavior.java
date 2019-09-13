@@ -9,9 +9,6 @@ import android.view.View;
 
 import java.util.List;
 
-/**
- * @author Eugen on 11.09.2016.
- */
 
 public class AppBarFillHorizontalBehavior extends FillHorizontalBehavior {
     public AppBarFillHorizontalBehavior() {

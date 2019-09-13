@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
-/**
- * @author Eugen on 15.03.2017.
- */
 
 public class FixedItemSizeLinearLayoutManager extends LinearLayoutManager {
 

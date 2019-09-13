@@ -8,9 +8,6 @@ import androidx.annotation.Nullable;
 import net.xpece.android.R;
 
 
-/**
- * @author Eugen on 05.08.2016.
- */
 
 public class XpAppCompatButton2 extends XpAppCompatButton {
     public XpAppCompatButton2(final Context context) {

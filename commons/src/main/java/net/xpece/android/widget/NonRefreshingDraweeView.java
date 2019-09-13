@@ -10,9 +10,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import javax.annotation.Nullable;
 
-/**
- * @author Eugen on 19.12.2016.
- */
 
 public class NonRefreshingDraweeView extends SimpleDraweeView {
 

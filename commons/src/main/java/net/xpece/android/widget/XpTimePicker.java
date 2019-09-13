@@ -8,9 +8,6 @@ import android.widget.TimePicker;
 
 import java.lang.reflect.Field;
 
-/**
- * Created by Eugen on 06.05.2016.
- */
 @SuppressLint("PrivateApi")
 public final class XpTimePicker {
     private static final Class<?> CLASS_SPINNER_DELEGATE;

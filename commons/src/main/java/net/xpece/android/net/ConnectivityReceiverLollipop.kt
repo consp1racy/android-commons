@@ -9,9 +9,6 @@ import android.os.Handler
 import androidx.annotation.RequiresApi
 import net.xpece.android.app.connectivityManager
 
-/**
- * @author Eugen on 04.01.2017.
- */
 
 @RequiresApi(21)
 @TargetApi(21)

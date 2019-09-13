@@ -10,9 +10,6 @@ import androidx.core.view.WindowInsetsCompat
 import android.util.AttributeSet
 import android.view.View
 
-/**
- * @author Eugen on 10.09.2016.
- */
 
 class StatusBarScrimBehavior : androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior<View> {
     constructor() : super()

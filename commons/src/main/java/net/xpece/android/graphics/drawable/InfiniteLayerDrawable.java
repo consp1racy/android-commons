@@ -3,9 +3,6 @@ package net.xpece.android.graphics.drawable;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 
-/**
- * @author Eugen on 28.04.2017.
- */
 public class InfiniteLayerDrawable extends LayerDrawableCompat {
     /**
      * Creates a new layer drawable with the list of specified layers.

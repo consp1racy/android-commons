@@ -2,9 +2,6 @@ package net.xpece.android.content.res
 
 import android.content.Context
 
-/**
- * Created by pechanecjr on 4. 1. 2015.
- */
 data class Dimen internal constructor(val value: Float) : Comparable<Dimen> {
     override fun compareTo(other: Dimen): Int = this.value.compareTo(other.value)
 

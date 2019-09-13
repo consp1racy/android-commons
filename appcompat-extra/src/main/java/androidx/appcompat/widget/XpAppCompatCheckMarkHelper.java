@@ -19,18 +19,16 @@ package androidx.appcompat.widget;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
+import android.widget.CheckedTextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
-import android.util.AttributeSet;
-import android.widget.CheckedTextView;
 
 import net.xpece.android.appcompatextra.R;
 import net.xpece.android.widget.XpCheckedTextViewCompat;
 
-/**
- * @hide
- */
 @RestrictTo(RestrictTo.Scope.GROUP_ID)
 @SuppressWarnings("RestrictedApi")
 public final class XpAppCompatCheckMarkHelper {

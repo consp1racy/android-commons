@@ -8,9 +8,6 @@ import android.os.Looper
 import android.util.LruCache
 import android.webkit.WebView
 
-/**
- * Created by Eugen on 16.03.2017.
- */
 object WebViewCache : ComponentCallbacks2 {
     override fun onLowMemory() {
         // No-op.

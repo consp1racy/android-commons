@@ -6,9 +6,6 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.appcompat.graphics.drawable.DrawableWrapper;
 
-/**
- * @author Eugen on 03.04.2017.
- */
 
 @SuppressWarnings("RestrictedApi")
 class AltInsetDrawable extends DrawableWrapper {

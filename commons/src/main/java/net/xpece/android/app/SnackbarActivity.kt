@@ -8,9 +8,6 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.appcompat.content.res.AppCompatResources
 import android.view.View
 
-/**
- * Created by Eugen on 17.10.2016.
- */
 interface SnackbarActivity {
     val snackbarParent : View
 

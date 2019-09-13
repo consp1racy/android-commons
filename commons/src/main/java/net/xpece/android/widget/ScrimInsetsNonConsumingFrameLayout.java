@@ -14,9 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import net.xpece.android.R;
 
-/**
- * @author Eugen on 19.12.2016.
- */
 
 public class ScrimInsetsNonConsumingFrameLayout extends IrresponsibleFrameLayout {
 

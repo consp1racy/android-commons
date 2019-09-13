@@ -1,14 +1,12 @@
 package androidx.appcompat.widget;
 
-import androidx.annotation.RestrictTo;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import androidx.annotation.RestrictTo;
+
 import net.xpece.android.appcompatextra.R;
 
-/**
- * @hide
- */
 @SuppressWarnings("RestrictedApi")
 @RestrictTo(RestrictTo.Scope.GROUP_ID)
 public final class XpAppCompatImageHelper {

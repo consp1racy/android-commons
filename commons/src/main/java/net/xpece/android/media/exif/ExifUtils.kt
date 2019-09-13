@@ -5,9 +5,6 @@ import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import java.io.BufferedInputStream
 
-/**
- * Created by Eugen on 19.05.2016.
- */
 
 object ExifUtils {
 

@@ -2,9 +2,6 @@ package net.xpece.android.transition;
 
 import android.animation.TimeInterpolator;
 
-/**
- * @author Eugen on 28.02.2017.
- */
 
 public class BooleanVisibilityInterpolator implements TimeInterpolator {
 

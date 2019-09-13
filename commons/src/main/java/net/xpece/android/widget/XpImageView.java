@@ -7,9 +7,6 @@ import android.widget.ImageView;
 
 import java.lang.reflect.Field;
 
-/**
- * @author Eugen on 1. 9. 2015.
- */
 @TargetApi(16)
 public final class XpImageView {
 

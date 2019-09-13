@@ -8,9 +8,6 @@ import android.view.View
 import net.xpece.android.os.readIntegerMap
 import net.xpece.android.os.writeMap
 
-/**
- * Created by Eugen on 27.02.2017.
- */
 @RequiresApi(17)
 class ViewIdGenerator {
     companion object {

@@ -15,9 +15,6 @@ import android.widget.Toast;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * @author Eugen on 24.01.2018.
- */
 
 public class ToastCompat {
 

@@ -9,9 +9,6 @@ import androidx.core.database.getIntOrNull as getIntOrNullImpl
 import androidx.core.database.getLongOrNull as getLongOrNullImpl
 import androidx.core.database.getStringOrNull as getStringOrNullImpl
 
-/**
- * @author Eugen on 24. 6. 2016.
- */
 private val cursorMap: WeakHashMap<Cursor, MutableMap<String, Int>> = WeakHashMap()
 
 fun Cursor.getColumnIndexCached(columnName: String): Int {

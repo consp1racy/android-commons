@@ -11,9 +11,6 @@ import android.util.AttributeSet;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * Created by pechanecjr on 14. 11. 2014.
- */
 public class AspectLockedImageView extends AppCompatImageView {
     private static final String TAG = AspectLockedImageView.class.getSimpleName();
 

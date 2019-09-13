@@ -15,8 +15,6 @@ import androidx.annotation.RestrictTo;
  * centre of the rectangle.
  * <p>
  * Insets are immutable so may be treated as values.
- *
- * @hide
  */
 @RequiresApi(16)
 @RestrictTo(RestrictTo.Scope.LIBRARY)

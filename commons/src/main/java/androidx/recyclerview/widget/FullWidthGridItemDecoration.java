@@ -7,9 +7,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 
-/**
- * @author Eugen on 25.04.2017.
- */
 
 public abstract class FullWidthGridItemDecoration extends RecyclerView.ItemDecoration {
     private static final String TAG = FullWidthGridItemDecoration.class.getSimpleName();

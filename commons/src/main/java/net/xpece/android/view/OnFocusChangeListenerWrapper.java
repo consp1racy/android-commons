@@ -5,9 +5,6 @@ import android.view.View;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Eugen on 17. 3. 2015.
- */
 public class OnFocusChangeListenerWrapper implements View.OnFocusChangeListener {
 
     private final Set<View.OnFocusChangeListener> mListeners = new HashSet<>();

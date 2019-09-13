@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Eugen on 17.03.2016.
- */
 public class SortedListEx<T> extends SortedList<T> {
 
     private final Class<T> mTClass;

@@ -4,9 +4,6 @@ import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
 import org.threeten.bp.*
 
-/**
- * @author Eugen on 27.08.2016.
- */
 object ThreeTenBpAdapter {
     @ToJson fun toJson(dt: Instant): String {
         return dt.toString()

@@ -10,9 +10,6 @@ import android.widget.Button
 import android.widget.TextView
 import net.xpece.android.R
 
-/**
- * Created by Eugen on 22.10.2016.
- */
 abstract class RecyclerViewAdapterEx<T : androidx.recyclerview.widget.RecyclerView.ViewHolder> : HeaderFooterRecyclerViewAdapter<T>() {
     companion object {
         internal const val EX_VIEW_TYPE_ERROR = 1

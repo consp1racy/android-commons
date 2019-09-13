@@ -237,8 +237,6 @@ public class AppCompatChronometer extends AppCompatTextView {
 
     /**
      * The same as calling {@link #start} or {@link #stop}.
-     *
-     * @hide pending API council approval
      */
     public void setStarted(boolean started) {
         mStarted = started;

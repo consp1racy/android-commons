@@ -5,9 +5,6 @@ import android.graphics.RectF
 import android.os.Parcel
 import android.os.Parcelable
 
-/**
- * Created by pechanecjr on 12. 9. 2014.
- */
 @Deprecated("Prefer immutable classes.")
 data class RectD(
         var left: Double, var top: Double, var right: Double,
@@ -302,7 +299,7 @@ data class RectD(
     /**
      * Insets the rectangle on all sides specified by the dimensions of the `insets`
      * rectangle.
-     * @hide
+     *
      * @param insets The rectangle specifying the insets on all side.
      */
     fun inset(insets: Rect) {
@@ -315,7 +312,7 @@ data class RectD(
     /**
      * Insets the rectangle on all sides specified by the dimensions of the `insets`
      * rectangle.
-     * @hide
+     *
      * @param insets The rectangle specifying the insets on all side.
      */
     fun inset(insets: RectF) {
@@ -328,7 +325,7 @@ data class RectD(
     /**
      * Insets the rectangle on all sides specified by the dimensions of the `insets`
      * rectangle.
-     * @hide
+     *
      * @param insets The rectangle specifying the insets on all side.
      */
     fun inset(insets: RectD) {

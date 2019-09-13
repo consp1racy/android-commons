@@ -7,9 +7,6 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.SupportErrorDialogFragment
 
-/**
- * Created by Eugen on 23.12.2016.
- */
 object XpGoogleApiAvailability {
     @JvmOverloads
     fun showErrorDialogFragment(fragment: androidx.fragment.app.Fragment, errorCode: Int, requestCode: Int, cancelListener: DialogInterface.OnCancelListener? = null): Boolean {

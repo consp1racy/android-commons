@@ -24,9 +24,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 
-/**
- * @author Eugen on 11. 2. 2016.
- */
 @SuppressLint("PrivateApi")
 public final class XpEdgeEffect {
     private XpEdgeEffect() {

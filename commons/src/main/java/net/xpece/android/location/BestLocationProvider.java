@@ -17,7 +17,6 @@ import java.util.Date;
 
 /**
  * @author https://github.com/salendron/BestLocationProvider-Android
- * @author Eugen Pechanec
  */
 @SuppressLint("MissingPermission")
 public class BestLocationProvider {

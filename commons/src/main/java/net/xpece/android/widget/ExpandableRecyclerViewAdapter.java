@@ -8,9 +8,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by Eugen on 26.08.2015.
- */
 public abstract class ExpandableRecyclerViewAdapter<G extends Expandable<C>, C>
     extends RecyclerViewAdapterEx {
 

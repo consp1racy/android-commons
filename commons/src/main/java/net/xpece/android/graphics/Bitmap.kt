@@ -10,9 +10,6 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import android.media.ExifInterface
 
-/**
- * @author Eugen on 28. 5. 2016.
- */
 
 /**
  * @param contrast 0..10 1 is default

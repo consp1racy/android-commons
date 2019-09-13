@@ -131,7 +131,7 @@ public class SingleLayout extends ViewGroup implements SingleLayoutImpl {
     }
 
     /**
-     * @hide Internal use only; called to apply window insets when configured
+     * Internal use only; called to apply window insets when configured
      * with fitsSystemWindows="true"
      */
     @Override

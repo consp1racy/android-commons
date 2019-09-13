@@ -6,9 +6,6 @@ import android.view.View;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-/**
- * @author Eugen on 31. 10. 2015.
- */
 class XpContextMenuViewCompat {
 
     private static final Method METHOD_GET_CONTEXT_MENU_INFO;

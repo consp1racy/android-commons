@@ -8,9 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * Created by Eugen on 19.04.2017.
- */
 
 public class PrefetchingLinearLayoutManager extends LinearLayoutManager {
     public PrefetchingLinearLayoutManager(Context context) {

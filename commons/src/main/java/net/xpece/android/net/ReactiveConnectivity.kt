@@ -7,9 +7,6 @@ import io.reactivex.Flowable
 import io.reactivex.annotations.SchedulerSupport
 import io.reactivex.processors.BehaviorProcessor
 
-/**
- * @author Eugen on 04.01.2017.
- */
 
 @Deprecated("")
 object ReactiveConnectivity {

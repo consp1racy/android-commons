@@ -7,9 +7,6 @@ import java.sql.Timestamp
 import java.util.*
 import kotlin.test.assertEquals
 
-/**
- * Created by Eugen on 16.01.2017.
- */
 class DateTimeUtilsUTCTest {
     private val NEW_YORK = TimeZone.getTimeZone("-05:00")
     private val UTC = TimeZone.getTimeZone("UTC")

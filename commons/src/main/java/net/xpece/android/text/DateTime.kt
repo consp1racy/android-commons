@@ -6,9 +6,6 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * @author Eugen on 26.07.2016.
- */
 
 val FORMATTER_DATE_MACHINE = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 val FORMATTER_ISO8601 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US)

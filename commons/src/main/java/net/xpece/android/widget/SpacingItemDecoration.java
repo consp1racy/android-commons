@@ -7,9 +7,6 @@ import androidx.annotation.ColorInt;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
-/**
- * Created by pechanecjr on 21. 12. 2014.
- */
 public class SpacingItemDecoration extends RecyclerView.ItemDecoration {
     private final Rect mPadding = new Rect();
 

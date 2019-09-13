@@ -3,9 +3,6 @@ package net.xpece.android.text;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-/**
- * Created by Eugen on 26.11.2016.
- */
 
 public class EmptyTextWatcher implements TextWatcher {
     @Override

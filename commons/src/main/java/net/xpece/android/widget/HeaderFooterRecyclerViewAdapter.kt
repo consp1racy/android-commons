@@ -3,9 +3,6 @@ package net.xpece.android.widget
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 
-/**
- * Created by Eugen on 22.10.2016.
- */
 
 abstract class HeaderFooterRecyclerViewAdapter<T : androidx.recyclerview.widget.RecyclerView.ViewHolder> : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
     companion object {

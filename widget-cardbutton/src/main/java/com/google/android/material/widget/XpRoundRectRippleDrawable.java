@@ -12,8 +12,6 @@ import androidx.annotation.RequiresApi;
 
 /**
  * Only used on Lollipop. Ripple over round rect mask has weird outline otherwise.
- *
- * @author Eugen on 06.10.2017.
  */
 @RequiresApi(21)
 class XpRoundRectRippleDrawable extends RippleDrawable {

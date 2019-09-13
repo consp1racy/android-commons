@@ -5,9 +5,6 @@ import android.graphics.drawable.StateListDrawable;
 
 import java.lang.reflect.Method;
 
-/**
- * Created by Eugen on 8. 3. 2015.
- */
 public final class XpStateListDrawable {
 
     private static final Method METHOD_GET_STATE_COUNT;

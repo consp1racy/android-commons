@@ -11,9 +11,6 @@ import java.text.Normalizer
 import java.util.*
 import java.util.regex.Pattern
 
-/**
- * Created by Eugen on 30.07.2016.
- */
 
 fun String?.nullIfEmpty(): String? = if (isNullOrEmpty()) null else this
 

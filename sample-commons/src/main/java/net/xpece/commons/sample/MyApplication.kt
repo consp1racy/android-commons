@@ -9,9 +9,6 @@ import net.xpece.android.app.wifiManager
 import net.xpece.android.util.td
 import timber.log.Timber
 
-/**
- * @author Eugen on 25.09.2017.
- */
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()

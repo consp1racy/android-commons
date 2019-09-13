@@ -24,9 +24,6 @@ import org.threeten.bp.ZoneId;
 
 import static net.xpece.android.content.XpResources.resolveColorStateList;
 
-/**
- * Created by Eugen on 06.05.2016.
- */
 public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment implements
     DialogInterface.OnClickListener {
     public static final String TAG = LocalDateBpPickerDialogFragment.class.getSimpleName();

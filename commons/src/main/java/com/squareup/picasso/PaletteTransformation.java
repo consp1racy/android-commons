@@ -12,8 +12,6 @@ import java.util.WeakHashMap;
 /**
  * Put this transformation always last, otherwise the bitmap lookup will not work.
  *
- * @author Eugen
- *
  * @author http://jakewharton.com/coercing-picasso-to-play-with-palette/
  */
 public class PaletteTransformation implements Transformation {

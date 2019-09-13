@@ -16,9 +16,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.util.Arrays;
 
-/**
- * Created by Eugen on 03.01.2017.
- */
 
 class CardButtonDrawableFactory {
     private static final float[] TEMP_CORNER_RADII_OUT = new float[8];

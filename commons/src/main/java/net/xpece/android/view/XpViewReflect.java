@@ -5,11 +5,6 @@ import android.view.View;
 
 import java.lang.reflect.Method;
 
-/**
- * @author Eugen on 18.08.2016.
- * @hide
- */
-
 final class XpViewReflect {
     private static final Method METHOD_FIT_SYSTEM_WINDOWS;
 

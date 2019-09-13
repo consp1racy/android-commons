@@ -12,9 +12,6 @@ import android.widget.FrameLayout;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * Created by pechanecjr on 14. 11. 2014.
- */
 public class AspectLockedFrameLayout extends FrameLayout {
     private static final String TAG = AspectLockedFrameLayout.class.getSimpleName();
 

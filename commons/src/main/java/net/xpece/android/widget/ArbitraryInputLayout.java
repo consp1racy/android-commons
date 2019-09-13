@@ -24,9 +24,6 @@ import net.xpece.android.R;
 
 import kotlin.collections.ArraysKt;
 
-/**
- * Created by Eugen on 20.10.2016.
- */
 
 @SuppressWarnings("RestrictedApi")
 public class ArbitraryInputLayout extends LinearLayoutCompat {

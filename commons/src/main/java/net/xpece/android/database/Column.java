@@ -2,9 +2,6 @@ package net.xpece.android.database;
 
 import android.database.Cursor;
 
-/**
- * Created by pechanecjr on 29. 11. 2014.
- */
 public class Column {
     final int mIndex;
     final Cursor mCursor;

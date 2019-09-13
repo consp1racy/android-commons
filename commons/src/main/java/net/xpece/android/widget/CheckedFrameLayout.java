@@ -8,9 +8,6 @@ import android.widget.FrameLayout;
 
 import net.xpece.android.R;
 
-/**
- * @author Eugen on 28.09.2016.
- */
 
 public class CheckedFrameLayout extends FrameLayout implements Checkable {
 

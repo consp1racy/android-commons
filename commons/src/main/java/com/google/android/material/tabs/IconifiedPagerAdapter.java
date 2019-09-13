@@ -4,9 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.Nullable;
 
-/**
- * @author Eugen on 25.02.2017.
- */
 
 public interface IconifiedPagerAdapter {
     @Nullable

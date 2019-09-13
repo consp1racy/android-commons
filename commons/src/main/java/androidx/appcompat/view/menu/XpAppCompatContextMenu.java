@@ -12,9 +12,6 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.WeakHashMap;
 
-/**
- * @author Eugen on 31. 10. 2015.
- */
 @SuppressWarnings("RestrictedApi")
 public class XpAppCompatContextMenu {
     private static final WeakHashMap<Window, XpAppCompatContextMenu> MAP = new WeakHashMap<>();

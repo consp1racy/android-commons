@@ -9,9 +9,6 @@ import android.net.NetworkInfo
 import android.os.Build
 import androidx.annotation.IntDef
 
-/**
- * @author Eugen on 21.08.2016.
- */
 
 class ConnectivityReceiver private constructor(context: Context) : ConnectivityReceiverDelegate {
     companion object {

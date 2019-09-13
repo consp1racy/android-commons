@@ -7,9 +7,6 @@ import android.content.Intent
 import androidx.core.app.NavUtils
 import androidx.core.app.TaskStackBuilder
 
-/**
- * Created by Eugen on 18.10.2016.
- */
 @JvmOverloads
 @Deprecated("Needs revision.")
 fun Activity.navigateUpEx(intent: Intent = NavUtils.getParentActivityIntent(this)!!): Boolean {

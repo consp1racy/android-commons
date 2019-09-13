@@ -4,9 +4,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import androidx.collection.LruCache;
 
-/**
- * Created by Eugen on 14.11.2015.
- */
 public class ColorFilterLruCache extends LruCache<Integer, PorterDuffColorFilter> {
 
     public ColorFilterLruCache(int maxSize) {

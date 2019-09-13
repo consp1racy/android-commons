@@ -3,9 +3,6 @@ package com.birbit.android.jobqueue.scheduling
 import android.content.Context
 import androidx.annotation.RequiresApi
 
-/**
- * @author Eugen on 23.08.2016.
- */
 object SchedulerFactory {
     @JvmStatic
     fun createSchedulerForGcmJobSchedulerService(

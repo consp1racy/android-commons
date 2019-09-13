@@ -5,9 +5,6 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-/**
- * @author Eugen on 04.04.2017.
- */
 
 @RequiresApi(21)
 @SuppressWarnings("RestrictedApi")

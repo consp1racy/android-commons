@@ -24,9 +24,6 @@ import org.threeten.bp.LocalTime;
 
 import static net.xpece.android.content.XpResources.resolveColorStateList;
 
-/**
- * Created by Eugen on 06.05.2016.
- */
 public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment implements
     DialogInterface.OnClickListener {
     public static final String TAG = LocalTimeBpPickerDialogFragment.class.getSimpleName();

@@ -32,9 +32,6 @@ import androidx.core.view.WindowInsetsCompat;
 import net.xpece.android.R;
 import net.xpece.android.graphics.XpRect;
 
-/**
- * @hide
- */
 public class ScrimInsetsLinearLayout extends LinearLayout {
 
     Drawable mInsetForeground;

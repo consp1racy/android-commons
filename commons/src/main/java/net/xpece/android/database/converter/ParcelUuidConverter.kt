@@ -5,9 +5,6 @@ import io.requery.Converter
 import java.nio.ByteBuffer
 import java.util.*
 
-/**
- * @author Eugen on 17.10.2016.
- */
 object ParcelUuidConverter : Converter<ParcelUuid, ByteArray> {
     override fun getMappedType(): Class<ParcelUuid> {
         return ParcelUuid::class.java

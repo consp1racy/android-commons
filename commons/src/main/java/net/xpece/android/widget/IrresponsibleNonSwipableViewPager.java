@@ -8,9 +8,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * @author Eugen on 25.02.2017.
- */
 
 public class IrresponsibleNonSwipableViewPager extends ViewPager {
     public IrresponsibleNonSwipableViewPager(final Context context) {

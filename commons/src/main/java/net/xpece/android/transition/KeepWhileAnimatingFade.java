@@ -2,9 +2,6 @@ package net.xpece.android.transition;
 
 import androidx.transition.Fade;
 
-/**
- * @author Eugen on 28.02.2017.
- */
 
 public class KeepWhileAnimatingFade {
     public static Fade create(final int fadingMode) {

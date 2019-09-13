@@ -5,9 +5,6 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import java.util.*
 
-/**
- * @author Eugen on 28.07.2016.
- */
 
 interface DrawableResolver {
     companion object Configuration {

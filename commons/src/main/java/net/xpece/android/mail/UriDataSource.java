@@ -11,9 +11,6 @@ import java.io.OutputStream;
 
 import javax.activation.DataSource;
 
-/**
- * @author Eugen on 08.08.2016.
- */
 
 public class UriDataSource implements DataSource {
     private static final String[] PROJECTION_NAME = {OpenableColumns.DISPLAY_NAME};

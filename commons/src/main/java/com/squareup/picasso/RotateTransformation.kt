@@ -3,9 +3,6 @@ package com.squareup.picasso
 import android.graphics.Bitmap
 import net.xpece.android.graphics.rotate
 
-/**
- * @author Eugen on 13. 5. 2016.
- */
 class RotateTransformation(private val portrait: Boolean) : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {

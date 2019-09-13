@@ -84,8 +84,6 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
     /**
      * This should be accessed via
      * {@link androidx.core.view.ViewCompat#setBackgroundTintList(View, ColorStateList)}
-     *
-     * @hide
      */
     @Override
     public void setSupportBackgroundTintList(@Nullable ColorStateList tint) {
@@ -97,8 +95,6 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
     /**
      * This should be accessed via
      * {@link androidx.core.view.ViewCompat#getBackgroundTintList(View)}
-     *
-     * @hide
      */
     @Override
     @Nullable
@@ -110,8 +106,6 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
     /**
      * This should be accessed via
      * {@link androidx.core.view.ViewCompat#setBackgroundTintMode(View, PorterDuff.Mode)}
-     *
-     * @hide
      */
     @Override
     public void setSupportBackgroundTintMode(@Nullable PorterDuff.Mode tintMode) {
@@ -123,8 +117,6 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
     /**
      * This should be accessed via
      * {@link androidx.core.view.ViewCompat#getBackgroundTintMode(View)}
-     *
-     * @hide
      */
     @Override
     @Nullable

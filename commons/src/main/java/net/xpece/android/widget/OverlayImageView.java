@@ -14,9 +14,6 @@ import android.view.Gravity;
 
 import net.xpece.android.R;
 
-/**
- * Created by Eugen on 02.09.2015.
- */
 public class OverlayImageView extends AspectLockedImageView {
 
     private Drawable mOverlay;

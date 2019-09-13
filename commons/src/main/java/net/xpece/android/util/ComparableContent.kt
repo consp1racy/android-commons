@@ -1,8 +1,5 @@
 package net.xpece.android.util
 
-/**
- * Created by Eugen on 14.05.2016.
- */
 interface ComparableContent<in T> {
     fun isSame(other: T): Boolean
     fun isContentSame(other: T): Boolean {

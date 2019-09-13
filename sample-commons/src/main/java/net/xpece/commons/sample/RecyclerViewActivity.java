@@ -17,9 +17,6 @@ import net.xpece.commons.sample.randname.RandomNameGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Eugen on 23.10.2016.
- */
 
 public class RecyclerViewActivity extends AppCompatActivity implements View.OnClickListener {
 

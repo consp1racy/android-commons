@@ -24,9 +24,6 @@ import android.widget.TextView;
 import net.xpece.android.R;
 import net.xpece.android.graphics.drawable.XpDrawable;
 
-/**
- * @author Eugen
- */
 public class ExpandableTextView extends LinearLayout implements View.OnClickListener {
 
     private static final String TAG = ExpandableTextView.class.getSimpleName();

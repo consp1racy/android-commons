@@ -9,9 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
-/**
- * Created by Eugen on 29.10.2016.
- */
 
 @Suppress("DEPRECATION")
 inline fun androidx.fragment.app.Fragment.invalidateOptionsMenu() = activity?.supportInvalidateOptionsMenu()

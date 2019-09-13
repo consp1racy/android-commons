@@ -5,9 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
-/**
- * Created by Eugen on 24. 3. 2015.
- */
 @Deprecated
 public class ExpandableListAdapterWrapper extends BaseExpandableListAdapter {
 

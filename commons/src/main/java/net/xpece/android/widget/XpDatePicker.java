@@ -9,9 +9,6 @@ import android.widget.NumberPicker;
 
 import java.lang.reflect.Field;
 
-/**
- * Created by Eugen on 06.05.2016.
- */
 public final class XpDatePicker {
     private static final Class<?> CLASS_SPINNER_DELEGATE;
     private static final Field FIELD_DELEGATE;

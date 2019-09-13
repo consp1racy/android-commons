@@ -5,9 +5,6 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
-/**
- * Created by Eugen on 27.04.2017.
- */
 
 public class EndInsetItemDecoration extends RecyclerView.ItemDecoration {
     private final int mInset;

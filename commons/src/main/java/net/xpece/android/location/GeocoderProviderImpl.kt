@@ -4,9 +4,6 @@ import android.content.Context
 import android.location.Geocoder
 import java.util.*
 
-/**
- * @author Eugen on 20.12.2016.
- */
 class GeocoderProviderImpl : GeocoderProvider {
     companion object {
         @JvmStatic

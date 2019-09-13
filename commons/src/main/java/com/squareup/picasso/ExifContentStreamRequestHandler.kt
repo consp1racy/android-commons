@@ -11,8 +11,6 @@ import java.io.InputStream
  * Requires com.android.support:exifinterface:25.1.0+.
  *
  * *Warning!* Android PNG reader doesn't support reset stream. Open a new stream before reading the image.
- *
- * @author Eugen on 17. 5. 2016.
  */
 open class ExifContentStreamRequestHandler(val context: Context) : RequestHandler() {
 

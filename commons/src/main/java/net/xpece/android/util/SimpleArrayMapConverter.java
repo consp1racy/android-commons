@@ -8,9 +8,6 @@ import org.parceler.Parcels;
 
 import java.lang.ClassLoader;import java.lang.Override;import java.lang.String;import java.util.ArrayList;
 
-/**
- * Created by Eugen on 30.10.2015.
- */
 public class SimpleArrayMapConverter<K, V> implements ParcelConverter<SimpleArrayMap<K, V>> {
 
     public static <K, V> void toBundle(Bundle bundle, String tag, SimpleArrayMap<K, V> map) {

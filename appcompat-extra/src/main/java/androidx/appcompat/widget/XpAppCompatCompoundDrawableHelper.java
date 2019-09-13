@@ -33,9 +33,6 @@ import android.widget.TextView;
 import net.xpece.android.appcompatextra.R;
 import net.xpece.android.widget.XpTextViewCompat;
 
-/**
- * @hide
- */
 @RestrictTo(RestrictTo.Scope.GROUP_ID)
 @SuppressWarnings("RestrictedApi")
 public final class XpAppCompatCompoundDrawableHelper {

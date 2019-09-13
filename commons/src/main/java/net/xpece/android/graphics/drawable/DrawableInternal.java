@@ -4,9 +4,6 @@ import android.content.res.Resources;
 import androidx.annotation.Nullable;
 import android.util.DisplayMetrics;
 
-/**
- * Created by Eugen on 26.11.2016.
- */
 
 class DrawableInternal {
 

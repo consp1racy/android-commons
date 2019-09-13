@@ -28,8 +28,6 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
  * Utility methods to check Theme compatibility with components.
  *
  * Utils class for custom views.
- *
- * @hide
  */
 @RestrictTo(LIBRARY)
 final class CardButtonUtils {

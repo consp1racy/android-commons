@@ -4,9 +4,6 @@ import android.content.Context;
 import androidx.core.view.WindowInsetsCompat;
 import android.util.AttributeSet;
 
-/**
- * @author Eugen on 19.12.2016.
- */
 
 public class ScrimInsetsSelfPaddingNonConsumingFrameLayout
     extends ScrimInsetsNonConsumingFrameLayout {

@@ -3,9 +3,6 @@ package net.xpece.android.widget;
 import androidx.appcompat.widget.SearchView;
 import android.view.View;
 
-/**
- * Created by pechanecjr on 21. 12. 2014.
- */
 public class SearchViewListenerAdapterCompat implements SearchView.OnCloseListener,
     SearchView.OnQueryTextListener, SearchView.OnSuggestionListener, View.OnClickListener {
   @Override

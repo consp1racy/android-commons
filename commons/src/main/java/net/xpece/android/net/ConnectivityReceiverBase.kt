@@ -6,9 +6,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 
-/**
- * @author Eugen on 21.08.2016.
- */
 
 open internal class ConnectivityReceiverBase(val delegate: ConnectivityReceiverDelegate) : ConnectivityReceiverImpl {
     companion object {

@@ -8,9 +8,6 @@ import android.content.IntentFilter
 import android.os.PowerManager
 import androidx.annotation.RequiresApi
 
-/**
- * @author Eugen on 04.01.2017.
- */
 
 @RequiresApi(23)
 @TargetApi(23)

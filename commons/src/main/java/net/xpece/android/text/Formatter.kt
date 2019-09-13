@@ -3,9 +3,6 @@ package net.xpece.android.text
 import java.text.NumberFormat
 import java.util.*
 
-/**
- * @author Eugen on 10.09.2016.
- */
 
 object Formatter {
     val CS_CZ = Locale("cs", "CZ")

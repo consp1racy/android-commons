@@ -4,9 +4,6 @@ import android.content.SharedPreferences
 import net.xpece.android.content.update
 import kotlin.reflect.KProperty
 
-/**
- * @author Eugen on 22.01.2017.
- */
 abstract class PrintablePreferenceDelegate<T>(val prefs: SharedPreferences, val key: String, val default: T? = null) {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T? {
         val string = prefs.getString(key, default.toString())

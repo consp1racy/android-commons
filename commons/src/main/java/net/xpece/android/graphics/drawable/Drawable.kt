@@ -14,9 +14,6 @@ import android.util.DisplayMetrics
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.graphics.drawable.toBitmap as toBitmapImpl
 
-/**
- * @author Eugen
- */
 private const val MAX_LEVEL = 10000
 private const val MIN_LEVEL = 0
 

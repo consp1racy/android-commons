@@ -1,8 +1,5 @@
 package net.xpece.android.net
 
-/**
- * @author Eugen on 23.08.2016.
- */
 
 open class HttpServiceException(val method: String, val url: String, val httpCode: Int, val httpMessage: String) : RuntimeException() {
     val isSuccess: Boolean

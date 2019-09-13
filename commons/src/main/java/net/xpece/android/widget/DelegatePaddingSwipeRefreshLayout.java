@@ -9,9 +9,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * @author Eugen on 11.09.2016.
- */
 
 public class DelegatePaddingSwipeRefreshLayout extends SwipeRefreshLayout {
 
