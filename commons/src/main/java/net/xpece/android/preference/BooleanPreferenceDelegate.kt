@@ -1,7 +1,7 @@
 package net.xpece.android.preference
 
 import android.content.SharedPreferences
-import net.xpece.android.content.update
+import androidx.core.content.edit
 import kotlin.reflect.KProperty
 
 class BooleanPreferenceDelegate(val prefs: SharedPreferences, val key: String, val default: Boolean = false) {
@@ -10,6 +10,6 @@ class BooleanPreferenceDelegate(val prefs: SharedPreferences, val key: String, v
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {
-        prefs.update { putBoolean(key, value) }
+        prefs.edit { putBoolean(key, value) }
     }
 }

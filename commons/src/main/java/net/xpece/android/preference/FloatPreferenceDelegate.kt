@@ -1,7 +1,7 @@
 package net.xpece.android.preference
 
 import android.content.SharedPreferences
-import net.xpece.android.content.update
+import androidx.core.content.edit
 import kotlin.reflect.KProperty
 
 class FloatPreferenceDelegate(val prefs: SharedPreferences, val key: String, val default: Float = 0F) {
@@ -10,6 +10,6 @@ class FloatPreferenceDelegate(val prefs: SharedPreferences, val key: String, val
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Float) {
-        prefs.update { putFloat(key, value) }
+        prefs.edit { putFloat(key, value) }
     }
 }

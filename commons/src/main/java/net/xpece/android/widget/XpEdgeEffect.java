@@ -5,20 +5,21 @@ import android.annotation.TargetApi;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.annotation.ColorInt;
-import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
-import androidx.core.widget.EdgeEffectCompat;
-import androidx.core.widget.NestedScrollView;
-import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
 import android.widget.AbsListView;
 import android.widget.EdgeEffect;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.core.widget.EdgeEffectCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
 import net.xpece.android.BuildConfig;
-import net.xpece.android.util.XpLog;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -243,7 +244,7 @@ public final class XpEdgeEffect {
             ee = LIST_VIEW_FIELD_EDGE_GLOW_BOTTOM.get(listView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(listView, ex);
+            Log.w("EdgeEffect", "Couldn't apply edge effect color.", ex);
         }
     }
 
@@ -262,7 +263,7 @@ public final class XpEdgeEffect {
             ee = SCROLL_VIEW_FIELD_EDGE_GLOW_BOTTOM.get(scrollView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(scrollView, ex);
+            Log.w("EdgeEffect", "Couldn't apply edge effect color.", ex);
         }
     }
 
@@ -281,7 +282,7 @@ public final class XpEdgeEffect {
             ee = HORIZONTAL_SCROLL_VIEW_FIELD_EDGE_GLOW_RIGHT.get(scrollView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(scrollView, ex);
+            Log.w("EdgeEffect", "Couldn't apply edge effect color.", ex);
         }
     }
 
@@ -300,7 +301,7 @@ public final class XpEdgeEffect {
             ee = VIEW_PAGER_FIELD_RIGHT_EDGE.get(viewPager);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(viewPager, ex);
+            Log.w("EdgeEffect", "Couldn't apply edge effect color.", ex);
         }
     }
 
@@ -319,7 +320,7 @@ public final class XpEdgeEffect {
             ee = NESTED_SCROLL_VIEW_FIELD_EDGE_GLOW_BOTTOM.get(scrollView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(scrollView, ex);
+            Log.w("EdgeEffect", "Couldn't apply edge effect color.", ex);
         }
     }
 
@@ -342,7 +343,7 @@ public final class XpEdgeEffect {
             ee = RECYCLER_VIEW_FIELD_EDGE_GLOW_RIGHT.get(scrollView);
             setColor(ee, color);
         } catch (Exception ex) {
-            XpLog.logException(scrollView, ex);
+            Log.w("EdgeEffect", "Couldn't apply edge effect color.", ex);
         }
     }
 

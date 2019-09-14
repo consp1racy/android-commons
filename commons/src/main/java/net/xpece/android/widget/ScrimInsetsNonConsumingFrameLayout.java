@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.TintTypedArray;
@@ -15,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import net.xpece.android.R;
 
 
-public class ScrimInsetsNonConsumingFrameLayout extends IrresponsibleFrameLayout {
+public class ScrimInsetsNonConsumingFrameLayout extends FrameLayout {
 
     Drawable mInsetForeground;
 

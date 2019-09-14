@@ -4,50 +4,15 @@
 package net.xpece.android.database
 
 import android.database.Cursor
-import java.util.*
-import androidx.core.database.getIntOrNull as getIntOrNullImpl
-import androidx.core.database.getLongOrNull as getLongOrNullImpl
-import androidx.core.database.getStringOrNull as getStringOrNullImpl
-
-private val cursorMap: WeakHashMap<Cursor, MutableMap<String, Int>> = WeakHashMap()
-
-fun Cursor.getColumnIndexCached(columnName: String): Int {
-    var columnMap = cursorMap[this]
-    if (columnMap == null) {
-        columnMap = mutableMapOf()
-        cursorMap[this] = columnMap
-    }
-    var columnIndex = columnMap[columnName]
-    if (columnIndex == null) {
-        columnIndex = getColumnIndex(columnName)
-        columnMap[columnName] = columnIndex
-    }
-    return columnIndex
-}
-
-@Deprecated(
-    "Use AndroidX.",
-    ReplaceWith("getLongOrNull(index)", imports = ["androidx.core.database.getLongOrNull"])
-)
-inline fun Cursor.getLongOrNull(index: Int): Long? = getLongOrNullImpl(index)
-
-@Deprecated(
-    "Use AndroidX.",
-    ReplaceWith("getIntOrNull(index)", imports = ["androidx.core.database.getIntOrNull"])
-)
-inline fun Cursor.getIntOrNull(index: Int): Int? = getIntOrNullImpl(index)
-
-@Deprecated(
-    "Use AndroidX.",
-    ReplaceWith("getStringOrNull(index)", imports = ["androidx.core.database.getStringOrNull"])
-)
-inline fun Cursor.getStringOrNull(index: Int): String? = getStringOrNullImpl(index)
+import androidx.core.database.getIntOrNull
+import androidx.core.database.getLongOrNull
+import androidx.core.database.getStringOrNull
 
 inline fun Cursor.getLong(index: Int, fallback: Long): Long =
-    getLongOrNullImpl(index) ?: fallback
+    getLongOrNull(index) ?: fallback
 
 inline fun Cursor.getInt(index: Int, fallback: Int): Int =
-    getIntOrNullImpl(index) ?: fallback
+    getIntOrNull(index) ?: fallback
 
 inline fun Cursor.getString(index: Int, fallback: String): String =
-    getStringOrNullImpl(index) ?: fallback
+    getStringOrNull(index) ?: fallback

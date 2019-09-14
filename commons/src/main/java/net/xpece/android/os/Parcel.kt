@@ -66,7 +66,3 @@ inline fun <reified E> Parcel.readList(cl: ClassLoader? = E::class.java.classLoa
 
 inline fun <reified T> Parcel.readTypedValue(cl: ClassLoader? = T::class.java.classLoader): T =
         readValue(cl) as T
-
-@Deprecated("Use readTypedValue instead.", replaceWith = ReplaceWith(expression = "readTypedValue"))
-inline fun <reified T> Parcel.readValueTyped(cl: ClassLoader? = T::class.java.classLoader): T =
-        readValue(cl) as T

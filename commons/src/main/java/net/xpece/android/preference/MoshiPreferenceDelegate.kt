@@ -1,8 +1,8 @@
 package net.xpece.android.preference
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import com.squareup.moshi.JsonAdapter
-import net.xpece.android.content.update
 import kotlin.reflect.KProperty
 
 // TODO Implement caching.
@@ -14,10 +14,10 @@ class MoshiPreferenceDelegate<T>(val prefs: SharedPreferences, val key: String, 
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
         if (value == null) {
-            prefs.update { remove(key) }
+            prefs.edit { remove(key) }
         } else {
             val string = adapter.toJson(value)
-            prefs.update { putString(key, string) }
+            prefs.edit { putString(key, string) }
         }
     }
 }

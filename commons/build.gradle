@@ -53,13 +53,8 @@ dependencies {
     compileOnly 'com.github.pluscubed:recycler-fast-scroll:0.3.2@aar'
 
     compileOnly 'com.jakewharton.threetenabp:threetenabp:1.0.0'
-    compileOnly 'org.parceler:parceler-api:1.0.0'
-    compileOnly "io.requery:requery:1.0.0"
     compileOnly 'com.birbit:android-priority-jobqueue:2.0.0'
-    compileOnly 'com.facebook.network.connectionclass:connectionclass:1.0.0'
 
-//    compileOnly 'android.arch.persistence:db:1.0.0'
-    compileOnly 'io.requery:sqlite-android:3.12.0'
     compileOnly 'com.sun.mail:android-activation:1.5.5'
     compileOnly 'com.jakewharton.timber:timber:4.5.0'
 //    compileOnly 'com.github.ajalt:timberkt:1.5.0'

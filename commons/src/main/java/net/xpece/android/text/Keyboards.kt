@@ -1,25 +1,23 @@
 package net.xpece.android.text
 
 import android.app.Activity
-import android.content.Context
 import android.view.View
-import android.view.inputmethod.InputMethodManager
+import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
+import net.xpece.android.app.inputMethodManager
 
 object Keyboards {
 
     fun showKeyboard(view: View) {
-        getInputManager(view.context).showSoftInput(view, 0)
+        view.context.inputMethodManager
+                .showSoftInput(view, 0)
     }
 
     fun hideKeyboard(activity: Activity) {
         val currentFocus = activity.currentFocus
         if (currentFocus != null) {
             currentFocus.clearFocus()
-            getInputManager(activity).hideSoftInputFromWindow(currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            activity.inputMethodManager
+                    .hideSoftInputFromWindow(currentFocus.windowToken, HIDE_NOT_ALWAYS)
         }
-    }
-
-    private fun getInputManager(context: Context): InputMethodManager {
-        return context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 }

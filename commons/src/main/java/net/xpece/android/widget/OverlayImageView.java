@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -15,7 +16,7 @@ import androidx.core.view.ViewCompat;
 
 import net.xpece.android.R;
 
-public class OverlayImageView extends AspectLockedImageView {
+public class OverlayImageView extends ImageView {
 
     private Drawable mOverlay;
     private int mOverlayGravity;

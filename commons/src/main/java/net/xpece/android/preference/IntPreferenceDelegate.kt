@@ -1,7 +1,7 @@
 package net.xpece.android.preference
 
 import android.content.SharedPreferences
-import net.xpece.android.content.update
+import androidx.core.content.edit
 import kotlin.reflect.KProperty
 
 class IntPreferenceDelegate(val prefs: SharedPreferences, val key: String, val default: Int = 0) {
@@ -10,6 +10,6 @@ class IntPreferenceDelegate(val prefs: SharedPreferences, val key: String, val d
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
-        prefs.update { putInt(key, value) }
+        prefs.edit { putInt(key, value) }
     }
 }

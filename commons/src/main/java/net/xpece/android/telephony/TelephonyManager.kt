@@ -3,20 +3,20 @@
 package net.xpece.android.telephony
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Build
+import android.telephony.TelephonyManager
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
-import android.telephony.TelephonyManager
 import java.lang.reflect.Method
 
 internal object TelephonyManagerReflection {
-    @JvmField
-    val methodGetDataEnabled: Method =
-            TelephonyManager::class.java.getDeclaredMethod("getDataEnabled")
 
-    init {
-        methodGetDataEnabled.isAccessible = true
-    }
+    @SuppressLint("PrivateApi")
+    @JvmField
+    val methodGetDataEnabled: Method = TelephonyManager::class.java
+            .getDeclaredMethod("getDataEnabled")
+            .apply { isAccessible = true }
 }
 
 val TelephonyManager.isDataEnabledCompat: Boolean
@@ -40,5 +40,6 @@ inline val TelephonyManager.isCallStateIdle: Boolean
 inline val TelephonyManager.isVoiceCapableCompat: Boolean
     get() = Build.VERSION.SDK_INT < 22 || isVoiceCapable
 
+@Deprecated("This method provides no meaningful value. Determine state based on your use case.")
 inline val TelephonyManager.isCallCapableInstantly: Boolean
     get() = isVoiceCapableCompat && isPhone && isSimStateReady && isCallStateIdle

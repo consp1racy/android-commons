@@ -1,7 +1,7 @@
 package net.xpece.android.preference
 
 import android.content.SharedPreferences
-import net.xpece.android.content.update
+import androidx.core.content.edit
 import kotlin.reflect.KProperty
 
 class StringPreferenceDelegate(val prefs: SharedPreferences, val key: String, val default: String? = null) {
@@ -10,9 +10,9 @@ class StringPreferenceDelegate(val prefs: SharedPreferences, val key: String, va
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String?) {
         if (value == null) {
-            prefs.update { remove(key) }
+            prefs.edit { remove(key) }
         } else {
-            prefs.update { putString(key, value) }
+            prefs.edit { putString(key, value) }
         }
     }
 }

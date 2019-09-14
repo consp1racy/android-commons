@@ -1,7 +1,7 @@
 package net.xpece.android.preference
 
 import android.content.SharedPreferences
-import net.xpece.android.content.update
+import androidx.core.content.edit
 import kotlin.reflect.KProperty
 
 class LongPreferenceDelegate(val prefs: SharedPreferences, val key: String, val default: Long = 0L) {
@@ -10,6 +10,6 @@ class LongPreferenceDelegate(val prefs: SharedPreferences, val key: String, val 
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Long) {
-        prefs.update { putLong(key, value) }
+        prefs.edit { putLong(key, value) }
     }
 }
