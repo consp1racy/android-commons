@@ -3,11 +3,11 @@
 
 package net.xpece.androidx.lifecycle
 
+import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.annotation.MainThread
 
 inline fun <T> LiveData<T>.observeNullable(
     owner: LifecycleOwner, crossinline observer: (T?) -> Unit

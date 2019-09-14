@@ -1,3 +1,4 @@
+@file:JvmName("FrameworkExtensions")
 @file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.app

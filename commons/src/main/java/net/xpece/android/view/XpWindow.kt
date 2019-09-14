@@ -5,8 +5,8 @@ package net.xpece.android.view
 
 import android.annotation.TargetApi
 import android.os.Build
-import androidx.annotation.ColorInt
 import android.view.Window
+import androidx.annotation.ColorInt
 
 @ColorInt
 @JvmField
