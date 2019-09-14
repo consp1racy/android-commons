@@ -4,23 +4,20 @@
 
 package net.xpece.android.view
 
-import android.animation.LayoutTransition
 import android.annotation.TargetApi
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.widget.LinearLayout
 import android.widget.ScrollView
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.text.TextUtilsCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
-import net.xpece.android.R
 import net.xpece.android.content.res.layoutDirectionCompat
 import java.lang.reflect.Method
 import java.util.*
@@ -40,35 +37,26 @@ fun View.cancelPendingInputEventsCompat() {
     }
 }
 
-fun View.gone(): View {
+inline fun View.gone(): View = apply {
     visibility = View.GONE
-    return this
 }
 
-fun View.invisible(): View {
+inline fun View.invisible(): View = apply {
     visibility = View.INVISIBLE
-    return this
 }
 
-fun View.visible(): View {
+inline fun View.visible(): View = apply {
     visibility = View.VISIBLE
-    return this
 }
 
-@TargetApi(16)
-fun View.setBackgroundCompat(d: Drawable) {
+inline fun View.setBackgroundCompat(d: Drawable) {
     @Suppress("DEPRECATION")
     setBackgroundDrawable(d)
 }
 
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-fun View.removeOnGlobalLayoutListenerCompat(l: ViewTreeObserver.OnGlobalLayoutListener) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-        @Suppress("deprecation")
-        viewTreeObserver.removeGlobalOnLayoutListener(l)
-    } else {
-        viewTreeObserver.removeOnGlobalLayoutListener(l)
-    }
+inline fun View.removeOnGlobalLayoutListenerCompat(l: ViewTreeObserver.OnGlobalLayoutListener) {
+    @Suppress("deprecation")
+    viewTreeObserver.removeGlobalOnLayoutListener(l)
 }
 
 /**
@@ -77,23 +65,12 @@ fun View.removeOnGlobalLayoutListenerCompat(l: ViewTreeObserver.OnGlobalLayoutLi
 fun ScrollView.canScroll(): Boolean {
     val child = getChildAt(0)
     if (child != null) {
-        val childHeight = child.height
-        return height < childHeight + paddingTop + paddingBottom
+        val lp = child.layoutParams as ViewGroup.MarginLayoutParams
+        val childSize = child.height + lp.topMargin + lp.bottomMargin
+        val parentSpace = height - paddingTop - paddingBottom
+        return childSize > parentSpace
     }
     return false
-}
-
-@Deprecated("")
-fun setSearchViewLayoutTransition(view: SearchView) {
-    val searchBarId = view.context.resources.getIdentifier("android:id/search_bar", null, null)
-    val searchBar = view.findViewById<LinearLayout>(searchBarId)
-    searchBar.layoutTransition = LayoutTransition()
-}
-
-@Deprecated("")
-fun setSearchViewLayoutTransition(view: androidx.appcompat.widget.SearchView) {
-    val searchBar = view.findViewById<LinearLayout>(R.id.search_bar)
-    searchBar.layoutTransition = LayoutTransition()
 }
 
 @JvmOverloads
