@@ -1,3 +1,6 @@
+import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.LibraryPlugin
+
 buildscript {
     ext.kotlin_version = '1.3.50'
 
@@ -32,3 +35,15 @@ allprojects {
     }
 }
 //}
+
+subprojects {
+    plugins.whenPluginAdded {
+        if (this instanceof LibraryPlugin) {
+            extensions.getByType(LibraryExtension).libraryVariants.all {
+                generateBuildConfigProvider.configure {
+                    enabled = false
+                }
+            }
+        }
+    }
+}
