@@ -1,4 +1,5 @@
 @file:JvmName("XpBundle")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.os
 

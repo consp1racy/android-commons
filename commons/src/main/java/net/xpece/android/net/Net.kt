@@ -22,6 +22,7 @@ val Context.isAirplaneModeOn: Boolean
         Settings.Global.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
     }
 
+@Suppress("DEPRECATION")
 val Context.isAnyNetworkConnected: Boolean
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     get() = connectivityManager?.activeNetworkInfo?.isConnected ?: false

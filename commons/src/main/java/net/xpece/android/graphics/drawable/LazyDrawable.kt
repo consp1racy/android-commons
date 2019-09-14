@@ -77,6 +77,7 @@ open class LazyDrawable(context: Context, @DrawableRes resId: Int) : Drawable(),
     }
 
     override fun getOpacity(): Int {
+        @Suppress("DEPRECATION")
         return wrappedDrawable.opacity
     }
 

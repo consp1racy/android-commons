@@ -1,4 +1,5 @@
 @file:JvmName("XpIntent")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.content
 
@@ -9,9 +10,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.Settings
-import androidx.annotation.RequiresPermission
-import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.annotation.RequiresPermission
 import com.google.android.gms.maps.model.LatLng
 import net.xpece.android.R
 
@@ -87,17 +87,6 @@ fun Activity.maybeStartActivityForResult(intent: Intent, requestCode: Int): Bool
 
 fun androidx.fragment.app.Fragment.maybeStartActivityForResult(intent: Intent, requestCode: Int): Boolean {
     val context = context!!
-    if (context.hasHandler(intent)) {
-        startActivityForResult(intent, requestCode)
-        return true
-    } else {
-        //            showNoActivityError(context);
-        return false
-    }
-}
-
-fun android.app.Fragment.maybeStartActivityForResult(intent: Intent, requestCode: Int): Boolean {
-    val context = activity
     if (context.hasHandler(intent)) {
         startActivityForResult(intent, requestCode)
         return true

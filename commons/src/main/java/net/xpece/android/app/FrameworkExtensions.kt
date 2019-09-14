@@ -7,7 +7,7 @@ import androidx.annotation.ColorInt
 import net.xpece.android.text.Truss
 import java.util.*
 
-inline fun @receiver:ColorInt Int.toColorStateList() = ColorStateList.valueOf(this)!!
+inline fun @receiver:ColorInt Int.toColorStateList() = ColorStateList.valueOf(this)
 
 inline fun <E> List<E>.asArrayList(): ArrayList<E> = this as? ArrayList<E> ?: ArrayList(this)
 

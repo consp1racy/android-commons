@@ -11,14 +11,12 @@ import android.content.pm.ApplicationInfo
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
-import androidx.annotation.LayoutRes
-import androidx.annotation.UiThread
-import androidx.fragment.app.Fragment
-import androidx.core.app.NotificationCompat
-import androidx.core.view.ViewCompat
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.annotation.UiThread
+import androidx.core.view.ViewCompat
 import net.xpece.android.R
 import net.xpece.android.app.layoutInflater
 
@@ -58,16 +56,6 @@ inline fun <reified T : Activity> androidx.fragment.app.Fragment.startActivity()
 
 inline fun <reified T : Activity> androidx.fragment.app.Fragment.startActivity(func: Intent.() -> Unit) {
     val intent = Intent(this.context, T::class.java)
-    intent.func()
-    startActivity(intent)
-}
-
-inline fun <reified T : Activity> android.app.Fragment.startActivity() {
-    startActivity<T> { }
-}
-
-inline fun <reified T : Activity> android.app.Fragment.startActivity(func: Intent.() -> Unit) {
-    val intent = Intent(this.activity, T::class.java)
     intent.func()
     startActivity(intent)
 }
@@ -119,14 +107,6 @@ inline fun Context.inflate(@LayoutRes layout: Int): View =
 @JvmOverloads
 inline fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = true): View =
         context.layoutInflater.inflate(layout, this, attachToRoot)
-
-@Deprecated("")
-inline fun Context.notification(
-        func: NotificationCompat.Builder.() -> Unit): NotificationCompat.Builder {
-    val builder = NotificationCompat.Builder(this)
-    builder.func()
-    return builder
-}
 
 inline val Context.isRtl: Boolean
     get() = if (Build.VERSION.SDK_INT < 17) {

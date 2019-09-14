@@ -6,7 +6,7 @@ import java.util.*
 
 interface GeocoderProvider {
     @Throws(GeocoderNotAvailableException::class)
-    fun getGeocoder(context: Context, locale: Locale = context.resources.configuration.locale): Geocoder
+    fun getGeocoder(context: Context, @Suppress("DEPRECATION") locale: Locale = context.resources.configuration.locale): Geocoder
 
     val isGeocoderPresent: Boolean
 }

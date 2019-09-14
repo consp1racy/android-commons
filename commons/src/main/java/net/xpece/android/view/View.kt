@@ -9,8 +9,6 @@ import android.annotation.TargetApi
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.Build
-import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
 import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
@@ -18,12 +16,14 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.core.view.ViewCompat
 import net.xpece.android.R
 
 private val methodViewRemovePerformClickCallback by lazy(LazyThreadSafetyMode.NONE) {
-    View::class.java.getDeclaredMethod("removePerformClickCallback").apply {
-        isAccessible = true
-    }
+    View::class.java
+            .getDeclaredMethod("removePerformClickCallback")
+            .apply { isAccessible = true }
 }
 
 fun View.cancelPendingInputEventsCompat() {
@@ -50,57 +50,10 @@ fun View.visible(): View {
     return this
 }
 
-@Deprecated(
-    "Use AndroidX.",
-    ReplaceWith("isVisible", imports = ["androidx.core.view.isVisible"]),
-    DeprecationLevel.ERROR
-)
-@JvmName("isVisibleLegacy")
-inline fun View.isVisible() = isVisible
-
-@Deprecated(
-    "Use AndroidX.",
-    level = DeprecationLevel.ERROR
-)
-@JvmName("setVisibleLegacy")
-@Suppress("DeprecatedCallableAddReplaceWith")
-inline fun View.setVisible(visible: Boolean) {
-    this.isVisible = visible
-}
-
-@Deprecated(
-    "Use AndroidX.",
-    ReplaceWith("isVisible", imports = ["androidx.core.view.isVisible"])
-)
-inline var View.isVisible: Boolean
-    get() = visibility == View.VISIBLE
-    set(value) {
-        visibility = if (value) View.VISIBLE else View.GONE
-    }
-
-@Deprecated(
-    "Use AndroidX.",
-    ReplaceWith("isVisible", imports = ["androidx.core.view.isVisible"]),
-    DeprecationLevel.ERROR
-)
-inline var View.visible: Boolean
-    @JvmName("isVisibleRedundant")
-    @JvmSynthetic
-    get() = isVisible
-    @JvmName("setVisibleRedundant")
-    @JvmSynthetic
-    set(value) {
-        isVisible = value
-    }
-
 @TargetApi(16)
 fun View.setBackgroundCompat(d: Drawable) {
-    if (Build.VERSION.SDK_INT < 16) {
-        @Suppress("DEPRECATION")
-        setBackgroundDrawable(d)
-    } else {
-        background = d
-    }
+    @Suppress("DEPRECATION")
+    setBackgroundDrawable(d)
 }
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -170,6 +123,8 @@ fun View.toastContentDescription(text: CharSequence = this.contentDescription): 
     return true
 }
 
+@Deprecated("")
+@Suppress("DEPRECATION")
 fun View.fitSystemWindows(insets: Rect) = XpViewReflect.fitSystemWindows(this, insets)
 
 inline fun View.setLayerTypeSafe(layerType: Int) {

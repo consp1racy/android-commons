@@ -1,4 +1,5 @@
 @file:JvmName("XpDateTime")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.text
 
@@ -56,28 +57,10 @@ inline fun Date.printHumanReadableDateTime(locale: Locale = Locale.getDefault())
     return getFormatterDateTimeHuman(locale).format(this)
 }
 
-inline fun Date.printMachineReadableDate(): String {
-    return FORMATTER_DATE_MACHINE.format(this)
-}
+inline fun Date.printMachineReadableDate(): String = FORMATTER_DATE_MACHINE.format(this)
 
-inline fun String.parseMachineReadableDate(): Date {
-    return FORMATTER_DATE_MACHINE.parse(this)
-}
+inline fun String.parseMachineReadableDate(): Date = FORMATTER_DATE_MACHINE.parse(this)!!
 
-inline fun Date.printMachineReadableDateTime(): String {
-    return FORMATTER_ISO8601.format(this)
-}
+inline fun Date.printMachineReadableDateTime(): String = FORMATTER_ISO8601.format(this)
 
-inline fun String.parseMachineReadableDateTime(): Date {
-    return FORMATTER_ISO8601.parse(this)
-}
-
-@Suppress("DEPRECATION")
-@Deprecated("Don't use Date.")
-fun Date.equalsDate(other: Date): Boolean {
-    return this.date == other.date && this.month == other.month && this.year == other.year
-}
-
-//fun DateTime.equalsDate(other: DateTime): Boolean {
-//    return this.dayOfMonth == other.dayOfMonth && this.monthOfYear == other.monthOfYear && this.year == other.year
-//}
+inline fun String.parseMachineReadableDateTime(): Date = FORMATTER_ISO8601.parse(this)!!

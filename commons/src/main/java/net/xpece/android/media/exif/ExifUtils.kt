@@ -13,7 +13,7 @@ object ExifUtils {
      */
     @JvmStatic
     fun getOrientation(context: Context, uri: Uri): Int =
-            context.contentResolver.openInputStream(uri)!!.buffered()?.use(this::getOrientation)
+            context.contentResolver.openInputStream(uri)!!.buffered().use(this::getOrientation)
 
     /**
      * Requires com.android.support:exifinterface:25.1.0+.

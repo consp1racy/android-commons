@@ -29,7 +29,7 @@ class RotateTransformation(private val portrait: Boolean) : Transformation {
 
     companion object {
         @JvmStatic
-        private val TAG = RotateTransformation::class.java.simpleName!!
+        private val TAG = RotateTransformation::class.java.simpleName
     }
 
 }

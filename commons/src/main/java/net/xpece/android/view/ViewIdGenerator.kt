@@ -14,7 +14,7 @@ class ViewIdGenerator {
         @JvmField
         var DEBUG = false
         @JvmField
-        val TAG = ViewIdGenerator::class.java.simpleName!!
+        val TAG = ViewIdGenerator::class.java.simpleName
     }
 
     private val cache = mutableMapOf<String, Int>()

@@ -5,7 +5,7 @@ package net.xpece.android.os
 import android.annotation.SuppressLint
 import android.os.Parcel
 
-@Suppress("NOTHING_TO_INLINE")
+@Suppress("NOTHING_TO_INLINE", "EXTENSION_SHADOWED_BY_MEMBER")
 @Deprecated(
         "Shadows method since API 29.",
         replaceWith = ReplaceWith("writeBooleanCompat"),
@@ -13,7 +13,7 @@ import android.os.Parcel
 )
 inline fun Parcel.writeBoolean(value: Boolean) = writeBooleanCompat(value)
 
-@Suppress("NOTHING_TO_INLINE")
+@Suppress("NOTHING_TO_INLINE", "EXTENSION_SHADOWED_BY_MEMBER")
 @Deprecated(
         "Shadows method since API 29.",
         replaceWith = ReplaceWith("readBooleanCompat"),
