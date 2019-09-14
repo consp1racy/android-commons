@@ -42,7 +42,7 @@ inline fun Parcel.writeFloatOrNan(value: Float?) {
  */
 @SuppressLint("ParcelClassLoader")
 @Suppress("NOTHING_TO_INLINE")
-inline fun Parcel.readFloatOrNull(): Float? = readFloat().takeIf { it != Float.NaN }
+inline fun Parcel.readFloatOrNull(): Float? = readFloat().takeIf { !it.isNaN() }
 
 /**
  * Writes `null` as [Double.NaN]. Only uses 4 bytes.
@@ -57,7 +57,7 @@ inline fun Parcel.writeDoubleOrNan(value: Double?) {
  */
 @SuppressLint("ParcelClassLoader")
 @Suppress("NOTHING_TO_INLINE")
-inline fun Parcel.readDoubleOrNull(): Double? = readDouble().takeIf { it != Double.NaN }
+inline fun Parcel.readDoubleOrNull(): Double? = readDouble().takeIf { !it.isNaN() }
 
 inline fun <reified E> Parcel.readList(cl: ClassLoader? = E::class.java.classLoader): List<E> =
         mutableListOf<E>().apply {
