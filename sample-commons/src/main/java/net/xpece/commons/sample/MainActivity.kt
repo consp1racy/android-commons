@@ -12,9 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import net.xpece.android.app.SnackbarActivity
 import net.xpece.android.content.dp
-import net.xpece.android.widget.XpDatePicker
 import net.xpece.android.widget.XpEdgeEffect
-import net.xpece.android.widget.XpTimePicker
+import net.xpece.android.widget.setSelectionDividerTint
 import net.xpece.commons.android.sample.R
 import org.threeten.bp.LocalDateTime
 
@@ -56,12 +55,12 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
             if (position == 0) {
                 val csl = ColorStateList.valueOf(Color.RED)
                 val tp = TimePicker(context)
-                XpTimePicker.setSelectionDividerTint(tp, csl)
+                tp.setSelectionDividerTint(csl)
                 view = tp
             } else if (position == 1) {
                 val csl = ColorStateList.valueOf(Color.RED)
                 val dp = DatePicker(context)
-                XpDatePicker.setSelectionDividerTint(dp, csl)
+                dp.setSelectionDividerTint(csl)
                 view = dp
             } else {
                 view = View(context)
