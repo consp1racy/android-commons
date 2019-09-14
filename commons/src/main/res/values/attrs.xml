@@ -67,4 +67,18 @@
         <attr name="textColorError"/>
     </declare-styleable>
 
+    <declare-styleable name="ScrimInsetsViewHelper">
+        <attr name="insetForeground"/>
+        <attr name="consumeInsets" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="ScrimInsetsFrameLayout">
+        <attr name="insetForeground"/>
+        <attr name="consumeInsets"/>
+    </declare-styleable>
+
+    <declare-styleable name="ScrimInsetsLinearLayout">
+        <attr name="insetForeground"/>
+        <attr name="consumeInsets"/>
+    </declare-styleable>
 </resources>

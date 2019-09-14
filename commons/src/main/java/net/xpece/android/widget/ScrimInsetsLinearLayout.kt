@@ -1,0 +1,75 @@
+package net.xpece.android.widget
+
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
+import android.util.AttributeSet
+import android.widget.LinearLayout
+import androidx.annotation.CallSuper
+import androidx.core.view.OnApplyWindowInsetsListener
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+
+open class ScrimInsetsLinearLayout @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
+
+    private val helper = ScrimInsetsViewHelper(this)
+            .apply { loadFromAttributes(attrs, defStyleAttr) }
+
+    init {
+        // No need to draw until the insets are adjusted
+        setWillNotDraw(true)
+
+        ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
+            onApplyWindowInsetsCompat(insets)
+        }
+    }
+
+    /**
+     * 1. Call from custom [OnApplyWindowInsetsListener] to update scrim insets.
+     * 2. Override this method in subclasses to add custom behavior.
+     * You're responsible for consuming the insets.
+     */
+    @CallSuper
+    open fun onApplyWindowInsetsCompat(insets: WindowInsetsCompat): WindowInsetsCompat {
+        return helper.onApplyWindowInsets(insets)
+    }
+
+    fun setScrimInsetForeground(drawable: Drawable?) {
+        helper.setScrimInsetForeground(drawable)
+    }
+
+    fun setDrawLeftInsetForeground(drawLeftInsetForeground: Boolean) {
+        helper.setDrawLeftInsetForeground(drawLeftInsetForeground)
+    }
+
+    fun setDrawTopInsetForeground(drawTopInsetForeground: Boolean) {
+        helper.setDrawTopInsetForeground(drawTopInsetForeground)
+    }
+
+    fun setDrawRightInsetForeground(drawRightInsetForeground: Boolean) {
+        helper.setDrawRightInsetForeground(drawRightInsetForeground)
+    }
+
+    fun setDrawBottomInsetForeground(drawBottomInsetForeground: Boolean) {
+        helper.setDrawBottomInsetForeground(drawBottomInsetForeground)
+    }
+
+    override fun draw(canvas: Canvas) {
+        super.draw(canvas)
+        helper.draw(canvas)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        helper.onAttachedToWindow()
+    }
+
+    override fun onDetachedFromWindow() {
+        helper.onDetachedFromWindow()
+        super.onDetachedFromWindow()
+    }
+}
