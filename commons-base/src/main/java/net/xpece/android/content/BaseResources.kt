@@ -1,39 +1,34 @@
-@file:JvmName("XpBaseResources")
-
 package net.xpece.android.content
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
+import androidx.annotation.AnyRes
 import androidx.annotation.AttrRes
 import androidx.annotation.StyleRes
-import androidx.appcompat.widget.TintTypedArray
 
-private val TEMP_ARRAY = object : ThreadLocal<IntArray>() {
-    override fun initialValue(): IntArray = intArrayOf(0)
-}
+object BaseResources {
 
-fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int): Int =
-        resolveResourceId(0, attr, fallback)
-
-fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int): Int {
-    val ta = obtainTypedArray(style, attr)
-    try {
-        return ta.getResourceId(0, fallback)
-    } finally {
-        ta.recycle()
+    private val TEMP_ARRAY = object : ThreadLocal<IntArray>() {
+        override fun initialValue(): IntArray = intArrayOf(0)
     }
-}
 
-fun Context.obtainTypedArray(@StyleRes style: Int, @AttrRes attr: Int): TypedArray {
-    val tempArray = TEMP_ARRAY.get()!!
-    tempArray[0] = attr
-    return obtainStyledAttributes(style, tempArray)
-}
+    @Suppress("NOTHING_TO_INLINE")
+    @AnyRes
+    inline fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int): Int =
+            resolveResourceId(0, attr, fallback)
 
-@SuppressLint("RestrictedApi")
-fun Context.obtainTintTypedArray(@StyleRes style: Int, @AttrRes attr: Int): TintTypedArray {
-    val tempArray = TEMP_ARRAY.get()!!
-    tempArray[0] = attr
-    return TintTypedArray.obtainStyledAttributes(this, style, tempArray)
+    fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int): Int {
+        val ta = obtainTypedArray(style, attr)
+        try {
+            return ta.getResourceId(0, fallback)
+        } finally {
+            ta.recycle()
+        }
+    }
+
+    fun Context.obtainTypedArray(@StyleRes style: Int, @AttrRes attr: Int): TypedArray {
+        val tempArray = TEMP_ARRAY.get()!!
+        tempArray[0] = attr
+        return obtainStyledAttributes(style, tempArray)
+    }
 }

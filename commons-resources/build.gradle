@@ -21,7 +21,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    api project(':commons-base')
+    implementation project(':commons-base')
 }
 
 group = rootProject.GROUP_ID

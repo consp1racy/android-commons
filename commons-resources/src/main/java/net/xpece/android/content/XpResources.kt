@@ -1,4 +1,5 @@
 @file:JvmName("XpResources")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.content
 
@@ -8,12 +9,22 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.appcompat.content.res.AppCompatResources
+import net.xpece.android.content.BaseResources.obtainTypedArray
+import net.xpece.android.content.BaseResources.resolveResourceId as resolveResourceIdImpl
+
+@AnyRes
+inline fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int): Int =
+        resolveResourceIdImpl(0, attr, fallback)
+
+@AnyRes
+inline fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int): Int =
+        resolveResourceIdImpl(style, attr, fallback)
 
 /**
  * @throws NullPointerException
  */
 @ColorInt
-fun Context.getColorCompat(@ColorRes resId: Int): Int
+inline fun Context.getColorCompat(@ColorRes resId: Int): Int
         = getColorStateListCompat(resId).defaultColor
 
 /**
@@ -45,34 +56,36 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable {
     }
 }
 
-fun Context.resolveFloat(@AttrRes attr: Int, fallback: Float = 0F): Float =
+inline fun Context.resolveFloat(@AttrRes attr: Int, fallback: Float = 0F): Float =
         resolveFloat(0, attr, fallback)
 
-fun Context.resolveBoolean(@AttrRes attr: Int, fallback: Boolean = false): Boolean =
+inline fun Context.resolveBoolean(@AttrRes attr: Int, fallback: Boolean = false): Boolean =
         resolveBoolean(0, attr, fallback)
 
 @ColorInt
-fun Context.resolveColor(@AttrRes attr: Int, @ColorInt fallback: Int = 0): Int =
+inline fun Context.resolveColor(@AttrRes attr: Int, @ColorInt fallback: Int = 0): Int =
         resolveColor(0, attr, fallback)
 
-fun Context.resolveColorStateList(@AttrRes attr: Int): ColorStateList? =
+inline fun Context.resolveColorStateList(@AttrRes attr: Int): ColorStateList? =
         resolveColorStateList(0, attr)
 
-fun Context.resolveDimension(@AttrRes attr: Int, fallback: Float = 0F): Float =
+inline fun Context.resolveDimension(@AttrRes attr: Int, fallback: Float = 0F): Float =
         resolveDimension(0, attr, fallback)
 
-fun Context.resolveDimensionPixelOffset(
-        @AttrRes attr: Int, fallback: Int = 0): Int =
+inline fun Context.resolveDimensionPixelOffset(@AttrRes attr: Int, fallback: Int = 0): Int =
         resolveDimensionPixelOffset(0, attr, fallback)
 
-fun Context.resolveDimensionPixelSize(@AttrRes attr: Int, fallback: Int = 0): Int =
+inline fun Context.resolveDimensionPixelSize(@AttrRes attr: Int, fallback: Int = 0): Int =
         resolveDimensionPixelSize(0, attr, fallback)
 
-fun Context.resolveDrawable(@AttrRes attr: Int): Drawable? = resolveDrawable(0, attr)
+inline fun Context.resolveDrawable(@AttrRes attr: Int): Drawable? =
+        resolveDrawable(0, attr)
 
-fun Context.resolveString(@AttrRes attr: Int): String? = resolveString(0, attr)
+inline fun Context.resolveString(@AttrRes attr: Int): String? =
+        resolveString(0, attr)
 
-fun Context.resolveText(@AttrRes attr: Int): CharSequence? = resolveText(0, attr)
+inline fun Context.resolveText(@AttrRes attr: Int): CharSequence? =
+        resolveText(0, attr)
 
 fun Context.resolveFloat(@StyleRes style: Int, @AttrRes attr: Int, fallback: Float): Float {
     val ta = obtainTypedArray(style, attr)

@@ -1,43 +1,17 @@
 @file:JvmName("Dimens")
-@file:JvmMultifileClass
+@file:Suppress("NOTHING_TO_INLINE")
 
 package net.xpece.android.content
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.res.Resources
+import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.DimenRes
-import android.util.TypedValue
+import net.xpece.android.content.BaseResources.resolveResourceId
 import net.xpece.android.content.res.Dimen
 
-@SuppressLint("StaticFieldLeak")
-private var sContext: Context = object : ContextWrapper(null) {
-    override fun getResources(): Resources {
-        throw IllegalStateException(
-                "You forgot to call ${this::class.java.simpleName}.init(Context).")
-    }
-}
-
-@Deprecated("Do not use dimensions without an intermediate context.")
-object DimensLegacyInitializer {
-    @JvmStatic
-    fun init(context: Context) {
-        sContext = context.applicationContext
-    }
-}
-
 fun px(px: Number): Dimen = Dimen(px.toFloat())
-
-@Deprecated("Not suitable for multiscreen environment.")
-fun sp(sp: Number): Dimen = sContext.sp(sp)
-
-@Deprecated("Not suitable for multiscreen environment.")
-fun dp(dp: Number): Dimen = sContext.dp(dp)
-
-@Deprecated("Not suitable for multiscreen environment.")
-fun dimen(@DimenRes resId: Int): Dimen = sContext.dimen(resId)
 
 fun Resources.sp(sp: Number): Dimen {
     val spf = sp.toFloat()
@@ -60,12 +34,14 @@ fun Resources.dimen(@DimenRes resId: Int, fallback: Number = 0): Dimen = try {
     Dimen(fallback.toFloat())
 }
 
-fun Context.sp(sp: Number): Dimen = resources.sp(sp)
+inline fun Context.sp(sp: Number): Dimen =
+        resources.sp(sp)
 
-fun Context.dp(dp: Number): Dimen = resources.dp(dp)
+inline fun Context.dp(dp: Number): Dimen =
+        resources.dp(dp)
 
 @JvmOverloads
-fun Context.dimen(@DimenRes resId: Int, fallback: Number = 0): Dimen =
+inline fun Context.dimen(@DimenRes resId: Int, fallback: Number = 0): Dimen =
         resources.dimen(resId, fallback)
 
 @JvmOverloads
