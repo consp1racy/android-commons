@@ -1,3 +1,4 @@
+@file:JvmName("SystemServices")
 @file:Suppress("unused", "DEPRECATION")
 
 package net.xpece.android.app
@@ -6,6 +7,7 @@ import android.accounts.AccountManager
 import android.app.*
 import android.app.admin.DevicePolicyManager
 import android.app.job.JobScheduler
+import android.app.role.RoleManager
 import android.app.usage.NetworkStatsManager
 import android.app.usage.StorageStatsManager
 import android.app.usage.UsageStatsManager
@@ -15,10 +17,12 @@ import android.companion.CompanionDeviceManager
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.RestrictionsManager
+import android.content.pm.CrossProfileApps
 import android.content.pm.LauncherApps
 import android.content.pm.ShortcutManager
 import android.hardware.ConsumerIrManager
 import android.hardware.SensorManager
+import android.hardware.biometrics.BiometricManager
 import android.hardware.camera2.CameraManager
 import android.hardware.display.DisplayManager
 import android.hardware.fingerprint.FingerprintManager
@@ -32,10 +36,12 @@ import android.media.projection.MediaProjectionManager
 import android.media.session.MediaSessionManager
 import android.media.tv.TvInputManager
 import android.net.ConnectivityManager
+import android.net.IpSecManager
 import android.net.nsd.NsdManager
 import android.net.wifi.WifiManager
 import android.net.wifi.aware.WifiAwareManager
 import android.net.wifi.p2p.WifiP2pManager
+import android.net.wifi.rtt.WifiRttManager
 import android.nfc.NfcManager
 import android.os.*
 import android.os.health.SystemHealthManager
@@ -45,6 +51,7 @@ import android.telecom.TelecomManager
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
+import android.telephony.euicc.EuiccManager
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityManager
@@ -54,6 +61,7 @@ import android.view.textclassifier.TextClassificationManager
 import android.view.textservice.TextServicesManager
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.core.hardware.display.DisplayManagerCompat
 import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 
@@ -104,9 +112,6 @@ inline val Context.notificationManager: NotificationManager
 
 /**
  * Never null.
- *
- * Requires `support-compat` library version 24.2.0 or later
- * or `support-v4` library version 22.0.0 or later.
  */
 inline val Context.notificationManagerCompat: NotificationManagerCompat
     get() = NotificationManagerCompat.from(this)
@@ -248,9 +253,6 @@ inline val Context.displayManager: DisplayManager
 
 /**
  * Never null.
- *
- * Requires `support-compat` library version 24.2.0 or later
- * or `support-v4` library version 22.0.0 or later.
  */
 inline val Context.displayManagerCompat: DisplayManagerCompat
     get() = DisplayManagerCompat.getInstance(this)
@@ -365,8 +367,6 @@ inline val Context.fingerprintManager: FingerprintManager?
 
 /**
  * Never null.
- *
- * Requires AndroidX Core library.
  */
 @Deprecated("Use BiometricPrompt instead.")
 inline val Context.fingerprintManagerCompat: FingerprintManagerCompat
@@ -414,6 +414,31 @@ inline val Context.textClassificationManager: TextClassificationManager
 inline val Context.wifiAwareManager: WifiAwareManager?
     get() = getSystemServiceOrNull(Context.WIFI_AWARE_SERVICE)
 
+@get:RequiresApi(28)
+inline val Context.crossProfileApps: CrossProfileApps
+    get() = getSystemServiceOrThrow(Context.CROSS_PROFILE_APPS_SERVICE)
+
+@get:RequiresApi(28)
+inline val Context.euiccManager: EuiccManager
+    get() = getSystemServiceOrThrow(Context.EUICC_SERVICE)
+
+@get:RequiresApi(28)
+inline val Context.ipSecManager: IpSecManager?
+    get() = getSystemServiceOrNull(Context.IPSEC_SERVICE)
+
+@get:RequiresApi(28)
+inline val Context.wifiRttManager: WifiRttManager?
+    get() = getSystemServiceOrNull(Context.WIFI_RTT_RANGING_SERVICE)
+
+@get:RequiresApi(29)
+inline val Context.biometricManager: BiometricManager
+    get() = getSystemServiceOrThrow(Context.BIOMETRIC_SERVICE)
+
+@get:RequiresApi(29)
+inline val Context.roleManager: RoleManager
+    get() = getSystemServiceOrThrow(Context.ROLE_SERVICE)
+
+
 inline fun <reified T> Context.getSystemServiceOrNull(name: String): T? =
         getSystemService(name) as T?
 
@@ -422,12 +447,11 @@ inline fun <reified T> Context.getSystemServiceOrNull(name: String): T? =
  */
 inline fun <reified T> Context.getSystemServiceOrThrow(name: String): T =
         getSystemServiceOrNull<T>(name) ?:
-                throw ServiceNotFoundException(
-                        "${T::class.java.simpleName} not found.")
+                throw ServiceNotFoundException("${T::class.java.simpleName} not found.")
 
 @RequiresApi(23)
 inline fun <reified T> Context.getSystemServiceOrNull(): T? =
-        getSystemService(T::class.java)
+        ContextCompat.getSystemService(this, T::class.java)
 
 /**
  * @throws ServiceNotFoundException When service is not found.
@@ -435,5 +459,4 @@ inline fun <reified T> Context.getSystemServiceOrNull(): T? =
 @RequiresApi(23)
 inline fun <reified T> Context.getSystemServiceOrThrow(): T =
         getSystemServiceOrNull<T>() ?:
-                throw ServiceNotFoundException(
-                        "${T::class.java.simpleName} not found.")
+                throw ServiceNotFoundException("${T::class.java.simpleName} not found.")
