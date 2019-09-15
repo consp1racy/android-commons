@@ -1,21 +1,21 @@
 package net.xpece.android.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.RequiresApi
-import net.xpece.android.os.readIntegerMap
-import net.xpece.android.os.writeMap
+import net.xpece.android.os.getIntegerMap
+import net.xpece.android.os.putMap
 
+/**
+ * Use this class to generate an Android resource ID based on a String key and persist this mapping
+ * across configuration changes.
+ *
+ * Possible use case would be saving and restoring states
+ * of [RecyclerView][androidx.recyclerview.widget.RecyclerView] item views.
+ */
 @RequiresApi(17)
 class ViewIdGenerator {
-    companion object {
-        @JvmField
-        var DEBUG = false
-        @JvmField
-        val TAG = ViewIdGenerator::class.java.simpleName
-    }
 
     private val cache = mutableMapOf<String, Int>()
 
@@ -24,27 +24,17 @@ class ViewIdGenerator {
         var out = cache[key]
         if (out == null) {
             out = View.generateViewId()
-            log { "Cache miss! Generated view ID $out for $key." }
             cache[key] = out
-        } else {
-            //td { "Cache hit! View ID $out for $key." }
         }
         return out
     }
 
     fun onSaveInstanceState(outState: Bundle, key: String) {
-        val bundle = Bundle().apply { writeMap(cache) }
-        outState.putBundle(key, bundle)
+        outState.putMap(key, cache)
     }
 
     fun onRestoreInstanceState(savedInstanceState: Bundle, key: String) {
-        val bundle = savedInstanceState.getBundle(key)!!
-        val map = bundle.readIntegerMap()
+        val map = savedInstanceState.getIntegerMap(key)
         cache.putAll(map)
-    }
-
-    @Suppress("ConstantConditionIf")
-    private inline fun log(priority: Int = Log.DEBUG, lazyMessage: () -> String) {
-        if (DEBUG) Log.println(priority, TAG, lazyMessage())
     }
 }
