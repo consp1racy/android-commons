@@ -5,7 +5,6 @@ package net.xpece.android.widget
 import android.content.res.ColorStateList
 import android.os.Build
 import android.util.Log
-import android.widget.DatePicker
 import android.widget.NumberPicker
 import android.widget.TimePicker
 import java.lang.reflect.Field
@@ -26,7 +25,7 @@ private object TimePickerReflection {
             delegateClass = null
             implClass = TimePicker::class.java
         } else {
-            delegateField = DatePicker::class.java.getOptionalPrivateField("mDelegate")
+            delegateField = TimePicker::class.java.getOptionalPrivateField("mDelegate")
             val delegateName = if (Build.VERSION.SDK_INT == 21) {
                 // On Android 5.0 the two delegate class names are switched.
                 "android.widget.TimePickerClockDelegate"
