@@ -17,8 +17,10 @@ open class ScrimInsetsFrameLayout @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private val helper = ScrimInsetsViewHelper(this)
-            .apply { loadFromAttributes(attrs, defStyleAttr, R.style.Widget_Xpece_ScrimInsetsFrameLayout) }
+    private val helper = ScrimInsetsViewHelper(this).apply {
+        val defStyleRes = R.style.Widget_Xpece_ScrimInsetsFrameLayout
+        loadFromAttributes(attrs, defStyleAttr, defStyleRes)
+    }
 
     init {
         // No need to draw until the insets are adjusted
@@ -36,7 +38,11 @@ open class ScrimInsetsFrameLayout @JvmOverloads constructor(
      */
     @CallSuper
     open fun onApplyWindowInsetsCompat(insets: WindowInsetsCompat): WindowInsetsCompat {
+        onInsetsChanged(insets)
         return helper.onApplyWindowInsets(insets)
+    }
+
+    protected open fun onInsetsChanged(insets: WindowInsetsCompat) {
     }
 
     fun setScrimInsetForeground(drawable: Drawable?) {

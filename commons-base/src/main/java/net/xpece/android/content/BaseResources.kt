@@ -18,7 +18,7 @@ object BaseResources {
             resolveResourceId(0, attr, fallback)
 
     fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int): Int {
-        val ta = obtainTypedArray(style, attr)
+        val ta = obtainStyledAttributes(style, attr)
         try {
             return ta.getResourceId(0, fallback)
         } finally {
@@ -26,7 +26,7 @@ object BaseResources {
         }
     }
 
-    fun Context.obtainTypedArray(@StyleRes style: Int, @AttrRes attr: Int): TypedArray {
+    fun Context.obtainStyledAttributes(@StyleRes style: Int, @AttrRes attr: Int): TypedArray {
         val tempArray = TEMP_ARRAY.get()!!
         tempArray[0] = attr
         return obtainStyledAttributes(style, tempArray)

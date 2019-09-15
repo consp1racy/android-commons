@@ -1,7 +1,5 @@
 package net.xpece.android.scriminsets.widget
 
-import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
@@ -10,10 +8,9 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.AttrRes
 import androidx.annotation.StyleRes
-import androidx.annotation.StyleableRes
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import net.xpece.android.content.getDrawableCompat
 import net.xpece.android.scriminsets.R
 
 class ScrimInsetsViewHelper(private val view: View) {
@@ -30,17 +27,6 @@ class ScrimInsetsViewHelper(private val view: View) {
     private var consumeInsets = true
 
     private val tempRect = Rect()
-
-    private fun TypedArray.getDrawableCompat(
-            context: Context,
-            @StyleableRes index: Int
-    ): Drawable? {
-        val resId = getResourceId(index, 0)
-        if (resId != 0) {
-            return AppCompatResources.getDrawable(context, resId)
-        }
-        return getDrawable(index)
-    }
 
     fun loadFromAttributes(
             attrs: AttributeSet?,

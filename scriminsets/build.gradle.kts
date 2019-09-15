@@ -14,8 +14,10 @@ android {
 dependencies {
     val kotlin_version = rootProject.ext["kotlin_version"]
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
-	
-    implementation("androidx.appcompat:appcompat-resources:1.1.0")
+
+    implementation("androidx.core:core:1.1.0")
+
+    implementation(project(":commons-resources"))
 }
 
 group = rootProject.property("GROUP_ID").toString()

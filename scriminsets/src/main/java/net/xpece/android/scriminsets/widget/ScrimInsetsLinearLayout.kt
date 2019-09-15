@@ -9,6 +9,7 @@ import androidx.annotation.CallSuper
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import net.xpece.android.scriminsets.R
 
 open class ScrimInsetsLinearLayout @JvmOverloads constructor(
         context: Context,
@@ -16,8 +17,10 @@ open class ScrimInsetsLinearLayout @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private val helper = ScrimInsetsViewHelper(this)
-            .apply { loadFromAttributes(attrs, defStyleAttr) }
+    private val helper = ScrimInsetsViewHelper(this).apply {
+        val defStyleRes = R.style.Widget_Xpece_ScrimInsetsLinearLayout
+        loadFromAttributes(attrs, defStyleAttr, defStyleRes)
+    }
 
     init {
         // No need to draw until the insets are adjusted
@@ -35,7 +38,11 @@ open class ScrimInsetsLinearLayout @JvmOverloads constructor(
      */
     @CallSuper
     open fun onApplyWindowInsetsCompat(insets: WindowInsetsCompat): WindowInsetsCompat {
+        onInsetsChanged(insets)
         return helper.onApplyWindowInsets(insets)
+    }
+
+    protected open fun onInsetsChanged(insets: WindowInsetsCompat) {
     }
 
     fun setScrimInsetForeground(drawable: Drawable?) {

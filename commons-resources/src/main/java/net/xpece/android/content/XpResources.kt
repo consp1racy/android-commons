@@ -5,11 +5,11 @@ package net.xpece.android.content
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import androidx.annotation.*
-import androidx.core.content.ContextCompat
 import androidx.appcompat.content.res.AppCompatResources
-import net.xpece.android.content.BaseResources.obtainTypedArray
+import net.xpece.android.content.BaseResources.obtainStyledAttributes
 import net.xpece.android.content.BaseResources.resolveResourceId as resolveResourceIdImpl
 
 @AnyRes
@@ -24,19 +24,13 @@ inline fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, f
  * @throws NullPointerException
  */
 @ColorInt
-inline fun Context.getColorCompat(@ColorRes resId: Int): Int
-        = getColorStateListCompat(resId).defaultColor
+inline fun Context.getColorCompat(@ColorRes resId: Int): Int = getColorStateListCompat(resId).defaultColor
 
 /**
  * @throws NullPointerException
  */
-fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList = try {
-    AppCompatResources.getColorStateList(this, resId)!!
-} catch (ex: NoSuchMethodError) {
-    ContextCompat.getColorStateList(this, resId)!!
-} catch (ex: NoClassDefFoundError) {
-    ContextCompat.getColorStateList(this, resId)!!
-}
+fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList =
+        AppCompatResources.getColorStateList(this, resId)!!
 
 /**
  * @throws NullPointerException
@@ -49,11 +43,7 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable {
             if (d != null) return d
         }
     }
-    return try {
-        AppCompatResources.getDrawable(this, resId)!!
-    } catch (ex: NoClassDefFoundError) {
-        ContextCompat.getDrawable(this, resId)!!
-    }
+    return AppCompatResources.getDrawable(this, resId)!!
 }
 
 inline fun Context.resolveFloat(@AttrRes attr: Int, fallback: Float = 0F): Float =
@@ -88,7 +78,7 @@ inline fun Context.resolveText(@AttrRes attr: Int): CharSequence? =
         resolveText(0, attr)
 
 fun Context.resolveFloat(@StyleRes style: Int, @AttrRes attr: Int, fallback: Float): Float {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
         return ta.getFloat(0, fallback)
     } finally {
@@ -97,7 +87,7 @@ fun Context.resolveFloat(@StyleRes style: Int, @AttrRes attr: Int, fallback: Flo
 }
 
 fun Context.resolveBoolean(@StyleRes style: Int, @AttrRes attr: Int, fallback: Boolean): Boolean {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
         return ta.getBoolean(0, fallback)
     } finally {
@@ -108,32 +98,18 @@ fun Context.resolveBoolean(@StyleRes style: Int, @AttrRes attr: Int, fallback: B
 @ColorInt
 fun Context.resolveColor(
         @StyleRes style: Int, @AttrRes attr: Int, @ColorInt fallback: Int = 0): Int {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
-        val resId = ta.getResourceId(0, 0)
-        if (resId != 0) {
-            // It's a reference, let Context handle it.
-            return getColorCompat(resId)
-        } else {
-            // It's in-place, obtain it form TypedArray. (Maybe a color int?)
-            return ta.getColor(0, fallback)
-        }
+        return ta.getColorCompat(this, 0, fallback)
     } finally {
         ta.recycle()
     }
 }
 
 fun Context.resolveColorStateList(@StyleRes style: Int, @AttrRes attr: Int): ColorStateList? {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
-        val resId = ta.getResourceId(0, 0)
-        if (resId != 0) {
-            // It's a reference, let Context handle it.
-            return getColorStateListCompat(resId)
-        } else {
-            // It's in-place, obtain it form TypedArray. (Maybe a color int?)
-            return ta.getColorStateList(0)
-        }
+        return ta.getColorStateListCompat(this, 0)
     } finally {
         ta.recycle()
     }
@@ -141,7 +117,7 @@ fun Context.resolveColorStateList(@StyleRes style: Int, @AttrRes attr: Int): Col
 
 fun Context.resolveDimension(
         @StyleRes style: Int, @AttrRes attr: Int, fallback: Float = 0F): Float {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
         return ta.getDimension(0, fallback)
     } finally {
@@ -151,7 +127,7 @@ fun Context.resolveDimension(
 
 fun Context.resolveDimensionPixelOffset(
         @StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
         return ta.getDimensionPixelOffset(0, fallback)
     } finally {
@@ -161,7 +137,7 @@ fun Context.resolveDimensionPixelOffset(
 
 fun Context.resolveDimensionPixelSize(
         @StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
         return ta.getDimensionPixelSize(0, fallback)
     } finally {
@@ -170,23 +146,16 @@ fun Context.resolveDimensionPixelSize(
 }
 
 fun Context.resolveDrawable(@StyleRes style: Int, @AttrRes attr: Int): Drawable? {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
-        val resId = ta.getResourceId(0, 0)
-        if (resId != 0) {
-            // It's a reference, let Context handle it.
-            return getDrawableCompat(resId)
-        } else {
-            // It's in-place, obtain it form TypedArray. (Maybe a color int?)
-            return ta.getDrawable(0)
-        }
+        return ta.getDrawableCompat(this, 0)
     } finally {
         ta.recycle()
     }
 }
 
 fun Context.resolveString(@StyleRes style: Int, @AttrRes attr: Int): String? {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
         val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
@@ -202,7 +171,7 @@ fun Context.resolveString(@StyleRes style: Int, @AttrRes attr: Int): String? {
 }
 
 fun Context.resolveText(@StyleRes style: Int, @AttrRes attr: Int): CharSequence? {
-    val ta = obtainTypedArray(style, attr)
+    val ta = obtainStyledAttributes(style, attr)
     try {
         val resId = ta.getResourceId(0, 0)
         if (resId != 0) {
@@ -214,5 +183,43 @@ fun Context.resolveText(@StyleRes style: Int, @AttrRes attr: Int): CharSequence?
         }
     } finally {
         ta.recycle()
+    }
+}
+
+fun TypedArray.getDrawableCompat(context: Context, @StyleableRes index: Int): Drawable? {
+    val resId = getResourceId(index, 0)
+    return if (resId != 0) {
+        // It's a reference, let Context handle it.
+        context.getDrawableCompat(resId)
+    } else {
+        // It's in-place, obtain it form TypedArray. (Maybe a color int?)
+        getDrawable(0)
+    }
+}
+
+fun TypedArray.getColorStateListCompat(context: Context, @StyleableRes index: Int): ColorStateList? {
+    val resId = getResourceId(index, 0)
+    return if (resId != 0) {
+        // It's a reference, let Context handle it.
+        context.getColorStateListCompat(resId)
+    } else {
+        // It's in-place, obtain it form TypedArray. (Maybe a color int?)
+        getColorStateList(0)
+    }
+}
+
+@ColorInt
+fun TypedArray.getColorCompat(
+        context: Context,
+        @StyleableRes index: Int,
+        @ColorInt defValue: Int
+): Int {
+    val resId = getResourceId(index, 0)
+    return if (resId != 0) {
+        // It's a reference, let Context handle it.
+        context.getColorCompat(resId)
+    } else {
+        // It's in-place, obtain it form TypedArray. (Maybe a color int?)
+        getColor(0, defValue)
     }
 }
