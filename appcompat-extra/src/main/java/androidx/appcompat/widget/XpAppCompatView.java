@@ -7,18 +7,14 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 import androidx.core.view.TintableBackgroundView;
 
-import net.xpece.android.R;
-
-@SuppressWarnings("RestrictedApi")
 public class XpAppCompatView extends View implements TintableBackgroundView {
-    private AppCompatBackgroundHelper mBackgroundTintHelper;
 
-    private int mBackgroundResource;
+    private AppCompatBackgroundHelper mBackgroundTintHelper;
 
     public XpAppCompatView(Context context) {
         this(context, null);
@@ -33,58 +29,29 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
 
         mBackgroundTintHelper = new AppCompatBackgroundHelper(this);
         mBackgroundTintHelper.loadFromAttributes(attrs, defStyleAttr);
-
-        final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs, R.styleable.ViewBackgroundHelper, defStyleAttr, 0);
-        try {
-            if (a.hasValue(R.styleable.ViewBackgroundHelper_android_background)) {
-                setBackgroundResource(a.getResourceId(R.styleable.ViewBackgroundHelper_android_background, 0));
-            }
-        } finally {
-            a.recycle();
-        }
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void setBackgroundResource(@DrawableRes int resId) {
-//        super.setBackgroundResource(resId);
-//        if (mBackgroundTintHelper != null) {
-//            mBackgroundTintHelper.onSetBackgroundResource(resId);
-//        }
-
-        if (resId != 0 && resId == mBackgroundResource) {
-            return;
+        super.setBackgroundResource(resId);
+        if (mBackgroundTintHelper != null) {
+            mBackgroundTintHelper.onSetBackgroundResource(resId);
         }
-
-        Drawable d = null;
-        if (resId != 0) {
-            d = AppCompatDrawableManager.get().getDrawable(getContext(), resId);
-        }
-        setBackgroundDrawable(d);
-
-        mBackgroundResource = resId;
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void setBackgroundDrawable(@Nullable Drawable background) {
-        mBackgroundResource = 0;
         super.setBackgroundDrawable(background);
         if (mBackgroundTintHelper != null) {
             mBackgroundTintHelper.onSetBackgroundDrawable(background);
         }
     }
 
-    @Override
-    public void setBackgroundColor(@ColorInt int color) {
-        mBackgroundResource = 0;
-        super.setBackgroundColor(color);
-    }
-
     /**
      * This should be accessed via
      * {@link androidx.core.view.ViewCompat#setBackgroundTintList(View, ColorStateList)}
      */
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     @Override
     public void setSupportBackgroundTintList(@Nullable ColorStateList tint) {
         if (mBackgroundTintHelper != null) {
@@ -96,6 +63,7 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
      * This should be accessed via
      * {@link androidx.core.view.ViewCompat#getBackgroundTintList(View)}
      */
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     @Override
     @Nullable
     public ColorStateList getSupportBackgroundTintList() {
@@ -107,6 +75,7 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
      * This should be accessed via
      * {@link androidx.core.view.ViewCompat#setBackgroundTintMode(View, PorterDuff.Mode)}
      */
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     @Override
     public void setSupportBackgroundTintMode(@Nullable PorterDuff.Mode tintMode) {
         if (mBackgroundTintHelper != null) {
@@ -118,6 +87,7 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
      * This should be accessed via
      * {@link androidx.core.view.ViewCompat#getBackgroundTintMode(View)}
      */
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     @Override
     @Nullable
     public PorterDuff.Mode getSupportBackgroundTintMode() {
@@ -125,6 +95,7 @@ public class XpAppCompatView extends View implements TintableBackgroundView {
             ? mBackgroundTintHelper.getSupportBackgroundTintMode() : null;
     }
 
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     @Override
     protected void drawableStateChanged() {
         super.drawableStateChanged();
