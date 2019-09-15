@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,18 +9,44 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
-    <androidx.appcompat.widget.XpAppCompatButton2
+    <androidx.appcompat.widget.XpAppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Light Button"/>
+        android:text="Light Button" />
 
-    <androidx.appcompat.widget.XpAppCompatButton2
+    <androidx.appcompat.widget.XpAppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dark Button"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editFilter"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="88dp"
+            android:layout_marginRight="88dp"
+            android:layout_height="wrap_content"
+            android:hint="Filter" />
+
+        <TextView
+            android:layout_marginTop="48dp"
+            android:id="@+id/textFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/buttonFilter"
+            android:text="Test"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -35,13 +60,13 @@
             android:layout_height="wrap_content"
             android:text="@string/action_settings"
             android:textSize="60dp"
-            tools:ignore="MissingPrefix"/>
+            tools:ignore="MissingPrefix" />
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.XpAppCompatView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?dividerHorizontal"/>
+        android:background="?dividerHorizontal" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -56,7 +81,7 @@
             android:layout_height="wrap_content"
             android:text="@string/action_settings"
             android:textSize="60dp"
-            tools:ignore="MissingPrefix"/>
+            tools:ignore="MissingPrefix" />
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

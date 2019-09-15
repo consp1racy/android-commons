@@ -6,16 +6,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.TimePicker
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.google.android.material.snackbar.Snackbar
 import net.xpece.android.app.SnackbarActivity
 import net.xpece.android.content.dp
+import net.xpece.android.text.EmphasisCache
+import net.xpece.android.text.emphasize
 import net.xpece.android.widget.XpEdgeEffect
 import net.xpece.android.widget.setSelectionDividerTint
 import net.xpece.commons.android.sample.R
 import org.threeten.bp.LocalDateTime
+import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity(), SnackbarActivity {
     override val snackbarParent: View
@@ -30,11 +33,29 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        pager = findViewById<androidx.viewpager.widget.ViewPager>(R.id.pager)
+        pager = findViewById(R.id.pager)
         val adapter = MyPagerAdapter()
         pager.adapter = adapter
 
         XpEdgeEffect.setColor(pager, Color.RED)
+
+        val textFilter = findViewById<TextView>(R.id.textFilter)
+        val editFilter = findViewById<EditText>(R.id.editFilter)
+        val buttonFilter = findViewById<Button>(R.id.buttonFilter)
+        val text = "A quick brown fox jumped over the lazy dog."
+//        val text = "Günaydın"
+        editFilter.addTextChangedListener {
+            val test = it?.trim() ?: ""
+            textFilter.setText(emphasize(text, test, resources.configuration.locale), TextView.BufferType.SPANNABLE)
+        }
+
+        buttonFilter.setOnClickListener {
+            EmphasisCache.clearCache()
+            val time = measureTimeMillis {
+                textFilter.setText(emphasize(text, "jump", resources.configuration.locale), TextView.BufferType.SPANNABLE)
+            }
+            Log.w("ASDF", "Took $time ms.")
+        }
 
         val d = dp(16)
         Log.d(TAG, "Dimension real size: " + d.toString(this))
@@ -76,6 +97,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
     }
 
     companion object {
-        @JvmField val TAG = MainActivity::class.java.simpleName
+        @JvmField
+        val TAG = MainActivity::class.java.simpleName
     }
 }

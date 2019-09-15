@@ -1,8 +1,1 @@
-<manifest package="net.xpece.android"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="1"
-          android:versionName="1">
-
-    <application/>
-
-</manifest>
+<manifest package="net.xpece.android" />

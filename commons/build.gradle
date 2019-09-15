@@ -9,6 +9,8 @@ android {
         minSdkVersion 14
 
         consumerProguardFiles 'proguard-consumer-rules.pro'
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     lintOptions {
@@ -25,6 +27,10 @@ android {
 }
 
 dependencies {
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+
     testImplementation 'junit:junit:4.12'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation 'com.jakewharton.threetenabp:threetenabp:1.0.0'
