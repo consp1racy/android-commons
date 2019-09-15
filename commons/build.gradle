@@ -54,7 +54,6 @@ dependencies {
 
     compileOnly 'com.jakewharton.threetenabp:threetenabp:1.0.0'
 
-    compileOnly 'com.sun.mail:android-activation:1.5.5'
     compileOnly 'com.jakewharton.timber:timber:4.5.0'
 //    compileOnly 'com.github.ajalt:timberkt:1.5.0'
 
