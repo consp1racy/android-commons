@@ -9,10 +9,6 @@ object ThreeTenBpAdapter {
         return dt.toString()
     }
 
-    @ToJson fun toJson(dt: ZonedDateTime): String {
-        return dt.toString()
-    }
-
     @ToJson fun toJson(dt: OffsetDateTime): String {
         return dt.toString()
     }
@@ -29,14 +25,6 @@ object ThreeTenBpAdapter {
         return dt.toString()
     }
 
-    @ToJson fun toJson(dt: OffsetTime): String {
-        return dt.toString()
-    }
-
-    @FromJson fun offsetTimeFromJson(dt: String): OffsetTime {
-        return OffsetTime.parse(dt)
-    }
-
     @FromJson fun localTimeFromJson(dt: String): LocalTime {
         return LocalTime.parse(dt)
     }
@@ -51,10 +39,6 @@ object ThreeTenBpAdapter {
 
     @FromJson fun offsetDateTimeFromJson(dt: String): OffsetDateTime {
         return OffsetDateTime.parse(dt)
-    }
-
-    @FromJson fun zonedDateTimeFromJson(dt: String): ZonedDateTime {
-        return ZonedDateTime.parse(dt)
     }
 
     @FromJson fun instantFromJson(dt: String): Instant {
