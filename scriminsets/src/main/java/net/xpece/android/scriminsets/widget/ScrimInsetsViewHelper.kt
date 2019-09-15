@@ -1,21 +1,7 @@
-/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+package net.xpece.android.scriminsets.widget
 
-package net.xpece.android.widget
-
+import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
@@ -23,10 +9,12 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.AttrRes
-import androidx.appcompat.widget.TintTypedArray
+import androidx.annotation.StyleRes
+import androidx.annotation.StyleableRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import net.xpece.android.R
+import net.xpece.android.scriminsets.R
 
 class ScrimInsetsViewHelper(private val view: View) {
 
@@ -43,18 +31,33 @@ class ScrimInsetsViewHelper(private val view: View) {
 
     private val tempRect = Rect()
 
-    fun loadFromAttributes(attrs: AttributeSet?, @AttrRes defStyleAttr: Int) {
+    private fun TypedArray.getDrawableCompat(
+            context: Context,
+            @StyleableRes index: Int
+    ): Drawable? {
+        val resId = getResourceId(index, 0)
+        if (resId != 0) {
+            return AppCompatResources.getDrawable(context, resId)
+        }
+        return getDrawable(index)
+    }
+
+    fun loadFromAttributes(
+            attrs: AttributeSet?,
+            @AttrRes defStyleAttr: Int,
+            @StyleRes defStyleRes: Int
+    ) {
         // Short-circuit if the platform doesn't support drawing behind insets.
         if (Build.VERSION.SDK_INT < 21) return
 
-        val a = TintTypedArray.obtainStyledAttributes(
-                view.context,
+        val c = view.context
+        val a = c.obtainStyledAttributes(
                 attrs,
                 R.styleable.ScrimInsetsViewHelper,
                 defStyleAttr,
-                R.style.Widget_Design_ScrimInsetsFrameLayout
+                defStyleRes
         )
-        insetForeground = a.getDrawable(R.styleable.ScrimInsetsViewHelper_insetForeground)
+        insetForeground = a.getDrawableCompat(c, R.styleable.ScrimInsetsViewHelper_insetForeground)
         consumeInsets = a.getBoolean(R.styleable.ScrimInsetsViewHelper_consumeInsets, true)
         a.recycle()
     }

@@ -1,4 +1,4 @@
-package net.xpece.android.widget
+package net.xpece.android.scriminsets.widget
 
 import android.content.Context
 import android.graphics.Canvas

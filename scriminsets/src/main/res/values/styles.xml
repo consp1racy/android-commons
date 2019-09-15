@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.Xpece.ScrimInsetsFrameLayout" parent="">
+        <item name="insetForeground">#4000</item>
+    </style>
+
+    <style name="Widget.Xpece.ScrimInsetsLinearLayout" parent="">
+        <item name="insetForeground">#4000</item>
+    </style>
+</resources>
