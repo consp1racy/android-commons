@@ -1,4 +1,4 @@
-package androidx.recyclerview.widget;
+package net.xpece.android.recyclerview.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

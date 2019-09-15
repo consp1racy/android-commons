@@ -1,13 +1,11 @@
-package androidx.appcompat.widget;
+package net.xpece.android.recyclerview.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
-/**
- * @deprecated Use {@link androidx.recyclerview.widget.FullWidthGridLayoutManager}.
- */
-@Deprecated
-public class FullWidthGridLayoutManager extends androidx.recyclerview.widget.FullWidthGridLayoutManager {
+import androidx.recyclerview.widget.FullWidthGridLayoutManagerImpl;
+
+public class FullWidthGridLayoutManager extends FullWidthGridLayoutManagerImpl {
 
     public FullWidthGridLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);

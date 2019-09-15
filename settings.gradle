@@ -1,5 +1,8 @@
-include ':sample-commons', ':commons', ':appcompat-extra', ':design-extra', ':sample-extra'
+include ':sample-commons', ':commons', ':sample-extra'
 include ':commons-services', ':commons-resources', ':commons-dimen', ':commons-dimen-lazy', ":commons-base"
 include ':cardbutton', ':sample-cardbutton'
 include ':scriminsets'
 include ':icontabs'
+include ':appcompat-extra'
+include ':recyclerview-extra'
+include ':design-extra'

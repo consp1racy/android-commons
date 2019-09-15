@@ -1,0 +1,19 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 14
+    }
+}
+
+dependencies {
+    api('androidx.recyclerview:recyclerview:1.0.0')
+}
+
+group = rootProject.GROUP_ID
+version = rootProject.RECYCLERVIEW_EXTRA_VERSION_NAME
+
+apply from: rootProject.file('android-release.gradle')

@@ -1,4 +1,4 @@
-package androidx.recyclerview.widget;
+package net.xpece.android.recyclerview.widget;
 
 import android.graphics.Rect;
 import android.util.Log;
@@ -6,6 +6,9 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.FullWidthGridLayoutManagerImpl;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public abstract class FullWidthGridItemDecoration extends RecyclerView.ItemDecoration {
@@ -17,9 +20,9 @@ public abstract class FullWidthGridItemDecoration extends RecyclerView.ItemDecor
     public void getItemOffsets(@NonNull final Rect outRect, @NonNull final View view, @NonNull final RecyclerView parent, @NonNull final RecyclerView.State state) {
         final boolean itemInset = isItemInset(view, parent, state);
         if (itemInset) {
-            final FullWidthGridLayoutManager layout;
+            final FullWidthGridLayoutManagerImpl layout;
             try {
-                layout = (FullWidthGridLayoutManager) parent.getLayoutManager();
+                layout = (FullWidthGridLayoutManagerImpl) parent.getLayoutManager();
             } catch (ClassCastException ex) {
                 Log.e(TAG, parent.getLayoutManager() + " is not supported by " + this.getClass() + ".");
                 super.getItemOffsets(outRect, view, parent, state);

@@ -17,16 +17,14 @@ package androidx.recyclerview.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.RestrictTo;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 import java.util.Arrays;
 
@@ -36,7 +34,8 @@ import java.util.Arrays;
  * By default, each item occupies 1 span. You can change it by providing a custom
  * {@link GridLayoutManager.SpanSizeLookup} instance via {@link #setSpanSizeLookup(GridLayoutManager.SpanSizeLookup)}.
  */
-public class FullWidthGridLayoutManager extends LinearLayoutManager {
+@RestrictTo(RestrictTo.Scope.LIBRARY)
+public class FullWidthGridLayoutManagerImpl extends LinearLayoutManager {
 
     private static final boolean DEBUG = false;
     private static final String TAG = "GridLayoutManager";
@@ -69,8 +68,8 @@ public class FullWidthGridLayoutManager extends LinearLayoutManager {
      *
      * @attr ref android.support.v7.recyclerview.R.styleable#RecyclerView_spanCount
      */
-    public FullWidthGridLayoutManager(Context context, AttributeSet attrs, int defStyleAttr,
-                                      int defStyleRes) {
+    public FullWidthGridLayoutManagerImpl(Context context, AttributeSet attrs, int defStyleAttr,
+                                          int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         Properties properties = getProperties(context, attrs, defStyleAttr, defStyleRes);
         setSpanCount(properties.spanCount);
@@ -82,7 +81,7 @@ public class FullWidthGridLayoutManager extends LinearLayoutManager {
      * @param context Current context, will be used to access resources.
      * @param spanCount The number of columns in the grid
      */
-    public FullWidthGridLayoutManager(Context context, int spanCount) {
+    public FullWidthGridLayoutManagerImpl(Context context, int spanCount) {
         super(context);
         setSpanCount(spanCount);
     }
@@ -94,8 +93,8 @@ public class FullWidthGridLayoutManager extends LinearLayoutManager {
      * #VERTICAL}.
      * @param reverseLayout When set to true, layouts from end to start.
      */
-    public FullWidthGridLayoutManager(Context context, int spanCount, int orientation,
-                                      boolean reverseLayout) {
+    public FullWidthGridLayoutManagerImpl(Context context, int spanCount, int orientation,
+                                          boolean reverseLayout) {
         super(context, orientation, reverseLayout);
         setSpanCount(spanCount);
     }
