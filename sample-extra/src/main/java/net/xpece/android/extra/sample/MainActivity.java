@@ -1,12 +1,28 @@
 package net.xpece.android.extra.sample;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Checkable;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import net.xpece.android.appcompat.FixedAppCompatDelegate;
+
 public class MainActivity extends AppCompatActivity {
+
+    private AppCompatDelegate mDelegate = null;
+
+    @Override
+    @NonNull
+    public AppCompatDelegate getDelegate() {
+        if (mDelegate == null) {
+            mDelegate = FixedAppCompatDelegate.create(this, this);
+        }
+        return mDelegate;
+    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
