@@ -8,11 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.google.android.material.widget.IconifiedPagerAdapter;
+import net.xpece.android.icontabs.widget.IconPagerAdapter;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public class IconifiedTabLayout extends TabLayout {
-    private static final IconifiedPagerAdapter NOOP_ICONIFIED_PAGER_ADAPTER = new IconifiedPagerAdapter() {
+public class IconTabLayoutImpl extends TabLayout {
+    private static final IconPagerAdapter NOOP_ICONIFIED_PAGER_ADAPTER = new IconPagerAdapter() {
         @Nullable
         @Override
         public Drawable getPageIcon(final int position) {
@@ -27,15 +27,15 @@ public class IconifiedTabLayout extends TabLayout {
 
     private PagerAdapter mPagerAdapter = null;
 
-    public IconifiedTabLayout(final Context context) {
+    public IconTabLayoutImpl(final Context context) {
         super(context);
     }
 
-    public IconifiedTabLayout(final Context context, @Nullable final AttributeSet attrs) {
+    public IconTabLayoutImpl(final Context context, @Nullable final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public IconifiedTabLayout(final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
+    public IconTabLayoutImpl(final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -50,7 +50,7 @@ public class IconifiedTabLayout extends TabLayout {
         removeAllTabs();
 
         if (mPagerAdapter != null) {
-            final IconifiedPagerAdapter iconifiedAdapter = getIconifiedPagerAdapter(mPagerAdapter);
+            final IconPagerAdapter iconifiedAdapter = getIconifiedPagerAdapter(mPagerAdapter);
 
             final int adapterCount = mPagerAdapter.getCount();
             for (int i = 0; i < adapterCount; i++) {
@@ -75,9 +75,9 @@ public class IconifiedTabLayout extends TabLayout {
         }
     }
 
-    private IconifiedPagerAdapter getIconifiedPagerAdapter(final PagerAdapter adapter) {
-        if (adapter instanceof IconifiedPagerAdapter) {
-            return (IconifiedPagerAdapter) adapter;
+    private IconPagerAdapter getIconifiedPagerAdapter(final PagerAdapter adapter) {
+        if (adapter instanceof IconPagerAdapter) {
+            return (IconPagerAdapter) adapter;
         } else {
             return NOOP_ICONIFIED_PAGER_ADAPTER;
         }

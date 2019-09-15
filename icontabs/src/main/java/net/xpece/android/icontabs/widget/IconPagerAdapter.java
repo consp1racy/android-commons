@@ -1,11 +1,12 @@
-package com.google.android.material.tabs;
+package net.xpece.android.icontabs.widget;
 
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.Nullable;
 
 
-public interface IconifiedPagerAdapter {
+public interface IconPagerAdapter {
+
     @Nullable
     Drawable getPageIcon(int position);
 
