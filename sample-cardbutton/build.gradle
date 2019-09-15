@@ -27,5 +27,5 @@ android {
 }
 
 dependencies {
-    implementation project(':widget-cardbutton')
+    implementation project(':cardbutton')
 }

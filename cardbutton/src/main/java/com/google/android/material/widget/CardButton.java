@@ -48,9 +48,13 @@ import androidx.core.view.MarginLayoutParamsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.xpece.android.cardbutton.R;
 import net.xpece.android.widget.TintableCompoundDrawableView;
-import net.xpece.android.widget.cardbutton.R;
 
+/**
+ * Use {@link net.xpece.android.cardbutton.widget.CardButton} instead.
+ */
+@Deprecated
 public class CardButton extends AppCompatButton implements TintableCompoundDrawableView {
     public static boolean AUTO_VISUAL_MARGIN_ENABLED = Build.VERSION.SDK_INT < 18;
 

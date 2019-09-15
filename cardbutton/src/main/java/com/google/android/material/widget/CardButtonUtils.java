@@ -19,8 +19,11 @@ package com.google.android.material.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
+
+import net.xpece.android.cardbutton.R;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -32,7 +35,7 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 @RestrictTo(LIBRARY)
 final class CardButtonUtils {
 
-    private static final int[] APPCOMPAT_CHECK_ATTRS = {net.xpece.android.widget.cardbutton.R.attr.colorPrimary};
+    private static final int[] APPCOMPAT_CHECK_ATTRS = {R.attr.colorPrimary};
     private static final String APPCOMPAT_THEME_NAME = "Theme.AppCompat";
 
     private CardButtonUtils() {
