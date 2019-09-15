@@ -14,10 +14,11 @@ object BaseResources {
 
     @Suppress("NOTHING_TO_INLINE")
     @AnyRes
-    inline fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int): Int =
+    inline fun Context.resolveResourceId(@AttrRes attr: Int, @AnyRes fallback: Int): Int =
             resolveResourceId(0, attr, fallback)
 
-    fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int): Int {
+    @AnyRes
+    fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, @AnyRes fallback: Int): Int {
         val ta = obtainStyledAttributes(style, attr)
         try {
             return ta.getResourceId(0, fallback)

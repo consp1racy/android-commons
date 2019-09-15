@@ -13,11 +13,11 @@ import net.xpece.android.content.BaseResources.obtainStyledAttributes
 import net.xpece.android.content.BaseResources.resolveResourceId as resolveResourceIdImpl
 
 @AnyRes
-inline fun Context.resolveResourceId(@AttrRes attr: Int, fallback: Int): Int =
+inline fun Context.resolveResourceId(@AttrRes attr: Int, @AnyRes fallback: Int): Int =
         resolveResourceIdImpl(0, attr, fallback)
 
 @AnyRes
-inline fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, fallback: Int): Int =
+inline fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, @AnyRes fallback: Int): Int =
         resolveResourceIdImpl(style, attr, fallback)
 
 /**
