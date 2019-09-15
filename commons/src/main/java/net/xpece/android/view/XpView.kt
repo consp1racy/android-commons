@@ -105,10 +105,6 @@ fun View.toastContentDescription(text: CharSequence = this.contentDescription): 
     return true
 }
 
-@Deprecated("")
-@Suppress("DEPRECATION")
-fun View.fitSystemWindows(insets: Rect) = XpViewReflect.fitSystemWindows(this, insets)
-
 inline fun View.setLayerTypeSafe(layerType: Int) {
     if (this.layerType != layerType) {
         setLayerType(layerType, null)
