@@ -65,6 +65,22 @@ open class ScrimInsetsFrameLayout @JvmOverloads constructor(
         helper.setDrawBottomInsetForeground(drawBottomInsetForeground)
     }
 
+    fun setDrawTopLeftInsetForeground(drawTopLeftInsetForeground: Boolean) {
+        helper.setDrawTopLeftInsetForeground(drawTopLeftInsetForeground)
+    }
+
+    fun setDrawTopRightInsetForeground(drawTopRightInsetForeground: Boolean) {
+        helper.setDrawTopRightInsetForeground(drawTopRightInsetForeground)
+    }
+
+    fun setDrawBottomLeftInsetForeground(drawBottomLeftInsetForeground: Boolean) {
+        helper.setDrawBottomLeftInsetForeground(drawBottomLeftInsetForeground)
+    }
+
+    fun setDrawBottomRightInsetForeground(drawBottomRightInsetForeground: Boolean) {
+        helper.setDrawBottomRightInsetForeground(drawBottomRightInsetForeground)
+    }
+
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
         helper.draw(canvas)
