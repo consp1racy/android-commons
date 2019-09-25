@@ -193,7 +193,7 @@ fun TypedArray.getDrawableCompat(context: Context, @StyleableRes index: Int): Dr
         context.getDrawableCompat(resId)
     } else {
         // It's in-place, obtain it form TypedArray. (Maybe a color int?)
-        getDrawable(0)
+        getDrawable(index)
     }
 }
 
@@ -204,7 +204,7 @@ fun TypedArray.getColorStateListCompat(context: Context, @StyleableRes index: In
         context.getColorStateListCompat(resId)
     } else {
         // It's in-place, obtain it form TypedArray. (Maybe a color int?)
-        getColorStateList(0)
+        getColorStateList(index)
     }
 }
 
@@ -220,6 +220,6 @@ fun TypedArray.getColorCompat(
         context.getColorCompat(resId)
     } else {
         // It's in-place, obtain it form TypedArray. (Maybe a color int?)
-        getColor(0, defValue)
+        getColor(index, defValue)
     }
 }
