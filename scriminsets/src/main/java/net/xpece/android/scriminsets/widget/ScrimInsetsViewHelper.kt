@@ -19,17 +19,17 @@ class ScrimInsetsViewHelper(private val view: View) {
 
     private var insets: Rect? = null
 
-    private var drawLeftInsetForeground = true
-    private var drawTopInsetForeground = true
-    private var drawRightInsetForeground = true
-    private var drawBottomInsetForeground = true
-
     private var drawTopLeftInsetForeground = true
-    private var drawTopRightInsetForeground = true
+    private var drawLeftInsetForeground = true
     private var drawBottomLeftInsetForeground = true
+
+    private var drawTopInsetForeground = true
+
+    private var drawTopRightInsetForeground = true
+    private var drawRightInsetForeground = true
     private var drawBottomRightInsetForeground = true
 
-    private var consumeInsets = true
+    private var drawBottomInsetForeground = true
 
     private val tempRect = Rect()
 
@@ -48,12 +48,25 @@ class ScrimInsetsViewHelper(private val view: View) {
                 defStyleAttr,
                 defStyleRes
         )
+
         insetForeground = a.getDrawableCompat(c, R.styleable.ScrimInsetsViewHelper_insetForeground)
-        consumeInsets = a.getBoolean(R.styleable.ScrimInsetsViewHelper_consumeInsets, true)
+
+        val scrimInsets = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsets, false)
+        val scrimInsetsHorizontal = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetsHorizontal, false)
+        val scrimInsetsVertical = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetsVertical, false)
+        val scrimInsetLeft = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetLeft, false)
+        val scrimInsetTop = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetTop, false)
+        val scrimInsetRight = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetRight, false)
+        val scrimInsetBottom = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetBottom, false)
+        setDrawLeftInsetForeground(scrimInsetLeft || scrimInsetsHorizontal || scrimInsets)
+        setDrawTopInsetForeground(scrimInsetTop || scrimInsetsVertical || scrimInsets)
+        setDrawRightInsetForeground(scrimInsetRight || scrimInsetsHorizontal || scrimInsets)
+        setDrawBottomInsetForeground(scrimInsetBottom || scrimInsetsVertical || scrimInsets)
+
         a.recycle()
     }
 
-    fun onApplyWindowInsets(insets: WindowInsetsCompat): WindowInsetsCompat {
+    fun onApplyWindowInsets(insets: WindowInsetsCompat) {
         if (this.insets == null) {
             this.insets = Rect()
         }
@@ -66,12 +79,6 @@ class ScrimInsetsViewHelper(private val view: View) {
 
         view.setWillNotDraw(!insets.hasSystemWindowInsets() || insetForeground == null)
         ViewCompat.postInvalidateOnAnimation(view)
-
-        return if (consumeInsets) {
-            insets.consumeSystemWindowInsets()
-        } else {
-            insets
-        }
     }
 
     fun setScrimInsetForeground(drawable: Drawable?) {
@@ -80,6 +87,8 @@ class ScrimInsetsViewHelper(private val view: View) {
 
     fun setDrawLeftInsetForeground(drawLeftInsetForeground: Boolean) {
         this.drawLeftInsetForeground = drawLeftInsetForeground
+        setDrawTopLeftInsetForeground(drawLeftInsetForeground)
+        setDrawBottomLeftInsetForeground(drawLeftInsetForeground)
     }
 
     fun setDrawTopInsetForeground(drawTopInsetForeground: Boolean) {
@@ -88,25 +97,27 @@ class ScrimInsetsViewHelper(private val view: View) {
 
     fun setDrawRightInsetForeground(drawRightInsetForeground: Boolean) {
         this.drawRightInsetForeground = drawRightInsetForeground
+        setDrawTopRightInsetForeground(drawRightInsetForeground)
+        setDrawBottomRightInsetForeground(drawRightInsetForeground)
     }
 
     fun setDrawBottomInsetForeground(drawBottomInsetForeground: Boolean) {
         this.drawBottomInsetForeground = drawBottomInsetForeground
     }
 
-    fun setDrawTopLeftInsetForeground(drawTopLeftInsetForeground: Boolean) {
+    private fun setDrawTopLeftInsetForeground(drawTopLeftInsetForeground: Boolean) {
         this.drawTopLeftInsetForeground = drawTopLeftInsetForeground
     }
 
-    fun setDrawTopRightInsetForeground(drawTopRightInsetForeground: Boolean) {
+    private fun setDrawTopRightInsetForeground(drawTopRightInsetForeground: Boolean) {
         this.drawTopRightInsetForeground = drawTopRightInsetForeground
     }
 
-    fun setDrawBottomLeftInsetForeground(drawBottomLeftInsetForeground: Boolean) {
+    private fun setDrawBottomLeftInsetForeground(drawBottomLeftInsetForeground: Boolean) {
         this.drawBottomLeftInsetForeground = drawBottomLeftInsetForeground
     }
 
-    fun setDrawBottomRightInsetForeground(drawBottomRightInsetForeground: Boolean) {
+    private fun setDrawBottomRightInsetForeground(drawBottomRightInsetForeground: Boolean) {
         this.drawBottomRightInsetForeground = drawBottomRightInsetForeground
     }
 

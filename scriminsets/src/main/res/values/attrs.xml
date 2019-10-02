@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="scrimInsetFrameLayoutStyle" format="reference" />
+    <attr name="scrimInsetLinearLayoutStyle" format="reference" />
+
     <declare-styleable name="ScrimInsetsViewHelper">
         <attr name="insetForeground" format="color|reference" />
-        <attr name="consumeInsets" format="boolean" />
+        <attr name="scrimInsets" format="boolean" />
+        <attr name="scrimInsetTop" format="boolean" />
+        <attr name="scrimInsetBottom" format="boolean" />
+        <attr name="scrimInsetLeft" format="boolean" />
+        <attr name="scrimInsetRight" format="boolean" />
+        <attr name="scrimInsetsHorizontal" format="boolean" />
+        <attr name="scrimInsetsVertical" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="ScrimInsetsFrameLayout">
         <attr name="insetForeground" />
-        <attr name="consumeInsets" />
+        <attr name="scrimInsets" />
+        <attr name="scrimInsetTop" />
+        <attr name="scrimInsetBottom" />
+        <attr name="scrimInsetLeft" />
+        <attr name="scrimInsetRight" />
+        <attr name="scrimInsetsHorizontal" />
+        <attr name="scrimInsetsVertical" />
     </declare-styleable>
 
     <declare-styleable name="ScrimInsetsLinearLayout">
         <attr name="insetForeground" />
-        <attr name="consumeInsets" />
+        <attr name="scrimInsets" />
+        <attr name="scrimInsetTop" />
+        <attr name="scrimInsetBottom" />
+        <attr name="scrimInsetLeft" />
+        <attr name="scrimInsetRight" />
+        <attr name="scrimInsetsHorizontal" />
+        <attr name="scrimInsetsVertical" />
     </declare-styleable>
 </resources>

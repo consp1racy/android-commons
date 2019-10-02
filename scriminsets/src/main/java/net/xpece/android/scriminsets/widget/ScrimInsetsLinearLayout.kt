@@ -14,7 +14,7 @@ import net.xpece.android.scriminsets.R
 open class ScrimInsetsLinearLayout @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+        defStyleAttr: Int = R.attr.scrimInsetLinearLayoutStyle
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
     private val helper = ScrimInsetsViewHelper(this).apply {
@@ -39,7 +39,8 @@ open class ScrimInsetsLinearLayout @JvmOverloads constructor(
     @CallSuper
     open fun onApplyWindowInsetsCompat(insets: WindowInsetsCompat): WindowInsetsCompat {
         onInsetsChanged(insets)
-        return helper.onApplyWindowInsets(insets)
+        helper.onApplyWindowInsets(insets)
+        return insets
     }
 
     protected open fun onInsetsChanged(insets: WindowInsetsCompat) {
@@ -63,22 +64,6 @@ open class ScrimInsetsLinearLayout @JvmOverloads constructor(
 
     fun setDrawBottomInsetForeground(drawBottomInsetForeground: Boolean) {
         helper.setDrawBottomInsetForeground(drawBottomInsetForeground)
-    }
-
-    fun setDrawTopLeftInsetForeground(drawTopLeftInsetForeground: Boolean) {
-        helper.setDrawTopLeftInsetForeground(drawTopLeftInsetForeground)
-    }
-
-    fun setDrawTopRightInsetForeground(drawTopRightInsetForeground: Boolean) {
-        helper.setDrawTopRightInsetForeground(drawTopRightInsetForeground)
-    }
-
-    fun setDrawBottomLeftInsetForeground(drawBottomLeftInsetForeground: Boolean) {
-        helper.setDrawBottomLeftInsetForeground(drawBottomLeftInsetForeground)
-    }
-
-    fun setDrawBottomRightInsetForeground(drawBottomRightInsetForeground: Boolean) {
-        helper.setDrawBottomRightInsetForeground(drawBottomRightInsetForeground)
     }
 
     override fun draw(canvas: Canvas) {
