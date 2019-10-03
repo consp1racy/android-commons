@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="scrimInsetFrameLayoutStyle" format="reference" />
-    <attr name="scrimInsetLinearLayoutStyle" format="reference" />
+    <attr name="scrimInsetsFrameLayoutStyle" format="reference" />
+    <attr name="scrimInsetsLinearLayoutStyle" format="reference" />
 
     <declare-styleable name="ScrimInsetsViewHelper">
         <attr name="insetForeground" format="color|reference" />
