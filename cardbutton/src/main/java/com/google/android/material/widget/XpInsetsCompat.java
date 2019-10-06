@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.graphics.drawable.InsetDrawable;
-import android.os.Build;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.RestrictTo;
+
+import static android.os.Build.VERSION.CODENAME;
 
 /**
  * An Insets instance holds four integer offsets which describe changes to the four
@@ -20,7 +22,7 @@ import androidx.annotation.RestrictTo;
 @RequiresApi(16)
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 final class XpInsetsCompat {
-    private static final boolean SAFE = !"P".equals(Build.VERSION.CODENAME);
+    private static final boolean SAFE = !"P".equals(CODENAME);
 
     public static final Insets NONE = of(0, 0, 0, 0);
 
@@ -42,8 +44,8 @@ final class XpInsetsCompat {
         if (SAFE) {
             return Insets.of(left, top, right, bottom);
         } else {
-            final InsetDrawable insets = new InsetDrawable(null, left, top, right, bottom);
-            return XpInsetsHelper.getOpticalBounds(insets);
+            final InsetDrawable d = new InsetDrawable(null, left, top, right, bottom);
+            return d.getOpticalInsets();
         }
     }
 
