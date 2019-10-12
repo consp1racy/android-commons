@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 /** An implementation of [BaseAdapter] which uses the new/bind pattern for its views.  */
 abstract class BindableAdapter<T> : BaseAdapter() {
 
-    abstract override fun getItem(position: Int): T
+    abstract override fun getItem(position: Int): T?
 
     override fun getView(position: Int, convertView: View?, container: ViewGroup): View {
         var view = convertView
@@ -24,7 +24,7 @@ abstract class BindableAdapter<T> : BaseAdapter() {
     abstract fun newView(inflater: LayoutInflater, position: Int, container: ViewGroup): View
 
     /** Bind the data for the specified `position` to the view.  */
-    abstract fun bindView(item: T, position: Int, view: View)
+    abstract fun bindView(item: T?, position: Int, view: View)
 
     override fun getDropDownView(position: Int, convertView: View?, container: ViewGroup): View {
         var view = convertView
@@ -42,7 +42,7 @@ abstract class BindableAdapter<T> : BaseAdapter() {
     }
 
     /** Bind the data for the specified `position` to the drop-down view.  */
-    open fun bindDropDownView(item: T, position: Int, view: View) {
+    open fun bindDropDownView(item: T?, position: Int, view: View) {
         bindView(item, position, view)
     }
 }
