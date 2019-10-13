@@ -4,20 +4,22 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
+
 import net.xpece.android.R;
-import net.xpece.android.widget.XpDatePicker;
+import net.xpece.android.picker.widget.XpDatePicker;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
@@ -120,7 +122,7 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         }
 
         final DatePicker datePicker = (DatePicker) view.findViewById(R.id.datePicker);
-        onCreateDatePicker(datePicker);
+        onBindDatePicker(datePicker);
 
         LocalDate date = mDate;
         if (date != null) {
@@ -143,9 +145,13 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         return builder.create();
     }
 
-    protected void onCreateDatePicker(DatePicker datePicker) {
-        Context context = datePicker.getContext();
-        XpDatePicker.setSelectionDividerTint(datePicker, resolveColorStateList(context, R.attr.colorControlNormal));
+    @SuppressWarnings("WeakerAccess")
+    protected void onBindDatePicker(@NonNull DatePicker datePicker) {
+        if (Build.VERSION.SDK_INT < 21) {
+            final Context context = datePicker.getContext();
+            final ColorStateList color = resolveColorStateList(context, R.attr.colorControlNormal);
+            XpDatePicker.setSelectionDividerTintCompat(datePicker, color);
+        }
     }
 
     @Override

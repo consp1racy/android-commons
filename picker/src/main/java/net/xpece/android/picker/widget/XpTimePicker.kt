@@ -1,12 +1,13 @@
 @file:JvmName("XpTimePicker")
 
-package net.xpece.android.widget
+package net.xpece.android.picker.widget
 
 import android.content.res.ColorStateList
 import android.os.Build
 import android.util.Log
 import android.widget.NumberPicker
 import android.widget.TimePicker
+import androidx.annotation.ColorInt
 import java.lang.reflect.Field
 
 private object TimePickerReflection {
@@ -88,15 +89,45 @@ private fun Any.getYearSpinner(): NumberPicker? = if (TimePickerReflection.amPmS
     null
 }
 
-fun TimePicker.setSelectionDividerTint(color: ColorStateList?) {
+/**
+ * Used to change classic [TimePicker] selection divider color on-the-fly.
+ *
+ * This is primarily used on Android 4.x with AppCompat, so that the selection divider color
+ * is `colorControlNormal` instead of Holo blue.
+ *
+ * You should rely on `android:colorControlNormal` on Android 5 and newer.
+ *
+ * **WARNING!** This method doesn't work on Android 10 and newer. There is no alternative.
+ */
+@Suppress("DEPRECATION")
+fun TimePicker.setSelectionDividerTintCompat(@ColorInt color: Int) {
+    if (Build.VERSION.SDK_INT >= 29) return
+
+    this@setSelectionDividerTint.setSelectionDividerTintCompat(ColorStateList.valueOf(color))
+}
+
+/**
+ * Used to change classic [TimePicker] selection divider color on-the-fly.
+ *
+ * This is primarily used on Android 4.x with AppCompat, so that the selection divider color
+ * is `colorControlNormal` instead of Holo blue.
+ *
+ * You should rely on `android:colorControlNormal` on Android 5 and newer.
+ *
+ * **WARNING!** This method doesn't work on Android 10 and newer. There is no alternative.
+ */
+@Suppress("DEPRECATION")
+fun TimePicker.setSelectionDividerTintCompat(color: ColorStateList?) {
+    if (Build.VERSION.SDK_INT >= 29) return
+
     val impl = if (Build.VERSION.SDK_INT < 21) {
         this
     } else {
         getDelegate()?.takeIf { javaClass == TimePickerReflection.delegateClass }
     }
     impl?.apply {
-        getYearSpinner()?.setSelectionDividerTint(color)
-        getMonthSpinner()?.setSelectionDividerTint(color)
-        getDaySpinner()?.setSelectionDividerTint(color)
+        getYearSpinner()?.setSelectionDividerTintCompat(color)
+        getMonthSpinner()?.setSelectionDividerTintCompat(color)
+        getDaySpinner()?.setSelectionDividerTintCompat(color)
     }
 }

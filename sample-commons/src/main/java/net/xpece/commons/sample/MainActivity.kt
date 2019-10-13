@@ -12,10 +12,10 @@ import androidx.core.widget.addTextChangedListener
 import com.google.android.material.snackbar.Snackbar
 import net.xpece.android.app.SnackbarActivity
 import net.xpece.android.content.dp
+import net.xpece.android.picker.widget.setSelectionDividerTintCompat
 import net.xpece.android.text.EmphasisCache
 import net.xpece.android.text.emphasize
 import net.xpece.android.widget.XpEdgeEffect
-import net.xpece.android.widget.setSelectionDividerTint
 import net.xpece.commons.android.sample.R
 import org.threeten.bp.LocalDateTime
 import kotlin.system.measureTimeMillis
@@ -76,12 +76,12 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
             if (position == 0) {
                 val csl = ColorStateList.valueOf(Color.RED)
                 val tp = TimePicker(context)
-                tp.setSelectionDividerTint(csl)
+                tp.setSelectionDividerTintCompat(csl)
                 view = tp
             } else if (position == 1) {
                 val csl = ColorStateList.valueOf(Color.RED)
                 val dp = DatePicker(context)
-                dp.setSelectionDividerTint(csl)
+                dp.setSelectionDividerTintCompat(csl)
                 view = dp
             } else {
                 view = View(context)

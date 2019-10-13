@@ -4,21 +4,23 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
+
 import net.xpece.android.R;
-import net.xpece.android.widget.XpTimePicker;
+import net.xpece.android.picker.widget.XpTimePicker;
 
 import org.threeten.bp.LocalTime;
 
@@ -115,7 +117,7 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
 
         final TimePicker timePicker = (TimePicker) view.findViewById(R.id.timePicker);
         timePicker.setIs24HourView(mIs24HourFormat);
-        onCreateTimePicker(timePicker);
+        onBindTimePicker(timePicker);
 
         LocalTime time = mTime;
         if (time != null) {
@@ -131,9 +133,13 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         return builder.create();
     }
 
-    protected void onCreateTimePicker(TimePicker timePicker) {
-        Context context = timePicker.getContext();
-        XpTimePicker.setSelectionDividerTint(timePicker, resolveColorStateList(context, R.attr.colorControlNormal));
+    @SuppressWarnings("WeakerAccess")
+    protected void onBindTimePicker(@NonNull TimePicker timePicker) {
+        if (Build.VERSION.SDK_INT < 21) {
+            final Context context = timePicker.getContext();
+            final ColorStateList color = resolveColorStateList(context, R.attr.colorControlNormal);
+            XpTimePicker.setSelectionDividerTintCompat(timePicker, color);
+        }
     }
 
     @Override
