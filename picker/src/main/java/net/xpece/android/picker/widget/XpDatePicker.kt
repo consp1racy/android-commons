@@ -102,7 +102,7 @@ private fun Any.getYearSpinner(): NumberPicker? = if (DatePickerReflection.yearS
 fun DatePicker.setSelectionDividerTintCompat(@ColorInt color: Int) {
     if (Build.VERSION.SDK_INT >= 29) return
 
-    this@setSelectionDividerTint.setSelectionDividerTintCompat(ColorStateList.valueOf(color))
+    setSelectionDividerTintCompat(ColorStateList.valueOf(color))
 }
 
 /**

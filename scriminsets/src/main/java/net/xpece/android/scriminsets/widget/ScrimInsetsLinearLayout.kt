@@ -14,7 +14,7 @@ import net.xpece.android.scriminsets.R
 open class ScrimInsetsLinearLayout @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
-        defStyleAttr: Int = R.attr.scrimInsetLinearLayoutStyle
+        defStyleAttr: Int = R.attr.scrimInsetsLinearLayoutStyle
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
     private val helper = ScrimInsetsViewHelper(this).apply {

@@ -103,7 +103,7 @@ private fun Any.getYearSpinner(): NumberPicker? = if (TimePickerReflection.amPmS
 fun TimePicker.setSelectionDividerTintCompat(@ColorInt color: Int) {
     if (Build.VERSION.SDK_INT >= 29) return
 
-    this@setSelectionDividerTint.setSelectionDividerTintCompat(ColorStateList.valueOf(color))
+    setSelectionDividerTintCompat(ColorStateList.valueOf(color))
 }
 
 /**

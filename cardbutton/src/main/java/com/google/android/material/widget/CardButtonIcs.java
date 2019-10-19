@@ -19,17 +19,18 @@ package com.google.android.material.widget;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
 import com.google.android.material.internal.StateListAnimator;
 
+@SuppressLint("RestrictedApi")
 @RequiresApi(14)
-@TargetApi(14)
 class CardButtonIcs extends CardButtonGingerbread {
 
     private float mRotation;

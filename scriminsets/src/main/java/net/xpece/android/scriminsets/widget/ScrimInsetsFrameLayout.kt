@@ -14,7 +14,7 @@ import net.xpece.android.scriminsets.R
 open class ScrimInsetsFrameLayout @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
-        defStyleAttr: Int = R.attr.scrimInsetFrameLayoutStyle
+        defStyleAttr: Int = R.attr.scrimInsetsFrameLayoutStyle
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val helper = ScrimInsetsViewHelper(this).apply {
