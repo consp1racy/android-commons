@@ -1,4 +1,4 @@
-package net.xpece.android.app;
+package net.xpece.android.dialog.threetenbp.app;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -19,15 +19,15 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import net.xpece.android.R;
+import net.xpece.android.content.XpResources;
+import net.xpece.android.dialog.threetenbp.R;
 import net.xpece.android.picker.widget.XpTimePicker;
 
 import org.threeten.bp.LocalTime;
 
-import static net.xpece.android.content.XpResources.resolveColorStateList;
-
 public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment implements
-    DialogInterface.OnClickListener {
+        DialogInterface.OnClickListener {
+
     public static final String TAG = LocalTimeBpPickerDialogFragment.class.getSimpleName();
 
     private TimePicker mTimePicker;
@@ -47,14 +47,16 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         }
     }
 
-    public static LocalTimeBpPickerDialogFragment newInstance(LocalTime time, boolean is24HourFormat) {
-        LocalTimeBpPickerDialogFragment f = newInstance(time);
-        Bundle args = f.getArguments();
+    @NonNull
+    public static LocalTimeBpPickerDialogFragment newInstance(@Nullable LocalTime time, boolean is24HourFormat) {
+        final LocalTimeBpPickerDialogFragment f = newInstance(time);
+        final Bundle args = f.requireArguments();
         args.putBoolean("mIs24HourFormat", is24HourFormat);
         return f;
     }
 
-    public static LocalTimeBpPickerDialogFragment newInstance(LocalTime time) {
+    @NonNull
+    public static LocalTimeBpPickerDialogFragment newInstance(@Nullable LocalTime time) {
         Bundle args = new Bundle();
         args.putSerializable("mTime", time);
         LocalTimeBpPickerDialogFragment fragment = new LocalTimeBpPickerDialogFragment();
@@ -62,6 +64,7 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         return fragment;
     }
 
+    @NonNull
     public LocalTimeBpPickerDialogFragment forceLegacy(final boolean forceLegacy) {
         mForceLegacy = forceLegacy;
         return this;
@@ -80,8 +83,7 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
             mTime = (LocalTime) savedInstanceState.getSerializable("mTime");
             mIs24HourFormat = savedInstanceState.getBoolean("mIs24HourFormat");
             mForceLegacy = savedInstanceState.getBoolean("mForceLegacy");
-        }
-        if (args != null) {
+        } else if (args != null) {
             mTime = (LocalTime) args.getSerializable("mTime");
             if (args.containsKey("mIs24HourFormat")) {
                 mIs24HourFormat = args.getBoolean("mIs24HourFormat");
@@ -94,19 +96,24 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
     @Override
     public void onDestroyView() {
         mTimePicker = null;
-        if (getDialog() != null && getRetainInstance())
+        if (getDialog() != null && getRetainInstance()) {
             getDialog().setOnDismissListener(null);
+        }
         super.onDestroyView();
     }
 
     @Override
     @NonNull
-    @SuppressWarnings("deprecation")
     @SuppressLint("InflateParams")
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Context context = getContext();
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mTime = (LocalTime) savedInstanceState.getSerializable("mTime");
+        }
+
+        Context context = requireContext();
         final AlertDialog.Builder builder = new AlertDialog.Builder(context, resolveDialogTheme(context, getTheme()));
         context = builder.getContext();
+
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view;
         if (mForceLegacy) {
@@ -115,7 +122,7 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
             view = inflater.inflate(R.layout.dialog_time_picker, null, false);
         }
 
-        final TimePicker timePicker = (TimePicker) view.findViewById(R.id.timePicker);
+        final TimePicker timePicker = view.findViewById(R.id.timePicker);
         timePicker.setIs24HourView(mIs24HourFormat);
         onBindTimePicker(timePicker);
 
@@ -137,13 +144,13 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
     protected void onBindTimePicker(@NonNull TimePicker timePicker) {
         if (Build.VERSION.SDK_INT < 21) {
             final Context context = timePicker.getContext();
-            final ColorStateList color = resolveColorStateList(context, R.attr.colorControlNormal);
+            final ColorStateList color = XpResources.resolveColorStateList(context, R.attr.colorControlNormal);
             XpTimePicker.setSelectionDividerTintCompat(timePicker, color);
         }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         LocalTime time = getLocalTime();
         outState.putSerializable("mTime", time);
@@ -151,29 +158,40 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
     }
 
     @NonNull
-    @SuppressWarnings("deprecation")
     private LocalTime getLocalTime() {
         final TimePicker timePicker = mTimePicker;
         return LocalTime.of(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
+    public void onClick(@NonNull DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            Callbacks callbacks;
-            if (getTargetFragment() instanceof Callbacks) {
-                callbacks = (Callbacks) getTargetFragment();
-            } else if (getActivity() instanceof Callbacks) {
-                callbacks = (Callbacks) getActivity();
-            } else {
-                throw new IllegalStateException("Activity does not implement Callbacks.");
-            }
+            Callbacks callbacks = getCallbacks();
             LocalTime time = getLocalTime();
             callbacks.onTimeSelected(this, time);
+        } else if (which == DialogInterface.BUTTON_NEGATIVE) {
+            onCancel(dialog);
+        }
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        getCallbacks().onCancel(this);
+    }
+
+    private Callbacks getCallbacks() {
+        if (getTargetFragment() instanceof Callbacks) {
+            return (Callbacks) getTargetFragment();
+        } else if (getActivity() instanceof Callbacks) {
+            return (Callbacks) getActivity();
+        } else {
+            throw new IllegalStateException("Activity does not implement Callbacks.");
         }
     }
 
     public interface Callbacks {
-        void onTimeSelected(LocalTimeBpPickerDialogFragment fragment, LocalTime time);
+        void onTimeSelected(@NonNull LocalTimeBpPickerDialogFragment fragment, @NonNull LocalTime time);
+
+        void onCancel(@NonNull LocalTimeBpPickerDialogFragment fragment);
     }
 }

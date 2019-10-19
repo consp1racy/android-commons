@@ -1,4 +1,4 @@
-package net.xpece.android.app;
+package net.xpece.android.dialog.threeten.app;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -18,17 +18,17 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import net.xpece.android.R;
+import net.xpece.android.content.XpResources;
+import net.xpece.android.dialog.threeten.R;
 import net.xpece.android.picker.widget.XpDatePicker;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.ZoneId;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
-import static net.xpece.android.content.XpResources.resolveColorStateList;
+public class LocalDatePickerDialogFragment extends AppCompatDialogFragment implements
+        DialogInterface.OnClickListener {
 
-public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment implements
-    DialogInterface.OnClickListener {
-    public static final String TAG = LocalDateBpPickerDialogFragment.class.getSimpleName();
+    public static final String TAG = LocalDatePickerDialogFragment.class.getSimpleName();
 
     private DatePicker mDatePicker;
     private LocalDate mDate;
@@ -38,7 +38,7 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
     private boolean mForceLegacy;
 
     @StyleRes
-    private static int resolveDialogTheme(@NonNull Context context, @StyleRes int themeResId) {
+    private static int resolveDialogTheme(@NonNull final Context context, @StyleRes final int themeResId) {
         if (Build.VERSION.SDK_INT >= 21 && themeResId == 0) {
             final TypedValue outValue = new TypedValue();
             context.getTheme().resolveAttribute(R.attr.dialogTheme, outValue, true);
@@ -48,34 +48,39 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         }
     }
 
-    public static LocalDateBpPickerDialogFragment newInstance(LocalDate date) {
+    @NonNull
+    public static LocalDatePickerDialogFragment newInstance(@Nullable final LocalDate date) {
         return newInstance(date, null, null);
     }
 
-    public static LocalDateBpPickerDialogFragment newInstanceWithMax(LocalDate date, LocalDate max) {
+    @NonNull
+    public static LocalDatePickerDialogFragment newInstanceWithMax(@Nullable final LocalDate date, @Nullable final LocalDate max) {
         return newInstance(date, null, max);
     }
 
-    public static LocalDateBpPickerDialogFragment newInstanceWithMin(LocalDate date, LocalDate min) {
+    @NonNull
+    public static LocalDatePickerDialogFragment newInstanceWithMin(@Nullable final LocalDate date, @Nullable final LocalDate min) {
         return newInstance(date, min, null);
     }
 
-    public static LocalDateBpPickerDialogFragment newInstance(LocalDate date, LocalDate min, LocalDate max) {
+    @NonNull
+    public static LocalDatePickerDialogFragment newInstance(@Nullable final LocalDate date, @Nullable final LocalDate min, @Nullable final LocalDate max) {
         Bundle args = new Bundle();
         args.putSerializable("mDate", date);
         args.putSerializable("mMinDate", min);
         args.putSerializable("mMaxDate", max);
-        LocalDateBpPickerDialogFragment fragment = new LocalDateBpPickerDialogFragment();
+        LocalDatePickerDialogFragment fragment = new LocalDatePickerDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public LocalDateBpPickerDialogFragment forceLegacy(final boolean forceLegacy) {
+    @NonNull
+    public LocalDatePickerDialogFragment forceLegacy(final boolean forceLegacy) {
         mForceLegacy = forceLegacy;
         return this;
     }
 
-    public LocalDateBpPickerDialogFragment() {
+    public LocalDatePickerDialogFragment() {
         setRetainInstance(true);
     }
 
@@ -97,8 +102,9 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
     @Override
     public void onDestroyView() {
         mDatePicker = null;
-        if (getDialog() != null && getRetainInstance())
+        if (getDialog() != null && getRetainInstance()) {
             getDialog().setOnDismissListener(null);
+        }
         super.onDestroyView();
     }
 
@@ -110,9 +116,10 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
             mDate = (LocalDate) savedInstanceState.getSerializable("mDate");
         }
 
-        Context context = getContext();
+        Context context = requireContext();
         final AlertDialog.Builder builder = new AlertDialog.Builder(context, resolveDialogTheme(context, getTheme()));
         context = builder.getContext();
+
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view;
         if (mForceLegacy) {
@@ -121,10 +128,10 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
             view = inflater.inflate(R.layout.dialog_date_picker, null, false);
         }
 
-        final DatePicker datePicker = (DatePicker) view.findViewById(R.id.datePicker);
+        final DatePicker datePicker = view.findViewById(R.id.datePicker);
         onBindDatePicker(datePicker);
 
-        LocalDate date = mDate;
+        final LocalDate date = mDate;
         if (date != null) {
             datePicker.updateDate(date.getYear(), date.getMonthValue() - 1, date.getDayOfMonth());
             if (mMinDate != null) {
@@ -146,18 +153,18 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
     }
 
     @SuppressWarnings("WeakerAccess")
-    protected void onBindDatePicker(@NonNull DatePicker datePicker) {
+    protected void onBindDatePicker(@NonNull final DatePicker datePicker) {
         if (Build.VERSION.SDK_INT < 21) {
             final Context context = datePicker.getContext();
-            final ColorStateList color = resolveColorStateList(context, R.attr.colorControlNormal);
+            final ColorStateList color = XpResources.resolveColorStateList(context, R.attr.colorControlNormal);
             XpDatePicker.setSelectionDividerTintCompat(datePicker, color);
         }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        LocalDate date = getLocalDate();
+        final LocalDate date = getLocalDate();
         outState.putSerializable("mDate", date);
     }
 
@@ -168,22 +175,35 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
+    public void onClick(@NonNull final DialogInterface dialog, final int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            Callbacks callbacks;
-            if (getTargetFragment() instanceof Callbacks) {
-                callbacks = (Callbacks) getTargetFragment();
-            } else if (getActivity() instanceof Callbacks) {
-                callbacks = (Callbacks) getActivity();
-            } else {
-                throw new IllegalStateException("Activity does not implement Callbacks.");
-            }
-            LocalDate date = getLocalDate();
+            final Callbacks callbacks = getCallbacks();
+            final LocalDate date = getLocalDate();
             callbacks.onDateSelected(this, date);
+        } else if (which == DialogInterface.BUTTON_NEGATIVE) {
+            onCancel(dialog);
+        }
+    }
+
+    @Override
+    public void onCancel(@NonNull final DialogInterface dialog) {
+        getCallbacks().onCancel(this);
+    }
+
+    @NonNull
+    private Callbacks getCallbacks() {
+        if (getTargetFragment() instanceof Callbacks) {
+            return (Callbacks) getTargetFragment();
+        } else if (getActivity() instanceof Callbacks) {
+            return (Callbacks) getActivity();
+        } else {
+            throw new IllegalStateException("Activity does not implement Callbacks.");
         }
     }
 
     public interface Callbacks {
-        void onDateSelected(LocalDateBpPickerDialogFragment fragment, LocalDate date);
+        void onDateSelected(@NonNull LocalDatePickerDialogFragment fragment, @NonNull LocalDate date);
+
+        void onCancel(@NonNull LocalDatePickerDialogFragment fragment);
     }
 }
