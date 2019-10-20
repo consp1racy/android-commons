@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import net.xpece.android.app.SnackbarActivity
 import net.xpece.android.content.dp
+import net.xpece.android.edgeeffect.widget.setEdgeEffectColorCompat
 import net.xpece.android.picker.widget.setSelectionDividerTintCompat
-import net.xpece.android.widget.XpEdgeEffect
 import net.xpece.commons.android.sample.R
 import org.threeten.bp.LocalDateTime
 
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         get() = findViewById(android.R.id.content)
     override var snackbar: Snackbar? = null
 
-    private lateinit var pager: androidx.viewpager.widget.ViewPager
+    private lateinit var pager: ViewPager
 
     private var localDateTime = LocalDateTime.of(2000, 1, 31, 16, 30)!!
 
@@ -34,13 +36,13 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         val adapter = MyPagerAdapter()
         pager.adapter = adapter
 
-        XpEdgeEffect.setColor(pager, Color.RED)
+        pager.setEdgeEffectColorCompat(Color.RED)
 
         val d = dp(16)
         Log.d(TAG, "Dimension real size: " + d.toString(this))
     }
 
-    internal class MyPagerAdapter : androidx.viewpager.widget.PagerAdapter() {
+    internal class MyPagerAdapter : PagerAdapter() {
         override fun getCount(): Int {
             return 4
         }
