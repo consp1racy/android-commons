@@ -3,10 +3,13 @@ package net.xpece.commons.sample
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.BulletSpan
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import android.widget.TextView
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.PagerAdapter
@@ -16,6 +19,7 @@ import net.xpece.android.app.SnackbarActivity
 import net.xpece.android.content.dp
 import net.xpece.android.edgeeffect.widget.setEdgeEffectColorCompat
 import net.xpece.android.picker.widget.setSelectionDividerTintCompat
+import net.xpece.android.text.span.BulletSpanCompat
 import net.xpece.commons.android.sample.R
 import org.threeten.bp.LocalDateTime
 
@@ -40,6 +44,14 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
 
         val d = dp(16)
         Log.d(TAG, "Dimension real size: " + d.toString(this))
+
+        val textBullets = findViewById<TextView>(R.id.textBullets)
+        val textBullets2 = findViewById<TextView>(R.id.textBullets2)
+//        textBullets.text = SpannableString(textBullets.text)
+        textBullets.text = SpannableString("Lorem ipsum")
+                .apply { setSpan(BulletSpanCompat.create(32, Color.BLACK, 8), 0, length, 0) }
+        textBullets2.text = SpannableString("Lorem ipsum")
+                .apply { setSpan(BulletSpan(32, Color.BLACK, 8), 0, length, 0) }
     }
 
     internal class MyPagerAdapter : PagerAdapter() {

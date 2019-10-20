@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TextAppearanceSpan">
+        <attr name="android:textColor" />
+        <attr name="android:textColorLink" />
+        <attr name="android:textSize" />
+        <attr name="android:textStyle" />
+        <attr name="android:fontFamily" />
+        <attr name="android:typeface" />
+    </declare-styleable>
+</resources>

@@ -26,26 +26,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textBullets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem Impsum\nDolor sit amet\nNever gonna give you up\nNever gonna let you down"
+                android:textSize="32dp" />
+
+            <TextView
+                android:id="@+id/textBullets2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem Impsum\nDolor sit amet\nNever gonna give you up\nNever gonna let you down"
+                android:textSize="32dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <EditText
             android:id="@+id/editFilter"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="88dp"
             android:layout_marginRight="88dp"
-            android:layout_height="wrap_content"
             android:hint="Filter" />
 
         <TextView
-            android:layout_marginTop="48dp"
             android:id="@+id/textFilter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp" />
 
         <Button
             android:id="@+id/buttonFilter"
-            android:text="Test"
-            android:layout_gravity="end"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Test" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
