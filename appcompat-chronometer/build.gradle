@@ -1,0 +1,21 @@
+plugins {
+    id("com.android.library")
+}
+
+android {
+    compileSdkVersion(29)
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion(14)
+    }
+}
+
+dependencies {
+    api("androidx.appcompat:appcompat:1.1.0")
+}
+
+group = rootProject.GROUP_ID
+version = rootProject.APPCOMPAT_CHRONOMETER_VERSION_NAME
+
+apply from: rootProject.file('android-release.gradle')

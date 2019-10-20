@@ -14,22 +14,25 @@
  * limitations under the License.
  */
 
-package net.xpece.android.widget;
+package net.xpece.android.appcompat.chronometer.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.os.SystemClock;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.TintTypedArray;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import net.xpece.android.R;
-import net.xpece.android.text.Truss;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.TintTypedArray;
+
+import net.xpece.android.appcompat.chronometer.R;
 
 import java.util.Formatter;
 import java.util.IllegalFormatException;
@@ -294,7 +297,7 @@ public class AppCompatChronometer extends AppCompatTextView {
 
         if (mChronoTextColor != null) {
             final int color = mChronoTextColor.getColorForState(getDrawableState(), getCurrentTextColor());
-            final CharSequence t;
+            final Spannable t;
             if (mFormat != null) {
                 if (mTextBuilder == null) {
                     mTextBuilder = new SpannableStringBuilder();
@@ -305,12 +308,9 @@ public class AppCompatChronometer extends AppCompatTextView {
                 mTextBuilder.append(text);
                 mTextBuilder.setSpan(new ForegroundColorSpan(color), chronoStart, chronoEnd, 0);
                 t = mTextBuilder;
-//                t = new Truss().append(mTextBuilder).build();
             } else {
-                t = new Truss()
-                    .pushSpan(new ForegroundColorSpan(color))
-                    .append(text)
-                    .build();
+                t = new SpannableString(text);
+                t.setSpan(new ForegroundColorSpan(color), 0, t.length(), 0);
             }
             setText(t);
             return;
@@ -378,21 +378,21 @@ public class AppCompatChronometer extends AppCompatTextView {
         try {
             if (h > 0) {
                 text.append(res.getQuantityString(
-                    R.plurals.duration_hours, h, h));
+                        R.plurals.duration_hours, h, h));
             }
             if (m > 0) {
                 if (text.length() > 0) {
                     text.append(' ');
                 }
                 text.append(res.getQuantityString(
-                    R.plurals.duration_minutes, m, m));
+                        R.plurals.duration_minutes, m, m));
             }
 
             if (text.length() > 0) {
                 text.append(' ');
             }
             text.append(res.getQuantityString(
-                R.plurals.duration_seconds, s, s));
+                    R.plurals.duration_seconds, s, s));
         } catch (Resources.NotFoundException e) {
             // Ignore; plurals throws an exception for an untranslated quantity for a given locale.
             return null;
@@ -400,6 +400,7 @@ public class AppCompatChronometer extends AppCompatTextView {
         return text.toString();
     }
 
+    @SuppressLint("GetContentDescriptionOverride")
     @Override
     public CharSequence getContentDescription() {
         return formatDuration(mNow - mBase);
