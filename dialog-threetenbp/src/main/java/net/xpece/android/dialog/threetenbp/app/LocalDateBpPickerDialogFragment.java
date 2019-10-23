@@ -166,6 +166,7 @@ public class LocalDateBpPickerDialogFragment extends AppCompatDialogFragment imp
         super.onSaveInstanceState(outState);
         final LocalDate date = getLocalDate();
         outState.putSerializable("mDate", date);
+        outState.putBoolean("mForceLegacy", mForceLegacy);
     }
 
     @NonNull

@@ -155,6 +155,7 @@ public class LocalTimeBpPickerDialogFragment extends AppCompatDialogFragment imp
         LocalTime time = getLocalTime();
         outState.putSerializable("mTime", time);
         outState.putBoolean("mIs24HourFormat", mIs24HourFormat);
+        outState.putBoolean("mForceLegacy", mForceLegacy);
     }
 
     @NonNull

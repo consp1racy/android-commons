@@ -166,6 +166,7 @@ public class LocalDatePickerDialogFragment extends AppCompatDialogFragment imple
         super.onSaveInstanceState(outState);
         final LocalDate date = getLocalDate();
         outState.putSerializable("mDate", date);
+        outState.putBoolean("mForceLegacy", mForceLegacy);
     }
 
     @NonNull
