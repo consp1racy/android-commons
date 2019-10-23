@@ -9,6 +9,7 @@ import androidx.annotation.CallSuper
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import net.xpece.android.content.resolveResourceId
 import net.xpece.android.scriminsets.R
 
 open class ScrimInsetsLinearLayout @JvmOverloads constructor(
@@ -18,6 +19,12 @@ open class ScrimInsetsLinearLayout @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
     private val helper = ScrimInsetsViewHelper(this).apply {
+        @Suppress("NAME_SHADOWING")
+        var defStyleAttr = defStyleAttr
+        if (context.resolveResourceId(R.attr.scrimInsetsLinearLayoutStyle, 0) == 0) {
+            // If the new attr is not defined fall back to the old attr.
+            defStyleAttr = R.attr.scrimInsetLinearLayoutStyle
+        }
         val defStyleRes = R.style.Widget_Xpece_ScrimInsetsLinearLayout
         loadFromAttributes(attrs, defStyleAttr, defStyleRes)
     }
