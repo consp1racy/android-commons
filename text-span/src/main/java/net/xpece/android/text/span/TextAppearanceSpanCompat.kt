@@ -9,7 +9,7 @@ import androidx.annotation.StyleRes
 
 @JvmName("create")
 fun TextAppearanceSpanCompat(context: Context, @StyleRes appearance: Int): Any {
-    return if (Build.VERSION.SDK_INT >= 23) {
+    return if (Build.VERSION.SDK_INT >= 29) {
         TextAppearanceSpan(context, appearance)
     } else {
         TextAppearanceSpanCompatImpl(context, appearance)
