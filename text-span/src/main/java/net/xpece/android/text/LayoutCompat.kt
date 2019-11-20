@@ -1,6 +1,6 @@
 @file:JvmName("LayoutCompat")
 
-package net.xpece.android.text.span
+package net.xpece.android.text
 
 import android.text.Layout
 import android.text.StaticLayout

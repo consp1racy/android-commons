@@ -31,6 +31,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Px;
 
+import net.xpece.android.text.LayoutCompat;
+
 /**
  * A span which styles paragraphs as bullet points (respecting layout direction).
  * <p>
@@ -63,7 +65,7 @@ import androidx.annotation.Px;
  * <img src="{@docRoot}reference/android/images/text/style/custombulletspan.png" />
  * <figcaption>Customized BulletSpan.</figcaption>
  */
-public class BulletSpanCompat implements LeadingMarginSpan {
+public final class BulletSpanCompat implements LeadingMarginSpan {
 
     // Bullet is slightly bigger to avoid aliasing artifacts on mdpi devices.
     private static final int STANDARD_BULLET_RADIUS = 4;
