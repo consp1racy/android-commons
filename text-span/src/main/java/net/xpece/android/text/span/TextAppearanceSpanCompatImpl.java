@@ -32,6 +32,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.TypefaceCompat;
 
 import net.xpece.android.content.XpResources;
+import net.xpece.android.graphics.WeightTypefaceCompat;
 
 /**
  * Sets the text appearance using the given
@@ -60,7 +61,9 @@ import net.xpece.android.content.XpResources;
  * @see android.R.attr#fontFeatureSettings
  * @see android.R.attr#fontVariationSettings
  */
-class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
+final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
+
+    private static final String TAG = "TextAppearanceSpan";
 
     /**
      * A maximum weight value for the font
@@ -98,7 +101,7 @@ class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
      * text appearance.  The <code>appearance</code> should be, for example,
      * <code>android.R.style.TextAppearance_Small</code>.
      */
-    TextAppearanceSpanCompatImpl(@NonNull Context context, @StyleRes int appearance) {
+    public TextAppearanceSpanCompatImpl(@NonNull Context context, @StyleRes int appearance) {
         final TypedArray a = context.obtainStyledAttributes(appearance, R.styleable.TextAppearanceSpanCompat);
 
         mTextColor = XpResources.getColorStateListCompat(a, context, R.styleable.TextAppearanceSpanCompat_android_textColor);
@@ -194,7 +197,8 @@ class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
     }
 
     private boolean needsContext() {
-        return Build.VERSION.SDK_INT < 21 && mTypeface != null && mTypeface.getStyle() != mStyle;
+        return (Build.VERSION.SDK_INT < 21 && mTypeface != null && mTypeface.getStyle() != mStyle)
+                || (Build.VERSION.SDK_INT < 26 && mTextFontWeight >= 0 && mTypeface != null);
     }
 
 //    /**
@@ -384,16 +388,19 @@ class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
         }
 
         if (styledTypeface != null) {
-            final Typeface readyTypeface;
+            Typeface readyTypeface;
             if (mTextFontWeight >= 0) {
-                if (Build.VERSION.SDK_INT >= 28) {
-                    final int weight = Math.min(FONT_WEIGHT_MAX, mTextFontWeight);
-                    final boolean italic = (style & Typeface.ITALIC) != 0;
-                    readyTypeface = ds.setTypeface(Typeface.create(styledTypeface, weight, italic));
+                final int weight = Math.min(FONT_WEIGHT_MAX, mTextFontWeight);
+                final boolean italic = (style & Typeface.ITALIC) != 0;
+                if (Build.VERSION.SDK_INT >= 26 || mTypeface != null) {
+                    // The only place a typeface with multiple weights can come from below Oreo
+                    // is ResourcesCompat.getFont with a XML font. So we have mTypeface set.
+                    // Also, this may be a non-XML font or otherwise simple typeface.
+                    readyTypeface = WeightTypefaceCompat.INSTANCE.createInternal(mContext, styledTypeface, weight, italic);
                 } else {
-                    // TODO Support weighted typefaces below API 28.
                     readyTypeface = styledTypeface;
                 }
+//                ds.setTypeface(readyTypeface);
             } else {
                 readyTypeface = styledTypeface;
             }
