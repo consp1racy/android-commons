@@ -66,7 +66,10 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         textSpanTest.text = buildSpannedString {
             append("This is ")
             inSpans(TextAppearanceSpanCompat(textSpanTest.context, R.style.TextAppearance_Raleway_Thin)) {
-                append("thin")
+                append("thin ")
+            }
+            inSpans(TextAppearanceSpanCompat(textSpanTest.context, R.style.TextAppearance_Raleway_Thin_Italic)) {
+                append("italic ")
             }
         }
     }

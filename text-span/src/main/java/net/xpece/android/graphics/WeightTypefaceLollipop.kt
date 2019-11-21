@@ -5,12 +5,10 @@ import android.graphics.Typeface
 import android.util.SparseArray
 import androidx.annotation.GuardedBy
 import androidx.annotation.IntRange
-import androidx.annotation.RequiresApi
 import androidx.collection.LongSparseArray
 
-@RequiresApi(26)
 @SuppressLint("PrivateApi")
-internal object WeightTypefaceOreo {
+internal object WeightTypefaceLollipop {
 
     private val constructorLong = Typeface::class.java
         .getDeclaredConstructor(Long::class.javaPrimitiveType)
@@ -20,23 +18,21 @@ internal object WeightTypefaceOreo {
         .getDeclaredField("native_instance")
         .apply { isAccessible = true }
 
-    private val methodNativeCreateFromTypefaceWithExactStyle = Typeface::class.java
+    private val methodNativeCreateWeightAlias = Typeface::class.java
         .getDeclaredMethod(
-            "nativeCreateFromTypefaceWithExactStyle",
+            "nativeCreateWeightAlias",
             Long::class.javaPrimitiveType,
-            Int::class.javaPrimitiveType,
-            Boolean::class.javaPrimitiveType
+            Int::class.javaPrimitiveType
         )
         .apply { isAccessible = true }
 
     @Suppress("FunctionName")
     private fun Typeface(ni: Long): Typeface = constructorLong.newInstance(ni)
 
-    private fun nativeCreateFromTypefaceWithExactStyle(
+    private fun nativeCreateWeightAlias(
         ni: Long,
-        @IntRange(from = 1, to = 1000) weight: Int,
-        italic: Boolean
-    ): Long = methodNativeCreateFromTypefaceWithExactStyle.invoke(null, ni, weight, italic) as Long
+        @IntRange(from = 1, to = 1000) weight: Int
+    ): Long = methodNativeCreateWeightAlias.invoke(null, ni, weight) as Long
 
     private val Typeface.native_instance: Long
         get() = fieldNativeInstance.get(this) as Long
@@ -68,11 +64,15 @@ internal object WeightTypefaceOreo {
                 }
             }
 
-            val ni = nativeCreateFromTypefaceWithExactStyle(
-                base.native_instance,
-                weight,
-                italic
-            )
+            @Suppress("NAME_SHADOWING")
+            val base = if (base.isItalic == italic) {
+                base
+            } else {
+                val style = if (italic) Typeface.ITALIC else Typeface.NORMAL
+                Typeface.create(base, style)
+            }
+
+            val ni = nativeCreateWeightAlias(base.native_instance, weight)
             return Typeface(ni)
                 .also { innerCache.put(key, it) }
         }

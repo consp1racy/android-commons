@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.os.Build
 import android.util.Log
 import androidx.annotation.IntRange
+import androidx.annotation.RestrictTo
 
 object WeightTypefaceCompat {
 
@@ -13,7 +14,9 @@ object WeightTypefaceCompat {
         return createInternal(context, family, weight, italic)
     }
 
+    @JvmStatic
     @PublishedApi
+    @RestrictTo(RestrictTo.Scope.LIBRARY)
     internal fun createInternal(
         context: Context?,
         family: Typeface,
@@ -25,13 +28,15 @@ object WeightTypefaceCompat {
                 Typeface.create(family, weight, italic)
             }
             Build.VERSION.SDK_INT >= 26 -> {
-                WeightTypefaceOreo.createWeightStyle(family, weight, italic)
+                WeightTypefaceOreo.create(family, weight, italic)
+            }
+            Build.VERSION.SDK_INT >= 21 -> {
+                WeightTypefaceLollipop.create(family, weight, italic)
             }
             else -> {
                 @Suppress("NAME_SHADOWING")
                 val context = requireNotNull(context)
-                WeightTypefaceLegacy.getBestFontFromFamily(context, family, weight, italic)
-                    ?: family
+                WeightTypefaceLegacy.create(context, family, weight, italic)
             }
         }
     } catch (ex: Throwable) {

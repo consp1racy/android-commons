@@ -204,7 +204,7 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
 
     private boolean needsContext() {
         return (Build.VERSION.SDK_INT < 21 && mTypeface != null && mTypeface.getStyle() != mStyle)
-                || (Build.VERSION.SDK_INT < 26 && mTextFontWeight >= 0 && mTypeface != null);
+                || (Build.VERSION.SDK_INT < 21 && mTextFontWeight >= 0 && mTypeface != null);
     }
 
 //    /**
@@ -398,14 +398,7 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
             if (mTextFontWeight >= 0) {
                 final int weight = Math.min(FONT_WEIGHT_MAX, mTextFontWeight);
                 final boolean italic = (style & Typeface.ITALIC) != 0;
-                if (Build.VERSION.SDK_INT >= 26 || mTypeface != null) {
-                    // The only place a typeface with multiple weights can come from below Oreo
-                    // is ResourcesCompat.getFont with a XML font. So we have mTypeface set.
-                    // Also, this may be a non-XML font or otherwise simple typeface.
-                    readyTypeface = WeightTypefaceCompat.INSTANCE.createInternal(mContext, styledTypeface, weight, italic);
-                } else {
-                    readyTypeface = styledTypeface;
-                }
+                readyTypeface = WeightTypefaceCompat.createInternal(mContext, styledTypeface, weight, italic);
 //                ds.setTypeface(readyTypeface);
             } else {
                 readyTypeface = styledTypeface;

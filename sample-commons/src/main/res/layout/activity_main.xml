@@ -44,6 +44,12 @@
                 android:textAppearance="@style/TextAppearance.Raleway.Thin" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is thin italic"
+                android:textAppearance="@style/TextAppearance.Raleway.Thin.Italic" />
+
+            <TextView
                 android:id="@+id/textSpanTest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

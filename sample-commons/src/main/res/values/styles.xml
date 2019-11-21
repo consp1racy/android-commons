@@ -24,4 +24,11 @@
         <item name="android:textFontWeight">100</item>
         <item name="textFontWeight">100</item>
     </style>
+
+    <style name="TextAppearance.Raleway.Thin.Italic" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/raleway</item>
+        <item name="android:textFontWeight">100</item>
+        <item name="textFontWeight">100</item>
+        <item name="android:textStyle">italic</item>
+    </style>
 </resources>

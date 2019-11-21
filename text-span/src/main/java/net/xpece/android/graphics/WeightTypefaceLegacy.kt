@@ -3,7 +3,10 @@ package net.xpece.android.graphics
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
+import android.util.SparseArray
+import androidx.annotation.GuardedBy
 import androidx.annotation.IntRange
+import androidx.collection.LongSparseArray
 import androidx.core.content.res.FontResourcesParserCompat
 import androidx.core.graphics.TypefaceCompat
 import androidx.core.graphics.TypefaceCompatUtil
@@ -38,6 +41,10 @@ internal object WeightTypefaceLegacy {
             return field
         }
 
+    private val fieldNativeInstance = Typeface::class.java
+        .getDeclaredField("native_instance")
+        .apply { isAccessible = true }
+
     private fun getFontFamily(typeface: Typeface): FontResourcesParserCompat.FontFamilyFilesResourceEntry? {
         return methodGetFontFamily.invoke(typefaceCompatImpl, typeface)
                 as FontResourcesParserCompat.FontFamilyFilesResourceEntry?
@@ -49,6 +56,9 @@ internal object WeightTypefaceLegacy {
     ) {
         methodAddFontFamily.invoke(typefaceCompatImpl, typeface, entry)
     }
+
+    private val Typeface.native_instance: Long
+        get() = fieldNativeInstance.get(this) as Long
 
     /**
      * Used by Resources to load a font resource of type font file.
@@ -146,7 +156,7 @@ internal object WeightTypefaceLegacy {
         return typeface
     }
 
-    fun getBestFontFromFamily(
+    private fun getBestFontFromFamily(
         context: Context,
         typeface: Typeface,
         @IntRange(from = 1, to = 1000) weight: Int,
@@ -161,5 +171,37 @@ internal object WeightTypefaceLegacy {
             weight,
             italic
         )
+    }
+    /**
+     * Cache for Typeface objects for weight variant. Currently max size is 3.
+     */
+    @GuardedBy("sWeightCacheLock")
+    private val sWeightTypefaceCache = LongSparseArray<SparseArray<Typeface>>(3)
+    private val sWeightCacheLock = Any()
+
+    @JvmStatic
+    fun create(
+        context: Context,
+        base: Typeface,
+        @IntRange(from = 1, to = 1000) weight: Int,
+        italic: Boolean
+    ): Typeface {
+        val key = weight shl 1 or if (italic) 1 else 0
+
+        synchronized(sWeightCacheLock) {
+            var innerCache: SparseArray<Typeface>? = sWeightTypefaceCache.get(base.native_instance)
+            if (innerCache == null) {
+                innerCache = SparseArray(4)
+                sWeightTypefaceCache.put(base.native_instance, innerCache)
+            } else {
+                val typeface = innerCache.get(key)
+                if (typeface != null) {
+                    return typeface
+                }
+            }
+
+            return (getBestFontFromFamily(context, base, weight, italic) ?: base)
+                .also { innerCache.put(key, it) }
+        }
     }
 }

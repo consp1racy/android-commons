@@ -5,6 +5,10 @@
         app:fontStyle="normal"
         app:fontWeight="100" />
     <font
+        app:font="@font/raleway_thin_italic"
+        app:fontStyle="italic"
+        app:fontWeight="100" />
+    <font
         app:font="@font/raleway_regular"
         app:fontStyle="normal"
         app:fontWeight="400" />
