@@ -2,6 +2,7 @@ package net.xpece.commons.sample
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.BulletSpan
@@ -12,6 +13,8 @@ import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.buildSpannedString
+import androidx.core.text.inSpans
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
@@ -20,6 +23,7 @@ import net.xpece.android.content.dp
 import net.xpece.android.edgeeffect.widget.setEdgeEffectColorCompat
 import net.xpece.android.picker.widget.setSelectionDividerTintCompat
 import net.xpece.android.text.span.BulletSpanCompat
+import net.xpece.android.text.span.TextAppearanceSpanCompat
 import net.xpece.commons.android.sample.R
 import org.threeten.bp.LocalDateTime
 
@@ -29,6 +33,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
     override var snackbar: Snackbar? = null
 
     private lateinit var pager: ViewPager
+    private lateinit var textSpanTest: TextView
 
     private var localDateTime = LocalDateTime.of(2000, 1, 31, 16, 30)!!
 
@@ -36,7 +41,10 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         pager = findViewById(R.id.pager)
+        textSpanTest = findViewById(R.id.textSpanTest)
+
         val adapter = MyPagerAdapter()
         pager.adapter = adapter
 
@@ -50,8 +58,17 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
 //        textBullets.text = SpannableString(textBullets.text)
         textBullets.text = SpannableString("Lorem ipsum")
                 .apply { setSpan(BulletSpanCompat.create(32, Color.BLACK, 8), 0, length, 0) }
-        textBullets2.text = SpannableString("Lorem ipsum")
+        if (Build.VERSION.SDK_INT >= 28) {
+            textBullets2.text = SpannableString("Lorem ipsum")
                 .apply { setSpan(BulletSpan(32, Color.BLACK, 8), 0, length, 0) }
+        }
+
+        textSpanTest.text = buildSpannedString {
+            append("This is ")
+            inSpans(TextAppearanceSpanCompat(textSpanTest.context, R.style.TextAppearance_Raleway_Thin)) {
+                append("thin")
+            }
+        }
     }
 
     internal class MyPagerAdapter : PagerAdapter() {

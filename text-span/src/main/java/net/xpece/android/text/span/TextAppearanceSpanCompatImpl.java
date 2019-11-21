@@ -140,7 +140,13 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
             }
         }
 
-        mTextFontWeight = a.getInt(R.styleable.TextAppearanceSpanCompat_android_textFontWeight, -1);
+        final int textFontWeight;
+        if (a.hasValue(R.styleable.TextAppearanceSpanCompat_textFontWeight)) {
+            textFontWeight = a.getInt(R.styleable.TextAppearanceSpanCompat_textFontWeight, -1);
+        } else {
+            textFontWeight = a.getInt(R.styleable.TextAppearanceSpanCompat_android_textFontWeight, -1);
+        }
+        mTextFontWeight = textFontWeight;
 
         if (Build.VERSION.SDK_INT >= 24) {
             final String localeString = a.getString(R.styleable.TextAppearanceSpanCompat_android_textLocale);

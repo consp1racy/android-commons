@@ -13,4 +13,15 @@
         <item name="android:datePickerMode" tools:targetApi="lollipop">spinner</item>
     </style>
 
+    <style name="TextAppearance.Raleway.Regular" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/raleway</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="textFontWeight">400</item>
+    </style>
+
+    <style name="TextAppearance.Raleway.Thin" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/raleway</item>
+        <item name="android:textFontWeight">100</item>
+        <item name="textFontWeight">100</item>
+    </style>
 </resources>
