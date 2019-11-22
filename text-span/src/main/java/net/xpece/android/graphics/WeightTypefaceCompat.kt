@@ -10,9 +10,12 @@ import androidx.annotation.RestrictTo
 object WeightTypefaceCompat {
 
     @JvmStatic
-    fun create(context: Context, family: Typeface, weight: Int, italic: Boolean): Typeface {
-        return createInternal(context, family, weight, italic)
-    }
+    fun create(
+        context: Context,
+        family: Typeface,
+        weight: Int,
+        italic: Boolean = family.isItalic
+    ): Typeface = createInternal(context, family, weight, italic)
 
     @JvmStatic
     @PublishedApi
@@ -34,9 +37,7 @@ object WeightTypefaceCompat {
                 WeightTypefaceLollipop.create(family, weight, italic)
             }
             else -> {
-                @Suppress("NAME_SHADOWING")
-                val context = requireNotNull(context)
-                WeightTypefaceLegacy.create(context, family, weight, italic)
+                WeightTypefaceLegacy.create(context!!, family, weight, italic)
             }
         }
     } catch (ex: Throwable) {

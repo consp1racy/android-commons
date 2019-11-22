@@ -399,7 +399,6 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
                 final int weight = Math.min(FONT_WEIGHT_MAX, mTextFontWeight);
                 final boolean italic = (style & Typeface.ITALIC) != 0;
                 readyTypeface = WeightTypefaceCompat.createInternal(mContext, styledTypeface, weight, italic);
-//                ds.setTypeface(readyTypeface);
             } else {
                 readyTypeface = styledTypeface;
             }
