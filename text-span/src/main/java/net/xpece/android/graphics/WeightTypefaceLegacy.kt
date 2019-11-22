@@ -3,6 +3,7 @@ package net.xpece.android.graphics
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
+import android.graphics.Typeface.*
 import android.util.Log
 import android.util.SparseArray
 import androidx.annotation.GuardedBy
@@ -152,14 +153,12 @@ internal object WeightTypefaceLegacy {
         italic: Boolean
     ): Typeface? {
         val best = findBestEntry(entry, weight, italic) ?: return null
-        val style = run {
-            // Synthesize a fake style which encodes the weight and doesn't clash with AndroidX.
-            weight // 10 bits of weight.
-                .shl(1).or(if (italic) 1 else 0) // 1 bit of italic.
-                .shl(1).or(1) // 1 bit of magic marker.
-                .shl(0x03) // Clear 3 bits of public flag mask.
-        }
+        // best now represents a precise font resource (not XML family).
+        // Try ITALIC or NORMAL first, depending on the font entry.
+        // It might also have been originally resolved under | BOLD.
+        val style = if (best.isItalic) ITALIC else NORMAL
         val typeface = findFromCache(resources, best.resourceId, style)
+            ?: findFromCache(resources, best.resourceId, style or BOLD)
             ?: createFromResourcesFontFile(context, resources, best.resourceId, null, style)
 
         addFontFamily(typeface, entry)
