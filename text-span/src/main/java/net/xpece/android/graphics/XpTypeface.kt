@@ -8,7 +8,6 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
-import androidx.annotation.RestrictTo
 
 @JvmName("create")
 fun Typeface.withExactStyle(
@@ -24,9 +23,7 @@ fun Typeface.withExactStyle(
     italic: Boolean = isItalic
 ): Typeface = createInternal(null, this, weight, italic)
 
-@PublishedApi
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-internal fun createInternal(
+private fun createInternal(
     context: Context?,
     family: Typeface,
     @IntRange(from = 1, to = 1000) weight: Int,
@@ -47,6 +44,6 @@ internal fun createInternal(
         }
     }
 } catch (ex: Throwable) {
-    Log.w("WeightTypefaceCompat", "Failed to apply font weight.", ex)
+    Log.w("XpTypeface", "Failed to apply font weight.", ex)
     family
 }

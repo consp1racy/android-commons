@@ -57,7 +57,7 @@ internal object WeightTypefaceLegacy {
 
             privateApiAvailable = true
         } catch (_: Throwable) {
-            Log.w("WeightTypefaceCompat", "Failed to lookup private API using reflection.")
+            Log.w("XpTypeface", "Failed to lookup private API using reflection.")
             fieldTypefaceCompatImpl = null
             methodGetFontFamily = null
             methodAddFontFamily = null

@@ -55,7 +55,7 @@ internal object WeightTypefaceLollipop {
 
             privateApiAvailable = true
         } catch (_: Throwable) {
-            Log.w("WeightTypefaceCompat", "Failed to lookup private API using reflection.")
+            Log.w("XpTypeface", "Failed to lookup private API using reflection.")
             constructorLong = null
             fieldNativeInstance = null
             methodNativeCreateFromTypeface = null

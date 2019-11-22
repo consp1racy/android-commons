@@ -203,8 +203,8 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
     }
 
     private boolean needsContext() {
-        return (Build.VERSION.SDK_INT < 21 && mTypeface != null && mTypeface.getStyle() != mStyle)
-                || (Build.VERSION.SDK_INT < 21 && mTextFontWeight >= 0 && mTypeface != null);
+        return Build.VERSION.SDK_INT < 21 && mTypeface != null
+                && (mTypeface.getStyle() != mStyle || mTextFontWeight >= 0);
     }
 
 //    /**
@@ -398,7 +398,11 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
             if (mTextFontWeight >= 0) {
                 final int weight = Math.min(FONT_WEIGHT_MAX, mTextFontWeight);
                 final boolean italic = (style & Typeface.ITALIC) != 0;
-                readyTypeface = XpTypeface.createInternal(mContext, styledTypeface, weight, italic);
+                if (Build.VERSION.SDK_INT >= 21) {
+                    readyTypeface = XpTypeface.create(styledTypeface, weight, italic);
+                } else {
+                    readyTypeface = XpTypeface.create(styledTypeface, mContext, weight, italic);
+                }
             } else {
                 readyTypeface = styledTypeface;
             }
