@@ -32,7 +32,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.TypefaceCompat;
 
 import net.xpece.android.content.XpResources;
-import net.xpece.android.graphics.WeightTypefaceCompat;
+import net.xpece.android.graphics.XpTypeface;
 
 /**
  * Sets the text appearance using the given
@@ -398,7 +398,7 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
             if (mTextFontWeight >= 0) {
                 final int weight = Math.min(FONT_WEIGHT_MAX, mTextFontWeight);
                 final boolean italic = (style & Typeface.ITALIC) != 0;
-                readyTypeface = WeightTypefaceCompat.createInternal(mContext, styledTypeface, weight, italic);
+                readyTypeface = XpTypeface.createInternal(mContext, styledTypeface, weight, italic);
             } else {
                 readyTypeface = styledTypeface;
             }
