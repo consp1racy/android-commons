@@ -19,12 +19,14 @@ internal object WeightTypefaceLollipop {
 
     private val constructorLong: Constructor<Typeface>?
     private val fieldNativeInstance: Field?
+    private val methodNativeCreateFromTypeface: Method?
     private val methodNativeCreateWeightAlias: Method?
 
     init {
         var privateApiAvailable: Boolean
         var constructorLong: Constructor<Typeface>?
         var fieldNativeInstance: Field?
+        var methodNativeCreateFromTypeface: Method?
         var methodNativeCreateWeightAlias: Method?
         try {
             constructorLong = Typeface::class.java
@@ -33,6 +35,14 @@ internal object WeightTypefaceLollipop {
 
             fieldNativeInstance = Typeface::class.java
                 .getDeclaredField("native_instance")
+                .apply { isAccessible = true }
+
+            methodNativeCreateFromTypeface = Typeface::class.java
+                .getDeclaredMethod(
+                    "nativeCreateFromTypeface",
+                    Long::class.javaPrimitiveType,
+                    Int::class.javaPrimitiveType
+                )
                 .apply { isAccessible = true }
 
             methodNativeCreateWeightAlias = Typeface::class.java
@@ -48,17 +58,22 @@ internal object WeightTypefaceLollipop {
             Log.w("WeightTypefaceCompat", "Failed to lookup private API using reflection.")
             constructorLong = null
             fieldNativeInstance = null
+            methodNativeCreateFromTypeface = null
             methodNativeCreateWeightAlias = null
             privateApiAvailable = false
         }
         this.constructorLong = constructorLong
         this.fieldNativeInstance = fieldNativeInstance
+        this.methodNativeCreateFromTypeface = methodNativeCreateFromTypeface
         this.methodNativeCreateWeightAlias = methodNativeCreateWeightAlias
         this.isPrivateApiAvailable = privateApiAvailable
     }
 
     @Suppress("FunctionName")
     private fun Typeface(ni: Long): Typeface = constructorLong!!.newInstance(ni)
+
+    private fun nativeCreateFromTypeface(ni: Long, style: Int): Long =
+        methodNativeCreateFromTypeface!!.invoke(null, ni, style) as Long
 
     private fun nativeCreateWeightAlias(
         ni: Long,
@@ -77,7 +92,9 @@ internal object WeightTypefaceLollipop {
     } else {
         var style = base.style and ITALIC.inv()
         if (italic) style = style or ITALIC
-        Typeface.create(base, style)
+        // Don't use public API, bypass style cache. We'll cache the weight instance instead.
+        val ni = nativeCreateFromTypeface(base.native_instance, style)
+        Typeface(ni)
     }
 
     /**
