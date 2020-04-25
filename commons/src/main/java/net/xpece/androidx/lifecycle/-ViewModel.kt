@@ -3,53 +3,61 @@
 
 package net.xpece.androidx.lifecycle
 
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 
-inline fun <reified T : ViewModel> FragmentActivity.viewModel() =
-    ViewModelProviders.of(this)[T::class.java]
-
-inline fun <reified T : ViewModel> Fragment.viewModel() =
-    ViewModelProviders.of(this)[T::class.java]
-
-inline fun <reified T : ViewModel> Fragment.activityViewModel() =
-    ViewModelProviders.of(activity!!)[T::class.java]
-
-inline fun <reified T : ViewModel> FragmentActivity.viewModel(factory: ViewModelProvider.Factory) =
-    ViewModelProviders.of(this, factory)[T::class.java]
-
-inline fun <reified T : ViewModel> Fragment.viewModel(factory: ViewModelProvider.Factory) =
-    ViewModelProviders.of(this, factory)[T::class.java]
-
-inline fun <reified T : ViewModel> Fragment.activityViewModel(factory: ViewModelProvider.Factory) =
-    ViewModelProviders.of(activity!!, factory)[T::class.java]
-
+@Deprecated(
+    message = "Use AndroidX equivalent.",
+    replaceWith = ReplaceWith("viewModels(factory)", "androidx.activity.viewModels"),
+    level = DeprecationLevel.ERROR
+)
 inline fun <reified T : ViewModel> FragmentActivity.lazyViewModel(
-    crossinline factory: () -> ViewModelProvider.Factory
-) = lazy(LazyThreadSafetyMode.NONE) {
-    viewModel<T>(factory())
-}
+    noinline factory: () -> ViewModelProvider.Factory
+): Lazy<T> = viewModels(factory)
 
-inline fun <reified T : ViewModel> FragmentActivity.lazyViewModel() =
-    lazy(LazyThreadSafetyMode.NONE) { viewModel<T>() }
+@Deprecated(
+    message = "Use AndroidX equivalent.",
+    replaceWith = ReplaceWith("viewModels()", "androidx.activity.viewModels"),
+    level = DeprecationLevel.ERROR
+)
+inline fun <reified T : ViewModel> FragmentActivity.lazyViewModel(): Lazy<T> =
+    viewModels()
 
+@Deprecated(
+    message = "Use AndroidX equivalent.",
+    replaceWith = ReplaceWith("viewModels()", "androidx.fragment.app.viewModels"),
+    level = DeprecationLevel.ERROR
+)
 inline fun <reified T : ViewModel> Fragment.lazyViewModel(
-    crossinline factory: () -> ViewModelProvider.Factory
-) = lazy(LazyThreadSafetyMode.NONE) {
-    viewModel<T>(factory())
-}
+    noinline factory: () -> ViewModelProvider.Factory
+): Lazy<T> = viewModels({ this }, factory)
 
-inline fun <reified T : ViewModel> Fragment.lazyViewModel() =
-    lazy(LazyThreadSafetyMode.NONE) { viewModel<T>() }
+@Deprecated(
+    message = "Use AndroidX equivalent.",
+    replaceWith = ReplaceWith("viewModels()", "androidx.fragment.app.viewModels"),
+    level = DeprecationLevel.ERROR
+)
+inline fun <reified T : ViewModel> Fragment.lazyViewModel(): Lazy<T> =
+    viewModels({ this })
 
+@Deprecated(
+    message = "Use AndroidX equivalent.",
+    replaceWith = ReplaceWith("activityViewModels()", "androidx.fragment.app.activityViewModels"),
+    level = DeprecationLevel.ERROR
+)
 inline fun <reified T : ViewModel> Fragment.lazyActivityViewModel(
-    crossinline factory: () -> ViewModelProvider.Factory
-) = lazy(LazyThreadSafetyMode.NONE) {
-    activityViewModel<T>(factory())
-}
+    noinline factory: () -> ViewModelProvider.Factory
+): Lazy<T> = activityViewModels(factory)
 
-inline fun <reified T : ViewModel> Fragment.lazyActivityViewModel() =
-    lazy(LazyThreadSafetyMode.NONE) { activityViewModel<T>() }
+@Deprecated(
+    message = "Use AndroidX equivalent.",
+    replaceWith = ReplaceWith("activityViewModels()", "androidx.fragment.app.activityViewModels"),
+    level = DeprecationLevel.ERROR
+)
+inline fun <reified T : ViewModel> Fragment.lazyActivityViewModel(): Lazy<T> =
+    activityViewModels()

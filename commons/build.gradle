@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
@@ -13,16 +15,27 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    lintOptions {
-        abortOnError false
-    }
-
     sourceSets {
         main {
             java.srcDirs += 'src/main/kotlin'
             res.srcDirs += 'src/main/res-preview'
             res.srcDirs += 'src/main/res-support'
         }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+tasks.withType(KotlinCompile) {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -46,6 +59,8 @@ dependencies {
 
     api 'androidx.core:core-ktx:1.1.0'
     api 'com.google.android.material:material:1.0.0'
+
+    compileOnly 'androidx.fragment:fragment-ktx:1.1.0'
 
     compileOnly 'androidx.annotation:annotation:1.1.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
