@@ -72,7 +72,6 @@ dependencies {
     compileOnly "com.google.android.gms:play-services-maps:9.0.0"
 
     compileOnly 'com.github.devlight.shadowlayout:library:1.0.0'
-    compileOnly "com.facebook.fresco:fresco:1.0.0"
     compileOnly 'com.github.pluscubed:recycler-fast-scroll:0.3.2@aar'
 
     compileOnly 'com.jakewharton.threetenabp:threetenabp:1.0.0'
