@@ -10,17 +10,8 @@ import android.provider.Settings
 import androidx.annotation.RequiresPermission
 import net.xpece.android.app.connectivityManager
 
-/**
- * Gets the state of Airplane Mode.
- * @return true if enabled.
- */
 val Context.isAirplaneModeOn: Boolean
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    get() = if (Build.VERSION.SDK_INT < 17) {
-        Settings.System.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
-    } else {
-        Settings.Global.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
-    }
+    get() = Settings.Global.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) != 0
 
 @Suppress("DEPRECATION")
 val Context.isAnyNetworkConnected: Boolean
