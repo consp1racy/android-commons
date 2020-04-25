@@ -5,32 +5,45 @@ package net.xpece.android.app
 
 import android.content.res.ColorStateList
 import androidx.annotation.ColorInt
-import net.xpece.android.text.Truss
 import java.util.*
+import net.xpece.android.collection.joinToCharSequence as joinToCharSequenceImpl
 
+@Deprecated(
+        message = "Moved.",
+        replaceWith = ReplaceWith("toColors()", "net.xpece.android.graphics.toColors"),
+        level = DeprecationLevel.ERROR
+)
 inline fun @receiver:ColorInt Int.toColorStateList() = ColorStateList.valueOf(this)
 
+@Deprecated(
+        message = "Moved.",
+        replaceWith = ReplaceWith("asArrayList()", "net.xpece.java.collection.asArrayList"),
+        level = DeprecationLevel.ERROR
+)
 inline fun <E> List<E>.asArrayList(): ArrayList<E> = this as? ArrayList<E> ?: ArrayList(this)
 
+@Deprecated(
+        message = "Moved.",
+        replaceWith = ReplaceWith("joinToCharSequence(separator, prefix, postfix)", "net.xpece.android.collection.joinToCharSequence"),
+        level = DeprecationLevel.ERROR
+)
 inline fun Iterable<CharSequence>.joinToCharSequence(
         separator: CharSequence = ", ",
         prefix: CharSequence = "",
-        postfix: CharSequence = ""): CharSequence =
-        joinToCharSequence(separator, prefix, postfix, { it })
+        postfix: CharSequence = ""
+): CharSequence = joinToCharSequenceImpl(separator, prefix, postfix)
 
+@Deprecated(
+        message = "Moved.",
+        replaceWith = ReplaceWith("joinToCharSequence(separator, prefix, postfix, transformation)", "net.xpece.android.collection.joinToCharSequence"),
+        level = DeprecationLevel.ERROR
+)
 inline fun Iterable<CharSequence>.joinToCharSequence(
         separator: CharSequence = ", ",
         prefix: CharSequence = "",
         postfix: CharSequence = "",
-        transformation: (CharSequence) -> CharSequence): CharSequence {
-    val t = Truss().append(prefix)
-    forEachIndexed { i, it ->
-        if (i > 0) t.append(separator)
-        val x = transformation(it)
-        t.append(x)
-    }
-    return t.append(postfix).build()
-}
+        transformation: (CharSequence) -> CharSequence
+): CharSequence = joinToCharSequenceImpl(separator, prefix, postfix, transformation)
 
 inline fun <T> T?.intIfNotNull(number: T.() -> Int): Int = this?.number() ?: 0
 inline fun <T> T?.intIfNotNull(number: Int): Int = if (this != null) number else 0
