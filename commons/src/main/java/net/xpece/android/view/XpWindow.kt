@@ -3,21 +3,18 @@
 
 package net.xpece.android.view
 
-import android.annotation.TargetApi
-import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.view.Window
 import androidx.annotation.ColorInt
 
-@ColorInt
-@JvmField
-val DEFAULT_SCRIM = 0x44000000
+inline var Window.statusBarColorCompat: Int
+    @ColorInt get() = if (SDK_INT >= 21) statusBarColor else 0
+    set(@ColorInt value) {
+        if (SDK_INT >= 21) statusBarColor = value
+    }
 
-@TargetApi(21)
-inline fun Window.setNavigationBarColorCompat(@ColorInt color: Int) {
-    if (Build.VERSION.SDK_INT >= 21) navigationBarColor = color
-}
-
-@TargetApi(21)
-inline fun Window.setStatusBarColorCompat(@ColorInt color: Int) {
-    if (Build.VERSION.SDK_INT >= 21) statusBarColor = color
-}
+inline var Window.navigationBarColorCompat: Int
+    @ColorInt get() = if (SDK_INT >= 21) navigationBarColor else 0
+    set(@ColorInt value) {
+        if (SDK_INT >= 21) navigationBarColor = value
+    }

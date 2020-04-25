@@ -3,7 +3,6 @@ package net.xpece.android.view
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
-import androidx.annotation.RequiresApi
 import net.xpece.android.os.getIntegerMap
 import net.xpece.android.os.putMap
 
@@ -14,7 +13,6 @@ import net.xpece.android.os.putMap
  * Possible use case would be saving and restoring states
  * of [RecyclerView][androidx.recyclerview.widget.RecyclerView] item views.
  */
-@RequiresApi(17)
 class ViewIdGenerator {
 
     private val cache = mutableMapOf<String, Int>()

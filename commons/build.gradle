@@ -63,28 +63,20 @@ dependencies {
     compileOnly 'androidx.fragment:fragment-ktx:1.1.0'
 
     compileOnly 'androidx.annotation:annotation:1.1.0'
-    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
 
     compileOnly 'androidx.palette:palette:1.0.0'
-    compileOnly 'androidx.exifinterface:exifinterface:1.0.0'
 
-    compileOnly "com.google.android.gms:play-services-gcm:17.0.0"
     compileOnly "com.google.android.gms:play-services-maps:17.0.0"
-
-    compileOnly 'com.github.devlight.shadowlayout:library:1.0.0'
-    compileOnly 'com.github.pluscubed:recycler-fast-scroll:0.3.2@aar'
 
     compileOnly 'com.jakewharton.threetenabp:threetenabp:1.0.0'
 
     compileOnly 'com.jakewharton.timber:timber:4.5.0'
-//    compileOnly 'com.github.ajalt:timberkt:1.5.0'
 
     compileOnly 'com.squareup.moshi:moshi:1.0.0'
     compileOnly 'com.squareup.okio:okio:1.0.0'
     compileOnly 'com.squareup.okhttp3:okhttp:3.0.0'
     compileOnly 'com.squareup.retrofit2:retrofit:2.0.0'
 
-    compileOnly 'org.reactivestreams:reactive-streams:1.0.0'
     compileOnly 'io.reactivex.rxjava2:rxjava:2.0.0'
 
     compileOnly 'androidx.lifecycle:lifecycle-extensions:2.0.0'

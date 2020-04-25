@@ -6,11 +6,6 @@
         <item name="android:elevation" tools:ignore="NewApi">@dimen/design_appbar_elevation</item>
     </style>
 
-    <style name="TextAppearance.Section" parent="TextAppearance.AppCompat.Body2">
-        <!--<item name="android:textColor">?android:textColorSecondary</item>-->
-        <item name="android:textColor">?colorAccent</item>
-    </style>
-
     <style name="Widget.Shadow.AppBar" parent="">
         <item name="android:background">@drawable/shadow_below</item>
         <item name="android:layout_height">4dp</item>
@@ -41,9 +36,5 @@
         <item name="behavior_peekHeight">9999dp</item>
         <item name="behavior_hideable">false</item>
         <item name="behavior_skipCollapsed">true</item>
-    </style>
-
-    <style name="Widget.Xpece.ArbitraryInputLayout" parent="Widget.Design.TextInputLayout">
-        <item name="android:textColorHint">@color/activated_text</item>
     </style>
 </resources>

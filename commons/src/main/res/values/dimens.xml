@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="status_bar_height">25dp</dimen>
-
     <dimen name="material_icon_size_small">24dp</dimen>
     <dimen name="material_icon_size_medium">40dp</dimen>
     <dimen name="material_icon_size_large">56dp</dimen>

@@ -1,6 +1,5 @@
 package net.xpece.android.view
 
-import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import android.view.View
 import android.view.View.VISIBLE
@@ -8,7 +7,6 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import java.util.*
 
-@RequiresApi(16)
 class ViewFader {
     companion object {
         private val HIDE_INTERPOLATOR = AccelerateInterpolator()

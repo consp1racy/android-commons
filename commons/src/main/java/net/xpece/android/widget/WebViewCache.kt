@@ -1,14 +1,16 @@
 package net.xpece.android.widget
 
-import android.annotation.TargetApi
 import android.content.ComponentCallbacks2
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Looper
 import android.util.LruCache
 import android.webkit.WebView
+import androidx.annotation.MainThread
 
+@MainThread
 object WebViewCache : ComponentCallbacks2 {
+
     override fun onLowMemory() {
         // No-op.
     }
@@ -17,16 +19,15 @@ object WebViewCache : ComponentCallbacks2 {
         // No-op.
     }
 
-    @TargetApi(17)
     override fun onTrimMemory(level: Int) {
         if (level >= ComponentCallbacks2.TRIM_MEMORY_COMPLETE) {
             cache.evictAll()
-        } else if (level >= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN && Build.VERSION.SDK_INT >= 17) {
+        } else if (level >= ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
             cache.trimToSize(1)
         }
     }
 
-    val cache = LruCache<String, WebView>(6)
+    private val cache = LruCache<String, WebView>(6)
 
     fun get(key: String, factory: () -> WebView): WebView {
         checkMainThread()
@@ -39,7 +40,13 @@ object WebViewCache : ComponentCallbacks2 {
     }
 
     fun remove(key: String) {
+        checkMainThread()
         cache.remove(key)
+    }
+
+    fun clear() {
+        checkMainThread()
+        cache.evictAll()
     }
 
     private fun checkMainThread() {

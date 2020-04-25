@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="xpc_disabled_dark">#2000</color>
-  <color name="xpc_disabled_light">#2fff</color>
-  <color name="xpc_selected_dark">#4fff</color>
-  <color name="xpc_selected_light">#4000</color>
-
   <!-- was #ff1744 -->
   <color name="material_red_a400_alt">#ff1717</color>
   <!-- was #c51162 -->

@@ -21,7 +21,6 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.XpAppCompatCompoundDrawableHelper;
 import android.util.AttributeSet;
 
@@ -64,7 +63,6 @@ public class XpTextInputEditText extends TextInputEditText implements TintableCo
         }
     }
 
-    @RequiresApi(17)
     @Override
     public void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
         if (mTextCompoundDrawableHelper != null) {

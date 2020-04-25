@@ -153,7 +153,7 @@ private fun View.resolveLayoutDirection(): Int {
             // Traverse parent views until we find an absolute value or _LOCALE.
             (parent as? View)?.resolveLayoutDirection() ?: run {
                 // If we're not attached return the value from Configuration object.
-                resources.configuration.layoutDirectionCompat
+                resources.configuration.layoutDirection
             }
         }
         else -> throw IllegalStateException()

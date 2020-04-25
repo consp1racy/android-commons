@@ -25,12 +25,10 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import com.google.android.material.internal.StateListAnimator;
 
 @SuppressLint("RestrictedApi")
-@RequiresApi(14)
 class CardButtonIcs extends CardButtonGingerbread {
 
     private float mRotation;
