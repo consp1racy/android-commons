@@ -4,6 +4,7 @@
 package net.xpece.android.content
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -15,6 +16,7 @@ import androidx.annotation.RequiresPermission
 import com.google.android.gms.maps.model.LatLng
 import net.xpece.android.R
 
+@SuppressLint("InlinedApi")
 fun Context.email(address: String) {
     val i = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", address, null))
     i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
@@ -23,6 +25,7 @@ fun Context.email(address: String) {
     }
 }
 
+@SuppressLint("InlinedApi")
 fun Context.dial(number: String) {
     val i = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null))
     i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
@@ -31,6 +34,7 @@ fun Context.dial(number: String) {
     }
 }
 
+@SuppressLint("InlinedApi")
 @RequiresPermission(Manifest.permission.CALL_PHONE)
 fun Context.call(number: String) {
     val i = Intent(Intent.ACTION_CALL, Uri.fromParts("tel", number, null))

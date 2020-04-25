@@ -4,6 +4,7 @@
 
 package net.xpece.android.content
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -82,6 +83,7 @@ fun Context.view(uri: Uri, func: Intent.() -> Unit = {}) {
 fun viewIntent(uri: String, func: Intent.() -> Unit = {}): Intent
         = viewIntent(Uri.parse(uri)!!, func)
 
+@SuppressLint("InlinedApi")
 fun viewIntent(uri: Uri, func: Intent.() -> Unit = {}): Intent {
     val i = Intent(Intent.ACTION_VIEW, uri)
     i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
@@ -109,11 +111,7 @@ inline fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = tru
         context.layoutInflater.inflate(layout, this, attachToRoot)
 
 inline val Context.isRtl: Boolean
-    get() = if (Build.VERSION.SDK_INT < 17) {
-        false
-    } else {
-        resources.configuration.layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL
-    }
+    get() = resources.configuration.layoutDirection == ViewCompat.LAYOUT_DIRECTION_RTL
 
 inline val Context.isDebugBuild: Boolean
     get() = 0 != (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)

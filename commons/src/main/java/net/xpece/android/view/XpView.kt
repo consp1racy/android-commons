@@ -4,6 +4,7 @@
 
 package net.xpece.android.view
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
@@ -22,11 +23,19 @@ import net.xpece.android.content.res.layoutDirectionCompat
 import java.lang.reflect.Method
 import java.util.*
 
-private val methodViewRemovePerformClickCallback by lazy(LazyThreadSafetyMode.NONE) {
-    View::class.java
-            .getDeclaredMethod("removePerformClickCallback")
-            .apply { isAccessible = true }
-}
+@Suppress("ObjectPropertyName")
+private var _methodViewRemovePerformClickCallback: Method? = null
+
+private val methodViewRemovePerformClickCallback: Method
+    @SuppressLint("PrivateApi")
+    get() {
+        if (_methodViewRemovePerformClickCallback == null) {
+            _methodViewRemovePerformClickCallback =
+                View::class.java
+                    .getDeclaredMethod("removePerformClickCallback")
+        }
+        return _methodViewRemovePerformClickCallback!!
+    }
 
 fun View.cancelPendingInputEventsCompat() {
     if (Build.VERSION.SDK_INT >= 19) {
@@ -95,8 +104,9 @@ fun View.toastContentDescription(text: CharSequence = this.contentDescription): 
     if (midy < displayFrame.height()) {
         // Show below the tab view
         cheatSheet.setGravity(
-                Gravity.TOP or GravityCompat.END, referenceX,
-                screenPos[1] + height - displayFrame.top)
+            Gravity.TOP or GravityCompat.END, referenceX,
+            screenPos[1] + height - displayFrame.top
+        )
     } else {
         // Show along the bottom center
         cheatSheet.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, height)
@@ -111,22 +121,21 @@ inline fun View.setLayerTypeSafe(layerType: Int) {
     }
 }
 
-@get:RequiresApi(17)
-private val getRawLayoutDirectionMethod: Method by lazy(LazyThreadSafetyMode.NONE) {
-    // This method didn't exist until API 17. It's hidden API.
-    View::class.java.getDeclaredMethod("getRawLayoutDirection")
-}
+@Suppress("ObjectPropertyName")
+private var _getRawLayoutDirectionMethod: Method? = null
 
-val View.rawLayoutDirection: Int
-    @TargetApi(17) get() = when {
-        Build.VERSION.SDK_INT >= 17 -> {
-            getRawLayoutDirectionMethod.invoke(this) as Int // Use hidden API.
+private val getRawLayoutDirectionMethod: Method
+    @SuppressLint("PrivateApi")
+    get() {
+        if (_getRawLayoutDirectionMethod == null) {
+            _getRawLayoutDirectionMethod = View::class.java
+                .getDeclaredMethod("getRawLayoutDirection")
         }
-        Build.VERSION.SDK_INT >= 14 -> {
-            layoutDirection // Until API 17 this method was hidden and returned raw value.
-        }
-        else -> ViewCompat.LAYOUT_DIRECTION_LTR // Until API 14 only LTR was a thing.
+        return _getRawLayoutDirectionMethod!!
     }
+
+private val View.rawLayoutDirection: Int
+    get() = getRawLayoutDirectionMethod.invoke(this) as Int // Use hidden API.
 
 private fun View.resolveLayoutDirection(): Int {
     return when (val rawLayoutDirection = rawLayoutDirection) {
