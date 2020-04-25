@@ -8,7 +8,11 @@ import android.net.Uri
 import java.io.InputStream
 import java.nio.charset.Charset
 
-@Deprecated("Use ContentResolver.copy instead.", replaceWith = ReplaceWith("contentResolver.copy"))
+@Deprecated(
+    message = "Use ContentResolver.copy instead.",
+    replaceWith = ReplaceWith("contentResolver.copy(inputUri, outputUri)", "net.xpece.android.io.copy"),
+    level = DeprecationLevel.ERROR
+)
 fun Context.copy(inputUri: Uri, outputUri: Uri) {
     contentResolver.copy(inputUri, outputUri)
 }
@@ -22,15 +26,17 @@ fun ContentResolver.copy(inputUri: Uri, outputUri: Uri) {
 }
 
 @Deprecated(
-        "Use standard library.",
-        replaceWith = ReplaceWith("readBytes", "kotlin.io.readBytes")
+    message = "Use standard library.",
+    replaceWith = ReplaceWith("readBytes", "kotlin.io.readBytes"),
+    level = DeprecationLevel.ERROR
 )
 @JvmOverloads
 fun InputStream.string(charset: String = "UTF-8"): String =
-        reader(Charset.forName(charset)).readText()
+    reader(Charset.forName(charset)).readText()
 
 @Deprecated(
-        "Use standard library.",
-        replaceWith = ReplaceWith("readBytes", "kotlin.io.readBytes")
+    message = "Use standard library.",
+    replaceWith = ReplaceWith("readBytes", "kotlin.io.readBytes"),
+    level = DeprecationLevel.ERROR
 )
 fun InputStream.bytes(): ByteArray = readBytes()
