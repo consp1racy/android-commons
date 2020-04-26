@@ -14,7 +14,7 @@ dependencies {
 	api project(':appcompat-extra')
 }
 
-group = rootProject.GROUP_ID
+group = rootProject.CARDBUTTON_GROUP_ID
 version = rootProject.CARDBUTTON_VERSION_NAME
 
 apply from: rootProject.file('android-release.gradle')
