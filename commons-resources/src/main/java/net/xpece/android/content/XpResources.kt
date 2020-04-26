@@ -5,6 +5,7 @@ package net.xpece.android.content
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import androidx.annotation.*
@@ -14,28 +15,30 @@ import net.xpece.android.content.BaseResources.resolveResourceId as resolveResou
 
 @AnyRes
 inline fun Context.resolveResourceId(@AttrRes attr: Int, @AnyRes fallback: Int): Int =
-        resolveResourceIdImpl(0, attr, fallback)
+    resolveResourceIdImpl(0, attr, fallback)
 
 @AnyRes
-inline fun Context.resolveResourceId(@StyleRes style: Int, @AttrRes attr: Int, @AnyRes fallback: Int): Int =
-        resolveResourceIdImpl(style, attr, fallback)
+inline fun Context.resolveResourceId(
+    @StyleRes style: Int,
+    @AttrRes attr: Int,
+    @AnyRes fallback: Int
+): Int = resolveResourceIdImpl(style, attr, fallback)
 
 /**
- * @throws NullPointerException
+ * @throws Resources.NotFoundException
  */
 @ColorInt
-inline fun Context.getColorCompat(@ColorRes resId: Int): Int = getColorStateListCompat(resId).defaultColor
+inline fun Context.getColorCompat(@ColorRes resId: Int): Int =
+    getColorStateListCompat(resId).defaultColor
 
 /**
- * @throws NullPointerException
+ * @throws Resources.NotFoundException
  */
 fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList =
-        AppCompatResources.getColorStateList(this, resId)!!
+    AppCompatResources.getColorStateList(this, resId)
+        ?: throw Resources.NotFoundException("0x" + String.format("%08X", resId))
 
-/**
- * @throws NullPointerException
- */
-fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable {
+fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
     if (DrawableResolver.isDrawableResolversEnabled) {
         @Suppress("LoopToCallChain")
         for (it in DrawableResolver.drawableResolvers) {
@@ -43,39 +46,39 @@ fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable {
             if (d != null) return d
         }
     }
-    return AppCompatResources.getDrawable(this, resId)!!
+    return AppCompatResources.getDrawable(this, resId)
 }
 
 inline fun Context.resolveFloat(@AttrRes attr: Int, fallback: Float = 0F): Float =
-        resolveFloat(0, attr, fallback)
+    resolveFloat(0, attr, fallback)
 
 inline fun Context.resolveBoolean(@AttrRes attr: Int, fallback: Boolean = false): Boolean =
-        resolveBoolean(0, attr, fallback)
+    resolveBoolean(0, attr, fallback)
 
 @ColorInt
 inline fun Context.resolveColor(@AttrRes attr: Int, @ColorInt fallback: Int = 0): Int =
-        resolveColor(0, attr, fallback)
+    resolveColor(0, attr, fallback)
 
 inline fun Context.resolveColorStateList(@AttrRes attr: Int): ColorStateList? =
-        resolveColorStateList(0, attr)
+    resolveColorStateList(0, attr)
 
 inline fun Context.resolveDimension(@AttrRes attr: Int, fallback: Float = 0F): Float =
-        resolveDimension(0, attr, fallback)
+    resolveDimension(0, attr, fallback)
 
 inline fun Context.resolveDimensionPixelOffset(@AttrRes attr: Int, fallback: Int = 0): Int =
-        resolveDimensionPixelOffset(0, attr, fallback)
+    resolveDimensionPixelOffset(0, attr, fallback)
 
 inline fun Context.resolveDimensionPixelSize(@AttrRes attr: Int, fallback: Int = 0): Int =
-        resolveDimensionPixelSize(0, attr, fallback)
+    resolveDimensionPixelSize(0, attr, fallback)
 
 inline fun Context.resolveDrawable(@AttrRes attr: Int): Drawable? =
-        resolveDrawable(0, attr)
+    resolveDrawable(0, attr)
 
 inline fun Context.resolveString(@AttrRes attr: Int): String? =
-        resolveString(0, attr)
+    resolveString(0, attr)
 
 inline fun Context.resolveText(@AttrRes attr: Int): CharSequence? =
-        resolveText(0, attr)
+    resolveText(0, attr)
 
 fun Context.resolveFloat(@StyleRes style: Int, @AttrRes attr: Int, fallback: Float): Float {
     val ta = obtainStyledAttributes(style, attr)
@@ -97,7 +100,8 @@ fun Context.resolveBoolean(@StyleRes style: Int, @AttrRes attr: Int, fallback: B
 
 @ColorInt
 fun Context.resolveColor(
-        @StyleRes style: Int, @AttrRes attr: Int, @ColorInt fallback: Int = 0): Int {
+    @StyleRes style: Int, @AttrRes attr: Int, @ColorInt fallback: Int = 0
+): Int {
     val ta = obtainStyledAttributes(style, attr)
     try {
         return ta.getColorCompat(this, 0, fallback)
@@ -116,7 +120,8 @@ fun Context.resolveColorStateList(@StyleRes style: Int, @AttrRes attr: Int): Col
 }
 
 fun Context.resolveDimension(
-        @StyleRes style: Int, @AttrRes attr: Int, fallback: Float = 0F): Float {
+    @StyleRes style: Int, @AttrRes attr: Int, fallback: Float = 0F
+): Float {
     val ta = obtainStyledAttributes(style, attr)
     try {
         return ta.getDimension(0, fallback)
@@ -126,7 +131,8 @@ fun Context.resolveDimension(
 }
 
 fun Context.resolveDimensionPixelOffset(
-        @StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
+    @StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0
+): Int {
     val ta = obtainStyledAttributes(style, attr)
     try {
         return ta.getDimensionPixelOffset(0, fallback)
@@ -136,7 +142,8 @@ fun Context.resolveDimensionPixelOffset(
 }
 
 fun Context.resolveDimensionPixelSize(
-        @StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0): Int {
+    @StyleRes style: Int, @AttrRes attr: Int, fallback: Int = 0
+): Int {
     val ta = obtainStyledAttributes(style, attr)
     try {
         return ta.getDimensionPixelSize(0, fallback)
@@ -197,7 +204,10 @@ fun TypedArray.getDrawableCompat(context: Context, @StyleableRes index: Int): Dr
     }
 }
 
-fun TypedArray.getColorStateListCompat(context: Context, @StyleableRes index: Int): ColorStateList? {
+fun TypedArray.getColorStateListCompat(
+    context: Context,
+    @StyleableRes index: Int
+): ColorStateList? {
     val resId = getResourceId(index, 0)
     return if (resId != 0) {
         // It's a reference, let Context handle it.
@@ -210,9 +220,9 @@ fun TypedArray.getColorStateListCompat(context: Context, @StyleableRes index: In
 
 @ColorInt
 fun TypedArray.getColorCompat(
-        context: Context,
-        @StyleableRes index: Int,
-        @ColorInt defValue: Int
+    context: Context,
+    @StyleableRes index: Int,
+    @ColorInt defValue: Int
 ): Int {
     val resId = getResourceId(index, 0)
     return if (resId != 0) {

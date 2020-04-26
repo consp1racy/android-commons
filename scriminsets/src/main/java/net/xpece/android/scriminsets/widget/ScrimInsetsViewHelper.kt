@@ -34,30 +34,33 @@ class ScrimInsetsViewHelper(private val view: View) {
     private val tempRect = Rect()
 
     fun loadFromAttributes(
-            attrs: AttributeSet?,
-            @AttrRes defStyleAttr: Int,
-            @StyleRes defStyleRes: Int
+        attrs: AttributeSet?,
+        @AttrRes defStyleAttr: Int,
+        @StyleRes defStyleRes: Int
     ) {
         // Short-circuit if the platform doesn't support drawing behind insets.
         if (Build.VERSION.SDK_INT < 21) return
 
         val c = view.context
         val a = c.obtainStyledAttributes(
-                attrs,
-                R.styleable.ScrimInsetsViewHelper,
-                defStyleAttr,
-                defStyleRes
+            attrs,
+            R.styleable.ScrimInsetsViewHelper,
+            defStyleAttr,
+            defStyleRes
         )
 
         insetForeground = a.getDrawableCompat(c, R.styleable.ScrimInsetsViewHelper_insetForeground)
 
         val scrimInsets = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsets, false)
-        val scrimInsetsHorizontal = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetsHorizontal, false)
-        val scrimInsetsVertical = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetsVertical, false)
+        val scrimInsetsHorizontal =
+            a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetsHorizontal, false)
+        val scrimInsetsVertical =
+            a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetsVertical, false)
         val scrimInsetLeft = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetLeft, false)
         val scrimInsetTop = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetTop, false)
         val scrimInsetRight = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetRight, false)
-        val scrimInsetBottom = a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetBottom, false)
+        val scrimInsetBottom =
+            a.getBoolean(R.styleable.ScrimInsetsViewHelper_scrimInsetBottom, false)
         setDrawLeftInsetForeground(scrimInsetLeft || scrimInsetsHorizontal || scrimInsets)
         setDrawTopInsetForeground(scrimInsetTop || scrimInsetsVertical || scrimInsets)
         setDrawRightInsetForeground(scrimInsetRight || scrimInsetsHorizontal || scrimInsets)
@@ -72,10 +75,11 @@ class ScrimInsetsViewHelper(private val view: View) {
         }
 
         this.insets!!.set(
-                insets.systemWindowInsetLeft,
-                insets.systemWindowInsetTop,
-                insets.systemWindowInsetRight,
-                insets.systemWindowInsetBottom)
+            insets.systemWindowInsetLeft,
+            insets.systemWindowInsetTop,
+            insets.systemWindowInsetRight,
+            insets.systemWindowInsetBottom
+        )
 
         view.setWillNotDraw(!insets.hasSystemWindowInsets() || insetForeground == null)
         ViewCompat.postInvalidateOnAnimation(view)
@@ -122,81 +126,80 @@ class ScrimInsetsViewHelper(private val view: View) {
     }
 
     fun draw(canvas: Canvas) {
-        val insets = insets
-        val insetForeground = insetForeground
-        if (insets != null && insetForeground != null) {
-            val width = view.width
-            val height = view.height
+        val insets = insets ?: return
+        val insetForeground = insetForeground ?: return
 
-            val sc = canvas.save()
-            canvas.translate(view.scrollX.toFloat(), view.scrollY.toFloat())
+        val width = view.width
+        val height = view.height
 
-            if (drawTopLeftInsetForeground) {
-                tempRect.set(0, 0, insets.left, insets.top)
-                if (!tempRect.isEmpty) {
-                    insetForeground.bounds = tempRect
-                    insetForeground.draw(canvas)
-                }
+        val sc = canvas.save()
+        canvas.translate(view.scrollX.toFloat(), view.scrollY.toFloat())
+
+        if (drawTopLeftInsetForeground) {
+            tempRect.set(0, 0, insets.left, insets.top)
+            if (!tempRect.isEmpty) {
+                insetForeground.bounds = tempRect
+                insetForeground.draw(canvas)
             }
-
-            if (drawTopInsetForeground) {
-                tempRect.set(insets.left, 0, width - insets.right, insets.top)
-                if (!tempRect.isEmpty) {
-                    insetForeground.bounds = tempRect
-                    insetForeground.draw(canvas)
-                }
-            }
-
-            if (drawTopRightInsetForeground) {
-                tempRect.set(width - insets.right, 0, width, insets.top)
-                if (!tempRect.isEmpty) {
-                    insetForeground.bounds = tempRect
-                    insetForeground.draw(canvas)
-                }
-            }
-
-            if (drawLeftInsetForeground) {
-                tempRect.set(0, insets.top, insets.left, height - insets.bottom)
-                if (!tempRect.isEmpty) {
-                    insetForeground.bounds = tempRect
-                    insetForeground.draw(canvas)
-                }
-            }
-
-            if (drawRightInsetForeground) {
-                tempRect.set(width - insets.right, insets.top, width, height - insets.bottom)
-                if (!tempRect.isEmpty) {
-                    insetForeground.bounds = tempRect
-                    insetForeground.draw(canvas)
-                }
-            }
-
-            if (drawBottomLeftInsetForeground) {
-                tempRect.set(0, height - insets.bottom, insets.left, height)
-                if (!tempRect.isEmpty) {
-                    insetForeground.bounds = tempRect
-                    insetForeground.draw(canvas)
-                }
-            }
-
-            if (drawBottomInsetForeground) {
-                tempRect.set(insets.left, height - insets.bottom, width - insets.right, height)
-                if (!tempRect.isEmpty) {
-                    insetForeground.bounds = tempRect
-                    insetForeground.draw(canvas)
-                }
-            }
-
-            if (drawBottomRightInsetForeground) {
-                tempRect.set(width - insets.right, height - insets.bottom, width, height)
-                if (!tempRect.isEmpty) {
-                    insetForeground.bounds = tempRect
-                    insetForeground.draw(canvas)
-                }
-            }
-
-            canvas.restoreToCount(sc)
         }
+
+        if (drawTopInsetForeground) {
+            tempRect.set(insets.left, 0, width - insets.right, insets.top)
+            if (!tempRect.isEmpty) {
+                insetForeground.bounds = tempRect
+                insetForeground.draw(canvas)
+            }
+        }
+
+        if (drawTopRightInsetForeground) {
+            tempRect.set(width - insets.right, 0, width, insets.top)
+            if (!tempRect.isEmpty) {
+                insetForeground.bounds = tempRect
+                insetForeground.draw(canvas)
+            }
+        }
+
+        if (drawLeftInsetForeground) {
+            tempRect.set(0, insets.top, insets.left, height - insets.bottom)
+            if (!tempRect.isEmpty) {
+                insetForeground.bounds = tempRect
+                insetForeground.draw(canvas)
+            }
+        }
+
+        if (drawRightInsetForeground) {
+            tempRect.set(width - insets.right, insets.top, width, height - insets.bottom)
+            if (!tempRect.isEmpty) {
+                insetForeground.bounds = tempRect
+                insetForeground.draw(canvas)
+            }
+        }
+
+        if (drawBottomLeftInsetForeground) {
+            tempRect.set(0, height - insets.bottom, insets.left, height)
+            if (!tempRect.isEmpty) {
+                insetForeground.bounds = tempRect
+                insetForeground.draw(canvas)
+            }
+        }
+
+        if (drawBottomInsetForeground) {
+            tempRect.set(insets.left, height - insets.bottom, width - insets.right, height)
+            if (!tempRect.isEmpty) {
+                insetForeground.bounds = tempRect
+                insetForeground.draw(canvas)
+            }
+        }
+
+        if (drawBottomRightInsetForeground) {
+            tempRect.set(width - insets.right, height - insets.bottom, width, height)
+            if (!tempRect.isEmpty) {
+                insetForeground.bounds = tempRect
+                insetForeground.draw(canvas)
+            }
+        }
+
+        canvas.restoreToCount(sc)
     }
 
     fun onAttachedToWindow() {
