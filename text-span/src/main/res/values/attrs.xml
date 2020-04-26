@@ -9,7 +9,7 @@
         <attr name="android:typeface" />
 
         <attr name="android:textFontWeight" />
-        <attr name="textFontWeight" />
+        <attr name="textFontWeight" format="integer"/>
 
         <attr name="android:textLocale" />
 
