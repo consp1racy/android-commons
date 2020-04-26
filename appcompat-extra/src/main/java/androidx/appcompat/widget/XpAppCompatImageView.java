@@ -20,8 +20,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 /**
- * {@link android.widget.ImageView} which supports image drawable tint on all platforms.
+ * {@link android.widget.ImageView} which supports {@code android:enabled} in XML.
  */
+@SuppressWarnings("deprecation")
+@Deprecated
 public class XpAppCompatImageView extends AppCompatImageView {
 
     private XpAppCompatImageHelper mImageHelper;

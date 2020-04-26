@@ -23,8 +23,10 @@ import android.util.AttributeSet;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
- * {@link FloatingActionButton} which supports image drawable tint on all platforms.
+ * {@link FloatingActionButton} which supports {@code android:enabled} XML attribute.
  */
+@SuppressWarnings("deprecation")
+@Deprecated
 public class XpFloatingActionButton extends FloatingActionButton {
 
     private XpAppCompatImageHelper mImageTintHelper;

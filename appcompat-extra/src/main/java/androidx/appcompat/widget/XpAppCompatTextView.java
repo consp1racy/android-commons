@@ -28,7 +28,11 @@ import net.xpece.android.widget.TintableCompoundDrawableView;
 
 /**
  * {@link android.widget.TextView} which supports compound drawable tint on all platforms.
+ *
+ * @deprecated Use AppCompat 1.1.0.
  */
+@SuppressWarnings("deprecation")
+@Deprecated
 public class XpAppCompatTextView extends AppCompatTextView implements TintableCompoundDrawableView {
 
     private final XpAppCompatCompoundDrawableHelper mTextCompoundDrawableHelper;

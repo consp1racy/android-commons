@@ -34,8 +34,9 @@ import androidx.core.widget.TextViewCompat;
 import net.xpece.android.appcompatextra.R;
 import net.xpece.android.widget.XpTextViewCompat;
 
-@RestrictTo(RestrictTo.Scope.GROUP_ID)
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 @SuppressWarnings("RestrictedApi")
+@Deprecated
 public final class XpAppCompatCompoundDrawableHelper {
 
     private final TextView mView;

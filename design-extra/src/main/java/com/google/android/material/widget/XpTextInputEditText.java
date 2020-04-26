@@ -21,6 +21,7 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.XpAppCompatCompoundDrawableHelper;
 import android.util.AttributeSet;
 
@@ -30,7 +31,11 @@ import net.xpece.android.widget.TintableCompoundDrawableView;
 
 /**
  * {@link TextInputEditText} which supports compound drawable tint on all platforms.
+ *
+ * @deprecated Use AppCompat 1.1.0.
  */
+@SuppressWarnings("deprecation")
+@Deprecated
 public class XpTextInputEditText extends TextInputEditText implements TintableCompoundDrawableView {
 
     private XpAppCompatCompoundDrawableHelper mTextCompoundDrawableHelper;
@@ -63,6 +68,7 @@ public class XpTextInputEditText extends TextInputEditText implements TintableCo
         }
     }
 
+    @RequiresApi(17)
     @Override
     public void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
         if (mTextCompoundDrawableHelper != null) {

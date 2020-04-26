@@ -29,7 +29,7 @@ import androidx.annotation.RestrictTo;
 import net.xpece.android.appcompatextra.R;
 import net.xpece.android.widget.XpCheckedTextViewCompat;
 
-@RestrictTo(RestrictTo.Scope.GROUP_ID)
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 @SuppressWarnings("RestrictedApi")
 public final class XpAppCompatCheckMarkHelper {
 

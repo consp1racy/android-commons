@@ -22,8 +22,10 @@ import android.util.AttributeSet;
 import net.xpece.android.appcompatextra.R;
 
 /**
- * {@link android.widget.ImageButton} which supports image drawable tint on all platforms.
+ * {@link android.widget.ImageButton} which supports {@code android:enabled} XML attribute.
  */
+@SuppressWarnings("deprecation")
+@Deprecated
 public class XpAppCompatImageButton extends AppCompatImageButton {
 
     private XpAppCompatImageHelper mImageTintHelper;

@@ -33,6 +33,7 @@ import net.xpece.android.widget.TintableCompoundDrawableView;
 /**
  * {@link android.widget.CheckedTextView} which supports compound drawable tint on all platforms.
  */
+@SuppressWarnings("deprecation")
 public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView implements
     TintableCompoundDrawableView, TintableCheckMarkView {
 
