@@ -28,6 +28,6 @@ repositories {
 }
 
 group = rootProject.property("GROUP_ID") as String
-version = rootProject.property("PICKER_VERSION_NAME") as String
+version = rootProject.property("DIALOG_BASE_VERSION_NAME") as String
 
 apply(from = rootProject.file("android-release.gradle"))
