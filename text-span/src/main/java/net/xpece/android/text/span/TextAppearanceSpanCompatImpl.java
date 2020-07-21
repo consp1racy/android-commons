@@ -111,7 +111,11 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
         mStyle = a.getInt(R.styleable.TextAppearanceSpanCompat_android_textStyle, 0);
         if (!context.isRestricted()) {
             final int resId = a.getResourceId(R.styleable.TextAppearanceSpanCompat_android_fontFamily, 0);
-            mTypeface = ResourcesCompat.getFont(context, resId);
+            if (resId != 0) {
+                mTypeface = ResourcesCompat.getFont(context, resId);
+            } else {
+                mTypeface = null;
+            }
         } else {
             mTypeface = null;
         }
