@@ -25,6 +25,7 @@ import android.os.Build;
 import android.os.LocaleList;
 import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
+import android.util.TypedValue;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
@@ -70,6 +71,8 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
      */
     private static final int FONT_WEIGHT_MAX = 1000;
 
+    private static final TypedValue TEMP_VALUE = new TypedValue();
+
     private final String mFamilyName;
     private final int mStyle;
     private final int mTextSize;
@@ -109,9 +112,10 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
         mTextSize = a.getDimensionPixelSize(R.styleable.TextAppearanceSpanCompat_android_textSize, -1);
 
         mStyle = a.getInt(R.styleable.TextAppearanceSpanCompat_android_textStyle, 0);
+        a.getValue(R.styleable.TextAppearanceSpanCompat_android_fontFamily, TEMP_VALUE);
         if (!context.isRestricted()) {
-            final int resId = a.getResourceId(R.styleable.TextAppearanceSpanCompat_android_fontFamily, 0);
-            if (resId != 0) {
+            final int resId = TEMP_VALUE.resourceId;
+            if (resId != 0 && TEMP_VALUE.type == TypedValue.TYPE_REFERENCE) {
                 mTypeface = ResourcesCompat.getFont(context, resId);
             } else {
                 mTypeface = null;
@@ -122,9 +126,9 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
         if (mTypeface != null) {
             mFamilyName = null;
         } else {
-            final String family = a.getString(R.styleable.TextAppearanceSpanCompat_android_fontFamily);
+            final CharSequence family = TEMP_VALUE.string;
             if (family != null) {
-                mFamilyName = family;
+                mFamilyName = family.toString();
             } else {
                 final int tf = a.getInt(R.styleable.TextAppearanceSpanCompat_android_typeface, 0);
                 switch (tf) {
