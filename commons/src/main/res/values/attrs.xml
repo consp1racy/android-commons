@@ -64,7 +64,6 @@
 
         <attr name="errorEnabled" format="boolean"/>
         <attr name="errorTextAppearance" format="reference"/>
-        <attr name="textColorError"/>
     </declare-styleable>
 
 </resources>

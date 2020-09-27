@@ -70,9 +70,6 @@ public class ArbitraryInputLayout extends LinearLayoutCompat {
         if (a.hasValue(R.styleable.ArbitraryInputLayout_android_textColorHint)) {
             mHintTextColor = a.getColorStateList(R.styleable.ArbitraryInputLayout_android_textColorHint);
         }
-        if (a.hasValue(R.styleable.ArbitraryInputLayout_android_textColorHint)) {
-            mErrorTextColor = a.getColorStateList(R.styleable.ArbitraryInputLayout_textColorError);
-        }
 
         mErrorEnabled = a.getBoolean(R.styleable.ArbitraryInputLayout_errorEnabled, false);
         mHintEnabled = a.getBoolean(R.styleable.ArbitraryInputLayout_hintEnabled, true);
