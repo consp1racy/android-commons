@@ -6,7 +6,6 @@ publishing {
             from components.android
 
             artifact(androidSourcesJar)
-            artifact(androidJavadocsJar)
 
 //            pom.withXml {
 //                def dependencies = asNode().get("dependencies")
