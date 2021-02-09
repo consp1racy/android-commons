@@ -44,7 +44,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit"
     testImplementation 'com.jakewharton.threetenabp:threetenabp:1.0.0'
 
     api project(':design-extra')
@@ -80,7 +80,7 @@ dependencies {
 
     compileOnly 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
 }
 
 repositories {

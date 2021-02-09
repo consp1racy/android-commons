@@ -18,7 +18,7 @@ android {
 dependencies {
     api 'androidx.appcompat:appcompat-resources:1.1.0'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
     implementation project(':commons-base')
 }

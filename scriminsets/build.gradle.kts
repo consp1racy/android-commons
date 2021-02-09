@@ -12,8 +12,7 @@ android {
 }
 
 dependencies {
-    val kotlin_version = rootProject.ext["kotlin_version"]
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
     implementation("androidx.core:core:1.1.0")
 
