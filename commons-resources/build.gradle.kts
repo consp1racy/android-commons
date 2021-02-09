@@ -14,8 +14,6 @@ android {
 dependencies {
     api("androidx.appcompat:appcompat-resources:1.1.0")
 
-    implementation(kotlin("stdlib"))
-
     implementation(project(":commons-base"))
 }
 

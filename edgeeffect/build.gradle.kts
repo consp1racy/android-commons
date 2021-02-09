@@ -16,8 +16,6 @@ dependencies {
 
     implementation("androidx.core:core:1.1.0")
 
-    implementation(kotlin("stdlib"))
-
     compileOnly("androidx.recyclerview:recyclerview:1.0.0@aar")
     compileOnly("androidx.viewpager:viewpager:1.0.0@aar")
     compileOnly("androidx.viewpager2:viewpager2:1.0.0-beta05@aar")

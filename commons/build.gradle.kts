@@ -77,8 +77,6 @@ dependencies {
     compileOnly("io.reactivex.rxjava2:rxjava:2.0.0")
 
     compileOnly("androidx.lifecycle:lifecycle-extensions:2.0.0")
-
-    implementation(kotlin("stdlib"))
 }
 
 repositories {

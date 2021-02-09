@@ -15,8 +15,6 @@ dependencies {
     implementation("androidx.annotation:annotation:1.1.0")
 
     implementation(project(":commons-resources"))
-
-    implementation(kotlin("stdlib"))
 }
 
 

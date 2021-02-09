@@ -16,8 +16,6 @@ dependencies {
 
     implementation("androidx.annotation:annotation:1.1.0")
     implementation("androidx.core:core:1.1.0")
-
-    implementation(kotlin("stdlib"))
 }
 
 group = rootProject.property("GROUP_ID") as String

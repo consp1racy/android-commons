@@ -12,8 +12,6 @@ android {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-
     implementation("androidx.core:core:1.1.0")
 
     implementation(project(":commons-resources"))

@@ -14,8 +14,6 @@ android {
 dependencies {
     compileOnly("androidx.annotation:annotation:1.1.0")
 
-    implementation(kotlin("stdlib"))
-
     api(project(":commons-dimen"))
 }
 
