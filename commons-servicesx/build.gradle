@@ -16,9 +16,9 @@ android {
 }
 
 dependencies {
-    compileOnly 'androidx.annotation:annotation:1.1.0'
+    api(project(":commons-services"))
 
-    compileOnly("androidx.core:core:1.1.0")
+    api("androidx.core:core:1.1.0")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

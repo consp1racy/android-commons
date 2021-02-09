@@ -1,5 +1,5 @@
 include ':sample-commons', ':commons', ':sample-extra'
-include ':commons-services', ':commons-resources', ':commons-dimen', ':commons-dimen-lazy', ":commons-base"
+include ':commons-services', ':commons-servicesx', ':commons-resources', ':commons-dimen', ':commons-dimen-lazy', ":commons-base"
 include ':cardbutton', ':sample-cardbutton'
 include ':scriminsets'
 include ':icontabs'

@@ -44,6 +44,7 @@ import android.net.wifi.p2p.WifiP2pManager
 import android.net.wifi.rtt.WifiRttManager
 import android.nfc.NfcManager
 import android.os.*
+import android.os.Build.VERSION.SDK_INT
 import android.os.health.SystemHealthManager
 import android.os.storage.StorageManager
 import android.print.PrintManager
@@ -113,12 +114,6 @@ inline val Context.notificationManager: NotificationManager
 /**
  * Never null.
  */
-inline val Context.notificationManagerCompat: NotificationManagerCompat
-    get() = NotificationManagerCompat.from(this)
-
-/**
- * Never null.
- */
 inline val Context.powerManager: PowerManager
     get() = getSystemServiceOrThrow(Context.POWER_SERVICE)
 
@@ -147,7 +142,7 @@ inline val Context.wallpaperService: WallpaperManager?
     get() = getSystemServiceOrNull(Context.WALLPAPER_SERVICE)
 
 inline val Context.wifiManager: WifiManager?
-    get() = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+    get() = if (SDK_INT < 24) {
         applicationContext.getSystemServiceOrNull(Context.WIFI_SERVICE)
     } else {
         getSystemServiceOrNull(Context.WIFI_SERVICE)
@@ -250,12 +245,6 @@ inline val Context.nsdManager: NsdManager?
 @get:RequiresApi(17)
 inline val Context.displayManager: DisplayManager
     get() = getSystemServiceOrThrow(Context.DISPLAY_SERVICE)
-
-/**
- * Never null.
- */
-inline val Context.displayManagerCompat: DisplayManagerCompat
-    get() = DisplayManagerCompat.getInstance(this)
 
 /**
  * Never null.
@@ -365,13 +354,6 @@ inline val Context.carrierConfigManager: CarrierConfigManager
 inline val Context.fingerprintManager: FingerprintManager?
     get() = getSystemServiceOrNull(Context.FINGERPRINT_SERVICE)
 
-/**
- * Never null.
- */
-@Deprecated("Use BiometricPrompt instead.")
-inline val Context.fingerprintManagerCompat: FingerprintManagerCompat
-    get() = FingerprintManagerCompat.from(this)
-
 @get:RequiresApi(23)
 inline val Context.midiManager: MidiManager?
     get() = getSystemServiceOrNull(Context.MIDI_SERVICE)
@@ -414,10 +396,16 @@ inline val Context.textClassificationManager: TextClassificationManager
 inline val Context.wifiAwareManager: WifiAwareManager?
     get() = getSystemServiceOrNull(Context.WIFI_AWARE_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(28)
 inline val Context.crossProfileApps: CrossProfileApps
     get() = getSystemServiceOrThrow(Context.CROSS_PROFILE_APPS_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(28)
 inline val Context.euiccManager: EuiccManager
     get() = getSystemServiceOrThrow(Context.EUICC_SERVICE)
@@ -430,10 +418,16 @@ inline val Context.ipSecManager: IpSecManager?
 inline val Context.wifiRttManager: WifiRttManager?
     get() = getSystemServiceOrNull(Context.WIFI_RTT_RANGING_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(29)
 inline val Context.biometricManager: BiometricManager
     get() = getSystemServiceOrThrow(Context.BIOMETRIC_SERVICE)
 
+/**
+ * Never null.
+ */
 @get:RequiresApi(29)
 inline val Context.roleManager: RoleManager
     get() = getSystemServiceOrThrow(Context.ROLE_SERVICE)
@@ -449,14 +443,39 @@ inline fun <reified T> Context.getSystemServiceOrThrow(name: String): T =
         getSystemServiceOrNull<T>(name) ?:
                 throw ServiceNotFoundException("${T::class.java.simpleName} not found.")
 
-@RequiresApi(23)
+// Split into commons-servicesx.
+
+/**
+ * Never null.
+ */
+@Deprecated("Use commons-servicesx.")
+inline val Context.notificationManagerCompat: NotificationManagerCompat
+    get() = NotificationManagerCompat.from(this)
+
+/**
+ * Never null.
+ */
+@Deprecated("Use commons-servicesx.")
+inline val Context.displayManagerCompat: DisplayManagerCompat
+    get() = DisplayManagerCompat.getInstance(this)
+
+/**
+ * Never null.
+ */
+@Deprecated("Use commons-servicesx.")
+inline val Context.fingerprintManagerCompat: FingerprintManagerCompat
+    get() = FingerprintManagerCompat.from(this)
+
+@Deprecated("Use commons-servicesx.")
 inline fun <reified T> Context.getSystemServiceOrNull(): T? =
-        ContextCompat.getSystemService(this, T::class.java)
+    ContextCompat.getSystemService(this, T::class.java)
 
 /**
  * @throws ServiceNotFoundException When service is not found.
  */
-@RequiresApi(23)
+@Deprecated("Use commons-servicesx.")
 inline fun <reified T> Context.getSystemServiceOrThrow(): T =
-        getSystemServiceOrNull<T>() ?:
-                throw ServiceNotFoundException("${T::class.java.simpleName} not found.")
+    getSystemServiceOrNull<T>() ?:
+    throw ServiceNotFoundException("${T::class.java.simpleName} not found.")
+
+typealias ServiceNotFoundException = NullPointerException
