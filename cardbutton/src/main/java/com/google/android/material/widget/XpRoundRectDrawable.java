@@ -15,6 +15,7 @@
  */
 package com.google.android.material.widget;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -39,6 +40,7 @@ import androidx.core.graphics.drawable.TintAwareDrawable;
  * <p>
  * Simpler and uses less resources compared to GradientDrawable or ShapeDrawable.
  */
+@SuppressLint("RestrictedApi")
 class XpRoundRectDrawable extends Drawable implements TintAwareDrawable {
     @NonNull
     private static final RoundRectHelper sHelper;

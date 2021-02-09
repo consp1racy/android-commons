@@ -1,5 +1,6 @@
 package net.xpece.android.graphics
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
@@ -145,6 +146,7 @@ internal object WeightTypefaceLegacy {
         }
     )
 
+    @SuppressLint("RestrictedApi")
     private fun createFromFontFamilyFilesResourceEntry(
         context: Context,
         entry: FontResourcesParserCompat.FontFamilyFilesResourceEntry,

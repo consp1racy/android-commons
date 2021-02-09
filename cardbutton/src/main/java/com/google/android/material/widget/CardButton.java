@@ -55,6 +55,7 @@ import net.xpece.android.widget.TintableCompoundDrawableView;
  * Use {@link net.xpece.android.cardbutton.widget.CardButton} instead.
  */
 @Deprecated
+@SuppressLint("RestrictedApi")
 public class CardButton extends AppCompatButton implements TintableCompoundDrawableView {
     public static boolean AUTO_VISUAL_MARGIN_ENABLED = Build.VERSION.SDK_INT < 18;
 

@@ -15,7 +15,7 @@ object WebViewCache : ComponentCallbacks2 {
         // No-op.
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         // No-op.
     }
 

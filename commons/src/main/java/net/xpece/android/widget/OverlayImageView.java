@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 
 import net.xpece.android.R;
 
+@SuppressLint("AppCompatCustomView")
 public class OverlayImageView extends ImageView {
 
     private Drawable mOverlay;
