@@ -31,7 +31,7 @@ subprojects {
     plugins.whenPluginAdded {
         if (this is LibraryPlugin) {
             extensions.getByType<LibraryExtension>().libraryVariants.all {
-                generateBuildConfigProvider.configure {
+                generateBuildConfigProvider!!.configure {
                     isEnabled = false
                 }
             }

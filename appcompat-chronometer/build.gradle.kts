@@ -14,7 +14,7 @@ dependencies {
     api("androidx.appcompat:appcompat:1.1.0")
 }
 
-group = rootProject.GROUP_ID
-version = rootProject.APPCOMPAT_CHRONOMETER_VERSION_NAME
+group = rootProject.property("GROUP_ID") as String
+version = rootProject.property("APPCOMPAT_CHRONOMETER_VERSION_NAME") as String
 
-apply from: rootProject.file('android-release.gradle')
+apply(from = rootProject.file("android-release.gradle"))

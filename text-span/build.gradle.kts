@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -18,11 +16,11 @@ dependencies {
 
     implementation(project(":commons-resources"))
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${KotlinCompilerVersion.VERSION}")
+    implementation(kotlin("stdlib"))
 }
 
 
-group = rootProject.property("TEXT_GROUP_ID").toString()
-version = rootProject.property("TEXT_SPAN_VERSION_NAME").toString()
+group = rootProject.property("TEXT_GROUP_ID") as String
+version = rootProject.property("TEXT_SPAN_VERSION_NAME") as String
 
 apply(from = rootProject.file("android-release.gradle"))

@@ -1,5 +1,5 @@
 plugins {
-	id("com.android.library")
+    id("com.android.library")
 }
 
 android {
@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         minSdkVersion(26)
-	}
+    }
 }
 
 dependencies {
@@ -19,11 +19,6 @@ dependencies {
 
     implementation("androidx.annotation:annotation:1.1.0")
     implementation("androidx.core:core:1.1.0")
-}
-
-repositories {
-	google()
-    jcenter()
 }
 
 group = rootProject.property("GROUP_ID") as String

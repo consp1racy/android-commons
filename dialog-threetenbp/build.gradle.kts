@@ -1,8 +1,6 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
-	id("com.android.library")
-	id("kotlin-android")
+    id("com.android.library")
+    id("kotlin-android")
 }
 
 android {
@@ -10,7 +8,7 @@ android {
 
     defaultConfig {
         minSdkVersion(14)
-	}
+    }
 }
 
 dependencies {
@@ -25,12 +23,7 @@ dependencies {
     implementation("androidx.annotation:annotation:1.1.0")
     implementation("androidx.core:core:1.1.0")
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${KotlinCompilerVersion.VERSION}")
-}
-
-repositories {
-	google()
-    jcenter()
+    implementation(kotlin("stdlib"))
 }
 
 group = rootProject.property("GROUP_ID") as String
