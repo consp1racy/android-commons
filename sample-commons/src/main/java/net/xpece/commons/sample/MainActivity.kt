@@ -1,8 +1,10 @@
 package net.xpece.commons.sample
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.BulletSpan
@@ -21,10 +23,12 @@ import com.google.android.material.snackbar.Snackbar
 import net.xpece.android.app.SnackbarActivity
 import net.xpece.android.content.dp
 import net.xpece.android.edgeeffect.widget.setEdgeEffectColorCompat
+import net.xpece.android.graphics.drawable.RippleDrawableCompatInflater
 import net.xpece.android.picker.widget.setSelectionDividerTintCompat
 import net.xpece.android.text.span.BulletSpanCompat
 import net.xpece.android.text.span.TextAppearanceSpanCompat
 import net.xpece.commons.android.sample.R
+import net.xpece.commons.android.sample.databinding.ActivityMainBinding
 import org.threeten.bp.LocalDateTime
 
 class MainActivity : AppCompatActivity(), SnackbarActivity {
@@ -32,23 +36,29 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         get() = findViewById(android.R.id.content)
     override var snackbar: Snackbar? = null
 
-    private lateinit var pager: ViewPager
-    private lateinit var textSpanTest: TextView
-
     private var localDateTime = LocalDateTime.of(2000, 1, 31, 16, 30)!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        pager = findViewById(R.id.pager)
-        textSpanTest = findViewById(R.id.textSpanTest)
+        RippleDrawableCompatInflater.installDelegate()
+
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.buttonLight.setOnClickListener {
+            if (SDK_INT >= 21) {
+                val context = it.context
+                Intent(context, RippleActivity::class.java)
+                    .let(context::startActivity)
+            }
+        }
 
         val adapter = MyPagerAdapter()
-        pager.adapter = adapter
+        binding.pager.adapter = adapter
 
-        pager.setEdgeEffectColorCompat(Color.RED)
+        binding.pager.setEdgeEffectColorCompat(Color.RED)
 
         val d = dp(16)
         Log.d(TAG, "Dimension real size: " + d.toString(this))
@@ -63,12 +73,12 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
                 .apply { setSpan(BulletSpan(32, Color.BLACK, 8), 0, length, 0) }
         }
 
-        textSpanTest.text = buildSpannedString {
+        binding.textSpanTest.text = buildSpannedString {
             append("This is ")
-            inSpans(TextAppearanceSpanCompat(textSpanTest.context, R.style.TextAppearance_Raleway_Thin)) {
+            inSpans(TextAppearanceSpanCompat(binding.textSpanTest.context, R.style.TextAppearance_Raleway_Thin)) {
                 append("thin ")
             }
-            inSpans(TextAppearanceSpanCompat(textSpanTest.context, R.style.TextAppearance_Raleway_Thin_Italic)) {
+            inSpans(TextAppearanceSpanCompat(binding.textSpanTest.context, R.style.TextAppearance_Raleway_Thin_Italic)) {
                 append("italic ")
             }
         }

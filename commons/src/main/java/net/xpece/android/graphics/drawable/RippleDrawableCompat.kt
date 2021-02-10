@@ -3,12 +3,19 @@ package net.xpece.android.graphics.drawable
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.res.ColorStateList
+import android.content.res.Resources
+import android.content.res.Resources.Theme
+import android.content.res.TypedArray
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.RippleDrawable.RADIUS_AUTO
 import android.os.Build.VERSION.SDK_INT
+import android.util.AttributeSet
 import androidx.annotation.RequiresApi
+import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserException
+import java.io.IOException
 import java.lang.reflect.Method
 
 @RequiresApi(21)
@@ -17,6 +24,8 @@ class RippleDrawableCompat(
     content: Drawable?,
     mask: Drawable?,
 ) : RippleDrawable(color, content, mask) {
+
+    internal constructor() : this(ColorStateList.valueOf(0), null, null)
 
     @TargetApi(21)
     override fun isProjected(): Boolean {
@@ -33,6 +42,20 @@ class RippleDrawableCompat(
         DELEGATE.setRadius(this, radius)
     }
 
+    @Throws(XmlPullParserException::class, IOException::class)
+    override fun inflate(r: Resources, parser: XmlPullParser, attrs: AttributeSet, theme: Theme?) {
+        DELEGATE.inflate(this, r, parser, attrs, theme)
+    }
+
+    internal fun superInflate(
+        r: Resources,
+        parser: XmlPullParser,
+        attrs: AttributeSet,
+        theme: Theme?
+    ) {
+        super.inflate(r, parser, attrs, theme)
+    }
+
     private companion object {
 
         val DELEGATE = when {
@@ -45,11 +68,20 @@ class RippleDrawableCompat(
 @RequiresApi(21)
 private interface RippleDrawableApi {
 
-    fun getRadius(d: RippleDrawable): Int
+    fun getRadius(d: RippleDrawableCompat): Int
 
-    fun setRadius(d: RippleDrawable, radius: Int)
+    fun setRadius(d: RippleDrawableCompat, radius: Int)
 
-    fun isProjected(d: RippleDrawable): Boolean
+    fun isProjected(d: RippleDrawableCompat): Boolean
+
+    @Throws(XmlPullParserException::class, IOException::class)
+    fun inflate(
+        d: RippleDrawableCompat,
+        r: Resources,
+        parser: XmlPullParser,
+        attrs: AttributeSet,
+        theme: Theme?,
+    )
 }
 
 @RequiresApi(21)
@@ -62,16 +94,16 @@ private object RippleDrawableApi21 : RippleDrawableApi {
     private val setMaxRadius: Method = RippleDrawable::class.java
         .getDeclaredMethod("setMaxRadius", Int::class.javaPrimitiveType)
 
-    override fun getRadius(d: RippleDrawable): Int {
+    override fun getRadius(d: RippleDrawableCompat): Int {
         return getMaxRadius.invoke(d) as Int
     }
 
-    override fun setRadius(d: RippleDrawable, radius: Int) {
+    override fun setRadius(d: RippleDrawableCompat, radius: Int) {
         setMaxRadius.invoke(d, radius)
         d.invalidateSelf()
     }
 
-    override fun isProjected(d: RippleDrawable): Boolean {
+    override fun isProjected(d: RippleDrawableCompat): Boolean {
         // If the layer is bounded, then we don't need to project.
         if (isBounded(d)) {
             return false
@@ -97,31 +129,73 @@ private object RippleDrawableApi21 : RippleDrawableApi {
         return true
     }
 
-    private fun isBounded(d: RippleDrawable): Boolean {
+    private fun isBounded(d: RippleDrawableCompat): Boolean {
         return d.numberOfLayers > 0
     }
 
+    private val TEMP_RECT = Rect()
+
     @TargetApi(23)
-    private fun getHotspotBounds(d: RippleDrawable): Rect {
-        return tempRect.also(d::getHotspotBounds)
+    private fun getHotspotBounds(d: RippleDrawableCompat): Rect {
+        return TEMP_RECT.also(d::getHotspotBounds)
     }
 
-    private val tempRect = Rect()
+    private val ATTRS = intArrayOf(android.R.attr.radius)
+
+    @Throws(XmlPullParserException::class, IOException::class)
+    override fun inflate(
+        d: RippleDrawableCompat,
+        r: Resources,
+        parser: XmlPullParser,
+        attrs: AttributeSet,
+        theme: Theme?
+    ) {
+        val a = obtainAttributes(r, theme, attrs, ATTRS)
+        val radius = try {
+            a.getDimensionPixelSize(0, getRadius(d))
+        } finally {
+            a.recycle()
+        }
+        d.superInflate(r, parser, attrs, theme)
+        setRadius(d, radius)
+    }
+
+    @SuppressLint("Recycle")
+    private fun obtainAttributes(
+        res: Resources,
+        theme: Theme?,
+        set: AttributeSet,
+        attrs: IntArray
+    ): TypedArray {
+        return theme?.obtainStyledAttributes(set, attrs, 0, 0)
+            ?: res.obtainAttributes(set, attrs)
+    }
 }
 
 @RequiresApi(23)
 private object RippleDrawableApi23 : RippleDrawableApi {
 
-    override fun getRadius(d: RippleDrawable): Int {
+    override fun getRadius(d: RippleDrawableCompat): Int {
         return d.radius
     }
 
-    override fun setRadius(d: RippleDrawable, radius: Int) {
+    override fun setRadius(d: RippleDrawableCompat, radius: Int) {
         d.radius = radius
     }
 
     @TargetApi(29)
-    override fun isProjected(d: RippleDrawable): Boolean {
+    override fun isProjected(d: RippleDrawableCompat): Boolean {
         return d.isProjected
+    }
+
+    @Throws(XmlPullParserException::class, IOException::class)
+    override fun inflate(
+        d: RippleDrawableCompat,
+        r: Resources,
+        parser: XmlPullParser,
+        attrs: AttributeSet,
+        theme: Theme?
+    ) {
+        d.superInflate(r, parser, attrs, theme)
     }
 }

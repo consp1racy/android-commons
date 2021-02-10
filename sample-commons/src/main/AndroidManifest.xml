@@ -1,7 +1,6 @@
-<manifest xmlns:tools="http://schemas.android.com/tools"
-    package="net.xpece.commons.android.sample"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="net.xpece.commons.android.sample">
 
     <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>-->
 
@@ -13,12 +12,14 @@
         tools:ignore="GoogleAppIndexingWarning,MissingApplicationIcon">
         <activity android:name="net.xpece.commons.sample.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name="net.xpece.commons.sample.RippleActivity" />
 
     </application>
 

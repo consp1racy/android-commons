@@ -22,6 +22,10 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     lintOptions {
         ignore("ExpiredTargetSdkVersion")
     }
@@ -33,6 +37,7 @@ dependencies {
     implementation(project(":text-span"))
 
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.appcompat:appcompat:1.2.0")
 
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     implementation("io.reactivex.rxjava2:rxjava:2.2.12")
