@@ -101,8 +101,8 @@ private fun BulletSpanPieParcel(
     val parcel = Parcel.obtain()
     try {
         parcel.writeInt(gapWidth)
-        parcel.writeInt(color)
         parcel.writeInt(if (wantColor) 1 else 0)
+        parcel.writeInt(color)
         parcel.writeInt(bulletRadius)
         parcel.setDataPosition(0)
         return BulletSpanPie(parcel)

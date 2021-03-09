@@ -11,17 +11,22 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <androidx.appcompat.widget.XpAppCompatButton
-        android:id="@+id/buttonLight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Light Button" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.XpAppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dark Button"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+        <androidx.appcompat.widget.XpAppCompatButton
+            android:id="@+id/buttonLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Light Button" />
+
+        <androidx.appcompat.widget.XpAppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dark Button"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -74,8 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="true"
-                android:lineSpacingExtra="10dp"
-                android:lineSpacingMultiplier="1"
+                android:lineSpacingExtra="5dp"
+                android:lineSpacingMultiplier="1.1"
                 android:text="Lorem Impsum\nDolor sit amet\nNever gonna give you up\nNever gonna let you down"
                 android:textSize="32dp" />
 
@@ -85,7 +90,15 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="true"
                 android:text="Lorem Impsum\nDolor sit amet\nNever gonna give you up\nNever gonna let you down"
-                android:textSize="32dp" />
+                android:textSize="28dp" />
+
+            <TextView
+                android:id="@+id/textBullets3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="true"
+                android:text="Lorem Impsum\nDolor sit amet\nNever gonna give you up\nNever gonna let you down"
+                android:textSize="24dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

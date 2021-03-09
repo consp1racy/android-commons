@@ -7,6 +7,7 @@ import android.graphics.Typeface
 import android.graphics.Typeface.BOLD
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.text.style.BulletSpan
 import android.text.style.StrikethroughSpan
 import android.util.Log
 import android.view.View
@@ -63,24 +64,41 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         val d = dp(16)
         Log.d(TAG, "Dimension real size: " + d.toString(this))
 
-        val textBullets = findViewById<TextView>(R.id.textBullets)
-        val textBullets2 = findViewById<TextView>(R.id.textBullets2)
-//        textBullets.text = SpannableString(textBullets.text)
-        textBullets.text = buildSpannedString {
+        binding.textBullets.text = buildSpannedString {
             for (i in 0..3) {
-                inSpans(BulletSpanCompat(32, Color.BLACK), StrikethroughSpan(), Typeface.defaultFromStyle(BOLD).asSpan()) {
+                inSpans(
+                    BulletSpanCompat(32, null, 8),
+                    StrikethroughSpan(),
+                    Typeface.defaultFromStyle(BOLD).asSpan()
+                ) {
                     appendLine("Lorem ipsum")
                 }
             }
             delete(length - 1, length)
         }
-        textBullets2.text = buildSpannedString {
+        binding.textBullets2.text = buildSpannedString {
             for (i in 0..3) {
-                inSpans(BulletSpanCompat(32, Color.BLACK), StrikethroughSpan()) {
+                inSpans(
+                    BulletSpanCompat(32, Color.BLACK),
+                    StrikethroughSpan()
+                ) {
                     appendLine("Lorem ipsum")
                 }
             }
             delete(length - 1, length)
+        }
+        if (SDK_INT >= 28) {
+            binding.textBullets3.text = buildSpannedString {
+                for (i in 0..3) {
+                    inSpans(
+                        BulletSpan(32, Color.BLACK, 8),
+                        StrikethroughSpan()
+                    ) {
+                        appendLine("Lorem ipsum")
+                    }
+                }
+                delete(length - 1, length)
+            }
         }
 
         binding.textSpanTest.text = buildSpannedString {
