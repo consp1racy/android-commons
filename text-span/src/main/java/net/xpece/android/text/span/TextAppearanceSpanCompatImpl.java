@@ -21,7 +21,6 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.LocaleList;
 import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
@@ -34,6 +33,8 @@ import androidx.core.graphics.TypefaceCompat;
 
 import net.xpece.android.content.XpResources;
 import net.xpece.android.graphics.XpTypeface;
+
+import static android.os.Build.VERSION.SDK_INT;
 
 /**
  * Sets the text appearance using the given
@@ -156,7 +157,7 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
         }
         mTextFontWeight = textFontWeight;
 
-        if (Build.VERSION.SDK_INT >= 24) {
+        if (SDK_INT >= 24) {
             final String localeString = a.getString(R.styleable.TextAppearanceSpanCompat_android_textLocale);
             if (localeString != null) {
                 final LocaleList localeList = LocaleList.forLanguageTags(localeString);
@@ -177,7 +178,7 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
         mShadowDy = a.getFloat(R.styleable.TextAppearanceSpanCompat_android_shadowDy, 0.0f);
         mShadowColor = XpResources.getColorCompat(a, context, R.styleable.TextAppearanceSpanCompat_android_shadowColor, Color.TRANSPARENT);
 
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (SDK_INT >= 21) {
             mHasElegantTextHeight = a.hasValue(R.styleable.TextAppearanceSpanCompat_android_elegantTextHeight);
             mElegantTextHeight = a.getBoolean(R.styleable.TextAppearanceSpanCompat_android_elegantTextHeight, false);
 
@@ -195,7 +196,7 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
             mFontFeatureSettings = null;
         }
 
-        if (Build.VERSION.SDK_INT >= 26) {
+        if (SDK_INT >= 26) {
             mFontVariationSettings = a.getString(R.styleable.TextAppearanceSpanCompat_android_fontVariationSettings);
         } else {
             mFontVariationSettings = null;
@@ -211,8 +212,9 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
     }
 
     private boolean needsContext() {
-        return Build.VERSION.SDK_INT < 21 && mTypeface != null
-                && (mTypeface.getStyle() != mStyle || mTextFontWeight >= 0);
+        return SDK_INT < 21
+                && (mTypeface != null && mTypeface.getStyle() != mStyle)
+                || mTextFontWeight >= 0;
     }
 
 //    /**
@@ -375,7 +377,7 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
             if (mTypeface.getStyle() == style) {
                 // Return early if we're asked for the same face/style
                 styledTypeface = mTypeface;
-            } else if (Build.VERSION.SDK_INT >= 21) {
+            } else if (SDK_INT >= 21) {
                 styledTypeface = Typeface.create(mTypeface, style);
             } else {
                 // Context must not be null in this path
@@ -406,7 +408,7 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
             if (mTextFontWeight >= 0) {
                 final int weight = Math.min(FONT_WEIGHT_MAX, mTextFontWeight);
                 final boolean italic = (style & Typeface.ITALIC) != 0;
-                if (Build.VERSION.SDK_INT >= 21) {
+                if (SDK_INT >= 21) {
                     readyTypeface = XpTypeface.create(styledTypeface, weight, italic);
                 } else {
                     readyTypeface = XpTypeface.create(styledTypeface, mContext, weight, italic);
@@ -432,23 +434,23 @@ final class TextAppearanceSpanCompatImpl extends MetricAffectingSpan {
             ds.setTextSize(mTextSize);
         }
 
-        if (Build.VERSION.SDK_INT >= 24 && mTextLocales != null) {
+        if (SDK_INT >= 24 && mTextLocales != null) {
             ds.setTextLocales(mTextLocales);
         }
 
-        if (Build.VERSION.SDK_INT >= 21 && mHasElegantTextHeight) {
+        if (SDK_INT >= 21 && mHasElegantTextHeight) {
             ds.setElegantTextHeight(mElegantTextHeight);
         }
 
-        if (Build.VERSION.SDK_INT >= 21 && mHasLetterSpacing) {
+        if (SDK_INT >= 21 && mHasLetterSpacing) {
             ds.setLetterSpacing(mLetterSpacing);
         }
 
-        if (Build.VERSION.SDK_INT >= 21 && mFontFeatureSettings != null) {
+        if (SDK_INT >= 21 && mFontFeatureSettings != null) {
             ds.setFontFeatureSettings(mFontFeatureSettings);
         }
 
-        if (Build.VERSION.SDK_INT >= 26 && mFontVariationSettings != null) {
+        if (SDK_INT >= 26 && mFontVariationSettings != null) {
             ds.setFontVariationSettings(mFontVariationSettings);
         }
     }
