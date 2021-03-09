@@ -5,7 +5,7 @@ package net.xpece.android.text.span
 
 import android.os.Build.VERSION.SDK_INT
 import android.os.Parcel
-import android.text.style.BulletSpan
+import android.text.style.BulletSpan.STANDARD_GAP_WIDTH
 import android.text.style.LeadingMarginSpan
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
@@ -20,7 +20,7 @@ private val FACTORY: BulletSpanFactory = when {
 }
 
 /**
- * Creates a [BulletSpan] based on a gap width and a color integer.
+ * Creates a [BulletSpanCompat] based on a gap width and a color integer.
  *
  * @param gapWidth     the distance, in pixels, between the bullet point and the paragraph.
  * @param color        the bullet point color, as a color integer.
@@ -39,7 +39,7 @@ fun BulletSpanCompat(
 }
 
 /**
- * Creates a [BulletSpan] based on a gap width and a color integer.
+ * Creates a [BulletSpanCompat] based on a gap width and a color integer.
  *
  * @param gapWidth the distance, in pixels, between the bullet point and the paragraph.
  * @param color    the bullet point color, as a color integer
@@ -53,7 +53,7 @@ fun BulletSpanCompat(
 }
 
 /**
- * Creates a [BulletSpan] based on a gap width.
+ * Creates a [BulletSpanCompat] based on a gap width.
  *
  * @param gapWidth the distance, in pixels, between the bullet point and the paragraph.
  */
@@ -62,6 +62,14 @@ fun BulletSpanCompat(
     @Px gapWidth: Int,
 ): LeadingMarginSpan {
     return FACTORY(gapWidth, 0, false, STANDARD_BULLET_RADIUS)
+}
+
+/**
+ * Creates a [BulletSpanCompat] with the default values.
+ */
+@JvmName("create")
+fun BulletSpanCompat(): LeadingMarginSpan {
+    return FACTORY(STANDARD_GAP_WIDTH, 0, false, STANDARD_BULLET_RADIUS)
 }
 
 private fun interface BulletSpanFactory {
