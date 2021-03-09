@@ -3,11 +3,10 @@ package net.xpece.commons.sample
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
-import android.text.SpannableString
 import android.text.style.BulletSpan
+import android.text.style.StrikethroughSpan
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import net.xpece.android.app.SnackbarActivity
 import net.xpece.android.content.dp
@@ -66,19 +64,39 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
         val textBullets = findViewById<TextView>(R.id.textBullets)
         val textBullets2 = findViewById<TextView>(R.id.textBullets2)
 //        textBullets.text = SpannableString(textBullets.text)
-        textBullets.text = SpannableString("Lorem ipsum")
-                .apply { setSpan(BulletSpanCompat.create(32, Color.BLACK, 8), 0, length, 0) }
-        if (Build.VERSION.SDK_INT >= 28) {
-            textBullets2.text = SpannableString("Lorem ipsum")
-                .apply { setSpan(BulletSpan(32, Color.BLACK, 8), 0, length, 0) }
+        textBullets.text = buildSpannedString {
+            for (i in 0..3) {
+                inSpans(BulletSpanCompat(32, Color.BLACK), StrikethroughSpan()) {
+                    appendLine("Lorem ipsum")
+                }
+            }
+            delete(length - 1, length)
+        }
+        textBullets2.text = buildSpannedString {
+            for (i in 0..3) {
+                inSpans(BulletSpanCompat(32, Color.BLACK), StrikethroughSpan()) {
+                    appendLine("Lorem ipsum")
+                }
+            }
+            delete(length - 1, length)
         }
 
         binding.textSpanTest.text = buildSpannedString {
             append("This is ")
-            inSpans(TextAppearanceSpanCompat(binding.textSpanTest.context, R.style.TextAppearance_Raleway_Thin)) {
+            inSpans(
+                TextAppearanceSpanCompat(
+                    binding.textSpanTest.context,
+                    R.style.TextAppearance_Raleway_Thin
+                )
+            ) {
                 append("thin ")
             }
-            inSpans(TextAppearanceSpanCompat(binding.textSpanTest.context, R.style.TextAppearance_Raleway_Thin_Italic)) {
+            inSpans(
+                TextAppearanceSpanCompat(
+                    binding.textSpanTest.context,
+                    R.style.TextAppearance_Raleway_Thin_Italic
+                )
+            ) {
                 append("italic ")
             }
         }
