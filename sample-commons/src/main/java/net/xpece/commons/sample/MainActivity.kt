@@ -3,9 +3,10 @@ package net.xpece.commons.sample
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.Typeface.BOLD
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
-import android.text.style.BulletSpan
 import android.text.style.StrikethroughSpan
 import android.util.Log
 import android.view.View
@@ -25,6 +26,7 @@ import net.xpece.android.graphics.drawable.RippleDrawableCompatInflater
 import net.xpece.android.picker.widget.setSelectionDividerTintCompat
 import net.xpece.android.text.span.BulletSpanCompat
 import net.xpece.android.text.span.TextAppearanceSpanCompat
+import net.xpece.android.text.span.asSpan
 import net.xpece.commons.android.sample.R
 import net.xpece.commons.android.sample.databinding.ActivityMainBinding
 import org.threeten.bp.LocalDateTime
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity(), SnackbarActivity {
 //        textBullets.text = SpannableString(textBullets.text)
         textBullets.text = buildSpannedString {
             for (i in 0..3) {
-                inSpans(BulletSpanCompat(32, Color.BLACK), StrikethroughSpan()) {
+                inSpans(BulletSpanCompat(32, Color.BLACK), StrikethroughSpan(), Typeface.defaultFromStyle(BOLD).asSpan()) {
                     appendLine("Lorem ipsum")
                 }
             }
