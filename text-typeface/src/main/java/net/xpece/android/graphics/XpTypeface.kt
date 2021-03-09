@@ -4,20 +4,22 @@ package net.xpece.android.graphics
 
 import android.content.Context
 import android.graphics.Typeface
-import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.util.Log
 import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
 
 @JvmName("create")
+@JvmOverloads
 fun Typeface.withExactStyle(
     context: Context,
     weight: Int,
     italic: Boolean = isItalic
 ): Typeface = createInternal(context, this, weight, italic)
 
-@JvmName("create")
 @RequiresApi(21)
+@JvmName("create")
+@JvmOverloads
 fun Typeface.withExactStyle(
     weight: Int,
     italic: Boolean = isItalic
@@ -30,13 +32,13 @@ private fun createInternal(
     italic: Boolean
 ): Typeface = try {
     when {
-        Build.VERSION.SDK_INT >= 28 -> {
+        SDK_INT >= 28 -> {
             Typeface.create(family, weight, italic)
         }
-        Build.VERSION.SDK_INT >= 26 -> {
+        SDK_INT >= 26 -> {
             WeightTypefaceOreo.create(family, weight, italic)
         }
-        Build.VERSION.SDK_INT >= 21 -> {
+        SDK_INT >= 21 -> {
             WeightTypefaceLollipop.create(family, weight, italic)
         }
         else -> {
