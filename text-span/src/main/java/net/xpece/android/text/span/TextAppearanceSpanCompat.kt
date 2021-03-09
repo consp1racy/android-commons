@@ -1,4 +1,5 @@
 @file:JvmName("TextAppearanceSpanCompat")
+@file:Suppress("FunctionName")
 
 package net.xpece.android.text.span
 
@@ -9,9 +10,10 @@ import androidx.annotation.StyleRes
 
 @JvmName("create")
 fun TextAppearanceSpanCompat(context: Context, @StyleRes appearance: Int): Any {
-    return if (SDK_INT >= 29) {
-        TextAppearanceSpan(context, appearance)
-    } else {
-        TextAppearanceSpanCompatImpl(context, appearance)
-    }
+    return TextAppearanceSpanCompatFactory(context, appearance)
+}
+
+private val TextAppearanceSpanCompatFactory = when {
+    SDK_INT >= 29 -> ::TextAppearanceSpan
+    else -> ::TextAppearanceSpanCompatImpl
 }

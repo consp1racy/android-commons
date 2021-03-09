@@ -9,25 +9,23 @@ import android.text.style.MetricAffectingSpan
 import android.text.style.StyleSpan
 import android.text.style.TypefaceSpan
 
-private val MediumSpanCompatFactory = when {
-    SDK_INT >= 21 -> RealMediumSpanFactory
-    else -> FakeMediumSpanFactory
-}
+@Deprecated(
+    message = "Every span must be a unique instance.",
+    replaceWith = ReplaceWith("MediumSpanCompat()"),
+    level = DeprecationLevel.ERROR
+)
+@get:JvmName("getInstance")
+val MediumSpanCompat: Any = MediumSpanCompat()
 
 @JvmName("create")
-fun MediumSpanCompat(): MetricAffectingSpan = MediumSpanCompatFactory()
+fun MediumSpanCompat(): MetricAffectingSpan = MediumSpanCompatFactory("sans-serif-medium")
 
-private interface MediumSpanFactory {
-
-    operator fun invoke(): MetricAffectingSpan
+private val MediumSpanCompatFactory = when {
+    SDK_INT >= 21 -> ::TypefaceSpan
+    else -> ::FakeMediumSpan
 }
 
-private object FakeMediumSpanFactory : MediumSpanFactory {
-
-    override fun invoke(): MetricAffectingSpan = StyleSpan(Typeface.BOLD)
-}
-
-private object RealMediumSpanFactory : MediumSpanFactory {
-
-    override fun invoke(): MetricAffectingSpan = TypefaceSpan("sans-serif-medium")
+@Suppress("UNUSED_PARAMETER")
+private fun FakeMediumSpan(ignore: String): MetricAffectingSpan {
+    return StyleSpan(Typeface.BOLD)
 }
