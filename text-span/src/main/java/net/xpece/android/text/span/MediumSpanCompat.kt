@@ -5,6 +5,7 @@ package net.xpece.android.text.span
 
 import android.graphics.Typeface
 import android.os.Build.VERSION.SDK_INT
+import android.text.style.MetricAffectingSpan
 import android.text.style.StyleSpan
 import android.text.style.TypefaceSpan
 
@@ -13,28 +14,20 @@ private val FACTORY = when {
     else -> FakeMediumSpanFactory
 }
 
-@Deprecated(
-    message = "Every span must be a unique instance.",
-    replaceWith = ReplaceWith("MediumSpanCompat()"),
-    level = DeprecationLevel.ERROR
-)
-@get:JvmName("getInstance")
-val MediumSpanCompat: Any = FACTORY.create()
-
 @JvmName("create")
-fun MediumSpanCompat(): Any = FACTORY.create()
+fun MediumSpanCompat(): MetricAffectingSpan = FACTORY()
 
-interface MediumSpanFactory {
+private interface MediumSpanFactory {
 
-    fun create(): Any
+    operator fun invoke(): MetricAffectingSpan
 }
 
-object FakeMediumSpanFactory : MediumSpanFactory {
+private object FakeMediumSpanFactory : MediumSpanFactory {
 
-    override fun create(): Any = StyleSpan(Typeface.BOLD)
+    override fun invoke(): MetricAffectingSpan = StyleSpan(Typeface.BOLD)
 }
 
-object RealMediumSpanFactory : MediumSpanFactory {
+private object RealMediumSpanFactory : MediumSpanFactory {
 
-    override fun create(): Any = TypefaceSpan("sans-serif-medium")
+    override fun invoke(): MetricAffectingSpan = TypefaceSpan("sans-serif-medium")
 }
