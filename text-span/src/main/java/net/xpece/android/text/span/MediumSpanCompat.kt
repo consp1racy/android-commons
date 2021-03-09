@@ -9,13 +9,13 @@ import android.text.style.MetricAffectingSpan
 import android.text.style.StyleSpan
 import android.text.style.TypefaceSpan
 
-private val FACTORY = when {
+private val MediumSpanCompatFactory = when {
     SDK_INT >= 21 -> RealMediumSpanFactory
     else -> FakeMediumSpanFactory
 }
 
 @JvmName("create")
-fun MediumSpanCompat(): MetricAffectingSpan = FACTORY()
+fun MediumSpanCompat(): MetricAffectingSpan = MediumSpanCompatFactory()
 
 private interface MediumSpanFactory {
 
