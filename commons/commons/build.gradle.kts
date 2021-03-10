@@ -47,10 +47,10 @@ dependencies {
 
     api(project(":design-extra"))
 
-    api(project(":commons-services"))
-    api(project(":commons-resources"))
-    api(project(":commons-dimen"))
-    api(project(":commons-base"))
+    api(project(":commons:commons-services"))
+    api(project(":commons:commons-resources"))
+    api(project(":commons:commons-dimen"))
+    api(project(":commons:commons-base"))
 
     api(project(":picker"))
 

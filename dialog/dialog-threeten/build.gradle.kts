@@ -14,7 +14,7 @@ dependencies {
     api("androidx.appcompat:appcompat:1.1.0")
 
     implementation(project(":picker"))
-    implementation(project(":commons-resources"))
+    implementation(project(":commons:commons-resources"))
     implementation(project(":dialog:dialog-datetime-base"))
 
     implementation("androidx.annotation:annotation:1.1.0")

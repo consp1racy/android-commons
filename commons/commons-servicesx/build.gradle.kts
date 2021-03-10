@@ -12,12 +12,12 @@ android {
 }
 
 dependencies {
-    api("androidx.appcompat:appcompat-resources:1.1.0")
+    api(project(":commons:commons-services"))
 
-    implementation(project(":commons-base"))
+    api("androidx.core:core:1.1.0")
 }
 
 group = rootProject.property("GROUP_ID") as String
-version = rootProject.property("COMMONS_RESOURCES_VERSION_NAME") as String
+version = rootProject.property("COMMONS_SERVICES_VERSION_NAME") as String
 
 apply(from = rootProject.file("android-release.gradle"))

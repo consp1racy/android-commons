@@ -14,7 +14,7 @@ android {
 dependencies {
     compileOnly("androidx.annotation:annotation:1.1.0")
 
-    api(project(":commons-dimen"))
+    api(project(":commons:commons-dimen"))
 }
 
 group = rootProject.property("GROUP_ID") as String

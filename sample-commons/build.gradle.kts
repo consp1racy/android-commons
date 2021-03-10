@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":commons"))
+    implementation(project(":commons:commons"))
     implementation(project(":edgeeffect"))
     implementation(project(":text:text-span"))
 

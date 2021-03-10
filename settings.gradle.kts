@@ -1,5 +1,4 @@
-include(":sample-commons", ":commons", ":sample-extra")
-include(":commons-services", ":commons-servicesx", ":commons-resources", ":commons-dimen", ":commons-dimen-lazy", ":commons-base")
+include(":sample-commons", ":sample-extra")
 include(":cardbutton", ":sample-cardbutton")
 include(":scriminsets")
 include(":icontabs")
@@ -18,5 +17,6 @@ fun includeSubprojects(vararg projectNames: String) {
     }
 }
 
+includeSubprojects("commons")
 includeSubprojects("dialog")
 includeSubprojects("text")

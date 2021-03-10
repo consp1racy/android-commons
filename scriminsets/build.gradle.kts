@@ -14,7 +14,7 @@ android {
 dependencies {
     implementation("androidx.core:core:1.1.0")
 
-    implementation(project(":commons-resources"))
+    implementation(project(":commons:commons-resources"))
 }
 
 group = rootProject.property("GROUP_ID") as String
