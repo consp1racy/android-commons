@@ -11,7 +11,11 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+        jcenter {
+            content {
+                includeVersion("org.jetbrains.trove4j", "trove4j", "20160824")
+            }
+        }
     }
 }
 
@@ -46,7 +50,11 @@ subprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+        jcenter {
+            content {
+                includeVersion("org.jetbrains.trove4j", "trove4j", "20160824")
+            }
+        }
     }
 }
 
