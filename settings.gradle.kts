@@ -20,3 +20,6 @@ fun includeSubprojects(vararg projectNames: String) {
 includeSubprojects("commons")
 includeSubprojects("dialog")
 includeSubprojects("text")
+
+includeBuild("gradle/plugins/publish")
+includeBuild("gradle/plugins/android")
