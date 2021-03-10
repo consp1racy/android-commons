@@ -14,8 +14,13 @@ include(":dialog-threeten")
 include(":dialog-threetenbp")
 include(":edgeeffect")
 include(":appcompat-chronometer")
-include(":text-span")
-include(":text-span-bullet")
-include(":text-span-textappearance")
-include(":text-span-typeface")
-include(":text-typeface")
+
+fun includeSubprojects(vararg projectPaths: String) {
+    projectPaths.forEach { projectPath ->
+        file(projectPath).listFiles()!!
+            .filter { File(it, "build.gradle.kts").exists() || File(it, "build.gradle").exists() }
+            .forEach { include(":$projectPath:${it.name}") }
+    }
+}
+
+includeSubprojects("text")

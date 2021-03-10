@@ -43,7 +43,7 @@ android {
 dependencies {
     implementation(project(":commons"))
     implementation(project(":edgeeffect"))
-    implementation(project(":text-span"))
+    implementation(project(":text:text-span"))
 
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.appcompat:appcompat:1.2.0")

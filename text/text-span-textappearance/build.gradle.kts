@@ -24,7 +24,7 @@ dependencies {
     implementation("androidx.annotation:annotation:1.1.0")
 
     implementation(project(":commons-resources"))
-    implementation(project(":text-typeface"))
+    implementation(project(":text:text-typeface"))
 }
 
 
