@@ -41,12 +41,6 @@ subprojects {
         }
     }
 
-    tasks.withType<Javadoc>().configureEach {
-        val options = options as StandardJavadocDocletOptions
-        options.addStringOption("Xdoclint:none", "-quiet")
-        setExcludes(listOf("**/*.kt"))
-    }
-
     repositories {
         google()
         mavenCentral()

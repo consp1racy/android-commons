@@ -1,2 +1,1 @@
-apply from: rootProject.file('android-tasks.gradle')
-apply from: rootProject.file('android-maven.gradle')
+// TODO
