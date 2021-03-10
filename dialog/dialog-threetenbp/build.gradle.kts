@@ -18,7 +18,7 @@ dependencies {
 
     implementation(project(":picker"))
     implementation(project(":commons-resources"))
-    implementation(project(":dialog-datetime-base"))
+    implementation(project(":dialog:dialog-datetime-base"))
 
     implementation("androidx.annotation:annotation:1.1.0")
     implementation("androidx.core:core:1.1.0")
