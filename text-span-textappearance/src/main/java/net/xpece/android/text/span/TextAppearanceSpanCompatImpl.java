@@ -33,6 +33,7 @@ import androidx.core.graphics.TypefaceCompat;
 
 import net.xpece.android.content.XpResources;
 import net.xpece.android.graphics.XpTypeface;
+import net.xpece.android.text.span.textappearance.R;
 
 import static android.os.Build.VERSION.SDK_INT;
 

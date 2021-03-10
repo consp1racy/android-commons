@@ -23,9 +23,8 @@ android {
 dependencies {
     implementation("androidx.annotation:annotation:1.1.0")
 
-    api(project(":text-span-bullet"))
-    api(project(":text-span-textappearance"))
-    api(project(":text-span-typeface"))
+    implementation(project(":commons-resources"))
+    implementation(project(":text-typeface"))
 }
 
 
