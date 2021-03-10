@@ -18,7 +18,6 @@ import androidx.annotation.CheckResult
 import androidx.annotation.IntDef
 import androidx.annotation.StringRes
 import kotlin.annotation.AnnotationRetention.SOURCE
-import android.widget.Toast as ToastImpl
 
 /**
  * Construct an empty Toast object. You must call [setView][Toast.setView] before you
@@ -28,8 +27,8 @@ import android.widget.Toast as ToastImpl
  */
 @CheckResult
 @JvmName("make")
-fun Toast(context: Context): Toast {
-    return ToastImpl(context.forSafeToast())
+fun ToastCompat(context: Context): Toast {
+    return Toast(context.forSafeToast())
 }
 
 /**
