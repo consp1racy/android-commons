@@ -87,6 +87,23 @@ fun ViewPager.setRightEdgeEffectColorCompat(@ColorInt color: Int) {
     ViewPagerEdgeEffect.setRightEdgeEffectColor(this, color)
 }
 
+@Deprecated(
+    "Replaced with property.",
+    replaceWith = ReplaceWith(
+        "run { this.edgeEffectFactory = factory }",
+        "net.xpece.android.edgeeffect.edgeEffectFactory"
+    )
+)
+@JvmName("-deprecated_setEdgeEffectFactoryCompat")
+@JvmSynthetic
 fun ViewPager2.setEdgeEffectFactoryCompat(factory: RecyclerView.EdgeEffectFactory) {
-    getRecyclerView().edgeEffectFactory = factory
+    edgeEffectFactory = factory
 }
+
+var ViewPager2.edgeEffectFactory: RecyclerView.EdgeEffectFactory
+    get() {
+        return getRecyclerView().edgeEffectFactory
+    }
+    set(value) {
+        getRecyclerView().edgeEffectFactory = value
+    }
