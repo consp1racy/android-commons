@@ -3,6 +3,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:4.1.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30")
         classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.4.0")
+        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.20")
     }
 
     repositories {
@@ -10,7 +11,7 @@ buildscript {
         mavenCentral()
         jcenter {
             content {
-                includeVersion("org.jetbrains.trove4j", "trove4j", "20160824")
+                includeVersion("org.jetbrains.trove4j", "trove4j", "20160824") // AGP.
             }
         }
     }
@@ -26,12 +27,25 @@ extensions.configure<kotlinx.validation.ApiValidationExtension> {
 }
 
 subprojects {
+    apply(plugin = "org.jetbrains.dokka")
+
+    tasks.named<org.jetbrains.dokka.gradle.DokkaTask>("dokkaJavadoc") {
+        dokkaSourceSets {
+            configureEach {
+                reportUndocumented.set(false)
+                skipDeprecated.set(true)
+            }
+        }
+    }
+
     repositories {
         google()
         mavenCentral()
         jcenter {
             content {
-                includeVersion("org.jetbrains.trove4j", "trove4j", "20160824")
+                includeVersion("org.jetbrains.trove4j", "trove4j", "20160824") // AGP.
+                includeGroup("org.jetbrains.kotlinx") // Dokka.
+                includeVersion("com.soywiz.korlibs.korte", "korte-jvm", "1.10.3") // Dokka.
             }
         }
     }

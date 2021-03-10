@@ -62,6 +62,12 @@ class AndroidXpecePlugin : Plugin<Project> {
     private val AndroidSourceSet.sourcesJarTaskName: String
         get() = name + "SourcesJar"
 
+    private val AndroidSourceSet.javadocJarTaskName: String
+        get() = name + "JavadocJar"
+
+    private val AndroidSourceSet.javadocTaskName: String
+        get() = name + "Javadoc"
+
     private val AndroidSourceSet.allSource: Set<File>
         get() = java.srcDirs
 
@@ -85,6 +91,23 @@ class AndroidXpecePlugin : Plugin<Project> {
 
     @Suppress("UnstableApiUsage")
     private fun Project.withJavadocJarImpl(variantName: String) {
-        // TODO
+        val main = android.sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME)
+        val component = findVariantComponent(components, variantName)
+        JvmPluginsHelper.configureDocumentationVariantWithArtifact(
+            variantName + JavaPlugin.JAVADOC_ELEMENTS_CONFIGURATION_NAME.capitalize(),
+            null,
+            DocsType.JAVADOC,
+            emptyList(),
+            main.javadocJarTaskName,
+            try {
+                tasks.named(main.javadocTaskName)
+            } catch (_: Throwable) {
+                tasks.named("dokkaJavadoc")
+            },
+            component,
+            configurations,
+            tasks,
+            objects
+        )
     }
 }
