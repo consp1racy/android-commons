@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+@SuppressWarnings("deprecation")
 @RequiresApi(28)
 final class BulletSpanPie extends BulletSpan implements BulletSpanCompat {
 
@@ -66,7 +67,11 @@ final class BulletSpanPie extends BulletSpan implements BulletSpanCompat {
     }
 
     @Override
-    public void drawLeadingMargin(@NonNull Canvas canvas, @NonNull Paint paint, int x, int dir, int top, int baseline, int bottom, @NonNull CharSequence text, int start, int end, boolean first, @Nullable Layout layout) {
+    public void drawLeadingMargin(
+            @NonNull Canvas canvas, @NonNull Paint paint,
+            int x, int dir, int top, int baseline, int bottom,
+            @NonNull CharSequence text, int start, int end,
+            boolean first, @Nullable Layout layout) {
         if (!enableColorChange) {
             if (tempPaint == null) {
                 tempPaint = new LockedPaint();

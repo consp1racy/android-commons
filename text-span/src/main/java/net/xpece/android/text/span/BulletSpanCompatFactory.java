@@ -1,7 +1,5 @@
 package net.xpece.android.text.span;
 
-import android.text.style.BulletSpan;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
@@ -11,6 +9,7 @@ import kotlin.jvm.functions.Function4;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.text.style.BulletSpan.STANDARD_GAP_WIDTH;
 
+@SuppressWarnings("deprecation")
 final class BulletSpanCompatFactory {
 
     // Bullet is slightly bigger to avoid aliasing artifacts on mdpi devices.

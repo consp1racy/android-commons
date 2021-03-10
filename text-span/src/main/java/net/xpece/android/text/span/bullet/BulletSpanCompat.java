@@ -1,8 +1,9 @@
-package net.xpece.android.text.span;
+package net.xpece.android.text.span.bullet;
+
+import android.text.style.LeadingMarginSpan;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Px;
-import androidx.annotation.RestrictTo;
 
 /**
  * A span which styles paragraphs as bullet points (respecting layout direction).
@@ -35,73 +36,75 @@ import androidx.annotation.RestrictTo;
  * string.setSpan(new BulletSpan(40, color, 20), 10, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);}</pre>
  * <img src="{@docRoot}reference/android/images/text/style/custombulletspan.png" />
  * <figcaption>Customized BulletSpan.</figcaption>
- *
- * @deprecated Use {@link net.xpece.android.text.span.bullet.BulletSpanCompat} instead.
  */
-@SuppressWarnings({"DeprecatedIsStillUsed", "deprecation"})
-@Deprecated
-public interface BulletSpanCompat extends net.xpece.android.text.span.bullet.BulletSpanCompat {
+public interface BulletSpanCompat extends LeadingMarginSpan {
 
     /**
-     * Creates a {@link BulletSpanCompat} based on a gap width and a color integer.
+     * Get the distance, in pixels, between the bullet point and the paragraph.
+     *
+     * @return the distance, in pixels, between the bullet point and the paragraph.
+     */
+    int getGapWidth();
+
+    /**
+     * Get the radius, in pixels, of the bullet point.
+     *
+     * @return the radius, in pixels, of the bullet point.
+     */
+    int getBulletRadius();
+
+    /**
+     * Get the bullet point color.
+     *
+     * @return the bullet point color
+     */
+    int getColor();
+
+    /**
+     * Creates a {@link BulletSpanCompat} based on a gap width, a bullet radius and a color integer.
      *
      * @param gapWidth     the distance, in pixels, between the bullet point and the paragraph.
+     * @param bulletRadius the radius of the bullet point, in pixels.
      * @param color        the bullet point color, as a color integer.
-     * @param bulletRadius the radius of the bullet point, in pixels.
-     * @deprecated Binary compatibility.
      */
-    @Deprecated
-    static Object create(
+    @SuppressWarnings("deprecation")
+    static BulletSpanCompat create(
             @Px int gapWidth,
-            @ColorInt int color,
-            @Px int bulletRadius) {
-        return BulletSpanCompatFactory.create(gapWidth, color, bulletRadius);
+            @Px int bulletRadius,
+            @ColorInt int color) {
+        return (BulletSpanCompat) net.xpece.android.text.span.BulletSpanCompat
+                .create(gapWidth, color, bulletRadius);
     }
 
     /**
-     * Creates a {@link BulletSpanCompat} based on a gap width and a color integer.
+     * Creates a {@link BulletSpanCompat} based on a gap width and a bullet radius.
      *
      * @param gapWidth     the distance, in pixels, between the bullet point and the paragraph.
      * @param bulletRadius the radius of the bullet point, in pixels.
-     * @deprecated Binary compatibility.
      */
-    @Deprecated
-    static Object createWithRadius(
+    @SuppressWarnings("deprecation")
+    static BulletSpanCompat create(
             @Px int gapWidth,
             @Px int bulletRadius) {
-        return BulletSpanCompatFactory.create(gapWidth, null, bulletRadius);
+        return (BulletSpanCompat) net.xpece.android.text.span.BulletSpanCompat
+                .createWithRadius(gapWidth, bulletRadius);
     }
 
     /**
-     * Creates a {@link BulletSpanCompat} based on a gap width and a color integer.
+     * Creates a{@link BulletSpanCompat} based on a gap width.
      *
      * @param gapWidth the distance, in pixels, between the bullet point and the paragraph.
-     * @param color    the bullet point color, as a color integer
-     * @deprecated Binary compatibility.
      */
-    @Deprecated
-    static Object createWithColor(
-            @Px int gapWidth,
-            @ColorInt int color) {
-        return BulletSpanCompatFactory.create(gapWidth, color);
-    }
-
-    /**
-     * Creates a {@link BulletSpanCompat} based on a gap width.
-     *
-     * @param gapWidth     the distance, in pixels, between the bullet point and the paragraph.
-     */
-    @RestrictTo(RestrictTo.Scope.LIBRARY)
-    static BulletSpanCompat create(
-            @Px int gapWidth) {
-        return BulletSpanCompatFactory.create(gapWidth);
+    @SuppressWarnings("deprecation")
+    static BulletSpanCompat create(@Px int gapWidth) {
+        return net.xpece.android.text.span.BulletSpanCompat.create(gapWidth);
     }
 
     /**
      * Creates a {@link BulletSpanCompat} with the default values.
      */
-    @RestrictTo(RestrictTo.Scope.LIBRARY)
+    @SuppressWarnings("deprecation")
     static BulletSpanCompat create() {
-        return BulletSpanCompatFactory.create();
+        return net.xpece.android.text.span.BulletSpanCompat.create();
     }
 }

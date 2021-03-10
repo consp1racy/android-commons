@@ -26,10 +26,12 @@ import android.text.StaticLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 
 import java.util.WeakHashMap;
 
+@SuppressWarnings("deprecation")
 final class BulletSpanKitkat implements BulletSpanCompat {
 
     @Px
@@ -82,10 +84,11 @@ final class BulletSpanKitkat implements BulletSpanCompat {
     }
 
     @Override
-    public void drawLeadingMargin(@NonNull Canvas canvas, @NonNull Paint paint, int x, int dir,
-                                  int top, int baseline, int bottom,
-                                  @NonNull CharSequence text, int start, int end,
-                                  boolean first, @NonNull Layout layout) {
+    public void drawLeadingMargin(
+            @NonNull Canvas canvas, @NonNull Paint paint,
+            int x, int dir, int top, int baseline, int bottom,
+            @NonNull CharSequence text, int start, int end,
+            boolean first, @Nullable Layout layout) {
         if (((Spanned) text).getSpanStart(this) == start) {
             Paint.Style style = paint.getStyle();
             int oldcolor = 0;
