@@ -4,13 +4,15 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.publish.PublishingExtension
+import org.gradle.api.publish.maven.MavenPom
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.get
 
 internal class JavaPublisher(
     private val project: Project,
     private val componentName: String,
-    private val repositories: (RepositoryHandler) -> Unit
+    private val pom: MavenPom.() -> Unit,
+    private val repositories: RepositoryHandler.() -> Unit
 ) {
 
     private fun Project.publishing(configure: PublishingExtension.() -> Unit): Unit =
@@ -34,10 +36,12 @@ internal class JavaPublisher(
                         version = theVersion
 
                         from(components[componentName])
+
+                        this.pom(this@JavaPublisher.pom)
                     }
                 }
 
-                this@publishing.repositories(this@JavaPublisher.repositories)
+                this.repositories(this@JavaPublisher.repositories)
             }
         }
     }

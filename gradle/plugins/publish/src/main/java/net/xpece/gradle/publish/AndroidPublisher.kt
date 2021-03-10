@@ -2,6 +2,7 @@ package net.xpece.gradle.publish
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.RepositoryHandler
+import org.gradle.api.publish.maven.MavenPom
 
 internal class AndroidPublisher private constructor(
     private val project: Project,
@@ -11,8 +12,9 @@ internal class AndroidPublisher private constructor(
     constructor(
         project: Project,
         componentName: String,
+        pom: MavenPom.() -> Unit,
         repositories: (RepositoryHandler) -> Unit
-    ) : this(project, JavaPublisher(project, componentName, repositories))
+    ) : this(project, JavaPublisher(project, componentName, pom, repositories))
 
     fun publish() {
         with(project) {

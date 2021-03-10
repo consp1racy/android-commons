@@ -45,16 +45,18 @@ class PublishPlugin : Plugin<Project> {
                 else -> throw IllegalStateException("Unsupported Android extension: $android")
             }
         }
+        val pom = extension.pom
         val repositories = extension.repositories
-        val publisher = AndroidPublisher(this, componentName, repositories)
+        val publisher = AndroidPublisher(this, componentName, pom, repositories)
         publisher.publish()
     }
 
     private fun Project.applyJava(extension: PublishExtension) {
         var componentName = extension.publishReleaseFromComponent ?: return
         if (componentName == DEFAULT_COMPONENT_NAME) componentName = "java"
+        val pom = extension.pom
         val repositories = extension.repositories
-        val publisher = JavaPublisher(this, componentName, repositories)
+        val publisher = JavaPublisher(this, componentName, pom, repositories)
         publisher.publish()
     }
 }

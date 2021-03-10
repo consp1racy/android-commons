@@ -35,6 +35,33 @@ class PublishSonatypePlugin : Plugin<Project> {
             }
         }
 
+        extension.pom {
+            name.set(target.name)
+            description.set(target.description ?: "Collection of custom utilities for Android development.")
+            url.set("https://github.com/consp1racy/android-commons")
+
+            licenses {
+                license {
+                    name.set("The Apache Software License, Version 2.0")
+                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                }
+            }
+
+            developers {
+                developer {
+                    name.set("Eugen Pechanec")
+                    email.set("e.pechanec@gmail.com")
+                    url.set("https://github.com/consp1racy")
+                }
+            }
+
+            scm {
+                connection.set("scm:git:https://github.com/consp1racy/android-commons.git")
+                developerConnection.set("scm:git:ssh://git@github.com/consp1racy/android-commons.git")
+                url.set("https://github.com/consp1racy/android-commons")
+            }
+        }
+
         extension.repositories {
             maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
                 name = "ossrh"
