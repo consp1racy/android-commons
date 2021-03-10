@@ -62,6 +62,8 @@ public interface BulletSpanCompat extends LeadingMarginSpan {
      *
      * @param gapWidth     the distance, in pixels, between the bullet point and the paragraph.
      * @param bulletRadius the radius of the bullet point, in pixels.
+     *
+     * @deprecated Binary compatibility. Use {@link #create(int, Integer, int)}.
      */
     @Deprecated
     static BulletSpanCompat createWithRadius(
@@ -75,6 +77,8 @@ public interface BulletSpanCompat extends LeadingMarginSpan {
      *
      * @param gapWidth the distance, in pixels, between the bullet point and the paragraph.
      * @param color    the bullet point color, as a color integer
+     *
+     * @deprecated Binary compatibility. Use {@link #create(int, int)}.
      */
     @Deprecated
     static BulletSpanCompat createWithColor(
