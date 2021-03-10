@@ -10,10 +10,10 @@ import androidx.annotation.StyleRes
 
 @JvmName("create")
 fun TextAppearanceSpanCompat(context: Context, @StyleRes appearance: Int): Any {
-    return TextAppearanceSpanCompatFactory(context, appearance)
+    return Factory(context, appearance)
 }
 
-private val TextAppearanceSpanCompatFactory = when {
+private val Factory = when {
     SDK_INT >= 29 -> ::TextAppearanceSpan
     else -> ::TextAppearanceSpanCompatImpl
 }

@@ -12,8 +12,6 @@ import androidx.annotation.Px
 import androidx.annotation.RequiresApi
 import androidx.annotation.RestrictTo
 
-import net.xpece.android.text.span.BulletSpanCompatFactory as Factory
-
 // Bullet is slightly bigger to avoid aliasing artifacts on mdpi devices.
 private const val STANDARD_BULLET_RADIUS = 4
 
@@ -70,9 +68,7 @@ fun BulletSpanCompat(): BulletSpanCompat {
     return Factory(BulletSpan.STANDARD_GAP_WIDTH, 0, false, STANDARD_BULLET_RADIUS)
 }
 
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-@get:JvmName("getInstance")
-internal val BulletSpanCompatFactory = when {
+private val Factory = when {
     SDK_INT >= 28 -> ::BulletSpanPieCompat
     else -> ::BulletSpanKitkat
 }

@@ -18,9 +18,9 @@ import android.text.style.TypefaceSpan
 val MediumSpanCompat: Any = MediumSpanCompat()
 
 @JvmName("create")
-fun MediumSpanCompat(): MetricAffectingSpan = MediumSpanCompatFactory("sans-serif-medium")
+fun MediumSpanCompat(): MetricAffectingSpan = Factory("sans-serif-medium")
 
-private val MediumSpanCompatFactory = when {
+private val Factory = when {
     SDK_INT >= 21 -> ::TypefaceSpan
     else -> ::FakeMediumSpan
 }
