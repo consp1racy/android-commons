@@ -1,6 +1,3 @@
-import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.LibraryPlugin
-
 buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:4.1.2")
@@ -29,18 +26,6 @@ extensions.configure<kotlinx.validation.ApiValidationExtension> {
 }
 
 subprojects {
-    plugins.whenPluginAdded {
-        when (this) {
-            is LibraryPlugin -> {
-                extensions.getByType<LibraryExtension>().apply {
-                    buildFeatures {
-                        buildConfig = false
-                    }
-                }
-            }
-        }
-    }
-
     repositories {
         google()
         mavenCentral()
