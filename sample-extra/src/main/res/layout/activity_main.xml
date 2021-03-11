@@ -20,7 +20,7 @@
         android:paddingRight="?listPreferredItemPaddingRight"
         android:paddingTop="8dp">
 
-        <androidx.appcompat.widget.XpAppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,22 +28,22 @@
             android:enabled="false"
             android:gravity="center"
             android:text="Sample"
-            app:drawableEnd="@drawable/abc_ic_ab_back_material"
-            app:drawableStart="@drawable/abc_ic_ab_back_material"
+            app:drawableEndCompat="@drawable/abc_ic_ab_back_material"
+            app:drawableStartCompat="@drawable/abc_ic_ab_back_material"
             app:drawableTint="?colorAccent"/>
 
-        <androidx.appcompat.widget.XpAppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
             android:enabled="false"
             android:gravity="center"
             android:text="Sample"
-            app:drawableEnd="@drawable/ic_android_black_24dp"
-            app:drawableStart="@drawable/ic_android_black_24dp"
+            app:drawableEndCompat="@drawable/ic_android_black_24dp"
+            app:drawableStartCompat="@drawable/ic_android_black_24dp"
             app:drawableTint="?colorAccent"/>
 
-        <androidx.appcompat.widget.XpAppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -51,8 +51,8 @@
             android:enabled="false"
             android:gravity="center"
             android:text="Sample"
-            app:drawableEnd="@drawable/ic_android_control_24dp"
-            app:drawableStart="@drawable/ic_android_control_24dp"/>
+            app:drawableEndCompat="@drawable/ic_android_control_24dp"
+            app:drawableStartCompat="@drawable/ic_android_control_24dp"/>
 
         <androidx.appcompat.widget.XpAppCompatImageView
             android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
             android:enabled="false"
             app:srcCompat="@drawable/ic_android_control_24dp"/>
 
-        <com.google.android.material.widget.XpFloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

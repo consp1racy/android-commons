@@ -23,15 +23,6 @@
         <attr name="carb_borderColor" format="color"/>
         <attr name="carb_cornerRadius" format="dimension"/>
 
-        <attr name="drawableLeft"/>
-        <attr name="drawableRight"/>
-        <attr name="drawableTop"/>
-        <attr name="drawableBottom"/>
-        <attr name="drawableStart"/>
-        <attr name="drawableEnd"/>
-        <attr name="drawableTint"/>
-        <attr name="drawableTintMode"/>
-
         <attr name="carb_insetTop" format="dimension"/>
         <attr name="carb_insetBottom" format="dimension"/>
         <attr name="carb_insetLeft" format="dimension"/>

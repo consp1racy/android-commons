@@ -56,7 +56,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation("com.jakewharton.threetenabp:threetenabp:1.0.0")
 
-    api(project(":design-extra"))
+    api(project(":appcompat-extra"))
 
     api(project(":commons:commons-services"))
     api(project(":commons:commons-resources"))

@@ -23,6 +23,5 @@ android {
 
 dependencies {
     api("com.google.android.material:material:1.0.0")
-
-    api(project(":appcompat-extra"))
+    implementation("androidx.appcompat:appcompat:1.2.0")
 }

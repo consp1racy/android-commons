@@ -1,50 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="XpAppCompatButton">
-        <attr name="drawableLeft"/>
-        <attr name="drawableRight"/>
-        <attr name="drawableTop"/>
-        <attr name="drawableBottom"/>
-        <attr name="drawableStart"/>
-        <attr name="drawableEnd"/>
-        <attr name="drawableTint"/>
-        <attr name="drawableTintMode"/>
-    </declare-styleable>
-
-    <declare-styleable name="XpAppCompatTextView">
-        <attr name="drawableLeft"/>
-        <attr name="drawableRight"/>
-        <attr name="drawableTop"/>
-        <attr name="drawableBottom"/>
-        <attr name="drawableStart"/>
-        <attr name="drawableEnd"/>
-        <attr name="drawableTint"/>
-        <attr name="drawableTintMode"/>
-    </declare-styleable>
-
     <declare-styleable name="XpAppCompatCheckedTextView">
-        <attr name="drawableLeft"/>
-        <attr name="drawableRight"/>
-        <attr name="drawableTop"/>
-        <attr name="drawableBottom"/>
-        <attr name="drawableStart"/>
-        <attr name="drawableEnd"/>
-        <attr name="drawableTint"/>
-        <attr name="drawableTintMode"/>
         <attr name="checkMark"/>
         <attr name="checkMarkTint"/>
         <attr name="checkMarkTintMode"/>
-    </declare-styleable>
-
-    <declare-styleable name="XpAppCompatCompoundDrawableHelper">
-        <attr name="drawableLeft" format="reference"/>
-        <attr name="drawableRight" format="reference"/>
-        <attr name="drawableTop" format="reference"/>
-        <attr name="drawableBottom" format="reference"/>
-        <attr name="drawableStart" format="reference"/>
-        <attr name="drawableEnd" format="reference"/>
-        <attr name="drawableTint" format="color"/>
-        <attr name="drawableTintMode"/>
     </declare-styleable>
 
     <declare-styleable name="XpAppCompatCheckMarkHelper">

@@ -33,7 +33,7 @@
             android:text="Single line"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:backgroundTint="#f0f"
-            app:drawableStart="@drawable/ic_android_control_24dp"
+            app:drawableStartCompat="@drawable/ic_android_control_24dp"
             app:rippleColor="#8000" />
         <!--android:drawSelectorOnTop="false"-->
         <!--android:background="@drawable/gradient_background"-->
@@ -109,7 +109,7 @@
             android:layout_marginTop="@dimen/control_margin"
             android:layout_marginBottom="@dimen/control_margin"
             android:text="No style"
-            app:drawableStart="@drawable/ic_android_control_24dp" />
+            app:drawableStartCompat="@drawable/ic_android_control_24dp" />
 
         <com.google.android.material.widget.CardButton
             android:id="@+id/cb0b"
@@ -119,7 +119,7 @@
             android:layout_marginBottom="@dimen/control_margin"
             android:enabled="false"
             android:text="No style"
-            app:drawableStart="@drawable/ic_android_control_24dp" />
+            app:drawableStartCompat="@drawable/ic_android_control_24dp" />
 
         <com.google.android.material.widget.CardButton
             android:id="@+id/cb1"
@@ -128,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/control_margin"
             android:layout_marginBottom="@dimen/control_margin"
-            app:drawableStart="@drawable/ic_android_control_24dp" />
+            app:drawableStartCompat="@drawable/ic_android_control_24dp" />
 
         <com.google.android.material.widget.CardButton
             android:id="@+id/cb1b"
@@ -138,7 +138,7 @@
             android:layout_marginTop="@dimen/control_margin"
             android:layout_marginBottom="@dimen/control_margin"
             android:enabled="false"
-            app:drawableStart="@drawable/ic_android_control_24dp" />
+            app:drawableStartCompat="@drawable/ic_android_control_24dp" />
 
         <com.google.android.material.widget.CardButton
             android:id="@+id/cb2"
@@ -194,11 +194,11 @@
             android:layout_marginTop="@dimen/control_margin"
             android:layout_marginBottom="@dimen/control_margin"
             android:text="XXX"
-            app:drawableBottom="@drawable/ic_android_black_24dp"
-            app:drawableEnd="@drawable/ic_android_black_24dp"
-            app:drawableStart="@drawable/ic_android_black_24dp"
+            app:drawableBottomCompat="@drawable/ic_android_black_24dp"
+            app:drawableEndCompat="@drawable/ic_android_black_24dp"
+            app:drawableStartCompat="@drawable/ic_android_black_24dp"
             app:drawableTint="@color/abc_btn_colored_borderless_text_material"
-            app:drawableTop="@drawable/ic_android_black_24dp" />
+            app:drawableTopCompat="@drawable/ic_android_black_24dp" />
 
         <com.google.android.material.widget.CardButton
             android:id="@+id/cb4b"
@@ -209,11 +209,11 @@
             android:layout_marginBottom="@dimen/control_margin"
             android:enabled="false"
             android:text="YYY"
-            app:drawableBottom="@drawable/ic_android_black_24dp"
-            app:drawableEnd="@drawable/ic_android_black_24dp"
-            app:drawableStart="@drawable/ic_android_black_24dp"
+            app:drawableBottomCompat="@drawable/ic_android_black_24dp"
+            app:drawableEndCompat="@drawable/ic_android_black_24dp"
+            app:drawableStartCompat="@drawable/ic_android_black_24dp"
             app:drawableTint="@color/abc_btn_colored_borderless_text_material"
-            app:drawableTop="@drawable/ic_android_black_24dp" />
+            app:drawableTopCompat="@drawable/ic_android_black_24dp" />
 
         <com.google.android.material.widget.CardButton
             android:id="@+id/cb5"

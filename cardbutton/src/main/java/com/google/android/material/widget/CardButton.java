@@ -43,20 +43,18 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.RestrictTo;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.TintTypedArray;
-import androidx.appcompat.widget.XpAppCompatCompoundDrawableHelper;
 import androidx.core.view.MarginLayoutParamsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.xpece.android.cardbutton.R;
-import net.xpece.android.widget.TintableCompoundDrawableView;
 
 /**
  * Use {@link net.xpece.android.cardbutton.widget.CardButton} instead.
  */
 @Deprecated
 @SuppressLint("RestrictedApi")
-public class CardButton extends AppCompatButton implements TintableCompoundDrawableView {
+public class CardButton extends AppCompatButton {
     public static boolean AUTO_VISUAL_MARGIN_ENABLED = Build.VERSION.SDK_INT < 18;
 
     private static final String TAG = "CardButton";
@@ -187,8 +185,6 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
 
     final Rect mContentInset = new Rect();
 
-    private XpAppCompatCompoundDrawableHelper mTextCompoundDrawableHelper;
-
     boolean mCompatPadding;
     final Rect mShadowPadding = new Rect();
     private final Rect mTouchArea = new Rect();
@@ -263,9 +259,6 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         getImpl().setPressedTranslationZ(pressedTranslationZ);
 
         updateMinSize();
-
-        mTextCompoundDrawableHelper = new XpAppCompatCompoundDrawableHelper(this);
-        mTextCompoundDrawableHelper.loadFromAttributes(attrs, defStyleAttr);
     }
 
     void updateMinSize() {
@@ -754,9 +747,6 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
         super.drawableStateChanged();
         final int[] stateSet = getDrawableState();
         getImpl().onDrawableStateChanged(stateSet);
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.applySupportTint();
-        }
         if (mForeground != null && mForeground.isStateful()) {
             mForeground.setState(stateSet);
         }
@@ -854,53 +844,6 @@ public class CardButton extends AppCompatButton implements TintableCompoundDrawa
     @SuppressWarnings("unused")
     public Drawable getContentBackground() {
         return getImpl().getContentBackground();
-    }
-
-    @Override
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
-        }
-    }
-
-    @Override
-    public void setCompoundDrawablesWithIntrinsicBounds(@DrawableRes int left, @DrawableRes int top, @DrawableRes int right, @DrawableRes int bottom) {
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
-        }
-    }
-
-    @Override
-    public void setSupportCompoundDrawableTintList(@Nullable ColorStateList tint) {
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.setSupportTintList(tint);
-        }
-    }
-
-    @Nullable
-    @Override
-    public ColorStateList getSupportCompoundDrawableTintList() {
-        if (mTextCompoundDrawableHelper != null) {
-            return mTextCompoundDrawableHelper.getSupportTintList();
-        }
-        return null;
-    }
-
-    @Override
-    public void setSupportCompoundDrawableTintMode(@Nullable PorterDuff.Mode tintMode) {
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.setSupportTintMode(tintMode);
-        }
-    }
-
-    @Nullable
-    @Override
-    public PorterDuff.Mode getSupportCompoundDrawableTintMode() {
-        if (mTextCompoundDrawableHelper != null) {
-            return mTextCompoundDrawableHelper.getSupportTintMode();
-        }
-        return null;
     }
 
     @Override

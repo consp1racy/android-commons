@@ -24,21 +24,18 @@ import android.util.AttributeSet;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import net.xpece.android.appcompatextra.R;
 import net.xpece.android.widget.TintableCheckMarkView;
-import net.xpece.android.widget.TintableCompoundDrawableView;
 
 /**
  * {@link android.widget.CheckedTextView} which supports compound drawable tint on all platforms.
  */
 @SuppressWarnings("deprecation")
 public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView implements
-    TintableCompoundDrawableView, TintableCheckMarkView {
+    TintableCheckMarkView {
 
-    private XpAppCompatCompoundDrawableHelper mTextCompoundDrawableHelper;
-    private XpAppCompatCheckMarkHelper mTextCheckMarkHelper;
+    private final XpAppCompatCheckMarkHelper mTextCheckMarkHelper;
 
     public XpAppCompatCheckedTextView(Context context) {
         this(context, null);
@@ -51,9 +48,6 @@ public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView impleme
     public XpAppCompatCheckedTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        mTextCompoundDrawableHelper = new XpAppCompatCompoundDrawableHelper(this);
-        mTextCompoundDrawableHelper.loadFromAttributes(attrs, defStyleAttr);
-
         mTextCheckMarkHelper = new XpAppCompatCheckMarkHelper(this);
         mTextCheckMarkHelper.loadFromAttributes(attrs, defStyleAttr);
     }
@@ -61,59 +55,9 @@ public class XpAppCompatCheckedTextView extends AppCompatCheckedTextView impleme
     @Override
     protected void drawableStateChanged() {
         super.drawableStateChanged();
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.applySupportTint();
-        }
         if (mTextCheckMarkHelper != null) {
             mTextCheckMarkHelper.applySupportTint();
         }
-    }
-
-    @Override
-    @RequiresApi(17)
-    public void setCompoundDrawablesRelativeWithIntrinsicBounds(@DrawableRes int start, @DrawableRes int top, @DrawableRes int end, @DrawableRes int bottom) {
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
-        }
-    }
-
-    @Override
-    public void setCompoundDrawablesWithIntrinsicBounds(@DrawableRes int left, @DrawableRes int top, @DrawableRes int right, @DrawableRes int bottom) {
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
-        }
-    }
-
-    @Override
-    public void setSupportCompoundDrawableTintList(@Nullable ColorStateList tint) {
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.setSupportTintList(tint);
-        }
-    }
-
-    @Nullable
-    @Override
-    public ColorStateList getSupportCompoundDrawableTintList() {
-        if (mTextCompoundDrawableHelper != null) {
-            return mTextCompoundDrawableHelper.getSupportTintList();
-        }
-        return null;
-    }
-
-    @Override
-    public void setSupportCompoundDrawableTintMode(@Nullable PorterDuff.Mode tintMode) {
-        if (mTextCompoundDrawableHelper != null) {
-            mTextCompoundDrawableHelper.setSupportTintMode(tintMode);
-        }
-    }
-
-    @Nullable
-    @Override
-    public PorterDuff.Mode getSupportCompoundDrawableTintMode() {
-        if (mTextCompoundDrawableHelper != null) {
-            return mTextCompoundDrawableHelper.getSupportTintMode();
-        }
-        return null;
     }
 
     @Override
