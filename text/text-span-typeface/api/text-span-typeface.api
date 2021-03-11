@@ -1,5 +1,9 @@
 public final class net/xpece/android/text/span/TypefaceSpanCompat {
-	public static final fun create (Landroid/graphics/Typeface;)Landroid/text/style/TypefaceSpan;
 	public static final fun span (Landroid/graphics/Typeface;)Landroid/text/style/TypefaceSpan;
+}
+
+public final class net/xpece/android/text/span/typeface/TypefaceSpanCompat {
+	public static final fun create (Landroid/graphics/Typeface;)Landroid/text/style/TypefaceSpan;
+	public static final fun getTypeface (Landroid/text/style/TypefaceSpan;)Landroid/graphics/Typeface;
 }
 

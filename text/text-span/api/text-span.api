@@ -8,7 +8,7 @@ public final class net/xpece/android/text/span/NoUnderlineSpan : android/text/st
 	public fun updateDrawState (Landroid/text/TextPaint;)V
 }
 
-public final class net/xpece/android/text/span/SpaceSpan : android/text/style/ReplacementSpan {
+public class net/xpece/android/text/span/SpaceSpan : android/text/style/ReplacementSpan {
 	public fun <init> (I)V
 	public fun draw (Landroid/graphics/Canvas;Ljava/lang/CharSequence;IIFIIILandroid/graphics/Paint;)V
 	public fun getSize (Landroid/graphics/Paint;Ljava/lang/CharSequence;IILandroid/graphics/Paint$FontMetricsInt;)I

@@ -1,4 +1,4 @@
-public final class net/xpece/android/app/SystemServices {
+public final class net/xpece/android/app/SystemServicesX {
 	public static final fun getDisplayManagerCompat (Landroid/content/Context;)Landroidx/core/hardware/display/DisplayManagerCompat;
 	public static final fun getFingerprintManagerCompat (Landroid/content/Context;)Landroidx/core/hardware/fingerprint/FingerprintManagerCompat;
 	public static final fun getNotificationManagerCompat (Landroid/content/Context;)Landroidx/core/app/NotificationManagerCompat;
