@@ -29,11 +29,13 @@ extensions.configure<kotlinx.validation.ApiValidationExtension> {
 subprojects {
     apply(plugin = "org.jetbrains.dokka")
 
-    tasks.named<org.jetbrains.dokka.gradle.DokkaTask>("dokkaJavadoc") {
+    tasks.withType<org.jetbrains.dokka.gradle.DokkaTask> {
         dokkaSourceSets {
             configureEach {
                 reportUndocumented.set(false)
                 skipDeprecated.set(true)
+                includeNonPublic.set(false)
+                skipEmptyPackages.set(true)
             }
         }
     }
