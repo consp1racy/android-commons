@@ -3,12 +3,12 @@ package net.xpece.android.graphics
 import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.util.Log
+import android.util.LongSparseArray
 import android.util.SparseArray
 import androidx.annotation.GuardedBy
 import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
 import androidx.annotation.RestrictTo
-import androidx.collection.LongSparseArray
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.Method
