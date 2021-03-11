@@ -104,9 +104,9 @@ fun Context.getColorStateListCompat(@ColorRes resId: Int): ColorStateList =
  * @see AppCompatResources.getDrawable
  */
 fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
+    @Suppress("DEPRECATION")
     if (DrawableResolver.isDrawableResolversEnabled) {
-        @Suppress("LoopToCallChain")
-        for (it in DrawableResolver.drawableResolvers) {
+        DrawableResolver.drawableResolvers.forEach {
             val d = it.getDrawable(this, resId)
             if (d != null) return d
         }
