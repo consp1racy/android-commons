@@ -1,0 +1,21 @@
+public final class net/xpece/android/content/LazyDimens {
+	public static final fun lazyDimen (ILjava/lang/Number;)Lnet/xpece/android/content/res/LazyDimen;
+	public static synthetic fun lazyDimen$default (ILjava/lang/Number;ILjava/lang/Object;)Lnet/xpece/android/content/res/LazyDimen;
+	public static final fun lazyDimenAttr (ILjava/lang/Number;)Lnet/xpece/android/content/res/LazyDimen;
+	public static synthetic fun lazyDimenAttr$default (ILjava/lang/Number;ILjava/lang/Object;)Lnet/xpece/android/content/res/LazyDimen;
+	public static final fun lazyDp (Ljava/lang/Number;)Lnet/xpece/android/content/res/LazyDimen;
+	public static final fun lazySp (Ljava/lang/Number;)Lnet/xpece/android/content/res/LazyDimen;
+}
+
+public abstract class net/xpece/android/content/res/LazyDimen {
+	public final fun div (Ljava/lang/Number;)Lnet/xpece/android/content/res/LazyDimen;
+	public final fun minus (Lnet/xpece/android/content/res/Dimen;)Lnet/xpece/android/content/res/LazyDimen;
+	public final fun minus (Lnet/xpece/android/content/res/LazyDimen;)Lnet/xpece/android/content/res/LazyDimen;
+	public final fun plus (Lnet/xpece/android/content/res/Dimen;)Lnet/xpece/android/content/res/LazyDimen;
+	public final fun plus (Lnet/xpece/android/content/res/LazyDimen;)Lnet/xpece/android/content/res/LazyDimen;
+	public abstract fun resolve (Landroid/content/Context;)Lnet/xpece/android/content/res/Dimen;
+	public final fun times (Ljava/lang/Number;)Lnet/xpece/android/content/res/LazyDimen;
+	public final fun unaryMinus ()Lnet/xpece/android/content/res/LazyDimen;
+	public final fun unaryPlus ()Lnet/xpece/android/content/res/LazyDimen;
+}
+

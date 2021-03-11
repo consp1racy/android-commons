@@ -1,0 +1,7 @@
+public final class net/xpece/android/content/BaseResources {
+	public static final field INSTANCE Lnet/xpece/android/content/BaseResources;
+	public final fun obtainStyledAttributes (Landroid/content/Context;II)Landroid/content/res/TypedArray;
+	public final fun resolveResourceId (Landroid/content/Context;II)I
+	public final fun resolveResourceId (Landroid/content/Context;III)I
+}
+

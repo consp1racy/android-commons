@@ -1,0 +1,17 @@
+public final class net/xpece/android/picker/widget/XpDatePicker {
+	public static final fun setSelectionDividerTintCompat (Landroid/widget/DatePicker;I)V
+	public static final fun setSelectionDividerTintCompat (Landroid/widget/DatePicker;Landroid/content/res/ColorStateList;)V
+}
+
+public final class net/xpece/android/picker/widget/XpNumberPicker {
+	public static final fun getSelectionDividerCompat (Landroid/widget/NumberPicker;)Landroid/graphics/drawable/Drawable;
+	public static final fun setSelectionDividerCompat (Landroid/widget/NumberPicker;Landroid/graphics/drawable/Drawable;)V
+	public static final fun setSelectionDividerTintCompat (Landroid/widget/NumberPicker;I)V
+	public static final fun setSelectionDividerTintCompat (Landroid/widget/NumberPicker;Landroid/content/res/ColorStateList;)V
+}
+
+public final class net/xpece/android/picker/widget/XpTimePicker {
+	public static final fun setSelectionDividerTintCompat (Landroid/widget/TimePicker;I)V
+	public static final fun setSelectionDividerTintCompat (Landroid/widget/TimePicker;Landroid/content/res/ColorStateList;)V
+}
+

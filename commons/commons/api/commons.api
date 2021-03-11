@@ -1,0 +1,749 @@
+public abstract class net/xpece/android/app/BaseActivity : androidx/appcompat/app/AppCompatActivity {
+	public fun <init> ()V
+	public fun addContentView (Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+	protected final fun getRoot ()Landroid/view/ViewGroup;
+	protected fun onCreate (Landroid/os/Bundle;)V
+	public fun provideRootView ()Landroid/view/ViewGroup;
+	public fun setContentView (I)V
+	public fun setContentView (Landroid/view/View;)V
+	public fun setContentView (Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+	public final fun superSetContentView (I)V
+	public final fun superSetContentView (Landroid/view/View;)V
+}
+
+public abstract class net/xpece/android/app/BaseFragment : androidx/fragment/app/Fragment {
+	public static final field Companion Lnet/xpece/android/app/BaseFragment$Companion;
+	public fun <init> ()V
+	public fun onCreate (Landroid/os/Bundle;)V
+	public fun onCreateAnimation (IZI)Landroid/view/animation/Animation;
+	public fun onSaveInstanceState (Landroid/os/Bundle;)V
+}
+
+public final class net/xpece/android/app/BaseFragment$Companion {
+}
+
+public final class net/xpece/android/app/FrameworkExtensions {
+	public static final fun asArrayList (Ljava/util/List;)Ljava/util/ArrayList;
+	public static final fun equalsNotNull (Ljava/lang/Object;Ljava/lang/Object;)Z
+	public static final fun intIfNotNull (Ljava/lang/Object;I)I
+	public static final fun intIfNotNull (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)I
+	public static final fun joinToCharSequence (Ljava/lang/Iterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+	public static final fun joinToCharSequence (Ljava/lang/Iterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)Ljava/lang/CharSequence;
+	public static synthetic fun joinToCharSequence$default (Ljava/lang/Iterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;ILjava/lang/Object;)Ljava/lang/CharSequence;
+	public static synthetic fun joinToCharSequence$default (Ljava/lang/Iterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/CharSequence;
+	public static final fun oneIfNotNull (Ljava/lang/Object;)I
+	public static final fun toColorStateList (I)Landroid/content/res/ColorStateList;
+}
+
+public abstract interface class net/xpece/android/app/SnackbarActivity {
+	public abstract fun getSnackbar ()Lcom/google/android/material/snackbar/Snackbar;
+	public abstract fun getSnackbarParent ()Landroid/view/View;
+	public abstract fun setSnackbar (Lcom/google/android/material/snackbar/Snackbar;)V
+	public abstract fun showSnackbar (IILjava/lang/Integer;)V
+	public abstract fun showSnackbar (Ljava/lang/CharSequence;ILjava/lang/Integer;)V
+}
+
+public final class net/xpece/android/app/SnackbarActivity$DefaultImpls {
+	public static fun showSnackbar (Lnet/xpece/android/app/SnackbarActivity;IILjava/lang/Integer;)V
+	public static fun showSnackbar (Lnet/xpece/android/app/SnackbarActivity;Ljava/lang/CharSequence;ILjava/lang/Integer;)V
+	public static synthetic fun showSnackbar$default (Lnet/xpece/android/app/SnackbarActivity;IILjava/lang/Integer;ILjava/lang/Object;)V
+	public static synthetic fun showSnackbar$default (Lnet/xpece/android/app/SnackbarActivity;Ljava/lang/CharSequence;ILjava/lang/Integer;ILjava/lang/Object;)V
+}
+
+public abstract interface class net/xpece/android/app/ViewContainer {
+	public static final field Companion Lnet/xpece/android/app/ViewContainer$Companion;
+	public abstract fun forActivity (Landroid/app/Activity;)Landroid/view/ViewGroup;
+}
+
+public final class net/xpece/android/app/ViewContainer$Companion {
+	public final fun getDEFAULT ()Lnet/xpece/android/app/ViewContainer;
+}
+
+public final class net/xpece/android/app/XpActionBar {
+	public static final fun setDisplayShowTitleAndHomeAsUp (Landroidx/appcompat/app/ActionBar;)V
+}
+
+public final class net/xpece/android/app/XpFragment {
+	public static final fun invalidateOptionsMenu (Landroidx/fragment/app/Fragment;)Lkotlin/Unit;
+	public static final fun showAllowingStateLoss (Landroidx/fragment/app/DialogFragment;Landroidx/fragment/app/FragmentManager;Ljava/lang/String;)V
+	public static final fun showAllowingStateLoss (Landroidx/fragment/app/DialogFragment;Landroidx/fragment/app/FragmentTransaction;Ljava/lang/String;)V
+	public static final fun withArguments (Landroidx/fragment/app/Fragment;Lkotlin/jvm/functions/Function1;)Landroidx/fragment/app/Fragment;
+}
+
+public final class net/xpece/android/app/XpGoogleApiAvailability {
+	public static final field INSTANCE Lnet/xpece/android/app/XpGoogleApiAvailability;
+	public final fun showErrorDialogFragment (Landroidx/fragment/app/Fragment;II)Z
+	public final fun showErrorDialogFragment (Landroidx/fragment/app/Fragment;IILandroid/content/DialogInterface$OnCancelListener;)Z
+	public static synthetic fun showErrorDialogFragment$default (Lnet/xpece/android/app/XpGoogleApiAvailability;Landroidx/fragment/app/Fragment;IILandroid/content/DialogInterface$OnCancelListener;ILjava/lang/Object;)Z
+}
+
+public final class net/xpece/android/collection/XpCollections {
+	public static final fun joinToCharSequence (Ljava/lang/Iterable;)Ljava/lang/CharSequence;
+	public static final fun joinToCharSequence (Ljava/lang/Iterable;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+	public static final fun joinToCharSequence (Ljava/lang/Iterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+	public static final fun joinToCharSequence (Ljava/lang/Iterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+	public static final fun joinToCharSequence (Ljava/lang/Iterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)Ljava/lang/CharSequence;
+	public static synthetic fun joinToCharSequence$default (Ljava/lang/Iterable;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/CharSequence;
+}
+
+public abstract class net/xpece/android/content/EmptyContentProvider : android/content/ContentProvider {
+	public fun <init> ()V
+	public fun delete (Landroid/net/Uri;Ljava/lang/String;[Ljava/lang/String;)I
+	public fun getType (Landroid/net/Uri;)Ljava/lang/String;
+	public fun insert (Landroid/net/Uri;Landroid/content/ContentValues;)Landroid/net/Uri;
+	public fun query (Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+	public fun update (Landroid/net/Uri;Landroid/content/ContentValues;Ljava/lang/String;[Ljava/lang/String;)I
+}
+
+public final class net/xpece/android/content/XpContext {
+	public static final fun ensureRuntimeTheme (Landroid/content/Context;)V
+	public static final fun getColorAccent (Landroid/content/Context;)Landroid/content/res/ColorStateList;
+	public static final fun getColorControlNormal (Landroid/content/Context;)Landroid/content/res/ColorStateList;
+	public static final fun getColorPrimary (Landroid/content/Context;)Landroid/content/res/ColorStateList;
+	public static final fun getPlayStoreUri (Ljava/lang/String;)Landroid/net/Uri;
+	public static final fun inflate (Landroid/content/Context;I)Landroid/view/View;
+	public static final fun inflate (Landroid/view/ViewGroup;I)Landroid/view/View;
+	public static final fun inflate (Landroid/view/ViewGroup;IZ)Landroid/view/View;
+	public static synthetic fun inflate$default (Landroid/view/ViewGroup;IZILjava/lang/Object;)Landroid/view/View;
+	public static final fun isDebugBuild (Landroid/content/Context;)Z
+	public static final fun isRtl (Landroid/content/Context;)Z
+	public static final fun openPlayStore (Landroid/content/Context;)V
+	public static final fun openPlayStore (Landroid/content/Context;Ljava/lang/String;)V
+	public static synthetic fun openPlayStore$default (Landroid/content/Context;Ljava/lang/String;ILjava/lang/Object;)V
+	public static final fun openPlayStoreIntent (Landroid/content/Context;)Landroid/content/Intent;
+	public static final fun openPlayStoreIntent (Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+	public static final fun openPlayStoreIntent (Landroid/content/Context;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Landroid/content/Intent;
+	public static synthetic fun openPlayStoreIntent$default (Landroid/content/Context;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Landroid/content/Intent;
+	public static final fun view (Landroid/content/Context;Landroid/net/Uri;Lkotlin/jvm/functions/Function1;)V
+	public static final fun view (Landroid/content/Context;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun view$default (Landroid/content/Context;Landroid/net/Uri;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public static synthetic fun view$default (Landroid/content/Context;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public static final fun viewIntent (Landroid/net/Uri;Lkotlin/jvm/functions/Function1;)Landroid/content/Intent;
+	public static final fun viewIntent (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Landroid/content/Intent;
+	public static synthetic fun viewIntent$default (Landroid/net/Uri;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Landroid/content/Intent;
+	public static synthetic fun viewIntent$default (Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Landroid/content/Intent;
+}
+
+public final class net/xpece/android/content/XpIntent {
+	public static final fun call (Landroid/content/Context;Ljava/lang/String;)V
+	public static final fun dial (Landroid/content/Context;Ljava/lang/String;)V
+	public static final fun email (Landroid/content/Context;Ljava/lang/String;)V
+	public static final fun getAppDetailIntent (Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+	public static synthetic fun getAppDetailIntent$default (Landroid/content/Context;Ljava/lang/String;ILjava/lang/Object;)Landroid/content/Intent;
+	public static final fun getHandlerCount (Landroid/content/Context;Landroid/content/Intent;)I
+	public static final fun getMapIntent (Ljava/lang/String;Lcom/google/android/gms/maps/model/LatLng;)Landroid/content/Intent;
+	public static final fun grantUriPermission (Landroid/content/Context;Landroid/content/Intent;Landroid/net/Uri;I)V
+	public static final fun hasHandler (Landroid/content/Context;Landroid/content/Intent;)Z
+	public static final fun intent (Landroid/content/Context;Ljava/lang/Class;Lkotlin/jvm/functions/Function1;)Landroid/content/Intent;
+	public static final fun maybeStartActivity (Landroid/content/Context;Landroid/content/Intent;)Z
+	public static final fun maybeStartActivity (Landroid/content/Context;Landroid/content/Intent;Z)Z
+	public static final fun maybeStartActivityForResult (Landroid/app/Activity;Landroid/content/Intent;I)Z
+	public static final fun maybeStartActivityForResult (Landroidx/fragment/app/Fragment;Landroid/content/Intent;I)Z
+	public static final fun maybeStartChooser (Landroid/content/Context;Landroid/content/Intent;)Z
+	public static final fun showNoActivityError (Landroid/content/Context;)V
+}
+
+public final class net/xpece/android/content/res/XpConfiguration {
+	public static final fun getLayoutDirectionCompat (Landroid/content/res/Configuration;)I
+}
+
+public class net/xpece/android/database/SelectionBuilder {
+	public fun <init> ()V
+	public fun delete (Landroid/database/sqlite/SQLiteDatabase;)I
+	public fun getSelection ()Ljava/lang/String;
+	public fun getSelectionArgs ()[Ljava/lang/String;
+	public fun groupBy (Ljava/lang/String;)Lnet/xpece/android/database/SelectionBuilder;
+	public fun having (Ljava/lang/String;)Lnet/xpece/android/database/SelectionBuilder;
+	public fun map (Ljava/lang/String;Ljava/lang/String;)Lnet/xpece/android/database/SelectionBuilder;
+	public fun mapToTable (Ljava/lang/String;Ljava/lang/String;)Lnet/xpece/android/database/SelectionBuilder;
+	public fun query (Landroid/database/sqlite/SQLiteDatabase;Z[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+	public fun query (Landroid/database/sqlite/SQLiteDatabase;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+	public fun reset ()Lnet/xpece/android/database/SelectionBuilder;
+	public fun table (Ljava/lang/String;)Lnet/xpece/android/database/SelectionBuilder;
+	public fun table (Ljava/lang/String;[Ljava/lang/String;)Lnet/xpece/android/database/SelectionBuilder;
+	public fun toString ()Ljava/lang/String;
+	public fun update (Landroid/database/sqlite/SQLiteDatabase;Landroid/content/ContentValues;)I
+	public fun where (Ljava/lang/String;[Ljava/lang/String;)Lnet/xpece/android/database/SelectionBuilder;
+}
+
+public final class net/xpece/android/database/XpCursor {
+	public static final fun getDouble (Landroid/database/Cursor;ID)D
+	public static final fun getFloat (Landroid/database/Cursor;IF)F
+	public static final fun getInt (Landroid/database/Cursor;II)I
+	public static final fun getLong (Landroid/database/Cursor;IJ)J
+	public static final fun getShort (Landroid/database/Cursor;IS)S
+	public static final fun getString (Landroid/database/Cursor;ILjava/lang/String;)Ljava/lang/String;
+}
+
+public final class net/xpece/android/graphics/XpColor {
+	public static final synthetic fun toColors (I)Landroid/content/res/ColorStateList;
+}
+
+public final class net/xpece/android/graphics/XpRect {
+	public static final fun isZero (Landroid/graphics/Rect;)Z
+	public static final fun isZero (Landroid/graphics/RectF;)Z
+}
+
+public class net/xpece/android/graphics/drawable/EmptyDrawable : android/graphics/drawable/ColorDrawable {
+	public fun <init> (I)V
+	public fun <init> (II)V
+	public fun getIntrinsicHeight ()I
+	public fun getIntrinsicWidth ()I
+}
+
+public class net/xpece/android/graphics/drawable/InfiniteLayerDrawable : net/xpece/android/graphics/drawable/LayerDrawableCompat {
+	public fun <init> ([Landroid/graphics/drawable/Drawable;)V
+	public fun getIntrinsicHeight ()I
+	public fun getIntrinsicWidth ()I
+}
+
+public class net/xpece/android/graphics/drawable/LayerDrawableCompat : android/graphics/drawable/Drawable, android/graphics/drawable/Drawable$Callback {
+	public static final field INSET_UNDEFINED I
+	public static final field PADDING_MODE_NEST I
+	public static final field PADDING_MODE_STACK I
+	public fun <init> ([Landroid/graphics/drawable/Drawable;)V
+	public fun addLayer (Landroid/graphics/drawable/Drawable;)I
+	public fun canApplyTheme ()Z
+	public fun draw (Landroid/graphics/Canvas;)V
+	public fun findDrawableByLayerId (I)Landroid/graphics/drawable/Drawable;
+	public fun findIndexByLayerId (I)I
+	public fun getAlpha ()I
+	public fun getBottomPadding ()I
+	public fun getChangingConfigurations ()I
+	public fun getConstantState ()Landroid/graphics/drawable/Drawable$ConstantState;
+	public fun getDrawable (I)Landroid/graphics/drawable/Drawable;
+	public fun getEndPadding ()I
+	public fun getHotspotBounds (Landroid/graphics/Rect;)V
+	public fun getId (I)I
+	public fun getIntrinsicHeight ()I
+	public fun getIntrinsicWidth ()I
+	public fun getLayerGravity (I)I
+	public fun getLayerHeight (I)I
+	public fun getLayerInsetBottom (I)I
+	public fun getLayerInsetEnd (I)I
+	public fun getLayerInsetLeft (I)I
+	public fun getLayerInsetRight (I)I
+	public fun getLayerInsetStart (I)I
+	public fun getLayerInsetTop (I)I
+	public fun getLayerWidth (I)I
+	public fun getLeftPadding ()I
+	public fun getNumberOfLayers ()I
+	public fun getOpacity ()I
+	public fun getOutline (Landroid/graphics/Outline;)V
+	public fun getPadding (Landroid/graphics/Rect;)Z
+	public fun getPaddingMode ()I
+	public fun getRightPadding ()I
+	public fun getStartPadding ()I
+	public fun getTopPadding ()I
+	public fun invalidateDrawable (Landroid/graphics/drawable/Drawable;)V
+	public fun isAutoMirrored ()Z
+	public fun isStateful ()Z
+	public fun jumpToCurrentState ()V
+	public fun mutate ()Landroid/graphics/drawable/Drawable;
+	protected fun onBoundsChange (Landroid/graphics/Rect;)V
+	public fun onLayoutDirectionChanged (I)Z
+	protected fun onLevelChange (I)Z
+	protected fun onStateChange ([I)Z
+	public fun scheduleDrawable (Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;J)V
+	public fun setAlpha (I)V
+	public fun setAutoMirrored (Z)V
+	public fun setColorFilter (Landroid/graphics/ColorFilter;)V
+	public fun setDither (Z)V
+	public fun setDrawable (ILandroid/graphics/drawable/Drawable;)V
+	public fun setDrawableByLayerId (ILandroid/graphics/drawable/Drawable;)Z
+	public fun setHotspot (FF)V
+	public fun setHotspotBounds (IIII)V
+	public fun setId (II)V
+	public fun setLayerGravity (II)V
+	public fun setLayerHeight (II)V
+	public fun setLayerInset (IIIII)V
+	public fun setLayerInsetBottom (II)V
+	public fun setLayerInsetEnd (II)V
+	public fun setLayerInsetLeft (II)V
+	public fun setLayerInsetRelative (IIIII)V
+	public fun setLayerInsetRight (II)V
+	public fun setLayerInsetStart (II)V
+	public fun setLayerInsetTop (II)V
+	public fun setLayerSize (III)V
+	public fun setLayerWidth (II)V
+	public fun setOpacity (I)V
+	public fun setPadding (IIII)V
+	public fun setPaddingMode (I)V
+	public fun setPaddingRelative (IIII)V
+	public fun setTintList (Landroid/content/res/ColorStateList;)V
+	public fun setTintMode (Landroid/graphics/PorterDuff$Mode;)V
+	public fun setVisible (ZZ)Z
+	public fun unscheduleDrawable (Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;)V
+}
+
+public final class net/xpece/android/graphics/drawable/RippleDrawableCompat : android/graphics/drawable/RippleDrawable {
+	public fun <init> (Landroid/content/res/ColorStateList;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V
+	public fun getRadius ()I
+	public fun inflate (Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V
+	public fun isProjected ()Z
+	public fun setRadius (I)V
+}
+
+public final class net/xpece/android/graphics/drawable/RippleDrawableCompatInflater {
+	public static final field INSTANCE Lnet/xpece/android/graphics/drawable/RippleDrawableCompatInflater;
+	public static final fun installDelegate ()V
+}
+
+public final class net/xpece/android/graphics/drawable/XpDrawable {
+	public static final fun animate (Landroid/graphics/drawable/Drawable;I)V
+	public static final fun animate (Landroid/graphics/drawable/Drawable;II)V
+}
+
+public final class net/xpece/android/io/XpIo {
+	public static final fun bytes (Ljava/io/InputStream;)[B
+	public static final fun copy (Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)V
+	public static final fun copy (Landroid/content/Context;Landroid/net/Uri;Landroid/net/Uri;)V
+	public static final fun string (Ljava/io/InputStream;)Ljava/lang/String;
+	public static final fun string (Ljava/io/InputStream;Ljava/lang/String;)Ljava/lang/String;
+	public static synthetic fun string$default (Ljava/io/InputStream;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class net/xpece/android/json/BigDecimalAdapter {
+	public static final field INSTANCE Lnet/xpece/android/json/BigDecimalAdapter;
+	public final fun fromJson (Ljava/lang/String;)Ljava/math/BigDecimal;
+	public final fun toJson (Ljava/math/BigDecimal;)Ljava/lang/String;
+}
+
+public final class net/xpece/android/json/ThreeTenBpAdapter {
+	public static final field INSTANCE Lnet/xpece/android/json/ThreeTenBpAdapter;
+	public final fun instantFromJson (Ljava/lang/String;)Lorg/threeten/bp/Instant;
+	public final fun localDateFromJson (Ljava/lang/String;)Lorg/threeten/bp/LocalDate;
+	public final fun localDateTimeFromJson (Ljava/lang/String;)Lorg/threeten/bp/LocalDateTime;
+	public final fun localTimeFromJson (Ljava/lang/String;)Lorg/threeten/bp/LocalTime;
+	public final fun offsetDateTimeFromJson (Ljava/lang/String;)Lorg/threeten/bp/OffsetDateTime;
+	public final fun toJson (Lorg/threeten/bp/Instant;)Ljava/lang/String;
+	public final fun toJson (Lorg/threeten/bp/LocalDate;)Ljava/lang/String;
+	public final fun toJson (Lorg/threeten/bp/LocalDateTime;)Ljava/lang/String;
+	public final fun toJson (Lorg/threeten/bp/LocalTime;)Ljava/lang/String;
+	public final fun toJson (Lorg/threeten/bp/OffsetDateTime;)Ljava/lang/String;
+}
+
+public final class net/xpece/android/json/UriAdapter {
+	public static final field INSTANCE Lnet/xpece/android/json/UriAdapter;
+	public final fun fromJson (Ljava/lang/String;)Landroid/net/Uri;
+	public final fun toJson (Landroid/net/Uri;)Ljava/lang/String;
+}
+
+public final class net/xpece/android/location/GeocoderNotAvailableException : java/lang/Exception {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Throwable;)V
+}
+
+public abstract interface class net/xpece/android/location/GeocoderProvider {
+	public abstract fun getGeocoder (Landroid/content/Context;Ljava/util/Locale;)Landroid/location/Geocoder;
+	public abstract fun isGeocoderPresent ()Z
+}
+
+public final class net/xpece/android/location/GeocoderProvider$DefaultImpls {
+	public static synthetic fun getGeocoder$default (Lnet/xpece/android/location/GeocoderProvider;Landroid/content/Context;Ljava/util/Locale;ILjava/lang/Object;)Landroid/location/Geocoder;
+}
+
+public final class net/xpece/android/location/GeocoderProviderImpl : net/xpece/android/location/GeocoderProvider {
+	public static final field Companion Lnet/xpece/android/location/GeocoderProviderImpl$Companion;
+	public fun <init> ()V
+	public fun getGeocoder (Landroid/content/Context;Ljava/util/Locale;)Landroid/location/Geocoder;
+	public fun isGeocoderPresent ()Z
+}
+
+public final class net/xpece/android/location/GeocoderProviderImpl$Companion {
+}
+
+public class net/xpece/android/net/HttpServiceException : java/lang/RuntimeException {
+	public static final field Companion Lnet/xpece/android/net/HttpServiceException$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V
+	public fun getDiagnosticMessage ()Ljava/lang/String;
+	public final fun getHttpCode ()I
+	public final fun getHttpMessage ()Ljava/lang/String;
+	public fun getMessage ()Ljava/lang/String;
+	public final fun getMethod ()Ljava/lang/String;
+	public final fun getUrl ()Ljava/lang/String;
+	public final fun isClientError ()Z
+	public final fun isServerError ()Z
+	public final fun isSuccess ()Z
+}
+
+public final class net/xpece/android/net/HttpServiceException$Companion {
+	public final fun from (Lokhttp3/Request;Lokhttp3/Response;)Lnet/xpece/android/net/HttpServiceException;
+	public final fun from (Lokhttp3/Request;Lretrofit2/Response;)Lnet/xpece/android/net/HttpServiceException;
+}
+
+public final class net/xpece/android/net/UriRequestBody : okhttp3/RequestBody {
+	public fun <init> (Landroid/content/ContentResolver;Landroid/net/Uri;)V
+	public fun <init> (Landroid/content/Context;Landroid/net/Uri;)V
+	public fun contentLength ()J
+	public fun contentType ()Lokhttp3/MediaType;
+	public fun writeTo (Lokio/BufferedSink;)V
+}
+
+public final class net/xpece/android/net/XpConnectivityManager {
+	public static final fun isMobileDataEnabled (Landroid/net/ConnectivityManager;)Z
+}
+
+public final class net/xpece/android/net/XpNet {
+	public static final fun isAirplaneModeOn (Landroid/content/Context;)Z
+	public static final fun isAnyNetworkConnected (Landroid/content/Context;)Z
+}
+
+public final class net/xpece/android/os/XpBundle {
+	public static final fun getUuid (Landroid/os/Bundle;Ljava/lang/String;)Ljava/util/UUID;
+	public static final fun putUuid (Landroid/os/Bundle;Ljava/lang/String;Ljava/util/UUID;)V
+}
+
+public final class net/xpece/android/os/XpParcel {
+	public static final synthetic fun readBoolean (Landroid/os/Parcel;)Z
+	public static final fun readBooleanCompat (Landroid/os/Parcel;)Z
+	public static final fun readDoubleOrNull (Landroid/os/Parcel;)Ljava/lang/Double;
+	public static final fun readFloatOrNull (Landroid/os/Parcel;)Ljava/lang/Float;
+	public static final synthetic fun writeBoolean (Landroid/os/Parcel;Z)V
+	public static final fun writeBooleanCompat (Landroid/os/Parcel;Z)V
+	public static final fun writeDoubleOrNan (Landroid/os/Parcel;Ljava/lang/Double;)V
+	public static final fun writeFloatOrNan (Landroid/os/Parcel;Ljava/lang/Float;)V
+}
+
+public final class net/xpece/android/telephony/XpTelephonyManager {
+	public static final fun isDataEnabledCompat (Landroid/telephony/TelephonyManager;)Z
+}
+
+public final class net/xpece/android/text/Emphasis {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Object;)V
+	public synthetic fun <init> (Ljava/lang/Object;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun emphasize (Ljava/lang/String;Ljava/lang/CharSequence;)Ljava/lang/CharSequence;
+	public final fun getEmphasisSpan ()Ljava/lang/Object;
+	public final fun setEmphasisSpan (Ljava/lang/Object;)V
+}
+
+public final class net/xpece/android/text/Formatter {
+	public static final field INSTANCE Lnet/xpece/android/text/Formatter;
+	public final fun getCS_CZ ()Ljava/util/Locale;
+	public final fun getCZK ()Ljava/util/Currency;
+	public final fun getCurrencyFormatter (Ljava/util/Currency;)Ljava/text/NumberFormat;
+	public final fun getCurrencyFormatter (Ljava/util/Currency;I)Ljava/text/NumberFormat;
+	public final fun getCurrencyFormatter (Ljava/util/Currency;ILjava/util/Locale;)Ljava/text/NumberFormat;
+	public static synthetic fun getCurrencyFormatter$default (Lnet/xpece/android/text/Formatter;Ljava/util/Currency;ILjava/util/Locale;ILjava/lang/Object;)Ljava/text/NumberFormat;
+}
+
+public final class net/xpece/android/text/Keyboards {
+	public static final field INSTANCE Lnet/xpece/android/text/Keyboards;
+	public final fun hideKeyboard (Landroid/app/Activity;)V
+	public final fun showKeyboard (Landroid/view/View;)V
+}
+
+public class net/xpece/android/text/Truss {
+	public fun <init> ()V
+	public fun append (C)Lnet/xpece/android/text/Truss;
+	public fun append (I)Lnet/xpece/android/text/Truss;
+	public fun append (Ljava/lang/CharSequence;)Lnet/xpece/android/text/Truss;
+	public fun append (Ljava/lang/String;)Lnet/xpece/android/text/Truss;
+	public fun build ()Ljava/lang/CharSequence;
+	public fun popSpan ()Lnet/xpece/android/text/Truss;
+	public fun pushSpan (Ljava/lang/Object;)Lnet/xpece/android/text/Truss;
+}
+
+public final class net/xpece/android/text/XpText {
+	public static final fun getMediumSpan ()Ljava/lang/Object;
+	public static final fun removeDiacritics (Ljava/lang/CharSequence;)Ljava/lang/String;
+}
+
+public class net/xpece/android/view/OnFocusChangeListenerWrapper : android/view/View$OnFocusChangeListener {
+	public fun <init> ()V
+	public fun add (Landroid/view/View$OnFocusChangeListener;)Lnet/xpece/android/view/OnFocusChangeListenerWrapper;
+	public static fun add (Landroid/view/View;Landroid/view/View$OnFocusChangeListener;)V
+	public static fun listen (Landroid/view/View;)Lnet/xpece/android/view/OnFocusChangeListenerWrapper;
+	public fun onFocusChange (Landroid/view/View;Z)V
+	public fun remove (Landroid/view/View$OnFocusChangeListener;)Lnet/xpece/android/view/OnFocusChangeListenerWrapper;
+	public static fun remove (Landroid/view/View;Landroid/view/View$OnFocusChangeListener;)V
+}
+
+public final class net/xpece/android/view/ViewFader {
+	public static final field Companion Lnet/xpece/android/view/ViewFader$Companion;
+	public fun <init> ()V
+	public final fun fadeIn (Landroid/view/View;)V
+	public final fun fadeOut (Landroid/view/View;)V
+	public final fun isFadingIn (Landroid/view/View;)Z
+	public final fun isFadingOut (Landroid/view/View;)Z
+}
+
+public final class net/xpece/android/view/ViewFader$Companion {
+}
+
+public final class net/xpece/android/view/ViewIdGenerator {
+	public fun <init> ()V
+	public final fun get (Ljava/lang/String;)I
+	public final fun onRestoreInstanceState (Landroid/os/Bundle;Ljava/lang/String;)V
+	public final fun onSaveInstanceState (Landroid/os/Bundle;Ljava/lang/String;)V
+}
+
+public final class net/xpece/android/view/ViewOutlineProviders {
+	public static final field INSTANCE Lnet/xpece/android/view/ViewOutlineProviders;
+	public static final field NONE Landroid/view/ViewOutlineProvider;
+}
+
+public final class net/xpece/android/view/XpImageView {
+	public static final fun switchImage (Landroid/widget/ImageView;I)V
+	public static final fun switchImage (Landroid/widget/ImageView;II)V
+	public static final fun switchImage (Landroid/widget/ImageView;Landroid/graphics/drawable/Drawable;)V
+	public static final fun switchImage (Landroid/widget/ImageView;Landroid/graphics/drawable/Drawable;I)V
+	public static synthetic fun switchImage$default (Landroid/widget/ImageView;IIILjava/lang/Object;)V
+	public static synthetic fun switchImage$default (Landroid/widget/ImageView;Landroid/graphics/drawable/Drawable;IILjava/lang/Object;)V
+}
+
+public final class net/xpece/android/view/XpSwipeRefreshLayout {
+	public static final fun setupDefaultColors (Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;)V
+}
+
+public final class net/xpece/android/view/XpTextView {
+	public static final fun setTextAndVisibility (Landroid/widget/TextView;Ljava/lang/CharSequence;)V
+	public static final fun setTextAndVisibility (Landroid/widget/TextView;Ljava/lang/CharSequence;Z)V
+	public static synthetic fun setTextAndVisibility$default (Landroid/widget/TextView;Ljava/lang/CharSequence;ZILjava/lang/Object;)V
+	public static final fun setTextAppearanceCompat (Landroid/widget/TextView;I)V
+}
+
+public final class net/xpece/android/view/XpView {
+	public static final fun canScroll (Landroid/widget/ScrollView;)Z
+	public static final fun cancelPendingInputEventsCompat (Landroid/view/View;)V
+	public static final fun getRealLayoutDirection (Landroid/view/View;)I
+	public static final fun gone (Landroid/view/View;)Landroid/view/View;
+	public static final fun invisible (Landroid/view/View;)Landroid/view/View;
+	public static final fun removeOnGlobalLayoutListenerCompat (Landroid/view/View;Landroid/view/ViewTreeObserver$OnGlobalLayoutListener;)V
+	public static final fun setBackgroundCompat (Landroid/view/View;Landroid/graphics/drawable/Drawable;)V
+	public static final fun setLayerTypeSafe (Landroid/view/View;I)V
+	public static final fun toastContentDescription (Landroid/view/View;)Z
+	public static final fun toastContentDescription (Landroid/view/View;Ljava/lang/CharSequence;)Z
+	public static synthetic fun toastContentDescription$default (Landroid/view/View;Ljava/lang/CharSequence;ILjava/lang/Object;)Z
+	public static final fun visible (Landroid/view/View;)Landroid/view/View;
+}
+
+public final class net/xpece/android/view/XpWindow {
+	public static final fun getNavigationBarColorCompat (Landroid/view/Window;)I
+	public static final fun getStatusBarColorCompat (Landroid/view/Window;)I
+	public static final fun setNavigationBarColorCompat (Landroid/view/Window;I)V
+	public static final fun setStatusBarColorCompat (Landroid/view/Window;I)V
+}
+
+public abstract class net/xpece/android/widget/BindableAdapter : android/widget/BaseAdapter {
+	public fun <init> ()V
+	public fun bindDropDownView (Ljava/lang/Object;ILandroid/view/View;)V
+	public abstract fun bindView (Ljava/lang/Object;ILandroid/view/View;)V
+	public fun getDropDownView (ILandroid/view/View;Landroid/view/ViewGroup;)Landroid/view/View;
+	public abstract fun getItem (I)Ljava/lang/Object;
+	public fun getView (ILandroid/view/View;Landroid/view/ViewGroup;)Landroid/view/View;
+	public fun newDropDownView (Landroid/view/LayoutInflater;ILandroid/view/ViewGroup;)Landroid/view/View;
+	public abstract fun newView (Landroid/view/LayoutInflater;ILandroid/view/ViewGroup;)Landroid/view/View;
+}
+
+public class net/xpece/android/widget/CheckedFrameLayout : android/widget/FrameLayout, android/widget/Checkable {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun isChecked ()Z
+	public fun onCreateDrawableState (I)[I
+	public fun setChecked (Z)V
+	public fun toggle ()V
+}
+
+public class net/xpece/android/widget/EndInsetItemDecoration : androidx/recyclerview/widget/RecyclerView$ItemDecoration {
+	public fun <init> (I)V
+	public fun getItemOffsets (Landroid/graphics/Rect;Landroid/view/View;Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$State;)V
+}
+
+public abstract class net/xpece/android/widget/EndlessRecyclerViewOnScrollListener : androidx/recyclerview/widget/RecyclerView$OnScrollListener {
+	public static field TAG Ljava/lang/String;
+	public fun <init> (Landroidx/recyclerview/widget/LinearLayoutManager;I)V
+	public abstract fun onLoadMore ()V
+	public fun onScrolled (Landroidx/recyclerview/widget/RecyclerView;II)V
+}
+
+public class net/xpece/android/widget/EnumAdapter : net/xpece/android/widget/BindableAdapter {
+	public fun <init> (Ljava/lang/Class;)V
+	public fun <init> (Ljava/lang/Class;Z)V
+	public synthetic fun <init> (Ljava/lang/Class;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun bindView (Ljava/lang/Enum;ILandroid/view/View;)V
+	public synthetic fun bindView (Ljava/lang/Object;ILandroid/view/View;)V
+	public fun getCount ()I
+	public fun getItem (I)Ljava/lang/Enum;
+	public synthetic fun getItem (I)Ljava/lang/Object;
+	public fun getItemId (I)J
+	protected fun getName (Ljava/lang/Enum;)Ljava/lang/String;
+	public fun newDropDownView (Landroid/view/LayoutInflater;ILandroid/view/ViewGroup;)Landroid/view/View;
+	public fun newView (Landroid/view/LayoutInflater;ILandroid/view/ViewGroup;)Landroid/view/View;
+}
+
+public abstract interface class net/xpece/android/widget/Expandable {
+	public abstract fun canExpand ()Z
+	public abstract fun getChildren ()Ljava/util/List;
+}
+
+public class net/xpece/android/widget/ExpandableTextView : android/widget/LinearLayout, android/view/View$OnClickListener {
+	protected field mButton Landroid/widget/ImageButton;
+	protected field mTv Landroid/widget/TextView;
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun addView (Landroid/view/View;ILandroid/view/ViewGroup$LayoutParams;)V
+	public fun getText ()Ljava/lang/CharSequence;
+	public fun isAnimating ()Z
+	public fun onClick (Landroid/view/View;)V
+	protected fun onFinishInflate ()V
+	public fun onInterceptTouchEvent (Landroid/view/MotionEvent;)Z
+	protected fun onMeasure (II)V
+	public fun onRestoreInstanceState (Landroid/os/Parcelable;)V
+	public fun onSaveInstanceState ()Landroid/os/Parcelable;
+	public fun setButton (Landroid/widget/ImageButton;)V
+	public fun setText (Ljava/lang/CharSequence;)V
+}
+
+protected class net/xpece/android/widget/ExpandableTextView$ExpandCollapseAnimation : android/view/animation/Animation {
+	public fun <init> (Lnet/xpece/android/widget/ExpandableTextView;II)V
+	protected fun applyTransformation (FLandroid/view/animation/Transformation;)V
+	public fun initialize (IIII)V
+	public fun willChangeBounds ()Z
+}
+
+public class net/xpece/android/widget/FixedItemSizeLinearLayoutManager : androidx/recyclerview/widget/LinearLayoutManager {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;IZ)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;II)V
+	public fun generateDefaultLayoutParams ()Landroidx/recyclerview/widget/RecyclerView$LayoutParams;
+	public fun generateLayoutParams (Landroid/content/Context;Landroid/util/AttributeSet;)Landroidx/recyclerview/widget/RecyclerView$LayoutParams;
+	public fun generateLayoutParams (Landroid/view/ViewGroup$LayoutParams;)Landroidx/recyclerview/widget/RecyclerView$LayoutParams;
+	public fun setItemHeight (I)Lnet/xpece/android/widget/FixedItemSizeLinearLayoutManager;
+	public fun setItemWidth (I)Lnet/xpece/android/widget/FixedItemSizeLinearLayoutManager;
+}
+
+public class net/xpece/android/widget/FontFitTextView : androidx/appcompat/widget/AppCompatTextView {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun getMaxTextSize ()F
+	public fun getMinTextSize ()F
+	protected fun onMeasure (II)V
+	protected fun onSizeChanged (IIII)V
+	protected fun onTextChanged (Ljava/lang/CharSequence;III)V
+	public fun onTextSizeChanged ()V
+	public fun setMaxTextSize (F)V
+	public fun setMinTextSize (F)V
+}
+
+public class net/xpece/android/widget/ForegroundLinearLayout : androidx/appcompat/widget/LinearLayoutCompat {
+	protected field mForegroundInPadding Z
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun draw (Landroid/graphics/Canvas;)V
+	public fun drawableHotspotChanged (FF)V
+	protected fun drawableStateChanged ()V
+	public fun getForeground ()Landroid/graphics/drawable/Drawable;
+	public fun getForegroundGravity ()I
+	public fun jumpDrawablesToCurrentState ()V
+	protected fun onLayout (ZIIII)V
+	protected fun onSizeChanged (IIII)V
+	public fun setForeground (Landroid/graphics/drawable/Drawable;)V
+	public fun setForegroundGravity (I)V
+	protected fun verifyDrawable (Landroid/graphics/drawable/Drawable;)Z
+}
+
+public class net/xpece/android/widget/GravitySnapHelper : androidx/recyclerview/widget/LinearSnapHelper {
+	public fun <init> (I)V
+	public fun <init> (IZ)V
+	public fun <init> (IZLnet/xpece/android/widget/GravitySnapHelper$SnapListener;)V
+	public fun attachToRecyclerView (Landroidx/recyclerview/widget/RecyclerView;)V
+	public fun calculateDistanceToFinalSnap (Landroidx/recyclerview/widget/RecyclerView$LayoutManager;Landroid/view/View;)[I
+	public fun enableLastItemSnap (Z)V
+	public fun findSnapView (Landroidx/recyclerview/widget/RecyclerView$LayoutManager;)Landroid/view/View;
+}
+
+public abstract interface class net/xpece/android/widget/GravitySnapHelper$SnapListener {
+	public abstract fun onSnap (I)V
+}
+
+public class net/xpece/android/widget/OverlayImageView : android/widget/ImageView {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	protected fun onDraw (Landroid/graphics/Canvas;)V
+	protected fun onSizeChanged (IIII)V
+	public fun setOverlay (I)V
+	public fun setOverlay (Landroid/graphics/drawable/Drawable;)V
+	public fun setOverlayGravity (I)V
+	public fun setOverlayPadding (I)V
+	public fun setShowOverlay (Z)V
+}
+
+public class net/xpece/android/widget/SpacingItemDecoration : androidx/recyclerview/widget/RecyclerView$ItemDecoration {
+	public fun <init> (I)V
+	public fun <init> (II)V
+	public fun <init> (IIII)V
+	public fun getColor ()I
+	public fun getItemOffsets (Landroid/graphics/Rect;Landroid/view/View;Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$State;)V
+	public fun getPaintPadding ()Z
+	public fun onDraw (Landroid/graphics/Canvas;Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$State;)V
+	public fun setColor (I)Lnet/xpece/android/widget/SpacingItemDecoration;
+	public fun setPaintPadding (Z)Lnet/xpece/android/widget/SpacingItemDecoration;
+}
+
+public final class net/xpece/android/widget/ToastCompat {
+	public static final fun make (Landroid/content/Context;)Landroid/widget/Toast;
+	public static final fun makeText (Landroid/content/Context;II)Landroid/widget/Toast;
+	public static final fun makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+}
+
+public final class net/xpece/android/widget/WebViewCache : android/content/ComponentCallbacks2 {
+	public static final field INSTANCE Lnet/xpece/android/widget/WebViewCache;
+	public final fun clear ()V
+	public final fun get (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Landroid/webkit/WebView;
+	public fun onConfigurationChanged (Landroid/content/res/Configuration;)V
+	public fun onLowMemory ()V
+	public fun onTrimMemory (I)V
+	public final fun remove (Ljava/lang/String;)V
+}
+
+public class net/xpece/android/widget/XpDividerItemDecoration : androidx/recyclerview/widget/RecyclerView$ItemDecoration {
+	public static final field HORIZONTAL I
+	public static final field SHOW_DIVIDER_BEGINNING I
+	public static final field SHOW_DIVIDER_END I
+	public static final field SHOW_DIVIDER_MIDDLE I
+	public static final field SHOW_DIVIDER_NONE I
+	public static final field VERTICAL I
+	public fun <init> (Landroid/content/Context;I)V
+	public fun drawOver (Z)Lnet/xpece/android/widget/XpDividerItemDecoration;
+	public fun drawable (Landroid/graphics/drawable/Drawable;)Lnet/xpece/android/widget/XpDividerItemDecoration;
+	public fun getShowDividers ()I
+	public fun isDrawOver ()Z
+	public fun onDraw (Landroid/graphics/Canvas;Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$State;)V
+	public fun orientation (I)Lnet/xpece/android/widget/XpDividerItemDecoration;
+	public fun setDrawOver (Z)V
+	public fun showDividers (I)Lnet/xpece/android/widget/XpDividerItemDecoration;
+}
+
+public abstract interface annotation class net/xpece/android/widget/XpDividerItemDecoration$DividerMode : java/lang/annotation/Annotation {
+}
+
+public final class net/xpece/android/widget/XpToolbar {
+	public static final fun getSubtitleTextAppearance (Landroidx/appcompat/widget/Toolbar;)I
+	public static final fun getSubtitleTextColor (Landroidx/appcompat/widget/Toolbar;)I
+	public static final fun getTitleTextAppearance (Landroidx/appcompat/widget/Toolbar;)I
+	public static final fun getTitleTextColor (Landroidx/appcompat/widget/Toolbar;)I
+	public static final fun setSubtitleTextAppearance (Landroidx/appcompat/widget/Toolbar;I)V
+	public static final fun setSubtitleTextColor (Landroidx/appcompat/widget/Toolbar;I)V
+	public static final fun setTitleTextAppearance (Landroidx/appcompat/widget/Toolbar;I)V
+	public static final fun setTitleTextColor (Landroidx/appcompat/widget/Toolbar;I)V
+}
+
+public final class net/xpece/androidx/lifecycle/-LiveData {
+	public static final fun observeFilterNotNull (Landroidx/lifecycle/LiveData;Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function1;)Landroidx/lifecycle/Observer;
+	public static final fun observeNonNull (Landroidx/lifecycle/LiveData;Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function1;)Landroidx/lifecycle/Observer;
+	public static final fun observeNullable (Landroidx/lifecycle/LiveData;Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function1;)Landroidx/lifecycle/Observer;
+	public static final fun postValueAndNull (Landroidx/lifecycle/MutableLiveData;Ljava/lang/Object;)V
+	public static final fun setValueAndNull (Landroidx/lifecycle/MutableLiveData;Ljava/lang/Object;)V
+}
+
+public final class net/xpece/java/collection/XpCollections {
+	public static final fun asArrayList (Ljava/util/Collection;)Ljava/util/ArrayList;
+}
+

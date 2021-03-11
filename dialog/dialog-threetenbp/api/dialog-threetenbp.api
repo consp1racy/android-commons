@@ -1,0 +1,42 @@
+public class net/xpece/android/dialog/threetenbp/app/LocalDateBpPickerDialogFragment : androidx/appcompat/app/AppCompatDialogFragment, android/content/DialogInterface$OnClickListener {
+	public static final field TAG Ljava/lang/String;
+	public fun <init> ()V
+	public fun forceLegacy (Z)Lnet/xpece/android/dialog/threetenbp/app/LocalDateBpPickerDialogFragment;
+	public static fun newInstance (Lorg/threeten/bp/LocalDate;)Lnet/xpece/android/dialog/threetenbp/app/LocalDateBpPickerDialogFragment;
+	public static fun newInstance (Lorg/threeten/bp/LocalDate;Lorg/threeten/bp/LocalDate;Lorg/threeten/bp/LocalDate;)Lnet/xpece/android/dialog/threetenbp/app/LocalDateBpPickerDialogFragment;
+	public static fun newInstanceWithMax (Lorg/threeten/bp/LocalDate;Lorg/threeten/bp/LocalDate;)Lnet/xpece/android/dialog/threetenbp/app/LocalDateBpPickerDialogFragment;
+	public static fun newInstanceWithMin (Lorg/threeten/bp/LocalDate;Lorg/threeten/bp/LocalDate;)Lnet/xpece/android/dialog/threetenbp/app/LocalDateBpPickerDialogFragment;
+	protected fun onBindDatePicker (Landroid/widget/DatePicker;)V
+	public fun onCancel (Landroid/content/DialogInterface;)V
+	public fun onClick (Landroid/content/DialogInterface;I)V
+	public fun onCreate (Landroid/os/Bundle;)V
+	public fun onCreateDialog (Landroid/os/Bundle;)Landroid/app/Dialog;
+	public fun onDestroyView ()V
+	public fun onSaveInstanceState (Landroid/os/Bundle;)V
+}
+
+public abstract interface class net/xpece/android/dialog/threetenbp/app/LocalDateBpPickerDialogFragment$Callbacks {
+	public abstract fun onCancel (Lnet/xpece/android/dialog/threetenbp/app/LocalDateBpPickerDialogFragment;)V
+	public abstract fun onDateSelected (Lnet/xpece/android/dialog/threetenbp/app/LocalDateBpPickerDialogFragment;Lorg/threeten/bp/LocalDate;)V
+}
+
+public class net/xpece/android/dialog/threetenbp/app/LocalTimeBpPickerDialogFragment : androidx/appcompat/app/AppCompatDialogFragment, android/content/DialogInterface$OnClickListener {
+	public static final field TAG Ljava/lang/String;
+	public fun <init> ()V
+	public fun forceLegacy (Z)Lnet/xpece/android/dialog/threetenbp/app/LocalTimeBpPickerDialogFragment;
+	public static fun newInstance (Lorg/threeten/bp/LocalTime;)Lnet/xpece/android/dialog/threetenbp/app/LocalTimeBpPickerDialogFragment;
+	public static fun newInstance (Lorg/threeten/bp/LocalTime;Z)Lnet/xpece/android/dialog/threetenbp/app/LocalTimeBpPickerDialogFragment;
+	protected fun onBindTimePicker (Landroid/widget/TimePicker;)V
+	public fun onCancel (Landroid/content/DialogInterface;)V
+	public fun onClick (Landroid/content/DialogInterface;I)V
+	public fun onCreate (Landroid/os/Bundle;)V
+	public fun onCreateDialog (Landroid/os/Bundle;)Landroid/app/Dialog;
+	public fun onDestroyView ()V
+	public fun onSaveInstanceState (Landroid/os/Bundle;)V
+}
+
+public abstract interface class net/xpece/android/dialog/threetenbp/app/LocalTimeBpPickerDialogFragment$Callbacks {
+	public abstract fun onCancel (Lnet/xpece/android/dialog/threetenbp/app/LocalTimeBpPickerDialogFragment;)V
+	public abstract fun onTimeSelected (Lnet/xpece/android/dialog/threetenbp/app/LocalTimeBpPickerDialogFragment;Lorg/threeten/bp/LocalTime;)V
+}
+

@@ -1,0 +1,16 @@
+public final class net/xpece/android/text/span/MediumSpanCompat {
+	public static final fun create ()Landroid/text/style/MetricAffectingSpan;
+	public static final fun getInstance ()Ljava/lang/Object;
+}
+
+public final class net/xpece/android/text/span/NoUnderlineSpan : android/text/style/CharacterStyle, android/text/style/UpdateAppearance {
+	public fun <init> ()V
+	public fun updateDrawState (Landroid/text/TextPaint;)V
+}
+
+public final class net/xpece/android/text/span/SpaceSpan : android/text/style/ReplacementSpan {
+	public fun <init> (I)V
+	public fun draw (Landroid/graphics/Canvas;Ljava/lang/CharSequence;IIFIIILandroid/graphics/Paint;)V
+	public fun getSize (Landroid/graphics/Paint;Ljava/lang/CharSequence;IILandroid/graphics/Paint$FontMetricsInt;)I
+}
+

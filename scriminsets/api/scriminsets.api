@@ -1,0 +1,48 @@
+public class net/xpece/android/scriminsets/widget/ScrimInsetsFrameLayout : android/widget/FrameLayout {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public synthetic fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun draw (Landroid/graphics/Canvas;)V
+	public fun onApplyWindowInsetsCompat (Landroidx/core/view/WindowInsetsCompat;)Landroidx/core/view/WindowInsetsCompat;
+	protected fun onAttachedToWindow ()V
+	protected fun onDetachedFromWindow ()V
+	protected fun onInsetsChanged (Landroidx/core/view/WindowInsetsCompat;)V
+	public final fun setDrawBottomInsetForeground (Z)V
+	public final fun setDrawLeftInsetForeground (Z)V
+	public final fun setDrawRightInsetForeground (Z)V
+	public final fun setDrawTopInsetForeground (Z)V
+	public final fun setScrimInsetForeground (Landroid/graphics/drawable/Drawable;)V
+}
+
+public class net/xpece/android/scriminsets/widget/ScrimInsetsLinearLayout : android/widget/LinearLayout {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public synthetic fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun draw (Landroid/graphics/Canvas;)V
+	public fun onApplyWindowInsetsCompat (Landroidx/core/view/WindowInsetsCompat;)Landroidx/core/view/WindowInsetsCompat;
+	protected fun onAttachedToWindow ()V
+	protected fun onDetachedFromWindow ()V
+	protected fun onInsetsChanged (Landroidx/core/view/WindowInsetsCompat;)V
+	public final fun setDrawBottomInsetForeground (Z)V
+	public final fun setDrawLeftInsetForeground (Z)V
+	public final fun setDrawRightInsetForeground (Z)V
+	public final fun setDrawTopInsetForeground (Z)V
+	public final fun setScrimInsetForeground (Landroid/graphics/drawable/Drawable;)V
+}
+
+public final class net/xpece/android/scriminsets/widget/ScrimInsetsViewHelper {
+	public fun <init> (Landroid/view/View;)V
+	public final fun draw (Landroid/graphics/Canvas;)V
+	public final fun loadFromAttributes (Landroid/util/AttributeSet;II)V
+	public final fun onApplyWindowInsets (Landroidx/core/view/WindowInsetsCompat;)V
+	public final fun onAttachedToWindow ()V
+	public final fun onDetachedFromWindow ()V
+	public final fun setDrawBottomInsetForeground (Z)V
+	public final fun setDrawLeftInsetForeground (Z)V
+	public final fun setDrawRightInsetForeground (Z)V
+	public final fun setDrawTopInsetForeground (Z)V
+	public final fun setScrimInsetForeground (Landroid/graphics/drawable/Drawable;)V
+}
+

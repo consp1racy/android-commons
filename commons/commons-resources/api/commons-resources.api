@@ -1,0 +1,52 @@
+public abstract interface class net/xpece/android/content/DrawableResolver {
+	public static final field Configuration Lnet/xpece/android/content/DrawableResolver$Configuration;
+	public abstract fun getDrawable (Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;
+}
+
+public final class net/xpece/android/content/DrawableResolver$Configuration {
+	public final fun getDrawableResolvers ()Ljava/util/List;
+	public final fun isDrawableResolversEnabled ()Z
+	public final fun setDrawableResolversEnabled (Z)V
+}
+
+public final class net/xpece/android/content/XpResources {
+	public static final fun getColorCompat (Landroid/content/Context;I)I
+	public static final fun getColorCompat (Landroid/content/res/TypedArray;Landroid/content/Context;II)I
+	public static final fun getColorStateListCompat (Landroid/content/Context;I)Landroid/content/res/ColorStateList;
+	public static final fun getColorStateListCompat (Landroid/content/res/TypedArray;Landroid/content/Context;I)Landroid/content/res/ColorStateList;
+	public static final fun getDrawableCompat (Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;
+	public static final fun getDrawableCompat (Landroid/content/res/TypedArray;Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;
+	public static final fun resolveBoolean (Landroid/content/Context;IIZ)Z
+	public static final fun resolveBoolean (Landroid/content/Context;IZ)Z
+	public static synthetic fun resolveBoolean$default (Landroid/content/Context;IZILjava/lang/Object;)Z
+	public static final fun resolveColor (Landroid/content/Context;II)I
+	public static final fun resolveColor (Landroid/content/Context;III)I
+	public static synthetic fun resolveColor$default (Landroid/content/Context;IIIILjava/lang/Object;)I
+	public static synthetic fun resolveColor$default (Landroid/content/Context;IIILjava/lang/Object;)I
+	public static final fun resolveColorStateList (Landroid/content/Context;I)Landroid/content/res/ColorStateList;
+	public static final fun resolveColorStateList (Landroid/content/Context;II)Landroid/content/res/ColorStateList;
+	public static final fun resolveDimension (Landroid/content/Context;IF)F
+	public static final fun resolveDimension (Landroid/content/Context;IIF)F
+	public static synthetic fun resolveDimension$default (Landroid/content/Context;IFILjava/lang/Object;)F
+	public static synthetic fun resolveDimension$default (Landroid/content/Context;IIFILjava/lang/Object;)F
+	public static final fun resolveDimensionPixelOffset (Landroid/content/Context;II)I
+	public static final fun resolveDimensionPixelOffset (Landroid/content/Context;III)I
+	public static synthetic fun resolveDimensionPixelOffset$default (Landroid/content/Context;IIIILjava/lang/Object;)I
+	public static synthetic fun resolveDimensionPixelOffset$default (Landroid/content/Context;IIILjava/lang/Object;)I
+	public static final fun resolveDimensionPixelSize (Landroid/content/Context;II)I
+	public static final fun resolveDimensionPixelSize (Landroid/content/Context;III)I
+	public static synthetic fun resolveDimensionPixelSize$default (Landroid/content/Context;IIIILjava/lang/Object;)I
+	public static synthetic fun resolveDimensionPixelSize$default (Landroid/content/Context;IIILjava/lang/Object;)I
+	public static final fun resolveDrawable (Landroid/content/Context;I)Landroid/graphics/drawable/Drawable;
+	public static final fun resolveDrawable (Landroid/content/Context;II)Landroid/graphics/drawable/Drawable;
+	public static final fun resolveFloat (Landroid/content/Context;IF)F
+	public static final fun resolveFloat (Landroid/content/Context;IIF)F
+	public static synthetic fun resolveFloat$default (Landroid/content/Context;IFILjava/lang/Object;)F
+	public static final fun resolveResourceId (Landroid/content/Context;II)I
+	public static final fun resolveResourceId (Landroid/content/Context;III)I
+	public static final fun resolveString (Landroid/content/Context;I)Ljava/lang/String;
+	public static final fun resolveString (Landroid/content/Context;II)Ljava/lang/String;
+	public static final fun resolveText (Landroid/content/Context;I)Ljava/lang/CharSequence;
+	public static final fun resolveText (Landroid/content/Context;II)Ljava/lang/CharSequence;
+}
+

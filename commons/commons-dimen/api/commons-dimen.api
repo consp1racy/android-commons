@@ -1,0 +1,41 @@
+public final class net/xpece/android/content/Dimens {
+	public static final fun dimen (Landroid/content/Context;I)Lnet/xpece/android/content/res/Dimen;
+	public static final fun dimen (Landroid/content/Context;ILjava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public static final fun dimen (Landroid/content/res/Resources;I)Lnet/xpece/android/content/res/Dimen;
+	public static final fun dimen (Landroid/content/res/Resources;ILjava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public static synthetic fun dimen$default (Landroid/content/Context;ILjava/lang/Number;ILjava/lang/Object;)Lnet/xpece/android/content/res/Dimen;
+	public static synthetic fun dimen$default (Landroid/content/res/Resources;ILjava/lang/Number;ILjava/lang/Object;)Lnet/xpece/android/content/res/Dimen;
+	public static final fun dimenAttr (Landroid/content/Context;I)Lnet/xpece/android/content/res/Dimen;
+	public static final fun dimenAttr (Landroid/content/Context;ILjava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public static synthetic fun dimenAttr$default (Landroid/content/Context;ILjava/lang/Number;ILjava/lang/Object;)Lnet/xpece/android/content/res/Dimen;
+	public static final fun dp (Landroid/content/Context;Ljava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public static final fun dp (Landroid/content/res/Resources;Ljava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public static final fun px (Ljava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public static final fun sp (Landroid/content/Context;Ljava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public static final fun sp (Landroid/content/res/Resources;Ljava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+}
+
+public final class net/xpece/android/content/res/Dimen : java/lang/Comparable {
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun compareTo (Lnet/xpece/android/content/res/Dimen;)I
+	public final fun component1 ()F
+	public final fun copy (F)Lnet/xpece/android/content/res/Dimen;
+	public static synthetic fun copy$default (Lnet/xpece/android/content/res/Dimen;FILjava/lang/Object;)Lnet/xpece/android/content/res/Dimen;
+	public final fun div (Ljava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public final fun div (Lnet/xpece/android/content/res/Dimen;)F
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPixelOffset ()I
+	public final fun getPixelSize ()I
+	public final fun getValue ()F
+	public fun hashCode ()I
+	public final fun minus (Ljava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public final fun minus (Lnet/xpece/android/content/res/Dimen;)Lnet/xpece/android/content/res/Dimen;
+	public final fun plus (Ljava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public final fun plus (Lnet/xpece/android/content/res/Dimen;)Lnet/xpece/android/content/res/Dimen;
+	public final fun times (Ljava/lang/Number;)Lnet/xpece/android/content/res/Dimen;
+	public fun toString ()Ljava/lang/String;
+	public final fun toString (Landroid/content/Context;)Ljava/lang/String;
+	public final fun unaryMinus ()Lnet/xpece/android/content/res/Dimen;
+	public final fun unaryPlus ()Lnet/xpece/android/content/res/Dimen;
+}
+

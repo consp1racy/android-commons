@@ -1,0 +1,9 @@
+public final class net/xpece/android/graphics/XpTypeface {
+	public static final fun create (Landroid/graphics/Typeface;I)Landroid/graphics/Typeface;
+	public static final fun create (Landroid/graphics/Typeface;IZ)Landroid/graphics/Typeface;
+	public static final fun create (Landroid/graphics/Typeface;Landroid/content/Context;I)Landroid/graphics/Typeface;
+	public static final fun create (Landroid/graphics/Typeface;Landroid/content/Context;IZ)Landroid/graphics/Typeface;
+	public static synthetic fun create$default (Landroid/graphics/Typeface;IZILjava/lang/Object;)Landroid/graphics/Typeface;
+	public static synthetic fun create$default (Landroid/graphics/Typeface;Landroid/content/Context;IZILjava/lang/Object;)Landroid/graphics/Typeface;
+}
+

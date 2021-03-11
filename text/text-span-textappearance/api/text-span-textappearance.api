@@ -1,0 +1,4 @@
+public final class net/xpece/android/text/span/TextAppearanceSpanCompat {
+	public static final fun create (Landroid/content/Context;I)Ljava/lang/Object;
+}
+

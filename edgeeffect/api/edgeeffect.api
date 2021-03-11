@@ -1,0 +1,29 @@
+public final class net/xpece/android/edgeeffect/widget/ColorEdgeEffectFactory : androidx/recyclerview/widget/RecyclerView$EdgeEffectFactory {
+	public fun <init> (I)V
+	public fun <init> (II)V
+	public fun <init> (IIII)V
+}
+
+public final class net/xpece/android/edgeeffect/widget/XpEdgeEffect {
+	public static final synthetic fun -deprecated_setEdgeEffectFactoryCompat (Landroidx/viewpager2/widget/ViewPager2;Landroidx/recyclerview/widget/RecyclerView$EdgeEffectFactory;)V
+	public static final fun getColorCompat (Landroid/widget/EdgeEffect;)I
+	public static final fun getEdgeEffectFactory (Landroidx/viewpager2/widget/ViewPager2;)Landroidx/recyclerview/widget/RecyclerView$EdgeEffectFactory;
+	public static final fun setBottomEdgeEffectColorCompat (Landroid/widget/AbsListView;I)V
+	public static final fun setBottomEdgeEffectColorCompat (Landroid/widget/ScrollView;I)V
+	public static final fun setBottomEdgeEffectColorCompat (Landroidx/core/widget/NestedScrollView;I)V
+	public static final fun setColorCompat (Landroid/widget/EdgeEffect;I)V
+	public static final fun setEdgeEffectColorCompat (Landroid/widget/AbsListView;I)V
+	public static final fun setEdgeEffectColorCompat (Landroid/widget/HorizontalScrollView;I)V
+	public static final fun setEdgeEffectColorCompat (Landroid/widget/ScrollView;I)V
+	public static final fun setEdgeEffectColorCompat (Landroidx/core/widget/NestedScrollView;I)V
+	public static final fun setEdgeEffectColorCompat (Landroidx/viewpager/widget/ViewPager;I)V
+	public static final fun setEdgeEffectFactory (Landroidx/viewpager2/widget/ViewPager2;Landroidx/recyclerview/widget/RecyclerView$EdgeEffectFactory;)V
+	public static final fun setLeftEdgeEffectColorCompat (Landroid/widget/HorizontalScrollView;I)V
+	public static final fun setLeftEdgeEffectColorCompat (Landroidx/viewpager/widget/ViewPager;I)V
+	public static final fun setRightEdgeEffectColorCompat (Landroid/widget/HorizontalScrollView;I)V
+	public static final fun setRightEdgeEffectColorCompat (Landroidx/viewpager/widget/ViewPager;I)V
+	public static final fun setTopEdgeEffectColorCompat (Landroid/widget/AbsListView;I)V
+	public static final fun setTopEdgeEffectColorCompat (Landroid/widget/ScrollView;I)V
+	public static final fun setTopEdgeEffectColorCompat (Landroidx/core/widget/NestedScrollView;I)V
+}
+

@@ -1,0 +1,33 @@
+public abstract interface class net/xpece/android/text/span/BulletSpanCompat : net/xpece/android/text/span/bullet/BulletSpanCompat {
+	public static fun create ()Lnet/xpece/android/text/span/BulletSpanCompat;
+	public static fun create (I)Lnet/xpece/android/text/span/BulletSpanCompat;
+	public static fun create (III)Ljava/lang/Object;
+	public static fun createWithColor (II)Ljava/lang/Object;
+	public static fun createWithRadius (II)Ljava/lang/Object;
+}
+
+public final class net/xpece/android/text/span/_BulletSpanCompatKt {
+	public static final synthetic fun create ()Lnet/xpece/android/text/span/BulletSpanCompat;
+	public static final synthetic fun create (I)Lnet/xpece/android/text/span/BulletSpanCompat;
+	public static final synthetic fun create (II)Lnet/xpece/android/text/span/BulletSpanCompat;
+	public static final synthetic fun create (ILjava/lang/Integer;I)Lnet/xpece/android/text/span/BulletSpanCompat;
+}
+
+public abstract interface class net/xpece/android/text/span/bullet/BulletSpanCompat : android/text/style/LeadingMarginSpan {
+	public static fun create ()Lnet/xpece/android/text/span/bullet/BulletSpanCompat;
+	public static fun create (I)Lnet/xpece/android/text/span/bullet/BulletSpanCompat;
+	public static fun create (II)Lnet/xpece/android/text/span/bullet/BulletSpanCompat;
+	public static fun create (III)Lnet/xpece/android/text/span/bullet/BulletSpanCompat;
+	public abstract fun getBulletRadius ()I
+	public abstract fun getColor ()I
+	public abstract fun getGapWidth ()I
+}
+
+public final class net/xpece/android/text/span/bullet/_BulletSpanCompatKt {
+	public static final synthetic fun create ()Lnet/xpece/android/text/span/bullet/BulletSpanCompat;
+	public static final synthetic fun create (I)Lnet/xpece/android/text/span/bullet/BulletSpanCompat;
+	public static final synthetic fun create (II)Lnet/xpece/android/text/span/bullet/BulletSpanCompat;
+	public static final synthetic fun create (III)Lnet/xpece/android/text/span/bullet/BulletSpanCompat;
+	public static final synthetic fun create (IILjava/lang/Void;)Lnet/xpece/android/text/span/bullet/BulletSpanCompat;
+}
+
