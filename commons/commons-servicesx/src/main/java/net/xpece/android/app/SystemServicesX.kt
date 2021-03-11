@@ -1,4 +1,4 @@
-@file:JvmName("SystemServices")
+@file:JvmName("SystemServicesX")
 @file:Suppress("unused", "DEPRECATION")
 
 package net.xpece.android.app
@@ -27,13 +27,3 @@ inline val Context.displayManagerCompat: DisplayManagerCompat
 @Deprecated("Use BiometricPrompt instead.")
 inline val Context.fingerprintManagerCompat: FingerprintManagerCompat
     get() = FingerprintManagerCompat.from(this)
-
-inline fun <reified T> Context.getSystemServiceOrNull(): T? =
-    ContextCompat.getSystemService(this, T::class.java)
-
-/**
- * @throws ServiceNotFoundException When service is not found.
- */
-inline fun <reified T> Context.getSystemServiceOrThrow(): T =
-    getSystemServiceOrNull<T>()
-        ?: throw ServiceNotFoundException("${T::class.java.simpleName} not found.")

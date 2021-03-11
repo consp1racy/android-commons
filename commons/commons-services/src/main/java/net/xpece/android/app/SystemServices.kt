@@ -4,6 +4,7 @@
 package net.xpece.android.app
 
 import android.accounts.AccountManager
+import android.annotation.SuppressLint
 import android.app.*
 import android.app.admin.DevicePolicyManager
 import android.app.job.JobScheduler
@@ -434,14 +435,30 @@ inline val Context.roleManager: RoleManager
 
 
 inline fun <reified T> Context.getSystemServiceOrNull(name: String): T? =
-        getSystemService(name) as T?
+    getSystemService(name) as T?
 
 /**
  * @throws ServiceNotFoundException When service is not found.
  */
 inline fun <reified T> Context.getSystemServiceOrThrow(name: String): T =
-        getSystemServiceOrNull<T>(name) ?:
-                throw ServiceNotFoundException("${T::class.java.simpleName} not found.")
+    getSystemServiceOrNull<T>(name)
+        ?: throw ServiceNotFoundException("${T::class.java.simpleName} not found.")
+
+@SuppressLint("NewApi")
+inline fun <reified T> Context.getSystemServiceOrNull(): T? = try {
+    ContextCompat.getSystemService(this, T::class.java)
+} catch (_: LinkageError) {
+    getSystemService(T::class.java)
+}
+
+/**
+ * @throws ServiceNotFoundException When service is not found.
+ */
+inline fun <reified T> Context.getSystemServiceOrThrow(): T =
+    getSystemServiceOrNull<T>()
+        ?: throw ServiceNotFoundException("${T::class.java.simpleName} not found.")
+
+typealias ServiceNotFoundException = NullPointerException
 
 // Split into commons-servicesx.
 
@@ -465,17 +482,3 @@ inline val Context.displayManagerCompat: DisplayManagerCompat
 @Deprecated("Use commons-servicesx.")
 inline val Context.fingerprintManagerCompat: FingerprintManagerCompat
     get() = FingerprintManagerCompat.from(this)
-
-@Deprecated("Use commons-servicesx.")
-inline fun <reified T> Context.getSystemServiceOrNull(): T? =
-    ContextCompat.getSystemService(this, T::class.java)
-
-/**
- * @throws ServiceNotFoundException When service is not found.
- */
-@Deprecated("Use commons-servicesx.")
-inline fun <reified T> Context.getSystemServiceOrThrow(): T =
-    getSystemServiceOrNull<T>() ?:
-    throw ServiceNotFoundException("${T::class.java.simpleName} not found.")
-
-typealias ServiceNotFoundException = NullPointerException
