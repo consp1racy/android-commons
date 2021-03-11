@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import java.util.*
 
-
 interface DrawableResolver {
     companion object Configuration {
         var isDrawableResolversEnabled = false
