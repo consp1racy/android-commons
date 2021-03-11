@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId = "net.xpece.android.widget.cardbutton.sample"
 
-        minSdkVersion(14)
+        minSdkVersion(18)
         targetSdkVersion(25)
 
         versionCode = 1

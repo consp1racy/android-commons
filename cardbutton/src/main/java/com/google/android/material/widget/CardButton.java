@@ -19,7 +19,6 @@ package com.google.android.material.widget;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Insets;
@@ -27,14 +26,12 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Debug;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.FloatRange;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
@@ -45,7 +42,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.TintTypedArray;
 import androidx.core.view.MarginLayoutParamsCompat;
 import androidx.core.view.ViewCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.xpece.android.cardbutton.R;
 
@@ -55,7 +51,9 @@ import net.xpece.android.cardbutton.R;
 @Deprecated
 @SuppressLint("RestrictedApi")
 public class CardButton extends AppCompatButton {
-    public static boolean AUTO_VISUAL_MARGIN_ENABLED = Build.VERSION.SDK_INT < 18;
+
+    @Deprecated
+    public static boolean AUTO_VISUAL_MARGIN_ENABLED = false;
 
     private static final String TAG = "CardButton";
 
@@ -117,41 +115,8 @@ public class CardButton extends AppCompatButton {
     public void setLayoutParams(ViewGroup.LayoutParams params) {
         mEatRequestLayout = true;
         super.setLayoutParams(params);
-        if (AUTO_VISUAL_MARGIN_ENABLED) {
-            try {
-                if (params instanceof RecyclerView.LayoutParams) {
-                    throwUnsupportedVisualMarginLayoutParams(params);
-                } else if (params instanceof ViewGroup.MarginLayoutParams) {
-                    final ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) params;
-                    if (MarginLayoutParamsCompat.isMarginRelative(lp)) {
-                        setVisualMarginRelativeOriginal(this);
-                    } else {
-                        setVisualMarginOriginal(this);
-                    }
-                } else {
-                    throwUnsupportedVisualMarginLayoutParams(params);
-                }
-            } catch (UnsupportedOperationException ex) {
-                if (isDebuggable()) {
-                    Log.w(TAG, this + " cannot automatically alter visual margins.", ex);
-                }
-            }
-        }
         mEatRequestLayout = false;
         requestLayout();
-    }
-
-    private void throwUnsupportedVisualMarginLayoutParams(final ViewGroup.LayoutParams params) {
-        throw new UnsupportedOperationException(params.getClass().getCanonicalName() + " does not support altering visual margins.");
-    }
-
-    private boolean isDebuggable() {
-        if (mDebuggable == null) {
-            final Context context = getContext();
-            final ApplicationInfo appInfo = context.getApplicationInfo();
-            mDebuggable = (0 != (appInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE));
-        }
-        return mDebuggable || Debug.isDebuggerConnected() || Debug.waitingForDebugger();
     }
 
     @Override

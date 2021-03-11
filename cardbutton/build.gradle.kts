@@ -14,7 +14,7 @@ android {
     compileSdkVersion(30)
 
     defaultConfig {
-        minSdkVersion(14)
+        minSdkVersion(18)
     }
 
     withSourcesJar()
