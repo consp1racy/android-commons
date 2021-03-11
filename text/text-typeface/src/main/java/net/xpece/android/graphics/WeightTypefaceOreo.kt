@@ -7,11 +7,13 @@ import android.util.SparseArray
 import androidx.annotation.GuardedBy
 import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
+import androidx.annotation.RestrictTo
 import androidx.collection.LongSparseArray
 import java.lang.reflect.Constructor
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 @RequiresApi(26)
 @SuppressLint("PrivateApi")
 internal object WeightTypefaceOreo {

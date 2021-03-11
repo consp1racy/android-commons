@@ -9,6 +9,7 @@ import android.util.Log
 import android.util.SparseArray
 import androidx.annotation.GuardedBy
 import androidx.annotation.IntRange
+import androidx.annotation.RestrictTo
 import androidx.core.content.res.FontResourcesParserCompat
 import androidx.core.graphics.TypefaceCompat
 import androidx.core.graphics.TypefaceCompat.createFromResourcesFontFile
@@ -17,6 +18,7 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 import kotlin.math.abs
 
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 internal object WeightTypefaceLegacy {
 
     private val isPrivateApiAvailable: Boolean
