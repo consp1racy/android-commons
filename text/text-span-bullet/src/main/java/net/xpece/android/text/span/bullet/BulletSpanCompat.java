@@ -16,26 +16,10 @@ import androidx.annotation.Px;
  * <ul>
  * <li><b>gap width</b> - the distance, in pixels, between the bullet point and the paragraph.
  * Default value is 2px.</li>
- * <li><b>color</b> - the bullet point color. By default, the bullet point color is 0 - no color,
- * so it uses the TextView's text color.</li>
  * <li><b>bullet radius</b> - the radius, in pixels, of the bullet point. Default value is
  * 4px.</li>
+ * <li><b>color</b> - the bullet point color. By default, it uses the TextView's text color.</li>
  * </ul>
- * For example, a BulletSpan using the default values can be constructed like this:
- * <pre>{@code
- *  SpannableString string = new SpannableString("Text with\nBullet point");
- * string.setSpan(new BulletSpan(), 10, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);}</pre>
- * <img src="{@docRoot}reference/android/images/text/style/defaultbulletspan.png" />
- * <figcaption>BulletSpan constructed with default values.</figcaption>
- * <p>
- * <p>
- * To construct a BulletSpan with a gap width of 40px, green bullet point and bullet radius of
- * 20px:
- * <pre>{@code
- *  SpannableString string = new SpannableString("Text with\nBullet point");
- * string.setSpan(new BulletSpan(40, color, 20), 10, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);}</pre>
- * <img src="{@docRoot}reference/android/images/text/style/custombulletspan.png" />
- * <figcaption>Customized BulletSpan.</figcaption>
  */
 public interface BulletSpanCompat extends LeadingMarginSpan {
 
@@ -94,7 +78,9 @@ public interface BulletSpanCompat extends LeadingMarginSpan {
      * Creates a{@link BulletSpanCompat} based on a gap width.
      *
      * @param gapWidth the distance, in pixels, between the bullet point and the paragraph.
+     * @deprecated Always specify {@code gapWidth} and {@code bulletRadius}.
      */
+    @Deprecated
     @SuppressWarnings("deprecation")
     static BulletSpanCompat create(@Px int gapWidth) {
         return net.xpece.android.text.span.BulletSpanCompat.create(gapWidth);
@@ -102,7 +88,10 @@ public interface BulletSpanCompat extends LeadingMarginSpan {
 
     /**
      * Creates a {@link BulletSpanCompat} with the default values.
+     *
+     * @deprecated Always specify {@code gapWidth} and {@code bulletRadius}.
      */
+    @Deprecated
     @SuppressWarnings("deprecation")
     static BulletSpanCompat create() {
         return net.xpece.android.text.span.BulletSpanCompat.create();

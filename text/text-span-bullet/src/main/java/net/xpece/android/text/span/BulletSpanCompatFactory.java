@@ -3,12 +3,14 @@ package net.xpece.android.text.span;
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
+import androidx.annotation.RestrictTo;
 
 import kotlin.jvm.functions.Function4;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.text.style.BulletSpan.STANDARD_GAP_WIDTH;
 
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 @SuppressWarnings("deprecation")
 final class BulletSpanCompatFactory {
 

@@ -28,9 +28,11 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
+import androidx.annotation.RestrictTo;
 
 import java.util.WeakHashMap;
 
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 @SuppressWarnings("deprecation")
 final class BulletSpanKitkat implements BulletSpanCompat {
 

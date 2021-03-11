@@ -3,6 +3,7 @@ package net.xpece.android.text.span;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.Layout;
 import android.text.style.BulletSpan;
 import android.util.Log;
@@ -12,7 +13,9 @@ import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.annotation.RestrictTo;
 
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 @SuppressWarnings("deprecation")
 @RequiresApi(28)
 final class BulletSpanPie extends BulletSpan implements BulletSpanCompat {
@@ -61,7 +64,7 @@ final class BulletSpanPie extends BulletSpan implements BulletSpanCompat {
         this.enableColorChange = wantColor;
     }
 
-    public BulletSpanPie(@NonNull Parcel src) {
+    BulletSpanPie(@NonNull Parcel src) {
         super(src);
         this.enableColorChange = true;
     }
@@ -101,4 +104,17 @@ final class BulletSpanPie extends BulletSpan implements BulletSpanCompat {
             // No-op.
         }
     }
+
+    public static final Parcelable.Creator<BulletSpanPie> CREATOR = new Parcelable.Creator<BulletSpanPie>() {
+
+        @Override
+        public BulletSpanPie createFromParcel(Parcel source) {
+            return new BulletSpanPie(source);
+        }
+
+        @Override
+        public BulletSpanPie[] newArray(int size) {
+            return new BulletSpanPie[size];
+        }
+    };
 }

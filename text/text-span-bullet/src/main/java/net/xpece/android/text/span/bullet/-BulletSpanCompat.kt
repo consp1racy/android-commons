@@ -1,4 +1,4 @@
-@file:Suppress("FunctionName")
+@file:Suppress("FunctionName", "DeprecatedCallableAddReplaceWith", "DEPRECATION")
 
 package net.xpece.android.text.span.bullet
 
@@ -64,6 +64,7 @@ fun BulletSpanCompat(
  *
  * @param gapWidth the distance, in pixels, between the bullet point and the paragraph.
  */
+@Deprecated("Always specify gapWidth and bulletRadius.")
 @JvmName("create")
 @JvmSynthetic
 fun BulletSpanCompat(
@@ -75,6 +76,7 @@ fun BulletSpanCompat(
 /**
  * Creates a [BulletSpanCompat] with the default values.
  */
+@Deprecated("Always specify gapWidth and bulletRadius.")
 @JvmName("create")
 @JvmSynthetic
 fun BulletSpanCompat(): BulletSpanCompat {

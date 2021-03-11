@@ -60,7 +60,7 @@ fun BulletSpanCompat(
  * @param gapWidth the distance, in pixels, between the bullet point and the paragraph.
  */
 @Deprecated(
-    message = "Moved.",
+    message = "Always specify gapWidth and bulletRadius.",
     replaceWith = ReplaceWith(
         "BulletSpanCompat(gapWidth)",
         "net.xpece.android.text.span.bullet.BulletSpanCompat",
@@ -79,7 +79,7 @@ fun BulletSpanCompat(
  * Creates a [BulletSpanCompat] with the default values.
  */
 @Deprecated(
-    message = "Moved.",
+    message = "Always specify gapWidth and bulletRadius.",
     replaceWith = ReplaceWith(
         "BulletSpanCompat()",
         "net.xpece.android.text.span.bullet.BulletSpanCompat",
