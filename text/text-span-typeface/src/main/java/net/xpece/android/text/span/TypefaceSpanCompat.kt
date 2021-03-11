@@ -3,24 +3,18 @@
 package net.xpece.android.text.span
 
 import android.graphics.Typeface
-import android.os.Build.VERSION.SDK_INT
 import android.text.style.TypefaceSpan
+import net.xpece.android.text.span.typeface.asSpan
 
+/**
+ * Constructs a [TypefaceSpan] from a [Typeface]. The previous style of the
+ * [TextPaint][android.text.TextPaint] is overridden and the style of the typeface is used.
+ */
 @Deprecated(
     message = "Renamed.",
-    replaceWith = ReplaceWith("asSpan()", "net.xpece.android.text.span.asSpan"),
-    level = DeprecationLevel.ERROR
+    replaceWith = ReplaceWith("asSpan()", "net.xpece.android.text.span.typeface.asSpan"),
+    level = DeprecationLevel.WARNING
 )
 fun Typeface.span(): TypefaceSpan {
     return asSpan()
-}
-
-@JvmName("create")
-fun Typeface.asSpan(): TypefaceSpan {
-    return Factory(this)
-}
-
-private val Factory: (Typeface) -> TypefaceSpan = when {
-    SDK_INT >= 28 -> ::TypefaceSpan
-    else -> ::TypefaceSpanCompatImpl
 }
