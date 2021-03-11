@@ -1,16 +1,26 @@
 package com.google.android.material.widget;
 
+import android.annotation.SuppressLint;
+import android.graphics.Insets;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.graphics.drawable.DrawableWrapper;
+
+import static android.os.Build.VERSION.SDK_INT;
 
 
 @SuppressWarnings("RestrictedApi")
 class AltInsetDrawable extends DrawableWrapper {
-    public static AltInsetDrawable create(@NonNull final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
-        if (Build.VERSION.SDK_INT >= 21) {
+
+    public static AltInsetDrawable create(
+            @NonNull final Drawable drawable,
+            final int insetLeft,
+            final int insetTop,
+            final int insetRight,
+            final int insetBottom) {
+        if (SDK_INT >= 21) {
             return new AltInsetDrawableApi21(drawable, insetLeft, insetTop, insetRight, insetBottom);
         } else {
             return new AltInsetDrawable(drawable, insetLeft, insetTop, insetRight, insetBottom);
@@ -18,7 +28,7 @@ class AltInsetDrawable extends DrawableWrapper {
     }
 
     public static AltInsetDrawable create(@NonNull final Drawable drawable) {
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (SDK_INT >= 21) {
             return new AltInsetDrawableApi21(drawable);
         } else {
             return new AltInsetDrawable(drawable);
@@ -27,13 +37,18 @@ class AltInsetDrawable extends DrawableWrapper {
 
     private final Rect mTmpRect = new Rect();
 
-    private Rect mInset = new Rect();
+    private final Rect mInset = new Rect();
 
     protected AltInsetDrawable(@NonNull final Drawable drawable) {
         super(drawable);
     }
 
-    protected AltInsetDrawable(@NonNull final Drawable drawable, final int insetLeft, final int insetTop, final int insetRight, final int insetBottom) {
+    protected AltInsetDrawable(
+            @NonNull final Drawable drawable,
+            final int insetLeft,
+            final int insetTop,
+            final int insetRight,
+            final int insetBottom) {
         super(drawable);
         mInset.set(insetLeft, insetTop, insetRight, insetBottom);
     }
@@ -43,6 +58,7 @@ class AltInsetDrawable extends DrawableWrapper {
         mInset.top = top;
         mInset.right = right;
         mInset.bottom = bottom;
+        invalidateSelf();
     }
 
     @Override
@@ -84,5 +100,16 @@ class AltInsetDrawable extends DrawableWrapper {
         padding.right += mInset.right;
         padding.bottom += mInset.bottom;
         return value || !mInset.isEmpty();
+    }
+
+    @SuppressLint("NewApi")
+    @NonNull
+    @Override
+    public Insets getOpticalInsets() {
+        final Insets contentInsets = super.getOpticalInsets();
+        return Insets.of(contentInsets.left + mInset.left,
+                contentInsets.top + mInset.top,
+                contentInsets.right + mInset.right,
+                contentInsets.bottom + mInset.bottom);
     }
 }

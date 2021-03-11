@@ -444,14 +444,14 @@ public class CardButton extends AppCompatButton {
 
     private Insets mOpticalInsets = null;
 
+    @SuppressLint("NewApi")
     @NonNull
     //@Override
-    @RequiresApi(16)
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     @SuppressWarnings("unused")
     public Insets getOpticalInsets() {
         if (mOpticalInsets == null) {
-            mOpticalInsets = XpInsetsCompat.of(
+            mOpticalInsets = Insets.of(
                     getEffectiveInsetLeft(),
                     getEffectiveInsetTop(),
                     getEffectiveInsetRight(),
