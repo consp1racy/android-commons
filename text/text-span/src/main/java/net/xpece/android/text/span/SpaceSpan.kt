@@ -5,8 +5,12 @@ import android.graphics.Paint
 import android.text.style.ReplacementSpan
 
 import androidx.annotation.IntRange
+import androidx.annotation.Px
 
-class SpaceSpan(private val mWidth: Int) : ReplacementSpan() {
+/**
+ * Replaces [width] pixels of text with nothing.
+ */
+open class SpaceSpan(@Px private val width: Int) : ReplacementSpan() {
 
     override fun getSize(
             paint: Paint,
@@ -15,7 +19,7 @@ class SpaceSpan(private val mWidth: Int) : ReplacementSpan() {
             @IntRange(from = 0) end: Int,
             fm: Paint.FontMetricsInt?
     ): Int {
-        return mWidth
+        return width
     }
 
     override fun draw(

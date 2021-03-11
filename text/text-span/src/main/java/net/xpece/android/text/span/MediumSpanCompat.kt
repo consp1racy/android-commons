@@ -9,6 +9,10 @@ import android.text.style.MetricAffectingSpan
 import android.text.style.StyleSpan
 import android.text.style.TypefaceSpan
 
+/**
+ * Singleton instance of a `sans-serif-medium` [TypefaceSpan] on API 21,
+ * or bold [StyleSpan] on older platforms.
+ */
 @Deprecated(
     message = "Every span must be a unique instance.",
     replaceWith = ReplaceWith("MediumSpanCompat()"),
@@ -17,6 +21,10 @@ import android.text.style.TypefaceSpan
 @get:JvmName("getInstance")
 val MediumSpanCompat: Any = MediumSpanCompat()
 
+/**
+ * Create instance of a `sans-serif-medium` [TypefaceSpan] on API 21,
+ * or bold [StyleSpan] on older platforms.
+ */
 @JvmName("create")
 fun MediumSpanCompat(): MetricAffectingSpan = Factory("sans-serif-medium")
 
