@@ -463,6 +463,8 @@ typealias ServiceNotFoundException = NullPointerException
 // Split into commons-servicesx.
 
 /**
+ * Get a [NotificationManagerCompat] instance for a provided context.
+ *
  * Never null.
  */
 @Deprecated("Use commons-servicesx.")
@@ -470,6 +472,8 @@ inline val Context.notificationManagerCompat: NotificationManagerCompat
     get() = NotificationManagerCompat.from(this)
 
 /**
+ * Gets an instance of the display manager given the context.
+ *
  * Never null.
  */
 @Deprecated("Use commons-servicesx.")
@@ -477,6 +481,8 @@ inline val Context.displayManagerCompat: DisplayManagerCompat
     get() = DisplayManagerCompat.getInstance(this)
 
 /**
+ * Get a [FingerprintManagerCompat] instance for a provided context.
+ *
  * Never null.
  */
 @Deprecated("Use commons-servicesx.")
