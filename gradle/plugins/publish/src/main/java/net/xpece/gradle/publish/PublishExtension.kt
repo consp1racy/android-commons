@@ -9,7 +9,7 @@ open class PublishExtension {
         private set
     internal var pom: MavenPom.() -> Unit = {}
         private set
-    internal var repositories: RepositoryHandler.() -> Unit = {}
+    internal var repositories: RepositoryHandler.(version: String) -> Unit = {}
         private set
 
     fun releaseFromDefaultComponent() {
@@ -25,7 +25,7 @@ open class PublishExtension {
         pom = block
     }
 
-    fun repositories(block: RepositoryHandler.() -> Unit) {
+    fun repositories(block: RepositoryHandler.(version: String) -> Unit) {
         repositories = block
     }
 

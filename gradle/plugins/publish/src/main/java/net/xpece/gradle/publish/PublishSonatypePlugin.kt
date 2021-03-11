@@ -62,15 +62,31 @@ class PublishSonatypePlugin : Plugin<Project> {
             }
         }
 
-        extension.repositories {
-            maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                name = "ossrh"
+        extension.repositories { version ->
+            when {
+                version.endsWith("-SNAPSHOT") -> {
+                    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+                        name = "ossrh"
 
-                credentials {
-                    username = System.getProperty("OSSRH_USERNAME")
-                        ?: signingProps.getProperty("OSSRH_USERNAME")
-                    password = System.getProperty("OSSRH_PASSWORD")
-                        ?: signingProps.getProperty("OSSRH_PASSWORD")
+                        credentials {
+                            username = System.getProperty("OSSRH_USERNAME")
+                                ?: signingProps.getProperty("OSSRH_USERNAME")
+                            password = System.getProperty("OSSRH_PASSWORD")
+                                ?: signingProps.getProperty("OSSRH_PASSWORD")
+                        }
+                    }
+                }
+                else -> {
+                    maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                        name = "ossrh"
+
+                        credentials {
+                            username = System.getProperty("OSSRH_USERNAME")
+                                ?: signingProps.getProperty("OSSRH_USERNAME")
+                            password = System.getProperty("OSSRH_PASSWORD")
+                                ?: signingProps.getProperty("OSSRH_PASSWORD")
+                        }
+                    }
                 }
             }
         }

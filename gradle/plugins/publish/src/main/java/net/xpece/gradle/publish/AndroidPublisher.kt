@@ -13,7 +13,7 @@ internal class AndroidPublisher private constructor(
         project: Project,
         componentName: String,
         pom: MavenPom.() -> Unit,
-        repositories: (RepositoryHandler) -> Unit
+        repositories: RepositoryHandler.(version: String) -> Unit
     ) : this(project, JavaPublisher(project, componentName, pom, repositories))
 
     fun publish() {

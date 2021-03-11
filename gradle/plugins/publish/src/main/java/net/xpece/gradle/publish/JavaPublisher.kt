@@ -12,7 +12,7 @@ internal class JavaPublisher(
     private val project: Project,
     private val componentName: String,
     private val pom: MavenPom.() -> Unit,
-    private val repositories: RepositoryHandler.() -> Unit
+    private val repositories: RepositoryHandler.(version: String) -> Unit
 ) {
 
     private fun Project.publishing(configure: PublishingExtension.() -> Unit): Unit =
@@ -41,7 +41,7 @@ internal class JavaPublisher(
                     }
                 }
 
-                this.repositories(this@JavaPublisher.repositories)
+                repositories { this@JavaPublisher.repositories(this, theVersion) }
             }
         }
     }
