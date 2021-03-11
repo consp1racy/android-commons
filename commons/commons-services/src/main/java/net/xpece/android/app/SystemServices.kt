@@ -101,7 +101,7 @@ inline val Context.clipboardManager: ClipboardManager?
  * Get a [ConnectivityManager] for handling management of network connections.
  */
 inline val Context.connectivityManager: ConnectivityManager?
-    get() = getSystemServiceOrNull(Context.CONNECTIVITY_SERVICE)
+    get() = applicationContext.getSystemServiceOrNull(Context.CONNECTIVITY_SERVICE)
 
 /**
  * Get a [KeyguardManager] for controlling keyguard.
@@ -325,7 +325,7 @@ inline val Context.displayManager: DisplayManager
  */
 @get:RequiresApi(17)
 inline val Context.userManager: UserManager
-    get() = getSystemServiceOrThrow(Context.USER_SERVICE)
+    get() = applicationContext.getSystemServiceOrThrow(Context.USER_SERVICE)
 
 /**
  * Get a [BluetoothManager] for using Bluetooth.
