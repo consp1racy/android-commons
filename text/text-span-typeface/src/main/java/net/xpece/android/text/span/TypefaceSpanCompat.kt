@@ -7,8 +7,9 @@ import android.text.style.TypefaceSpan
 import net.xpece.android.text.span.typeface.asSpan
 
 /**
- * Constructs a [TypefaceSpan] from a [Typeface]. The previous style of the
- * [TextPaint][android.text.TextPaint] is overridden and the style of the typeface is used.
+ * Constructs a [TypefaceSpan] from a [Typeface].
+ * The previous style of the [TextPaint][android.text.TextPaint] is overridden
+ * and the style of the typeface is used.
  */
 @Deprecated(
     message = "Renamed.",
