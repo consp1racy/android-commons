@@ -17,6 +17,7 @@
 package net.xpece.android.text.span.typeface;
 
 import android.graphics.Typeface;
+import android.os.Parcel;
 import android.text.TextPaint;
 import android.text.style.TypefaceSpan;
 
@@ -30,6 +31,11 @@ final class TypefaceSpanCompatImpl extends TypefaceSpan {
     TypefaceSpanCompatImpl(@NonNull Typeface typeface) {
         super((String) null);
         mTypeface = typeface;
+    }
+
+    TypefaceSpanCompatImpl(@NonNull Parcel parcel) {
+        super(parcel);
+        mTypeface = null;
     }
 
     @Nullable
@@ -55,4 +61,17 @@ final class TypefaceSpanCompatImpl extends TypefaceSpan {
             super.updateMeasureState(paint);
         }
     }
+
+    public static final Creator<TypefaceSpanCompatImpl> CREATOR = new Creator<TypefaceSpanCompatImpl>() {
+
+        @Override
+        public TypefaceSpanCompatImpl createFromParcel(Parcel source) {
+            return new TypefaceSpanCompatImpl(source);
+        }
+
+        @Override
+        public TypefaceSpanCompatImpl[] newArray(int size) {
+            return new TypefaceSpanCompatImpl[size];
+        }
+    };
 }
