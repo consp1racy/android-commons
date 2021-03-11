@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
-import android.widget.TextView
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.buildSpannedString
@@ -27,7 +26,7 @@ import net.xpece.android.graphics.drawable.RippleDrawableCompatInflater
 import net.xpece.android.picker.widget.setSelectionDividerTintCompat
 import net.xpece.android.text.span.BulletSpanCompat
 import net.xpece.android.text.span.TextAppearanceSpanCompat
-import net.xpece.android.text.span.asSpan
+import net.xpece.android.text.span.typeface.asSpan
 import net.xpece.commons.android.sample.R
 import net.xpece.commons.android.sample.databinding.ActivityMainBinding
 import org.threeten.bp.LocalDateTime
