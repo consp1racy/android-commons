@@ -5,6 +5,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("net.xpece.android")
+    id("net.xpece.publish.sonatype")
 }
 
 group = rootProject.property("GROUP_ID") as String
