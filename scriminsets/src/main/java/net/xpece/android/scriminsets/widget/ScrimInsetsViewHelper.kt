@@ -13,6 +13,66 @@ import androidx.core.view.WindowInsetsCompat
 import net.xpece.android.content.getDrawableCompat
 import net.xpece.android.scriminsets.R
 
+/**
+ * A helper class used to implement scrim insets feature in custom views and layouts.
+ *
+ * A minimal implementation that reads attributes from XML could look like this:
+ *
+ *     public class CustomScrimLayout extends FrameLayout {
+ *
+ *         private final ScrimInsetsViewHelper helper;
+ *
+ *         public CustomScrimLayout(@NonNull Context context) {
+ *             this(context, null);
+ *         }
+ *
+ *         public CustomScrimLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+ *             super(context, attrs);
+ *
+ *             helper = new ScrimInsetsViewHelper(this);
+ *             helper.loadFromAttributes(attrs, 0, 0);
+ *
+ *             setWillNotDraw(true);
+ *
+ *             ViewCompat.setOnApplyWindowInsetsListener(this, new androidx.core.view.OnApplyWindowInsetsListener() {
+ *                 @Override
+ *                 public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
+ *                     helper.onApplyWindowInsets(insets);
+ *                     return insets;
+ *                 }
+ *             });
+ *         }
+ *
+ *         @Override
+ *         public void draw(Canvas canvas) {
+ *             super.draw(canvas);
+ *             helper.draw(canvas);
+ *         }
+ *
+ *         @Override
+ *         protected void onAttachedToWindow() {
+ *             super.onAttachedToWindow();
+ *             helper.onAttachedToWindow();
+ *         }
+ *
+ *         @Override
+ *         protected void onDetachedFromWindow() {
+ *             helper.onDetachedFromWindow();
+ *             super.onDetachedFromWindow();
+ *         }
+ *     }
+ *
+ * @param view The view this helper will manage inset scrims for.
+ *
+ * @see R.attr.insetForeground
+ * @see R.attr.scrimInsets
+ * @see R.attr.scrimInsetsHorizontal
+ * @see R.attr.scrimInsetsVertical
+ * @see R.attr.scrimInsetLeft
+ * @see R.attr.scrimInsetTop
+ * @see R.attr.scrimInsetRight
+ * @see R.attr.scrimInsetBottom
+ */
 class ScrimInsetsViewHelper(private val view: View) {
 
     private var insetForeground: Drawable? = null
@@ -33,6 +93,9 @@ class ScrimInsetsViewHelper(private val view: View) {
 
     private val tempRect = Rect()
 
+    /**
+     * Call this from the custom view's constructor.
+     */
     fun loadFromAttributes(
         attrs: AttributeSet?,
         @AttrRes defStyleAttr: Int,
@@ -69,6 +132,9 @@ class ScrimInsetsViewHelper(private val view: View) {
         a.recycle()
     }
 
+    /**
+     * Call this whenever [WindowInsetsCompat] is dispatched to the view.
+     */
     fun onApplyWindowInsets(insets: WindowInsetsCompat) {
         if (this.insets == null) {
             this.insets = Rect()
@@ -85,34 +151,60 @@ class ScrimInsetsViewHelper(private val view: View) {
         ViewCompat.postInvalidateOnAnimation(view)
     }
 
+    /**
+     * Set the drawable used to draw the inset scrims. This should be a color.
+     */
     fun setScrimInsetForeground(drawable: Drawable?) {
         this.insetForeground = drawable
     }
 
+    /**
+     * Set whether the left inset scrim should be drawn.
+     *
+     * Top left and bottom left corner scrims will be drawn if this is `true`.
+     */
     fun setDrawLeftInsetForeground(drawLeftInsetForeground: Boolean) {
         this.drawLeftInsetForeground = drawLeftInsetForeground
         this.drawTopLeftInsetForeground = drawLeftInsetForeground || drawTopInsetForeground
         this.drawBottomLeftInsetForeground = drawLeftInsetForeground || drawBottomInsetForeground
     }
 
+    /**
+     * Set whether the top inset scrim should be drawn.
+     *
+     * Top left and top right corner scrims will be drawn if this is `true`.
+     */
     fun setDrawTopInsetForeground(drawTopInsetForeground: Boolean) {
         this.drawTopInsetForeground = drawTopInsetForeground
         this.drawTopLeftInsetForeground = drawTopInsetForeground || drawLeftInsetForeground
         this.drawTopRightInsetForeground = drawTopInsetForeground || drawRightInsetForeground
     }
 
+    /**
+     * Set whether the right inset scrim should be drawn.
+     *
+     * Top right and bottom right corner scrims will be drawn if this is `true`.
+     */
     fun setDrawRightInsetForeground(drawRightInsetForeground: Boolean) {
         this.drawRightInsetForeground = drawRightInsetForeground
         this.drawTopRightInsetForeground = drawRightInsetForeground || drawTopInsetForeground
         this.drawBottomRightInsetForeground = drawRightInsetForeground || drawBottomInsetForeground
     }
 
+    /**
+     * Set whether the bottom inset scrim should be drawn.
+     *
+     * Bottom left and bottom right corner scrims will be drawn if this is `true`.
+     */
     fun setDrawBottomInsetForeground(drawBottomInsetForeground: Boolean) {
         this.drawBottomInsetForeground = drawBottomInsetForeground
         this.drawBottomLeftInsetForeground = drawBottomInsetForeground || drawLeftInsetForeground
         this.drawBottomRightInsetForeground = drawBottomInsetForeground || drawRightInsetForeground
     }
 
+    /**
+     * Call this from [View.draw].
+     */
     fun draw(canvas: Canvas) {
         val insets = insets ?: return
         val insetForeground = insetForeground ?: return
@@ -190,10 +282,16 @@ class ScrimInsetsViewHelper(private val view: View) {
         canvas.restoreToCount(sc)
     }
 
+    /**
+     * Call this from [View.onAttachedToWindow].
+     */
     fun onAttachedToWindow() {
         insetForeground?.callback = view
     }
 
+    /**
+     * Call this from [View.onDetachedFromWindow].
+     */
     fun onDetachedFromWindow() {
         insetForeground?.callback = null
     }
