@@ -3,7 +3,7 @@ package net.xpece.android.scriminsets.widget
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.AttrRes
@@ -39,7 +39,7 @@ class ScrimInsetsViewHelper(private val view: View) {
         @StyleRes defStyleRes: Int
     ) {
         // Short-circuit if the platform doesn't support drawing behind insets.
-        if (Build.VERSION.SDK_INT < 21) return
+        if (SDK_INT < 21) return
 
         val c = view.context
         val a = c.obtainStyledAttributes(
@@ -91,38 +91,26 @@ class ScrimInsetsViewHelper(private val view: View) {
 
     fun setDrawLeftInsetForeground(drawLeftInsetForeground: Boolean) {
         this.drawLeftInsetForeground = drawLeftInsetForeground
-        setDrawTopLeftInsetForeground(drawLeftInsetForeground)
-        setDrawBottomLeftInsetForeground(drawLeftInsetForeground)
+        this.drawTopLeftInsetForeground = drawLeftInsetForeground || drawTopInsetForeground
+        this.drawBottomLeftInsetForeground = drawLeftInsetForeground || drawBottomInsetForeground
     }
 
     fun setDrawTopInsetForeground(drawTopInsetForeground: Boolean) {
         this.drawTopInsetForeground = drawTopInsetForeground
+        this.drawTopLeftInsetForeground = drawTopInsetForeground || drawLeftInsetForeground
+        this.drawTopRightInsetForeground = drawTopInsetForeground || drawRightInsetForeground
     }
 
     fun setDrawRightInsetForeground(drawRightInsetForeground: Boolean) {
         this.drawRightInsetForeground = drawRightInsetForeground
-        setDrawTopRightInsetForeground(drawRightInsetForeground)
-        setDrawBottomRightInsetForeground(drawRightInsetForeground)
+        this.drawTopRightInsetForeground = drawRightInsetForeground || drawTopInsetForeground
+        this.drawBottomRightInsetForeground = drawRightInsetForeground || drawBottomInsetForeground
     }
 
     fun setDrawBottomInsetForeground(drawBottomInsetForeground: Boolean) {
         this.drawBottomInsetForeground = drawBottomInsetForeground
-    }
-
-    private fun setDrawTopLeftInsetForeground(drawTopLeftInsetForeground: Boolean) {
-        this.drawTopLeftInsetForeground = drawTopLeftInsetForeground
-    }
-
-    private fun setDrawTopRightInsetForeground(drawTopRightInsetForeground: Boolean) {
-        this.drawTopRightInsetForeground = drawTopRightInsetForeground
-    }
-
-    private fun setDrawBottomLeftInsetForeground(drawBottomLeftInsetForeground: Boolean) {
-        this.drawBottomLeftInsetForeground = drawBottomLeftInsetForeground
-    }
-
-    private fun setDrawBottomRightInsetForeground(drawBottomRightInsetForeground: Boolean) {
-        this.drawBottomRightInsetForeground = drawBottomRightInsetForeground
+        this.drawBottomLeftInsetForeground = drawBottomInsetForeground || drawLeftInsetForeground
+        this.drawBottomRightInsetForeground = drawBottomInsetForeground || drawRightInsetForeground
     }
 
     fun draw(canvas: Canvas) {
