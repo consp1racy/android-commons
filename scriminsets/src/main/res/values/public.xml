@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public name="Widget.Xpece.ScrimInsetsLinearLayout" type="style" />
+    <public name="Widget.Xpece.ScrimInsetsFrameLayout" type="style" />
+
+    <public name="scrimInsetsFrameLayoutStyle" type="attr" />
+    <public name="scrimInsetsLinearLayoutStyle" type="attr" />
+
+    <public name="insetForeground" type="attr" />
+    <public name="scrimInsets" type="attr" />
+    <public name="scrimInsetsHorizontal" type="attr" />
+    <public name="scrimInsetsVertical" type="attr" />
+    <public name="scrimInsetLeft" type="attr" />
+    <public name="scrimInsetTop" type="attr" />
+    <public name="scrimInsetRight" type="attr" />
+    <public name="scrimInsetBottom" type="attr" />
+</resources>

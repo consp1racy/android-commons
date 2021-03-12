@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- deprecated -->
-    <attr name="scrimInsetFrameLayoutStyle" format="reference" />
-    <!-- deprecated -->
-    <attr name="scrimInsetLinearLayoutStyle" format="reference" />
-
     <attr name="scrimInsetsFrameLayoutStyle" format="reference" />
     <attr name="scrimInsetsLinearLayoutStyle" format="reference" />
 

@@ -9,22 +9,18 @@ import androidx.annotation.CallSuper
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import net.xpece.android.content.resolveResourceId
 import net.xpece.android.scriminsets.R
 
-open class ScrimInsetsFrameLayout @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = R.attr.scrimInsetsFrameLayoutStyle
+@Suppress("LeakingThis")
+open class ScrimInsetsFrameLayout
+@JvmOverloads
+constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = R.attr.scrimInsetsFrameLayoutStyle
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val helper = ScrimInsetsViewHelper(this).apply {
-        @Suppress("NAME_SHADOWING")
-        var defStyleAttr = defStyleAttr
-        if (context.resolveResourceId(R.attr.scrimInsetsFrameLayoutStyle, 0) == 0) {
-            // If the new attr is not defined fall back to the old attr.
-            defStyleAttr = R.attr.scrimInsetFrameLayoutStyle
-        }
         val defStyleRes = R.style.Widget_Xpece_ScrimInsetsFrameLayout
         loadFromAttributes(attrs, defStyleAttr, defStyleRes)
     }
