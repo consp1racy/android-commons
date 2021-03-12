@@ -8,8 +8,8 @@ plugins {
     id("net.xpece.publish.sonatype")
 }
 
-group = rootProject.property("GROUP_ID") as String
-version = rootProject.property("SCRIMINSETS_VERSION_NAME") as String
+group = "net.xpece.android.scriminsets"
+version = "1.0.0-SNAPSHOT"
 
 android {
     compileSdkVersion(30)
@@ -23,7 +23,6 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core:1.1.0")
-
+    implementation("androidx.core:core:1.3.2")
     implementation(project(":commons:commons-resources"))
 }
