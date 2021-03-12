@@ -8,8 +8,8 @@ plugins {
     id("net.xpece.publish.sonatype")
 }
 
-group = rootProject.property("TEXT_GROUP_ID") as String
-version = rootProject.property("TEXT_TYPEFACE_VERSION_NAME") as String
+group = "net.xpece.android.text"
+version = "1.1.0"
 
 android {
     compileSdkVersion(30)
