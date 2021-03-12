@@ -143,11 +143,6 @@
             tools:ignore="MissingPrefix" />
     </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.XpAppCompatView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?dividerHorizontal" />
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

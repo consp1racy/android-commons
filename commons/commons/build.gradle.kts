@@ -56,8 +56,6 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation("com.jakewharton.threetenabp:threetenabp:1.0.0")
 
-    api(project(":appcompat-extra"))
-
     api(project(":commons:commons-services"))
     api(project(":commons:commons-resources"))
     api(project(":commons:commons-dimen"))
@@ -65,10 +63,8 @@ dependencies {
 
     api(project(":picker"))
 
-    api("androidx.core:core-ktx:1.1.0")
+    api("androidx.core:core-ktx:1.3.2")
     api("com.google.android.material:material:1.0.0")
-
-    compileOnly("androidx.fragment:fragment-ktx:1.1.0")
 
     compileOnly("androidx.annotation:annotation:1.1.0")
 

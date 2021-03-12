@@ -23,7 +23,7 @@ extensions.configure<kotlinx.validation.ApiValidationExtension> {
     // Ignore all sample projects, since they're not part of our API.
     // Only leaf project name is valid configuration, and every project must be individually ignored.
     // See https://github.com/Kotlin/binary-compatibility-validator/issues/3
-    ignoredProjects.addAll(listOf("sample-cardbutton", "sample-commons", "sample-extra"))
+    ignoredProjects.addAll(listOf("sample-cardbutton", "sample-commons"))
 }
 
 subprojects {
