@@ -28,11 +28,14 @@ class PublishSonatypePlugin : Plugin<Project> {
         val extension = target.extensions.getByType<PublishExtension>()
         extension.releaseFromDefaultComponent()
 
-        val signingProps by lazy {
+        val signingProps = try {
             Properties().apply {
                 target.rootProject.file("publishing.properties")
                     .inputStream().buffered().use(this::load)
             }
+        } catch (ex: Throwable) {
+            target.logger.error(ex.toString())
+            return
         }
 
         extension.pom {
