@@ -1,19 +1,14 @@
 buildscript {
     dependencies {
-        classpath("com.android.tools.build:gradle:4.1.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30")
-        classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.4.0")
-        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.20")
+        classpath("com.android.tools.build:gradle:4.2.2")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
+        classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.7.0")
+        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.30")
     }
 
     repositories {
         google()
         mavenCentral()
-        jcenter {
-            content {
-                includeVersion("org.jetbrains.trove4j", "trove4j", "20160824") // AGP.
-            }
-        }
     }
 }
 
@@ -43,12 +38,12 @@ subprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter {
-            content {
-                includeVersion("org.jetbrains.trove4j", "trove4j", "20160824") // AGP.
-                includeGroup("org.jetbrains.kotlinx") // Dokka.
-                includeVersion("com.soywiz.korlibs.korte", "korte-jvm", "1.10.3") // Dokka.
-            }
+    }
+
+    configurations.all {
+        resolutionStrategy.dependencySubstitution {
+            substitute(module("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2"))
+                .using(module("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3"))
         }
     }
 }
