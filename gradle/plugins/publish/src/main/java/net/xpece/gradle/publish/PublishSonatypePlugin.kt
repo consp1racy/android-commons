@@ -14,29 +14,8 @@ class PublishSonatypePlugin : Plugin<Project> {
         target.plugins.findPlugin(PublishPlugin::class)
             ?: target.apply<PublishPlugin>()
 
-        target.plugins.findPlugin("signing")
-            ?: target.apply(plugin = "signing")
-
-        val publishing = target.extensions.getByName<PublishingExtension>("publishing")
-        val signing = target.extensions.getByName<SigningExtension>("signing")
-        signing.sign(publishing.publications)
-
-        if (System.getenv("CI") == null) {
-            signing.useGpgCmd()
-        }
-
         val extension = target.extensions.getByType<PublishExtension>()
         extension.releaseFromDefaultComponent()
-
-        val signingProps = try {
-            Properties().apply {
-                target.rootProject.file("publishing.properties")
-                    .inputStream().buffered().use(this::load)
-            }
-        } catch (ex: Throwable) {
-            target.logger.error(ex.toString())
-            return
-        }
 
         extension.pom {
             name.set(target.name)
@@ -63,6 +42,27 @@ class PublishSonatypePlugin : Plugin<Project> {
                 developerConnection.set("scm:git:ssh://git@github.com/consp1racy/android-commons.git")
                 url.set("https://github.com/consp1racy/android-commons")
             }
+        }
+
+        val signingProps = try {
+            Properties().apply {
+                target.rootProject.file("publishing.properties")
+                    .inputStream().buffered().use(this::load)
+            }
+        } catch (ex: Throwable) {
+            target.logger.error(ex.toString())
+            return
+        }
+
+        target.plugins.findPlugin("signing")
+            ?: target.apply(plugin = "signing")
+
+        val publishing = target.extensions.getByName<PublishingExtension>("publishing")
+        val signing = target.extensions.getByName<SigningExtension>("signing")
+        signing.sign(publishing.publications)
+
+        if (System.getenv("CI") == null) {
+            signing.useGpgCmd()
         }
 
         extension.repositories { version ->
