@@ -59,7 +59,7 @@ constructor(
     }
 
     @CallSuper
-    protected fun onApplyWindowInsetsCompat(insets: WindowInsetsCompat): WindowInsetsCompat {
+    open fun onApplyWindowInsetsCompat(insets: WindowInsetsCompat): WindowInsetsCompat {
         helper.onApplyWindowInsets(insets)
         return insets
     }

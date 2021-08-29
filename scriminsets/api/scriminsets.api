@@ -5,6 +5,7 @@ public class net/xpece/android/scriminsets/widget/ScrimInsetsFrameLayout : andro
 	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;II)V
 	public synthetic fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun draw (Landroid/graphics/Canvas;)V
+	public fun onApplyWindowInsetsCompat (Landroidx/core/view/WindowInsetsCompat;)Landroidx/core/view/WindowInsetsCompat;
 	protected fun onAttachedToWindow ()V
 	protected fun onDetachedFromWindow ()V
 	public final fun setDrawBottomInsetForeground (Z)V
@@ -21,6 +22,7 @@ public class net/xpece/android/scriminsets/widget/ScrimInsetsLinearLayout : andr
 	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;II)V
 	public synthetic fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun draw (Landroid/graphics/Canvas;)V
+	public fun onApplyWindowInsetsCompat (Landroidx/core/view/WindowInsetsCompat;)Landroidx/core/view/WindowInsetsCompat;
 	protected fun onAttachedToWindow ()V
 	protected fun onDetachedFromWindow ()V
 	public final fun setDrawBottomInsetForeground (Z)V
