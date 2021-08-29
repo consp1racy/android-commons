@@ -6,8 +6,10 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.AttrRes
+import androidx.annotation.CallSuper
 import androidx.annotation.StyleRes
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import net.xpece.android.scriminsets.R
 
 /**
@@ -52,9 +54,14 @@ constructor(
         setWillNotDraw(true)
 
         ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
-            helper.onApplyWindowInsets(insets)
-            insets
+            onApplyWindowInsetsCompat(insets)
         }
+    }
+
+    @CallSuper
+    protected fun onApplyWindowInsetsCompat(insets: WindowInsetsCompat): WindowInsetsCompat {
+        helper.onApplyWindowInsets(insets)
+        return insets
     }
 
     /**
